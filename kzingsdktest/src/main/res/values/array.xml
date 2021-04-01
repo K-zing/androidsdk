@@ -1,0 +1,9 @@
+<resources>
+    <string-array name="lang_array">
+        <item>CHS</item>
+        <item>ENG</item>
+        <item>THA</item>
+        <item>IND</item>
+        <item>VIT</item>
+    </string-array>
+</resources>
