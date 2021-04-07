@@ -1,1 +1,1 @@
-include ':kzingsdk', ':kzingsdktest'
+include ':kzingsdk'

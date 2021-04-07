@@ -1,38 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
-
-tasks.withType(Javadoc) {
-    options.addStringOption('Xdoclint:none', '-quiet')
-    options.addStringOption('encoding', 'UTF-8')
-    options.addStringOption('charSet', 'UTF-8')
-}
-
-ext {
-    bintrayRepo = 'kzingsdk'
-    bintrayName = 'kzingsdk'
-
-    publishedGroupId = 'com.kzingsdk'
-    libraryName = 'kzingsdk'
-    artifact = 'kzingsdk'
-
-    libraryDescription = 'KzingSDK for Android'
-
-    siteUrl = 'https://sdk.kzing.com/'
-    gitUrl = 'https://sdk.kzing.com/'
-
-    libraryVersion = '0.3.05'
-
-    developerId = 'kzing'
-    developerName = 'wing'
-    developerEmail = 'wing.lee@evergreensystemltd.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
-}
 
 android {
 
@@ -56,8 +23,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    compile 'io.reactivex.rxjava2:rxjava:2.2.10'
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
-    compile 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 }
