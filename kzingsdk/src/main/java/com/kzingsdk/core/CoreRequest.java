@@ -25,7 +25,6 @@ import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
@@ -69,7 +68,8 @@ public abstract class CoreRequest {
     private final String defaultIP = "https://tvwkkq8k9e7grjbw49pk.jumzxxtu3j.com";
     private final String defaultBetterIP = "https://fsr5vqdhsspsrtz6fl93.jumzxxtu3j.com/";
     private static HashSet<String> failedIP = null;
-    private final ArrayList<String> API_URL_LIST = new ArrayList<String>() {{
+
+    private final HashSet<String> API_URL_SET = new HashSet<String>() {{
         add(defaultIP);
         add("https://mcxyfv3tdbq9jap3vexg.jumzxxtu3j.com");
         add("https://21q3bnvp.ui2now.com");
@@ -79,7 +79,7 @@ public abstract class CoreRequest {
         add("https://nqj4hrthz4dtaytvbxnu.t8arxezlq7.com");
     }};
 
-    private final ArrayList<String> API_URL_LIST_BETTER = new ArrayList<String>() {{
+    private final HashSet<String> API_URL_SET_BETTER = new HashSet<String>() {{
         add(defaultBetterIP);
         add("https://4jqz2j97.ui4now.com");
     }};
@@ -171,14 +171,19 @@ public abstract class CoreRequest {
     }
 
     private Observable<String> findFastestIPTask(Context context) {
-        ArrayList<String> toFindList = isUseBetterUrl(context) ? API_URL_LIST_BETTER : API_URL_LIST;
-        if (failedIP.size() >= toFindList.size()) {
+        HashSet<String> toFindSet;
+        if (KzingSDK.getInstance().isUseCustomUrl()) {
+            toFindSet = KzingSDK.getInstance().getCustomUrlSet();
+        } else {
+            toFindSet = isUseBetterUrl(context) ? API_URL_SET_BETTER : API_URL_SET;
+        }
+        if (failedIP.equals(toFindSet) || failedIP.size() >= toFindSet.size()) {
             failedIP.clear();
         }
-        ArrayList<FutureTask<String>> futureTasks = createPingIPTasks(toFindList, failedIP);
-        final ExecutorService executor = Executors.newFixedThreadPool(toFindList.size());
+        ArrayList<FutureTask<String>> futureTasks = createPingIPTasks(toFindSet, failedIP);
+        final ExecutorService executor = Executors.newFixedThreadPool(toFindSet.size());
         String fastestIP = Flowable.fromIterable(futureTasks)
-                .parallel(toFindList.size())
+                .parallel(toFindSet.size())
                 .runOn(Schedulers.newThread())
                 .flatMap((Function<FutureTask<String>, Publisher<String>>) futureTask -> {
                     executor.submit(futureTask);
@@ -200,10 +205,9 @@ public abstract class CoreRequest {
         return Observable.just(fastestIP);
     }
 
-    private ArrayList<FutureTask<String>> createPingIPTasks(ArrayList<String> ipList, HashSet<String> toCheckFailedSet) {
+    private ArrayList<FutureTask<String>> createPingIPTasks(HashSet<String> ipSet, HashSet<String> toCheckFailedSet) {
         ArrayList<FutureTask<String>> futureTasks = new ArrayList<>();
-        for (int i = 0; i < ipList.size(); i++) {
-            String ip = ipList.get(i);
+        for (String ip : ipSet) {
             if (toCheckFailedSet.contains(ip)) {
                 continue;
             }
@@ -232,13 +236,6 @@ public abstract class CoreRequest {
         }
         log("pingIP : " + ip + " - " + (ping == Integer.MAX_VALUE ? "Timeout" : ping + "ms"));
         return ping;
-    }
-
-    private String pickRandomIP() {
-        Random rand = new Random();
-        int randomNum = rand.nextInt(API_URL_LIST.size());
-        log("pickRandomIP : " + API_URL_LIST.get(randomNum));
-        return API_URL_LIST.get(randomNum);
     }
 
     private void showLogDebug(Request request, Interceptor.Chain chain) throws IOException {

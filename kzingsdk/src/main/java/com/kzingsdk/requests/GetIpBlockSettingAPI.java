@@ -5,10 +5,15 @@ import android.content.Context;
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.IpBlockSetting;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import io.reactivex.Observable;
 
 
 public class GetIpBlockSettingAPI extends CoreRequest {
+
+    private String appId = "";
 
     GetIpBlockSettingAPI() {
         super();
@@ -18,6 +23,18 @@ public class GetIpBlockSettingAPI extends CoreRequest {
     protected String getAction() {
         return Action.getIpBlockSetting;
     }
+
+    @Override
+    protected JSONObject generateParamsJson() {
+        JSONObject jsonData = super.generateParamsJson();
+        try {
+            jsonData.put("appId", appId);
+            return jsonData;
+        } catch (JSONException ignored) {
+        }
+        return super.generateParamsJson();
+    }
+
 
     @Override
     public Observable<IpBlockSetting> requestRx(Context context) {
@@ -44,4 +61,8 @@ public class GetIpBlockSettingAPI extends CoreRequest {
         void onSuccess(IpBlockSetting ipBlockSetting);
     }
 
+    public GetIpBlockSettingAPI setAppId(String appId) {
+        this.appId = appId;
+        return this;
+    }
 }

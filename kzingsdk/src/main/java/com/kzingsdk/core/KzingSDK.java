@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Created by wing.lee@evergreensystemltd.com
@@ -37,6 +38,8 @@ public final class KzingSDK {
     private int requestTimeoutMs = DEFAUL_REQUEST_TIMEOUT_MS;
     private int pingCheckTimeoutMs = DEFAUL_PING_CHECK_TIMEOUT_MS;
 
+    private boolean useCustomUrl = false;
+    private HashSet<String> customUrlSet = new HashSet<>();
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
@@ -358,5 +361,19 @@ public final class KzingSDK {
         this.aid = aid;
     }
 
+    public boolean isUseCustomUrl() {
+        return useCustomUrl;
+    }
 
+    public void setUseCustomUrl(boolean useCustomUrl) {
+        this.useCustomUrl = useCustomUrl;
+    }
+
+    public void setCustomUrlSet(HashSet<String> customUrlSet) {
+        this.customUrlSet = customUrlSet;
+    }
+
+    public HashSet<String> getCustomUrlSet() {
+        return customUrlSet;
+    }
 }
