@@ -18,7 +18,7 @@ final class Action {
     static final String editMemberAvatar = "1833F4A";
     static final String checkUserNameExist = "qbiluvw";
     static final String checkAgentNameExist = "tejqigy";
-    static final String getWebsiteConfig = "93bf052";
+    static final String getWebsiteConfig = "aynbshp";
     static final String getNewMobilePopup = "ldeqxay";
     static final String getHotGames = "rzqqo66";
     static final String getIpBlockSetting = "9sft2r8";

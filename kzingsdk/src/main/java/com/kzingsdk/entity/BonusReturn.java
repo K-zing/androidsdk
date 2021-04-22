@@ -17,17 +17,21 @@ public class BonusReturn implements Parcelable {
             return new BonusReturn[size];
         }
     };
+
+    private String actName = "";
     private String dno = "";
     private String amount = "";
     private String gp = "";
     private String type = "";
     private String created = "";
 
+
     public BonusReturn() {
 
     }
 
     public BonusReturn(Parcel in) {
+        actName = in.readString();
         dno = in.readString();
         amount = in.readString();
         gp = in.readString();
@@ -37,12 +41,21 @@ public class BonusReturn implements Parcelable {
 
     public static BonusReturn newInstance(JSONObject rootObject) {
         BonusReturn bonusReturn = new BonusReturn();
+        bonusReturn.setActName(rootObject.optString("actname"));
         bonusReturn.setDno(rootObject.optString("dno"));
         bonusReturn.setAmount(rootObject.optString("money"));
         bonusReturn.setGp(rootObject.optString("gp"));
         bonusReturn.setType(rootObject.optString("type"));
         bonusReturn.setCreated(rootObject.optString("time"));
         return bonusReturn;
+    }
+
+    public String getActName() {
+        return actName;
+    }
+
+    public void setActName(String actName) {
+        this.actName = actName;
     }
 
     /**
@@ -90,6 +103,7 @@ public class BonusReturn implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(actName);
         dest.writeString(dno);
         dest.writeString(amount);
         dest.writeString(gp);
