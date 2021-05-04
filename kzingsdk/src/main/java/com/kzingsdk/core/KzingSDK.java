@@ -227,18 +227,18 @@ public final class KzingSDK {
         SharePrefUtil.putString(context, Constant.Pref.CCTOKEN, null);
     }
 
-    public void getVcTokenCache(Context context) {
+    public String getVcTokenCache(Context context) {
         if (context == null) {
-            return;
+            return null;
         }
-        SharePrefUtil.getString(context, Constant.Pref.VCTOKEN, null);
+        return SharePrefUtil.getString(context, Constant.Pref.VCTOKEN, null);
     }
 
-    public void getCcTokenCache(Context context) {
+    public String getCcTokenCache(Context context) {
         if (context == null) {
-            return;
+            return null;
         }
-        SharePrefUtil.getString(context, Constant.Pref.CCTOKEN, null);
+        return SharePrefUtil.getString(context, Constant.Pref.CCTOKEN, null);
     }
 
     /**
