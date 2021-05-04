@@ -227,6 +227,20 @@ public final class KzingSDK {
         SharePrefUtil.putString(context, Constant.Pref.CCTOKEN, null);
     }
 
+    public void getVcTokenCache(Context context) {
+        if (context == null) {
+            return;
+        }
+        SharePrefUtil.getString(context, Constant.Pref.VCTOKEN, null);
+    }
+
+    public void getCcTokenCache(Context context) {
+        if (context == null) {
+            return;
+        }
+        SharePrefUtil.getString(context, Constant.Pref.CCTOKEN, null);
+    }
+
     /**
      * Check if KzingSDK has player token saved.
      */
