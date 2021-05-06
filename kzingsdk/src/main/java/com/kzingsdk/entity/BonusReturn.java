@@ -23,20 +23,12 @@ public class BonusReturn implements Parcelable {
     private String amount = "";
     private String gp = "";
     private String type = "";
+    private String typeId = "";
     private String created = "";
 
 
     public BonusReturn() {
 
-    }
-
-    public BonusReturn(Parcel in) {
-        actName = in.readString();
-        dno = in.readString();
-        amount = in.readString();
-        gp = in.readString();
-        type = in.readString();
-        created = in.readString();
     }
 
     public static BonusReturn newInstance(JSONObject rootObject) {
@@ -46,6 +38,7 @@ public class BonusReturn implements Parcelable {
         bonusReturn.setAmount(rootObject.optString("money"));
         bonusReturn.setGp(rootObject.optString("gp"));
         bonusReturn.setType(rootObject.optString("type"));
+        bonusReturn.setTypeId(rootObject.optString("type_id"));
         bonusReturn.setCreated(rootObject.optString("time"));
         return bonusReturn;
     }
@@ -101,6 +94,24 @@ public class BonusReturn implements Parcelable {
         this.type = type;
     }
 
+    public String getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
+    }
+
+    public BonusReturn(Parcel in) {
+        actName = in.readString();
+        dno = in.readString();
+        amount = in.readString();
+        gp = in.readString();
+        type = in.readString();
+        typeId = in.readString();
+        created = in.readString();
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(actName);
@@ -108,6 +119,7 @@ public class BonusReturn implements Parcelable {
         dest.writeString(amount);
         dest.writeString(gp);
         dest.writeString(type);
+        dest.writeString(typeId);
         dest.writeString(created);
     }
 

@@ -466,4 +466,23 @@ public final class KzingAPI {
         return new SocialAccountBindingStatusAPI();
     }
 
+    public static GetMemberAgentAPI getMemberAgent(){
+        return new GetMemberAgentAPI();
+    }
+    public static GetCommissionDetailsAPI getCommissionDetails(){
+        return new GetCommissionDetailsAPI();
+    }
+    public static GetCommissionAPI getCommission(){
+        return new GetCommissionAPI();
+    }
+    public static GetMemberAgentAllDownLineAPI getMemberAgentAllDownLine(){
+        return new GetMemberAgentAllDownLineAPI();
+    }
+    public static GetMemberAgentSalesHistoryAPI getMemberAgentSalesHistory(){
+        return new GetMemberAgentSalesHistoryAPI();
+    }
+    public static GetMemberAgentWithdrawalAPI getMemberAgentWithdrawal(){
+        return new GetMemberAgentWithdrawalAPI();
+    }
+
 }

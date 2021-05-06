@@ -135,4 +135,11 @@ final class Action {
     static final String redisConnectionCount = "fhq30md";
     static final String connectionSpeedTest = "23m0mko";
 
+    static final String getMemberAgent = "myn6zpl";
+    static final String getCommissionDetails = "jeqjm9t";
+    static final String getCommission = "xcofdd8";
+    static final String getMemberAgentAllDownLine = "pbde4nx";
+    static final String getMemberAgentSalesHistory = "bnotuxq";
+    static final String getMemberAgentWithdrawal = "zuqlbt7";
+
 }
