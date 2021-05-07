@@ -25,8 +25,8 @@ public class ActivityGiftRequirement implements Parcelable {
     private String giftPicUrl;
     private String giftName;
     private int displayOrder;
+    private boolean isRedPacket = false;
 
-    //    gift_requirement
     public ActivityGiftRequirement() {
 
     }
@@ -37,6 +37,7 @@ public class ActivityGiftRequirement implements Parcelable {
         giftPicUrl = in.readString();
         giftName = in.readString();
         displayOrder = in.readInt();
+        isRedPacket = in.readInt() == 1;
     }
 
     public static ActivityGiftRequirement newInstance(JSONObject rootObject) {
@@ -46,6 +47,7 @@ public class ActivityGiftRequirement implements Parcelable {
         item.setGiftPicUrl(rootObject.optString("gift_pic_url"));
         item.setGiftName(rootObject.optString("gift_name"));
         item.setDisplayOrder(rootObject.optInt("display_order"));
+        item.setRedPacket(rootObject.optBoolean("is_red_packet"));
         return item;
     }
 
@@ -56,6 +58,8 @@ public class ActivityGiftRequirement implements Parcelable {
         dest.writeString(giftPicUrl);
         dest.writeString(giftName);
         dest.writeInt(displayOrder);
+        dest.writeInt(isRedPacket ? 1 : 0);
+
     }
 
     public String getRequirementAmount() {
@@ -96,6 +100,14 @@ public class ActivityGiftRequirement implements Parcelable {
 
     public void setDisplayOrder(int displayOrder) {
         this.displayOrder = displayOrder;
+    }
+
+    public boolean isRedPacket() {
+        return isRedPacket;
+    }
+
+    public void setRedPacket(boolean redPacket) {
+        isRedPacket = redPacket;
     }
 
     @Override
