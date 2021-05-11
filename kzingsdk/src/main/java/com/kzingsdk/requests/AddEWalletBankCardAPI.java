@@ -20,6 +20,7 @@ public class AddEWalletBankCardAPI extends CoreRequest {
     }
 
     private String bid = null;
+    private String cryptoType = null;
     private ArrayList<WithdrawField> withdrawFieldList = null;
 
     AddEWalletBankCardAPI() {
@@ -39,7 +40,10 @@ public class AddEWalletBankCardAPI extends CoreRequest {
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
+
             jsonData.put("bid", bid);
+            if(cryptoType!=null)
+                jsonData.put("cryptotype", cryptoType);
             if (withdrawFieldList != null && withdrawFieldList.size() > 0) {
                 JSONObject withdrawFieldData = new JSONObject();
                 for (WithdrawField withdrawField : withdrawFieldList) {
@@ -80,6 +84,11 @@ public class AddEWalletBankCardAPI extends CoreRequest {
 
     public AddEWalletBankCardAPI setBid(String bid) {
         this.bid = bid;
+        return this;
+    }
+
+    public AddEWalletBankCardAPI setCryptoType(String cryptoType) {
+        this.cryptoType = cryptoType;
         return this;
     }
 

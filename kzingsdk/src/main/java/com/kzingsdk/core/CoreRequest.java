@@ -274,6 +274,7 @@ public abstract class CoreRequest {
             }
             jsonData.put("device", "android");
             jsonData.put("platform", "an");
+            jsonData.put("currency", "CNY");
             return jsonData;
         } catch (JSONException e) {
             throw new KzingException(e.getMessage());

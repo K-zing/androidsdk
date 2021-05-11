@@ -251,6 +251,10 @@ public final class KzingAPI {
         return new AddEWalletBankCardAPI();
     }
 
+    public static DeleteEWalletBankCardAPI deleteEWalletBankCard() {
+        return new DeleteEWalletBankCardAPI();
+    }
+
     public static AddBankCardAPI addBankCard() {
         return new AddBankCardAPI();
     }
@@ -483,6 +487,9 @@ public final class KzingAPI {
     }
     public static GetMemberAgentWithdrawalAPI getMemberAgentWithdrawal(){
         return new GetMemberAgentWithdrawalAPI();
+    }
+    public static MemberAgentWithdrawAPI memberAgentWithdraw(){
+        return new MemberAgentWithdrawAPI();
     }
 
 }

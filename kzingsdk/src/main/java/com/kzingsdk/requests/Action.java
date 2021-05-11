@@ -72,6 +72,7 @@ final class Action {
     static final String cancelWithdrawal = "1mhcmap";
     static final String getMessageList = "bd01e4c";
     static final String deleteMessage = "ln28d0h";
+    static final String deleteEWalletBankCard = "w5d9v0t";
     static final String readMessage = "87a3b6a";
     static final String getBonusList = "581eb4c";
     static final String getWaterWager = "nzfnj0h";
@@ -141,5 +142,7 @@ final class Action {
     static final String getMemberAgentAllDownLine = "pbde4nx";
     static final String getMemberAgentSalesHistory = "bnotuxq";
     static final String getMemberAgentWithdrawal = "zuqlbt7";
+    static final String memberAgentWithdraw = "qwhmt4j";
+
 
 }
