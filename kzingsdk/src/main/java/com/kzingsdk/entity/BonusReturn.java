@@ -21,6 +21,7 @@ public class BonusReturn implements Parcelable {
     private String actName = "";
     private String dno = "";
     private String amount = "";
+    private String validBet = "";
     private String gp = "";
     private String type = "";
     private String typeId = "";
@@ -36,6 +37,7 @@ public class BonusReturn implements Parcelable {
         bonusReturn.setActName(rootObject.optString("actname"));
         bonusReturn.setDno(rootObject.optString("dno"));
         bonusReturn.setAmount(rootObject.optString("money"));
+        bonusReturn.setValidBet(rootObject.optString("validbet"));
         bonusReturn.setGp(rootObject.optString("gp"));
         bonusReturn.setType(rootObject.optString("type"));
         bonusReturn.setTypeId(rootObject.optString("type_id"));
@@ -68,6 +70,14 @@ public class BonusReturn implements Parcelable {
 
     public void setAmount(String amount) {
         this.amount = amount;
+    }
+
+    public String getValidBet() {
+        return validBet;
+    }
+
+    public void setValidBet(String validBet) {
+        this.validBet = validBet;
     }
 
     public String getGp() {
@@ -106,6 +116,7 @@ public class BonusReturn implements Parcelable {
         actName = in.readString();
         dno = in.readString();
         amount = in.readString();
+        validBet = in.readString();
         gp = in.readString();
         type = in.readString();
         typeId = in.readString();
@@ -117,6 +128,7 @@ public class BonusReturn implements Parcelable {
         dest.writeString(actName);
         dest.writeString(dno);
         dest.writeString(amount);
+        dest.writeString(validBet);
         dest.writeString(gp);
         dest.writeString(type);
         dest.writeString(typeId);

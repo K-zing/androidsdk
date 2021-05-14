@@ -5,6 +5,10 @@ import org.json.JSONObject;
 
 public class MobilePopup {
 
+    private String frame;
+    private String frameSetting;
+    private String title;
+    private String content;
     private String imagePath;
     private String csRemark;
     private int displayCondition = 0;
@@ -17,6 +21,10 @@ public class MobilePopup {
 
     public static MobilePopup newInstance(JSONObject rootObject) {
         MobilePopup item = new MobilePopup();
+        item.setFrame(rootObject.optString("frame"));
+        item.setFrameSetting(rootObject.optString("framesetting"));
+        item.setTitle(rootObject.optString("title"));
+        item.setContent(rootObject.optString("content"));
         item.setImagePath(rootObject.optString("image_path"));
         item.setCsRemark(rootObject.optString("csremark"));
         item.setDisplayCondition(rootObject.optInt("displaycondition"));
@@ -24,6 +32,38 @@ public class MobilePopup {
         item.setClickFunction(rootObject.optString("clickfunction"));
         item.setRedirectLink(rootObject.optString("redirect_link"));
         return item;
+    }
+
+    public String getFrame() {
+        return frame;
+    }
+
+    public void setFrame(String frame) {
+        this.frame = frame;
+    }
+
+    public String getFrameSetting() {
+        return frameSetting;
+    }
+
+    public void setFrameSetting(String frameSetting) {
+        this.frameSetting = frameSetting;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getImagePath() {
