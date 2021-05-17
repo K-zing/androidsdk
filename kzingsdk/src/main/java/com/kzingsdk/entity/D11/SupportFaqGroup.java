@@ -52,5 +52,14 @@ public class SupportFaqGroup {
     public void setContentList(ArrayList<SupportFaqContent> contentList) {
         this.contentList = contentList;
     }
+
+    @Override
+    public String toString() {
+        return "SupportFaqGroup{" +
+                "uid=" + uid +
+                ", title='" + title + '\'' +
+                ", contentList=" + contentList +
+                '}';
+    }
 }
 

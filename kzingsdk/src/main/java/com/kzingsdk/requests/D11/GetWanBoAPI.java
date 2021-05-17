@@ -12,14 +12,14 @@ import java.util.ArrayList;
 
 import io.reactivex.Observable;
 
-public class GetWanBoAPI extends CoreRequest {
+public class GetWanBoAPI extends BaseD11API {
 
     GetWanBoAPI() {
         super();
     }
 
     @Override
-    protected String getAction() {
+    protected String getD11Action() {
         return Action.getWanBo;
     }
 

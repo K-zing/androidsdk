@@ -12,14 +12,14 @@ import java.util.ArrayList;
 
 import io.reactivex.Observable;
 
-public class GetD11HotGameAPI extends CoreRequest {
+public class GetD11HotGameAPI extends BaseD11API {
 
     GetD11HotGameAPI() {
         super();
     }
 
     @Override
-    protected String getAction() {
+    protected String getD11Action() {
         return Action.getHotGame;
     }
 

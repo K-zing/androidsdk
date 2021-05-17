@@ -13,14 +13,14 @@ import java.util.HashSet;
 
 import io.reactivex.Observable;
 
-public class GetMyFavGameAPI extends CoreRequest {
+public class GetMyFavGameAPI extends BaseD11API {
 
     GetMyFavGameAPI() {
         super();
     }
 
     @Override
-    protected String getAction() {
+    protected String getD11Action() {
         return Action.getMyFavGame;
     }
 

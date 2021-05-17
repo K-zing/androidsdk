@@ -55,6 +55,7 @@ public abstract class CoreRequest {
     protected final String CLIENT_KEY_OBJECT_NAME = "key";
     protected final String PLATFORM_OBJECT_NAME = "os";
     protected final String ACTION_OBJECT_NAME = "url";
+    protected final String ACTION_OBJECT_NAME_D11 = "d11url";
     protected final String DATA_JSON_OBJECT_NAME = "data";
     protected final String SIGN_OBJECT_NAME = "sign";
     protected final String CLIENT_OBJECT_NAME = "aid";
@@ -102,6 +103,8 @@ public abstract class CoreRequest {
     public abstract void request(Context context);
 
     protected abstract String getAction();
+
+    protected String getD11Action(){return "";};
 
     /*
      *  Override if API need to validate params first. Empty means success.
@@ -307,6 +310,7 @@ public abstract class CoreRequest {
             dataWithKey.put(DATA_JSON_OBJECT_NAME, dataRSA);
             dataWithKey.put(CLIENT_KEY_OBJECT_NAME, getApiKey());
             dataWithKey.put(ACTION_OBJECT_NAME, getAction());
+            dataWithKey.put(ACTION_OBJECT_NAME_D11, getD11Action());
             dataWithKey.put(PLATFORM_OBJECT_NAME, PLATFORM_NAME);
             dataWithKey.put(SIGN_OBJECT_NAME, MD5Utils.md5(dataRSA + KzingSDK.getInstance().getMd5Key()).toUpperCase());
             log(dataWithKey.toString());

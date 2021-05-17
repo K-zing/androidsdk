@@ -2,6 +2,7 @@ package com.kzingsdk.requests.D11;
 
 final class Action {
 
+    static final String baseAction = "gfn21hc";
     static final String getHotGame = "li3kr2o";
     static final String getMyFavGame = "yte06wn";
     static final String getSupportTerms = "dswqn59";

@@ -7,14 +7,14 @@ import com.kzingsdk.requests.KzingCallBack;
 
 import io.reactivex.Observable;
 
-public class GetSupportTermsAPI extends CoreRequest {
+public class GetSupportTermsAPI extends BaseD11API {
 
     GetSupportTermsAPI() {
         super();
     }
 
     @Override
-    protected String getAction() {
+    protected String getD11Action() {
         return Action.getSupportTerms;
     }
 

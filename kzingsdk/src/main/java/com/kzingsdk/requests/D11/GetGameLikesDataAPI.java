@@ -12,14 +12,14 @@ import java.util.ArrayList;
 
 import io.reactivex.Observable;
 
-public class GetGameLikesDataAPI extends CoreRequest {
+public class GetGameLikesDataAPI extends BaseD11API {
 
     GetGameLikesDataAPI() {
         super();
     }
 
     @Override
-    protected String getAction() {
+    protected String getD11Action() {
         return Action.getGameLikesData;
     }
 

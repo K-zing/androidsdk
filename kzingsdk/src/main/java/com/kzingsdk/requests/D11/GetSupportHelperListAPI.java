@@ -12,14 +12,14 @@ import java.util.ArrayList;
 
 import io.reactivex.Observable;
 
-public class GetSupportHelperListAPI extends CoreRequest {
+public class GetSupportHelperListAPI extends BaseD11API {
 
     GetSupportHelperListAPI() {
         super();
     }
 
     @Override
-    protected String getAction() {
+    protected String getD11Action() {
         return Action.getSupportHelperList;
     }
 
