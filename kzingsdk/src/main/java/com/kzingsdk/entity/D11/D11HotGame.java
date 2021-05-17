@@ -9,6 +9,8 @@ public class D11HotGame {
     private String name;
     private String url;
     private String roomNo;
+    private String gpAccountId;
+    private String gpid;
     private Integer order;
     private Integer tryPlatform;
     private Integer type;
@@ -20,11 +22,13 @@ public class D11HotGame {
     public static D11HotGame newInstance(JSONObject rootObject) {
         D11HotGame activityBonus = new D11HotGame();
         JSONObject dataObject = rootObject.optJSONObject("data");
-        if(dataObject!=null) {
+        if (dataObject != null) {
             activityBonus.setImgurl(dataObject.optString("imgurl"));
             activityBonus.setName(dataObject.optString("name"));
             activityBonus.setUrl(dataObject.optString("url"));
             activityBonus.setRoomNo(dataObject.optString("room_no"));
+            activityBonus.setGpAccountId(dataObject.optString("gpaccountid"));
+            activityBonus.setGpid(dataObject.optString("gpid"));
         }
         activityBonus.setOrder(rootObject.optInt("order"));
         activityBonus.setTryPlatform(rootObject.optInt("try_platform"));
@@ -62,6 +66,22 @@ public class D11HotGame {
 
     public void setRoomNo(String roomNo) {
         this.roomNo = roomNo;
+    }
+
+    public String getGpAccountId() {
+        return gpAccountId;
+    }
+
+    public void setGpAccountId(String gpAccountId) {
+        this.gpAccountId = gpAccountId;
+    }
+
+    public String getGpid() {
+        return gpid;
+    }
+
+    public void setGpid(String gpid) {
+        this.gpid = gpid;
     }
 
     public Integer getOrder() {
