@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 
 public class AgentCommissionSummary {
 
+    private String title;
     private String brandId;
     private String currency;
     private String playerId;
@@ -48,6 +49,7 @@ public class AgentCommissionSummary {
 
     public static AgentCommissionSummary newInstance(JSONObject rootObject) {
         AgentCommissionSummary agentCommissionSummary = new AgentCommissionSummary();
+        agentCommissionSummary.setTitle(rootObject.optString("title"));
         agentCommissionSummary.setBrandId(rootObject.optString("brandid"));
         agentCommissionSummary.setCurrency(rootObject.optString("currency"));
         agentCommissionSummary.setPlayerId(rootObject.optString("playerid"));
@@ -81,6 +83,14 @@ public class AgentCommissionSummary {
         agentCommissionSummary.setCreated(rootObject.optLong("created"));
         agentCommissionSummary.setUpdated(rootObject.optLong("updated"));
         return agentCommissionSummary;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
 
