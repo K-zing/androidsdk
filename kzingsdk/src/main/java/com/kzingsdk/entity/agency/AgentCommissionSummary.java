@@ -12,6 +12,7 @@ public class AgentCommissionSummary {
     private String brandId;
     private String currency;
     private String playerId;
+    private String playerName;
     private String sid;
     private String parentPlayerId;
     private String parentPlayerName;
@@ -21,6 +22,7 @@ public class AgentCommissionSummary {
     private Integer teamDownlineCountDiff;
     private Integer calculationStatus;
     private Integer rewardStatus;
+    private BigDecimal balance;
     private BigDecimal commissionEvery;
     private BigDecimal commissionRateDownlineSales;
     private BigDecimal commissionRateTotalSales;
@@ -49,6 +51,7 @@ public class AgentCommissionSummary {
         agentCommissionSummary.setBrandId(rootObject.optString("brandid"));
         agentCommissionSummary.setCurrency(rootObject.optString("currency"));
         agentCommissionSummary.setPlayerId(rootObject.optString("playerid"));
+        agentCommissionSummary.setPlayerName(rootObject.optString("playername"));
         agentCommissionSummary.setSid(rootObject.optString("sid"));
         agentCommissionSummary.setParentPlayerId(rootObject.optString("parentplayerid"));
         agentCommissionSummary.setParentPlayerName(rootObject.optString("parentplayername"));
@@ -58,6 +61,7 @@ public class AgentCommissionSummary {
         agentCommissionSummary.setTeamDownlineCountDiff(rootObject.optInt("teamdownlinecountdiff"));
         agentCommissionSummary.setCalculationStatus(rootObject.optInt("calculationstatus"));
         agentCommissionSummary.setRewardStatus(rootObject.optInt("rewardstatus"));
+        agentCommissionSummary.setBalance(BigDecimalUtil.optBigDecimal(rootObject, "balance"));
         agentCommissionSummary.setCommissionEvery(BigDecimalUtil.optBigDecimal(rootObject, "commissionevery"));
         agentCommissionSummary.setCommissionRateDownlineSales(BigDecimalUtil.optBigDecimal(rootObject, "commissionratedownlinesales"));
         agentCommissionSummary.setCommissionRateTotalSales(BigDecimalUtil.optBigDecimal(rootObject, "commissionratetotalsales"));
@@ -126,6 +130,22 @@ public class AgentCommissionSummary {
 
     public void setParentPlayerName(String parentPlayerName) {
         this.parentPlayerName = parentPlayerName;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 
     public Integer getDirectDownlineCount() {

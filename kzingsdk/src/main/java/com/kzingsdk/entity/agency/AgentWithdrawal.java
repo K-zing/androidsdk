@@ -19,6 +19,7 @@ public class AgentWithdrawal {
     private String remark;
     private String playerName;
     private String sname;
+    private String uplineName;
     private BigDecimal amount;
     private BigDecimal nowBalance;
     private Integer bType;
@@ -42,6 +43,7 @@ public class AgentWithdrawal {
         agentCommissionSummary.setRemark(rootObject.optString("remark"));
         agentCommissionSummary.setPlayerName(rootObject.optString("playername"));
         agentCommissionSummary.setSname(rootObject.optString("sname"));
+        agentCommissionSummary.setUplineName(rootObject.optString("uplinename"));
         agentCommissionSummary.setAmount(BigDecimalUtil.optBigDecimal(rootObject, "amount"));
         agentCommissionSummary.setNowBalance(BigDecimalUtil.optBigDecimal(rootObject, "nowbalance"));
         agentCommissionSummary.setBType(rootObject.optInt("btype"));
@@ -129,6 +131,14 @@ public class AgentWithdrawal {
 
     public void setSname(String sname) {
         this.sname = sname;
+    }
+
+    public String getUplineName() {
+        return uplineName;
+    }
+
+    public void setUplineName(String uplineName) {
+        this.uplineName = uplineName;
     }
 
     public BigDecimal getAmount() {
