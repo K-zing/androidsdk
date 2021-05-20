@@ -30,4 +30,47 @@ public class KzingD11API {
         return new GetGameLikesDataAPI();
     }
 
+    public static GetCommonCslinkAPI getCommonCslink() {
+        return new GetCommonCslinkAPI();
+    }
+
+    public static GetRandomCslinkAPI getRandomCslink() {
+        return new GetRandomCslinkAPI();
+    }
+
+    public static GetQuanJuListAPI getQuanJuList() {
+        return new GetQuanJuListAPI();
+    }
+
+    public static GetQuestListAPI getQuestList() {
+        return new GetQuestListAPI();
+    }
+
+    public static GetQuestFormAPI getQuestForm() {
+        return new GetQuestFormAPI();
+    }
+
+    public static SubmitQuestFormAPI submitQuestForm() {
+        return new SubmitQuestFormAPI();
+    }
+
+    public static DelMyFavGameAPI delMyFavGame() {
+        return new DelMyFavGameAPI();
+    }
+
+    public static AddMyFavGameAPI addMyFavGame() {
+        return new AddMyFavGameAPI();
+    }
+
+    public static LikeGameAPI likeGame() {
+        return new LikeGameAPI();
+    }
+
+    public static GetCsHistoryAPI getCsHistory() {
+        return new GetCsHistoryAPI();
+    }
+
+    public static GetCsHistoryDetailByIdAPI getCsHistoryDetailById() {
+        return new GetCsHistoryDetailByIdAPI();
+    }
 }
