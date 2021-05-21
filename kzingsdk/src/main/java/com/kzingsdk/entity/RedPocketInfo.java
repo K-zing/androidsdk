@@ -3,7 +3,10 @@ package com.kzingsdk.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 
 public class RedPocketInfo implements Parcelable {
@@ -27,6 +30,7 @@ public class RedPocketInfo implements Parcelable {
     private String displayType = "";
     private String notActiveReason = "";
     private Integer notActiveReasonCode = 0;
+    private ArrayList<RedPocketTime> redPocketTimeList = new ArrayList<>();
 
     public RedPocketInfo() {
 
@@ -43,6 +47,13 @@ public class RedPocketInfo implements Parcelable {
         redPocketInfo.setDisplayType(rootObject.optString("display_type", ""));
         redPocketInfo.setNotActiveReason(rootObject.optString("not_active_reason"));
         redPocketInfo.setNotActiveReasonCode(rootObject.optInt("not_active_reason_code"));
+        JSONArray rpTimeArray = rootObject.optJSONArray("rpTime");
+        if (rpTimeArray != null) {
+            for (int i = 0; i < rpTimeArray.length(); i++) {
+                redPocketInfo.redPocketTimeList.add(RedPocketTime.newInstance(rpTimeArray.optJSONObject(i)));
+
+            }
+        }
         return redPocketInfo;
     }
 
@@ -118,6 +129,14 @@ public class RedPocketInfo implements Parcelable {
         this.notActiveReasonCode = notActiveReasonCode;
     }
 
+    public ArrayList<RedPocketTime> getRedPocketTimeList() {
+        return redPocketTimeList;
+    }
+
+    public void setRedPocketTimeList(ArrayList<RedPocketTime> redPocketTimeList) {
+        this.redPocketTimeList = redPocketTimeList;
+    }
+
     public RedPocketInfo(Parcel in) {
         hasRedPocketActivity = in.readInt() == 1;
         chance = in.readInt();
@@ -128,6 +147,8 @@ public class RedPocketInfo implements Parcelable {
         displayType = in.readString();
         notActiveReason = in.readString();
         notActiveReasonCode = in.readInt();
+        Object[] customObjects = in.readArray(RedPocketInfo.class.getClassLoader());
+        redPocketTimeList = (ArrayList<RedPocketTime>) customObjects[0];
     }
 
     @Override
@@ -141,6 +162,9 @@ public class RedPocketInfo implements Parcelable {
         dest.writeString(displayType);
         dest.writeString(notActiveReason);
         dest.writeInt(notActiveReasonCode);
+        Object[] customObjects = new Object[1];
+        customObjects[0] = redPocketTimeList;
+        dest.writeArray(customObjects);
     }
 
     @Override
