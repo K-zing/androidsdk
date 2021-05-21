@@ -24,7 +24,7 @@ public class QuestQuestionGroup {
         questQuestionGroup.setQTypeName(rootObject.optString("qtypename"));
         questQuestionGroup.setStatus(rootObject.optInt("status"));
         questQuestionGroup.setDisplayOrder(rootObject.optInt("displayorder"));
-        JSONArray contentArray = rootObject.optJSONArray("questionList");
+        JSONArray contentArray = rootObject.optJSONArray("question");
         if (contentArray != null) {
             for (int i = 0; i < contentArray.length(); i++) {
                 questQuestionGroup.questQuestionTypeList.add(QuestQuestionType.newInstance(contentArray.optJSONObject(i)));
