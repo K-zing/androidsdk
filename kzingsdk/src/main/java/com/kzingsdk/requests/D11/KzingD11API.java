@@ -6,6 +6,10 @@ public class KzingD11API {
         return new GetD11HotGameAPI();
     }
 
+    public static GetAllNewsAPI getAllNews() {
+        return new GetAllNewsAPI();
+    }
+
     public static GetMyFavGameAPI getMyFavGame() {
         return new GetMyFavGameAPI();
     }

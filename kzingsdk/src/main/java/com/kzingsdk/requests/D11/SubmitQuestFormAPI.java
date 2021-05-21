@@ -22,7 +22,7 @@ public class SubmitQuestFormAPI extends BaseD11API {
     private String qgtId;
     private String sqtId;
     private String verifyCode;
-    private String cover;
+    private ArrayList<String> coverList = new ArrayList<>();
     private ArrayList<QuestQuestion> questQuestionList = new ArrayList<>();
 
     @Override
@@ -51,13 +51,17 @@ public class SubmitQuestFormAPI extends BaseD11API {
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            JSONArray questArray = new JSONArray();
             jsonData.put("qgtid", qgtId);
             jsonData.put("sqtid", sqtId);
             jsonData.put("verifycode", verifyCode);
-            if (cover != null)
-                jsonData.put("cover", cover);
-
+            if (coverList != null && !coverList.isEmpty()) {
+                JSONArray coverArray = new JSONArray();
+                for (String cover : coverList) {
+                    coverArray.put(cover);
+                }
+                jsonData.put("cover", coverArray);
+            }
+            JSONArray questArray = new JSONArray();
             for (QuestQuestion questQuestion : questQuestionList) {
                 questArray.put(questQuestion.toAnswerObject());
             }
@@ -110,8 +114,18 @@ public class SubmitQuestFormAPI extends BaseD11API {
         return this;
     }
 
-    public SubmitQuestFormAPI setCover(String cover) {
-        this.cover = cover;
+    public SubmitQuestFormAPI setCoverList(ArrayList<String> coverList) {
+        this.coverList = coverList;
+        return this;
+    }
+
+    public SubmitQuestFormAPI addCover(String cover) {
+        this.coverList.add(cover);
+        return this;
+    }
+
+    public SubmitQuestFormAPI clearCoverList() {
+        this.coverList.clear();
         return this;
     }
 

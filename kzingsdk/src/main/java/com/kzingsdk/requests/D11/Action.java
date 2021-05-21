@@ -22,4 +22,5 @@ final class Action {
     static final String likeGame = "ubnazeb";
     static final String getCsHistory = "sqa14uf";
     static final String getCsHistoryDetailById = "9l7npjb";
+    static final String getAllNews = "jdyt6om";
 }

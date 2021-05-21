@@ -20,20 +20,20 @@ public class D11HotGame {
     }
 
     public static D11HotGame newInstance(JSONObject rootObject) {
-        D11HotGame activityBonus = new D11HotGame();
+        D11HotGame d11HotGame = new D11HotGame();
         JSONObject dataObject = rootObject.optJSONObject("data");
         if (dataObject != null) {
-            activityBonus.setImgurl(dataObject.optString("imgurl"));
-            activityBonus.setName(dataObject.optString("name"));
-            activityBonus.setUrl(dataObject.optString("url"));
-            activityBonus.setRoomNo(dataObject.optString("room_no"));
-            activityBonus.setGpAccountId(dataObject.optString("gpaccountid"));
-            activityBonus.setGpid(dataObject.optString("gpid"));
+            d11HotGame.setImgurl(dataObject.optString("imgurl"));
+            d11HotGame.setName(dataObject.optString("name"));
+            d11HotGame.setUrl(dataObject.optString("url"));
+            d11HotGame.setRoomNo(dataObject.optString("room_no"));
+            d11HotGame.setGpAccountId(dataObject.optString("gpaccountid"));
+            d11HotGame.setGpid(dataObject.optString("gpid"));
         }
-        activityBonus.setOrder(rootObject.optInt("order"));
-        activityBonus.setTryPlatform(rootObject.optInt("try_platform"));
-        activityBonus.setType(rootObject.optInt("type"));
-        return activityBonus;
+        d11HotGame.setOrder(rootObject.optInt("order"));
+        d11HotGame.setTryPlatform(rootObject.optInt("try_platform"));
+        d11HotGame.setType(rootObject.optInt("type"));
+        return d11HotGame;
     }
 
     public String getImgurl() {

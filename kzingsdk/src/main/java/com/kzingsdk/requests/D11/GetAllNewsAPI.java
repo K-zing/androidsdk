@@ -2,8 +2,7 @@ package com.kzingsdk.requests.D11;
 
 import android.content.Context;
 
-import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.D11.D11HotGame;
+import com.kzingsdk.entity.D11.D11News;
 import com.kzingsdk.requests.KzingCallBack;
 
 import org.json.JSONArray;
@@ -12,51 +11,51 @@ import java.util.ArrayList;
 
 import io.reactivex.Observable;
 
-public class GetD11HotGameAPI extends BaseD11API {
+public class GetAllNewsAPI extends BaseD11API {
 
-    GetD11HotGameAPI() {
+    GetAllNewsAPI() {
         super();
     }
 
     @Override
     protected String getD11Action() {
-        return Action.getHotGame;
+        return Action.getAllNews;
     }
 
 
     @Override
-    public Observable<ArrayList<D11HotGame>> requestRx(Context context) {
+    public Observable<ArrayList<D11News>> requestRx(Context context) {
         return super.baseExecute(context)
                 .map(jsonResponse -> {
-                    ArrayList<D11HotGame> d11HotGame = new ArrayList<>();
+                    ArrayList<D11News> d11News = new ArrayList<>();
                     JSONArray response = jsonResponse.optJSONArray("data");
                     if (response != null) {
                         for (int i = 0; i < response.length(); i++) {
-                            d11HotGame.add(D11HotGame.newInstance(response.optJSONObject(i)));
+                            d11News.add(D11News.newInstance(response.optJSONObject(i)));
                         }
                     }
-                    return d11HotGame;
+                    return d11News;
                 });
     }
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(d11HotGames -> {
+        requestRx(context).subscribe(d11News -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((GetD11HotGameCallBack) kzingCallBack).onSuccess(d11HotGames);
+                    ((GetAllNewsCallBack) kzingCallBack).onSuccess(d11News);
                 }
             }
         }, defaultOnErrorConsumer);
     }
 
-    public GetD11HotGameAPI addGetD11HotGameCallBack(GetD11HotGameCallBack getD11HotGameCallBack) {
-        kzingCallBackList.add(getD11HotGameCallBack);
+    public GetAllNewsAPI addGetAllNewsCallBack(GetAllNewsCallBack getAllNewsCallBack) {
+        kzingCallBackList.add(getAllNewsCallBack);
         return this;
     }
 
-    public interface GetD11HotGameCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<D11HotGame> d11HotGame);
+    public interface GetAllNewsCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<D11News> d11News);
     }
 
 }
