@@ -23,4 +23,10 @@ final class Action {
     static final String getCsHistory = "sqa14uf";
     static final String getCsHistoryDetailById = "9l7npjb";
     static final String getAllNews = "jdyt6om";
+    static final String getPhoneRecallInfo = "jhptnpa";
+    static final String setDefaultWtdCard = "mmgndvd";
+    static final String submitPhoneRecallForm = "r2rrn0z";
+    static final String addOtherPhoneRecallNo = "ptusmux";
+    static final String submitAdditionalQuestForm = "kkfgl95";
+
 }

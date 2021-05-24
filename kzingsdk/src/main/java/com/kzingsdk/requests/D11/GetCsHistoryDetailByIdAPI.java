@@ -25,11 +25,16 @@ public class GetCsHistoryDetailByIdAPI extends BaseD11API {
     }
 
     private String qhId;
+    private Integer type = 1;
+
 
     @Override
     protected Observable<String> validateParams() {
         if (qhId == null) {
             return Observable.just("QhId is missing");
+        }
+        if (type == null) {
+            type = 1;
         }
         return super.validateParams();
     }
@@ -39,6 +44,7 @@ public class GetCsHistoryDetailByIdAPI extends BaseD11API {
         JSONObject jsonData = super.generateParamsJson();
         try {
             jsonData.put("qhid", qhId);
+            jsonData.put("type", type);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -55,13 +61,13 @@ public class GetCsHistoryDetailByIdAPI extends BaseD11API {
                     JSONArray main = response.optJSONArray("main");
                     if (main != null) {
                         for (int i = 0; i < main.length(); i++) {
-                            csHistoryDetails.add(CsHistoryDetail.newInstance(main.optJSONObject(i)));
+                            csHistoryDetails.add(CsHistoryDetail.newInstance(main.optJSONObject(i), false));
                         }
                     }
                     JSONArray extra = response.optJSONArray("extra");
                     if (extra != null) {
                         for (int i = 0; i < extra.length(); i++) {
-                            csHistoryDetails.add(CsHistoryDetail.newInstance(extra.optJSONObject(i)));
+                            csHistoryDetails.add(CsHistoryDetail.newInstance(extra.optJSONObject(i), true));
                         }
                     }
                     return csHistoryDetails;
@@ -92,4 +98,10 @@ public class GetCsHistoryDetailByIdAPI extends BaseD11API {
         this.qhId = qhId;
         return this;
     }
+
+    public GetCsHistoryDetailByIdAPI setType(int type) {
+        this.type = type;
+        return this;
+    }
+
 }

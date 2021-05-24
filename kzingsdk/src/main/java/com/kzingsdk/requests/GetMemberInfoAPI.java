@@ -35,8 +35,8 @@ public class GetMemberInfoAPI extends CoreRequest {
         }, defaultOnErrorConsumer);
     }
 
-    public GetMemberInfoAPI addGetMemberInfoCallBack(GetMemberInfoAPI.GetMemberInfoCallBack getActivityListCallBack){
-        kzingCallBackList.add(getActivityListCallBack);
+    public GetMemberInfoAPI addGetMemberInfoCallBack(GetMemberInfoCallBack getMemberInfoCallBack){
+        kzingCallBackList.add(getMemberInfoCallBack);
         return this;
     }
 

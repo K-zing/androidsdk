@@ -10,6 +10,7 @@ public class PlayerBankCard extends BankCard {
     private String ifscCode = "";
     private String address = "";
     private String bankNode = "";
+    private Integer defaultCard = 0;
 
 
     public static PlayerBankCard newInstance(JSONObject rootObject) {
@@ -23,6 +24,8 @@ public class PlayerBankCard extends BankCard {
         playerBankCard.setIfscCode(rootObject.optString("ifsccode"));
         playerBankCard.setAddress(rootObject.optString("address"));
         playerBankCard.setBankNode(rootObject.optString("banknode"));
+        playerBankCard.setDefaultCard(rootObject.optInt("defaultcard"));
+
         return playerBankCard;
     }
 
@@ -72,6 +75,14 @@ public class PlayerBankCard extends BankCard {
 
     public void setBankNode(String bankNode) {
         this.bankNode = bankNode;
+    }
+
+    public Integer getDefaultCard() {
+        return defaultCard;
+    }
+
+    public void setDefaultCard(Integer defaultCard) {
+        this.defaultCard = defaultCard;
     }
 
     @Override

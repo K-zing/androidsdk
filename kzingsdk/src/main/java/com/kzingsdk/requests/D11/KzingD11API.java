@@ -77,4 +77,25 @@ public class KzingD11API {
     public static GetCsHistoryDetailByIdAPI getCsHistoryDetailById() {
         return new GetCsHistoryDetailByIdAPI();
     }
+
+    public static GetPhoneRecallInfoAPI getPhoneRecallInfo() {
+        return new GetPhoneRecallInfoAPI();
+    }
+
+    public static SetDefaultWtdCardAPI setDefaultWtdCard() {
+        return new SetDefaultWtdCardAPI();
+    }
+
+    public static SubmitPhoneRecallFormAPI submitPhoneRecallForm() {
+        return new SubmitPhoneRecallFormAPI();
+    }
+
+    public static AddOtherPhoneRecallNoAPI addOtherPhoneRecallNo() {
+        return new AddOtherPhoneRecallNoAPI();
+    }
+
+    public static SubmitAdditionalQuestFormAPI submitAdditionalQuestForm() {
+        return new SubmitAdditionalQuestFormAPI();
+    }
+
 }

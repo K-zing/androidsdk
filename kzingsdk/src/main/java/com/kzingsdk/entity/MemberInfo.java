@@ -56,6 +56,7 @@ public class MemberInfo implements Parcelable {
     private boolean forceChangePw = false;
     private boolean isRealNameSeparated = false;
     private boolean panStatus = false;
+    private boolean enablePhoneRecall = false;
 
     private String withdrawFrozenAmount = "0";
 
@@ -103,6 +104,7 @@ public class MemberInfo implements Parcelable {
         zalo = in.readString();
         facebook = in.readString();
         pan = in.readString();
+        enablePhoneRecall = in.readInt() == 1;
     }
 
     public static MemberInfo newInstance(JSONObject rootObject) {
@@ -144,6 +146,8 @@ public class MemberInfo implements Parcelable {
         memberInfo.setPanStatus(rootObject.optString("pan_status", "0").equalsIgnoreCase("1"));
         memberInfo.setGroupId(rootObject.optString("groupid"));
         memberInfo.setWithdrawFrozenAmount(rootObject.optString("wtdfrozenamt"));
+        memberInfo.setEnablePhoneRecall(rootObject.optBoolean("enablePhoneRecall", false));
+
         return memberInfo;
     }
 
@@ -447,6 +451,14 @@ public class MemberInfo implements Parcelable {
         this.agentCode = agentCode;
     }
 
+    public boolean isEnablePhoneRecall() {
+        return enablePhoneRecall;
+    }
+
+    public void setEnablePhoneRecall(boolean enablePhoneRecall) {
+        this.enablePhoneRecall = enablePhoneRecall;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(regDate);
@@ -486,6 +498,7 @@ public class MemberInfo implements Parcelable {
         dest.writeString(zalo);
         dest.writeString(facebook);
         dest.writeString(pan);
+        dest.writeInt(enablePhoneRecall ? 1 : 0);
 
 
     }
