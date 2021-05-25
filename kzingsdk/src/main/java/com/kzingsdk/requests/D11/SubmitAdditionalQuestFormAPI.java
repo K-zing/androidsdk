@@ -54,19 +54,15 @@ public class SubmitAdditionalQuestFormAPI extends BaseD11API {
                 jsonData.put("cover", coverObject);
             }
             JSONArray questArray = new JSONArray();
-            int extraI = 0;
             for (int i = 0; i < csHistoryDetailList.size(); i++) {
                 CsHistoryDetail csHistoryDetail = csHistoryDetailList.get(i);
                 if (!csHistoryDetail.isExtra()) continue;
-                if(csHistoryDetail.getType().equalsIgnoreCase("img") && csHistoryDetail.getValue().length() == 0){
-                    extraI++;
+                if (csHistoryDetail.getType().equalsIgnoreCase("img") && csHistoryDetail.getValue().length() == 0)
                     continue;
-                }
                 JSONObject answerJSON = new JSONObject();
-                answerJSON.put("id", extraI);
+                answerJSON.put("id", csHistoryDetail.getId());
                 answerJSON.put("value", csHistoryDetail.getValue());
                 questArray.put(answerJSON);
-                extraI++;
             }
             jsonData.put("data", questArray);
             return jsonData;

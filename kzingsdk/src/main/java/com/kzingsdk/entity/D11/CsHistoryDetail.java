@@ -6,18 +6,19 @@ import org.json.JSONObject;
 public class CsHistoryDetail {
 
     private boolean isExtra = false;
+    private String id;
     private String title;
     private String type;
     private String value;
-
 
     public CsHistoryDetail() {
 
     }
 
-    public static CsHistoryDetail newInstance(JSONObject rootObject, boolean isExtra) {
+    public static CsHistoryDetail newInstance(JSONObject rootObject, String id, boolean isExtra) {
         CsHistoryDetail csHistoryDetail = new CsHistoryDetail();
         csHistoryDetail.isExtra = isExtra;
+        csHistoryDetail.id = id;
         csHistoryDetail.setTitle(rootObject.optString("title"));
         csHistoryDetail.setType(rootObject.optString("type"));
         csHistoryDetail.setValue(rootObject.optString("value"));
@@ -56,5 +57,12 @@ public class CsHistoryDetail {
         this.value = value;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }
 

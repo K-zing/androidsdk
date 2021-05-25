@@ -61,13 +61,13 @@ public class GetCsHistoryDetailByIdAPI extends BaseD11API {
                     JSONArray main = response.optJSONArray("main");
                     if (main != null) {
                         for (int i = 0; i < main.length(); i++) {
-                            csHistoryDetails.add(CsHistoryDetail.newInstance(main.optJSONObject(i), false));
+                            csHistoryDetails.add(CsHistoryDetail.newInstance(main.optJSONObject(i), i + "", false));
                         }
                     }
                     JSONArray extra = response.optJSONArray("extra");
                     if (extra != null) {
                         for (int i = 0; i < extra.length(); i++) {
-                            csHistoryDetails.add(CsHistoryDetail.newInstance(extra.optJSONObject(i), true));
+                            csHistoryDetails.add(CsHistoryDetail.newInstance(extra.optJSONObject(i), i + "", true));
                         }
                     }
                     return csHistoryDetails;
