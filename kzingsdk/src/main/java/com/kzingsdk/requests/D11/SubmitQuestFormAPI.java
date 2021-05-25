@@ -68,6 +68,7 @@ public class SubmitQuestFormAPI extends BaseD11API {
                 questArray.put(questQuestion.toAnswerObject());
             }
             jsonData.put("main", questArray);
+            jsonData.put("jsessionid", getSessionId());
             return jsonData;
         } catch (JSONException ignored) {
         }
