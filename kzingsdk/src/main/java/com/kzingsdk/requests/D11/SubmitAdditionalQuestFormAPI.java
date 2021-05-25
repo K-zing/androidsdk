@@ -58,6 +58,10 @@ public class SubmitAdditionalQuestFormAPI extends BaseD11API {
             for (int i = 0; i < csHistoryDetailList.size(); i++) {
                 CsHistoryDetail csHistoryDetail = csHistoryDetailList.get(i);
                 if (!csHistoryDetail.isExtra()) continue;
+                if(csHistoryDetail.getType().equalsIgnoreCase("img") && csHistoryDetail.getValue().length() == 0){
+                    extraI++;
+                    continue;
+                }
                 JSONObject answerJSON = new JSONObject();
                 answerJSON.put("id", extraI);
                 answerJSON.put("value", csHistoryDetail.getValue());
