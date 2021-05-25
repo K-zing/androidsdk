@@ -99,7 +99,7 @@ public class RegAccountAPI extends CoreRequest {
             jsonData.put("telegram", telegram);
             jsonData.put("zalo", zalo);
             jsonData.put("facebook", facebook);
-            jsonData.put("utmCode", utmCode);
+            jsonData.put("utmcode", utmCode);
             jsonData.put("line", line);
 
             jsonData.put("jsessionid", getSessionId());

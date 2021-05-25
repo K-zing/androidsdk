@@ -16,7 +16,7 @@ public class GameLikesData {
 
     public static GameLikesData newInstance(JSONObject rootObject) {
         GameLikesData activityBonus = new GameLikesData();
-        activityBonus.setGpid(rootObject.optString("game_id"));
+        activityBonus.setGpid(rootObject.optString("gpid"));
         activityBonus.setOnlineGamers(rootObject.optInt("online_gamers"));
         activityBonus.setThumbStatus(rootObject.optInt("thumb_status"));
         activityBonus.setThumbValue(rootObject.optInt("thumb_value"));
