@@ -27,11 +27,7 @@ public class GetPhoneRecallInfoAPI extends BaseD11API {
     @Override
     public Observable<GetPhoneRecallInfoResult> requestRx(Context context) {
         return super.baseExecute(context)
-                .map(jsonResponse -> {
-                    JSONObject response = jsonResponse.optJSONObject("data");
-                    JSONObject response2 = response.optJSONObject("data");
-                    return GetPhoneRecallInfoResult.newInstance(response2);
-                });
+                .map(jsonResponse -> GetPhoneRecallInfoResult.newInstance(jsonResponse.optJSONObject("data")));
     }
 
     @Override
