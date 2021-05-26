@@ -50,8 +50,8 @@ public class SubmitAdditionalQuestFormAPI extends BaseD11API {
                 for (String cover : coverList) {
                     coverArray.put(cover);
                 }
-                coverObject.put("cover", coverArray);
-                jsonData.put("cover", coverObject);
+                coverObject.put("extra_cover", coverArray);
+                jsonData.put("extra_cover", coverObject.toString());
             }
             JSONArray questArray = new JSONArray();
             for (int i = 0; i < csHistoryDetailList.size(); i++) {
@@ -64,7 +64,7 @@ public class SubmitAdditionalQuestFormAPI extends BaseD11API {
                 answerJSON.put("value", csHistoryDetail.getValue());
                 questArray.put(answerJSON);
             }
-            jsonData.put("data", questArray);
+            jsonData.put("data", questArray.toString());
             return jsonData;
         } catch (JSONException ignored) {
         }
