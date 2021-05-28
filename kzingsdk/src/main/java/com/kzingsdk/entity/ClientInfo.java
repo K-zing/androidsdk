@@ -30,6 +30,7 @@ public class ClientInfo implements Parcelable {
     private String siteLogoSmall;
     private String siteLogoSimple;
     private String support;
+    private String support2;
     private String announcement;
     private boolean allowUserEditProfile;
     private boolean hasRedPocket;
@@ -54,6 +55,7 @@ public class ClientInfo implements Parcelable {
     private boolean canCancelWithdrawal;
     private boolean initWdPwdNeedLoginPwd;
     private String rankLevel;
+    private String appResourceDomain;
 
     private HashMap<Integer, String> websiteConfigMap = new HashMap<>();
     private ContactInfo feedbackContactInfo = new ContactInfo();
@@ -73,6 +75,7 @@ public class ClientInfo implements Parcelable {
         clientInfo.setSiteName(rootObject.optString("sitename"));
         clientInfo.setSiteLogoSimple(rootObject.optString("sitelogosimple"));
         clientInfo.setSupport(rootObject.optString("support").trim());
+        clientInfo.setSupport2(rootObject.optString("support2").trim());
         clientInfo.setAnnouncement(rootObject.optString("announcement"));
         clientInfo.setUseBanner(rootObject.optInt("use_banner", USE_CLIENTINFO_BANNER));
         clientInfo.setAllowUserEditProfile(rootObject.optString("allowUserEditProfile").equals("1"));
@@ -92,6 +95,7 @@ public class ClientInfo implements Parcelable {
         clientInfo.setCanCancelWithdrawal(rootObject.optBoolean("canCancelWithdrawal", false));
         clientInfo.setInitWdPwdNeedLoginPwd(rootObject.optBoolean("initWdPwdNeedLoginPwd", false));
         clientInfo.setRankLevel(rootObject.optString("rankLevel"));
+        clientInfo.setAppResourceDomain(rootObject.optString("appResourceDomain"));
 
         for (int i = 301; i < 400; i++) {
             clientInfo.websiteConfigMap.put(i, rootObject.optString("wc" + i));
@@ -188,6 +192,14 @@ public class ClientInfo implements Parcelable {
 
     public void setSupport(String support) {
         this.support = support;
+    }
+
+    public String getSupport2() {
+        return support2;
+    }
+
+    public void setSupport2(String support2) {
+        this.support2 = support2;
     }
 
     public String getSiteLogoSimple() {
@@ -403,6 +415,14 @@ public class ClientInfo implements Parcelable {
         this.rankLevel = rankLevel;
     }
 
+    public String getAppResourceDomain() {
+        return appResourceDomain;
+    }
+
+    public void setAppResourceDomain(String appResourceDomain) {
+        this.appResourceDomain = appResourceDomain;
+    }
+
     public ContactInfo getFeedbackContactInfo() {
         return feedbackContactInfo;
     }
@@ -435,6 +455,7 @@ public class ClientInfo implements Parcelable {
         siteLogoSmall = in.readString();
         siteLogoSimple = in.readString();
         support = in.readString();
+        support2 = in.readString();
         announcement = in.readString();
         useBanner = in.readInt();
         Object[] objectArray = in.readArray(ClientInfo.class.getClassLoader());
@@ -475,6 +496,7 @@ public class ClientInfo implements Parcelable {
         dest.writeString(siteLogoSmall);
         dest.writeString(siteLogoSimple);
         dest.writeString(support);
+        dest.writeString(support2);
         dest.writeString(announcement);
         dest.writeInt(useBanner);
         dest.writeArray(new Object[]{
@@ -504,6 +526,7 @@ public class ClientInfo implements Parcelable {
         dest.writeInt(canCancelWithdrawal ? 1 : 0);
         dest.writeInt(initWdPwdNeedLoginPwd ? 1 : 0);
         dest.writeString(rankLevel);
+        dest.writeString(appResourceDomain);
 
     }
 
