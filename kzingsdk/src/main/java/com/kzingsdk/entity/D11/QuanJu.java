@@ -175,6 +175,13 @@ public class QuanJu {
         this.openIcon = openIcon;
     }
 
+    public ArrayList<QuanJuTime> getQuanJuTimeList() {
+        return quanJuTimeList;
+    }
+
+    public void setQuanJuTimeList(ArrayList<QuanJuTime> quanJuTimeList) {
+        this.quanJuTimeList = quanJuTimeList;
+    }
 
     public static class QuanJuTime {
         private String start;

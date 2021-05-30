@@ -35,7 +35,7 @@ public class GetMyFavGameAPI extends BaseD11API {
                         JSONArray gpArray = response.optJSONObject(0).optJSONArray("gp");
                         if (gpArray != null) {
                             for (int i = 0; i < gpArray.length(); i++) {
-                                favGameSet.add(gpArray.optJSONObject(0).optString("gpid"));
+                                favGameSet.add(gpArray.optJSONObject(i).optString("gpid"));
                             }
                         }
                     }
