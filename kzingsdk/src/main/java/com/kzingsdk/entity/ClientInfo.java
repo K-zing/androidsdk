@@ -98,7 +98,7 @@ public class ClientInfo implements Parcelable {
         clientInfo.setHasFriendPromo(rootObject.optBoolean("hasFriendPromo", false));
         clientInfo.setCanCancelWithdrawal(rootObject.optBoolean("canCancelWithdrawal", false));
         clientInfo.setInitWdPwdNeedLoginPwd(rootObject.optBoolean("initWdPwdNeedLoginPwd", false));
-        clientInfo.setInitWdPwdNeedLoginPwd(rootObject.optBoolean("memberpanverify", false));
+        clientInfo.setMemberPanVerify(rootObject.optBoolean("memberpanverify", false));
         clientInfo.setRankLevel(rootObject.optString("rankLevel"));
         clientInfo.setAppResourceDomain(rootObject.optString("appResourceDomain"));
 
