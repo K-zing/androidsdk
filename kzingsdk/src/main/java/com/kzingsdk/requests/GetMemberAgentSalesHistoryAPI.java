@@ -47,6 +47,7 @@ public class GetMemberAgentSalesHistoryAPI extends CoreRequest {
         }
         return super.validateParams();
     }
+
     @Override
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();

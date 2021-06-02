@@ -2,7 +2,6 @@ package com.kzingsdk.requests.D11;
 
 import android.content.Context;
 
-import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.requests.KzingCallBack;
 
 import io.reactivex.Observable;

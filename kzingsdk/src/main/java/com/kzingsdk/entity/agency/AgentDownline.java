@@ -1,10 +1,6 @@
 package com.kzingsdk.entity.agency;
 
-import com.kzingsdk.util.BigDecimalUtil;
-
 import org.json.JSONObject;
-
-import java.math.BigDecimal;
 
 
 public class AgentDownline {

@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class ClientInfo implements Parcelable {
 
@@ -54,6 +55,9 @@ public class ClientInfo implements Parcelable {
     private boolean hasFriendPromo;
     private boolean canCancelWithdrawal;
     private boolean initWdPwdNeedLoginPwd;
+    private boolean memberPanVerify;
+    private HashSet<String> memberPanPlayerGroup = new HashSet<>();
+
     private String rankLevel;
     private String appResourceDomain;
 
@@ -94,6 +98,7 @@ public class ClientInfo implements Parcelable {
         clientInfo.setHasFriendPromo(rootObject.optBoolean("hasFriendPromo", false));
         clientInfo.setCanCancelWithdrawal(rootObject.optBoolean("canCancelWithdrawal", false));
         clientInfo.setInitWdPwdNeedLoginPwd(rootObject.optBoolean("initWdPwdNeedLoginPwd", false));
+        clientInfo.setInitWdPwdNeedLoginPwd(rootObject.optBoolean("memberpanverify", false));
         clientInfo.setRankLevel(rootObject.optString("rankLevel"));
         clientInfo.setAppResourceDomain(rootObject.optString("appResourceDomain"));
 
@@ -148,6 +153,14 @@ public class ClientInfo implements Parcelable {
             }
             if (socialMediaJSONObject != null) {
                 clientInfo.setSocialMediaContactInfo(ContactInfo.newInstance(socialMediaJSONObject));
+            }
+        }
+
+        JSONArray memberPanPlayerGroupJSONArray = rootObject.optJSONArray("memberpanplayergroup");
+        if (memberPanPlayerGroupJSONArray != null) {
+            clientInfo.memberPanPlayerGroup.clear();
+            for (int i = 0; i < memberPanPlayerGroupJSONArray.length(); i++) {
+                clientInfo.memberPanPlayerGroup.add(memberPanPlayerGroupJSONArray.optString(i));
             }
         }
 
@@ -447,6 +460,22 @@ public class ClientInfo implements Parcelable {
         this.socialMediaContactInfo = socialMediaContactInfo;
     }
 
+    public boolean isMemberPanVerify() {
+        return memberPanVerify;
+    }
+
+    public void setMemberPanVerify(boolean memberPanVerify) {
+        this.memberPanVerify = memberPanVerify;
+    }
+
+    public HashSet<String> getMemberPanPlayerGroup() {
+        return memberPanPlayerGroup;
+    }
+
+    public void setMemberPanPlayerGroup(HashSet<String> memberPanPlayerGroup) {
+        this.memberPanPlayerGroup = memberPanPlayerGroup;
+    }
+
     public ClientInfo(Parcel in) {
         siteName = in.readString();
         siteDomain = in.readString();
@@ -464,6 +493,7 @@ public class ClientInfo implements Parcelable {
         websiteConfigMap = (HashMap<Integer, String>) objectArray[2];
         bannerCountdownList = (ArrayList<String>) objectArray[3];
         bannerFirstLaunchList = (ArrayList<String>) objectArray[4];
+        memberPanPlayerGroup = (HashSet<String>) objectArray[5];
         feedbackContactInfo = (ContactInfo) objectArray[5];
         partnershipContactInfo = (ContactInfo) objectArray[6];
         socialMediaContactInfo = (ContactInfo) objectArray[7];
@@ -484,6 +514,9 @@ public class ClientInfo implements Parcelable {
         canCancelWithdrawal = in.readInt() == 1;
         initWdPwdNeedLoginPwd = in.readInt() == 1;
         rankLevel = in.readString();
+        memberPanVerify = in.readInt() == 1;
+
+
     }
 
 
@@ -507,7 +540,8 @@ public class ClientInfo implements Parcelable {
                 bannerFirstLaunchList,
                 feedbackContactInfo,
                 partnershipContactInfo,
-                socialMediaContactInfo
+                socialMediaContactInfo,
+                memberPanPlayerGroup
         });
         dest.writeInt(hasRedPocket ? 1 : 0);
         dest.writeString(redPocketImageUrl);
@@ -527,6 +561,7 @@ public class ClientInfo implements Parcelable {
         dest.writeInt(initWdPwdNeedLoginPwd ? 1 : 0);
         dest.writeString(rankLevel);
         dest.writeString(appResourceDomain);
+        dest.writeInt(memberPanVerify ? 1 : 0);
 
     }
 

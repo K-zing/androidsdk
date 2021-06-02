@@ -3,13 +3,7 @@ package com.kzingsdk.requests.D11;
 import android.content.Context;
 
 import com.kzingsdk.entity.D11.GetPhoneRecallInfoResult;
-import com.kzingsdk.entity.D11.PhoneRecallInfo;
 import com.kzingsdk.requests.KzingCallBack;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import io.reactivex.Observable;
 

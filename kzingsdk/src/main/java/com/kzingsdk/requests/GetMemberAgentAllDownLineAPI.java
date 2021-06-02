@@ -38,12 +38,12 @@ public class GetMemberAgentAllDownLineAPI extends CoreRequest {
         return super.baseExecute(context).map(jsonResponse -> {
             ArrayList<AgentDownline> agentDownlineList = new ArrayList<>();
             JSONArray commissionsArray = jsonResponse.optJSONArray("downlines");
-            if(commissionsArray!=null && commissionsArray.length()>0){
-                for(int i = 0 ; i < commissionsArray.length();i++){
+            if (commissionsArray != null && commissionsArray.length() > 0) {
+                for (int i = 0; i < commissionsArray.length(); i++) {
                     agentDownlineList.add(AgentDownline.newInstance(commissionsArray.optJSONObject(i)));
                 }
             }
-            
+
             return agentDownlineList;
         });
     }

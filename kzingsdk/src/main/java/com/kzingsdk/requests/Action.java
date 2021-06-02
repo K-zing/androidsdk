@@ -54,12 +54,14 @@ final class Action {
     static final String getActivityContent = "cc13e23";
     static final String checkGiftRedeemable = "qfn2hma";
     static final String applyActivity = "c43e69f";
+    static final String activityCanSignIn = "c948aca";
+    static final String activitySignIn = "8acac94";
     static final String getRedPocketInfo = "dj1m98x";
     static final String redeemRedPocket = "hch19ao";
     static final String getGiftHistory = "q3fm9hd";
     static final String getMemberReferral = "mw08mcv";
     static final String getFriendRefLogs = "smzsocy";
-
+    static final String getNewComerActivity = "nahkyr";
 
     static final String getClientInfo = "5f7cd5b";
     static final String getVipDetail = "at2sfrv";
@@ -87,12 +89,8 @@ final class Action {
     static final String getAllGpBalance = "p18jd1a";
     static final String getGpsBalance = "p18jd1b";
 
-
     static final String transferToGame = "bb85b0a";
     static final String transferGameToGame = "0fa5c4d";
-
-    static final String getDownloadAppList = "0fda2c6";
-    static final String appLinkInfo = "n19cfna";
 
     static final String iplSendWhatsapp = "mk4j2wz";
     static final String getPlayerEWalletCard = "kxzbeso";

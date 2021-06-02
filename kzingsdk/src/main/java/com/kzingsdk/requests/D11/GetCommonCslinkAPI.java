@@ -7,7 +7,6 @@ import com.kzingsdk.requests.KzingCallBack;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import io.reactivex.Observable;

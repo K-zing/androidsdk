@@ -3,10 +3,8 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.SocialRegisterPlatform;
 import com.kzingsdk.entity.agency.MemberAgent;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import io.reactivex.Observable;

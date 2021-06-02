@@ -104,7 +104,11 @@ public abstract class CoreRequest {
 
     protected abstract String getAction();
 
-    protected String getD11Action(){return "";};
+    protected String getD11Action() {
+        return "";
+    }
+
+    ;
 
     /*
      *  Override if API need to validate params first. Empty means success.

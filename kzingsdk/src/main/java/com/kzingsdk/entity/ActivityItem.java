@@ -47,6 +47,7 @@ public class ActivityItem implements Parcelable {
     private long expiredDate;
     private ActivityGift activityGift;
     private ActivityReferDpt activityReferDpt;//5009
+    private ActivitySignIn7Days activitySignIn7Days;
     private boolean isPublic;
     private int applyStatus;
     private BigDecimal availableDptAmt;
@@ -68,8 +69,8 @@ public class ActivityItem implements Parcelable {
         content = in.readString();
         cover = in.readString();
         created = in.readString();
-        canJoin = in.readString().equals("1");
-        isGift = in.readString().equals("1");
+        canJoin = in.readInt() == 1;
+        isGift = in.readInt() == 1;
         show = in.readString();
         Object[] objectArray = in.readArray(ActivityItem.class.getClassLoader());
         activityType = (ActivityType) objectArray[0];
@@ -77,6 +78,7 @@ public class ActivityItem implements Parcelable {
         groupNames = (ArrayList<String>) objectArray[2];
         activityReferDpt = (ActivityReferDpt) objectArray[3];
         activityFrontType = (ActivityType) objectArray[4];
+        activitySignIn7Days = (ActivitySignIn7Days) objectArray[5];
         redirectUrl = in.readString();
         redirectType = RedirectType.valueOf(in.readString());
         displayOrder = in.readInt();
@@ -130,6 +132,9 @@ public class ActivityItem implements Parcelable {
             }
             if (acDataJSONObject.optJSONArray("gift_requirement") != null) {
                 item.setActivityGift(ActivityGift.newInstance(acDataJSONObject));
+            }
+            if (acDataJSONObject.optJSONArray("signin7days_requirement") != null) {
+                item.setActivitySignIn7Days(ActivitySignIn7Days.newInstance(acDataJSONObject));
             }
             item.setShowProgressBar(acDataJSONObject.optString("progressbar", "0").equalsIgnoreCase("1"));
             item.setApplyPeriod(acDataJSONObject.optInt("apply_period", 1));
@@ -317,6 +322,14 @@ public class ActivityItem implements Parcelable {
         this.activityGift = activityGift;
     }
 
+    public ActivitySignIn7Days getActivitySignIn7Days() {
+        return activitySignIn7Days;
+    }
+
+    public void setActivitySignIn7Days(ActivitySignIn7Days activitySignIn7Days) {
+        this.activitySignIn7Days = activitySignIn7Days;
+    }
+
     public boolean isGift() {
         return isGift;
     }
@@ -449,8 +462,8 @@ public class ActivityItem implements Parcelable {
         dest.writeString(content);
         dest.writeString(cover);
         dest.writeString(created);
-        dest.writeString(canJoin ? "1" : "0");
-        dest.writeString(isGift ? "1" : "0");
+        dest.writeInt(canJoin ? 1 : 0);
+        dest.writeInt(isGift ? 1 : 0);
         dest.writeString(show);
         dest.writeArray(new Object[]{
                 activityType,
@@ -458,6 +471,7 @@ public class ActivityItem implements Parcelable {
                 groupNames,
                 activityReferDpt,
                 activityFrontType,
+                activitySignIn7Days,
         });
         dest.writeString(redirectUrl);
         dest.writeString(redirectType.name().toUpperCase());

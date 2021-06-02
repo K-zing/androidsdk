@@ -9,23 +9,23 @@ import org.json.JSONObject;
 
 import io.reactivex.Observable;
 
-public class DeleteEWalletBankCardAPI extends CoreRequest {
+public class ActivityCanSignInAPI extends CoreRequest {
 
-    DeleteEWalletBankCardAPI() {
+    ActivityCanSignInAPI() {
         super();
     }
 
-    private String id = null;
-
     @Override
     protected String getAction() {
-        return Action.deleteEWalletBankCard;
+        return Action.activityCanSignIn;
     }
+
+    private String actid;
 
     @Override
     protected Observable<String> validateParams() {
-        if (id == null) {
-            return Observable.just("ID is missing");
+        if (actid == null || actid.length() == 0) {
+            return Observable.just("ActID is not valid");
         }
         return super.validateParams();
     }
@@ -34,12 +34,13 @@ public class DeleteEWalletBankCardAPI extends CoreRequest {
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            jsonData.put("id", id);
+            jsonData.put("actid", actid);
             return jsonData;
         } catch (JSONException ignored) {
         }
         return super.generateParamsJson();
     }
+
 
     @Override
     public Observable<String> requestRx(Context context) {
@@ -48,26 +49,29 @@ public class DeleteEWalletBankCardAPI extends CoreRequest {
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(message -> {
+        requestRx(context).subscribe(activityContent -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((DeleteEWalletBankCardCallBack) kzingCallBack).onSuccess();
+                    ((ActivityCanSignInCallBack) kzingCallBack).onSuccess();
                 }
             }
         }, defaultOnErrorConsumer);
     }
 
-    public DeleteEWalletBankCardAPI addDeleteEWalletBankCardCallBack(DeleteEWalletBankCardCallBack deleteEWalletBankCardCallBack) {
-        kzingCallBackList.add(deleteEWalletBankCardCallBack);
+    public ActivityCanSignInAPI addActivityCanSignInCallBack(ActivityCanSignInCallBack activityCanSignInCallBack) {
+        kzingCallBackList.add(activityCanSignInCallBack);
         return this;
     }
 
-    public interface DeleteEWalletBankCardCallBack extends KzingCallBack {
+    public interface ActivityCanSignInCallBack extends KzingCallBack {
         void onSuccess();
     }
 
-    public DeleteEWalletBankCardAPI setId(String id) {
-        this.id = id;
+    /**
+     * @param actid From {@link com.kzingsdk.entity.ActivityItem} returned by {@link GetActivityListAPI}
+     */
+    public ActivityCanSignInAPI setActid(String actid) {
+        this.actid = actid;
         return this;
     }
 

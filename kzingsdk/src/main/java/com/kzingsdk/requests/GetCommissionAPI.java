@@ -38,12 +38,12 @@ public class GetCommissionAPI extends CoreRequest {
         return super.baseExecute(context).map(jsonResponse -> {
             ArrayList<AgentCommission> agentCommissionList = new ArrayList<>();
             JSONArray commissionsArray = jsonResponse.optJSONArray("commissions");
-            if(commissionsArray!=null && commissionsArray.length()>0){
-                for(int i = 0 ; i < commissionsArray.length();i++){
+            if (commissionsArray != null && commissionsArray.length() > 0) {
+                for (int i = 0; i < commissionsArray.length(); i++) {
                     agentCommissionList.add(AgentCommission.newInstance(commissionsArray.optJSONObject(i)));
                 }
             }
-            
+
             return agentCommissionList;
         });
     }

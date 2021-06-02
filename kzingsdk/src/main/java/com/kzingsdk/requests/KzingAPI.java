@@ -32,6 +32,14 @@ public final class KzingAPI {
         return new ApplyActivityAPI();
     }
 
+    public static ActivityCanSignInAPI activityCanSignIn() {
+        return new ActivityCanSignInAPI();
+    }
+
+    public static ActivitySignInAPI activitySignIn() {
+        return new ActivitySignInAPI();
+    }
+
     public static GetRedPocketInfoAPI getRedPocketInfo() {
         return new GetRedPocketInfoAPI();
     }
@@ -209,14 +217,6 @@ public final class KzingAPI {
 
     public static TransferGameToGameAPI transferGameToGame() {
         return new TransferGameToGameAPI();
-    }
-
-    public static GetDownloadAppListAPI getDownloadAppList() {
-        return new GetDownloadAppListAPI();
-    }
-
-    public static AppLinkInfoAPI appLinkInfo() {
-        return new AppLinkInfoAPI();
     }
 
     public static IplSendWhatsappAPI iplSendWhatsapp() {

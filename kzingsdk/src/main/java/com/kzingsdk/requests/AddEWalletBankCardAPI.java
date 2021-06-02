@@ -42,7 +42,7 @@ public class AddEWalletBankCardAPI extends CoreRequest {
         try {
 
             jsonData.put("bid", bid);
-            if(cryptoType!=null)
+            if (cryptoType != null)
                 jsonData.put("cryptotype", cryptoType);
             if (withdrawFieldList != null && withdrawFieldList.size() > 0) {
                 JSONObject withdrawFieldData = new JSONObject();

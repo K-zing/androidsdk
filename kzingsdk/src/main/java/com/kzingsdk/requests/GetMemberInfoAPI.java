@@ -35,14 +35,14 @@ public class GetMemberInfoAPI extends CoreRequest {
         }, defaultOnErrorConsumer);
     }
 
-    public GetMemberInfoAPI addGetMemberInfoCallBack(GetMemberInfoCallBack getMemberInfoCallBack){
+    public GetMemberInfoAPI addGetMemberInfoCallBack(GetMemberInfoCallBack getMemberInfoCallBack) {
         kzingCallBackList.add(getMemberInfoCallBack);
         return this;
     }
 
-    public interface GetMemberInfoCallBack extends KzingCallBack{
+    public interface GetMemberInfoCallBack extends KzingCallBack {
         void onSuccess(MemberInfo memberInfo);
     }
-    
+
 
 }
