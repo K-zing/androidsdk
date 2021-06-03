@@ -40,6 +40,10 @@ public final class KzingAPI {
         return new ActivitySignInAPI();
     }
 
+    public static GetNewComerActivityAPI getNewComerActivity() {
+        return new GetNewComerActivityAPI();
+    }
+
     public static GetRedPocketInfoAPI getRedPocketInfo() {
         return new GetRedPocketInfoAPI();
     }
