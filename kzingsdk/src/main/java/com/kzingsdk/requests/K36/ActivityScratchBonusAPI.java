@@ -17,7 +17,7 @@ public class ActivityScratchBonusAPI extends BaseK36API {
     }
 
     @Override
-    protected String getD11Action() {
+    protected String getK36Action() {
         return Action.activityScratchBonus;
     }
 
@@ -68,6 +68,11 @@ public class ActivityScratchBonusAPI extends BaseK36API {
 
     public interface ActivityScratchBonusCallBack extends KzingCallBack {
         void onSuccess(K36ActivityInfo activityScratchBonus);
+    }
+
+    public ActivityScratchBonusAPI setActid(String actid) {
+        this.actid = actid;
+        return this;
     }
 
 }

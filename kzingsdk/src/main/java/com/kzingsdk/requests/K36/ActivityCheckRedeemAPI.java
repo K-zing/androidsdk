@@ -18,7 +18,7 @@ public class ActivityCheckRedeemAPI extends BaseK36API {
     }
 
     @Override
-    protected String getD11Action() {
+    protected String getK36Action() {
         return Action.activityCheckRedeem;
     }
 
