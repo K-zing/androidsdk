@@ -17,7 +17,7 @@ import static com.kzingsdk.entity.gameplatform.GameOrientation.PORTRAIT;
  * <p>
  * Please check if the object is {@link GamePlatformCustom}. You need to handle it differently to get the actual {@link GamePlatform} or sub game.
  */
-public class GamePlatform implements Playable {
+public class GamePlatform extends SimpleGamePlatform implements Playable {
 
     public static final int MAINTAIN = 0;
     public static final int NOT_MAINTAIN = 1;
@@ -47,9 +47,7 @@ public class GamePlatform implements Playable {
         }
     }
 
-    private String gpid = "";
     private String gpaccountid = "";
-    private String gpname = "";
     private String gpename = "";
     private String frameIcons = "0";
     private long maintainStart = 0L;

@@ -56,6 +56,7 @@ public abstract class CoreRequest {
     protected final String PLATFORM_OBJECT_NAME = "os";
     protected final String ACTION_OBJECT_NAME = "url";
     protected final String ACTION_OBJECT_NAME_D11 = "d11url";
+    protected final String ACTION_OBJECT_NAME_K36 = "k36url";
     protected final String DATA_JSON_OBJECT_NAME = "data";
     protected final String SIGN_OBJECT_NAME = "sign";
     protected final String CLIENT_OBJECT_NAME = "aid";
@@ -107,8 +108,9 @@ public abstract class CoreRequest {
     protected String getD11Action() {
         return "";
     }
-
-    ;
+    protected String getK36Action() {
+        return "";
+    }
 
     /*
      *  Override if API need to validate params first. Empty means success.
@@ -185,6 +187,9 @@ public abstract class CoreRequest {
             toFindSet = isUseBetterUrl(context) ? API_URL_SET_BETTER : API_URL_SET;
         }
         if (failedIP.equals(toFindSet) || failedIP.size() >= toFindSet.size()) {
+            if(KzingSDK.getInstance().isUseCustomUrl()){
+                KzingSDK.getInstance().setUseCustomUrl(false);
+            }
             failedIP.clear();
         }
         ArrayList<FutureTask<String>> futureTasks = createPingIPTasks(toFindSet, failedIP);
@@ -315,6 +320,7 @@ public abstract class CoreRequest {
             dataWithKey.put(CLIENT_KEY_OBJECT_NAME, getApiKey());
             dataWithKey.put(ACTION_OBJECT_NAME, getAction());
             dataWithKey.put(ACTION_OBJECT_NAME_D11, getD11Action());
+            dataWithKey.put(ACTION_OBJECT_NAME_K36, getK36Action());
             dataWithKey.put(PLATFORM_OBJECT_NAME, PLATFORM_NAME);
             dataWithKey.put(SIGN_OBJECT_NAME, MD5Utils.md5(dataRSA + KzingSDK.getInstance().getMd5Key()).toUpperCase());
             log(dataWithKey.toString());

@@ -3,7 +3,7 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.gameplatform.CancelWithdrawalResult;
+import com.kzingsdk.entity.CancelWithdrawalResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
