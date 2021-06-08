@@ -2,13 +2,14 @@ package com.kzingsdk.requests.K36;
 
 import android.content.Context;
 
-import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.K36.K36ActivityInfo;
 import com.kzingsdk.requests.KzingCallBack;
+import com.kzingsdk.util.BigDecimalUtil;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -74,6 +75,14 @@ public class GetNewComerActivityAPI extends BaseK36API {
         private Integer status;
         private String msg;
         private String content;
+        private Integer applyPeriod;
+        private Integer signinPeriodStart;
+        private Integer signinPeriodEnd;
+        private Integer achieveMethod;
+        private Integer collectDate;
+        private BigDecimal dayAccumulateDpt;
+        private BigDecimal dayValidBet;
+        private boolean checkCollectDate = false;
         private ArrayList<String> contentList = new ArrayList<>();
         private K36ActivityInfo k36ActivityInfo;
 
@@ -83,6 +92,14 @@ public class GetNewComerActivityAPI extends BaseK36API {
             getNewComerActivityResult.setStatus(rootObject.optInt("status"));
             getNewComerActivityResult.setMsg(rootObject.optString("msg"));
             getNewComerActivityResult.setContent(rootObject.optString("content"));
+            getNewComerActivityResult.setApplyPeriod(rootObject.optInt("apply_period"));
+            getNewComerActivityResult.setSigninPeriodStart(rootObject.optInt("signin_period_start"));
+            getNewComerActivityResult.setSigninPeriodEnd(rootObject.optInt("signin_period_end"));
+            getNewComerActivityResult.setAchieveMethod(rootObject.optInt("achieve_method"));
+            getNewComerActivityResult.setCollectDate(rootObject.optInt("collectdate"));
+            getNewComerActivityResult.setDayAccumulateDpt(BigDecimalUtil.optBigDecimal(rootObject, "day_accumulatedpt"));
+            getNewComerActivityResult.setDayValidBet(BigDecimalUtil.optBigDecimal(rootObject, "day_validbet"));
+            getNewComerActivityResult.setCheckCollectDate(rootObject.optBoolean("check_collectdate"));
             JSONArray contentArray = rootObject.optJSONArray("content");
             if (contentArray != null) {
                 for (int i = 0; i < contentArray.length(); i++) {
@@ -118,6 +135,70 @@ public class GetNewComerActivityAPI extends BaseK36API {
 
         public void setMsg(String msg) {
             this.msg = msg;
+        }
+
+        public Integer getApplyPeriod() {
+            return applyPeriod;
+        }
+
+        public void setApplyPeriod(Integer applyPeriod) {
+            this.applyPeriod = applyPeriod;
+        }
+
+        public Integer getSigninPeriodStart() {
+            return signinPeriodStart;
+        }
+
+        public void setSigninPeriodStart(Integer signinPeriodStart) {
+            this.signinPeriodStart = signinPeriodStart;
+        }
+
+        public Integer getSigninPeriodEnd() {
+            return signinPeriodEnd;
+        }
+
+        public void setSigninPeriodEnd(Integer signinPeriodEnd) {
+            this.signinPeriodEnd = signinPeriodEnd;
+        }
+
+        public Integer getAchieveMethod() {
+            return achieveMethod;
+        }
+
+        public void setAchieveMethod(Integer achieveMethod) {
+            this.achieveMethod = achieveMethod;
+        }
+
+        public Integer getCollectDate() {
+            return collectDate;
+        }
+
+        public void setCollectDate(Integer collectDate) {
+            this.collectDate = collectDate;
+        }
+
+        public BigDecimal getDayAccumulateDpt() {
+            return dayAccumulateDpt;
+        }
+
+        public void setDayAccumulateDpt(BigDecimal dayAccumulateDpt) {
+            this.dayAccumulateDpt = dayAccumulateDpt;
+        }
+
+        public BigDecimal getDayValidBet() {
+            return dayValidBet;
+        }
+
+        public void setDayValidBet(BigDecimal dayValidBet) {
+            this.dayValidBet = dayValidBet;
+        }
+
+        public boolean isCheckCollectDate() {
+            return checkCollectDate;
+        }
+
+        public void setCheckCollectDate(boolean checkCollectDate) {
+            this.checkCollectDate = checkCollectDate;
         }
 
         public String getContent() {
