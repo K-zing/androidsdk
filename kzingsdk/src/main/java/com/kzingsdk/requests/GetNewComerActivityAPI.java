@@ -19,7 +19,7 @@ public class GetNewComerActivityAPI extends CoreRequest {
 
     @Override
     protected String getAction() {
-        return Action.getActivityList;
+        return Action.getNewComerActivity;
     }
 
     @Override

@@ -22,7 +22,7 @@ public class GetTransferBonusActivityAPI extends BaseK36API {
     public Observable<TransferBonusActivity> requestRx(Context context) {
         return super.baseExecute(context)
                 .map(jsonResponse -> {
-                    return TransferBonusActivity.newInstance(jsonResponse.optJSONObject("result"));
+                    return TransferBonusActivity.newInstance(jsonResponse);
                 });
     }
 

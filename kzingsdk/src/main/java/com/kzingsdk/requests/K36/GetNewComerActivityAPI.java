@@ -69,6 +69,7 @@ public class GetNewComerActivityAPI extends BaseK36API {
 
         private String actId;
         private Integer status;
+        private String content;
         private String msg;
         private K36ActivityInfo k36ActivityInfo;
 
@@ -76,6 +77,7 @@ public class GetNewComerActivityAPI extends BaseK36API {
             GetNewComerActivityResult getNewComerActivityResult = new GetNewComerActivityResult();
             getNewComerActivityResult.setActId(rootObject.optString("actid"));
             getNewComerActivityResult.setStatus(rootObject.optInt("status"));
+            getNewComerActivityResult.setContent(rootObject.optString("content"));
             getNewComerActivityResult.setMsg(rootObject.optString("msg"));
             JSONObject resultObject = rootObject.optJSONObject("result");
             if (resultObject != null) {
@@ -106,6 +108,14 @@ public class GetNewComerActivityAPI extends BaseK36API {
 
         public void setMsg(String msg) {
             this.msg = msg;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
         }
 
         public K36ActivityInfo getK36ActivityInfo() {
