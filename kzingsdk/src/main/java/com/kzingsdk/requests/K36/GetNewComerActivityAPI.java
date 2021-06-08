@@ -2,6 +2,7 @@ package com.kzingsdk.requests.K36;
 
 import android.content.Context;
 
+import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.K36.K36ActivityInfo;
 import com.kzingsdk.requests.KzingCallBack;
 
@@ -72,6 +73,7 @@ public class GetNewComerActivityAPI extends BaseK36API {
         private String actId;
         private Integer status;
         private String msg;
+        private String content;
         private ArrayList<String> contentList = new ArrayList<>();
         private K36ActivityInfo k36ActivityInfo;
 
@@ -80,6 +82,7 @@ public class GetNewComerActivityAPI extends BaseK36API {
             getNewComerActivityResult.setActId(rootObject.optString("actid"));
             getNewComerActivityResult.setStatus(rootObject.optInt("status"));
             getNewComerActivityResult.setMsg(rootObject.optString("msg"));
+            getNewComerActivityResult.setContent(rootObject.optString("content"));
             JSONArray contentArray = rootObject.optJSONArray("content");
             if (contentArray != null) {
                 for (int i = 0; i < contentArray.length(); i++) {
@@ -115,6 +118,14 @@ public class GetNewComerActivityAPI extends BaseK36API {
 
         public void setMsg(String msg) {
             this.msg = msg;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
         }
 
         public ArrayList<String> getContentList() {

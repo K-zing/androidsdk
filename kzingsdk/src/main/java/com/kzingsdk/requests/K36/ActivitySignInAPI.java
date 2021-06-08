@@ -46,7 +46,7 @@ public class ActivitySignInAPI extends BaseK36API {
     public Observable<K36ActivityInfo> requestRx(Context context) {
         return super.baseExecute(context)
                 .map(jsonResponse -> {
-                    return K36ActivityInfo.newInstance(jsonResponse.optJSONObject("result"));
+                    return K36ActivityInfo.newInstance(jsonResponse.optJSONObject("data").optJSONObject("result"));
                 });
     }
 

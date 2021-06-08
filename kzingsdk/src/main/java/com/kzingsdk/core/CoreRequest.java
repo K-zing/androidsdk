@@ -403,7 +403,7 @@ public abstract class CoreRequest {
         }
     };
 
-    private final Function<Response<String>, JSONObject> mapToGetData = stringResponse -> {
+    protected final Function<Response<String>, JSONObject> mapToGetData = stringResponse -> {
         String body = "";
         try {
             body = stringResponse.body();
