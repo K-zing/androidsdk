@@ -5,8 +5,10 @@ import android.content.Context;
 import com.kzingsdk.entity.K36.K36ActivityInfo;
 import com.kzingsdk.requests.KzingCallBack;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import io.reactivex.Observable;
@@ -69,16 +71,21 @@ public class GetNewComerActivityAPI extends BaseK36API {
 
         private String actId;
         private Integer status;
-        private String content;
         private String msg;
+        private ArrayList<String> contentList = new ArrayList<>();
         private K36ActivityInfo k36ActivityInfo;
 
         public static GetNewComerActivityResult newInstance(JSONObject rootObject) {
             GetNewComerActivityResult getNewComerActivityResult = new GetNewComerActivityResult();
             getNewComerActivityResult.setActId(rootObject.optString("actid"));
             getNewComerActivityResult.setStatus(rootObject.optInt("status"));
-            getNewComerActivityResult.setContent(rootObject.optString("content"));
             getNewComerActivityResult.setMsg(rootObject.optString("msg"));
+            JSONArray contentArray = rootObject.optJSONArray("content");
+            if (contentArray != null) {
+                for (int i = 0; i < contentArray.length(); i++) {
+                    getNewComerActivityResult.contentList.add(contentArray.optString(i));
+                }
+            }
             JSONObject resultObject = rootObject.optJSONObject("result");
             if (resultObject != null) {
                 getNewComerActivityResult.k36ActivityInfo = K36ActivityInfo.newInstance(resultObject);
@@ -110,12 +117,12 @@ public class GetNewComerActivityAPI extends BaseK36API {
             this.msg = msg;
         }
 
-        public String getContent() {
-            return content;
+        public ArrayList<String> getContentList() {
+            return contentList;
         }
 
-        public void setContent(String content) {
-            this.content = content;
+        public void setContentList(ArrayList<String> contentList) {
+            this.contentList = contentList;
         }
 
         public K36ActivityInfo getK36ActivityInfo() {
