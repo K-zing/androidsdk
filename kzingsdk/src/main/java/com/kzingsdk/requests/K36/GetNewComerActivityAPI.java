@@ -3,6 +3,7 @@ package com.kzingsdk.requests.K36;
 import android.content.Context;
 
 import com.kzingsdk.entity.K36.K36ActivityInfo;
+import com.kzingsdk.entity.gameplatform.SimpleGamePlatform;
 import com.kzingsdk.requests.KzingCallBack;
 import com.kzingsdk.util.BigDecimalUtil;
 
@@ -83,6 +84,7 @@ public class GetNewComerActivityAPI extends BaseK36API {
         private BigDecimal dayAccumulateDpt;
         private BigDecimal dayValidBet;
         private boolean checkCollectDate = false;
+        private ArrayList<SimpleGamePlatform> simpleGamePlatformArrayList = new ArrayList<>();
         private ArrayList<String> contentList = new ArrayList<>();
         private K36ActivityInfo k36ActivityInfo;
 
@@ -100,6 +102,13 @@ public class GetNewComerActivityAPI extends BaseK36API {
             getNewComerActivityResult.setDayAccumulateDpt(BigDecimalUtil.optBigDecimal(rootObject, "day_accumulatedpt"));
             getNewComerActivityResult.setDayValidBet(BigDecimalUtil.optBigDecimal(rootObject, "day_validbet"));
             getNewComerActivityResult.setCheckCollectDate(rootObject.optBoolean("check_collectdate"));
+            JSONArray platformArray = rootObject.optJSONArray("gpid");
+            if (platformArray != null) {
+                for(int i = 0 ; i < platformArray.length();i++){
+                    JSONObject dataObject = platformArray.optJSONObject(i);
+                    getNewComerActivityResult.simpleGamePlatformArrayList.add(SimpleGamePlatform.newInstance(dataObject));
+                }
+            }
             JSONArray contentArray = rootObject.optJSONArray("content");
             if (contentArray != null) {
                 for (int i = 0; i < contentArray.length(); i++) {
@@ -207,6 +216,14 @@ public class GetNewComerActivityAPI extends BaseK36API {
 
         public void setContent(String content) {
             this.content = content;
+        }
+
+        public ArrayList<SimpleGamePlatform> getSimpleGamePlatformArrayList() {
+            return simpleGamePlatformArrayList;
+        }
+
+        public void setSimpleGamePlatformArrayList(ArrayList<SimpleGamePlatform> simpleGamePlatformArrayList) {
+            this.simpleGamePlatformArrayList = simpleGamePlatformArrayList;
         }
 
         public ArrayList<String> getContentList() {
