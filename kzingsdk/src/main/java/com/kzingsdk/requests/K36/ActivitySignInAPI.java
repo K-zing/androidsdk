@@ -2,7 +2,7 @@ package com.kzingsdk.requests.K36;
 
 import android.content.Context;
 
-import com.kzingsdk.entity.K36.K36ActivityInfo;
+import com.kzingsdk.entity.K36.GetNewComerActivityResult;
 import com.kzingsdk.requests.KzingCallBack;
 
 import org.json.JSONException;
@@ -43,19 +43,19 @@ public class ActivitySignInAPI extends BaseK36API {
     }
 
     @Override
-    public Observable<K36ActivityInfo> requestRx(Context context) {
+    public Observable<GetNewComerActivityResult> requestRx(Context context) {
         return super.baseExecute(context)
                 .map(jsonResponse -> {
-                    return K36ActivityInfo.newInstance(jsonResponse.optJSONObject("data").optJSONObject("result"));
+                    return GetNewComerActivityResult.newInstance(jsonResponse.optJSONObject("data"));
                 });
     }
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(k36ActivityInfo -> {
+        requestRx(context).subscribe(getNewComerActivityResult -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((ActivitySignInAPICallBack) kzingCallBack).onSuccess(k36ActivityInfo);
+                    ((ActivitySignInAPICallBack) kzingCallBack).onSuccess(getNewComerActivityResult);
                 }
             }
         }, defaultOnErrorConsumer);
@@ -67,9 +67,8 @@ public class ActivitySignInAPI extends BaseK36API {
     }
 
     public interface ActivitySignInAPICallBack extends KzingCallBack {
-        void onSuccess(K36ActivityInfo k36ActivityInfo);
+        void onSuccess(GetNewComerActivityResult getNewComerActivityResult);
     }
-
 
     public ActivitySignInAPI setActid(String actid) {
         this.actid = actid;
