@@ -17,6 +17,7 @@ public class ActivityRequirement {
     private BigDecimal moneyPercentage;
     private BigDecimal watergateMultiplier;
     private BigDecimal maxDistributeAmount;
+    private BigDecimal amountMaxLimit;
     private Integer type;
     private Long created;
 
@@ -34,6 +35,7 @@ public class ActivityRequirement {
         activityRequirement.setMoneyPercentage(BigDecimalUtil.optBigDecimal(rootObject, "money_percentage"));
         activityRequirement.setWatergateMultiplier(BigDecimalUtil.optBigDecimal(rootObject, "watergate_multiplier"));
         activityRequirement.setMaxDistributeAmount(BigDecimalUtil.optBigDecimal(rootObject, "max_distribute_amount"));
+        activityRequirement.setAmountMaxLimit(BigDecimalUtil.optBigDecimal(rootObject, "amount_max_limit"));
         activityRequirement.setType(rootObject.optInt("type"));
         activityRequirement.setCreated(rootObject.optLong("created"));
         return activityRequirement;
@@ -101,6 +103,14 @@ public class ActivityRequirement {
 
     public void setMaxDistributeAmount(BigDecimal maxDistributeAmount) {
         this.maxDistributeAmount = maxDistributeAmount;
+    }
+
+    public BigDecimal getAmountMaxLimit() {
+        return amountMaxLimit;
+    }
+
+    public void setAmountMaxLimit(BigDecimal amountMaxLimit) {
+        this.amountMaxLimit = amountMaxLimit;
     }
 
     public Integer getType() {
