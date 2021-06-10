@@ -3,9 +3,12 @@ package com.kzingsdk.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.kzingsdk.util.BigDecimalUtil;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 
@@ -27,6 +30,7 @@ public class ActivityReferDpt implements Parcelable {
     private Integer refereeBonusType;
     private Integer bonusType;
     private Integer maxJoin;
+    private BigDecimal waterGateMultiplier;
     private ArrayList<String> gpidList = new ArrayList<>();
     private ArrayList<ActivityReferDptRequirement> referrerDptRequirement = new ArrayList<>();
     private ArrayList<ActivityReferDptRequirement> refereeDptRequirement = new ArrayList<>();
@@ -42,6 +46,7 @@ public class ActivityReferDpt implements Parcelable {
         item.maxJoin = rootObject.optInt("max_join");
         item.refereeBonusType = rootObject.optInt("referee_bonus_type");
         item.bonusType = rootObject.optInt("bonus_type");
+        item.waterGateMultiplier = BigDecimalUtil.optBigDecimal(rootObject, "watergate_multiplier");
         JSONArray gpidArray = rootObject.optJSONArray("gpid");
         if (gpidArray != null) {
             for (int i = 0; i < gpidArray.length(); i++) {
@@ -75,6 +80,7 @@ public class ActivityReferDpt implements Parcelable {
         refereeBonusType = in.readInt();
         bonusType = in.readInt();
         maxJoin = in.readInt();
+        waterGateMultiplier = new BigDecimal(in.readString());
         Object[] objectArray = in.readArray(ActivityReferDpt.class.getClassLoader());
         gpidList = (ArrayList<String>) objectArray[0];
         referrerDptRequirement = (ArrayList<ActivityReferDptRequirement>) objectArray[1];
@@ -95,6 +101,7 @@ public class ActivityReferDpt implements Parcelable {
         dest.writeInt(refereeBonusType);
         dest.writeInt(bonusType);
         dest.writeInt(maxJoin);
+        dest.writeString(waterGateMultiplier.toString());
         dest.writeArray(new Object[]{
                 gpidList,
                 referrerDptRequirement,
@@ -152,6 +159,14 @@ public class ActivityReferDpt implements Parcelable {
 
     public void setMaxJoin(Integer maxJoin) {
         this.maxJoin = maxJoin;
+    }
+
+    public BigDecimal getWaterGateMultiplier() {
+        return waterGateMultiplier;
+    }
+
+    public void setWaterGateMultiplier(BigDecimal waterGateMultiplier) {
+        this.waterGateMultiplier = waterGateMultiplier;
     }
 
     public ArrayList<String> getGpidList() {
