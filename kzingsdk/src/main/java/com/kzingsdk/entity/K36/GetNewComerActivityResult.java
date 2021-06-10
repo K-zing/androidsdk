@@ -16,15 +16,18 @@ public class GetNewComerActivityResult {
     private String msg;
     private String content;
     private Integer applyPeriod;
+    private Integer signinPeriod;
     private Integer signinPeriodStart;
     private Integer signinPeriodEnd;
     private Integer achieveMethod;
     private Integer collectDate;
+    private Integer requestTimeLimit;
     private BigDecimal dayAccumulateDpt;
     private BigDecimal dayValidBet;
     private boolean checkCollectDate = false;
     private ArrayList<SimpleGamePlatform> simpleGamePlatformArrayList = new ArrayList<>();
     private ArrayList<String> contentList = new ArrayList<>();
+    private ArrayList<ActivityRequirement> activityRequirementList = new ArrayList<>();
     private K36ActivityInfo k36ActivityInfo;
 
     public static GetNewComerActivityResult newInstance(JSONObject rootObject) {
@@ -34,10 +37,12 @@ public class GetNewComerActivityResult {
         getNewComerActivityResult.setMsg(rootObject.optString("msg"));
         getNewComerActivityResult.setContent(rootObject.optString("content"));
         getNewComerActivityResult.setApplyPeriod(rootObject.optInt("apply_period"));
+        getNewComerActivityResult.setSigninPeriod(rootObject.optInt("signin_period"));
         getNewComerActivityResult.setSigninPeriodStart(rootObject.optInt("signin_period_start"));
         getNewComerActivityResult.setSigninPeriodEnd(rootObject.optInt("signin_period_end"));
         getNewComerActivityResult.setAchieveMethod(rootObject.optInt("achieve_method"));
         getNewComerActivityResult.setCollectDate(rootObject.optInt("collectdate"));
+        getNewComerActivityResult.setRequestTimeLimit(rootObject.optInt("requestTimeLimit"));
         getNewComerActivityResult.setDayAccumulateDpt(BigDecimalUtil.optBigDecimal(rootObject, "day_accumulatedpt"));
         getNewComerActivityResult.setDayValidBet(BigDecimalUtil.optBigDecimal(rootObject, "day_validbet"));
         getNewComerActivityResult.setCheckCollectDate(rootObject.optBoolean("check_collectdate"));
@@ -58,7 +63,29 @@ public class GetNewComerActivityResult {
         if (resultObject != null) {
             getNewComerActivityResult.k36ActivityInfo = K36ActivityInfo.newInstance(resultObject);
         }
+        JSONArray requirementArray = getRequirementArray(rootObject);
+        if (requirementArray != null) {
+            for (int i = 0; i < requirementArray.length(); i++) {
+                getNewComerActivityResult.activityRequirementList.add(ActivityRequirement.newInstance(requirementArray.optJSONObject(i)));
+            }
+        }
         return getNewComerActivityResult;
+    }
+
+    private static JSONArray getRequirementArray(JSONObject rootObject) {
+        String[] keySet = new String[]{
+                "requirement",
+                "dpt_requirement",
+                "wtd_requirement",
+                "signin_requirement"
+        };
+        for (String key : keySet) {
+            JSONArray reqArray = rootObject.optJSONArray(key);
+            if (reqArray != null) {
+                return reqArray;
+            }
+        }
+        return null;
     }
 
     public String getActId() {
@@ -93,6 +120,14 @@ public class GetNewComerActivityResult {
         this.applyPeriod = applyPeriod;
     }
 
+    public Integer getSigninPeriod() {
+        return signinPeriod;
+    }
+
+    public void setSigninPeriod(Integer signinPeriod) {
+        this.signinPeriod = signinPeriod;
+    }
+
     public Integer getSigninPeriodStart() {
         return signinPeriodStart;
     }
@@ -123,6 +158,22 @@ public class GetNewComerActivityResult {
 
     public void setCollectDate(Integer collectDate) {
         this.collectDate = collectDate;
+    }
+
+    public Integer getRequestTimeLimit() {
+        return requestTimeLimit;
+    }
+
+    public void setRequestTimeLimit(Integer requestTimeLimit) {
+        this.requestTimeLimit = requestTimeLimit;
+    }
+
+    public ArrayList<ActivityRequirement> getActivityRequirementList() {
+        return activityRequirementList;
+    }
+
+    public void setActivityRequirementList(ArrayList<ActivityRequirement> activityRequirementList) {
+        this.activityRequirementList = activityRequirementList;
     }
 
     public BigDecimal getDayAccumulateDpt() {

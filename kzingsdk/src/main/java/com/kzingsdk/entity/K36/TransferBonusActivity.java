@@ -1,12 +1,10 @@
 package com.kzingsdk.entity.K36;
 
 import com.kzingsdk.entity.gameplatform.SimpleGamePlatform;
-import com.kzingsdk.util.BigDecimalUtil;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 
@@ -18,7 +16,7 @@ public class TransferBonusActivity {
     private String targetUser;
     private String activityPeriod;
     private ArrayList<SimpleGamePlatform> simpleGamePlatformArrayList = new ArrayList<>();
-    private ArrayList<TransferBonusActivityAcData> transferBonusActivityAcDataArrayList = new ArrayList<>();
+    private ArrayList<ActivityRequirement> activityRequirementArrayList = new ArrayList<>();
 
     public TransferBonusActivity() {
 
@@ -42,7 +40,7 @@ public class TransferBonusActivity {
         if (acDataArray != null) {
             for(int i = 0 ; i < acDataArray.length();i++){
                 JSONObject dataObject = acDataArray.optJSONObject(i);
-                transferBonusActivity.transferBonusActivityAcDataArrayList.add(TransferBonusActivityAcData.newInstance(dataObject));
+                transferBonusActivity.activityRequirementArrayList.add(ActivityRequirement.newInstance(dataObject));
             }
         }
         return transferBonusActivity;
@@ -96,12 +94,12 @@ public class TransferBonusActivity {
         this.simpleGamePlatformArrayList = simpleGamePlatformArrayList;
     }
 
-    public ArrayList<TransferBonusActivityAcData> getTransferBonusActivityAcDataArrayList() {
-        return transferBonusActivityAcDataArrayList;
+    public ArrayList<ActivityRequirement> getActivityRequirementArrayList() {
+        return activityRequirementArrayList;
     }
 
-    public void setTransferBonusActivityAcDataArrayList(ArrayList<TransferBonusActivityAcData> transferBonusActivityAcDataArrayList) {
-        this.transferBonusActivityAcDataArrayList = transferBonusActivityAcDataArrayList;
+    public void setActivityRequirementArrayList(ArrayList<ActivityRequirement> activityRequirementArrayList) {
+        this.activityRequirementArrayList = activityRequirementArrayList;
     }
 }
 
