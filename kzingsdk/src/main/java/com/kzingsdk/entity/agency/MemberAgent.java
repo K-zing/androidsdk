@@ -12,6 +12,7 @@ public class MemberAgent {
     private String qrcode;
     private String referralCode;
     private String referralLink;
+    private String appReferralLink;
     private BigDecimal commissionHistory;
     private BigDecimal commission;
     private AgentCommissionSummary agentCommissionSummary;
@@ -25,6 +26,7 @@ public class MemberAgent {
         memberAgent.setQrcode(rootObject.optString("qrcode"));
         memberAgent.setReferralCode(rootObject.optString("referralcode"));
         memberAgent.setReferralLink(rootObject.optString("referrallink"));
+        memberAgent.setAppReferralLink(rootObject.optString("appreferrallink"));
         memberAgent.setCommissionHistory(BigDecimalUtil.optBigDecimal(rootObject, "agents_commission_history"));
         memberAgent.setCommission(BigDecimalUtil.optBigDecimal(rootObject, "agents_commission"));
         memberAgent.setAgentCommissionSummary(AgentCommissionSummary.newInstance(rootObject.optJSONObject("agents_info")));
@@ -78,5 +80,12 @@ public class MemberAgent {
     public void setAgentCommissionSummary(AgentCommissionSummary agentCommissionSummary) {
         this.agentCommissionSummary = agentCommissionSummary;
     }
-}
 
+    public String getAppReferralLink() {
+        return appReferralLink;
+    }
+
+    public void setAppReferralLink(String appReferralLink) {
+        this.appReferralLink = appReferralLink;
+    }
+}
