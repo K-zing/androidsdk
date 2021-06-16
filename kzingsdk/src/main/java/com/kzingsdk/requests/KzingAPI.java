@@ -35,6 +35,9 @@ public final class KzingAPI {
     public static ActivityCanSignInAPI activityCanSignIn() {
         return new ActivityCanSignInAPI();
     }
+    public static HasWaterGateAPI hasWaterGate() {
+        return new HasWaterGateAPI();
+    }
 
     public static ActivitySignInAPI activitySignIn() {
         return new ActivitySignInAPI();

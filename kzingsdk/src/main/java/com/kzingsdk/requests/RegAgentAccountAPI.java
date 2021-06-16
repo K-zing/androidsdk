@@ -33,6 +33,7 @@ public class RegAgentAccountAPI extends CoreRequest {
     private String birthdayYear = "";
     private String verifycode = "";
     private String phoneCountry = "";
+    private String wdPassword = "";
 
 
     RegAgentAccountAPI() {
@@ -91,6 +92,9 @@ public class RegAgentAccountAPI extends CoreRequest {
             }
             if (line != null) {
                 jsonData.put("line", line);
+            }
+            if (wdPassword != null) {
+                jsonData.put("wdpassword", wdPassword);
             }
             jsonData.put("qq", qq);
             jsonData.put("birthday", birthdayDay);
@@ -221,6 +225,10 @@ public class RegAgentAccountAPI extends CoreRequest {
 
     public RegAgentAccountAPI setLine(String line) {
         this.line = line;
+        return this;
+    }
+    public RegAgentAccountAPI setWdPassword(String wdPassword) {
+        this.wdPassword = wdPassword;
         return this;
     }
 

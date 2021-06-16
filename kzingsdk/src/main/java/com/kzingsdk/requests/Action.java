@@ -141,6 +141,7 @@ final class Action {
     static final String getMemberAgentSalesHistory = "bnotuxq";
     static final String getMemberAgentWithdrawal = "zuqlbt7";
     static final String memberAgentWithdraw = "qwhmt4j";
+    static final String hasWaterGate = "nzjtimk";
 
 
 }
