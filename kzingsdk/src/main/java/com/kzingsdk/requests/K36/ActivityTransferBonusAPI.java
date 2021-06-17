@@ -39,7 +39,7 @@ public class ActivityTransferBonusAPI extends BaseK36API {
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            jsonData.put("id", actid);
+            jsonData.put("actid", actid);
             jsonData.put("gpid", gpid);
             jsonData.put("amount", amount.toString());
             jsonData.put("transfer", transfer);
