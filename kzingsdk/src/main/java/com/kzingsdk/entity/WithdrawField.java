@@ -3,7 +3,10 @@ package com.kzingsdk.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class WithdrawField implements Parcelable {
 
@@ -35,6 +38,7 @@ public class WithdrawField implements Parcelable {
     private Integer minLength;
     private Integer maxLength;
     private String prefix;
+    private ArrayList<WithdrawFieldOption> withdrawFieldOptionList = new ArrayList<>();
 
     private WithdrawField() {
     }
@@ -50,6 +54,12 @@ public class WithdrawField implements Parcelable {
         withdrawField.setMinLength(rootObject.optInt("minlength", 0));
         withdrawField.setMaxLength(rootObject.optInt("maxlength", 0));
         withdrawField.setPrefix(rootObject.optString("prefix"));
+        JSONArray optionsJSONArray = rootObject.optJSONArray("options");
+        if (optionsJSONArray != null) {
+            for (int i = 0; i < optionsJSONArray.length(); i++) {
+                withdrawField.withdrawFieldOptionList.add(WithdrawFieldOption.newInstance(optionsJSONArray.optJSONObject(i)));
+            }
+        }
         return withdrawField;
     }
 
@@ -133,6 +143,14 @@ public class WithdrawField implements Parcelable {
         this.prefix = prefix;
     }
 
+    public ArrayList<WithdrawFieldOption> getWithdrawFieldOptionList() {
+        return withdrawFieldOptionList;
+    }
+
+    public void setWithdrawFieldOptionList(ArrayList<WithdrawFieldOption> withdrawFieldOptionList) {
+        this.withdrawFieldOptionList = withdrawFieldOptionList;
+    }
+
     public WithdrawField(Parcel in) {
 
         field = in.readString();
@@ -145,6 +163,8 @@ public class WithdrawField implements Parcelable {
         minLength = in.readInt();
         maxLength = in.readInt();
         prefix = in.readString();
+        Object[] objectArray = in.readArray(WithdrawField.class.getClassLoader());
+        withdrawFieldOptionList = (ArrayList<WithdrawFieldOption>) objectArray[0];
     }
 
     @Override
@@ -160,6 +180,9 @@ public class WithdrawField implements Parcelable {
         dest.writeInt(maxLength);
         dest.writeString(prefix);
 
+        dest.writeArray(new Object[]{
+                withdrawFieldOptionList
+        });
 
     }
 }
