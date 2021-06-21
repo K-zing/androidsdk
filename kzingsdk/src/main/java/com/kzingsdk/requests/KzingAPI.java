@@ -35,6 +35,7 @@ public final class KzingAPI {
     public static ActivityCanSignInAPI activityCanSignIn() {
         return new ActivityCanSignInAPI();
     }
+
     public static HasWaterGateAPI hasWaterGate() {
         return new HasWaterGateAPI();
     }
@@ -503,6 +504,14 @@ public final class KzingAPI {
 
     public static MemberAgentWithdrawAPI memberAgentWithdraw() {
         return new MemberAgentWithdrawAPI();
+    }
+
+    public static GetAgentTeamHistoryAPI getAgentTeamHistory() {
+        return new GetAgentTeamHistoryAPI();
+    }
+
+    public static GetAgentPlayerHistoryAPI getAgentPlayerHistory() {
+        return new GetAgentPlayerHistoryAPI();
     }
 
 

@@ -143,5 +143,6 @@ final class Action {
     static final String memberAgentWithdraw = "qwhmt4j";
     static final String hasWaterGate = "nzjtimk";
 
-
+    static final String getAgentPlayerHistory = "tlsvm61";
+    static final String getAgentTeamHistory = "loo0tw1";
 }
