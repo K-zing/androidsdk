@@ -15,6 +15,7 @@ public class RequestVerifyPlayerPhoneAPI extends CoreRequest {
 
     private String phone = null;
     private String playerPhoneCountry = null;
+    private boolean requestVoice = false;
 
     RequestVerifyPlayerPhoneAPI() {
         super();
@@ -40,6 +41,7 @@ public class RequestVerifyPlayerPhoneAPI extends CoreRequest {
             jsonData.put("phone", phone);
             if (playerPhoneCountry != null)
                 jsonData.put("playerPhoneCountry", playerPhoneCountry);
+            jsonData.put("requestVoice", requestVoice);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -81,4 +83,11 @@ public class RequestVerifyPlayerPhoneAPI extends CoreRequest {
         return this;
     }
 
+    public boolean isRequestVoice() {
+        return requestVoice;
+    }
+
+    public void setRequestVoice(boolean requestVoice) {
+        this.requestVoice = requestVoice;
+    }
 }

@@ -57,6 +57,7 @@ public class ClientInfo implements Parcelable {
     private boolean initWdPwdNeedLoginPwd;
     private boolean memberPanVerify;
     private HashSet<String> memberPanPlayerGroup = new HashSet<>();
+    private boolean registerSendVoice;
 
     private String rankLevel;
     private String appResourceDomain;
@@ -101,6 +102,7 @@ public class ClientInfo implements Parcelable {
         clientInfo.setMemberPanVerify(rootObject.optBoolean("memberpanverify", false));
         clientInfo.setRankLevel(rootObject.optString("rankLevel"));
         clientInfo.setAppResourceDomain(rootObject.optString("appResourceDomain"));
+        clientInfo.setRegisterSendVoice(rootObject.optBoolean("registerSendVoice", false));
 
         for (int i = 301; i < 400; i++) {
             clientInfo.websiteConfigMap.put(i, rootObject.optString("wc" + i));
@@ -476,6 +478,14 @@ public class ClientInfo implements Parcelable {
         this.memberPanPlayerGroup = memberPanPlayerGroup;
     }
 
+    public boolean isRegisterSendVoice() {
+        return registerSendVoice;
+    }
+
+    public void setRegisterSendVoice(boolean registerSendVoice) {
+        this.registerSendVoice = registerSendVoice;
+    }
+
     public ClientInfo(Parcel in) {
         siteName = in.readString();
         siteDomain = in.readString();
@@ -515,6 +525,7 @@ public class ClientInfo implements Parcelable {
         initWdPwdNeedLoginPwd = in.readInt() == 1;
         rankLevel = in.readString();
         memberPanVerify = in.readInt() == 1;
+        registerSendVoice = in.readInt() == 1;
 
 
     }
@@ -562,6 +573,7 @@ public class ClientInfo implements Parcelable {
         dest.writeString(rankLevel);
         dest.writeString(appResourceDomain);
         dest.writeInt(memberPanVerify ? 1 : 0);
+        dest.writeInt(registerSendVoice ? 1 : 0);
 
     }
 

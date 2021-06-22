@@ -16,6 +16,7 @@ public class RegSendSmsAPI extends CoreRequest {
     private String loginName = null;
     private String phone = null;
     private String uphonecountry = null;
+    private boolean requestVoice = false;
 
     RegSendSmsAPI() {
         super();
@@ -44,6 +45,7 @@ public class RegSendSmsAPI extends CoreRequest {
             jsonData.put("username", loginName);
             jsonData.put("uphone", phone);
             jsonData.put("uphonecountry", uphonecountry);
+            jsonData.put("requestVoice", requestVoice);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -93,4 +95,11 @@ public class RegSendSmsAPI extends CoreRequest {
         return this;
     }
 
+    public boolean isRequestVoice() {
+        return requestVoice;
+    }
+
+    public void setRequestVoice(boolean requestVoice) {
+        this.requestVoice = requestVoice;
+    }
 }
