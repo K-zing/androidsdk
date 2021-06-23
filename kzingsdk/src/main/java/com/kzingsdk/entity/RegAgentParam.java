@@ -20,10 +20,11 @@ public class RegAgentParam implements Parcelable {
             reqTelegram,
             reqLine,
             reqBirthdate,
-            highLevelPassAgent;
+            highLevelPassAgent,
+            agentWithdrawPassword;
 
     private Bitmap verifyCode;
-
+    private String agentWithdrawPasswordFormat;
 
     public static RegAgentParam newInstance(JSONObject rootObject) {
         RegAgentParam regParam = new RegAgentParam();
@@ -38,6 +39,8 @@ public class RegAgentParam implements Parcelable {
         regParam.setReqLine(rootObject.optString("agentreqline").equals("ON"));
         regParam.setReqBirthdate(rootObject.optString("agentreqbirthdate").equals("ON"));
         regParam.setHighLevelPassAgent(rootObject.optString("highLevelPassAgent").equals("ON"));
+        regParam.setAgentWithdrawPassword(rootObject.optString("agentwithdrawpassword").equals("ON"));
+        regParam.setAgentWithdrawPasswordFormat(rootObject.optString("agentwithdrawpasswordformat"));
         String image = rootObject.optString("image");
         byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
         regParam.verifyCode = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
@@ -142,6 +145,22 @@ public class RegAgentParam implements Parcelable {
         this.reqLine = reqLine;
     }
 
+    public boolean isAgentWithdrawPassword() {
+        return agentWithdrawPassword;
+    }
+
+    public void setAgentWithdrawPassword(boolean agentWithdrawPassword) {
+        this.agentWithdrawPassword = agentWithdrawPassword;
+    }
+
+    public String getAgentWithdrawPasswordFormat() {
+        return agentWithdrawPasswordFormat;
+    }
+
+    public void setAgentWithdrawPasswordFormat(String agentWithdrawPasswordFormat) {
+        this.agentWithdrawPasswordFormat = agentWithdrawPasswordFormat;
+    }
+
     public RegAgentParam(Parcel in) {
         regQQ = in.readInt() == 1;
         reqPhone = in.readInt() == 1;
@@ -154,6 +173,8 @@ public class RegAgentParam implements Parcelable {
         reqLine = in.readInt() == 1;
         reqBirthdate = in.readInt() == 1;
         highLevelPassAgent = in.readInt() == 1;
+        agentWithdrawPassword = in.readInt() == 1;
+        agentWithdrawPasswordFormat = in.readString();
         Object[] objectArray = in.readArray(RegAgentParam.class.getClassLoader());
         verifyCode = (Bitmap) objectArray[0];
     }
@@ -172,6 +193,8 @@ public class RegAgentParam implements Parcelable {
         dest.writeInt(reqLine ? 1 : 0);
         dest.writeInt(reqBirthdate ? 1 : 0);
         dest.writeInt(highLevelPassAgent ? 1 : 0);
+        dest.writeInt(agentWithdrawPassword ? 1 : 0);
+        dest.writeString(agentWithdrawPasswordFormat);
         dest.writeArray(new Object[]{
                 verifyCode
         });

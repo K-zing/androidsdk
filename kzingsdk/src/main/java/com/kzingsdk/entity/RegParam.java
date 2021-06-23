@@ -14,7 +14,7 @@ public class RegParam {
             reqDisplayReferCode, hasFriendPromo, regWhatsapp, regTelegram, regFacebook, regZalo, regLine;
     private int nameMin = 4, nameMax = 11;
     private int passwordMin = 6, passwordMax = 16;
-    private String defaultAgentCode;
+    private String defaultAgentCode, withdrawPasswordFormat;
     private Bitmap verifyCode;
 
     public static RegParam newInstance(JSONObject rootObject) {
@@ -43,6 +43,7 @@ public class RegParam {
         regParam.setRegFacebook(paramObject.optString("regfacebook").equalsIgnoreCase("ON"));
         regParam.setRegZalo(paramObject.optString("regzalo").equalsIgnoreCase("ON"));
         regParam.setRegLine(paramObject.optString("regline").equalsIgnoreCase("ON"));
+        regParam.setWithdrawPasswordFormat(paramObject.optString("withdrawpasswordformat"));
 
         regParam.setHasFriendPromo(paramObject.optBoolean("hasFriendPromo", false));
 
@@ -259,6 +260,14 @@ public class RegParam {
 
     public void setRegLine(boolean regLine) {
         this.regLine = regLine;
+    }
+
+    public String getWithdrawPasswordFormat() {
+        return withdrawPasswordFormat;
+    }
+
+    public void setWithdrawPasswordFormat(String withdrawPasswordFormat) {
+        this.withdrawPasswordFormat = withdrawPasswordFormat;
     }
 
     @Override

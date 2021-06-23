@@ -61,6 +61,7 @@ public class ClientInfo implements Parcelable {
 
     private String rankLevel;
     private String appResourceDomain;
+    private String memberPanAgentCode;
 
     private HashMap<Integer, String> websiteConfigMap = new HashMap<>();
     private ContactInfo feedbackContactInfo = new ContactInfo();
@@ -103,6 +104,7 @@ public class ClientInfo implements Parcelable {
         clientInfo.setRankLevel(rootObject.optString("rankLevel"));
         clientInfo.setAppResourceDomain(rootObject.optString("appResourceDomain"));
         clientInfo.setRegisterSendVoice(rootObject.optBoolean("registerSendVoice", false));
+        clientInfo.setMemberPanAgentCode(rootObject.optString("memberpanagentcode"));
 
         for (int i = 301; i < 400; i++) {
             clientInfo.websiteConfigMap.put(i, rootObject.optString("wc" + i));
@@ -438,6 +440,14 @@ public class ClientInfo implements Parcelable {
         this.appResourceDomain = appResourceDomain;
     }
 
+    public String getMemberPanAgentCode() {
+        return memberPanAgentCode;
+    }
+
+    public void setMemberPanAgentCode(String memberPanAgentCode) {
+        this.memberPanAgentCode = memberPanAgentCode;
+    }
+
     public ContactInfo getFeedbackContactInfo() {
         return feedbackContactInfo;
     }
@@ -526,6 +536,7 @@ public class ClientInfo implements Parcelable {
         rankLevel = in.readString();
         memberPanVerify = in.readInt() == 1;
         registerSendVoice = in.readInt() == 1;
+        memberPanAgentCode = in.readString();
 
 
     }
@@ -574,7 +585,7 @@ public class ClientInfo implements Parcelable {
         dest.writeString(appResourceDomain);
         dest.writeInt(memberPanVerify ? 1 : 0);
         dest.writeInt(registerSendVoice ? 1 : 0);
-
+        dest.writeString(memberPanAgentCode);
     }
 
     @Override
