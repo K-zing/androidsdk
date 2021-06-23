@@ -18,12 +18,13 @@ public class AgentHistoryResult {
 
     public static AgentHistoryResult newInstance(JSONObject rootObject) {
         AgentHistoryResult agentHistoryResult = new AgentHistoryResult();
-        agentHistoryResult.setNext(rootObject.optInt("next"));
-        agentHistoryResult.setTotalItems(rootObject.optInt("totalItems"));
-        agentHistoryResult.setPageCount(rootObject.optInt("pageCount"));
-        agentHistoryResult.setPre(rootObject.optInt("pre"));
-        agentHistoryResult.setTotalPages(rootObject.optInt("totalPages"));
-        agentHistoryResult.setCurIndex(rootObject.optInt("curIndex"));
+        JSONObject pageObject = rootObject.optJSONObject("page");
+        agentHistoryResult.setNext(pageObject.optInt("next"));
+        agentHistoryResult.setTotalItems(pageObject.optInt("totalItems"));
+        agentHistoryResult.setPageCount(pageObject.optInt("pageCount"));
+        agentHistoryResult.setPre(pageObject.optInt("pre"));
+        agentHistoryResult.setTotalPages(pageObject.optInt("totalPages"));
+        agentHistoryResult.setCurIndex(pageObject.optInt("curIndex"));
         JSONArray agentHistoryArray = rootObject.optJSONArray("history");
         if (agentHistoryArray != null) {
             for (int i = 0; i < agentHistoryArray.length(); i++) {

@@ -5,6 +5,8 @@ import android.content.Context;
 import com.kzingsdk.entity.K36.TransferBonusActivity;
 import com.kzingsdk.requests.KzingCallBack;
 
+import org.json.JSONObject;
+
 import io.reactivex.Observable;
 
 public class GetTransferBonusActivityAPI extends BaseK36API {
@@ -19,19 +21,19 @@ public class GetTransferBonusActivityAPI extends BaseK36API {
     }
 
     @Override
-    public Observable<TransferBonusActivity> requestRx(Context context) {
+    public Observable<GetTransferBonusActivityResult> requestRx(Context context) {
         return super.baseExecute(context)
                 .map(jsonResponse -> {
-                    return TransferBonusActivity.newInstance(jsonResponse.optJSONObject("data"));
+                    return GetTransferBonusActivityResult.newInstance(jsonResponse);
                 });
     }
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(transferBonusActivity -> {
+        requestRx(context).subscribe(getTransferBonusActivityResult -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((GetTransferBonusActivityAPICallBack) kzingCallBack).onSuccess(transferBonusActivity);
+                    ((GetTransferBonusActivityAPICallBack) kzingCallBack).onSuccess(getTransferBonusActivityResult);
                 }
             }
         }, defaultOnErrorConsumer);
@@ -43,7 +45,37 @@ public class GetTransferBonusActivityAPI extends BaseK36API {
     }
 
     public interface GetTransferBonusActivityAPICallBack extends KzingCallBack {
-        void onSuccess(TransferBonusActivity transferBonusActivity);
+        void onSuccess(GetTransferBonusActivityResult getTransferBonusActivityResult);
+    }
+
+    public static class GetTransferBonusActivityResult {
+
+        private int status;
+        private TransferBonusActivity transferBonusActivity;
+
+
+        public static GetTransferBonusActivityResult newInstance(JSONObject rootObject) {
+            GetTransferBonusActivityResult getTransferBonusActivityResult = new GetTransferBonusActivityResult();
+            getTransferBonusActivityResult.status = rootObject.optInt("status");
+            getTransferBonusActivityResult.transferBonusActivity = TransferBonusActivity.newInstance(rootObject.optJSONObject("data"));
+            return getTransferBonusActivityResult;
+        }
+
+        public int getStatus() {
+            return status;
+        }
+
+        public void setStatus(int status) {
+            this.status = status;
+        }
+
+        public TransferBonusActivity getTransferBonusActivity() {
+            return transferBonusActivity;
+        }
+
+        public void setTransferBonusActivity(TransferBonusActivity transferBonusActivity) {
+            this.transferBonusActivity = transferBonusActivity;
+        }
     }
 
 
