@@ -11,7 +11,7 @@ public class RegParam {
 
     private boolean regBirthday, regQQ, reqPhone, regEmail, withdrawPassword, regWeixin,
             reqReferCode, regRealName, regMobileVerify, regPwdConfirm, regLegalAge, isHighLevelPass, reqPhoneCountry,
-            reqDisplayReferCode, hasFriendPromo, regWhatsapp, regTelegram, regFacebook, regZalo, regLine;
+            reqDisplayReferCode, hasFriendPromo, regWhatsapp, regTelegram, regFacebook, regZalo, regLine, mustFillReferral;
     private int nameMin = 4, nameMax = 11;
     private int passwordMin = 6, passwordMax = 16;
     private String defaultAgentCode, withdrawPasswordFormat;
@@ -46,6 +46,7 @@ public class RegParam {
         regParam.setWithdrawPasswordFormat(paramObject.optString("withdrawpasswordformat"));
 
         regParam.setHasFriendPromo(paramObject.optBoolean("hasFriendPromo", false));
+        regParam.setMustFillReferral(paramObject.optBoolean("mustfillrefferal", false));
 
         String image = rootObject.optString("image");
         byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
@@ -270,6 +271,14 @@ public class RegParam {
         this.withdrawPasswordFormat = withdrawPasswordFormat;
     }
 
+    public boolean isMustFillReferral() {
+        return mustFillReferral;
+    }
+
+    public void setMustFillReferral(boolean mustFillReferral) {
+        this.mustFillReferral = mustFillReferral;
+    }
+
     @Override
     public String toString() {
         return "RegParam{" +
@@ -286,6 +295,7 @@ public class RegParam {
                 ", regLegalAge=" + regLegalAge +
                 ", highLevelPass=" + isHighLevelPass +
                 ", hasFriendPromo=" + hasFriendPromo +
+                ", mustFillReferral=" + mustFillReferral +
                 ", nameMin=" + nameMin +
                 ", nameMax=" + nameMax +
                 ", passwordMin=" + passwordMin +
