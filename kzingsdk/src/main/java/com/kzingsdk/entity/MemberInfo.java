@@ -3,7 +3,10 @@ package com.kzingsdk.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class MemberInfo implements Parcelable {
 
@@ -57,6 +60,8 @@ public class MemberInfo implements Parcelable {
     private boolean isRealNameSeparated = false;
     private boolean panStatus = false;
     private boolean enablePhoneRecall = false;
+    private String playerCurrency = "";
+    private ArrayList<String> currencyList = new ArrayList<>();
 
     private String withdrawFrozenAmount = "0";
 
@@ -105,6 +110,9 @@ public class MemberInfo implements Parcelable {
         facebook = in.readString();
         pan = in.readString();
         enablePhoneRecall = in.readInt() == 1;
+        playerCurrency = in.readString();
+        Object[] objectArray = in.readArray(MemberInfo.class.getClassLoader());
+        currencyList = (ArrayList<String>) objectArray[0];
     }
 
     public static MemberInfo newInstance(JSONObject rootObject) {
@@ -147,6 +155,15 @@ public class MemberInfo implements Parcelable {
         memberInfo.setGroupId(rootObject.optString("groupid"));
         memberInfo.setWithdrawFrozenAmount(rootObject.optString("wtdfrozenamt"));
         memberInfo.setEnablePhoneRecall(rootObject.optBoolean("enablePhoneRecall", false));
+        memberInfo.setPlayerCurrency(rootObject.optString("playerCurrency"));
+        JSONArray currencyJSONArray = rootObject.optJSONArray("currencyList");
+        ArrayList<String> currencyList = new ArrayList<>();
+        if (currencyJSONArray != null) {
+            for (int i = 0; i < currencyJSONArray.length(); i++) {
+                currencyList.add(currencyJSONArray.optString(i));
+            }
+        }
+        memberInfo.setCurrencyList(currencyList);
 
         return memberInfo;
     }
@@ -459,6 +476,22 @@ public class MemberInfo implements Parcelable {
         this.enablePhoneRecall = enablePhoneRecall;
     }
 
+    public String getPlayerCurrency() {
+        return playerCurrency;
+    }
+
+    public void setPlayerCurrency(String playerCurrency) {
+        this.playerCurrency = playerCurrency;
+    }
+
+    public ArrayList<String> getCurrencyList() {
+        return currencyList;
+    }
+
+    public void setCurrencyList(ArrayList<String> currencyList) {
+        this.currencyList = currencyList;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(regDate);
@@ -499,6 +532,10 @@ public class MemberInfo implements Parcelable {
         dest.writeString(facebook);
         dest.writeString(pan);
         dest.writeInt(enablePhoneRecall ? 1 : 0);
+        dest.writeString(playerCurrency);
+        dest.writeArray(new Object[]{
+                currencyList
+        });
 
 
     }
