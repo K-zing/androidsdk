@@ -61,12 +61,16 @@ public class ClientInfo implements Parcelable {
 
     private String rankLevel;
     private String appResourceDomain;
-    private String memberPanAgentCode;
+    private ArrayList<String> memberPanAgentCodeList;
 
     private HashMap<Integer, String> websiteConfigMap = new HashMap<>();
     private ContactInfo feedbackContactInfo = new ContactInfo();
     private ContactInfo partnershipContactInfo = new ContactInfo();
     private ContactInfo socialMediaContactInfo = new ContactInfo();
+    private CaptchaApiId captchaApiId = new CaptchaApiId();
+    private String captchaMode;
+
+
 
     public ClientInfo() {
 
@@ -104,7 +108,14 @@ public class ClientInfo implements Parcelable {
         clientInfo.setRankLevel(rootObject.optString("rankLevel"));
         clientInfo.setAppResourceDomain(rootObject.optString("appResourceDomain"));
         clientInfo.setRegisterSendVoice(rootObject.optBoolean("registerSendVoice", false));
-        clientInfo.setMemberPanAgentCode(rootObject.optString("memberpanagentcode"));
+        clientInfo.setCaptchaMode(rootObject.optString("captchaMode"));
+
+        JSONArray memberPanAgentCodeJSONArray = rootObject.optJSONArray("memberPanAgentCode");
+        if(memberPanAgentCodeJSONArray!=null){
+            for (int i = 0; i < memberPanAgentCodeJSONArray.length(); i++) {
+                clientInfo.memberPanAgentCodeList.add(memberPanAgentCodeJSONArray.optString(i));
+            }
+        }
 
         for (int i = 301; i < 400; i++) {
             clientInfo.websiteConfigMap.put(i, rootObject.optString("wc" + i));
@@ -159,6 +170,9 @@ public class ClientInfo implements Parcelable {
                 clientInfo.setSocialMediaContactInfo(ContactInfo.newInstance(socialMediaJSONObject));
             }
         }
+        JSONObject captchaApiIdJSONObject = rootObject.optJSONObject("captchaApiId");
+        if(captchaApiIdJSONObject!=null)
+            clientInfo.setCaptchaApiId(CaptchaApiId.newInstance(captchaApiIdJSONObject));
 
         JSONArray memberPanPlayerGroupJSONArray = rootObject.optJSONArray("memberpanplayergroup");
         if (memberPanPlayerGroupJSONArray != null) {
@@ -440,13 +454,7 @@ public class ClientInfo implements Parcelable {
         this.appResourceDomain = appResourceDomain;
     }
 
-    public String getMemberPanAgentCode() {
-        return memberPanAgentCode;
-    }
 
-    public void setMemberPanAgentCode(String memberPanAgentCode) {
-        this.memberPanAgentCode = memberPanAgentCode;
-    }
 
     public ContactInfo getFeedbackContactInfo() {
         return feedbackContactInfo;
@@ -496,6 +504,22 @@ public class ClientInfo implements Parcelable {
         this.registerSendVoice = registerSendVoice;
     }
 
+    public CaptchaApiId getCaptchaApiId() {
+        return captchaApiId;
+    }
+
+    public void setCaptchaApiId(CaptchaApiId captchaApiId) {
+        this.captchaApiId = captchaApiId;
+    }
+
+    public String getCaptchaMode() {
+        return captchaMode;
+    }
+
+    public void setCaptchaMode(String captchaMode) {
+        this.captchaMode = captchaMode;
+    }
+
     public ClientInfo(Parcel in) {
         siteName = in.readString();
         siteDomain = in.readString();
@@ -517,6 +541,8 @@ public class ClientInfo implements Parcelable {
         feedbackContactInfo = (ContactInfo) objectArray[5];
         partnershipContactInfo = (ContactInfo) objectArray[6];
         socialMediaContactInfo = (ContactInfo) objectArray[7];
+        captchaApiId = (CaptchaApiId) objectArray[8];
+        memberPanAgentCodeList = (ArrayList<String>) objectArray[9];
         hasRedPocket = in.readInt() == 1;
         redPocketImageUrl = in.readString();
         defaultViewMode = in.readString();
@@ -536,7 +562,7 @@ public class ClientInfo implements Parcelable {
         rankLevel = in.readString();
         memberPanVerify = in.readInt() == 1;
         registerSendVoice = in.readInt() == 1;
-        memberPanAgentCode = in.readString();
+        captchaMode = in.readString();
 
 
     }
@@ -563,7 +589,9 @@ public class ClientInfo implements Parcelable {
                 feedbackContactInfo,
                 partnershipContactInfo,
                 socialMediaContactInfo,
-                memberPanPlayerGroup
+                memberPanPlayerGroup,
+                captchaApiId,
+                memberPanAgentCodeList
         });
         dest.writeInt(hasRedPocket ? 1 : 0);
         dest.writeString(redPocketImageUrl);
@@ -585,7 +613,8 @@ public class ClientInfo implements Parcelable {
         dest.writeString(appResourceDomain);
         dest.writeInt(memberPanVerify ? 1 : 0);
         dest.writeInt(registerSendVoice ? 1 : 0);
-        dest.writeString(memberPanAgentCode);
+        dest.writeString(captchaMode);
+
     }
 
     @Override

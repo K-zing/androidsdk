@@ -28,6 +28,9 @@ public class LoginAPI extends CoreRequest {
     private String platform;
     private String token;
 
+    private String captchaValidate = "";
+    private String verifyCode = "";
+
     @Override
     protected String getAction() {
         return Action.login;
@@ -52,6 +55,7 @@ public class LoginAPI extends CoreRequest {
             if (password == null) {
                 return Observable.just("Password is missing");
             }
+
         }
         return super.validateParams();
     }
@@ -68,6 +72,8 @@ public class LoginAPI extends CoreRequest {
                 jsonData.put("playername", loginName);
                 jsonData.put("password", password);
             }
+            jsonData.put("captchaValidate", captchaValidate);
+            jsonData.put("verifycode", verifyCode);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -136,6 +142,18 @@ public class LoginAPI extends CoreRequest {
         this.platform = platform.name();
         return this;
     }
+
+    public LoginAPI setCaptchaValidate(String captchaValidate) {
+        this.captchaValidate = captchaValidate;
+        return this;
+    }
+
+    public LoginAPI setVerifyCode(String verifyCode) {
+        this.verifyCode = verifyCode;
+        return this;
+    }
+
+
 
 }
 

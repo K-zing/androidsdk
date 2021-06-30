@@ -39,6 +39,7 @@ public class RegAccountAPI extends CoreRequest {
     private String facebook = "";
     private String utmCode = "";
     private String line = "";
+    private String captchaValidate = "";
 
 
     RegAccountAPI() {
@@ -101,6 +102,7 @@ public class RegAccountAPI extends CoreRequest {
             jsonData.put("facebook", facebook);
             jsonData.put("utmcode", utmCode);
             jsonData.put("line", line);
+            jsonData.put("captchaValidate", captchaValidate);
 
             jsonData.put("jsessionid", getSessionId());
 
@@ -248,6 +250,11 @@ public class RegAccountAPI extends CoreRequest {
 
     public RegAccountAPI setLine(String line) {
         this.line = line;
+        return this;
+    }
+
+    public RegAccountAPI setCaptchaValidate(String captchaValidate) {
+        this.captchaValidate = captchaValidate;
         return this;
     }
 
