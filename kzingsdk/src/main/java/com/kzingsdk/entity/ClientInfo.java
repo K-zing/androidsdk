@@ -69,6 +69,7 @@ public class ClientInfo implements Parcelable {
     private ContactInfo socialMediaContactInfo = new ContactInfo();
     private CaptchaApiId captchaApiId = new CaptchaApiId();
     private String captchaMode;
+    private boolean memberLoginNeedCaptcha;
 
 
 
@@ -109,6 +110,7 @@ public class ClientInfo implements Parcelable {
         clientInfo.setAppResourceDomain(rootObject.optString("appResourceDomain"));
         clientInfo.setRegisterSendVoice(rootObject.optBoolean("registerSendVoice", false));
         clientInfo.setCaptchaMode(rootObject.optString("captchaMode"));
+        clientInfo.setMemberLoginNeedCaptcha(rootObject.optBoolean("memberLoginNeedCaptcha", false));
 
         JSONArray memberPanAgentCodeJSONArray = rootObject.optJSONArray("memberPanAgentCode");
         if(memberPanAgentCodeJSONArray!=null){
@@ -520,6 +522,22 @@ public class ClientInfo implements Parcelable {
         this.captchaMode = captchaMode;
     }
 
+    public ArrayList<String> getMemberPanAgentCodeList() {
+        return memberPanAgentCodeList;
+    }
+
+    public void setMemberPanAgentCodeList(ArrayList<String> memberPanAgentCodeList) {
+        this.memberPanAgentCodeList = memberPanAgentCodeList;
+    }
+
+    public Boolean getMemberLoginNeedCaptcha() {
+        return memberLoginNeedCaptcha;
+    }
+
+    public void setMemberLoginNeedCaptcha(Boolean memberLoginNeedCaptcha) {
+        this.memberLoginNeedCaptcha = memberLoginNeedCaptcha;
+    }
+
     public ClientInfo(Parcel in) {
         siteName = in.readString();
         siteDomain = in.readString();
@@ -563,6 +581,7 @@ public class ClientInfo implements Parcelable {
         memberPanVerify = in.readInt() == 1;
         registerSendVoice = in.readInt() == 1;
         captchaMode = in.readString();
+        memberLoginNeedCaptcha = in.readInt() == 1;
 
 
     }
@@ -614,6 +633,7 @@ public class ClientInfo implements Parcelable {
         dest.writeInt(memberPanVerify ? 1 : 0);
         dest.writeInt(registerSendVoice ? 1 : 0);
         dest.writeString(captchaMode);
+        dest.writeInt(memberLoginNeedCaptcha ? 1 : 0);
 
     }
 
