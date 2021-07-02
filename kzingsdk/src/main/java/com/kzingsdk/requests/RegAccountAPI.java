@@ -3,7 +3,10 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
+import com.kzingsdk.entity.MemberInfo;
 import com.kzingsdk.entity.RegParam;
+import com.kzingsdk.util.Constant;
+import com.kzingsdk.util.SharePrefUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -114,7 +117,14 @@ public class RegAccountAPI extends CoreRequest {
 
     @Override
     public Observable<String> requestRx(final Context context) {
-        return super.baseExecute(context).map(jsonResponse -> "Success");
+        return super.baseExecute(context).map(jsonResponse -> {
+            String vcToken = jsonResponse.optString("vc", "");
+            String ccToken = jsonResponse.optString("cc", "");
+            SharePrefUtil.putString(context, Constant.Pref.VCTOKEN, vcToken);
+            SharePrefUtil.putString(context, Constant.Pref.CCTOKEN, ccToken);
+            setLoginTokens(vcToken, ccToken);
+            return "Success";
+        });
     }
 
     @Override
