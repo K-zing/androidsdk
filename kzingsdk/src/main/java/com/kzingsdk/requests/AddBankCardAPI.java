@@ -26,6 +26,8 @@ public class AddBankCardAPI extends CoreRequest {
     private boolean needSMS = false;
     private String ifscCode;
     private String address;
+    private String addrA = "";
+    private String addrB = "";
 
     AddBankCardAPI() {
         super();
@@ -71,6 +73,8 @@ public class AddBankCardAPI extends CoreRequest {
                 jsonData.put("address", address);
             }
             jsonData.put("needSMS", needSMS);
+            jsonData.put("addrA", addrA);
+            jsonData.put("addrB", addrB);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -160,5 +164,18 @@ public class AddBankCardAPI extends CoreRequest {
         this.address = address;
         return this;
     }
+
+    public AddBankCardAPI setAddrA(String addrA) {
+        this.addrA = addrA;
+        return this;
+    }
+
+    public AddBankCardAPI setAddrB(String addrB) {
+        this.addrB = addrB;
+        return this;
+    }
+
+
+
 }
 

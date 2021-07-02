@@ -34,7 +34,7 @@ public class RegAgentAccountAPI extends CoreRequest {
     private String verifycode = "";
     private String phoneCountry = "";
     private String wdPassword = "";
-
+    private String captchaValidate = "";
 
     RegAgentAccountAPI() {
         super();
@@ -102,6 +102,7 @@ public class RegAgentAccountAPI extends CoreRequest {
             jsonData.put("birthyear", birthdayYear);
             jsonData.put("atype", "1000");
             jsonData.put("aphonecountry", phoneCountry);
+            jsonData.put("captchaValidate", captchaValidate);
 //            jsonData.put("wdpassword",wdpassword);
 
             jsonData.put("jsessionid", getSessionId());
@@ -231,6 +232,11 @@ public class RegAgentAccountAPI extends CoreRequest {
         this.wdPassword = wdPassword;
         return this;
     }
+    public RegAgentAccountAPI setCaptchaValidate(String captchaValidate) {
+        this.captchaValidate = captchaValidate;
+        return this;
+    }
+
 
 }
 
