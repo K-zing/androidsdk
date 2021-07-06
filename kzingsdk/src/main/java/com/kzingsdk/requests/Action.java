@@ -63,7 +63,9 @@ final class Action {
     static final String getFriendRefLogs = "smzsocy";
     static final String getNewComerActivity = "nahkyr";
 
+
     static final String getClientInfo = "5f7cd5b";
+    static final String getClientInstantInfo = "g3zmkvo";
     static final String getVipDetail = "at2sfrv";
     static final String getPlayerRecentStat = "qno2c2d";
     static final String getMemberInfo = "7c98893";

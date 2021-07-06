@@ -174,6 +174,9 @@ public final class KzingAPI {
     public static GetClientInfoAPI getSiteInfo() {
         return new GetClientInfoAPI();
     }
+    public static GetClientInstantInfoAPI getClientInstantInfo() {
+        return new GetClientInstantInfoAPI();
+    }
 
 
     public static RegParamAPI getRegParam() {
