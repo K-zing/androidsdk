@@ -74,6 +74,7 @@ public class LoginAPI extends CoreRequest {
             }
             jsonData.put("captchaValidate", captchaValidate);
             jsonData.put("verifycode", verifyCode);
+            jsonData.put("jsessionid", getSessionId());
             return jsonData;
         } catch (JSONException ignored) {
         }
