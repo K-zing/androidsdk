@@ -118,8 +118,9 @@ public class RegAccountAPI extends CoreRequest {
     @Override
     public Observable<String> requestRx(final Context context) {
         return super.baseExecute(context).map(jsonResponse -> {
-            String vcToken = jsonResponse.optString("vc", "");
-            String ccToken = jsonResponse.optString("cc", "");
+            JSONObject responseObject = jsonResponse.optJSONObject("response");
+            String vcToken = responseObject.optString("vc", "");
+            String ccToken = responseObject.optString("cc", "");
             SharePrefUtil.putString(context, Constant.Pref.VCTOKEN, vcToken);
             SharePrefUtil.putString(context, Constant.Pref.CCTOKEN, ccToken);
             setLoginTokens(vcToken, ccToken);
