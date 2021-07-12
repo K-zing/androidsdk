@@ -30,6 +30,7 @@ public class LoginAPI extends CoreRequest {
 
     private String captchaValidate = "";
     private String verifyCode = "";
+    private String uuid = "";
 
     @Override
     protected String getAction() {
@@ -55,7 +56,6 @@ public class LoginAPI extends CoreRequest {
             if (password == null) {
                 return Observable.just("Password is missing");
             }
-
         }
         return super.validateParams();
     }
@@ -75,6 +75,9 @@ public class LoginAPI extends CoreRequest {
             jsonData.put("captchaValidate", captchaValidate);
             jsonData.put("verifycode", verifyCode);
             jsonData.put("jsessionid", getSessionId());
+            if (uuid != null) {
+                jsonData.put("uuid", uuid);
+            }
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -154,6 +157,10 @@ public class LoginAPI extends CoreRequest {
         return this;
     }
 
+    public LoginAPI setUuid(String uuid) {
+        this.uuid = uuid;
+        return this;
+    }
 
 
 }

@@ -62,6 +62,7 @@ public class MemberInfo implements Parcelable {
     private boolean enablePhoneRecall = false;
     private String playerCurrency = "";
     private ArrayList<String> currencyList = new ArrayList<>();
+    private ArrayList<CurrencyBalance> currencyBalanceList = new ArrayList<>();
 
     private String withdrawFrozenAmount = "0";
 
@@ -113,6 +114,7 @@ public class MemberInfo implements Parcelable {
         playerCurrency = in.readString();
         Object[] objectArray = in.readArray(MemberInfo.class.getClassLoader());
         currencyList = (ArrayList<String>) objectArray[0];
+        currencyBalanceList = (ArrayList<CurrencyBalance>) objectArray[1];
     }
 
     public static MemberInfo newInstance(JSONObject rootObject) {
@@ -165,6 +167,14 @@ public class MemberInfo implements Parcelable {
         }
         memberInfo.setCurrencyList(currencyList);
 
+        JSONArray currencyBalancesJSONArray = rootObject.optJSONArray("currencyBalances");
+        ArrayList<CurrencyBalance> currencyBalancesList = new ArrayList<>();
+        if (currencyBalancesJSONArray != null) {
+            for (int i = 0; i < currencyBalancesJSONArray.length(); i++) {
+                currencyBalancesList.add(CurrencyBalance.newInstance(currencyBalancesJSONArray.optJSONObject(i)));
+            }
+        }
+        memberInfo.setCurrencyBalanceList(currencyBalancesList);
         return memberInfo;
     }
 
@@ -492,6 +502,14 @@ public class MemberInfo implements Parcelable {
         this.currencyList = currencyList;
     }
 
+    public ArrayList<CurrencyBalance> getCurrencyBalanceList() {
+        return currencyBalanceList;
+    }
+
+    public void setCurrencyBalanceList(ArrayList<CurrencyBalance> currencyBalanceList) {
+        this.currencyBalanceList = currencyBalanceList;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(regDate);
@@ -534,9 +552,9 @@ public class MemberInfo implements Parcelable {
         dest.writeInt(enablePhoneRecall ? 1 : 0);
         dest.writeString(playerCurrency);
         dest.writeArray(new Object[]{
-                currencyList
+                currencyList,
+                currencyBalanceList
         });
-
 
     }
 
