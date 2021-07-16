@@ -27,6 +27,7 @@ public class LoginAllInOneAPI extends CoreRequest {
     private String socialId;
     private String platform;
     private String token;
+    private String uuid = "";
 
     @Override
     protected String getAction() {
@@ -67,6 +68,9 @@ public class LoginAllInOneAPI extends CoreRequest {
             } else {
                 jsonData.put("playername", loginName);
                 jsonData.put("password", password);
+            }
+            if (uuid != null) {
+                jsonData.put("uuid", uuid);
             }
             return jsonData;
         } catch (JSONException ignored) {
@@ -142,6 +146,11 @@ public class LoginAllInOneAPI extends CoreRequest {
 
     public LoginAllInOneAPI setPlatform(SocialRegisterPlatform platform) {
         this.platform = platform.name();
+        return this;
+    }
+
+    public LoginAllInOneAPI setUuid(String uuid) {
+        this.uuid = uuid;
         return this;
     }
 
