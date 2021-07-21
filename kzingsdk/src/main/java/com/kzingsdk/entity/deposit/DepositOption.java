@@ -26,6 +26,10 @@ public class DepositOption implements Parcelable {
     private boolean useRotate = false;
     private boolean allowUploadDepositCredential = false;
     private boolean depositMustBindBankcard = false;
+    private Integer pgAllowPendingCount = 0;
+    private Integer pgProcessPendingCount = 0;
+    private Integer atmAllowPendingCount = 0;
+    private Integer atmProcessPendingCount = 0;
     private ArrayList<PaymentGroup> paymentGroupList = new ArrayList<>();
     private HashMap<String, String> activityMap = new HashMap<>();
     private ArrayList<QuickLinkDeposit> quickLinkDepositList = new ArrayList<>();
@@ -46,6 +50,10 @@ public class DepositOption implements Parcelable {
         item.useRotate = rootObject.optBoolean("useRotate", false);
         item.allowUploadDepositCredential = rootObject.optBoolean("isUpload", false);
         item.depositMustBindBankcard = rootObject.optBoolean("depositMustBindBankcard", false);
+        item.pgAllowPendingCount = rootObject.optInt("pgAllowPendingCount", 0);
+        item.pgProcessPendingCount = rootObject.optInt("pgProcessPendingCount", 0);
+        item.atmAllowPendingCount = rootObject.optInt("atmAllowPendingCount", 0);
+        item.atmProcessPendingCount = rootObject.optInt("atmProcessPendingCount", 0);
 
         item.setProcessing(rootObject.optBoolean("process"));
         item.setAllowDeposit(rootObject.optBoolean("allowdeposit"));
@@ -297,6 +305,38 @@ public class DepositOption implements Parcelable {
         this.depositMustBindBankcard = depositMustBindBankcard;
     }
 
+    public Integer getPgAllowPendingCount() {
+        return pgAllowPendingCount;
+    }
+
+    public void setPgAllowPendingCount(Integer pgAllowPendingCount) {
+        this.pgAllowPendingCount = pgAllowPendingCount;
+    }
+
+    public Integer getPgProcessPendingCount() {
+        return pgProcessPendingCount;
+    }
+
+    public void setPgProcessPendingCount(Integer pgProcessPendingCount) {
+        this.pgProcessPendingCount = pgProcessPendingCount;
+    }
+
+    public Integer getAtmAllowPendingCount() {
+        return atmAllowPendingCount;
+    }
+
+    public void setAtmAllowPendingCount(Integer atmAllowPendingCount) {
+        this.atmAllowPendingCount = atmAllowPendingCount;
+    }
+
+    public Integer getAtmProcessPendingCount() {
+        return atmProcessPendingCount;
+    }
+
+    public void setAtmProcessPendingCount(Integer atmProcessPendingCount) {
+        this.atmProcessPendingCount = atmProcessPendingCount;
+    }
+
     public HashMap<String, String> getActivityMap() {
         return activityMap;
     }
@@ -331,6 +371,10 @@ public class DepositOption implements Parcelable {
         useRotate = in.readInt() == 1;
         allowUploadDepositCredential = in.readInt() == 1;
         depositMustBindBankcard = in.readInt() == 1;
+        pgAllowPendingCount = in.readInt();
+        pgProcessPendingCount = in.readInt();
+        atmAllowPendingCount = in.readInt();
+        atmProcessPendingCount = in.readInt();
         Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
         paymentGroupList = (ArrayList<PaymentGroup>) customObjects[0];
         activityMap = (HashMap<String, String>) customObjects[1];
@@ -351,6 +395,10 @@ public class DepositOption implements Parcelable {
         dest.writeInt(useRotate ? 1 : 0);
         dest.writeInt(allowUploadDepositCredential ? 1 : 0);
         dest.writeInt(depositMustBindBankcard ? 1 : 0);
+        dest.writeInt(pgAllowPendingCount);
+        dest.writeInt(pgProcessPendingCount);
+        dest.writeInt(atmAllowPendingCount);
+        dest.writeInt(atmProcessPendingCount);
 
         Object[] customObjects = new Object[3];
         customObjects[0] = paymentGroupList;
