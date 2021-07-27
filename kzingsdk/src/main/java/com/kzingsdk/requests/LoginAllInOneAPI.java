@@ -27,6 +27,9 @@ public class LoginAllInOneAPI extends CoreRequest {
     private String socialId;
     private String platform;
     private String token;
+
+    private String captchaValidate = "";
+    private String verifyCode = "";
     private String uuid = "";
 
     @Override
@@ -69,6 +72,9 @@ public class LoginAllInOneAPI extends CoreRequest {
                 jsonData.put("playername", loginName);
                 jsonData.put("password", password);
             }
+            jsonData.put("captchaValidate", captchaValidate);
+            jsonData.put("verifycode", verifyCode);
+            jsonData.put("jsessionid", getSessionId());
             if (uuid != null) {
                 jsonData.put("uuid", uuid);
             }
@@ -146,6 +152,16 @@ public class LoginAllInOneAPI extends CoreRequest {
 
     public LoginAllInOneAPI setPlatform(SocialRegisterPlatform platform) {
         this.platform = platform.name();
+        return this;
+    }
+
+    public LoginAllInOneAPI setCaptchaValidate(String captchaValidate) {
+        this.captchaValidate = captchaValidate;
+        return this;
+    }
+
+    public LoginAllInOneAPI setVerifyCode(String verifyCode) {
+        this.verifyCode = verifyCode;
         return this;
     }
 
