@@ -11,7 +11,8 @@ public class RegParam {
 
     private boolean regBirthday, regQQ, reqPhone, regEmail, withdrawPassword, regWeixin,
             reqReferCode, regRealName, regMobileVerify, regPwdConfirm, regLegalAge, isHighLevelPass, reqPhoneCountry,
-            reqDisplayReferCode, hasFriendPromo, regWhatsapp, regTelegram, regFacebook, regZalo, regLine, mustFillReferral;
+            reqDisplayReferCode, hasFriendPromo, regWhatsapp, regTelegram, regFacebook, regZalo, regLine, mustFillReferral,
+            regEmailDisplay;
     private int nameMin = 4, nameMax = 11;
     private int passwordMin = 6, passwordMax = 16;
     private String defaultAgentCode, withdrawPasswordFormat;
@@ -43,6 +44,8 @@ public class RegParam {
         regParam.setRegFacebook(paramObject.optString("regfacebook").equalsIgnoreCase("ON"));
         regParam.setRegZalo(paramObject.optString("regzalo").equalsIgnoreCase("ON"));
         regParam.setRegLine(paramObject.optString("regline").equalsIgnoreCase("ON"));
+        regParam.setRegEmailDisplay(paramObject.optString("regemaildisplay").equalsIgnoreCase("ON"));
+
         regParam.setWithdrawPasswordFormat(paramObject.optString("withdrawpasswordformat"));
 
         regParam.setHasFriendPromo(paramObject.optBoolean("hasFriendPromo", false));
@@ -277,6 +280,14 @@ public class RegParam {
 
     public void setMustFillReferral(boolean mustFillReferral) {
         this.mustFillReferral = mustFillReferral;
+    }
+
+    public boolean isRegEmailDisplay() {
+        return regEmailDisplay;
+    }
+
+    public void setRegEmailDisplay(boolean regEmailDisplay) {
+        this.regEmailDisplay = regEmailDisplay;
     }
 
     @Override

@@ -22,6 +22,7 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
     private BigDecimal promoRate = BigDecimal.ZERO;
     private String bcMin;
     private String bcMax;
+    private String network;
 
 
     public AtmPayment() {
@@ -44,6 +45,7 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         item.setPromoRate(BigDecimalUtil.optBigDecimal(rootObject, "promorate", BigDecimal.ZERO));
         item.setBcMin(rootObject.optString("bcmin"));
         item.setBcMax(rootObject.optString("bcmax"));
+        item.setNetwork(rootObject.optString("network"));
         return item;
     }
 
@@ -136,6 +138,14 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         this.bcMax = bcMax;
     }
 
+    public String getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(String network) {
+        this.network = network;
+    }
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public AtmPayment createFromParcel(Parcel in) {
             return new AtmPayment(in);
@@ -166,6 +176,7 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         promoRate = new BigDecimal(in.readString());
         bcMin = in.readString();
         bcMax = in.readString();
+        network = in.readString();
     }
 
     @Override
@@ -194,6 +205,7 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         dest.writeString(promoRate.toString());
         dest.writeString(bcMin);
         dest.writeString(bcMax);
+        dest.writeString(network);
     }
 
     @Override
