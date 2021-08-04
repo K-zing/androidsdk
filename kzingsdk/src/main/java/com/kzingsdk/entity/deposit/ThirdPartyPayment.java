@@ -312,6 +312,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         minDpt = new BigDecimal(in.readString());
         pRate = new BigDecimal(in.readString());
         promoRate = new BigDecimal(in.readString());
+        formType = in.readString();
         Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
         fixAmounts = (String[]) customObjects[0];
         paymentBankList = (ArrayList<ThirdPartyPaymentBank>) customObjects[1];
@@ -349,6 +350,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         dest.writeString(minDpt.toString());
         dest.writeString(pRate.toString());
         dest.writeString(promoRate.toString());
+        dest.writeString(formType);
         Object[] customObjects = new Object[5];
         customObjects[0] = fixAmounts;
         customObjects[1] = paymentBankList;

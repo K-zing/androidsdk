@@ -177,6 +177,7 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         bcMin = in.readString();
         bcMax = in.readString();
         network = in.readString();
+        formType = in.readString();
     }
 
     @Override
@@ -206,6 +207,7 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         dest.writeString(bcMin);
         dest.writeString(bcMax);
         dest.writeString(network);
+        dest.writeString(formType);
     }
 
     @Override
