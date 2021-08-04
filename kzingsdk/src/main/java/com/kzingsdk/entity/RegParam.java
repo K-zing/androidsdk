@@ -12,7 +12,7 @@ public class RegParam {
     private boolean regBirthday, regQQ, reqPhone, regEmail, withdrawPassword, regWeixin,
             reqReferCode, regRealName, regMobileVerify, regPwdConfirm, regLegalAge, isHighLevelPass, reqPhoneCountry,
             reqDisplayReferCode, hasFriendPromo, regWhatsapp, regTelegram, regFacebook, regZalo, regLine, mustFillReferral,
-            regEmailDisplay;
+            regEmailDisplay, reqPhoneDisplay;
     private int nameMin = 4, nameMax = 11;
     private int passwordMin = 6, passwordMax = 16;
     private String defaultAgentCode, withdrawPasswordFormat;
@@ -45,6 +45,7 @@ public class RegParam {
         regParam.setRegZalo(paramObject.optString("regzalo").equalsIgnoreCase("ON"));
         regParam.setRegLine(paramObject.optString("regline").equalsIgnoreCase("ON"));
         regParam.setRegEmailDisplay(paramObject.optString("regemaildisplay").equalsIgnoreCase("ON"));
+        regParam.setReqPhoneDisplay(paramObject.optString("reqphonedisplay").equalsIgnoreCase("ON"));
 
         regParam.setWithdrawPasswordFormat(paramObject.optString("withdrawpasswordformat"));
 
@@ -288,6 +289,14 @@ public class RegParam {
 
     public void setRegEmailDisplay(boolean regEmailDisplay) {
         this.regEmailDisplay = regEmailDisplay;
+    }
+
+    public boolean isReqPhoneDisplay() {
+        return reqPhoneDisplay;
+    }
+
+    public void setReqPhoneDisplay(boolean reqPhoneDisplay) {
+        this.reqPhoneDisplay = reqPhoneDisplay;
     }
 
     @Override
