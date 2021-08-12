@@ -14,6 +14,7 @@ final class Action {
     static final String regAccount = "56fa759";
     static final String changePassword = "b787647";
     static final String changeWithdrawPassword = "3D01286";
+    static final String crossPlayerChangePassword = "95hhcb6";
     static final String editMemberInfo = "33F418A";
     static final String editMemberAvatar = "1833F4A";
     static final String checkUserNameExist = "qbiluvw";
