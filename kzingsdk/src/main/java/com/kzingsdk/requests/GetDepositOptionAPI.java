@@ -4,7 +4,9 @@ import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.deposit.DepositOption;
+import com.kzingsdk.util.Constant;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import io.reactivex.Observable;
@@ -14,6 +16,8 @@ public class GetDepositOptionAPI extends CoreRequest {
     GetDepositOptionAPI() {
         super();
     }
+
+    private boolean isV2 = false;
 
     @Override
     protected String getAction() {
@@ -27,9 +31,14 @@ public class GetDepositOptionAPI extends CoreRequest {
 
     @Override
     protected JSONObject generateParamsJson() {
+        JSONObject jsonData = super.generateParamsJson();
+        try {
+            jsonData.put("isV2", isV2);
+            return jsonData;
+        } catch (JSONException ignored) {
+        }
         return super.generateParamsJson();
     }
-
 
     @Override
     public Observable<DepositOption> requestRx(Context context) {
@@ -56,5 +65,8 @@ public class GetDepositOptionAPI extends CoreRequest {
         void onSuccess(DepositOption depositOption);
     }
 
-
+    public GetDepositOptionAPI setV2(boolean v2) {
+        isV2 = v2;
+        return this;
+    }
 }

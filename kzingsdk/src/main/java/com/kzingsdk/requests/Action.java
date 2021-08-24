@@ -148,4 +148,8 @@ final class Action {
 
     static final String getAgentPlayerHistory = "tlsvm61";
     static final String getAgentTeamHistory = "loo0tw1";
+
+
+    static final String submitAtmDepositV2 = "zavju0w";
+
 }

@@ -3,9 +3,12 @@ package com.kzingsdk.entity.deposit;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.kzingsdk.util.BigDecimalUtil;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -30,9 +33,11 @@ public class DepositOption implements Parcelable {
     private Integer pgProcessPendingCount = 0;
     private Integer atmAllowPendingCount = 0;
     private Integer atmProcessPendingCount = 0;
+    private BigDecimal cryptoAtmExchangeRate = BigDecimal.ZERO;
     private ArrayList<PaymentGroup> paymentGroupList = new ArrayList<>();
     private HashMap<String, String> activityMap = new HashMap<>();
     private ArrayList<QuickLinkDeposit> quickLinkDepositList = new ArrayList<>();
+    private ArrayList<Crypto> cryptoList = new ArrayList<>();
 
     public DepositOption() {
 
@@ -54,6 +59,7 @@ public class DepositOption implements Parcelable {
         item.pgProcessPendingCount = rootObject.optInt("pgProcessPendingCount", 0);
         item.atmAllowPendingCount = rootObject.optInt("atmAllowPendingCount", 0);
         item.atmProcessPendingCount = rootObject.optInt("atmProcessPendingCount", 0);
+        item.cryptoAtmExchangeRate = BigDecimalUtil.optBigDecimal(rootObject, "cryptoAtm_exchange_rate");
 
         item.setProcessing(rootObject.optBoolean("process"));
         item.setAllowDeposit(rootObject.optBoolean("allowdeposit"));
@@ -69,15 +75,16 @@ public class DepositOption implements Parcelable {
 
         JSONArray paymentTypeJArray = rootObject.optJSONArray("paymentType");
         JSONArray paymentAtmTypeJArray = rootObject.optJSONArray("paymentAtmType");
+        JSONArray cryptoAtmTypeJArray = rootObject.optJSONArray("cryptoAtmType");
         JSONArray quickLinkJArray = rootObject.optJSONArray("quicklinkdeposit");
         JSONArray atmSortSettingJArray = rootObject.optJSONArray("atmSortSetting");
         HashMap<String, ArrayList<ThirdPartyPayment>> thirdPartyPaymentMap = createThirdPartyPaymentMap(paymentTypeJArray);
         ArrayList<AtmPayment> atmPaymentList = createAtmPaymentList(paymentAtmTypeJArray, atmSortSettingJArray, false);
         ArrayList<AtmPayment> qrcodePaymentList = createAtmPaymentList(paymentAtmTypeJArray, atmSortSettingJArray, true);
+        ArrayList<CryptoAtmPayment> cryptoAtmPaymentList = createCryptoAtmPaymentList(cryptoAtmTypeJArray);
 
         JSONArray sortArrJArray = rootObject.optJSONArray("sortArr");
         JSONArray paymentGroupJArray = rootObject.optJSONArray("payOptionSortInfo");
-
         if (quickLinkJArray != null) {
             for (int i = 0; i < quickLinkJArray.length(); i++) {
                 JSONObject quickLinkObject = quickLinkJArray.optJSONObject(i);
@@ -85,12 +92,21 @@ public class DepositOption implements Parcelable {
             }
         }
 
+        JSONArray cryptoJArray = rootObject.optJSONArray("crypto_list");
+        if (cryptoJArray != null) {
+            for (int i = 0; i < cryptoJArray.length(); i++) {
+                JSONObject cryptoObject = cryptoJArray.optJSONObject(i);
+                item.cryptoList.add(Crypto.newInstance(cryptoObject));
+            }
+        }
+
+
         for (int i = 0; i < sortArrJArray.length(); i++) {
             JSONObject cateSortingObject = sortArrJArray.optJSONObject(i);
-            int option = cateSortingObject.optInt("option");
+            String option = cateSortingObject.optString("option");
             int j;
             switch (option) {
-                case 1:
+                case "1":
                     for (j = 0; j < paymentGroupJArray.length(); j++) {
                         PaymentGroup paymentGroup = PaymentGroup.newInstance(paymentGroupJArray.optJSONObject(j));
                         if (paymentGroup.getPaymentType() == THIRD_PARTY) {
@@ -98,7 +114,7 @@ public class DepositOption implements Parcelable {
                         }
                     }
                     break;
-                case 99: // prepaid card
+                case "99": // prepaid card
                     if (!item.isPrepaidCard) break;
                     String displayName = cateSortingObject.optString("displayName");
                     String bankcss = cateSortingObject.optString("bankcss");
@@ -108,13 +124,14 @@ public class DepositOption implements Parcelable {
                     paymentGroupPrepaid.setPaymentType(PREPAIDCARD);
                     item.paymentGroupList.add(paymentGroupPrepaid);
                     break;
-                case 3:
+                case "3":
                     //ignored
                     break;
-                case 2:
-                case 4:
-                case 69:
-                case 73:
+                case "2":
+                case "4":
+                case "5"://crypto
+                case "69":
+                case "73":
                     for (j = 0; j < paymentGroupJArray.length(); j++) {
                         PaymentGroup paymentGroup = PaymentGroup.newInstance(paymentGroupJArray.optJSONObject(j));
                         if (paymentGroup.getPaymentType() == PaymentType.valueOfTypeId(option)) {
@@ -153,9 +170,27 @@ public class DepositOption implements Parcelable {
                         paymentGroup.getPaymentList().addAll(thirdPartyPaymentMap.get(key));
                     }
                     break;
+                case CRYPTO:
+                    paymentGroup.getPaymentList().addAll(cryptoAtmPaymentList);
+                    break;
             }
         }
         return item;
+    }
+
+    private static ArrayList<CryptoAtmPayment> createCryptoAtmPaymentList(JSONArray jArray) {
+        ArrayList<CryptoAtmPayment> cryptoAtmPaymentList = new ArrayList<>();
+        if (jArray != null) {
+            for (int i = 0; i < jArray.length(); i++) {
+                JSONObject cryptoAtmJObject = jArray.optJSONObject(i);
+                CryptoAtmPayment cryptoAtmPayment = CryptoAtmPayment.newInstance(cryptoAtmJObject);
+                cryptoAtmPaymentList.add(cryptoAtmPayment);
+            }
+            Collections.sort(cryptoAtmPaymentList,
+                    (o1, o2) -> o1.getDisplayOrder() - o2.getDisplayOrder()
+            );
+        }
+        return cryptoAtmPaymentList;
     }
 
     private static ArrayList<AtmPayment> createAtmPaymentList(JSONArray jArray, JSONArray sortingArray, boolean isQrcode) {
@@ -213,9 +248,9 @@ public class DepositOption implements Parcelable {
                         thirdPartyPaymentMap.containsKey(key) ?
                                 thirdPartyPaymentMap.get(key) : new ArrayList<>();
                 for (int j = 0; j < thirdPartyPaymentArray.length(); j++) {
-                    if (Integer.parseInt(key) == EWALLET.getId()) {
+                    if (EWALLET.getId().equalsIgnoreCase(key)) {
                         thirdPartyPaymentList.add(EWalletPayment.newInstance(thirdPartyPaymentArray.optJSONObject(j), atmJObject, key));
-                    } else if (Integer.parseInt(key) == PHONE.getId()) {
+                    } else if (PHONE.getId().equalsIgnoreCase(key)) {
                         thirdPartyPaymentList.add(PhonePayment.newInstance(thirdPartyPaymentArray.optJSONObject(j), atmJObject, key));
                     } else {
                         thirdPartyPaymentList.add(ThirdPartyPayment.newInstance(thirdPartyPaymentArray.optJSONObject(j), atmJObject, key));
@@ -353,6 +388,22 @@ public class DepositOption implements Parcelable {
         this.quickLinkDepositList = quickLinkDepositList;
     }
 
+    public BigDecimal getCryptoAtmExchangeRate() {
+        return cryptoAtmExchangeRate;
+    }
+
+    public void setCryptoAtmExchangeRate(BigDecimal cryptoAtmExchangeRate) {
+        this.cryptoAtmExchangeRate = cryptoAtmExchangeRate;
+    }
+
+    public ArrayList<Crypto> getCryptoList() {
+        return cryptoList;
+    }
+
+    public void setCryptoList(ArrayList<Crypto> cryptoList) {
+        this.cryptoList = cryptoList;
+    }
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public DepositOption createFromParcel(Parcel in) {
             return new DepositOption(in);
@@ -375,10 +426,14 @@ public class DepositOption implements Parcelable {
         pgProcessPendingCount = in.readInt();
         atmAllowPendingCount = in.readInt();
         atmProcessPendingCount = in.readInt();
+        cryptoAtmExchangeRate = new BigDecimal(in.readString());
         Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
         paymentGroupList = (ArrayList<PaymentGroup>) customObjects[0];
         activityMap = (HashMap<String, String>) customObjects[1];
         quickLinkDepositList = (ArrayList<QuickLinkDeposit>) customObjects[2];
+        cryptoList = (ArrayList<Crypto>) customObjects[3];
+
+
     }
 
     @Override
@@ -399,11 +454,13 @@ public class DepositOption implements Parcelable {
         dest.writeInt(pgProcessPendingCount);
         dest.writeInt(atmAllowPendingCount);
         dest.writeInt(atmProcessPendingCount);
+        dest.writeString(cryptoAtmExchangeRate.toString());
 
         Object[] customObjects = new Object[3];
         customObjects[0] = paymentGroupList;
         customObjects[1] = activityMap;
         customObjects[2] = quickLinkDepositList;
+        customObjects[3] = cryptoList;
         dest.writeArray(customObjects);
     }
 

@@ -452,6 +452,10 @@ public final class KzingAPI {
         return new ConnectionSpeedTestAPI();
     }
 
+    public static SubmitAtmDepositV2API submitAtmDepositV2() {
+        return new SubmitAtmDepositV2API();
+    }
+
     public static GetIpBlockSettingAPI getIpBlockSetting() {
         return new GetIpBlockSettingAPI();
     }

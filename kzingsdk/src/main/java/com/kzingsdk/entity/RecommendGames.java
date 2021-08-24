@@ -16,6 +16,8 @@ public class RecommendGames {
     protected String lang;
     protected Long homeId;
     protected Long matchId;
+    protected String matchDateString;
+
 
     public static RecommendGames newInstance(JSONObject rootObject) {
         RecommendGames bankCard = new RecommendGames();
@@ -31,6 +33,7 @@ public class RecommendGames {
         bankCard.setLang(rootObject.optString("lang"));
         bankCard.setHomeId(rootObject.optLong("homeid"));
         bankCard.setMatchId(rootObject.optLong("matchid"));
+        bankCard.setMatchDateString(rootObject.optString("matchdatestring"));
         return bankCard;
     }
 
@@ -128,6 +131,14 @@ public class RecommendGames {
 
     public void setMatchId(Long matchId) {
         this.matchId = matchId;
+    }
+
+    public String getMatchDateString() {
+        return matchDateString;
+    }
+
+    public void setMatchDateString(String matchDateString) {
+        this.matchDateString = matchDateString;
     }
 
     @Override

@@ -70,7 +70,7 @@ public class ClientInfo implements Parcelable {
     private CaptchaApiId captchaApiId = new CaptchaApiId();
     private String captchaMode;
     private boolean memberLoginNeedCaptcha;
-
+    private boolean allowCryptoCurrencyWithdrawal;
 
 
     public ClientInfo() {
@@ -111,6 +111,7 @@ public class ClientInfo implements Parcelable {
         clientInfo.setRegisterSendVoice(rootObject.optBoolean("registerSendVoice", false));
         clientInfo.setCaptchaMode(rootObject.optString("captchaMode"));
         clientInfo.setMemberLoginNeedCaptcha(rootObject.optBoolean("memberLoginNeedCaptcha", false));
+        clientInfo.setAllowCryptoCurrencyWithdrawal(rootObject.optBoolean("allowcryptocurrencywithdrawal", false));
 
         JSONArray memberPanAgentCodeJSONArray = rootObject.optJSONArray("memberPanAgentCode");
         if(memberPanAgentCodeJSONArray!=null){
@@ -538,6 +539,14 @@ public class ClientInfo implements Parcelable {
         this.memberLoginNeedCaptcha = memberLoginNeedCaptcha;
     }
 
+    public boolean isAllowCryptoCurrencyWithdrawal() {
+        return allowCryptoCurrencyWithdrawal;
+    }
+
+    public void setAllowCryptoCurrencyWithdrawal(boolean allowCryptoCurrencyWithdrawal) {
+        this.allowCryptoCurrencyWithdrawal = allowCryptoCurrencyWithdrawal;
+    }
+
     public ClientInfo(Parcel in) {
         siteName = in.readString();
         siteDomain = in.readString();
@@ -582,6 +591,7 @@ public class ClientInfo implements Parcelable {
         registerSendVoice = in.readInt() == 1;
         captchaMode = in.readString();
         memberLoginNeedCaptcha = in.readInt() == 1;
+        allowCryptoCurrencyWithdrawal = in.readInt() == 1;
 
 
     }
@@ -634,6 +644,7 @@ public class ClientInfo implements Parcelable {
         dest.writeInt(registerSendVoice ? 1 : 0);
         dest.writeString(captchaMode);
         dest.writeInt(memberLoginNeedCaptcha ? 1 : 0);
+        dest.writeInt(allowCryptoCurrencyWithdrawal ? 1 : 0);
 
     }
 

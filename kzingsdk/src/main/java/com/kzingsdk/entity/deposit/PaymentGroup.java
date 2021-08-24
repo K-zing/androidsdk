@@ -101,7 +101,7 @@ public class PaymentGroup implements Parcelable {
     };
 
     public PaymentGroup(Parcel in) {
-        paymentType = PaymentType.valueOfTypeId(in.readInt());
+        paymentType = PaymentType.valueOfTypeId(in.readString());
         name = in.readString();
         image = in.readString();
         if (paymentType == PaymentType.PREPAIDCARD) return;
@@ -120,7 +120,7 @@ public class PaymentGroup implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(paymentType.getId());
+        dest.writeString(paymentType.getId());
         dest.writeString(name);
         dest.writeString(image);
         if (paymentType == PaymentType.PREPAIDCARD) return;
