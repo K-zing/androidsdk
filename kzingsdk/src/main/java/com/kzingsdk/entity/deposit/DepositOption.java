@@ -456,7 +456,7 @@ public class DepositOption implements Parcelable {
         dest.writeInt(atmProcessPendingCount);
         dest.writeString(cryptoAtmExchangeRate.toString());
 
-        Object[] customObjects = new Object[3];
+        Object[] customObjects = new Object[4];
         customObjects[0] = paymentGroupList;
         customObjects[1] = activityMap;
         customObjects[2] = quickLinkDepositList;
