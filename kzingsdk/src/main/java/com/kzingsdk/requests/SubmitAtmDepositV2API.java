@@ -3,6 +3,7 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
+import com.kzingsdk.entity.deposit.AtmPayment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,6 +19,17 @@ public class SubmitAtmDepositV2API extends CoreRequest {
     private Double cryptoRate;
     private String address;
 
+    private AtmPayment atmPayment = null;
+    private Double amount = 0d;
+    private String transactionNumber = "";
+    private String depositDate = "";
+    private String depositorName = "";
+    private String depositSlip = "";
+    private String utmCode = "";
+    private String transType = "";
+    private String userbank = "";
+    private String gpaid = "";
+
     @Override
     protected String getAction() {
         return Action.submitAtmDepositV2;
@@ -27,9 +39,17 @@ public class SubmitAtmDepositV2API extends CoreRequest {
         super();
     }
 
-
     @Override
     protected Observable<String> validateParams() {
+        if (amount <= 0) {
+            return Observable.just("Deposit amount must be bigger than 0.");
+        }
+        if (atmPayment == null) {
+            return Observable.just("AtmPayment is missing");
+        }
+        if (atmPayment.getId() == null || atmPayment.getId().length() == 0) {
+            return Observable.just("Atm Payment ID is missing. AtmPayment object is invalid.");
+        }
         return super.validateParams();
     }
 
@@ -43,6 +63,30 @@ public class SubmitAtmDepositV2API extends CoreRequest {
             jsonData.put("camount", cAmount);
             jsonData.put("crypto_rate", cryptoRate);
             jsonData.put("address", address);
+            jsonData.put("bcid", atmPayment.getId());
+            jsonData.put("amount", amount);
+            jsonData.put("transtype", transType);
+            if (gpaid != null) {
+                jsonData.put("gpaid", gpaid);
+            }
+            if (utmCode != null) {
+                jsonData.put("utm_code", utmCode);
+            }
+            if (transactionNumber != null) {
+                jsonData.put("transno", transactionNumber);
+            }
+            if (depositDate != null) {
+                jsonData.put("depositdate", depositDate);
+            }
+            if (depositorName != null) {
+                jsonData.put("deposituser", depositorName);
+            }
+            if (depositSlip != null) {
+                jsonData.put("depositslip", depositSlip);
+            }
+            if (userbank != null) {
+                jsonData.put("userbank", userbank);
+            }
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -103,5 +147,60 @@ public class SubmitAtmDepositV2API extends CoreRequest {
         this.address = address;
         return this;
     }
+
+    public SubmitAtmDepositV2API setThirdPartyPayment(AtmPayment atmPayment) {
+        this.atmPayment = atmPayment;
+        return this;
+    }
+
+    public SubmitAtmDepositV2API setAmount(Double amount) {
+        this.amount = amount;
+        return this;
+    }
+
+
+    public SubmitAtmDepositV2API setTransactionNumber(String transactionNumber) {
+        this.transactionNumber = transactionNumber;
+        return this;
+    }
+
+
+    public SubmitAtmDepositV2API setDepositDate(String depositDate) {
+        this.depositDate = depositDate;
+        return this;
+    }
+
+
+    public SubmitAtmDepositV2API setDepositorName(String depositorName) {
+        this.depositorName = depositorName;
+        return this;
+    }
+
+    public SubmitAtmDepositV2API setDepositSlip(String depositSlip) {
+        this.depositSlip = depositSlip;
+        return this;
+    }
+
+
+    public SubmitAtmDepositV2API setUtmCode(String utmCode) {
+        this.utmCode = utmCode;
+        return this;
+    }
+
+    public SubmitAtmDepositV2API setTransType(String transType) {
+        this.transType = transType;
+        return this;
+    }
+
+    public SubmitAtmDepositV2API setUserBank(String userbank) {
+        this.userbank = userbank;
+        return this;
+    }
+
+    public SubmitAtmDepositV2API setGpaid(String gpaid) {
+        this.gpaid = gpaid;
+        return this;
+    }
+    
 }
 

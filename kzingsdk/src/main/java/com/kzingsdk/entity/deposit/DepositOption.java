@@ -49,6 +49,9 @@ public class DepositOption implements Parcelable {
         double atmMaxAmount = rootObject.optDouble("amax", 0d);
         double atmTpMinAmount = rootObject.optDouble("atpmin", 0d);
         double atmTpMaxAmount = rootObject.optDouble("atpmax", 0d);
+        double cMinAmount = rootObject.optDouble("cmin", 0d);
+        double cMaxAmount = rootObject.optDouble("cmax", 0d);
+
         int atmBankPosition = rootObject.optInt("atmbank_position", 0);
         item.isPrepaidCard = rootObject.optBoolean("isPrepaidCard", false);
         item.isV2 = rootObject.optBoolean("isV2", false);
@@ -171,7 +174,11 @@ public class DepositOption implements Parcelable {
                     }
                     break;
                 case CRYPTO:
-                    paymentGroup.getPaymentList().addAll(cryptoAtmPaymentList);
+                    for (CryptoAtmPayment cryptoAtmPayment : cryptoAtmPaymentList) {
+                        cryptoAtmPayment.setMinAmount(cMinAmount);
+                        cryptoAtmPayment.setMaxAmount(cMaxAmount);
+                        paymentGroup.getPaymentList().add(cryptoAtmPayment);
+                    }
                     break;
             }
         }

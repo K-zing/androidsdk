@@ -21,6 +21,7 @@ public class SubmitAtmDepositAPI extends CoreRequest {
     private String utmCode = "";
     private String transType = "";
     private String userbank = "";
+    private String gpaid = "";
 
 
     SubmitAtmDepositAPI() {
@@ -54,6 +55,9 @@ public class SubmitAtmDepositAPI extends CoreRequest {
             jsonData.put("bcid", atmPayment.getId());
             jsonData.put("amount", amount);
             jsonData.put("transtype", transType);
+            if (gpaid != null) {
+                jsonData.put("gpaid", gpaid);
+            }
             if (utmCode != null) {
                 jsonData.put("utm_code", utmCode);
             }
@@ -150,6 +154,11 @@ public class SubmitAtmDepositAPI extends CoreRequest {
 
     public SubmitAtmDepositAPI setParamUserBank(String userbank) {
         this.userbank = userbank;
+        return this;
+    }
+
+    public SubmitAtmDepositAPI setParamGpaid(String gpaid) {
+        this.gpaid = gpaid;
         return this;
     }
 }
