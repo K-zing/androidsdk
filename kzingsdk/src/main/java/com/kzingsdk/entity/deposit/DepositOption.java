@@ -132,12 +132,19 @@ public class DepositOption implements Parcelable {
                     break;
                 case "2":
                 case "4":
-                case "5"://crypto
                 case "69":
                 case "73":
                     for (j = 0; j < paymentGroupJArray.length(); j++) {
                         PaymentGroup paymentGroup = PaymentGroup.newInstance(paymentGroupJArray.optJSONObject(j));
                         if (paymentGroup.getPaymentType() == PaymentType.valueOfTypeId(option)) {
+                            item.paymentGroupList.add(paymentGroup);
+                        }
+                    }
+                    break;
+                case "5"://crypto
+                    for (j = 0; j < paymentGroupJArray.length(); j++) {
+                        PaymentGroup paymentGroup = PaymentGroup.newInstance(paymentGroupJArray.optJSONObject(j));
+                        if (paymentGroup.getPaymentType() == PaymentType.valueOfTypeId("crypto")) {
                             item.paymentGroupList.add(paymentGroup);
                         }
                     }

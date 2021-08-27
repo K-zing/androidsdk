@@ -7,7 +7,7 @@ public enum PaymentType {
     PHONE("69", "Phone"),
     EWALLET("73", "Ewallet"),
     PREPAIDCARD("99", "Prepaid Card"),
-    CRYPTO("crypto", "Crypto"),
+    CRYPTO("crypto", "cryptoAtmType"),
     OTHER("-1", "Other"),
     ;
 
