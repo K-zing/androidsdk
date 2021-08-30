@@ -107,7 +107,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         }
         useRotate = rootObject.optBoolean("useRotate", false);
         random = useRotate ? rootObject.optInt("randType", 0) : settingObject.optInt("random", 0);
-        minAmount = useRotate ? rootObject.optDouble("r7andMin", 0d) : settingObject.optDouble("min", 0d);
+        minAmount = useRotate ? rootObject.optDouble("randMin", 0d) : settingObject.optDouble("min", 0d);
         maxAmount = useRotate ? rootObject.optDouble("randMax", 0d) : settingObject.optDouble("max", 0d);
         if (!useRotate) {
             fixAmounts = settingObject.optString("fixamount", "").split(",");

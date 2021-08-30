@@ -8,6 +8,8 @@ import com.kzingsdk.entity.deposit.AtmPayment;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+
 import io.reactivex.Observable;
 
 public class SubmitAtmDepositV2API extends CoreRequest {
@@ -16,7 +18,7 @@ public class SubmitAtmDepositV2API extends CoreRequest {
     private String cTransNo;
     private String bcid;
     private Double cAmount;
-    private Double cryptoRate;
+    private BigDecimal cryptoRate;
     private String address;
 
     private AtmPayment atmPayment = null;
@@ -61,7 +63,7 @@ public class SubmitAtmDepositV2API extends CoreRequest {
             jsonData.put("ctransno", cTransNo);
             jsonData.put("bcid", bcid);
             jsonData.put("camount", cAmount);
-            jsonData.put("crypto_rate", cryptoRate);
+            jsonData.put("crypto_rate", cryptoRate.toString());
             jsonData.put("address", address);
             jsonData.put("bcid", atmPayment.getId());
             jsonData.put("amount", amount);
@@ -138,7 +140,7 @@ public class SubmitAtmDepositV2API extends CoreRequest {
         return this;
     }
 
-    public SubmitAtmDepositV2API setCryptoRate(Double cryptoRate) {
+    public SubmitAtmDepositV2API setCryptoRate(BigDecimal cryptoRate) {
         this.cryptoRate = cryptoRate;
         return this;
     }
