@@ -21,6 +21,7 @@ public class CryptoAtmPayment extends BasePaymentMethod implements Parcelable {
     private String key;
     private String ptAlias;
     private int number;
+    private int displayFlag;
 
     public CryptoAtmPayment() {
     }
@@ -34,6 +35,7 @@ public class CryptoAtmPayment extends BasePaymentMethod implements Parcelable {
         item.setPaymentName(rootObject.optString("bankname"));
         item.setDesc(rootObject.optString("desc"));
         item.setDisplayOrder(rootObject.optInt("displayorder"));
+        item.setDisplayFlag(rootObject.optInt("displayflag"));
         item.setPromoRate(BigDecimalUtil.optBigDecimal(rootObject, "promorate", BigDecimal.ZERO));
         item.setShowField(rootObject.optInt("showfield"));
         item.setRandom(rootObject.optInt("random"));
@@ -133,6 +135,14 @@ public class CryptoAtmPayment extends BasePaymentMethod implements Parcelable {
         this.ptAlias = ptAlias;
     }
 
+    public int getDisplayFlag() {
+        return displayFlag;
+    }
+
+    public void setDisplayFlag(int displayFlag) {
+        this.displayFlag = displayFlag;
+    }
+
     public static final Creator CREATOR = new Creator() {
         public CryptoAtmPayment createFromParcel(Parcel in) {
             return new CryptoAtmPayment(in);
@@ -148,6 +158,7 @@ public class CryptoAtmPayment extends BasePaymentMethod implements Parcelable {
         paymentName = in.readString();
         image = in.readString();
         displayOrder = in.readInt();
+        displayFlag = in.readInt();
         minAmount = in.readDouble();
         maxAmount = in.readDouble();
         desc = in.readString();
@@ -177,6 +188,7 @@ public class CryptoAtmPayment extends BasePaymentMethod implements Parcelable {
         dest.writeString(paymentName);
         dest.writeString(image);
         dest.writeInt(displayOrder);
+        dest.writeInt(displayFlag);
         dest.writeDouble(minAmount);
         dest.writeDouble(maxAmount);
         dest.writeString(desc);

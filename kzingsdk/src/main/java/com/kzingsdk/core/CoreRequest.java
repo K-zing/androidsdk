@@ -108,6 +108,7 @@ public abstract class CoreRequest {
     protected String getD11Action() {
         return "";
     }
+
     protected String getK36Action() {
         return "";
     }
@@ -187,7 +188,7 @@ public abstract class CoreRequest {
             toFindSet = isUseBetterUrl(context) ? API_URL_SET_BETTER : API_URL_SET;
         }
         if (failedIP.equals(toFindSet) || failedIP.size() >= toFindSet.size()) {
-            if(KzingSDK.getInstance().isUseCustomUrl()){
+            if (KzingSDK.getInstance().isUseCustomUrl()) {
                 KzingSDK.getInstance().setUseCustomUrl(false);
             }
             failedIP.clear();

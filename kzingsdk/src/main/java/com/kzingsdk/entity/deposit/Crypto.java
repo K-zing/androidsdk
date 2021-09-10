@@ -7,27 +7,31 @@ import org.json.JSONObject;
 
 public class Crypto implements Parcelable {
 
-    private String address;
+    private String txid;
     private String bcid;
     private String qrcode;
+    private String network;
+    private String bankcode;
 
     public Crypto() {
     }
 
     public static Crypto newInstance(JSONObject rootObject) {
         Crypto quickLinkDeposit = new Crypto();
-        quickLinkDeposit.setAddress(rootObject.optString("address"));
+        quickLinkDeposit.setTxid(rootObject.optString("txid"));
         quickLinkDeposit.setBcid(rootObject.optString("bcid"));
         quickLinkDeposit.setQrcode(rootObject.optString("qrcode"));
+        quickLinkDeposit.setNetwork(rootObject.optString("network"));
+        quickLinkDeposit.setBankcode(rootObject.optString("bankcode"));
         return quickLinkDeposit;
     }
 
-    public String getAddress() {
-        return address;
+    public String getTxid() {
+        return txid;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setTxid(String txid) {
+        this.txid = txid;
     }
 
     public String getBcid() {
@@ -46,6 +50,22 @@ public class Crypto implements Parcelable {
         this.qrcode = qrcode;
     }
 
+    public String getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(String network) {
+        this.network = network;
+    }
+
+    public String getBankcode() {
+        return bankcode;
+    }
+
+    public void setBankcode(String bankcode) {
+        this.bankcode = bankcode;
+    }
+
     public static final Creator CREATOR = new Creator() {
         public Crypto createFromParcel(Parcel in) {
             return new Crypto(in);
@@ -57,9 +77,11 @@ public class Crypto implements Parcelable {
     };
 
     public Crypto(Parcel in) {
-        address = in.readString();
+        txid = in.readString();
         bcid = in.readString();
         qrcode = in.readString();
+        network = in.readString();
+        bankcode = in.readString();
     }
 
     @Override
@@ -69,9 +91,11 @@ public class Crypto implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(address);
+        dest.writeString(txid);
         dest.writeString(bcid);
         dest.writeString(qrcode);
+        dest.writeString(bcid);
+        dest.writeString(bankcode);
     }
 
 }
