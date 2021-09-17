@@ -22,6 +22,8 @@ public class SubmitPhoneDepositAPI extends CoreRequest {
     private Calendar depositDate;
     private String depositSlipBase64;
     private String userBank;
+    private String prevdno;
+    private String transno;
 
 
     SubmitPhoneDepositAPI() {
@@ -46,6 +48,10 @@ public class SubmitPhoneDepositAPI extends CoreRequest {
             jsonData.put("depositslip", depositSlipBase64);
             if (userBank != null)
                 jsonData.put("userbank", userBank);
+            if (prevdno != null)
+                jsonData.put("prevdno", prevdno);
+            if (transno != null)
+                jsonData.put("transno", transno);
 
             return jsonData;
         } catch (JSONException ignored) {
@@ -112,4 +118,16 @@ public class SubmitPhoneDepositAPI extends CoreRequest {
         this.userBank = userBank;
         return this;
     }
+
+    public SubmitPhoneDepositAPI setPrevdno(String prevdno) {
+        this.prevdno = prevdno;
+        return this;
+    }
+
+    public SubmitPhoneDepositAPI setTransno(String transno) {
+        this.transno = transno;
+        return this;
+    }
+
+
 }

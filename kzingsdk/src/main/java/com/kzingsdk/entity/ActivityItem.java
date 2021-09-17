@@ -57,6 +57,8 @@ public class ActivityItem implements Parcelable {
     private BigDecimal fixBonusAmount = BigDecimal.ZERO;
     private boolean isPostPaidReward = false;
     private int expiredDays = 0;
+    private String displayStartTime;
+    private String displayEndTime;
 
     public ActivityItem() {
 
@@ -95,6 +97,8 @@ public class ActivityItem implements Parcelable {
         fixBonusAmount = new BigDecimal(in.readString());
         isPostPaidReward = in.readInt() == 1;
         expiredDays = in.readInt();
+        displayStartTime = in.readString();
+        displayEndTime = in.readString();
     }
 
     public static ActivityItem newInstance(JSONObject rootObject) {
@@ -121,6 +125,8 @@ public class ActivityItem implements Parcelable {
         item.setIsPublic(rootObject.optString("ispublic", "1").equalsIgnoreCase("1"));
         item.setApplyStatus(rootObject.optInt("applyStatus", 0));
         item.setAvailableDptAmt(BigDecimalUtil.optBigDecimal(rootObject, "available_dptAmt"));
+        item.setDisplayStartTime(rootObject.optString("displaystarttime"));
+        item.setDisplayEndTime(rootObject.optString("displayendtime"));
         JSONArray groupNamesJSONArray = rootObject.optJSONArray("groupnames");
         for (int i = 0; i < groupNamesJSONArray.length(); i++) {
             item.getGroupNames().add(groupNamesJSONArray.optString(i));
@@ -434,6 +440,22 @@ public class ActivityItem implements Parcelable {
         this.expiredDays = expiredDays;
     }
 
+    public String getDisplayStartTime() {
+        return displayStartTime;
+    }
+
+    public void setDisplayStartTime(String displayStartTime) {
+        this.displayStartTime = displayStartTime;
+    }
+
+    public String getDisplayEndTime() {
+        return displayEndTime;
+    }
+
+    public void setDisplayEndTime(String displayEndTime) {
+        this.displayEndTime = displayEndTime;
+    }
+
     @Override
     public String toString() {
         return "ActivityItem{" +
@@ -489,6 +511,8 @@ public class ActivityItem implements Parcelable {
         dest.writeString(fixBonusAmount.toString());
         dest.writeInt(isPostPaidReward ? 1 : 0);
         dest.writeInt(expiredDays);
+        dest.writeString(displayStartTime);
+        dest.writeString(displayEndTime);
     }
 
     @Override
