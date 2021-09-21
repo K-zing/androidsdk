@@ -94,7 +94,7 @@ public class Crypto implements Parcelable {
         dest.writeString(txid);
         dest.writeString(bcid);
         dest.writeString(qrcode);
-        dest.writeString(bcid);
+        dest.writeString(network);
         dest.writeString(bankcode);
     }
 
