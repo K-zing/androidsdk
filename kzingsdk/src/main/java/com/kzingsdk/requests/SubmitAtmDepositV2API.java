@@ -22,7 +22,7 @@ public class SubmitAtmDepositV2API extends CoreRequest {
     private BigDecimal cryptoRate;
     private String address;
 
-    private CryptoAtmPayment cryptoAtmPayment = null;
+//    private CryptoAtmPayment cryptoAtmPayment = null;
     private Double amount = 0d;
     private String transactionNumber = "";
     private String depositDate = "";
@@ -46,12 +46,12 @@ public class SubmitAtmDepositV2API extends CoreRequest {
         if (amount <= 0) {
             return Observable.just("Deposit amount must be bigger than 0.");
         }
-        if (cryptoAtmPayment == null) {
-            return Observable.just("CryptoAtmPayment is missing");
-        }
-        if (cryptoAtmPayment.getId() == null || cryptoAtmPayment.getId().length() == 0) {
-            return Observable.just("CryptoAtmPayment ID is missing. CryptoAtmPayment object is invalid.");
-        }
+//        if (cryptoAtmPayment == null) {
+//            return Observable.just("CryptoAtmPayment is missing");
+//        }
+//        if (cryptoAtmPayment.getId() == null || cryptoAtmPayment.getId().length() == 0) {
+//            return Observable.just("CryptoAtmPayment ID is missing. CryptoAtmPayment object is invalid.");
+//        }
         return super.validateParams();
     }
 
@@ -65,7 +65,7 @@ public class SubmitAtmDepositV2API extends CoreRequest {
             jsonData.put("camount", cAmount);
             jsonData.put("crypto_rate", cryptoRate.toString());
             jsonData.put("address", address);
-            jsonData.put("bcid", cryptoAtmPayment.getId());
+//            jsonData.put("bcid", cryptoAtmPayment.getId());
             jsonData.put("amount", amount);
             jsonData.put("transtype", transType);
             if (gpaid != null) {
@@ -147,10 +147,10 @@ public class SubmitAtmDepositV2API extends CoreRequest {
         return this;
     }
 
-    public SubmitAtmDepositV2API setCryptoAtmPayment(CryptoAtmPayment cryptoAtmPayment) {
-        this.cryptoAtmPayment = cryptoAtmPayment;
-        return this;
-    }
+//    public SubmitAtmDepositV2API setCryptoAtmPayment(CryptoAtmPayment cryptoAtmPayment) {
+//        this.cryptoAtmPayment = cryptoAtmPayment;
+//        return this;
+//    }
 
     public SubmitAtmDepositV2API setAmount(Double amount) {
         this.amount = amount;
