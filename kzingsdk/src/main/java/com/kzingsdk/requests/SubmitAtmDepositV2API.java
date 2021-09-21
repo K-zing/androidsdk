@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.deposit.AtmPayment;
+import com.kzingsdk.entity.deposit.CryptoAtmPayment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,11 +22,10 @@ public class SubmitAtmDepositV2API extends CoreRequest {
     private BigDecimal cryptoRate;
     private String address;
 
-    private AtmPayment atmPayment = null;
+    private CryptoAtmPayment cryptoAtmPayment = null;
     private Double amount = 0d;
     private String transactionNumber = "";
     private String depositDate = "";
-    private String depositorName = "";
     private String depositSlip = "";
     private String utmCode = "";
     private String transType = "";
@@ -46,11 +46,11 @@ public class SubmitAtmDepositV2API extends CoreRequest {
         if (amount <= 0) {
             return Observable.just("Deposit amount must be bigger than 0.");
         }
-        if (atmPayment == null) {
-            return Observable.just("AtmPayment is missing");
+        if (cryptoAtmPayment == null) {
+            return Observable.just("CryptoAtmPayment is missing");
         }
-        if (atmPayment.getId() == null || atmPayment.getId().length() == 0) {
-            return Observable.just("Atm Payment ID is missing. AtmPayment object is invalid.");
+        if (cryptoAtmPayment.getId() == null || cryptoAtmPayment.getId().length() == 0) {
+            return Observable.just("CryptoAtmPayment ID is missing. CryptoAtmPayment object is invalid.");
         }
         return super.validateParams();
     }
@@ -65,7 +65,7 @@ public class SubmitAtmDepositV2API extends CoreRequest {
             jsonData.put("camount", cAmount);
             jsonData.put("crypto_rate", cryptoRate.toString());
             jsonData.put("address", address);
-            jsonData.put("bcid", atmPayment.getId());
+            jsonData.put("bcid", cryptoAtmPayment.getId());
             jsonData.put("amount", amount);
             jsonData.put("transtype", transType);
             if (gpaid != null) {
@@ -79,9 +79,6 @@ public class SubmitAtmDepositV2API extends CoreRequest {
             }
             if (depositDate != null) {
                 jsonData.put("depositdate", depositDate);
-            }
-            if (depositorName != null) {
-                jsonData.put("deposituser", depositorName);
             }
             if (depositSlip != null) {
                 jsonData.put("depositslip", depositSlip);
@@ -150,8 +147,8 @@ public class SubmitAtmDepositV2API extends CoreRequest {
         return this;
     }
 
-    public SubmitAtmDepositV2API setThirdPartyPayment(AtmPayment atmPayment) {
-        this.atmPayment = atmPayment;
+    public SubmitAtmDepositV2API setCryptoAtmPayment(CryptoAtmPayment cryptoAtmPayment) {
+        this.cryptoAtmPayment = cryptoAtmPayment;
         return this;
     }
 
@@ -169,12 +166,6 @@ public class SubmitAtmDepositV2API extends CoreRequest {
 
     public SubmitAtmDepositV2API setDepositDate(String depositDate) {
         this.depositDate = depositDate;
-        return this;
-    }
-
-
-    public SubmitAtmDepositV2API setDepositorName(String depositorName) {
-        this.depositorName = depositorName;
         return this;
     }
 
