@@ -43,9 +43,9 @@ public class SubmitAtmDepositV2API extends CoreRequest {
 
     @Override
     protected Observable<String> validateParams() {
-        if (amount <= 0) {
-            return Observable.just("Deposit amount must be bigger than 0.");
-        }
+//        if (amount <= 0) {
+//            return Observable.just("Deposit amount must be bigger than 0.");
+//        }
 //        if (cryptoAtmPayment == null) {
 //            return Observable.just("CryptoAtmPayment is missing");
 //        }
