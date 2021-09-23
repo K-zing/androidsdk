@@ -58,10 +58,14 @@ public class ClientInfo implements Parcelable {
     private boolean memberPanVerify;
     private HashSet<String> memberPanPlayerGroup = new HashSet<>();
     private boolean registerSendVoice;
+    private boolean memberPanDupIp;
+    private boolean memberPanDupUuid;
+
 
     private String rankLevel;
     private String appResourceDomain;
     private ArrayList<String> memberPanAgentCodeList;
+    private ArrayList<String> memberPanUsernameList;
 
     private HashMap<Integer, String> websiteConfigMap = new HashMap<>();
     private ContactInfo feedbackContactInfo = new ContactInfo();
@@ -109,14 +113,23 @@ public class ClientInfo implements Parcelable {
         clientInfo.setRankLevel(rootObject.optString("rankLevel"));
         clientInfo.setAppResourceDomain(rootObject.optString("appResourceDomain"));
         clientInfo.setRegisterSendVoice(rootObject.optBoolean("registerSendVoice", false));
+        clientInfo.setMemberPanDupIp(rootObject.optBoolean("memberpandupip", false));
+        clientInfo.setMemberPanDupUuid(rootObject.optBoolean("memberpandupuuid", false));
         clientInfo.setCaptchaMode(rootObject.optString("captchaMode"));
         clientInfo.setMemberLoginNeedCaptcha(rootObject.optBoolean("memberLoginNeedCaptcha", false));
         clientInfo.setAllowCryptoCurrencyWithdrawal(rootObject.optBoolean("allowcryptocurrencywithdrawal", false));
 
         JSONArray memberPanAgentCodeJSONArray = rootObject.optJSONArray("memberPanAgentCode");
-        if(memberPanAgentCodeJSONArray!=null){
+        if (memberPanAgentCodeJSONArray != null) {
             for (int i = 0; i < memberPanAgentCodeJSONArray.length(); i++) {
                 clientInfo.memberPanAgentCodeList.add(memberPanAgentCodeJSONArray.optString(i));
+            }
+        }
+
+        JSONArray memberPanUsernameJSONArray = rootObject.optJSONArray("memberpanusername");
+        if (memberPanUsernameJSONArray != null) {
+            for (int i = 0; i < memberPanUsernameJSONArray.length(); i++) {
+                clientInfo.memberPanUsernameList.add(memberPanUsernameJSONArray.optString(i));
             }
         }
 
@@ -174,7 +187,7 @@ public class ClientInfo implements Parcelable {
             }
         }
         JSONObject captchaApiIdJSONObject = rootObject.optJSONObject("captchaApiId");
-        if(captchaApiIdJSONObject!=null)
+        if (captchaApiIdJSONObject != null)
             clientInfo.setCaptchaApiId(CaptchaApiId.newInstance(captchaApiIdJSONObject));
 
         JSONArray memberPanPlayerGroupJSONArray = rootObject.optJSONArray("memberpanplayergroup");
@@ -458,7 +471,6 @@ public class ClientInfo implements Parcelable {
     }
 
 
-
     public ContactInfo getFeedbackContactInfo() {
         return feedbackContactInfo;
     }
@@ -507,6 +519,22 @@ public class ClientInfo implements Parcelable {
         this.registerSendVoice = registerSendVoice;
     }
 
+    public boolean isMemberPanDupIp() {
+        return memberPanDupIp;
+    }
+
+    public void setMemberPanDupIp(boolean memberPanDupIp) {
+        this.memberPanDupIp = memberPanDupIp;
+    }
+
+    public boolean isMemberPanDupUuid() {
+        return memberPanDupUuid;
+    }
+
+    public void setMemberPanDupUuid(boolean memberPanDupUuid) {
+        this.memberPanDupUuid = memberPanDupUuid;
+    }
+
     public CaptchaApiId getCaptchaApiId() {
         return captchaApiId;
     }
@@ -529,6 +557,14 @@ public class ClientInfo implements Parcelable {
 
     public void setMemberPanAgentCodeList(ArrayList<String> memberPanAgentCodeList) {
         this.memberPanAgentCodeList = memberPanAgentCodeList;
+    }
+
+    public ArrayList<String> getMemberPanUsernameList() {
+        return memberPanUsernameList;
+    }
+
+    public void setMemberPanUsernameList(ArrayList<String> memberPanUsernameList) {
+        this.memberPanUsernameList = memberPanUsernameList;
     }
 
     public Boolean getMemberLoginNeedCaptcha() {
@@ -570,6 +606,7 @@ public class ClientInfo implements Parcelable {
         socialMediaContactInfo = (ContactInfo) objectArray[7];
         captchaApiId = (CaptchaApiId) objectArray[8];
         memberPanAgentCodeList = (ArrayList<String>) objectArray[9];
+        memberPanUsernameList = (ArrayList<String>) objectArray[10];
         hasRedPocket = in.readInt() == 1;
         redPocketImageUrl = in.readString();
         defaultViewMode = in.readString();
@@ -589,6 +626,8 @@ public class ClientInfo implements Parcelable {
         rankLevel = in.readString();
         memberPanVerify = in.readInt() == 1;
         registerSendVoice = in.readInt() == 1;
+        memberPanDupIp = in.readInt() == 1;
+        memberPanDupUuid = in.readInt() == 1;
         captchaMode = in.readString();
         memberLoginNeedCaptcha = in.readInt() == 1;
         allowCryptoCurrencyWithdrawal = in.readInt() == 1;
@@ -620,7 +659,8 @@ public class ClientInfo implements Parcelable {
                 socialMediaContactInfo,
                 memberPanPlayerGroup,
                 captchaApiId,
-                memberPanAgentCodeList
+                memberPanAgentCodeList,
+                memberPanUsernameList
         });
         dest.writeInt(hasRedPocket ? 1 : 0);
         dest.writeString(redPocketImageUrl);
@@ -642,6 +682,8 @@ public class ClientInfo implements Parcelable {
         dest.writeString(appResourceDomain);
         dest.writeInt(memberPanVerify ? 1 : 0);
         dest.writeInt(registerSendVoice ? 1 : 0);
+        dest.writeInt(memberPanDupIp ? 1 : 0);
+        dest.writeInt(memberPanDupUuid ? 1 : 0);
         dest.writeString(captchaMode);
         dest.writeInt(memberLoginNeedCaptcha ? 1 : 0);
         dest.writeInt(allowCryptoCurrencyWithdrawal ? 1 : 0);
