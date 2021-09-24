@@ -59,6 +59,8 @@ public class MemberInfo implements Parcelable {
     private boolean forceChangePw = false;
     private boolean isRealNameSeparated = false;
     private boolean panStatus = false;
+    private boolean panDuplicateUUID = false;
+    private boolean panDuplicateIP = false;
     private boolean enablePhoneRecall = false;
     private String playerCurrency = "";
     private ArrayList<String> currencyList = new ArrayList<>();
@@ -105,6 +107,8 @@ public class MemberInfo implements Parcelable {
         forceChangePw = in.readInt() == 1;
         isRealNameSeparated = in.readInt() == 1;
         panStatus = in.readInt() == 1;
+        panDuplicateUUID = in.readInt() == 1;
+        panDuplicateIP = in.readInt() == 1;
         groupId = in.readString();
         withdrawFrozenAmount = in.readString();
         zalo = in.readString();
@@ -154,6 +158,8 @@ public class MemberInfo implements Parcelable {
         memberInfo.setForceChangePw(rootObject.optString("forceChangePw").equalsIgnoreCase("1"));
         memberInfo.setRealNameSeparated(rootObject.optBoolean("isRealNameSeparated", false));
         memberInfo.setPanStatus(rootObject.optString("pan_status", "0").equalsIgnoreCase("1"));
+        memberInfo.setPanDuplicateUUID(rootObject.optBoolean("panDuplicateUUID", false));
+        memberInfo.setPanDuplicateIP(rootObject.optBoolean("panDuplicateIP", false));
         memberInfo.setGroupId(rootObject.optString("groupid"));
         memberInfo.setWithdrawFrozenAmount(rootObject.optString("wtdfrozenamt"));
         memberInfo.setEnablePhoneRecall(rootObject.optBoolean("enablePhoneRecall", false));
@@ -414,6 +420,22 @@ public class MemberInfo implements Parcelable {
         this.panStatus = panStatus;
     }
 
+    public boolean isPanDuplicateUUID() {
+        return panDuplicateUUID;
+    }
+
+    public void setPanDuplicateUUID(boolean panDuplicateUUID) {
+        this.panDuplicateUUID = panDuplicateUUID;
+    }
+
+    public boolean isPanDuplicateIP() {
+        return panDuplicateIP;
+    }
+
+    public void setPanDuplicateIP(boolean panDuplicateIP) {
+        this.panDuplicateIP = panDuplicateIP;
+    }
+
     public String getWhatsapp() {
         return whatsapp;
     }
@@ -544,6 +566,8 @@ public class MemberInfo implements Parcelable {
         dest.writeInt(forceChangePw ? 1 : 0);
         dest.writeInt(isRealNameSeparated ? 1 : 0);
         dest.writeInt(panStatus ? 1 : 0);
+        dest.writeInt(panDuplicateUUID ? 1 : 0);
+        dest.writeInt(panDuplicateIP ? 1 : 0);
         dest.writeString(groupId);
         dest.writeString(withdrawFrozenAmount);
         dest.writeString(zalo);

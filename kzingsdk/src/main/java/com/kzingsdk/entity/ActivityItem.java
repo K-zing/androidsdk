@@ -59,6 +59,7 @@ public class ActivityItem implements Parcelable {
     private int expiredDays = 0;
     private String displayStartTime;
     private String displayEndTime;
+    private String keyFeature;
 
     public ActivityItem() {
 
@@ -99,6 +100,7 @@ public class ActivityItem implements Parcelable {
         expiredDays = in.readInt();
         displayStartTime = in.readString();
         displayEndTime = in.readString();
+        keyFeature = in.readString();
     }
 
     public static ActivityItem newInstance(JSONObject rootObject) {
@@ -127,6 +129,7 @@ public class ActivityItem implements Parcelable {
         item.setAvailableDptAmt(BigDecimalUtil.optBigDecimal(rootObject, "available_dptAmt"));
         item.setDisplayStartTime(rootObject.optString("displaystarttime"));
         item.setDisplayEndTime(rootObject.optString("displayendtime"));
+        item.setKeyFeature(rootObject.optString("keyfeature"));
         JSONArray groupNamesJSONArray = rootObject.optJSONArray("groupnames");
         for (int i = 0; i < groupNamesJSONArray.length(); i++) {
             item.getGroupNames().add(groupNamesJSONArray.optString(i));
@@ -456,6 +459,14 @@ public class ActivityItem implements Parcelable {
         this.displayEndTime = displayEndTime;
     }
 
+    public String getKeyFeature() {
+        return keyFeature;
+    }
+
+    public void setKeyFeature(String keyFeature) {
+        this.keyFeature = keyFeature;
+    }
+
     @Override
     public String toString() {
         return "ActivityItem{" +
@@ -513,6 +524,8 @@ public class ActivityItem implements Parcelable {
         dest.writeInt(expiredDays);
         dest.writeString(displayStartTime);
         dest.writeString(displayEndTime);
+        dest.writeString(keyFeature);
+
     }
 
     @Override

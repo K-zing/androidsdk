@@ -63,7 +63,7 @@ final class Action {
     static final String getMemberReferral = "mw08mcv";
     static final String getFriendRefLogs = "smzsocy";
     static final String getNewComerActivity = "nahkyr";
-
+    static final String getBanners = "9bsrbxu";
 
     static final String getClientInfo = "5f7cd5b";
     static final String getClientInstantInfo = "g3zmkvo";

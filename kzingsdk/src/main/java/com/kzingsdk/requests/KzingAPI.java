@@ -32,6 +32,10 @@ public final class KzingAPI {
         return new ApplyActivityAPI();
     }
 
+    public static GetBannersAPI getBanners() {
+        return new GetBannersAPI();
+    }
+
     public static ActivityCanSignInAPI activityCanSignIn() {
         return new ActivityCanSignInAPI();
     }
@@ -174,6 +178,7 @@ public final class KzingAPI {
     public static GetClientInfoAPI getSiteInfo() {
         return new GetClientInfoAPI();
     }
+
     public static GetClientInstantInfoAPI getClientInstantInfo() {
         return new GetClientInstantInfoAPI();
     }
