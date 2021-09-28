@@ -12,18 +12,20 @@ public class Crypto implements Parcelable {
     private String qrcode;
     private String network;
     private String bankcode;
+    private String recommended;
 
     public Crypto() {
     }
 
     public static Crypto newInstance(JSONObject rootObject) {
-        Crypto quickLinkDeposit = new Crypto();
-        quickLinkDeposit.setTxid(rootObject.optString("txid"));
-        quickLinkDeposit.setBcid(rootObject.optString("bcid"));
-        quickLinkDeposit.setQrcode(rootObject.optString("qrcode"));
-        quickLinkDeposit.setNetwork(rootObject.optString("network"));
-        quickLinkDeposit.setBankcode(rootObject.optString("bankcode"));
-        return quickLinkDeposit;
+        Crypto crypto = new Crypto();
+        crypto.setTxid(rootObject.optString("txid"));
+        crypto.setBcid(rootObject.optString("bcid"));
+        crypto.setQrcode(rootObject.optString("qrcode"));
+        crypto.setNetwork(rootObject.optString("network"));
+        crypto.setBankcode(rootObject.optString("bankcode"));
+        crypto.setRecommended(rootObject.optString("recommended"));
+        return crypto;
     }
 
     public String getTxid() {
@@ -66,6 +68,14 @@ public class Crypto implements Parcelable {
         this.bankcode = bankcode;
     }
 
+    public String getRecommended() {
+        return recommended;
+    }
+
+    public void setRecommended(String recommended) {
+        this.recommended = recommended;
+    }
+
     public static final Creator CREATOR = new Creator() {
         public Crypto createFromParcel(Parcel in) {
             return new Crypto(in);
@@ -82,6 +92,7 @@ public class Crypto implements Parcelable {
         qrcode = in.readString();
         network = in.readString();
         bankcode = in.readString();
+        recommended = in.readString();
     }
 
     @Override
@@ -96,6 +107,7 @@ public class Crypto implements Parcelable {
         dest.writeString(qrcode);
         dest.writeString(network);
         dest.writeString(bankcode);
+        dest.writeString(recommended);
     }
 
 }
