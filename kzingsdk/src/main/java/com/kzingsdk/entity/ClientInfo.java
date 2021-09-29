@@ -118,8 +118,10 @@ public class ClientInfo implements Parcelable {
         clientInfo.setCaptchaMode(rootObject.optString("captchaMode"));
         clientInfo.setMemberLoginNeedCaptcha(rootObject.optBoolean("memberLoginNeedCaptcha", false));
         clientInfo.setAllowCryptoCurrencyWithdrawal(rootObject.optBoolean("allowcryptocurrencywithdrawal", false));
+        clientInfo.memberPanAgentCodeList = new ArrayList<>();
+        clientInfo.memberPanUsernameList = new ArrayList<>();
 
-        JSONArray memberPanAgentCodeJSONArray = rootObject.optJSONArray("memberPanAgentCode");
+        JSONArray memberPanAgentCodeJSONArray = rootObject.optJSONArray("memberpanagentcode");
         if (memberPanAgentCodeJSONArray != null) {
             for (int i = 0; i < memberPanAgentCodeJSONArray.length(); i++) {
                 clientInfo.memberPanAgentCodeList.add(memberPanAgentCodeJSONArray.optString(i));
