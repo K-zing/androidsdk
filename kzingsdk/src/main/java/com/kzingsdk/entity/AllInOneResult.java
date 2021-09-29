@@ -42,9 +42,15 @@ public class AllInOneResult {
 
         SharePrefUtil.putString(context, Constant.Pref.GAMEPLATFORM, gamePlatformArray.toString());
         String gamePlatformChildArray = jsonResponse.optString("gamePlatformChildList");
-        String subGame = GzipUtil.decompress(gamePlatformChildArray);
-        SharePrefUtil.putString(context, Constant.Pref.GAMEPLATFORMCHILD, subGame);
-        gamePlatformCreator.setSubGameJsonObject(new JSONArray(subGame));
+        if (gamePlatformChildArray.length() > 0) {
+            try {
+                String subGame = GzipUtil.decompress(gamePlatformChildArray);
+                SharePrefUtil.putString(context, Constant.Pref.GAMEPLATFORMCHILD, subGame);
+                gamePlatformCreator.setSubGameJsonObject(new JSONArray(subGame));
+            } catch (IOException ignored) {
+            }
+        }
+
         allInOneResult.setGamePlatformContainerList(gamePlatformCreator.build());
 
         ArrayList<ActivityItem> activityItemList = new ArrayList<>();
