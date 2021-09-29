@@ -11,6 +11,8 @@ import com.kzingsdk.util.SharePrefUtil;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
+
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 
@@ -43,9 +45,16 @@ class GetSubGameListAPI extends CoreRequest {
         return super.baseExecute(context)
                 .flatMap((Function<JSONObject, Observable<GamePlatformCreator>>) jsonResponse -> {
                     String responseRaw = jsonResponse.optString("response");
-                    String subGame = GzipUtil.decompress(responseRaw);
-                    SharePrefUtil.putString(context, Constant.Pref.GAMEPLATFORMCHILD, subGame);
-                    gamePlatformCreator.setSubGameJsonObject(new JSONArray(subGame));
+                    if (responseRaw.length() > 0) {
+                        try {
+                            String subGame = GzipUtil.decompress(responseRaw);
+                            SharePrefUtil.putString(context, Constant.Pref.GAMEPLATFORMCHILD, subGame);
+                            gamePlatformCreator.setSubGameJsonObject(new JSONArray(subGame));
+                        } catch (IOException ignored) {
+                            SharePrefUtil.putString(context, Constant.Pref.GAMEPLATFORMCHILD, "[]");
+                            gamePlatformCreator.setSubGameJsonObject(new JSONArray());
+                        }
+                    }
                     return Observable.just(gamePlatformCreator);
                 });
     }
