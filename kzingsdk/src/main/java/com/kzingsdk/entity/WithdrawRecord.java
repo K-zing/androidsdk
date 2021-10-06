@@ -26,6 +26,7 @@ public class WithdrawRecord implements Parcelable {
     private String cardNum;
     private String bankName;
     private String status;
+    private String currency;
     private Boolean canCancel;
     private StatusCode statusCode;
 
@@ -42,6 +43,7 @@ public class WithdrawRecord implements Parcelable {
         cardNum = in.readString();
         bankName = in.readString();
         status = in.readString();
+        currency = in.readString();
         canCancel = in.readInt() == 1;
         statusCode = StatusCode.valueOfId(in.readInt());
     }
@@ -57,6 +59,7 @@ public class WithdrawRecord implements Parcelable {
         item.setCardNum(rootObject.optString("cardnum"));
         item.setBankName(rootObject.optString("bankname"));
         item.setStatus(rootObject.optString("status"));
+        item.setCurrency(rootObject.optString("currency"));
         item.setCanCancel(rootObject.optBoolean("canCancel"));
         item.setStatusCode(StatusCode.valueOfId(rootObject.optInt("status_code")));
         return item;
@@ -153,6 +156,14 @@ public class WithdrawRecord implements Parcelable {
         this.statusCode = statusCode;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(transType);
@@ -163,10 +174,9 @@ public class WithdrawRecord implements Parcelable {
         dest.writeString(cardNum);
         dest.writeString(bankName);
         dest.writeString(status);
+        dest.writeString(currency);
         dest.writeInt(canCancel ? 1 : 0);
         dest.writeInt(statusCode.getId());
-
-
     }
 
     @Override

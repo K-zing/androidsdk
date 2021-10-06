@@ -16,7 +16,6 @@ import java.util.Calendar;
 import io.reactivex.Observable;
 
 
-
 public class GetTransferRecordAPI extends CoreRequest {
 
 
@@ -26,23 +25,27 @@ public class GetTransferRecordAPI extends CoreRequest {
 
     @Override
     protected Observable<String> validateParams() {
-        if(startDateCalendar == null){
+        if (startDateCalendar == null) {
             return Observable.just("Start date is missing");
         }
-        if(endDateCalendar == null){
+        if (endDateCalendar == null) {
             return Observable.just("End date is missing");
         }
         return super.validateParams();
     }
+
     @Override
-    protected JSONObject generateParamsJson(){
+    protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            jsonData.put("type","T");
-            jsonData.put("pageCount",pageCount);
-            jsonData.put("offset",offset);
+            jsonData.put("type", "T");
+            jsonData.put("pageCount", pageCount);
+            jsonData.put("offset", offset);
             jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
-            jsonData.put("end",Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
+            jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
+            if (currency != null) {
+                jsonData.put("currency", currency);
+            }
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -56,7 +59,8 @@ public class GetTransferRecordAPI extends CoreRequest {
 
     private Integer pageCount = 10;
     private Integer offset = 0;
-    private Calendar startDateCalendar,endDateCalendar;
+    private Calendar startDateCalendar, endDateCalendar;
+    private String currency;
 
     @Override
     public Observable<ArrayList<TransferRecord>> requestRx(Context context) {
@@ -82,12 +86,12 @@ public class GetTransferRecordAPI extends CoreRequest {
         }, defaultOnErrorConsumer);
     }
 
-    public GetTransferRecordAPI addGetDepositRecordCallBack(GetTransferRecordCallBack getTransferRecordCallBack){
+    public GetTransferRecordAPI addGetDepositRecordCallBack(GetTransferRecordCallBack getTransferRecordCallBack) {
         kzingCallBackList.add(getTransferRecordCallBack);
         return this;
     }
 
-    public interface GetTransferRecordCallBack extends KzingCallBack{
+    public interface GetTransferRecordCallBack extends KzingCallBack {
         void onSuccess(ArrayList<TransferRecord> transferRecordList);
     }
 
@@ -106,6 +110,7 @@ public class GetTransferRecordAPI extends CoreRequest {
         this.endDateCalendar = endDateCalendar;
         return this;
     }
+
     /**
      * @param offset Number of record to offset.
      */
@@ -122,6 +127,11 @@ public class GetTransferRecordAPI extends CoreRequest {
         return this;
     }
 
+
+    public GetTransferRecordAPI setParamCurrency(String currency) {
+        this.currency = currency;
+        return this;
+    }
 
 
 }

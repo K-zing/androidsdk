@@ -67,6 +67,7 @@ final class Action {
 
     static final String getClientInfo = "5f7cd5b";
     static final String getClientInstantInfo = "g3zmkvo";
+    static final String getCsExtraInfo = "ckjahpc";
     static final String getVipDetail = "at2sfrv";
     static final String getPlayerRecentStat = "qno2c2d";
     static final String getMemberInfo = "7c98893";
@@ -134,7 +135,6 @@ final class Action {
 
     static final String getSmsCode = "vnlauiq";
     static final String getEmailCode = "vnlauiw";
-    static final String redisConnectionCount = "fhq30md";
     static final String connectionSpeedTest = "23m0mko";
 
     static final String getMemberAgent = "myn6zpl";

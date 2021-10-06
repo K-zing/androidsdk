@@ -28,6 +28,7 @@ public class TransferRecord implements Parcelable {
     private String outGpid;
     private String outGpName;
     private String outGpImage;
+    private String currency;
     private StatusCode statusCode;
 
 
@@ -47,6 +48,7 @@ public class TransferRecord implements Parcelable {
         outGpName = in.readString();
         inGpImage = in.readString();
         outGpImage = in.readString();
+        currency = in.readString();
         statusCode = StatusCode.valueOfId(in.readInt());
     }
 
@@ -64,6 +66,7 @@ public class TransferRecord implements Parcelable {
         item.setOutGpName(rootObject.optString("outgpname"));
         item.setOutGpid(rootObject.optString("outgpid"));
         item.setOutGpImage(rootObject.optString("out_image_an"));
+        item.setCurrency(rootObject.optString("currency"));
         return item;
     }
 
@@ -170,6 +173,14 @@ public class TransferRecord implements Parcelable {
         this.statusCode = statusCode;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(created);
@@ -182,10 +193,8 @@ public class TransferRecord implements Parcelable {
         dest.writeString(outGpName);
         dest.writeString(inGpImage);
         dest.writeString(outGpImage);
-
+        dest.writeString(currency);
         dest.writeInt(statusCode.getId());
-
-
     }
 
     @Override

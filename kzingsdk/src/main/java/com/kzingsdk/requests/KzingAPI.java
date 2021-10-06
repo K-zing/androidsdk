@@ -182,6 +182,9 @@ public final class KzingAPI {
     public static GetClientInstantInfoAPI getClientInstantInfo() {
         return new GetClientInstantInfoAPI();
     }
+    public static GetCsExtraInfoAPI getCsExtraInfo() {
+        return new GetCsExtraInfoAPI();
+    }
 
 
     public static RegParamAPI getRegParam() {

@@ -75,6 +75,9 @@ public class ClientInfo implements Parcelable {
     private String captchaMode;
     private boolean memberLoginNeedCaptcha;
     private boolean allowCryptoCurrencyWithdrawal;
+    private boolean allowPlayerDeleteCryptoAddr;
+    private String cryptoFixedExchangeRate;
+
 
 
     public ClientInfo() {
@@ -118,6 +121,9 @@ public class ClientInfo implements Parcelable {
         clientInfo.setCaptchaMode(rootObject.optString("captchaMode"));
         clientInfo.setMemberLoginNeedCaptcha(rootObject.optBoolean("memberLoginNeedCaptcha", false));
         clientInfo.setAllowCryptoCurrencyWithdrawal(rootObject.optBoolean("allowcryptocurrencywithdrawal", false));
+        clientInfo.setAllowPlayerDeleteCryptoAddr(rootObject.optBoolean("allowplayerdeletecryptoaddr", false));
+        clientInfo.setCryptoFixedExchangeRate(rootObject.optString("cryptofixedexchangerate"));
+
         clientInfo.memberPanAgentCodeList = new ArrayList<>();
         clientInfo.memberPanUsernameList = new ArrayList<>();
 
@@ -585,6 +591,22 @@ public class ClientInfo implements Parcelable {
         this.allowCryptoCurrencyWithdrawal = allowCryptoCurrencyWithdrawal;
     }
 
+    public boolean isAllowPlayerDeleteCryptoAddr() {
+        return allowPlayerDeleteCryptoAddr;
+    }
+
+    public void setAllowPlayerDeleteCryptoAddr(boolean allowPlayerDeleteCryptoAddr) {
+        this.allowPlayerDeleteCryptoAddr = allowPlayerDeleteCryptoAddr;
+    }
+
+    public String getCryptoFixedExchangeRate() {
+        return cryptoFixedExchangeRate;
+    }
+
+    public void setCryptoFixedExchangeRate(String cryptoFixedExchangeRate) {
+        this.cryptoFixedExchangeRate = cryptoFixedExchangeRate;
+    }
+
     public ClientInfo(Parcel in) {
         siteName = in.readString();
         siteDomain = in.readString();
@@ -633,6 +655,9 @@ public class ClientInfo implements Parcelable {
         captchaMode = in.readString();
         memberLoginNeedCaptcha = in.readInt() == 1;
         allowCryptoCurrencyWithdrawal = in.readInt() == 1;
+        allowPlayerDeleteCryptoAddr = in.readInt() == 1;
+        cryptoFixedExchangeRate = in.readString();
+
 
 
     }
@@ -689,7 +714,8 @@ public class ClientInfo implements Parcelable {
         dest.writeString(captchaMode);
         dest.writeInt(memberLoginNeedCaptcha ? 1 : 0);
         dest.writeInt(allowCryptoCurrencyWithdrawal ? 1 : 0);
-
+        dest.writeInt(allowPlayerDeleteCryptoAddr ? 1 : 0);
+        dest.writeString(cryptoFixedExchangeRate);
     }
 
     @Override

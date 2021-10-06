@@ -25,6 +25,7 @@ public class DepositRecord implements Parcelable {
     private String status;
     private String remark;
     private String payName;
+    private String currency;
     private StatusCode statusCode;
 
     public DepositRecord() {
@@ -42,6 +43,7 @@ public class DepositRecord implements Parcelable {
         item.setRemark(rootObject.optString("remark"));
         item.setStatus(rootObject.optString("status"));
         item.setPayName(rootObject.optString("payname"));
+        item.setCurrency(rootObject.optString("currency"));
         item.setStatusCode(StatusCode.valueOfId(rootObject.optInt("status_code")));
         return item;
     }
@@ -121,6 +123,14 @@ public class DepositRecord implements Parcelable {
         this.payName = payName;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(transType);
@@ -130,6 +140,7 @@ public class DepositRecord implements Parcelable {
         dest.writeString(status);
         dest.writeString(remark);
         dest.writeString(payName);
+        dest.writeString(currency);
         dest.writeInt(statusCode.getId());
     }
 
@@ -141,6 +152,7 @@ public class DepositRecord implements Parcelable {
         status = in.readString();
         remark = in.readString();
         payName = in.readString();
+        currency = in.readString();
         statusCode = StatusCode.valueOfId(in.readInt());
     }
 
@@ -167,7 +179,8 @@ public class DepositRecord implements Parcelable {
         DEPOSIT_AWAIT(0),
         DEPOSIT_PROCESS(11),
         DEPOSIT_FAIL(22),
-        DEPOSIT_SUCCESS(33),;
+        DEPOSIT_SUCCESS(33),
+        ;
 
         private final int id;
 

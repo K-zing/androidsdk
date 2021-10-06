@@ -41,6 +41,9 @@ public class GetDepositRecordAPI extends CoreRequest {
             jsonData.put("offset",offset);
             jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
             jsonData.put("end",Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
+            if (currency != null) {
+                jsonData.put("currency", currency);
+            }
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -55,6 +58,7 @@ public class GetDepositRecordAPI extends CoreRequest {
     private Integer pageCount = 10;
     private Integer offset = 0;
     private Calendar startDateCalendar,endDateCalendar;
+    private String currency;
 
     @Override
     public Observable<ArrayList<DepositRecord>> requestRx(Context context) {
@@ -120,6 +124,12 @@ public class GetDepositRecordAPI extends CoreRequest {
         this.pageCount = pageCount;
         return this;
     }
+
+    public GetDepositRecordAPI setParamCurrency(String currency) {
+        this.currency = currency;
+        return this;
+    }
+
 
 
 }

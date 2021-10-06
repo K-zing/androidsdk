@@ -16,7 +16,6 @@ import java.util.Calendar;
 import io.reactivex.Observable;
 
 
-
 public class GetWithdrawRecordAPI extends CoreRequest {
 
     GetWithdrawRecordAPI() {
@@ -25,23 +24,27 @@ public class GetWithdrawRecordAPI extends CoreRequest {
 
     @Override
     protected Observable<String> validateParams() {
-        if(startDateCalendar == null){
+        if (startDateCalendar == null) {
             return Observable.just("Start date is missing");
         }
-        if(endDateCalendar == null){
+        if (endDateCalendar == null) {
             return Observable.just("End date is missing");
         }
         return super.validateParams();
     }
+
     @Override
-    protected JSONObject generateParamsJson(){
+    protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            jsonData.put("type","W");
-            jsonData.put("pageCount",pageCount);
-            jsonData.put("offset",offset);
+            jsonData.put("type", "W");
+            jsonData.put("pageCount", pageCount);
+            jsonData.put("offset", offset);
             jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
-            jsonData.put("end",Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
+            jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
+            if (currency != null) {
+                jsonData.put("currency", currency);
+            }
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -55,7 +58,8 @@ public class GetWithdrawRecordAPI extends CoreRequest {
 
     private Integer pageCount = 10;
     private Integer offset = 0;
-    private Calendar startDateCalendar,endDateCalendar;
+    private Calendar startDateCalendar, endDateCalendar;
+    private String currency;
 
     @Override
     public Observable<ArrayList<WithdrawRecord>> requestRx(Context context) {
@@ -81,12 +85,12 @@ public class GetWithdrawRecordAPI extends CoreRequest {
         }, defaultOnErrorConsumer);
     }
 
-    public GetWithdrawRecordAPI addGetWithdrawRecordCallBack(GetWithdrawRecordCallBack getWithdrawRecordCallBack){
+    public GetWithdrawRecordAPI addGetWithdrawRecordCallBack(GetWithdrawRecordCallBack getWithdrawRecordCallBack) {
         kzingCallBackList.add(getWithdrawRecordCallBack);
         return this;
     }
 
-    public interface GetWithdrawRecordCallBack extends KzingCallBack{
+    public interface GetWithdrawRecordCallBack extends KzingCallBack {
         void onSuccess(ArrayList<WithdrawRecord> withdrawRecordList);
     }
 
@@ -97,6 +101,7 @@ public class GetWithdrawRecordAPI extends CoreRequest {
         this.startDateCalendar = startDateCalendar;
         return this;
     }
+
     /**
      * @param endDateCalendar End date of records search.
      */
@@ -120,6 +125,10 @@ public class GetWithdrawRecordAPI extends CoreRequest {
         this.pageCount = pageCount;
         return this;
     }
-    
+
+    public GetWithdrawRecordAPI setParamCurrency(String currency) {
+        this.currency = currency;
+        return this;
+    }
 
 }

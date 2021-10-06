@@ -14,6 +14,7 @@ public class GamePlatformChild implements Playable {
     private String childEnName = "";
     private String urlSuffix = "";
     private String image = "";
+    private String rtpPercentage = "";
     private int displayorder = 0;
     private boolean isEnabled = false;
     private HashSet<Integer> categorysSet = new HashSet<>();
@@ -27,6 +28,7 @@ public class GamePlatformChild implements Playable {
         gpChild.childEnName = childEnName;
         gpChild.urlSuffix = urlSuffix;
         gpChild.image = image;
+        gpChild.rtpPercentage = rtpPercentage;
         gpChild.displayorder = displayorder;
         gpChild.isEnabled = isEnabled;
         gpChild.categorysSet = (HashSet<Integer>) categorysSet.clone();
@@ -49,6 +51,7 @@ public class GamePlatformChild implements Playable {
         item.urlSuffix = rootObject.optString("appurl_suffix");
         item.setDisplayorder(rootObject.optInt("displayorder"));
         item.setImage(rootObject.optString("image"));
+        item.setRtpPercentage(rootObject.optString("rtppercentage"));
         item.setEnabled(rootObject.optString("enable_an").equals("1"));
         JSONArray categorysArray = rootObject.optJSONArray("categories");
         if (categorysArray != null) {
@@ -153,6 +156,14 @@ public class GamePlatformChild implements Playable {
 
     public void setChildEnName(String childEnName) {
         this.childEnName = childEnName;
+    }
+
+    public String getRtpPercentage() {
+        return rtpPercentage;
+    }
+
+    public void setRtpPercentage(String rtpPercentage) {
+        this.rtpPercentage = rtpPercentage;
     }
 
     @Override
