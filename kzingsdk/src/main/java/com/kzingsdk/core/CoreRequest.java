@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.kzingsdk.requests.KzingCallBack;
 import com.kzingsdk.requests.KzingRequestException;
+import com.kzingsdk.requests.RequireCurrency;
 import com.kzingsdk.util.Base64Utils;
 import com.kzingsdk.util.Constant;
 import com.kzingsdk.util.MD5Utils;
@@ -287,7 +288,10 @@ public abstract class CoreRequest {
             }
             jsonData.put("device", "android");
             jsonData.put("platform", "an");
-            jsonData.put("currency", "CNY");
+            if (this instanceof RequireCurrency) {
+                String currency = ((RequireCurrency) this).getCurrency();
+                jsonData.put("currency", currency);
+            }
             return jsonData;
         } catch (JSONException e) {
             throw new KzingException(e.getMessage());

@@ -390,4 +390,5 @@ public final class KzingSDK {
     public HashSet<String> getCustomUrlSet() {
         return customUrlSet;
     }
+
 }

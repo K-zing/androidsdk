@@ -16,7 +16,7 @@ import java.util.Calendar;
 import io.reactivex.Observable;
 
 
-public class GetWithdrawRecordAPI extends CoreRequest {
+public class GetWithdrawRecordAPI extends CoreRequest implements RequireCurrency {
 
     GetWithdrawRecordAPI() {
         super();
@@ -42,9 +42,6 @@ public class GetWithdrawRecordAPI extends CoreRequest {
             jsonData.put("offset", offset);
             jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
             jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
-            if (currency != null) {
-                jsonData.put("currency", currency);
-            }
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -129,6 +126,11 @@ public class GetWithdrawRecordAPI extends CoreRequest {
     public GetWithdrawRecordAPI setParamCurrency(String currency) {
         this.currency = currency;
         return this;
+    }
+
+    @Override
+    public String getCurrency() {
+        return currency;
     }
 
 }

@@ -16,7 +16,7 @@ import java.util.Calendar;
 import io.reactivex.Observable;
 
 
-public class GetTransferRecordAPI extends CoreRequest {
+public class GetTransferRecordAPI extends CoreRequest implements RequireCurrency {
 
 
     GetTransferRecordAPI() {
@@ -43,9 +43,6 @@ public class GetTransferRecordAPI extends CoreRequest {
             jsonData.put("offset", offset);
             jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
             jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
-            if (currency != null) {
-                jsonData.put("currency", currency);
-            }
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -131,6 +128,11 @@ public class GetTransferRecordAPI extends CoreRequest {
     public GetTransferRecordAPI setParamCurrency(String currency) {
         this.currency = currency;
         return this;
+    }
+
+    @Override
+    public String getCurrency() {
+        return currency;
     }
 
 

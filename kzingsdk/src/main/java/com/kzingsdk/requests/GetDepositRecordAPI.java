@@ -16,7 +16,7 @@ import java.util.Calendar;
 import io.reactivex.Observable;
 
 
-public class GetDepositRecordAPI extends CoreRequest {
+public class GetDepositRecordAPI extends CoreRequest implements RequireCurrency {
 
     GetDepositRecordAPI() {
         super();
@@ -24,26 +24,24 @@ public class GetDepositRecordAPI extends CoreRequest {
 
     @Override
     protected Observable<String> validateParams() {
-        if(startDateCalendar == null){
+        if (startDateCalendar == null) {
             return Observable.just("Start date is missing");
         }
-        if(endDateCalendar == null){
+        if (endDateCalendar == null) {
             return Observable.just("End date is missing");
         }
         return super.validateParams();
     }
+
     @Override
-    protected JSONObject generateParamsJson(){
+    protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            jsonData.put("type","D");
-            jsonData.put("pageCount",pageCount);
-            jsonData.put("offset",offset);
+            jsonData.put("type", "D");
+            jsonData.put("pageCount", pageCount);
+            jsonData.put("offset", offset);
             jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
-            jsonData.put("end",Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
-            if (currency != null) {
-                jsonData.put("currency", currency);
-            }
+            jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -57,7 +55,7 @@ public class GetDepositRecordAPI extends CoreRequest {
 
     private Integer pageCount = 10;
     private Integer offset = 0;
-    private Calendar startDateCalendar,endDateCalendar;
+    private Calendar startDateCalendar, endDateCalendar;
     private String currency;
 
     @Override
@@ -72,6 +70,7 @@ public class GetDepositRecordAPI extends CoreRequest {
                     return depositRecordList;
                 });
     }
+
     @Override
     public void request(Context context) {
         requestRx(context).subscribe(depositRecordList -> {
@@ -83,12 +82,12 @@ public class GetDepositRecordAPI extends CoreRequest {
         }, defaultOnErrorConsumer);
     }
 
-    public GetDepositRecordAPI addGetDepositRecordCallBack(GetDepositRecordAPI.GetDepositRecordCallBack GetDepositRecordCallBack){
+    public GetDepositRecordAPI addGetDepositRecordCallBack(GetDepositRecordAPI.GetDepositRecordCallBack GetDepositRecordCallBack) {
         kzingCallBackList.add(GetDepositRecordCallBack);
         return this;
     }
 
-    public interface GetDepositRecordCallBack extends KzingCallBack{
+    public interface GetDepositRecordCallBack extends KzingCallBack {
         void onSuccess(ArrayList<DepositRecord> depositRecordList);
     }
 
@@ -130,6 +129,9 @@ public class GetDepositRecordAPI extends CoreRequest {
         return this;
     }
 
-
+    @Override
+    public String getCurrency() {
+        return currency;
+    }
 
 }
