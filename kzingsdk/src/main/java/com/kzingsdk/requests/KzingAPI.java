@@ -182,6 +182,7 @@ public final class KzingAPI {
     public static GetClientInstantInfoAPI getClientInstantInfo() {
         return new GetClientInstantInfoAPI();
     }
+
     public static GetCsExtraInfoAPI getCsExtraInfo() {
         return new GetCsExtraInfoAPI();
     }
@@ -460,6 +461,23 @@ public final class KzingAPI {
         return new ConnectionSpeedTestAPI();
     }
 
+    public static GetWithdrawCryptoListAPI getWithdrawCryptoList() {
+        return new GetWithdrawCryptoListAPI();
+    }
+
+    public static EditWithdrawCryptoAPI editWithdrawCrypto() {
+        return new EditWithdrawCryptoAPI();
+    }
+
+    public static AddWithdrawalCryptoAPI addWithdrawalCrypto() {
+        return new AddWithdrawalCryptoAPI();
+    }
+
+    public static SubmitWithdrawCryptoAPI submitWithdrawCrypto() {
+        return new SubmitWithdrawCryptoAPI();
+    }
+
+
     public static SubmitAtmDepositV2API submitAtmDepositV2() {
         return new SubmitAtmDepositV2API();
     }
@@ -506,6 +524,10 @@ public final class KzingAPI {
 
     public static GetCommissionAPI getCommission() {
         return new GetCommissionAPI();
+    }
+
+    public static RequestSendEmailRegCodeAPI requestSendEmailRegCode() {
+        return new RequestSendEmailRegCodeAPI();
     }
 
     public static GetMemberAgentAllDownLineAPI getMemberAgentAllDownLine() {

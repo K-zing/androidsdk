@@ -111,6 +111,10 @@ final class Action {
     static final String getPostpaidBonus = "szmb1yr";
     static final String redeemPostpaidBonus = "lhwwvpk";
     static final String cancelPostpaidBonus = "0acbblu";
+    static final String getWithdrawCryptoList = "oyex7ty";
+    static final String editWithdrawCrypto = "8ztpbbd";
+    static final String addWithdrawalCrypto = "uljxjnd";
+    static final String submitWithdrawCrypto = "ozhmubp";
 
     static final String enterGame = "B531774";
 
@@ -136,6 +140,7 @@ final class Action {
     static final String getSmsCode = "vnlauiq";
     static final String getEmailCode = "vnlauiw";
     static final String connectionSpeedTest = "23m0mko";
+    static final String requestSendEmailRegCode = "fpY8Bo21";
 
     static final String getMemberAgent = "myn6zpl";
     static final String getCommissionDetails = "jeqjm9t";

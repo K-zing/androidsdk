@@ -29,7 +29,10 @@ public class GetEncryptKeyAPI extends CoreRequest {
     @Override
     protected JSONObject generateParamsJson() {
         try {
-            return new JSONObject("{\"getPrivateKey\": \"\"}");
+            JSONObject dataObject = new JSONObject();
+            dataObject.put("getPrivateKey","");
+            return dataObject;
+//            return new JSONObject("{\"getPrivateKey\": \"\"}");
         } catch (JSONException e) {
         }
         return super.generateParamsJson();

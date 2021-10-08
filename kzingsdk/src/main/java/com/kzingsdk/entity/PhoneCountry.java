@@ -1,6 +1,9 @@
 package com.kzingsdk.entity;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 
 public class PhoneCountry {
@@ -9,6 +12,7 @@ public class PhoneCountry {
     private String name;
     private Integer mobileCode;
     private boolean isPreferred;
+    private ArrayList<String> popularList;
 
     public static PhoneCountry newInstance(JSONObject rootObject) {
         PhoneCountry phoneCountry = new PhoneCountry();
@@ -16,6 +20,13 @@ public class PhoneCountry {
         phoneCountry.setName(rootObject.optString("text"));
         phoneCountry.setMobileCode(rootObject.optInt("mobilecode"));
         phoneCountry.setPreferred(rootObject.optBoolean("preferred", false));
+        phoneCountry.setPopularList(new ArrayList<>());
+        JSONArray popularListJSONArray = rootObject.optJSONArray("popular");
+        if (popularListJSONArray != null) {
+            for (int i = 0; i < popularListJSONArray.length(); i++) {
+                phoneCountry.getPopularList().add(popularListJSONArray.optString(i));
+            }
+        }
         return phoneCountry;
     }
 
@@ -49,5 +60,13 @@ public class PhoneCountry {
 
     public void setPreferred(boolean preferred) {
         isPreferred = preferred;
+    }
+
+    public ArrayList<String> getPopularList() {
+        return popularList;
+    }
+
+    public void setPopularList(ArrayList<String> popularList) {
+        this.popularList = popularList;
     }
 }

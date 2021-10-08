@@ -76,6 +76,7 @@ public class ClientInfo implements Parcelable {
     private boolean memberLoginNeedCaptcha;
     private boolean allowCryptoCurrencyWithdrawal;
     private boolean allowPlayerDeleteCryptoAddr;
+    private boolean registerEmailVerify;
     private String cryptoFixedExchangeRate;
 
 
@@ -607,6 +608,14 @@ public class ClientInfo implements Parcelable {
         this.cryptoFixedExchangeRate = cryptoFixedExchangeRate;
     }
 
+    public boolean isRegisterEmailVerify() {
+        return registerEmailVerify;
+    }
+
+    public void setRegisterEmailVerify(boolean registerEmailVerify) {
+        this.registerEmailVerify = registerEmailVerify;
+    }
+
     public ClientInfo(Parcel in) {
         siteName = in.readString();
         siteDomain = in.readString();
@@ -656,10 +665,8 @@ public class ClientInfo implements Parcelable {
         memberLoginNeedCaptcha = in.readInt() == 1;
         allowCryptoCurrencyWithdrawal = in.readInt() == 1;
         allowPlayerDeleteCryptoAddr = in.readInt() == 1;
+        registerEmailVerify = in.readInt() == 1;
         cryptoFixedExchangeRate = in.readString();
-
-
-
     }
 
 
@@ -715,6 +722,7 @@ public class ClientInfo implements Parcelable {
         dest.writeInt(memberLoginNeedCaptcha ? 1 : 0);
         dest.writeInt(allowCryptoCurrencyWithdrawal ? 1 : 0);
         dest.writeInt(allowPlayerDeleteCryptoAddr ? 1 : 0);
+        dest.writeInt(registerEmailVerify ? 1 : 0);
         dest.writeString(cryptoFixedExchangeRate);
     }
 
