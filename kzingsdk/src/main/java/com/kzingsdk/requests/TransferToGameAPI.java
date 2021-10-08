@@ -17,6 +17,8 @@ public class TransferToGameAPI extends CoreRequest {
     public static final String TRANSFER_BACK = "10000";
     private String gpAccountId;
     private Double transferAmount;
+    private Boolean isTransferAll = false;
+
 
     TransferToGameAPI() {
         super();
@@ -39,12 +41,14 @@ public class TransferToGameAPI extends CoreRequest {
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
+            jsonData.put("transferall", isTransferAll);
             if (gpAccountId != null && !gpAccountId.equals(TRANSFER_BACK)) {
                 jsonData.put("toid", gpAccountId);
             }
             if (transferAmount != null) {
                 jsonData.put("transferAmount", transferAmount);
             }
+
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -91,6 +95,11 @@ public class TransferToGameAPI extends CoreRequest {
         BigDecimal a = new BigDecimal(transferAmount);
         BigDecimal roundOff = a.setScale(2, BigDecimal.ROUND_DOWN);
         this.transferAmount = roundOff.doubleValue();
+        return this;
+    }
+
+    public TransferToGameAPI setParamTransferall(Boolean transferall) {
+        this.isTransferAll = transferall;
         return this;
     }
 
