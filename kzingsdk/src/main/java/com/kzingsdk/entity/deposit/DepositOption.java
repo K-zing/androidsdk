@@ -136,7 +136,7 @@ public class DepositOption implements Parcelable {
                 case "4":
                 case "69":
                 case "73":
-                case "101":
+                case "101"://micro
                     for (j = 0; j < paymentGroupJArray.length(); j++) {
                         PaymentGroup paymentGroup = PaymentGroup.newInstance(paymentGroupJArray.optJSONObject(j));
                         if (paymentGroup.getPaymentType() == PaymentType.valueOfTypeId(option)) {
