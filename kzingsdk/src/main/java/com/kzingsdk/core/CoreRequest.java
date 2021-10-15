@@ -3,6 +3,7 @@ package com.kzingsdk.core;
 import android.content.Context;
 import android.util.Log;
 
+import com.kzingsdk.BuildConfig;
 import com.kzingsdk.requests.KzingCallBack;
 import com.kzingsdk.requests.KzingRequestException;
 import com.kzingsdk.requests.RequireCurrency;
@@ -288,6 +289,7 @@ public abstract class CoreRequest {
             }
             jsonData.put("device", "android");
             jsonData.put("platform", "an");
+            jsonData.put("sdkversion", BuildConfig.VERSION_NAME);
             if (this instanceof RequireCurrency) {
                 String currency = ((RequireCurrency) this).getCurrency();
                 jsonData.put("currency", currency);
