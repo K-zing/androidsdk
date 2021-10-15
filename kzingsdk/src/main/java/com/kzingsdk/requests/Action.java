@@ -86,6 +86,7 @@ final class Action {
 
     static final String getGamePlatformList = "35978f7";
     static final String getSubGameList = "80064d4";
+    static final String gamePlatformOrderByPlayerBet = "im0fa5t";
 
 
     static final String getRecommendGames = "8asb71c";
@@ -130,6 +131,7 @@ final class Action {
     static final String updatePan = "3r6luoo";
 
     static final String getProvinceInfo = "glfagc7";
+    static final String getAllCurrencyRate = "tglfsf8";
 
     static final String finishDeposit = "2zwavac";
 

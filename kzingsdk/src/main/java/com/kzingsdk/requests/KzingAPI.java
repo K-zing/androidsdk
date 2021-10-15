@@ -162,6 +162,10 @@ public final class KzingAPI {
         return new GetAllGpBalanceAPI();
     }
 
+    public static GetAllCurrencyRateAPI getAllCurrencyRate() {
+        return new GetAllCurrencyRateAPI();
+    }
+
     public static GetGpsBalanceAPI getGpsBalance() {
         return new GetGpsBalanceAPI();
     }

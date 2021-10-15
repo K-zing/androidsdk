@@ -8,6 +8,7 @@ public enum PaymentType {
     EWALLET("73", "Ewallet"),
     PREPAIDCARD("99", "Prepaid Card"),
     CRYPTO("crypto", "cryptoAtmType"),
+    MICRO("101", "microAtmPayment"),
     OTHER("-1", "Other"),
     ;
 
