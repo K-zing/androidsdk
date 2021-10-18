@@ -116,6 +116,8 @@ final class Action {
     static final String editWithdrawCrypto = "8ztpbbd";
     static final String addWithdrawalCrypto = "uljxjnd";
     static final String submitWithdrawCrypto = "ozhmubp";
+    static final String getCryptoBetWinAmount = "awevliu";
+
 
     static final String enterGame = "B531774";
 

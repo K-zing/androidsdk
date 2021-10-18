@@ -28,6 +28,8 @@ public class WithdrawRecord implements Parcelable {
     private String status;
     private String currency;
     private Boolean canCancel;
+    private String device;
+    private String network;
     private StatusCode statusCode;
 
     public WithdrawRecord() {
@@ -45,6 +47,8 @@ public class WithdrawRecord implements Parcelable {
         status = in.readString();
         currency = in.readString();
         canCancel = in.readInt() == 1;
+        device = in.readString();
+        network = in.readString();
         statusCode = StatusCode.valueOfId(in.readInt());
     }
 
@@ -61,6 +65,10 @@ public class WithdrawRecord implements Parcelable {
         item.setStatus(rootObject.optString("status"));
         item.setCurrency(rootObject.optString("currency"));
         item.setCanCancel(rootObject.optBoolean("canCancel"));
+        item.setDevice(rootObject.optString("device"));
+        item.setNetwork(rootObject.optString("network"));
+
+
         item.setStatusCode(StatusCode.valueOfId(rootObject.optInt("status_code")));
         return item;
     }
@@ -164,6 +172,22 @@ public class WithdrawRecord implements Parcelable {
         this.currency = currency;
     }
 
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
+    }
+
+    public String getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(String network) {
+        this.network = network;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(transType);
@@ -177,6 +201,10 @@ public class WithdrawRecord implements Parcelable {
         dest.writeString(currency);
         dest.writeInt(canCancel ? 1 : 0);
         dest.writeInt(statusCode.getId());
+        dest.writeString(device);
+        dest.writeString(network);
+
+
     }
 
     @Override

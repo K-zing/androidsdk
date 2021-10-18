@@ -26,21 +26,21 @@ public class GetAllCurrencyRateAPI extends CoreRequest {
     public Observable<ArrayList<CurrencyRate>> requestRx(Context context) {
         return super.baseExecute(context)
                 .map(jsonResponse -> {
-                    ArrayList<CurrencyRate> gpBalanceMap = new ArrayList<>();
-                    JSONArray response = jsonResponse.optJSONArray("gpBalances");
+                    ArrayList<CurrencyRate> currencyRateList = new ArrayList<>();
+                    JSONArray response = jsonResponse.optJSONArray("data");
                     for (int i = 0; i < response.length(); i++) {
-                        gpBalanceMap.add(CurrencyRate.newInstance(response.optJSONObject(i)));
+                        currencyRateList.add(CurrencyRate.newInstance(response.optJSONObject(i)));
                     }
-                    return gpBalanceMap;
+                    return currencyRateList;
                 });
     }
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(gpBalanceMap -> {
+        requestRx(context).subscribe(currencyRateList -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((GetAllCurrencyRateCallBack) kzingCallBack).onSuccess(gpBalanceMap);
+                    ((GetAllCurrencyRateCallBack) kzingCallBack).onSuccess(currencyRateList);
                 }
             }
         }, defaultOnErrorConsumer);
@@ -52,7 +52,7 @@ public class GetAllCurrencyRateAPI extends CoreRequest {
     }
 
     public interface GetAllCurrencyRateCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<CurrencyRate> gpBalanceMap);
+        void onSuccess(ArrayList<CurrencyRate> currencyRateList);
     }
 
 }

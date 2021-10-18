@@ -26,6 +26,8 @@ public class DepositRecord implements Parcelable {
     private String remark;
     private String payName;
     private String currency;
+    private String device;
+    private String network;
     private StatusCode statusCode;
 
     public DepositRecord() {
@@ -44,6 +46,8 @@ public class DepositRecord implements Parcelable {
         item.setStatus(rootObject.optString("status"));
         item.setPayName(rootObject.optString("payname"));
         item.setCurrency(rootObject.optString("currency"));
+        item.setDevice(rootObject.optString("device"));
+        item.setNetwork(rootObject.optString("network"));
         item.setStatusCode(StatusCode.valueOfId(rootObject.optInt("status_code")));
         return item;
     }
@@ -131,6 +135,22 @@ public class DepositRecord implements Parcelable {
         this.currency = currency;
     }
 
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
+    }
+
+    public String getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(String network) {
+        this.network = network;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(transType);
@@ -141,6 +161,8 @@ public class DepositRecord implements Parcelable {
         dest.writeString(remark);
         dest.writeString(payName);
         dest.writeString(currency);
+        dest.writeString(device);
+        dest.writeString(network);
         dest.writeInt(statusCode.getId());
     }
 
@@ -153,6 +175,8 @@ public class DepositRecord implements Parcelable {
         remark = in.readString();
         payName = in.readString();
         currency = in.readString();
+        device = in.readString();
+        network = in.readString();
         statusCode = StatusCode.valueOfId(in.readInt());
     }
 

@@ -26,6 +26,7 @@ public class BonusReturn implements Parcelable {
     private String type = "";
     private String typeId = "";
     private String created = "";
+    private String currency = "";
 
 
     public BonusReturn() {
@@ -42,6 +43,7 @@ public class BonusReturn implements Parcelable {
         bonusReturn.setType(rootObject.optString("type"));
         bonusReturn.setTypeId(rootObject.optString("type_id"));
         bonusReturn.setCreated(rootObject.optString("time"));
+        bonusReturn.setCurrency(rootObject.optString("currency"));
         return bonusReturn;
     }
 
@@ -96,6 +98,14 @@ public class BonusReturn implements Parcelable {
         this.created = created;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     public String getType() {
         return type;
     }
@@ -121,6 +131,7 @@ public class BonusReturn implements Parcelable {
         type = in.readString();
         typeId = in.readString();
         created = in.readString();
+        currency = in.readString();
     }
 
     @Override
@@ -133,6 +144,7 @@ public class BonusReturn implements Parcelable {
         dest.writeString(type);
         dest.writeString(typeId);
         dest.writeString(created);
+        dest.writeString(currency);
     }
 
     @Override
