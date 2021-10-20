@@ -166,6 +166,19 @@ public final class KzingAPI {
         return new GetAllCurrencyRateAPI();
     }
 
+    public static GetAutoRankInfoAPI getAutoRankInfo() {
+        return new GetAutoRankInfoAPI();
+    }
+
+    public static GetRankTierListAPI getRankTierList() {
+        return new GetRankTierListAPI();
+    }
+
+    public static SwitchCurrencyAPI switchCurrency() {
+        return new SwitchCurrencyAPI();
+    }
+
+
     public static GetGpsBalanceAPI getGpsBalance() {
         return new GetGpsBalanceAPI();
     }
@@ -496,6 +509,10 @@ public final class KzingAPI {
 
     public static RedeemPostpaidBonusAPI redeemPostpaidBonus() {
         return new RedeemPostpaidBonusAPI();
+    }
+
+    public static GetCryptoBetWinAmountAPI getCryptoBetWinAmount() {
+        return new GetCryptoBetWinAmountAPI();
     }
 
     public static CancelPostpaidBonusAPI cancelPostpaidBonus() {

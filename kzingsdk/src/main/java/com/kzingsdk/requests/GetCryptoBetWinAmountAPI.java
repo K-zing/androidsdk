@@ -6,12 +6,17 @@ import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.CryptoBetWinAmount;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import io.reactivex.Observable;
 
 public class GetCryptoBetWinAmountAPI extends CoreRequest {
+
+    private String gpType;
+    private String randomNum;
 
     GetCryptoBetWinAmountAPI() {
         super();
@@ -21,6 +26,20 @@ public class GetCryptoBetWinAmountAPI extends CoreRequest {
     protected String getAction() {
         return Action.getCryptoBetWinAmount;
     }
+
+    @Override
+    protected JSONObject generateParamsJson() {
+        JSONObject jsonData = super.generateParamsJson();
+        try {
+            jsonData.put("gptype", gpType);
+            if (randomNum != null)
+                jsonData.put("random_num", randomNum);
+            return jsonData;
+        } catch (JSONException ignored) {
+        }
+        return super.generateParamsJson();
+    }
+
 
     @Override
     public Observable<ArrayList<CryptoBetWinAmount>> requestRx(Context context) {
@@ -55,4 +74,13 @@ public class GetCryptoBetWinAmountAPI extends CoreRequest {
         void onSuccess(ArrayList<CryptoBetWinAmount> cryptoBetWinAmountList);
     }
 
+    public GetCryptoBetWinAmountAPI setGpType(String gpType) {
+        this.gpType = gpType;
+        return this;
+    }
+
+    public GetCryptoBetWinAmountAPI setRandomNum(String randomNum) {
+        this.randomNum = randomNum;
+        return this;
+    }
 }

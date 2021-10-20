@@ -84,6 +84,10 @@ final class Action {
     static final String getWaterWager = "nzfnj0h";
     static final String getSportOddsData = "kzafauu";
 
+    static final String switchCurrency = "x7tVfZX";
+    static final String getAutoRankInfo = "pbbXLy0";
+    static final String getRankTierList = "jndhjfn";
+
     static final String getGamePlatformList = "35978f7";
     static final String getSubGameList = "80064d4";
     static final String gamePlatformOrderByPlayerBet = "im0fa5t";
