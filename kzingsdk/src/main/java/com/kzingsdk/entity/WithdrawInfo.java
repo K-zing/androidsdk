@@ -31,7 +31,7 @@ public class WithdrawInfo {
     private BigDecimal withdrawRate = BigDecimal.ONE;
     private ArrayList<BankCard> bankCardList = new ArrayList<>();
     private ArrayList<PlayerBankCard> playerBankCardList = new ArrayList<>();
-    private HashMap<String,String> cryptoMap = new HashMap<>();
+    private HashMap<String,ArrayList<String>> cryptoMap = new HashMap<>();
 
     public static WithdrawInfo newInstance(JSONObject rootObject) {
         WithdrawInfo withdrawInfo = new WithdrawInfo();
@@ -57,7 +57,13 @@ public class WithdrawInfo {
         JSONArray cryptoArray = rootObject.optJSONArray("crypto");
         for (int i = 0; i < cryptoArray.length(); i++) {
             JSONObject cryptoObject = cryptoArray.optJSONObject(i);
-            withdrawInfo.cryptoMap.put(cryptoObject.optString("currency"),cryptoObject.optString("network"));
+            String currency = cryptoObject.optString("currency");
+            ArrayList<String> networkList = withdrawInfo.cryptoMap.get(currency);
+            if (networkList == null){
+                networkList = new ArrayList<>();
+            }
+            networkList.add(cryptoObject.optString("network"));
+            withdrawInfo.cryptoMap.put(currency,networkList);
         }
         JSONArray playerBanksArray = rootObject.optJSONArray("wd_banks");
         for (int i = 0; i < playerBanksArray.length(); i++) {
@@ -231,11 +237,11 @@ public class WithdrawInfo {
         this.bankCardCityProvince = bankCardCityProvince;
     }
 
-    public HashMap<String, String> getCryptoMap() {
+    public HashMap<String,ArrayList<String>> getCryptoMap() {
         return cryptoMap;
     }
 
-    public void setCryptoMap(HashMap<String, String> cryptoMap) {
+    public void setCryptoMap(HashMap<String,ArrayList<String>> cryptoMap) {
         this.cryptoMap = cryptoMap;
     }
 
