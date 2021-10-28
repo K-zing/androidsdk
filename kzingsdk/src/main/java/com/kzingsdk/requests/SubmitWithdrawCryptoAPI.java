@@ -21,10 +21,12 @@ public class SubmitWithdrawCryptoAPI extends CoreRequest {
     }
 
     private String amount;
-    private String cryptorate;
+    private String cryptoRate;
     private String wdpassword;
     private String wdbank;
     private String note;
+    private String address;
+    private String network;
 
     @Override
     protected JSONObject generateParamsJson() {
@@ -32,14 +34,18 @@ public class SubmitWithdrawCryptoAPI extends CoreRequest {
         try {
             if (amount != null)
                 jsonData.put("amount", amount);
-            if (cryptorate != null)
-                jsonData.put("cryptorate", cryptorate);
+            if (cryptoRate != null)
+                jsonData.put("cryptorate", cryptoRate);
             if (wdpassword != null)
                 jsonData.put("wdpassword", wdpassword);
             if (wdbank != null)
                 jsonData.put("wdbank", wdbank);
             if (note != null)
                 jsonData.put("note", note);
+            if (address != null)
+                jsonData.put("address", address);
+            if (network != null)
+                jsonData.put("network", network);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -77,8 +83,8 @@ public class SubmitWithdrawCryptoAPI extends CoreRequest {
         return this;
     }
 
-    public SubmitWithdrawCryptoAPI setCryptoRate(String cryptorate) {
-        this.cryptorate = cryptorate;
+    public SubmitWithdrawCryptoAPI setCryptoRate(String cryptoRate) {
+        this.cryptoRate = cryptoRate;
         return this;
     }
 
@@ -94,6 +100,16 @@ public class SubmitWithdrawCryptoAPI extends CoreRequest {
 
     public SubmitWithdrawCryptoAPI setNote(String note) {
         this.note = note;
+        return this;
+    }
+
+    public SubmitWithdrawCryptoAPI setAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public SubmitWithdrawCryptoAPI setNetwork(String network) {
+        this.network = network;
         return this;
     }
 }

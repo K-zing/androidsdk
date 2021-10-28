@@ -13,6 +13,7 @@ public class VerifyPlayerEmailAPI extends CoreRequest {
 
     private String email = null;
     private String validateCode = null;
+    private String newEmail = null;
 
     VerifyPlayerEmailAPI() {
         super();
@@ -40,6 +41,9 @@ public class VerifyPlayerEmailAPI extends CoreRequest {
         try {
             jsonData.put("email", email);
             jsonData.put("validateCode", validateCode);
+            if (newEmail != null) {
+                jsonData.put("newemail", newEmail);
+            }
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -85,4 +89,8 @@ public class VerifyPlayerEmailAPI extends CoreRequest {
         return this;
     }
 
+    public VerifyPlayerEmailAPI setNewEmail(String newEmail) {
+        this.newEmail = newEmail;
+        return this;
+    }
 }

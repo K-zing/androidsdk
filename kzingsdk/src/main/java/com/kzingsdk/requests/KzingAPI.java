@@ -494,6 +494,10 @@ public final class KzingAPI {
         return new SubmitWithdrawCryptoAPI();
     }
 
+    public static ManageWithdrawCryptoAPI manageWithdrawCrypto() {
+        return new ManageWithdrawCryptoAPI();
+    }
+
 
     public static SubmitAtmDepositV2API submitAtmDepositV2() {
         return new SubmitAtmDepositV2API();
@@ -513,6 +517,34 @@ public final class KzingAPI {
 
     public static GetCryptoBetWinAmountAPI getCryptoBetWinAmount() {
         return new GetCryptoBetWinAmountAPI();
+    }
+
+    public static GetDividendPoolsAPI getDividendPools() {
+        return new GetDividendPoolsAPI();
+    }
+
+    public static CryptoRedeemTokenAPI cryptoRedeemToken() {
+        return new CryptoRedeemTokenAPI();
+    }
+
+    public static CryptoGetTransactionAPI cryptoGetTransaction() {
+        return new CryptoGetTransactionAPI();
+    }
+
+    public static GetCryptoDepositOptionAPI getCryptoDepositOption() {
+        return new GetCryptoDepositOptionAPI();
+    }
+
+    public static GetCryptoDepositAddrAPI getCryptoDepositAddr() {
+        return new GetCryptoDepositAddrAPI();
+    }
+
+    public static GetActivityHistoryAPI getActivityHistory() {
+        return new GetActivityHistoryAPI();
+    }
+
+    public static PasswordVerifyAPI passwordVerify() {
+        return new PasswordVerifyAPI();
     }
 
     public static CancelPostpaidBonusAPI cancelPostpaidBonus() {

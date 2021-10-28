@@ -27,6 +27,8 @@ public class HistoryListItem implements Parcelable {
     private String comboType = "";
     private String resultScore = "";
     private String potentialPayout = "";
+    private Integer tokenStatus = 0;
+    private String token = "";
 
     private ArrayList<Parlay> parlayList = new ArrayList<>();
 
@@ -52,6 +54,8 @@ public class HistoryListItem implements Parcelable {
         historyListItem.setComboType(rootObject.optString("combotype"));
         historyListItem.setResultScore(rootObject.optString("result_score"));
         historyListItem.setPotentialPayout(rootObject.optString("potentialPayout"));
+        historyListItem.setTokenStatus(rootObject.optInt("tokenstatus"));
+        historyListItem.setToken(rootObject.optString("token"));
 
         JSONArray parlayArray = rootObject.optJSONArray("data");
         if (parlayArray != null) {
@@ -212,6 +216,22 @@ public class HistoryListItem implements Parcelable {
         }
     };
 
+    public Integer getTokenStatus() {
+        return tokenStatus;
+    }
+
+    public void setTokenStatus(Integer tokenStatus) {
+        this.tokenStatus = tokenStatus;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(betTime);
@@ -230,6 +250,8 @@ public class HistoryListItem implements Parcelable {
         dest.writeString(comboType);
         dest.writeString(resultScore);
         dest.writeString(potentialPayout);
+        dest.writeInt(tokenStatus);
+        dest.writeString(token);
     }
 
     public HistoryListItem(Parcel in) {
@@ -249,6 +271,8 @@ public class HistoryListItem implements Parcelable {
         comboType = in.readString();
         resultScore = in.readString();
         potentialPayout = in.readString();
+        tokenStatus = in.readInt();
+        token = in.readString();
     }
 
     @Override

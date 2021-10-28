@@ -27,6 +27,7 @@ final class Action {
     static final String bindSocialAccount = "4sxaxsb";
     static final String socialAccountBindingStatus = "gjpofu6";
     static final String getIplMatchesData = "egydymd";
+    static final String getDividendPools = "liuawev";
 
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";
@@ -121,7 +122,14 @@ final class Action {
     static final String addWithdrawalCrypto = "uljxjnd";
     static final String submitWithdrawCrypto = "ozhmubp";
     static final String getCryptoBetWinAmount = "awevliu";
+    static final String manageWithdrawCrypto = "ozhmubp";
 
+    static final String cryptoRedeemToken = "iqtrhrj";
+    static final String cryptoGetTransaction = "OuasJfO";
+    static final String getCryptoDepositOption = "WBVXwCB";
+    static final String getCryptoDepositAddr = "pEoMBfK";
+    static final String getActivityHistory = "SYqhEyK";
+    static final String passwordVerify = "OoTfKIz";
 
     static final String enterGame = "B531774";
 
