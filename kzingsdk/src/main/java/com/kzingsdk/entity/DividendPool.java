@@ -9,9 +9,9 @@ import java.math.BigDecimal;
 
 public class DividendPool {
 
-    private String min;
-    private String max;
-    private String limit;
+    private BigDecimal min;
+    private BigDecimal max;
+    private Integer limit;
     private Long end;
     private BigDecimal playerToken;
     private BigDecimal poolTotalToken;
@@ -31,9 +31,9 @@ public class DividendPool {
 
     public static DividendPool newInstance(JSONObject rootObject) {
         DividendPool dividendPool = new DividendPool();
-        dividendPool.setMin(rootObject.optString("min"));
-        dividendPool.setMax(rootObject.optString("max"));
-        dividendPool.setLimit(rootObject.optString("limit"));
+        dividendPool.setMin(BigDecimalUtil.optBigDecimal(rootObject, "min"));
+        dividendPool.setMax(BigDecimalUtil.optBigDecimal(rootObject, "max"));
+        dividendPool.setLimit(rootObject.optInt("limit"));
         dividendPool.setEnd(rootObject.optLong("end"));
         dividendPool.setPlayerToken(BigDecimalUtil.optBigDecimal(rootObject, "player_token"));
         dividendPool.setPoolTotalToken(BigDecimalUtil.optBigDecimal(rootObject, "pool_Total_token"));
@@ -48,27 +48,27 @@ public class DividendPool {
         return dividendPool;
     }
 
-    public String getMin() {
+    public BigDecimal getMin() {
         return min;
     }
 
-    public void setMin(String min) {
+    public void setMin(BigDecimal min) {
         this.min = min;
     }
 
-    public String getMax() {
+    public BigDecimal getMax() {
         return max;
     }
 
-    public void setMax(String max) {
+    public void setMax(BigDecimal max) {
         this.max = max;
     }
 
-    public String getLimit() {
+    public Integer getLimit() {
         return limit;
     }
 
-    public void setLimit(String limit) {
+    public void setLimit(Integer limit) {
         this.limit = limit;
     }
 

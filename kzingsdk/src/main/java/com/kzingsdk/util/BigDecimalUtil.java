@@ -14,7 +14,8 @@ public class BigDecimalUtil {
         if (jsonObject == null) {
             return fallback;
         }
-        String valueString = jsonObject.optString(key, "");
+        String valueString = jsonObject.optString(key, "")
+                .replaceAll(",","");
         try {
             return new BigDecimal(valueString);
         } catch (NumberFormatException e) {
