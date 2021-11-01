@@ -15,6 +15,7 @@ public class MobilePopup {
     private int displayRepeat = 0;
     private String clickFunction;
     private String redirectLink;
+    private String selectedDisplay;
 
     public MobilePopup() {
     }
@@ -31,6 +32,7 @@ public class MobilePopup {
         item.setDisplayRepeat(rootObject.optInt("displayrepeat"));
         item.setClickFunction(rootObject.optString("clickfunction"));
         item.setRedirectLink(rootObject.optString("redirect_link"));
+        item.setSelectedDisplay(rootObject.optString("selecteddisplay"));
         return item;
     }
 
@@ -112,5 +114,13 @@ public class MobilePopup {
 
     public void setRedirectLink(String redirectLink) {
         this.redirectLink = redirectLink;
+    }
+
+    public String getSelectedDisplay() {
+        return selectedDisplay;
+    }
+
+    public void setSelectedDisplay(String selectedDisplay) {
+        this.selectedDisplay = selectedDisplay;
     }
 }
