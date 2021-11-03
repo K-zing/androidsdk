@@ -27,11 +27,12 @@ public class WithdrawInfo {
     private boolean waterCheckBeforeWithdraw = false;
     private boolean waterCheckOnOff = false;
     private boolean bankCardCityProvince = false;
+    private boolean playerWithdrawEnterOtp = false;
     private String mobileBetCheckDesc;
     private BigDecimal withdrawRate = BigDecimal.ONE;
     private ArrayList<BankCard> bankCardList = new ArrayList<>();
     private ArrayList<PlayerBankCard> playerBankCardList = new ArrayList<>();
-    private HashMap<String,ArrayList<String>> cryptoMap = new HashMap<>();
+    private HashMap<String, ArrayList<String>> cryptoMap = new HashMap<>();
 
     public static WithdrawInfo newInstance(JSONObject rootObject) {
         WithdrawInfo withdrawInfo = new WithdrawInfo();
@@ -53,17 +54,18 @@ public class WithdrawInfo {
         withdrawInfo.setWaterCheckBeforeWithdraw(rootObject.optString("waterCheckBeforeWithdraw", "OFF").equalsIgnoreCase("ON"));
         withdrawInfo.setWaterCheckOnOff(rootObject.optBoolean("watercheckonoff", false));
         withdrawInfo.setBankCardCityProvince(rootObject.optString("bankCardCityProvince", "OFF").equalsIgnoreCase("ON"));
+        withdrawInfo.setPlayerWithdrawEnterOtp(rootObject.optBoolean("playerWithdrawEnterOtp", false));
 
         JSONArray cryptoArray = rootObject.optJSONArray("crypto");
         for (int i = 0; i < cryptoArray.length(); i++) {
             JSONObject cryptoObject = cryptoArray.optJSONObject(i);
             String currency = cryptoObject.optString("currency");
             ArrayList<String> networkList = withdrawInfo.cryptoMap.get(currency);
-            if (networkList == null){
+            if (networkList == null) {
                 networkList = new ArrayList<>();
             }
             networkList.add(cryptoObject.optString("network"));
-            withdrawInfo.cryptoMap.put(currency,networkList);
+            withdrawInfo.cryptoMap.put(currency, networkList);
         }
         JSONArray playerBanksArray = rootObject.optJSONArray("wd_banks");
         for (int i = 0; i < playerBanksArray.length(); i++) {
@@ -237,11 +239,19 @@ public class WithdrawInfo {
         this.bankCardCityProvince = bankCardCityProvince;
     }
 
-    public HashMap<String,ArrayList<String>> getCryptoMap() {
+    public boolean isPlayerWithdrawEnterOtp() {
+        return playerWithdrawEnterOtp;
+    }
+
+    public void setPlayerWithdrawEnterOtp(boolean playerWithdrawEnterOtp) {
+        this.playerWithdrawEnterOtp = playerWithdrawEnterOtp;
+    }
+
+    public HashMap<String, ArrayList<String>> getCryptoMap() {
         return cryptoMap;
     }
 
-    public void setCryptoMap(HashMap<String,ArrayList<String>> cryptoMap) {
+    public void setCryptoMap(HashMap<String, ArrayList<String>> cryptoMap) {
         this.cryptoMap = cryptoMap;
     }
 

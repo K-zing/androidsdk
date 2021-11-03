@@ -53,6 +53,7 @@ public class MemberInfo implements Parcelable {
     private String facebook = "";
     private String pan = "";
     private String agentCode = "";
+    private String skype = "";
     private boolean isDisplayGroupName = false;
     private boolean isMobileVerified = false;
     private boolean isEmailVerified = false;
@@ -99,6 +100,7 @@ public class MemberInfo implements Parcelable {
         telegram = in.readString();
         line = in.readString();
         agentCode = in.readString();
+        skype = in.readString();
         hasWithdrawPassword = in.readInt() == 1;
         displayGroupName = in.readString();
         isDisplayGroupName = in.readInt() == 1;
@@ -150,6 +152,7 @@ public class MemberInfo implements Parcelable {
         memberInfo.setPan(rootObject.optString("pan"));
         memberInfo.setLine(rootObject.optString("line"));
         memberInfo.setAgentCode(rootObject.optString("agentcode"));
+        memberInfo.setSkype(rootObject.optString("skype"));
         memberInfo.setHasWithdrawPassword(rootObject.optString("haswithdrawpassword").equalsIgnoreCase("ON"));
         memberInfo.setDisplayGroupName(rootObject.optString("display_group_name"));
         memberInfo.setIsDisplayGroupName(rootObject.optString("is_display_group_name").equalsIgnoreCase("1"));
@@ -500,6 +503,14 @@ public class MemberInfo implements Parcelable {
         this.agentCode = agentCode;
     }
 
+    public String getSkype() {
+        return skype;
+    }
+
+    public void setSkype(String skype) {
+        this.skype = skype;
+    }
+
     public boolean isEnablePhoneRecall() {
         return enablePhoneRecall;
     }
@@ -558,6 +569,7 @@ public class MemberInfo implements Parcelable {
         dest.writeString(telegram);
         dest.writeString(line);
         dest.writeString(agentCode);
+        dest.writeString(skype);
         dest.writeInt(hasWithdrawPassword ? 1 : 0);
         dest.writeString(displayGroupName);
         dest.writeInt(isDisplayGroupName ? 1 : 0);

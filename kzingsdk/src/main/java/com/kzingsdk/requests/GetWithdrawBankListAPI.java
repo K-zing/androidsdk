@@ -34,12 +34,12 @@ public class GetWithdrawBankListAPI extends CoreRequest {
         }, defaultOnErrorConsumer);
     }
 
-    public GetWithdrawBankListAPI addGetBankDictionaryCallBack(GetBankDictionaryCallBack getBankDictionaryCallBack){
+    public GetWithdrawBankListAPI addGetBankDictionaryCallBack(GetBankDictionaryCallBack getBankDictionaryCallBack) {
         kzingCallBackList.add(getBankDictionaryCallBack);
         return this;
     }
 
-    public interface GetBankDictionaryCallBack extends KzingCallBack{
+    public interface GetBankDictionaryCallBack extends KzingCallBack {
         void onSuccess(WithdrawInfo withdrawInfo);
     }
 }

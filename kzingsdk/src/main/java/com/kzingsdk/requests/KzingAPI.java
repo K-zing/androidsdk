@@ -458,6 +458,10 @@ public final class KzingAPI {
         return new GetWebsiteConfigAPI();
     }
 
+    public static GetWebsiteContentConfigAPI getWebsiteContentConfig() {
+        return new GetWebsiteContentConfigAPI();
+    }
+
     public static GetSmsCodeAPI getSmsCode() {
         return new GetSmsCodeAPI();
     }

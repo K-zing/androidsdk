@@ -27,6 +27,7 @@ public class EditMemberInfoAPI extends CoreRequest {
     private String zalo = null;
     private String facebook = null;
     private String line = null;
+    private String skype = null;
     private MemberInfo.Gender gender = null;
 
 
@@ -42,7 +43,7 @@ public class EditMemberInfoAPI extends CoreRequest {
     @Override
     protected Observable<String> validateParams() {
         if (email == null && phone == null && qq == null && weixin == null && realname == null && birth == null && gender == null &&
-                whatsapp == null && telegram == null && userPreferLanguage == null && zalo == null && facebook == null && line == null) {
+                whatsapp == null && telegram == null && userPreferLanguage == null && zalo == null && facebook == null && line == null && skype == null) {
             return Observable.just("You must at least edit one of the infos.");
         }
         return super.validateParams();
@@ -78,6 +79,8 @@ public class EditMemberInfoAPI extends CoreRequest {
                 jsonData.put("facebook", facebook);
             if (line != null)
                 jsonData.put("line", line);
+            if (skype != null)
+                jsonData.put("skype", skype);
 
             return jsonData;
         } catch (JSONException ignored) {

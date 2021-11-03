@@ -20,6 +20,7 @@ final class Action {
     static final String checkUserNameExist = "qbiluvw";
     static final String checkAgentNameExist = "tejqigy";
     static final String getWebsiteConfig = "aynbshp";
+    static final String getWebsiteContentConfig = "bynbshp";
     static final String getNewMobilePopup = "ldeqxay";
     static final String getHotGames = "rzqqo66";
     static final String getIpBlockSetting = "9sft2r8";

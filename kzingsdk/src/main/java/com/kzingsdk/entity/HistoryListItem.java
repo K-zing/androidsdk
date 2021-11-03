@@ -29,6 +29,7 @@ public class HistoryListItem implements Parcelable {
     private String potentialPayout = "";
     private Integer tokenStatus = 0;
     private String token = "";
+    private String currency = "";
 
     private ArrayList<Parlay> parlayList = new ArrayList<>();
 
@@ -56,6 +57,7 @@ public class HistoryListItem implements Parcelable {
         historyListItem.setPotentialPayout(rootObject.optString("potentialPayout"));
         historyListItem.setTokenStatus(rootObject.optInt("tokenstatus"));
         historyListItem.setToken(rootObject.optString("token"));
+        historyListItem.setCurrency(rootObject.optString("currency"));
 
         JSONArray parlayArray = rootObject.optJSONArray("data");
         if (parlayArray != null) {
@@ -232,6 +234,14 @@ public class HistoryListItem implements Parcelable {
         this.token = token;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(betTime);
@@ -252,6 +262,7 @@ public class HistoryListItem implements Parcelable {
         dest.writeString(potentialPayout);
         dest.writeInt(tokenStatus);
         dest.writeString(token);
+        dest.writeString(currency);
     }
 
     public HistoryListItem(Parcel in) {
@@ -273,6 +284,7 @@ public class HistoryListItem implements Parcelable {
         potentialPayout = in.readString();
         tokenStatus = in.readInt();
         token = in.readString();
+        currency = in.readString();
     }
 
     @Override
