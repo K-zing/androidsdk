@@ -66,7 +66,7 @@ public final class GamePlatformCreator {
                     } else {
                         gp = GamePlatform.newInstance(gamePlatformArray.optJSONObject(j));
                     }
-                    if (gp.getPlayStatus().contains(ENABLE_H5) || gp.getPlayStatus().contains(ENABLE_APP)) {
+//                    if (gp.getPlayStatus().contains(ENABLE_H5) || gp.getPlayStatus().contains(ENABLE_APP)) {
                         if (!(gp instanceof GamePlatformCustom)) {
                             if (!gp.getUrl().isEmpty()) {
                                 gamePlatformListList.add(gp);
@@ -74,7 +74,7 @@ public final class GamePlatformCreator {
                         } else {
                             gamePlatformListList.add(gp);
                         }
-                    }
+//                    }
                 }
             }
             if (gamePlatformListList.size() > 0) {
