@@ -4,15 +4,23 @@ import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.ActivityHistory;
+import com.kzingsdk.util.Constant;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import io.reactivex.Observable;
 
 public class GetActivityHistoryAPI extends CoreRequest {
 
+    private Integer pageCount = 10;
+    private Integer offset = 0;
+    private Calendar startDateCalendar, endDateCalendar;
+    
     GetActivityHistoryAPI() {
         super();
     }
@@ -20,6 +28,20 @@ public class GetActivityHistoryAPI extends CoreRequest {
     @Override
     protected String getAction() {
         return Action.getActivityHistory;
+    }
+    
+    @Override
+    protected JSONObject generateParamsJson() {
+        JSONObject jsonData = super.generateParamsJson();
+        try {
+            jsonData.put("pagecount", pageCount);
+            jsonData.put("offset", offset);
+            jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
+            jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
+            return jsonData;
+        } catch (JSONException ignored) {
+        }
+        return super.generateParamsJson();
     }
 
     @Override
@@ -53,5 +75,26 @@ public class GetActivityHistoryAPI extends CoreRequest {
     public interface GetActivityHistoryCallBack extends KzingCallBack {
         void onSuccess(ArrayList<ActivityHistory> activityHistory);
     }
+
+    public GetActivityHistoryAPI setStartDateCalendar(Calendar startDateCalendar) {
+        this.startDateCalendar = startDateCalendar;
+        return this;
+    }
+
+    public GetActivityHistoryAPI setEndDateCalendar(Calendar endDateCalendar) {
+        this.endDateCalendar = endDateCalendar;
+        return this;
+    }
+
+    public GetActivityHistoryAPI setOffset(int offset) {
+        this.offset = offset;
+        return this;
+    }
+
+    public GetActivityHistoryAPI setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+        return this;
+    }
+    
 }
 
