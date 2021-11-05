@@ -60,6 +60,7 @@ public class SubmitThirdPartyDepositAPI extends CoreRequest {
             }
             return jsonData;
         } catch (JSONException ignored) {
+
         }
         return super.generateParamsJson();
     }

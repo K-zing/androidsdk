@@ -18,8 +18,19 @@ import io.reactivex.Observable;
 
 public class GetWithdrawRecordAPI extends CoreRequest implements RequireCurrency {
 
+    private Integer pageCount = 10;
+    private Integer offset = 0;
+    private Calendar startDateCalendar, endDateCalendar;
+    private String currency;
+    private String status;
+
     GetWithdrawRecordAPI() {
         super();
+    }
+
+    @Override
+    protected String getAction() {
+        return Action.getWHistoryList;
     }
 
     @Override
@@ -42,21 +53,15 @@ public class GetWithdrawRecordAPI extends CoreRequest implements RequireCurrency
             jsonData.put("offset", offset);
             jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
             jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
+            if (status!=null)
+                jsonData.put("status", status);
+
             return jsonData;
         } catch (JSONException ignored) {
         }
         return super.generateParamsJson();
     }
 
-    @Override
-    protected String getAction() {
-        return Action.getWHistoryList;
-    }
-
-    private Integer pageCount = 10;
-    private Integer offset = 0;
-    private Calendar startDateCalendar, endDateCalendar;
-    private String currency;
 
     @Override
     public Observable<ArrayList<WithdrawRecord>> requestRx(Context context) {
@@ -120,6 +125,11 @@ public class GetWithdrawRecordAPI extends CoreRequest implements RequireCurrency
      */
     public GetWithdrawRecordAPI setParamPageCount(int pageCount) {
         this.pageCount = pageCount;
+        return this;
+    }
+
+    public GetWithdrawRecordAPI setParamStatus(String status) {
+        this.status = status;
         return this;
     }
 
