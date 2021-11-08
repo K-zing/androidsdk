@@ -11,6 +11,8 @@ import org.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 
 
 public class ActivityItem implements Parcelable {
@@ -60,6 +62,7 @@ public class ActivityItem implements Parcelable {
     private String displayStartTime;
     private String displayEndTime;
     private String keyFeature;
+    private HashSet<String> restrictedPlatform = new HashSet<>();
 
     public ActivityItem() {
 
@@ -82,6 +85,7 @@ public class ActivityItem implements Parcelable {
         activityReferDpt = (ActivityReferDpt) objectArray[3];
         activityFrontType = (ActivityType) objectArray[4];
         activitySignIn7Days = (ActivitySignIn7Days) objectArray[5];
+        restrictedPlatform = (HashSet<String>) objectArray[6];
         redirectUrl = in.readString();
         redirectType = RedirectType.valueOf(in.readString());
         displayOrder = in.readInt();
@@ -102,6 +106,49 @@ public class ActivityItem implements Parcelable {
         displayEndTime = in.readString();
         keyFeature = in.readString();
     }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(actId);
+        dest.writeString(actName);
+        dest.writeString(actDesc);
+        dest.writeString(content);
+        dest.writeString(cover);
+        dest.writeString(created);
+        dest.writeInt(canJoin ? 1 : 0);
+        dest.writeInt(isGift ? 1 : 0);
+        dest.writeString(show);
+        dest.writeArray(new Object[]{
+                activityType,
+                activityGift,
+                groupNames,
+                activityReferDpt,
+                activityFrontType,
+                activitySignIn7Days,
+                restrictedPlatform,
+        });
+        dest.writeString(redirectUrl);
+        dest.writeString(redirectType.name().toUpperCase());
+        dest.writeInt(displayOrder);
+        dest.writeLong(publishDate);
+        dest.writeLong(expiredDate);
+        dest.writeString(bgColor);
+        dest.writeString(fontColor);
+        dest.writeInt(isPublic ? 1 : 0);
+        dest.writeInt(applyStatus);
+        dest.writeString(availableDptAmt.toString());
+        dest.writeInt(showProgressBar ? 1 : 0);
+        dest.writeInt(applyPeriod);
+        dest.writeString(depositAmount.toString());
+        dest.writeString(fixBonusAmount.toString());
+        dest.writeInt(isPostPaidReward ? 1 : 0);
+        dest.writeInt(expiredDays);
+        dest.writeString(displayStartTime);
+        dest.writeString(displayEndTime);
+        dest.writeString(keyFeature);
+
+    }
+
 
     public static ActivityItem newInstance(JSONObject rootObject) {
         ActivityItem item = new ActivityItem();
@@ -130,6 +177,11 @@ public class ActivityItem implements Parcelable {
         item.setDisplayStartTime(rootObject.optString("displaystarttime"));
         item.setDisplayEndTime(rootObject.optString("displayendtime"));
         item.setKeyFeature(rootObject.optString("keyfeature"));
+
+        String restrictedPlatformArrayString = rootObject.optString("restricted_platform");
+        String[] restrictedPlatformArray = restrictedPlatformArrayString.split(",");
+        item.restrictedPlatform.addAll(Arrays.asList(restrictedPlatformArray));
+
         JSONArray groupNamesJSONArray = rootObject.optJSONArray("groupnames");
         for (int i = 0; i < groupNamesJSONArray.length(); i++) {
             item.getGroupNames().add(groupNamesJSONArray.optString(i));
@@ -467,6 +519,14 @@ public class ActivityItem implements Parcelable {
         this.keyFeature = keyFeature;
     }
 
+    public HashSet<String> getRestrictedPlatform() {
+        return restrictedPlatform;
+    }
+
+    public void setRestrictedPlatform(HashSet<String> restrictedPlatform) {
+        this.restrictedPlatform = restrictedPlatform;
+    }
+
     @Override
     public String toString() {
         return "ActivityItem{" +
@@ -485,47 +545,6 @@ public class ActivityItem implements Parcelable {
                 ", redirectUrl='" + redirectUrl + '\'' +
                 ", displayOrder=" + displayOrder +
                 '}';
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(actId);
-        dest.writeString(actName);
-        dest.writeString(actDesc);
-        dest.writeString(content);
-        dest.writeString(cover);
-        dest.writeString(created);
-        dest.writeInt(canJoin ? 1 : 0);
-        dest.writeInt(isGift ? 1 : 0);
-        dest.writeString(show);
-        dest.writeArray(new Object[]{
-                activityType,
-                activityGift,
-                groupNames,
-                activityReferDpt,
-                activityFrontType,
-                activitySignIn7Days,
-        });
-        dest.writeString(redirectUrl);
-        dest.writeString(redirectType.name().toUpperCase());
-        dest.writeInt(displayOrder);
-        dest.writeLong(publishDate);
-        dest.writeLong(expiredDate);
-        dest.writeString(bgColor);
-        dest.writeString(fontColor);
-        dest.writeInt(isPublic ? 1 : 0);
-        dest.writeInt(applyStatus);
-        dest.writeString(availableDptAmt.toString());
-        dest.writeInt(showProgressBar ? 1 : 0);
-        dest.writeInt(applyPeriod);
-        dest.writeString(depositAmount.toString());
-        dest.writeString(fixBonusAmount.toString());
-        dest.writeInt(isPostPaidReward ? 1 : 0);
-        dest.writeInt(expiredDays);
-        dest.writeString(displayStartTime);
-        dest.writeString(displayEndTime);
-        dest.writeString(keyFeature);
-
     }
 
     @Override
