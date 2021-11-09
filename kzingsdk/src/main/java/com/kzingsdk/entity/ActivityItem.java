@@ -59,8 +59,8 @@ public class ActivityItem implements Parcelable {
     private BigDecimal fixBonusAmount = BigDecimal.ZERO;
     private boolean isPostPaidReward = false;
     private int expiredDays = 0;
-    private String displayStartTime;
-    private String displayEndTime;
+    private long displayStartTime;
+    private long displayEndTime;
     private String keyFeature;
     private HashSet<String> restrictedPlatform = new HashSet<>();
 
@@ -102,8 +102,8 @@ public class ActivityItem implements Parcelable {
         fixBonusAmount = new BigDecimal(in.readString());
         isPostPaidReward = in.readInt() == 1;
         expiredDays = in.readInt();
-        displayStartTime = in.readString();
-        displayEndTime = in.readString();
+        displayStartTime = in.readLong();
+        displayEndTime = in.readLong();
         keyFeature = in.readString();
     }
 
@@ -143,8 +143,8 @@ public class ActivityItem implements Parcelable {
         dest.writeString(fixBonusAmount.toString());
         dest.writeInt(isPostPaidReward ? 1 : 0);
         dest.writeInt(expiredDays);
-        dest.writeString(displayStartTime);
-        dest.writeString(displayEndTime);
+        dest.writeLong(displayStartTime);
+        dest.writeLong(displayEndTime);
         dest.writeString(keyFeature);
 
     }
@@ -174,8 +174,8 @@ public class ActivityItem implements Parcelable {
         item.setIsPublic(rootObject.optString("ispublic", "1").equalsIgnoreCase("1"));
         item.setApplyStatus(rootObject.optInt("applyStatus", 0));
         item.setAvailableDptAmt(BigDecimalUtil.optBigDecimal(rootObject, "available_dptAmt"));
-        item.setDisplayStartTime(rootObject.optString("displaystarttime"));
-        item.setDisplayEndTime(rootObject.optString("displayendtime"));
+        item.setDisplayStartTime(rootObject.optLong("displaystarttime"));
+        item.setDisplayEndTime(rootObject.optLong("displayendtime"));
         item.setKeyFeature(rootObject.optString("keyfeature"));
 
         String restrictedPlatformArrayString = rootObject.optString("restricted_platform");
@@ -495,19 +495,19 @@ public class ActivityItem implements Parcelable {
         this.expiredDays = expiredDays;
     }
 
-    public String getDisplayStartTime() {
+    public long getDisplayStartTime() {
         return displayStartTime;
     }
 
-    public void setDisplayStartTime(String displayStartTime) {
+    public void setDisplayStartTime(long displayStartTime) {
         this.displayStartTime = displayStartTime;
     }
 
-    public String getDisplayEndTime() {
+    public long getDisplayEndTime() {
         return displayEndTime;
     }
 
-    public void setDisplayEndTime(String displayEndTime) {
+    public void setDisplayEndTime(long displayEndTime) {
         this.displayEndTime = displayEndTime;
     }
 

@@ -275,6 +275,22 @@ public final class KzingAPI {
         return new GetPlayerEWalletCardAPI();
     }
 
+    public static VerifyWdPasswordAPI verifyWdPassword() {
+        return new VerifyWdPasswordAPI();
+    }
+
+    public static ChangePwdbyWithdrawalAPI changePwdbyWithdrawal() {
+        return new ChangePwdbyWithdrawalAPI();
+    }
+
+    public static ForgotPwdVerifyUsernameAPI forgotPwdVerifyUsername() {
+        return new ForgotPwdVerifyUsernameAPI();
+    }
+
+    public static GetSendRegCodeDurationAPI getSendRegCodeDuration() {
+        return new GetSendRegCodeDurationAPI();
+    }
+
     public static GetAllWithdrawEWalletsAPI getAllWithdrawEWallets() {
         return new GetAllWithdrawEWalletsAPI();
     }
