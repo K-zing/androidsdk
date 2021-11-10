@@ -21,9 +21,11 @@ public class AllInOneResult {
     private ArrayList<GamePlatformContainer> gamePlatformContainerList;
     private ArrayList<ActivityItem> activityItemList;
     private boolean isLogined = false;
+    private AppUpdateInfo appUpdateInfo = new AppUpdateInfo();
 
     public static AllInOneResult newInstance(JSONObject jsonResponse, Context context) throws JSONException, IOException {
         AllInOneResult allInOneResult = new AllInOneResult();
+        allInOneResult.setAppUpdateInfo(AppUpdateInfo.newInstance(jsonResponse.optJSONObject("appVersion")));
         allInOneResult.setClientInfo(ClientInfo.newInstance(jsonResponse.optJSONObject("siteInfo")));
 
         JSONObject memberInfoObject = jsonResponse.optJSONObject("memberInfo");
@@ -35,6 +37,7 @@ public class AllInOneResult {
             SharePrefUtil.putString(context, Constant.Pref.VCTOKEN, vcToken);
             SharePrefUtil.putString(context, Constant.Pref.CCTOKEN, ccToken);
         }
+
 
         final GamePlatformCreator gamePlatformCreator = new GamePlatformCreator();
         JSONArray gamePlatformArray = jsonResponse.optJSONArray("gamePlatformList");
@@ -100,5 +103,13 @@ public class AllInOneResult {
 
     public void setLogined(boolean logined) {
         isLogined = logined;
+    }
+
+    public AppUpdateInfo getAppUpdateInfo() {
+        return appUpdateInfo;
+    }
+
+    public void setAppUpdateInfo(AppUpdateInfo appUpdateInfo) {
+        this.appUpdateInfo = appUpdateInfo;
     }
 }

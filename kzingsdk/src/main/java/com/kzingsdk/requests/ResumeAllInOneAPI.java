@@ -7,11 +7,14 @@ import com.kzingsdk.entity.AllInOneResult;
 import com.kzingsdk.util.Constant;
 import com.kzingsdk.util.SharePrefUtil;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import io.reactivex.Observable;
 
 public class ResumeAllInOneAPI extends CoreRequest {
+
+    private String version = "";
 
     ResumeAllInOneAPI() {
         super();
@@ -24,6 +27,13 @@ public class ResumeAllInOneAPI extends CoreRequest {
 
     @Override
     protected JSONObject generateParamsJson() {
+        JSONObject jsonData = super.generateParamsJson();
+        try {
+            jsonData.put("version", version);
+            jsonData.put("platform", PLATFORM_NAME);
+            return jsonData;
+        } catch (JSONException ignored) {
+        }
         return super.generateParamsJson();
     }
 
@@ -68,5 +78,9 @@ public class ResumeAllInOneAPI extends CoreRequest {
         void onSuccess(AllInOneResult allInOneResult);
     }
 
+    public ResumeAllInOneAPI setVersion(String version) {
+        this.version = version;
+        return this;
+    }
 }
 
