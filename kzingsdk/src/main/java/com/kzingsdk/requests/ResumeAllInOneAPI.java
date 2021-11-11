@@ -30,7 +30,6 @@ public class ResumeAllInOneAPI extends CoreRequest {
         JSONObject jsonData = super.generateParamsJson();
         try {
             jsonData.put("version", version);
-            jsonData.put("platform", PLATFORM_NAME);
             return jsonData;
         } catch (JSONException ignored) {
         }
