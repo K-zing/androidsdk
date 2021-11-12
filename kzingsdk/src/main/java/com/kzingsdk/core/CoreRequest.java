@@ -74,7 +74,6 @@ public abstract class CoreRequest {
     private static HashSet<String> failedIP = null;
 
     private final ArrayList<String> PORT_LIST = new ArrayList<String>() {{
-        add("");
         add("9999");
         add("9487");
         add("9496");
@@ -85,6 +84,7 @@ public abstract class CoreRequest {
         add("9009");
         add("8888");
         add("8998");
+        add("");
     }};
 
     private final HashSet<String> API_URL_SET = new HashSet<String>() {{
