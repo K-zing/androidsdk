@@ -63,15 +63,29 @@ public abstract class CoreRequest {
     protected final String SIGN_OBJECT_NAME = "sign";
     protected final String CLIENT_OBJECT_NAME = "aid";
     protected final String PLATFORM_NAME = "android";
-    private final int DOMAIN_USE_TIME = 200;
     private static int requestTimeoutMs = 10 * 1000;
 
     private String choseDomain = "";
+    private final int MAX_DOMAIN_USE = 200;
     private static int domainUsedCount = 0;
     private static String lastUsedIP = "";
     private final String defaultIP = "https://tvwkkq8k9e7grjbw49pk.jumzxxtu3j.com";
     private final String defaultBetterIP = "https://fsr5vqdhsspsrtz6fl93.jumzxxtu3j.com/";
     private static HashSet<String> failedIP = null;
+
+    private final ArrayList<String> PORT_LIST = new ArrayList<String>() {{
+        add("");
+        add("9999");
+        add("9487");
+        add("9496");
+        add("9587");
+        add("9119");
+        add("9190");
+        add("9250");
+        add("9009");
+        add("8888");
+        add("8998");
+    }};
 
     private final HashSet<String> API_URL_SET = new HashSet<String>() {{
         add(defaultIP);
@@ -81,6 +95,11 @@ public abstract class CoreRequest {
         add("https://weijinlai.com");
         add("https://hsrjah.com");
         add("https://nqj4hrthz4dtaytvbxnu.t8arxezlq7.com");
+        add("https://nwlzzv.marnnfnzqpnz.com");
+        add("https://arxzjq.epmmthxqvnfn.com");
+        add("https://erpnfh.qutfdbjapxmd.com");
+        add("https://xjgnfy.pzgktkvcwbch.com");
+        add("https://pnoeee.draxetggrjqu.com");
     }};
 
     private final HashSet<String> API_URL_SET_BETTER = new HashSet<String>() {{
@@ -163,7 +182,7 @@ public abstract class CoreRequest {
 
     private Observable<Retrofit> setupRetrofit(final Context context, final OkHttpClient client) {
         Observable<String> setupTask;
-        if (lastUsedIP.equalsIgnoreCase("") || domainUsedCount > DOMAIN_USE_TIME || failedIP.contains(lastUsedIP)) {
+        if (lastUsedIP.equalsIgnoreCase("") || domainUsedCount > MAX_DOMAIN_USE || failedIP.contains(lastUsedIP)) {
             setupTask = findFastestIPTask(context);
             domainUsedCount = 0;
         } else {
@@ -226,31 +245,32 @@ public abstract class CoreRequest {
             if (toCheckFailedSet.contains(ip)) {
                 continue;
             }
-            final FutureTask<String> future = new FutureTask<>(() -> {
-                pingIP(ip);
-                return ip;
-            });
+            final FutureTask<String> future = new FutureTask<>(() -> pingIP(ip));
             futureTasks.add(future);
         }
         return futureTasks;
     }
 
-    private Integer pingIP(final String ip) {
+    private String pingIP(final String ip) {
         int ping = Integer.MAX_VALUE;
-        try {
-            long startTime = System.currentTimeMillis();
-            URL toPingURL = new URL(ip);
-            URLConnection connection = toPingURL.openConnection();
-            connection.setConnectTimeout(2000);
-            connection.connect();
-            connection.getInputStream().close();
-            ping = (int) (System.currentTimeMillis() - startTime);
-        } catch (Exception e) {
-            e.printStackTrace();
-            log("pingIP IOException : " + e.getMessage() + " " + ip);
+        for (String port : PORT_LIST) {
+            String pingIp = ip + (port.length() > 0 ? (":" + port) : "");
+            try {
+                long startTime = System.currentTimeMillis();
+                URL toPingURL = new URL(pingIp);
+                URLConnection connection = toPingURL.openConnection();
+                connection.setConnectTimeout(2000);
+                connection.connect();
+                connection.getInputStream().close();
+                ping = (int) (System.currentTimeMillis() - startTime);
+                log("pingIP : " + pingIp + " - " + (ping == Integer.MAX_VALUE ? "Timeout" : ping + "ms"));
+                return pingIp;
+            } catch (Exception e) {
+//                e.printStackTrace();
+                log("pingIP IOException : " + pingIp + " " + e.getMessage());
+            }
         }
-        log("pingIP : " + ip + " - " + (ping == Integer.MAX_VALUE ? "Timeout" : ping + "ms"));
-        return ping;
+        return ip;
     }
 
     private void showLogDebug(Request request, Interceptor.Chain chain) throws IOException {
