@@ -208,6 +208,7 @@ public abstract class CoreRequest {
         } else {
             toFindSet = isUseBetterUrl(context) ? API_URL_SET_BETTER : API_URL_SET;
         }
+        toFindSet = toFindIpWithPortSet(toFindSet);
         if (failedIP.equals(toFindSet) || failedIP.size() >= toFindSet.size()) {
             if (KzingSDK.getInstance().isUseCustomUrl()) {
                 KzingSDK.getInstance().setUseCustomUrl(false);
@@ -222,8 +223,7 @@ public abstract class CoreRequest {
                 .flatMap((Function<FutureTask<String>, Publisher<String>>) futureTask -> {
                     executor.submit(futureTask);
                     return Flowable.fromFuture(futureTask, KzingSDK.getInstance().getPingCheckTimeoutMs(), TimeUnit.MILLISECONDS)
-                            .onErrorReturnItem("")
-                            .doOnNext(CoreRequest.this::log);
+                            .onErrorReturnItem("");
                 })
                 .sequential()
                 .doOnNext(s -> {
@@ -234,6 +234,7 @@ public abstract class CoreRequest {
                         throw new Exception();
                     }
                 })
+//                .doOnError(Throwable::printStackTrace)
                 .onErrorReturnItem(defaultIP)
                 .blockingFirst();
         return Observable.just(fastestIP);
@@ -251,24 +252,31 @@ public abstract class CoreRequest {
         return futureTasks;
     }
 
-    private String pingIP(final String ip) {
-        int ping = Integer.MAX_VALUE;
-        for (String port : PORT_LIST) {
-            String pingIp = ip + (port.length() > 0 ? (":" + port) : "");
-            try {
-                long startTime = System.currentTimeMillis();
-                URL toPingURL = new URL(pingIp);
-                URLConnection connection = toPingURL.openConnection();
-                connection.setConnectTimeout(2000);
-                connection.connect();
-                connection.getInputStream().close();
-                ping = (int) (System.currentTimeMillis() - startTime);
-                log("pingIP : " + pingIp + " - " + (ping == Integer.MAX_VALUE ? "Timeout" : ping + "ms"));
-                return pingIp;
-            } catch (Exception e) {
-//                e.printStackTrace();
-                log("pingIP IOException : " + pingIp + " " + e.getMessage());
+    private HashSet<String> toFindIpWithPortSet(HashSet<String> toFindSet) {
+        HashSet<String> toFindIpWithPortSet = new HashSet<>();
+        for (String ip : toFindSet) {
+            for (String port : PORT_LIST) {
+                String pingIp = ip + (!KzingSDK.getInstance().isUseCustomUrl() && port.length() > 0 ? (":" + port) : "");
+                toFindIpWithPortSet.add(pingIp);
             }
+        }
+        return toFindIpWithPortSet;
+    }
+
+    private String pingIP(final String ip) {
+//        int ping = Integer.MAX_VALUE;
+        try {
+            long startTime = System.currentTimeMillis();
+            URL toPingURL = new URL(ip);
+            URLConnection connection = toPingURL.openConnection();
+            connection.setConnectTimeout(2000);
+            connection.connect();
+            connection.getInputStream().close();
+//            ping = (int) (System.currentTimeMillis() - startTime);
+//            log("pingIP : " + ip + " - " + (ping == Integer.MAX_VALUE ? "Timeout" : ping + "ms"));
+        } catch (Exception e) {
+//                e.printStackTrace();
+//            log("pingIP IOException : " + ip + " " + e.getMessage());
         }
         return ip;
     }

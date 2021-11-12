@@ -33,10 +33,10 @@ public final class KzingSDK {
     private String sessionId;
     private LangCode langCode = LangCode.CHS;
 
-    private final int DEFAUL_REQUEST_TIMEOUT_MS = 1000 * 20;
-    private final int DEFAUL_PING_CHECK_TIMEOUT_MS = 1000 * 2;
-    private int requestTimeoutMs = DEFAUL_REQUEST_TIMEOUT_MS;
-    private int pingCheckTimeoutMs = DEFAUL_PING_CHECK_TIMEOUT_MS;
+    private final int DEFAULT_REQUEST_TIMEOUT_MS = 1000 * 20;
+    private final int DEFAULT_PING_CHECK_TIMEOUT_MS = 1000 * 2;
+    private int requestTimeoutMs = DEFAULT_REQUEST_TIMEOUT_MS;
+    private int pingCheckTimeoutMs = DEFAULT_PING_CHECK_TIMEOUT_MS;
 
     private boolean useCustomUrl = false;
     private HashSet<String> customUrlSet = new HashSet<>();
