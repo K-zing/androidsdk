@@ -12,7 +12,8 @@ public class RegParam {
     private boolean regBirthday, regQQ, reqPhone, regEmail, withdrawPassword, regWeixin,
             reqReferCode, regRealName, regMobileVerify, regPwdConfirm, regLegalAge, isHighLevelPass, reqPhoneCountry,
             reqDisplayReferCode, hasFriendPromo, regWhatsapp, regTelegram, regFacebook, regZalo, regLine, mustFillReferral,
-            regEmailDisplay, reqPhoneDisplay, regSkype;
+            regEmailDisplay, reqPhoneDisplay, regSkype, regEmailVerify;
+
     private int nameMin = 4, nameMax = 11;
     private int passwordMin = 6, passwordMax = 16;
     private String defaultAgentCode, withdrawPasswordFormat;
@@ -33,7 +34,6 @@ public class RegParam {
         regParam.setRegWeixin(paramObject.optString("regweixin").equalsIgnoreCase("ON"));
         regParam.setReqReferCode(paramObject.optString("reqrefercode").equalsIgnoreCase("ON"));
         regParam.setRegRealName(paramObject.optString("regrealname").equalsIgnoreCase("ON"));
-        regParam.setRegMobileVerify(paramObject.optString("registermobileverify").equalsIgnoreCase("ON"));
         regParam.setRegPwdConfirm(paramObject.optString("regPwdConfirm").equalsIgnoreCase("ON"));
         regParam.setRegLegalAge(paramObject.optString("regLegalAge").equalsIgnoreCase("ON"));
         regParam.setHighLevelPass(paramObject.optString("highLevelPass").equalsIgnoreCase("ON"));
@@ -47,6 +47,9 @@ public class RegParam {
         regParam.setRegEmailDisplay(paramObject.optString("regemaildisplay").equalsIgnoreCase("ON"));
         regParam.setReqPhoneDisplay(paramObject.optString("reqphonedisplay").equalsIgnoreCase("ON"));
         regParam.setRegSkype(paramObject.optString("regskype").equalsIgnoreCase("ON"));
+
+        regParam.setRegMobileVerify(paramObject.optString("registermobileverify").equalsIgnoreCase("ON"));
+        regParam.setRegEmailVerify(paramObject.optString("registeremailverify").equalsIgnoreCase("ON"));
 
         regParam.setWithdrawPasswordFormat(paramObject.optString("withdrawpasswordformat"));
 
@@ -306,6 +309,14 @@ public class RegParam {
 
     public void setRegSkype(boolean regSkype) {
         this.regSkype = regSkype;
+    }
+
+    public boolean isRegEmailVerify() {
+        return regEmailVerify;
+    }
+
+    public void setRegEmailVerify(boolean regEmailVerify) {
+        this.regEmailVerify = regEmailVerify;
     }
 
     @Override
