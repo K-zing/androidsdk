@@ -3,7 +3,6 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.MemberInfo;
 import com.kzingsdk.entity.RegParam;
 import com.kzingsdk.util.Constant;
 import com.kzingsdk.util.SharePrefUtil;
@@ -42,6 +41,7 @@ public class RegAccountAPI extends CoreRequest {
     private String facebook = "";
     private String utmCode = "";
     private String line = "";
+    private String skype = "";
     private String captchaValidate = "";
 
 
@@ -105,6 +105,7 @@ public class RegAccountAPI extends CoreRequest {
             jsonData.put("facebook", facebook);
             jsonData.put("utmcode", utmCode);
             jsonData.put("line", line);
+            jsonData.put("skype", skype);
             jsonData.put("captchaValidate", captchaValidate);
 
             jsonData.put("jsessionid", getSessionId());
@@ -261,6 +262,11 @@ public class RegAccountAPI extends CoreRequest {
 
     public RegAccountAPI setLine(String line) {
         this.line = line;
+        return this;
+    }
+
+    public RegAccountAPI setSkype(String skype) {
+        this.skype = skype;
         return this;
     }
 
