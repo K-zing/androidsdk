@@ -27,7 +27,6 @@ public class GamePlatformCustom extends GamePlatform{
         item.setCustomgpid(rootObject.optString("gpid"));
         item.setCustomgpname(rootObject.optString("gpnameCN"));
         item.setCustomgpename(rootObject.optString("gpnameEN"));
-        item.setDisplayorder(rootObject.optInt("displayorder"));
         item.setImage(rootObject.optString("image_an"));
 
         item.setBig(rootObject.optInt("is_big_game") == 1);
@@ -47,6 +46,18 @@ public class GamePlatformCustom extends GamePlatform{
                         ) ){
                     item.playableArrayList.add(gp);
                 }
+            }
+        }
+
+        Integer defaultCurrency = rootObject.optInt("displayorder");
+        item.currencyDisplayOrderMap.put("default", defaultCurrency);
+        JSONArray currenciesArray = rootObject.optJSONArray("currencies");
+        JSONObject displayOrdersObject = rootObject.optJSONObject("displayorders");
+        if (currenciesArray != null) {
+            for (int i = 0; i < currenciesArray.length(); i++) {
+                String currency = currenciesArray.optString(i);
+                Integer displayOrder = displayOrdersObject != null ? displayOrdersObject.optInt(currency) : defaultCurrency;
+                item.currencyDisplayOrderMap.put(currenciesArray.optString(i), displayOrder);
             }
         }
 
@@ -110,7 +121,6 @@ public class GamePlatformCustom extends GamePlatform{
                 ", banner='" + banner + '\'' +
                 ", isBig=" + isBig +
                 ", playableArrayList=" + playableArrayList +
-                ", displayorder=" + displayorder +
                 ", image='" + image + '\'' +
                 ", statusCode=" + getStatusCode() +
                 '}';

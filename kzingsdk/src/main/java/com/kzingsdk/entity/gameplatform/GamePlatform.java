@@ -2,10 +2,12 @@ package com.kzingsdk.entity.gameplatform;
 
 import com.kzingsdk.requests.KzingAPI;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.HashMap;
 
 import static com.kzingsdk.entity.gameplatform.GameOrientation.PORTRAIT;
 
@@ -52,7 +54,6 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
     private String frameIcons = "0";
     private long maintainStart = 0L;
     private long maintainEnd = 0L;
-    protected int displayorder = 0;
     private String url = "";
     protected String image = "";
     private GamePlatformType gamePlatformType;
@@ -64,6 +65,7 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
     private ArrayList<GamePlatformCategory> categoryArrayList = new ArrayList<>();
     private ArrayList<GamePlatformGroup> groupArrayList = new ArrayList<>();
     private GameOrientation gameOrientation = PORTRAIT;
+    protected HashMap<String, Integer> currencyDisplayOrderMap = new HashMap<>();
 
     public GamePlatform clone() {
         GamePlatform gp = new GamePlatform();
@@ -71,7 +73,6 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
         gp.gpaccountid = gpaccountid;
         gp.gpname = gpname;
         gp.gpename = gpename;
-        gp.displayorder = displayorder;
         gp.url = url;
         gp.image = image;
         gp.gamePlatformType = gamePlatformType;
@@ -83,6 +84,7 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
         gp.childArrayList = (ArrayList<GamePlatformChild>) childArrayList.clone();
         gp.categoryArrayList = (ArrayList<GamePlatformCategory>) categoryArrayList.clone();
         gp.groupArrayList = (ArrayList<GamePlatformGroup>) groupArrayList.clone();
+        gp.currencyDisplayOrderMap = (HashMap<String, Integer>) currencyDisplayOrderMap.clone();
         gp.gameOrientation = gameOrientation;
         return gp;
     }
@@ -100,7 +102,6 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
     protected static GamePlatform newInstance(JSONObject rootObject, boolean handleByCustom) {
         GamePlatform item = new GamePlatform();
         item.setUrl(rootObject.optString("app_url"));
-        item.setDisplayorder(rootObject.optInt("displayorder"));
         item.setGpAccountid(rootObject.optString("gpaccountid"));
         item.setGpid(rootObject.optString("gpid"));
         item.setGpname(rootObject.optString("gpnameCN"));
@@ -115,6 +116,17 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
         item.setPlayStatus(PlayStatus.getPlayStatus(statusFlag));
         item.setImage(rootObject.optString("image_an"));
         item.setGameOrientation(GameOrientation.values()[rootObject.optInt("orientation", 0)]);
+        Integer defaultCurrency = rootObject.optInt("displayorder");
+        item.currencyDisplayOrderMap.put("default", defaultCurrency);
+        JSONArray currenciesArray = rootObject.optJSONArray("currencies");
+        JSONObject displayOrdersObject = rootObject.optJSONObject("displayorders");
+        if (currenciesArray != null) {
+            for (int i = 0; i < currenciesArray.length(); i++) {
+                String currency = currenciesArray.optString(i);
+                Integer displayOrder = displayOrdersObject != null ? displayOrdersObject.optInt(currency) : defaultCurrency;
+                item.currencyDisplayOrderMap.put(currenciesArray.optString(i), displayOrder);
+            }
+        }
         return item;
     }
 
@@ -187,11 +199,19 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
     }
 
     public int getDisplayorder() {
-        return displayorder;
+        return currencyDisplayOrderMap.get("default");
     }
 
-    public void setDisplayorder(int displayorder) {
-        this.displayorder = displayorder;
+    public int getDisplayorder(String currency) {
+        return currencyDisplayOrderMap.get(currency);
+    }
+
+    public HashMap<String, Integer> getCurrencyDisplayOrderMap() {
+        return currencyDisplayOrderMap;
+    }
+
+    public void setCurrencyDisplayOrderMap(HashMap<String, Integer> currencyDisplayOrderMap) {
+        this.currencyDisplayOrderMap = currencyDisplayOrderMap;
     }
 
     public String getUrl() {
@@ -303,7 +323,6 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
                 ", gpname='" + gpname + '\'' +
                 ", maintainStart=" + maintainStart +
                 ", maintainEnd=" + maintainEnd +
-                ", displayorder=" + displayorder +
                 ", url='" + url + '\'' +
                 ", image='" + image + '\'' +
                 ", gamePlatformType=" + gamePlatformType +

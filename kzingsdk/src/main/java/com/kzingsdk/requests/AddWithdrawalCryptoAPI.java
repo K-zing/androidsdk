@@ -21,6 +21,7 @@ public class AddWithdrawalCryptoAPI extends CoreRequest {
         return Action.addWithdrawalCrypto;
     }
 
+    private String wdpassword;
     private String bankcode;
     private String network;
     private String address;
@@ -30,6 +31,8 @@ public class AddWithdrawalCryptoAPI extends CoreRequest {
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
+            if (wdpassword != null)
+                jsonData.put("wdpassword", wdpassword);
             if (bankcode != null)
                 jsonData.put("bankcode", bankcode);
             if (network != null)
@@ -90,5 +93,13 @@ public class AddWithdrawalCryptoAPI extends CoreRequest {
         this.note = note;
         return this;
     }
+
+    public AddWithdrawalCryptoAPI setWdpassword(String wdpassword) {
+        this.wdpassword = wdpassword;
+        return this;
+    }
+
+
+
 
 }

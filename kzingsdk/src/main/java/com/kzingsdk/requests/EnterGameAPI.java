@@ -3,6 +3,7 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
+import com.kzingsdk.entity.EnterGameResult;
 import com.kzingsdk.entity.gameplatform.GamePlatformChild;
 import com.kzingsdk.entity.gameplatform.Playable;
 
@@ -61,16 +62,16 @@ public class EnterGameAPI extends CoreRequest {
     }
 
     @Override
-    public Observable<String> requestRx(Context context) {
-        return super.baseExecute(context).map(jsonResponse -> jsonResponse.optString("url"));
+    public Observable<EnterGameResult> requestRx(Context context) {
+        return super.baseExecute(context).map(EnterGameResult::newInstance);
     }
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(url -> {
+        requestRx(context).subscribe(enterGameResult -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((EnterGameCallBack) kzingCallBack).onSuccess(url);
+                    ((EnterGameCallBack) kzingCallBack).onSuccess(enterGameResult);
                 }
             }
         }, defaultOnErrorConsumer);
@@ -82,7 +83,7 @@ public class EnterGameAPI extends CoreRequest {
     }
 
     public interface EnterGameCallBack extends KzingCallBack {
-        void onSuccess(String url);
+        void onSuccess(EnterGameResult enterGameResult);
     }
 
     /**
