@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import io.reactivex.Observable;
 
 
-public class AddWithdrawalCryptoAPI extends CoreRequest {
+public class AddWithdrawalCryptoAPI extends CoreRequest implements RequireCurrency{
 
     AddWithdrawalCryptoAPI() {
         super();
@@ -26,6 +26,7 @@ public class AddWithdrawalCryptoAPI extends CoreRequest {
     private String network;
     private String address;
     private String note;
+    private String currency;
 
     @Override
     protected JSONObject generateParamsJson() {
@@ -99,7 +100,15 @@ public class AddWithdrawalCryptoAPI extends CoreRequest {
         return this;
     }
 
+    public AddWithdrawalCryptoAPI setCurrency(String currency) {
+        this.currency = currency;
+        return this;
+    }
 
+    @Override
+    public String getCurrency() {
+        return currency;
+    }
 
 
 }
