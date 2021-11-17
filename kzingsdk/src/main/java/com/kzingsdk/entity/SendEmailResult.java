@@ -4,7 +4,8 @@ import org.json.JSONObject;
 
 public class SendEmailResult {
 
-    private Integer interval = 0;
+    private Integer intervalSec = 0;
+    private Integer validDuration = 0;
     private Boolean success = false;
     private String message = "";
     private String token = "";
@@ -15,19 +16,21 @@ public class SendEmailResult {
 
     public static SendEmailResult newInstance(JSONObject rootObject) {
         SendEmailResult sendEmailResult = new SendEmailResult();
-        sendEmailResult.setInterval(rootObject.optInt("validduration"));
+        sendEmailResult.setIntervalSec(rootObject.optInt("intervalsec"));
+        sendEmailResult.setValidDuration(rootObject.optInt("validduration"));
         sendEmailResult.setSuccess(rootObject.optInt("status") == 0);
         sendEmailResult.setMessage(rootObject.optString("message"));
         sendEmailResult.setToken(rootObject.optString("token"));
+
         return sendEmailResult;
     }
 
-    public Integer getInterval() {
-        return interval;
+    public Integer getValidDuration() {
+        return validDuration;
     }
 
-    public void setInterval(Integer interval) {
-        this.interval = interval;
+    public void setValidDuration(Integer validDuration) {
+        this.validDuration = validDuration;
     }
 
     public Boolean getSuccess() {
@@ -54,10 +57,18 @@ public class SendEmailResult {
         this.token = token;
     }
 
+    public Integer getIntervalSec() {
+        return intervalSec;
+    }
+
+    public void setIntervalSec(Integer intervalSec) {
+        this.intervalSec = intervalSec;
+    }
+
     @Override
     public String toString() {
         return "SendEmailResult{" +
-                "interval=" + interval +
+                "interval=" + validDuration +
                 ", success=" + success +
                 ", message='" + message + '\'' +
                 ", token='" + token + '\'' +

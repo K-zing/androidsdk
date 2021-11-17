@@ -127,7 +127,7 @@ final class Action {
     static final String addWithdrawalCrypto = "uljxjnd";
     static final String submitWithdrawCrypto = "ozhmubp";
     static final String getCryptoBetWinAmount = "awevliu";
-    static final String manageWithdrawCrypto = "ozhmubp";
+    static final String manageWithdrawCrypto = "ubpozhm";
 
     static final String cryptoRedeemToken = "iqtrhrj";
     static final String cryptoGetTransaction = "OuasJfO";

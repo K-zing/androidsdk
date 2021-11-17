@@ -63,6 +63,7 @@ public class ActivityItem implements Parcelable {
     private long displayEndTime;
     private String keyFeature;
     private HashSet<String> restrictedPlatform = new HashSet<>();
+    private String currency;
 
     public ActivityItem() {
 
@@ -105,6 +106,7 @@ public class ActivityItem implements Parcelable {
         displayStartTime = in.readLong();
         displayEndTime = in.readLong();
         keyFeature = in.readString();
+        currency = in.readString();
     }
 
     @Override
@@ -146,6 +148,7 @@ public class ActivityItem implements Parcelable {
         dest.writeLong(displayStartTime);
         dest.writeLong(displayEndTime);
         dest.writeString(keyFeature);
+        dest.writeString(currency);
 
     }
 
@@ -160,6 +163,7 @@ public class ActivityItem implements Parcelable {
         item.setContent(rootObject.optString("content"));
         item.setCover(rootObject.optString("cover"));
         item.setCreated(rootObject.optString("created"));
+        item.setCurrency(rootObject.optString("currency"));
         item.setCanJoin(rootObject.optBoolean("canJoin"));
         item.setIsGift(rootObject.optBoolean("isGift"));
         item.setShow(rootObject.optString("show"));
@@ -525,6 +529,14 @@ public class ActivityItem implements Parcelable {
 
     public void setRestrictedPlatform(HashSet<String> restrictedPlatform) {
         this.restrictedPlatform = restrictedPlatform;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     @Override
