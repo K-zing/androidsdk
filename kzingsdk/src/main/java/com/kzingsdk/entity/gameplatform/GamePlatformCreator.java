@@ -189,7 +189,7 @@ public final class GamePlatformCreator {
                         GamePlatform gpClone = gp.clone();
                         if (customGpchildid != null) {
                             if (customGpchildid.equals("0")) {
-                                gpClone.setDisplayorder(customDisplayorder);
+                                gpClone.getCurrencyDisplayOrderMap().put("default",customDisplayorder);
                                 ((GamePlatformCustom) gpPlatform).getPlayableArrayList().add(gpClone.clone());
                             } else {
                                 ArrayList<GamePlatformChild> findChildList = getAllGpChildList(gpClone);

@@ -15,15 +15,6 @@ public class ClientInfo implements Parcelable {
     public static final int USE_ACTIVITYS_BANNER = 1;
     public static final int USE_CLIENTINFO_BANNER = 2;
 
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public ClientInfo createFromParcel(Parcel in) {
-            return new ClientInfo(in);
-        }
-
-        public ClientInfo[] newArray(int size) {
-            return new ClientInfo[size];
-        }
-    };
     private String siteName;
     private String siteDomain;
     private String siteId;
@@ -37,7 +28,6 @@ public class ClientInfo implements Parcelable {
     private boolean hasRedPocket;
     private String redPocketImageUrl;
     private int useBanner = USE_ACTIVITYS_BANNER;
-    private ArrayList<String> bannerList = new ArrayList<>();
     private ArrayList<String> bannerCountdownList = new ArrayList<>();
     private ArrayList<String> bannerFirstLaunchList = new ArrayList<>();
     private HashMap<String, ThemeInfo> clientThemeMap;
@@ -124,35 +114,23 @@ public class ClientInfo implements Parcelable {
         clientInfo.setAllowCryptoCurrencyWithdrawal(rootObject.optBoolean("allowcryptocurrencywithdrawal", false));
         clientInfo.setAllowPlayerDeleteCryptoAddr(rootObject.optBoolean("allowplayerdeletecryptoaddr", false));
         clientInfo.setCryptoFixedExchangeRate(rootObject.optString("cryptofixedexchangerate"));
-
         clientInfo.memberPanAgentCodeList = new ArrayList<>();
         clientInfo.memberPanUsernameList = new ArrayList<>();
-
         JSONArray memberPanAgentCodeJSONArray = rootObject.optJSONArray("memberpanagentcode");
         if (memberPanAgentCodeJSONArray != null) {
             for (int i = 0; i < memberPanAgentCodeJSONArray.length(); i++) {
                 clientInfo.memberPanAgentCodeList.add(memberPanAgentCodeJSONArray.optString(i));
             }
         }
-
         JSONArray memberPanUsernameJSONArray = rootObject.optJSONArray("memberpanusername");
         if (memberPanUsernameJSONArray != null) {
             for (int i = 0; i < memberPanUsernameJSONArray.length(); i++) {
                 clientInfo.memberPanUsernameList.add(memberPanUsernameJSONArray.optString(i));
             }
         }
-
         for (int i = 301; i < 400; i++) {
             clientInfo.websiteConfigMap.put(i, rootObject.optString("wc" + i));
         }
-        JSONArray bannerJSONArray = rootObject.optJSONArray("bannerList");
-        ArrayList<String> bannerList = new ArrayList<>();
-        if (bannerJSONArray != null) {
-            for (int i = 0; i < bannerJSONArray.length(); i++) {
-                bannerList.add(bannerJSONArray.optString(i));
-            }
-        }
-        clientInfo.setBannerList(bannerList);
         JSONArray bannerCountdownJSONArray = rootObject.optJSONArray("bannerCountdown");
         ArrayList<String> bannerCountdownList = new ArrayList<>();
         if (bannerCountdownJSONArray != null) {
@@ -288,14 +266,6 @@ public class ClientInfo implements Parcelable {
 
     public void setUseBanner(int useBanner) {
         this.useBanner = useBanner;
-    }
-
-    public ArrayList<String> getBannerList() {
-        return bannerList;
-    }
-
-    public void setBannerList(ArrayList<String> bannerList) {
-        this.bannerList = bannerList;
     }
 
     public boolean isAllowUserEditProfile() {
@@ -628,18 +598,18 @@ public class ClientInfo implements Parcelable {
         announcement = in.readString();
         useBanner = in.readInt();
         Object[] objectArray = in.readArray(ClientInfo.class.getClassLoader());
-        bannerList = (ArrayList<String>) objectArray[0];
-        clientThemeMap = (HashMap<String, ThemeInfo>) objectArray[1];
-        websiteConfigMap = (HashMap<Integer, String>) objectArray[2];
-        bannerCountdownList = (ArrayList<String>) objectArray[3];
-        bannerFirstLaunchList = (ArrayList<String>) objectArray[4];
-        memberPanPlayerGroup = (HashSet<String>) objectArray[5];
-        feedbackContactInfo = (ContactInfo) objectArray[5];
-        partnershipContactInfo = (ContactInfo) objectArray[6];
-        socialMediaContactInfo = (ContactInfo) objectArray[7];
-        captchaApiId = (CaptchaApiId) objectArray[8];
-        memberPanAgentCodeList = (ArrayList<String>) objectArray[9];
-        memberPanUsernameList = (ArrayList<String>) objectArray[10];
+        int i = 0;
+        clientThemeMap = (HashMap<String, ThemeInfo>) objectArray[i++];
+        websiteConfigMap = (HashMap<Integer, String>) objectArray[i++];
+        bannerCountdownList = (ArrayList<String>) objectArray[i++];
+        bannerFirstLaunchList = (ArrayList<String>) objectArray[i++];
+        memberPanPlayerGroup = (HashSet<String>) objectArray[i++];
+        feedbackContactInfo = (ContactInfo) objectArray[i++];
+        partnershipContactInfo = (ContactInfo) objectArray[i++];
+        socialMediaContactInfo = (ContactInfo) objectArray[i++];
+        captchaApiId = (CaptchaApiId) objectArray[i++];
+        memberPanAgentCodeList = (ArrayList<String>) objectArray[i++];
+        memberPanUsernameList = (ArrayList<String>) objectArray[i++];
         hasRedPocket = in.readInt() == 1;
         redPocketImageUrl = in.readString();
         defaultViewMode = in.readString();
@@ -683,7 +653,6 @@ public class ClientInfo implements Parcelable {
         dest.writeString(announcement);
         dest.writeInt(useBanner);
         dest.writeArray(new Object[]{
-                bannerList,
                 clientThemeMap,
                 websiteConfigMap,
                 bannerCountdownList,
@@ -746,7 +715,6 @@ public class ClientInfo implements Parcelable {
                 ", hasRedPocket=" + hasRedPocket +
                 ", redPocketImageUrl='" + redPocketImageUrl + '\'' +
                 ", useBanner=" + useBanner +
-                ", bannerList=" + bannerList +
                 ", clientThemeMap=" + clientThemeMap +
                 ", defaultViewMode='" + defaultViewMode + '\'' +
                 ", allowSendEmail=" + allowSendEmail +
@@ -762,4 +730,15 @@ public class ClientInfo implements Parcelable {
 
                 '}';
     }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public ClientInfo createFromParcel(Parcel in) {
+            return new ClientInfo(in);
+        }
+
+        public ClientInfo[] newArray(int size) {
+            return new ClientInfo[size];
+        }
+    };
+
 }
