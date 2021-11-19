@@ -15,6 +15,7 @@ public class RequestVerifyPlayerPhoneAPI extends CoreRequest {
 
     private String phone = null;
     private String playerPhoneCountry = null;
+    private String step = null;
     private boolean requestVoice = false;
 
     RequestVerifyPlayerPhoneAPI() {
@@ -41,6 +42,8 @@ public class RequestVerifyPlayerPhoneAPI extends CoreRequest {
             jsonData.put("phone", phone);
             if (playerPhoneCountry != null)
                 jsonData.put("playerPhoneCountry", playerPhoneCountry);
+            if (step != null)
+                jsonData.put("step", step);
             jsonData.put("requestVoice", requestVoice);
             return jsonData;
         } catch (JSONException ignored) {
@@ -87,7 +90,13 @@ public class RequestVerifyPlayerPhoneAPI extends CoreRequest {
         return requestVoice;
     }
 
-    public void setRequestVoice(boolean requestVoice) {
+    public RequestVerifyPlayerPhoneAPI setRequestVoice(boolean requestVoice) {
         this.requestVoice = requestVoice;
+        return this;
+    }
+
+    public RequestVerifyPlayerPhoneAPI setStep(String step) {
+        this.step = step;
+        return this;
     }
 }
