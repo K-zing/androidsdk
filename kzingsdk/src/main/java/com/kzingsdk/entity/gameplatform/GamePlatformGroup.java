@@ -4,27 +4,25 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 
 
 public class GamePlatformGroup {
 
-    private GamePlatform gamePlatform ;
-    private String childGroupId = "" ;
-    private String childGroupName = "" ;
-    private String image = "" ;
-    private int displayorder = 0 ;
+    private GamePlatform gamePlatform;
+    private String childGroupId = "";
+    private String childGroupName = "";
+    private String image = "";
+    private int displayorder = 0;
     private ArrayList<GamePlatformChild> childArrayList = new ArrayList<>();
     private ArrayList<GamePlatformCategory> categoryArrayList = new ArrayList<>();
 
-    public GamePlatformGroup(){
+    public GamePlatformGroup() {
 
-    };
+    }
 
-    public static GamePlatformGroup newInstance(JSONObject rootObject,GamePlatform gamePlatform) {
-        HashSet<Integer> checkCatagorySet = new HashSet<>();
-
+    public static GamePlatformGroup newInstance(JSONObject rootObject, GamePlatform gamePlatform) {
+//        HashSet<Integer> checkCatagorySet = new HashSet<>();
         GamePlatformGroup item = new GamePlatformGroup();
         item.setGamePlatform(gamePlatform);
         item.setChildGroupId(rootObject.optString("childgroupid"));
@@ -33,11 +31,11 @@ public class GamePlatformGroup {
         item.setImage(rootObject.optString("image"));
 
         JSONArray childsArray = rootObject.optJSONArray("childs");
-        if(childsArray!=null){
-            for(int i = 0 ; i < childsArray.length() ; i++){
-                GamePlatformChild child = GamePlatformChild.newInstance(childsArray.optJSONObject(i),gamePlatform);
-                if(child.isEnabled()){
-                    checkCatagorySet.addAll(child.getCategorysSet());
+        if (childsArray != null) {
+            for (int i = 0; i < childsArray.length(); i++) {
+                GamePlatformChild child = GamePlatformChild.newInstance(childsArray.optJSONObject(i), gamePlatform);
+                if (child.isEnabled()) {
+//                    checkCatagorySet.addAll(child.getCategorysSet());
                     item.childArrayList.add(child);
                 }
             }
@@ -45,10 +43,10 @@ public class GamePlatformGroup {
         return item;
     }
 
-    public ArrayList<GamePlatformChild> getChildListByCategory(GamePlatformCategory gamePlatformCategory){
+    public ArrayList<GamePlatformChild> getChildListByCategory(GamePlatformCategory gamePlatformCategory) {
         ArrayList<GamePlatformChild> resultList = new ArrayList<>();
-        for(GamePlatformChild child :childArrayList){
-            if(child.getCategorysSet().contains( Integer.parseInt(gamePlatformCategory.getChildCategoryId()))){
+        for (GamePlatformChild child : childArrayList) {
+            if (child.getCategorysSet().contains(Integer.parseInt(gamePlatformCategory.getChildCategoryId()))) {
                 resultList.add(child);
             }
         }

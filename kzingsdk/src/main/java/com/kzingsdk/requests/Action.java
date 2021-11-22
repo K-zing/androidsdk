@@ -81,6 +81,7 @@ final class Action {
     static final String getWHistoryList = "ffe6392";
     static final String getTHistoryList = "ffe6392";
     static final String getBetHistoryList = "07db642";
+    static final String getEpGamePlatform = "va2vlia";
     static final String cancelWithdrawal = "1mhcmap";
     static final String getMessageList = "bd01e4c";
     static final String deleteMessage = "ln28d0h";

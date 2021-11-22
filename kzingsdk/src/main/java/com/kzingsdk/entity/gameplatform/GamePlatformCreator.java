@@ -119,12 +119,6 @@ public final class GamePlatformCreator {
                                 }
                             }
                             gpPlatform.setChildArrayList(childList);
-                            if (gpPlatform.getGpid().equalsIgnoreCase("5434054984301")) {
-                                Log.d("Creator", "gpPlatform 5434054984301 = " + gpPlatform.getChildArrayList().size());
-                            }
-                            if (gpPlatform.getGpid().equalsIgnoreCase("7295220587201")) {
-                                Log.d("Creator", "gpPlatform 7295220587201 = " + gpPlatform.getChildArrayList().size());
-                            }
                         } else if (childGroupArray.length() > 1) {
                             for (int cg = 0; cg < childGroupArray.length(); cg++) {
                                 GamePlatformGroup group = GamePlatformGroup.newInstance(childGroupArray.optJSONObject(cg), gpPlatform);

@@ -130,6 +130,52 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
         return item;
     }
 
+    public static GamePlatform newInstanceFromEp(JSONObject rootObject) {
+        GamePlatform item = new GamePlatform();
+        item.setUrl(rootObject.optString("app_url"));
+        item.setGpAccountid(rootObject.optString("gpaccountid"));
+        item.setGpid(rootObject.optString("gpid"));
+        item.setGpname(rootObject.optString("gpnameCN"));
+        item.setGpename(rootObject.optString("gpnameEN"));
+        item.setMaintainStart(rootObject.optLong("maintain_start", 0L));
+        item.setMaintainEnd(rootObject.optLong("maintain_end", 0L));
+        item.setStatusCode(rootObject.optInt("status", NOT_MAINTAIN));
+        item.setClientStatusCode(rootObject.optInt("client_status", NOT_MAINTAIN));
+        item.setFrameIcons(rootObject.optString("frame_icons"));
+        item.setGamePlatformType(GamePlatformType.valueOfTypeId(rootObject.optInt("gptype")));
+        int statusFlag = rootObject.optInt("enable_an_app", 0) << 1 | rootObject.optInt("enable_an_h5", 0);
+        item.setPlayStatus(PlayStatus.getPlayStatus(statusFlag));
+        item.setImage(rootObject.optString("image_an"));
+        item.setGameOrientation(GameOrientation.values()[rootObject.optInt("orientation", 0)]);
+        Integer defaultCurrency = rootObject.optInt("displayorder");
+        item.currencyDisplayOrderMap.put("default", defaultCurrency);
+
+        JSONArray childGroupsArray = rootObject.optJSONArray("childgroups");
+        if (childGroupsArray != null) {
+            for (int i = 0; i < childGroupsArray.length(); i++) {
+                JSONObject childGroup  =childGroupsArray.optJSONObject(i);
+                JSONArray childArray = childGroup.optJSONArray("childs");
+                if (childArray != null) {
+                    for (int j = 0; j < childArray.length(); j++) {
+                        item.childArrayList.add(GamePlatformChild.newInstance(childArray.optJSONObject(j),item));
+                    }
+                }
+                item.groupArrayList.add(GamePlatformGroup.newInstance(childGroup, item));
+            }
+        }
+
+        JSONArray currenciesArray = rootObject.optJSONArray("currencies");
+        JSONObject displayOrdersObject = rootObject.optJSONObject("displayorders");
+        if (currenciesArray != null) {
+            for (int i = 0; i < currenciesArray.length(); i++) {
+                String currency = currenciesArray.optString(i);
+                Integer displayOrder = displayOrdersObject != null ? displayOrdersObject.optInt(currency) : defaultCurrency;
+                item.currencyDisplayOrderMap.put(currenciesArray.optString(i), displayOrder);
+            }
+        }
+        return item;
+    }
+
     public static GamePlatform newInstance(JSONObject rootObject) {
         return newInstance(rootObject, false);
     }

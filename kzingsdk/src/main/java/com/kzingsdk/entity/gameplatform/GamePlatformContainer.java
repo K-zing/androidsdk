@@ -1,11 +1,14 @@
 package com.kzingsdk.entity.gameplatform;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class GamePlatformContainer {
 
-    private GamePlatformType type = null;
-    private ArrayList<GamePlatform> gamePlatformList = new ArrayList<>();
+    private GamePlatformType type;
+    private ArrayList<GamePlatform> gamePlatformList;
 
     public GamePlatformContainer(GamePlatformType type) {
         this.type = type;
@@ -15,6 +18,18 @@ public class GamePlatformContainer {
     public GamePlatformContainer(GamePlatformType type, ArrayList<GamePlatform> gamePlatformList) {
         this.type = type;
         this.gamePlatformList = (ArrayList<GamePlatform>) gamePlatformList.clone();
+    }
+
+    public static GamePlatformContainer newInstanceFromEp(JSONObject rootObject) {
+        GamePlatformType type = GamePlatformType.valueOfTypeId(rootObject.optInt("gptype"));
+        GamePlatformContainer item = new GamePlatformContainer(type);
+        JSONArray gamePlatformArray = rootObject.optJSONArray("gp");
+        if (gamePlatformArray != null) {
+            for (int i = 0; i < gamePlatformArray.length(); i++) {
+                item.gamePlatformList.add(GamePlatform.newInstanceFromEp(gamePlatformArray.optJSONObject(i)));
+            }
+        }
+        return item;
     }
 
     public GamePlatformType getType() {
