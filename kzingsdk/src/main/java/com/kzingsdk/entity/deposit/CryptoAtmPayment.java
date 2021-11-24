@@ -16,6 +16,7 @@ public class CryptoAtmPayment extends BasePaymentMethod implements Parcelable {
     private int showField;
     private String qrcode;
     private BigDecimal promoRate = BigDecimal.ZERO;
+    private BigDecimal sSealsRate = BigDecimal.ZERO;
     private String accountId;
     private String dpAddress;
     private String key;
@@ -37,6 +38,7 @@ public class CryptoAtmPayment extends BasePaymentMethod implements Parcelable {
         item.setDisplayOrder(rootObject.optInt("displayorder"));
         item.setDisplayFlag(rootObject.optInt("displayflag"));
         item.setPromoRate(BigDecimalUtil.optBigDecimal(rootObject, "promorate", BigDecimal.ZERO));
+        item.setSSealsRate(BigDecimalUtil.optBigDecimal(rootObject, "ssealsrate", BigDecimal.ZERO));
         item.setShowField(rootObject.optInt("showfield"));
         item.setRandom(rootObject.optInt("random"));
         item.setAccountId(rootObject.optString("accountid"));
@@ -93,6 +95,14 @@ public class CryptoAtmPayment extends BasePaymentMethod implements Parcelable {
 
     public void setPromoRate(BigDecimal promoRate) {
         this.promoRate = promoRate;
+    }
+
+    public BigDecimal getSSealsRate() {
+        return sSealsRate;
+    }
+
+    public void setSSealsRate(BigDecimal sSealsRate) {
+        this.sSealsRate = sSealsRate;
     }
 
     public String getAccountId() {
@@ -169,6 +179,7 @@ public class CryptoAtmPayment extends BasePaymentMethod implements Parcelable {
         random = in.readInt();
         isAllowDecimal = in.readInt() == 1;
         promoRate = new BigDecimal(in.readString());
+        sSealsRate = new BigDecimal(in.readString());
         formType = in.readString();
         accountId = in.readString();
         dpAddress = in.readString();
@@ -199,6 +210,7 @@ public class CryptoAtmPayment extends BasePaymentMethod implements Parcelable {
         dest.writeInt(random);
         dest.writeInt(isAllowDecimal ? 1 : 0);
         dest.writeString(promoRate.toString());
+        dest.writeString(sSealsRate.toString());
         dest.writeString(formType);
         dest.writeString(accountId);
         dest.writeString(dpAddress);

@@ -1,11 +1,13 @@
 package com.kzingsdk.util;
 
+import com.kzingsdk.core.KzingSDK;
+
 import java.text.SimpleDateFormat;
 
 
 public final class Constant {
 
-    private Constant(){
+    private Constant() {
 
     }
 
@@ -15,7 +17,8 @@ public final class Constant {
     }
 
     public static class Pref {
-        public static final String PREF_FILE_NAME = "com.kzingsdk";
+        public static final String PREF_PREFIX = "com.kzingsdk";
+        public static final String PREF_FILE_NAME = PREF_PREFIX + "." + KzingSDK.getInstance().getApiKey();
         public static final String VCTOKEN = PREF_FILE_NAME + "." + "VCTOKEN";
         public static final String CCTOKEN = PREF_FILE_NAME + "." + "CCTOKEN";
         public static final String VCID = PREF_FILE_NAME + "." + "VCID";
@@ -25,7 +28,6 @@ public final class Constant {
         public static final String BASICKEY = PREF_FILE_NAME + "." + "BASICKEY";
         public static final String AID = PREF_FILE_NAME + "." + "AID";
         public static final String USE_BETTER_URL = PREF_FILE_NAME + "." + "USE_BETTER_URL";
-
         public static final String GAMEPLATFORM = PREF_FILE_NAME + "." + "GAMEPLATFORM";
         public static final String GAMEPLATFORMCHILD = PREF_FILE_NAME + "." + "GAMEPLATFORMCHILDARRAY";
 
