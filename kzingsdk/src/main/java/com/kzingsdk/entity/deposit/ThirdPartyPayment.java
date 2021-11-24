@@ -24,7 +24,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
     private BigDecimal randMin = BigDecimal.ZERO;
     private Integer randType = -1;
     private BigDecimal promoRate = BigDecimal.ZERO;
-    private BigDecimal sSealsRate = BigDecimal.ZERO;
+    private BigDecimal sDealsRate = BigDecimal.ZERO;
     private ArrayList<COption> cOptionList = new ArrayList<>();
 
     //extra for phone deposit
@@ -82,7 +82,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         item.setRandMin(BigDecimalUtil.optBigDecimal(rootObject, "randMin", BigDecimal.ZERO));
         item.setRandType(rootObject.optInt("randType", -1));
         item.setPromoRate(BigDecimalUtil.optBigDecimal(rootObject, "promorate", BigDecimal.ZERO));
-        item.setSSealsRate(BigDecimalUtil.optBigDecimal(rootObject, "ssealsrate", BigDecimal.ZERO));
+        item.setSDealsRate(BigDecimalUtil.optBigDecimal(rootObject, "sdealsrate", BigDecimal.ZERO));
 
         JSONArray fixAmtArray = rootRootObject.optJSONArray("fixAmtArray");
         if (fixAmtArray != null) {
@@ -217,12 +217,12 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         this.promoRate = promoRate;
     }
 
-    public BigDecimal getSSealsRate() {
-        return sSealsRate;
+    public BigDecimal getSDealsRate() {
+        return sDealsRate;
     }
 
-    public void setSSealsRate(BigDecimal sSealsRate) {
-        this.sSealsRate = sSealsRate;
+    public void setSDealsRate(BigDecimal sDealsRate) {
+        this.sDealsRate = sDealsRate;
     }
 
     public Integer getBcid() {
@@ -322,7 +322,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         minDpt = new BigDecimal(in.readString());
         pRate = new BigDecimal(in.readString());
         promoRate = new BigDecimal(in.readString());
-        sSealsRate = new BigDecimal(in.readString());
+        sDealsRate = new BigDecimal(in.readString());
         formType = in.readString();
         Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
         fixAmounts = (String[]) customObjects[0];
@@ -361,7 +361,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         dest.writeString(minDpt.toString());
         dest.writeString(pRate.toString());
         dest.writeString(promoRate.toString());
-        dest.writeString(sSealsRate.toString());
+        dest.writeString(sDealsRate.toString());
         dest.writeString(formType);
         Object[] customObjects = new Object[5];
         customObjects[0] = fixAmounts;

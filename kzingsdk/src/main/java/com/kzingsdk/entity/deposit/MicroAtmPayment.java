@@ -20,7 +20,7 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
     private String qrcode;
     private String key;
     private BigDecimal promoRate = BigDecimal.ZERO;
-    private BigDecimal sSealsRate = BigDecimal.ZERO;
+    private BigDecimal sDealsRate = BigDecimal.ZERO;
     private BigDecimal bcMin = BigDecimal.ZERO;
     private BigDecimal bcMax = BigDecimal.ZERO;
     private Integer showField;
@@ -48,7 +48,7 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
         item.setNumber(rootObject.optInt("number"));
         item.setBcOptionType(rootObject.optInt("bcoptiontype"));
         item.setPromoRate(BigDecimalUtil.optBigDecimal(rootObject, "promorate", BigDecimal.ZERO));
-        item.setSSealsRate(BigDecimalUtil.optBigDecimal(rootObject, "ssealsrate", BigDecimal.ZERO));
+        item.setSDealsRate(BigDecimalUtil.optBigDecimal(rootObject, "sdealsrate", BigDecimal.ZERO));
         item.setBcMin(BigDecimalUtil.optBigDecimal(rootObject, "bcmin", BigDecimal.ZERO));
         item.setBcMax(BigDecimalUtil.optBigDecimal(rootObject, "bcmax", BigDecimal.ZERO));
         return item;
@@ -126,12 +126,12 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
         this.promoRate = promoRate;
     }
 
-    public BigDecimal getSSealsRate() {
-        return sSealsRate;
+    public BigDecimal getSDealsRate() {
+        return sDealsRate;
     }
 
-    public void setSSealsRate(BigDecimal sSealsRate) {
-        this.sSealsRate = sSealsRate;
+    public void setSDealsRate(BigDecimal sDealsRate) {
+        this.sDealsRate = sDealsRate;
     }
 
     public Integer getShowField() {
@@ -205,7 +205,7 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
         qrcode = in.readString();
         key = in.readString();
         promoRate = new BigDecimal(in.readString());
-        sSealsRate = new BigDecimal(in.readString());
+        sDealsRate = new BigDecimal(in.readString());
         bcMin = new BigDecimal(in.readString());
         bcMax = new BigDecimal(in.readString());
         showField = in.readInt();
@@ -239,7 +239,7 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
         dest.writeString(qrcode);
         dest.writeString(key);
         dest.writeString(promoRate.toString());
-        dest.writeString(sSealsRate.toString());
+        dest.writeString(sDealsRate.toString());
         dest.writeString(bcMin.toString());
         dest.writeString(bcMax.toString());
         dest.writeInt(showField);

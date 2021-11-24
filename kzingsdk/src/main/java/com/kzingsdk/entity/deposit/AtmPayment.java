@@ -20,7 +20,7 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
     private String qrcode;
     private boolean isQrcode = false;
     private BigDecimal promoRate = BigDecimal.ZERO;
-    private BigDecimal sSealsRate = BigDecimal.ZERO;
+    private BigDecimal sDealsRate = BigDecimal.ZERO;
     private String bcMin;
     private String bcMax;
     private String network;
@@ -44,7 +44,7 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         item.setRandom(rootObject.optInt("random"));
         item.setQrcode(rootObject.optString("qrcode"));
         item.setPromoRate(BigDecimalUtil.optBigDecimal(rootObject, "promorate", BigDecimal.ZERO));
-        item.setSSealsRate(BigDecimalUtil.optBigDecimal(rootObject, "ssealsrate", BigDecimal.ZERO));
+        item.setSDealsRate(BigDecimalUtil.optBigDecimal(rootObject, "sdealsrate", BigDecimal.ZERO));
         item.setBcMin(rootObject.optString("bcmin"));
         item.setBcMax(rootObject.optString("bcmax"));
         item.setNetwork(rootObject.optString("network"));
@@ -124,12 +124,12 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         this.promoRate = promoRate;
     }
 
-    public BigDecimal getSSealsRate() {
-        return sSealsRate;
+    public BigDecimal getSDealsRate() {
+        return sDealsRate;
     }
 
-    public void setSSealsRate(BigDecimal sSealsRate) {
-        this.sSealsRate = sSealsRate;
+    public void setSDealsRate(BigDecimal sDealsRate) {
+        this.sDealsRate = sDealsRate;
     }
 
     public String getBcMin() {
@@ -184,7 +184,7 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         isQrcode = in.readInt() == 1;
         isAllowDecimal = in.readInt() == 1;
         promoRate = new BigDecimal(in.readString());
-        sSealsRate = new BigDecimal(in.readString());
+        sDealsRate = new BigDecimal(in.readString());
         bcMin = in.readString();
         bcMax = in.readString();
         network = in.readString();
@@ -215,7 +215,7 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         dest.writeInt(isQrcode ? 1 : 0);
         dest.writeInt(isAllowDecimal ? 1 : 0);
         dest.writeString(promoRate.toString());
-        dest.writeString(sSealsRate.toString());
+        dest.writeString(sDealsRate.toString());
         dest.writeString(bcMin);
         dest.writeString(bcMax);
         dest.writeString(network);
