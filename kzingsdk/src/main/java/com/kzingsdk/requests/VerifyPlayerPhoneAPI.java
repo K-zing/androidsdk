@@ -12,6 +12,7 @@ import io.reactivex.Observable;
 public class VerifyPlayerPhoneAPI extends CoreRequest {
 
     private String phone = null;
+    private String playerPhoneCountry = null;
     private String validateCode = null;
 
     VerifyPlayerPhoneAPI() {
@@ -40,6 +41,8 @@ public class VerifyPlayerPhoneAPI extends CoreRequest {
         try {
             jsonData.put("phone", phone);
             jsonData.put("validateCode", validateCode);
+            if (playerPhoneCountry != null)
+                jsonData.put("playerPhoneCountry", playerPhoneCountry);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -82,6 +85,11 @@ public class VerifyPlayerPhoneAPI extends CoreRequest {
 
     public VerifyPlayerPhoneAPI setParamValidateCode(String validateCode) {
         this.validateCode = validateCode;
+        return this;
+    }
+
+    public VerifyPlayerPhoneAPI setParamPlayerPhoneCountry(String playerPhoneCountry) {
+        this.playerPhoneCountry = playerPhoneCountry;
         return this;
     }
 
