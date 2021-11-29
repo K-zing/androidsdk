@@ -6,12 +6,16 @@ import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.CurrencyRate;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import io.reactivex.Observable;
 
 public class GetAllCurrencyRateAPI extends CoreRequest {
+
+    private Integer forDisplay = null;
 
     GetAllCurrencyRateAPI() {
         super();
@@ -21,6 +25,19 @@ public class GetAllCurrencyRateAPI extends CoreRequest {
     protected String getAction() {
         return Action.getAllCurrencyRate;
     }
+
+    @Override
+    protected JSONObject generateParamsJson() {
+        JSONObject jsonData = super.generateParamsJson();
+        try {
+            if (forDisplay != null)
+                jsonData.put("fordisplay", forDisplay);
+            return jsonData;
+        } catch (JSONException ignored) {
+        }
+        return super.generateParamsJson();
+    }
+
 
     @Override
     public Observable<ArrayList<CurrencyRate>> requestRx(Context context) {
@@ -55,4 +72,8 @@ public class GetAllCurrencyRateAPI extends CoreRequest {
         void onSuccess(ArrayList<CurrencyRate> currencyRateList);
     }
 
+    public GetAllCurrencyRateAPI setForDisplay(Integer forDisplay) {
+        this.forDisplay = forDisplay;
+        return this;
+    }
 }

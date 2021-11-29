@@ -180,6 +180,12 @@ public class EditMemberInfoAPI extends CoreRequest {
         return this;
     }
 
+    public EditMemberInfoAPI setSkype(String skype) {
+        this.skype = skype;
+        return this;
+    }
+
+
 
 }
 
