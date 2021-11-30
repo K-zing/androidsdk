@@ -78,12 +78,12 @@ public abstract class CoreRequest {
         add("9487");
         add("9496");
         add("9587");
-        add("9119");
-        add("9190");
-        add("9250");
-        add("9009");
-        add("8888");
-        add("8998");
+//        add("9119");
+//        add("9190");
+//        add("9250");
+//        add("9009");
+//        add("8888");
+//        add("8998");
         add("");
     }};
 
@@ -221,6 +221,9 @@ public abstract class CoreRequest {
                 .parallel(toFindSet.size())
                 .runOn(Schedulers.newThread())
                 .flatMap((Function<FutureTask<String>, Publisher<String>>) futureTask -> {
+                    if (executor.isShutdown()){
+                        return Flowable.just("");
+                    }
                     executor.submit(futureTask);
                     return Flowable.fromFuture(futureTask, KzingSDK.getInstance().getPingCheckTimeoutMs(), TimeUnit.MILLISECONDS)
                             .onErrorReturnItem("");

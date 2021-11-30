@@ -30,6 +30,8 @@ public class HistoryListItem implements Parcelable {
     private Integer tokenStatus = 0;
     private String token = "";
     private String currency = "";
+    private String conversion = "";
+    private String conversionCurrency = "";
 
     private ArrayList<Parlay> parlayList = new ArrayList<>();
 
@@ -58,6 +60,8 @@ public class HistoryListItem implements Parcelable {
         historyListItem.setTokenStatus(rootObject.optInt("tokenstatus"));
         historyListItem.setToken(rootObject.optString("token"));
         historyListItem.setCurrency(rootObject.optString("currency"));
+        historyListItem.setConversion(rootObject.optString("conversion"));
+        historyListItem.setConversionCurrency(rootObject.optString("conversioncurrency"));
 
         JSONArray parlayArray = rootObject.optJSONArray("data");
         if (parlayArray != null) {
@@ -242,6 +246,22 @@ public class HistoryListItem implements Parcelable {
         this.currency = currency;
     }
 
+    public String getConversion() {
+        return conversion;
+    }
+
+    public void setConversion(String conversion) {
+        this.conversion = conversion;
+    }
+
+    public String getConversionCurrency() {
+        return conversionCurrency;
+    }
+
+    public void setConversionCurrency(String conversionCurrency) {
+        this.conversionCurrency = conversionCurrency;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(betTime);
@@ -263,6 +283,8 @@ public class HistoryListItem implements Parcelable {
         dest.writeInt(tokenStatus);
         dest.writeString(token);
         dest.writeString(currency);
+        dest.writeString(conversion);
+        dest.writeString(conversionCurrency);
     }
 
     public HistoryListItem(Parcel in) {
@@ -285,6 +307,8 @@ public class HistoryListItem implements Parcelable {
         tokenStatus = in.readInt();
         token = in.readString();
         currency = in.readString();
+        conversion = in.readString();
+        conversionCurrency = in.readString();
     }
 
     @Override
