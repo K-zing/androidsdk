@@ -13,7 +13,9 @@ public enum GamePlatformType {
     DINGDONG(8234, ""),
     POKER(9234, ""),
     ANIMAL(10234, ""),
-    ARCADE(11234, "");
+    ARCADE(11234, ""),
+    RUMMY(12234, ""),
+    ;
 
     private final int id;
     private String name;
