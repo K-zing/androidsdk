@@ -8,22 +8,53 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class ClientInstantInfo implements Parcelable {
 
-    public static final Creator CREATOR = new Creator() {
-        public ClientInstantInfo createFromParcel(Parcel in) {
-            return new ClientInstantInfo(in);
-        }
-
-        public ClientInstantInfo[] newArray(int size) {
-            return new ClientInstantInfo[size];
-        }
-    };
-    private CaptchaApiId captchaApiId = new CaptchaApiId();
     private String captchaMode;
-    private boolean memberLoginNeedCaptcha;
+    private Boolean memberLoginNeedCaptcha;
+    private Boolean addBankCardSmsVerify;
+    private Boolean allowSendEmail;
+    private Boolean allowSendSms;
+    private Boolean allowUploadDepositCredential;
+    private Boolean allowUserEditProfile;
+    private Boolean allowCryptoCurrencyWithdrawal;
+    private Boolean allowDeleteCryptoAddress;
+    private Boolean allowCancelWithdrawal;
+    private Boolean checkEmailVerified;
+    private Boolean checkMobileVerified;
+    private Boolean isWdPasswordOn;
+    private Boolean allowGameTransferPopup;
+    private Boolean initWdPwdNeedLoginPwd;
+    private Boolean memberPanDupIP;
+    private Boolean memberPanDupUUID;
+    private Boolean memberPanVerify;
+    private Boolean hasFriendPromo;
+    private String siteId;
+    private String cryptoFixedExchangeRate;
+    private String announcement;
+    private String sitenameApp;
+    private String sitename;
+    private String supportUrl;
+    private String appDomain;
+    private String h5Domain;
+    private String androidAppDownloadLink;
+    private String iosAppDownloadLink;
+    private String resourceDomain;
+    private String depositPageFooter;
+    private String pageDescription;
+    private String pageFooter;
+    private String pageKeyword;
+    private CaptchaApiId captchaApiId = new CaptchaApiId();
+    private ArrayList<String> memberPanAgentCode = new ArrayList<>();
+    private ArrayList<String> memberPanPlayerGroup = new ArrayList<>();
+    private ArrayList<String> memberPanUsername = new ArrayList<>();
+    private ArrayList<String> bannerCountdown = new ArrayList<>();
+    private ArrayList<String> bannerFirstLaunch = new ArrayList<>();
+    private ContactInfo feedbackContactInfo = new ContactInfo();
+    private ContactInfo partnershipContactInfo = new ContactInfo();
+    private ContactInfo socialMediaContactInfo = new ContactInfo();
+    private HashMap<Integer, String> websiteConfigMap = new HashMap<>();
 
     public ClientInstantInfo() {
 
@@ -33,11 +64,101 @@ public class ClientInstantInfo implements Parcelable {
         ClientInstantInfo clientInfo = new ClientInstantInfo();
         clientInfo.setCaptchaMode(rootObject.optString("captchaMode"));
         clientInfo.setMemberLoginNeedCaptcha(rootObject.optBoolean("memberLoginNeedCaptcha", false));
+        clientInfo.setAddBankCardSmsVerify(rootObject.optBoolean("addBankCardSmsVerify", false));
+        clientInfo.setAllowSendEmail(rootObject.optBoolean("allowSendEmail", false));
+        clientInfo.setAllowSendSms(rootObject.optBoolean("allowSendSms", false));
+        clientInfo.setAllowUploadDepositCredential(rootObject.optBoolean("allowUploadDepositCredential", false));
+        clientInfo.setAllowUserEditProfile(rootObject.optBoolean("allowUserEditProfile", false));
+        clientInfo.setAllowCryptoCurrencyWithdrawal(rootObject.optBoolean("allowCryptoCurrencyWithdrawal", false));
+        clientInfo.setAllowDeleteCryptoAddress(rootObject.optBoolean("allowDeleteCryptoAddress", false));
+        clientInfo.setAllowCancelWithdrawal(rootObject.optBoolean("allowCancelWithdrawal", false));
+        clientInfo.setCheckEmailVerified(rootObject.optBoolean("checkEmailVerified", false));
+        clientInfo.setCheckMobileVerified(rootObject.optBoolean("checkMobileVerified", false));
+        clientInfo.setWdPasswordOn(rootObject.optBoolean("isWdPasswordOn", false));
+        clientInfo.setAllowGameTransferPopup(rootObject.optBoolean("allowGameTransferPopup", false));
+        clientInfo.setInitWdPwdNeedLoginPwd(rootObject.optBoolean("initWdPwdNeedLoginPwd", false));
+        clientInfo.setMemberPanDupIP(rootObject.optBoolean("memberPanDupIP", false));
+        clientInfo.setMemberPanDupUUID(rootObject.optBoolean("memberPanDupUUID", false));
+        clientInfo.setMemberPanVerify(rootObject.optBoolean("memberPanVerify", false));
+        clientInfo.setHasFriendPromo(rootObject.optBoolean("hasFriendPromo", false));
+        clientInfo.setCaptchaMode(rootObject.optString("captchaMode"));
+        clientInfo.setSiteId(rootObject.optString("siteId"));
+        clientInfo.setCryptoFixedExchangeRate(rootObject.optString("cryptoFixedExchangeRate"));
+        clientInfo.setAnnouncement(rootObject.optString("announcement"));
+        clientInfo.setSitenameApp(rootObject.optString("sitenameApp"));
+        clientInfo.setSitename(rootObject.optString("sitename"));
+        clientInfo.setSupportUrl(rootObject.optString("supportUrl"));
+        clientInfo.setAppDomain(rootObject.optString("appDomain"));
+        clientInfo.setH5Domain(rootObject.optString("h5Domain"));
+        clientInfo.setAndroidAppDownloadLink(rootObject.optString("androidAppDownloadLink"));
+        clientInfo.setIosAppDownloadLink(rootObject.optString("iosAppDownloadLink"));
+        clientInfo.setResourceDomain(rootObject.optString("resourceDomain"));
+        clientInfo.setDepositPageFooter(rootObject.optString("depositPageFooter"));
+        clientInfo.setPageDescription(rootObject.optString("pageDescription"));
+        clientInfo.setPageFooter(rootObject.optString("pageFooter"));
+        clientInfo.setPageKeyword(rootObject.optString("pageKeyword"));
 
         JSONObject captchaApiIdJSONObject = rootObject.optJSONObject("captchaApiId");
-        if(captchaApiIdJSONObject!=null)
+        if (captchaApiIdJSONObject != null)
             clientInfo.setCaptchaApiId(CaptchaApiId.newInstance(captchaApiIdJSONObject));
 
+        JSONObject contactInfoJSONObject = rootObject.optJSONObject("contactInfo");
+        if (contactInfoJSONObject != null) {
+            JSONObject feedbackJSONObject = contactInfoJSONObject.optJSONObject("feedback");
+            JSONObject partnershipJSONObject = contactInfoJSONObject.optJSONObject("partnership");
+            JSONObject socialMediaJSONObject = contactInfoJSONObject.optJSONObject("socialMedia");
+            if (feedbackJSONObject != null) {
+                clientInfo.setFeedbackContactInfo(ContactInfo.newInstance(feedbackJSONObject));
+            }
+            if (partnershipJSONObject != null) {
+                clientInfo.setPartnershipContactInfo(ContactInfo.newInstance(partnershipJSONObject));
+            }
+            if (socialMediaJSONObject != null) {
+                clientInfo.setSocialMediaContactInfo(ContactInfo.newInstance(socialMediaJSONObject));
+            }
+        }
+
+        clientInfo.memberPanAgentCode = new ArrayList<>();
+        clientInfo.memberPanUsername = new ArrayList<>();
+        JSONArray memberPanAgentCodeJSONArray = rootObject.optJSONArray("memberPanAgentCode");
+        if (memberPanAgentCodeJSONArray != null) {
+            for (int i = 0; i < memberPanAgentCodeJSONArray.length(); i++) {
+                clientInfo.memberPanAgentCode.add(memberPanAgentCodeJSONArray.optString(i));
+            }
+        }
+        JSONArray memberPanPlayerGroupJSONArray = rootObject.optJSONArray("memberPanPlayerGroup");
+        if (memberPanPlayerGroupJSONArray != null) {
+            clientInfo.memberPanPlayerGroup.clear();
+            for (int i = 0; i < memberPanPlayerGroupJSONArray.length(); i++) {
+                clientInfo.memberPanPlayerGroup.add(memberPanPlayerGroupJSONArray.optString(i));
+            }
+        }
+        JSONArray memberPanUsernameJSONArray = rootObject.optJSONArray("memberPanUsername");
+        if (memberPanUsernameJSONArray != null) {
+            for (int i = 0; i < memberPanUsernameJSONArray.length(); i++) {
+                clientInfo.memberPanUsername.add(memberPanUsernameJSONArray.optString(i));
+            }
+        }
+        JSONArray bannerCountdownJSONArray = rootObject.optJSONArray("bannerCountdown");
+        ArrayList<String> bannerCountdownList = new ArrayList<>();
+        if (bannerCountdownJSONArray != null) {
+            for (int i = 0; i < bannerCountdownJSONArray.length(); i++) {
+                bannerCountdownList.add(bannerCountdownJSONArray.optString(i));
+            }
+        }
+        clientInfo.setBannerCountdown(bannerCountdownList);
+        JSONArray bannerFirstLaunchJSONArray = rootObject.optJSONArray("bannerFirstLaunch");
+        ArrayList<String> bannerFirstLaunchList = new ArrayList<>();
+        if (bannerFirstLaunchJSONArray != null) {
+            for (int i = 0; i < bannerFirstLaunchJSONArray.length(); i++) {
+                bannerFirstLaunchList.add(bannerFirstLaunchJSONArray.optString(i));
+            }
+        }
+        clientInfo.setBannerFirstLaunch(bannerFirstLaunchList);
+
+        for (int i = 301; i < 400; i++) {
+            clientInfo.websiteConfigMap.put(i, rootObject.optString("wc" + i));
+        }
         return clientInfo;
     }
 
@@ -66,26 +187,456 @@ public class ClientInstantInfo implements Parcelable {
     }
 
     public ClientInstantInfo(Parcel in) {
-        Object[] objectArray = in.readArray(ClientInstantInfo.class.getClassLoader());
-        captchaApiId = (CaptchaApiId) objectArray[0];
         captchaMode = in.readString();
         memberLoginNeedCaptcha = in.readInt() == 1;
+        addBankCardSmsVerify = in.readInt() == 1;
+        allowSendEmail = in.readInt() == 1;
+        allowSendSms = in.readInt() == 1;
+        allowUploadDepositCredential = in.readInt() == 1;
+        allowUserEditProfile = in.readInt() == 1;
+        allowCryptoCurrencyWithdrawal = in.readInt() == 1;
+        allowDeleteCryptoAddress = in.readInt() == 1;
+        allowCancelWithdrawal = in.readInt() == 1;
+        checkEmailVerified = in.readInt() == 1;
+        checkMobileVerified = in.readInt() == 1;
+        isWdPasswordOn = in.readInt() == 1;
+        allowGameTransferPopup = in.readInt() == 1;
+        initWdPwdNeedLoginPwd = in.readInt() == 1;
+        memberPanDupIP = in.readInt() == 1;
+        memberPanDupUUID = in.readInt() == 1;
+        memberPanVerify = in.readInt() == 1;
+        hasFriendPromo = in.readInt() == 1;
+        siteId = in.readString();
+        cryptoFixedExchangeRate = in.readString();
+        announcement = in.readString();
+        sitenameApp = in.readString();
+        sitename = in.readString();
+        supportUrl = in.readString();
+        appDomain = in.readString();
+        h5Domain = in.readString();
+        androidAppDownloadLink = in.readString();
+        iosAppDownloadLink = in.readString();
+        resourceDomain = in.readString();
+        depositPageFooter = in.readString();
+        pageDescription = in.readString();
+        pageFooter = in.readString();
+        pageKeyword = in.readString();
+
+        Object[] objectArray = in.readArray(ClientInstantInfo.class.getClassLoader());
+        int i = 0;
+        captchaApiId = (CaptchaApiId) objectArray[i++];
+        memberPanAgentCode = (ArrayList<String>) objectArray[i++];
+        memberPanPlayerGroup = (ArrayList<String>) objectArray[i++];
+        memberPanUsername = (ArrayList<String>) objectArray[i++];
+        bannerCountdown = (ArrayList<String>) objectArray[i++];
+        bannerFirstLaunch = (ArrayList<String>) objectArray[i++];
+        feedbackContactInfo = (ContactInfo) objectArray[i++];
+        partnershipContactInfo = (ContactInfo) objectArray[i++];
+        socialMediaContactInfo = (ContactInfo) objectArray[i++];
+        websiteConfigMap = (HashMap<Integer, String>) objectArray[i++];
     }
 
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeArray(new Object[]{
-                captchaApiId
-        });
         dest.writeString(captchaMode);
         dest.writeInt(memberLoginNeedCaptcha ? 1 : 0);
-
+        dest.writeInt(addBankCardSmsVerify ? 1 : 0);
+        dest.writeInt(allowSendEmail ? 1 : 0);
+        dest.writeInt(allowSendSms ? 1 : 0);
+        dest.writeInt(allowUploadDepositCredential ? 1 : 0);
+        dest.writeInt(allowUserEditProfile ? 1 : 0);
+        dest.writeInt(allowCryptoCurrencyWithdrawal ? 1 : 0);
+        dest.writeInt(allowDeleteCryptoAddress ? 1 : 0);
+        dest.writeInt(allowCancelWithdrawal ? 1 : 0);
+        dest.writeInt(checkEmailVerified ? 1 : 0);
+        dest.writeInt(checkMobileVerified ? 1 : 0);
+        dest.writeInt(isWdPasswordOn ? 1 : 0);
+        dest.writeInt(allowGameTransferPopup ? 1 : 0);
+        dest.writeInt(initWdPwdNeedLoginPwd ? 1 : 0);
+        dest.writeInt(memberPanDupIP ? 1 : 0);
+        dest.writeInt(memberPanDupUUID ? 1 : 0);
+        dest.writeInt(memberPanVerify ? 1 : 0);
+        dest.writeInt(hasFriendPromo ? 1 : 0);
+        dest.writeString(siteId);
+        dest.writeString(cryptoFixedExchangeRate);
+        dest.writeString(announcement);
+        dest.writeString(sitenameApp);
+        dest.writeString(sitename);
+        dest.writeString(supportUrl);
+        dest.writeString(appDomain);
+        dest.writeString(h5Domain);
+        dest.writeString(androidAppDownloadLink);
+        dest.writeString(iosAppDownloadLink);
+        dest.writeString(resourceDomain);
+        dest.writeString(depositPageFooter);
+        dest.writeString(pageDescription);
+        dest.writeString(pageFooter);
+        dest.writeString(pageKeyword);
+        dest.writeArray(new Object[]{
+                captchaApiId,
+                memberPanAgentCode,
+                memberPanPlayerGroup,
+                memberPanUsername,
+                bannerCountdown,
+                bannerFirstLaunch,
+                feedbackContactInfo,
+                partnershipContactInfo,
+                socialMediaContactInfo,
+                websiteConfigMap,
+        });
     }
 
     @Override
     public int describeContents() {
         return 0;
     }
+
+    public boolean isMemberLoginNeedCaptcha() {
+        return memberLoginNeedCaptcha;
+    }
+
+    public void setMemberLoginNeedCaptcha(boolean memberLoginNeedCaptcha) {
+        this.memberLoginNeedCaptcha = memberLoginNeedCaptcha;
+    }
+
+    public Boolean getAddBankCardSmsVerify() {
+        return addBankCardSmsVerify;
+    }
+
+    public void setAddBankCardSmsVerify(Boolean addBankCardSmsVerify) {
+        this.addBankCardSmsVerify = addBankCardSmsVerify;
+    }
+
+    public Boolean getAllowSendEmail() {
+        return allowSendEmail;
+    }
+
+    public void setAllowSendEmail(Boolean allowSendEmail) {
+        this.allowSendEmail = allowSendEmail;
+    }
+
+    public Boolean getAllowSendSms() {
+        return allowSendSms;
+    }
+
+    public void setAllowSendSms(Boolean allowSendSms) {
+        this.allowSendSms = allowSendSms;
+    }
+
+    public Boolean getAllowUploadDepositCredential() {
+        return allowUploadDepositCredential;
+    }
+
+    public void setAllowUploadDepositCredential(Boolean allowUploadDepositCredential) {
+        this.allowUploadDepositCredential = allowUploadDepositCredential;
+    }
+
+    public Boolean getAllowUserEditProfile() {
+        return allowUserEditProfile;
+    }
+
+    public void setAllowUserEditProfile(Boolean allowUserEditProfile) {
+        this.allowUserEditProfile = allowUserEditProfile;
+    }
+
+    public Boolean getAllowCryptoCurrencyWithdrawal() {
+        return allowCryptoCurrencyWithdrawal;
+    }
+
+    public void setAllowCryptoCurrencyWithdrawal(Boolean allowCryptoCurrencyWithdrawal) {
+        this.allowCryptoCurrencyWithdrawal = allowCryptoCurrencyWithdrawal;
+    }
+
+    public Boolean getAllowDeleteCryptoAddress() {
+        return allowDeleteCryptoAddress;
+    }
+
+    public void setAllowDeleteCryptoAddress(Boolean allowDeleteCryptoAddress) {
+        this.allowDeleteCryptoAddress = allowDeleteCryptoAddress;
+    }
+
+    public Boolean getAllowCancelWithdrawal() {
+        return allowCancelWithdrawal;
+    }
+
+    public void setAllowCancelWithdrawal(Boolean allowCancelWithdrawal) {
+        this.allowCancelWithdrawal = allowCancelWithdrawal;
+    }
+
+    public Boolean getCheckEmailVerified() {
+        return checkEmailVerified;
+    }
+
+    public void setCheckEmailVerified(Boolean checkEmailVerified) {
+        this.checkEmailVerified = checkEmailVerified;
+    }
+
+    public Boolean getCheckMobileVerified() {
+        return checkMobileVerified;
+    }
+
+    public void setCheckMobileVerified(Boolean checkMobileVerified) {
+        this.checkMobileVerified = checkMobileVerified;
+    }
+
+    public Boolean getWdPasswordOn() {
+        return isWdPasswordOn;
+    }
+
+    public void setWdPasswordOn(Boolean wdPasswordOn) {
+        isWdPasswordOn = wdPasswordOn;
+    }
+
+    public Boolean getAllowGameTransferPopup() {
+        return allowGameTransferPopup;
+    }
+
+    public void setAllowGameTransferPopup(Boolean allowGameTransferPopup) {
+        this.allowGameTransferPopup = allowGameTransferPopup;
+    }
+
+    public Boolean getInitWdPwdNeedLoginPwd() {
+        return initWdPwdNeedLoginPwd;
+    }
+
+    public void setInitWdPwdNeedLoginPwd(Boolean initWdPwdNeedLoginPwd) {
+        this.initWdPwdNeedLoginPwd = initWdPwdNeedLoginPwd;
+    }
+
+    public Boolean getMemberPanDupIP() {
+        return memberPanDupIP;
+    }
+
+    public void setMemberPanDupIP(Boolean memberPanDupIP) {
+        this.memberPanDupIP = memberPanDupIP;
+    }
+
+    public Boolean getMemberPanDupUUID() {
+        return memberPanDupUUID;
+    }
+
+    public void setMemberPanDupUUID(Boolean memberPanDupUUID) {
+        this.memberPanDupUUID = memberPanDupUUID;
+    }
+
+    public Boolean getMemberPanVerify() {
+        return memberPanVerify;
+    }
+
+    public void setMemberPanVerify(Boolean memberPanVerify) {
+        this.memberPanVerify = memberPanVerify;
+    }
+
+    public Boolean getHasFriendPromo() {
+        return hasFriendPromo;
+    }
+
+    public void setHasFriendPromo(Boolean hasFriendPromo) {
+        this.hasFriendPromo = hasFriendPromo;
+    }
+
+    public String getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(String siteId) {
+        this.siteId = siteId;
+    }
+
+    public String getCryptoFixedExchangeRate() {
+        return cryptoFixedExchangeRate;
+    }
+
+    public void setCryptoFixedExchangeRate(String cryptoFixedExchangeRate) {
+        this.cryptoFixedExchangeRate = cryptoFixedExchangeRate;
+    }
+
+    public String getAnnouncement() {
+        return announcement;
+    }
+
+    public void setAnnouncement(String announcement) {
+        this.announcement = announcement;
+    }
+
+    public String getSitenameApp() {
+        return sitenameApp;
+    }
+
+    public void setSitenameApp(String sitenameApp) {
+        this.sitenameApp = sitenameApp;
+    }
+
+    public String getSitename() {
+        return sitename;
+    }
+
+    public void setSitename(String sitename) {
+        this.sitename = sitename;
+    }
+
+    public String getSupportUrl() {
+        return supportUrl;
+    }
+
+    public void setSupportUrl(String supportUrl) {
+        this.supportUrl = supportUrl;
+    }
+
+    public String getAppDomain() {
+        return appDomain;
+    }
+
+    public void setAppDomain(String appDomain) {
+        this.appDomain = appDomain;
+    }
+
+    public String getH5Domain() {
+        return h5Domain;
+    }
+
+    public void setH5Domain(String h5Domain) {
+        this.h5Domain = h5Domain;
+    }
+
+    public String getAndroidAppDownloadLink() {
+        return androidAppDownloadLink;
+    }
+
+    public void setAndroidAppDownloadLink(String androidAppDownloadLink) {
+        this.androidAppDownloadLink = androidAppDownloadLink;
+    }
+
+    public String getIosAppDownloadLink() {
+        return iosAppDownloadLink;
+    }
+
+    public void setIosAppDownloadLink(String iosAppDownloadLink) {
+        this.iosAppDownloadLink = iosAppDownloadLink;
+    }
+
+    public String getResourceDomain() {
+        return resourceDomain;
+    }
+
+    public void setResourceDomain(String resourceDomain) {
+        this.resourceDomain = resourceDomain;
+    }
+
+    public String getDepositPageFooter() {
+        return depositPageFooter;
+    }
+
+    public void setDepositPageFooter(String depositPageFooter) {
+        this.depositPageFooter = depositPageFooter;
+    }
+
+    public String getPageDescription() {
+        return pageDescription;
+    }
+
+    public void setPageDescription(String pageDescription) {
+        this.pageDescription = pageDescription;
+    }
+
+    public String getPageFooter() {
+        return pageFooter;
+    }
+
+    public void setPageFooter(String pageFooter) {
+        this.pageFooter = pageFooter;
+    }
+
+    public String getPageKeyword() {
+        return pageKeyword;
+    }
+
+    public void setPageKeyword(String pageKeyword) {
+        this.pageKeyword = pageKeyword;
+    }
+
+    public ArrayList<String> getMemberPanAgentCode() {
+        return memberPanAgentCode;
+    }
+
+    public void setMemberPanAgentCode(ArrayList<String> memberPanAgentCode) {
+        this.memberPanAgentCode = memberPanAgentCode;
+    }
+
+    public ArrayList<String> getMemberPanPlayerGroup() {
+        return memberPanPlayerGroup;
+    }
+
+    public void setMemberPanPlayerGroup(ArrayList<String> memberPanPlayerGroup) {
+        this.memberPanPlayerGroup = memberPanPlayerGroup;
+    }
+
+    public ArrayList<String> getMemberPanUsername() {
+        return memberPanUsername;
+    }
+
+    public void setMemberPanUsername(ArrayList<String> memberPanUsername) {
+        this.memberPanUsername = memberPanUsername;
+    }
+
+    public ArrayList<String> getBannerCountdown() {
+        return bannerCountdown;
+    }
+
+    public void setBannerCountdown(ArrayList<String> bannerCountdown) {
+        this.bannerCountdown = bannerCountdown;
+    }
+
+    public ArrayList<String> getBannerFirstLaunch() {
+        return bannerFirstLaunch;
+    }
+
+    public void setBannerFirstLaunch(ArrayList<String> bannerFirstLaunch) {
+        this.bannerFirstLaunch = bannerFirstLaunch;
+    }
+
+    public ContactInfo getFeedbackContactInfo() {
+        return feedbackContactInfo;
+    }
+
+    public void setFeedbackContactInfo(ContactInfo feedbackContactInfo) {
+        this.feedbackContactInfo = feedbackContactInfo;
+    }
+
+    public ContactInfo getPartnershipContactInfo() {
+        return partnershipContactInfo;
+    }
+
+    public void setPartnershipContactInfo(ContactInfo partnershipContactInfo) {
+        this.partnershipContactInfo = partnershipContactInfo;
+    }
+
+    public ContactInfo getSocialMediaContactInfo() {
+        return socialMediaContactInfo;
+    }
+
+    public void setSocialMediaContactInfo(ContactInfo socialMediaContactInfo) {
+        this.socialMediaContactInfo = socialMediaContactInfo;
+    }
+
+    public HashMap<Integer, String> getWebsiteConfigMap() {
+        return websiteConfigMap;
+    }
+
+    public void setWebsiteConfigMap(HashMap<Integer, String> websiteConfigMap) {
+        this.websiteConfigMap = websiteConfigMap;
+    }
+
+
+    public static final Creator CREATOR = new Creator() {
+        public ClientInstantInfo createFromParcel(Parcel in) {
+            return new ClientInstantInfo(in);
+        }
+
+        public ClientInstantInfo[] newArray(int size) {
+            return new ClientInstantInfo[size];
+        }
+    };
 
 }
