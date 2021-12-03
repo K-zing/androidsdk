@@ -21,6 +21,7 @@ public class GetBetHistoryListAPI extends CoreRequest {
 
     private String gpid = ALL;
     private Integer page = 1;
+    private String currency;
     private Calendar startDateCalendar, endDateCalendar;
 
     GetBetHistoryListAPI() {
@@ -59,6 +60,8 @@ public class GetBetHistoryListAPI extends CoreRequest {
             jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
             jsonData.put("startTime", Constant.TIME_FORMAT.format(startDateCalendar.getTime()));
             jsonData.put("endTime", Constant.TIME_FORMAT.format(endDateCalendar.getTime()));
+            if (currency != null)
+                jsonData.put("currency", currency);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -86,6 +89,7 @@ public class GetBetHistoryListAPI extends CoreRequest {
         kzingCallBackList.add(getBetHistoryListCallBack);
         return this;
     }
+
 
     public interface GetBetHistoryListCallBack extends KzingCallBack {
         void onSuccess(HistoryListSummary historyListSummary);
@@ -126,6 +130,11 @@ public class GetBetHistoryListAPI extends CoreRequest {
      */
     public GetBetHistoryListAPI setParamEndDateCalendar(Calendar endDateCalendar) {
         this.endDateCalendar = endDateCalendar;
+        return this;
+    }
+
+    public GetBetHistoryListAPI setParamCurrency(String currency) {
+        this.currency = currency;
         return this;
     }
 
