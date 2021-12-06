@@ -13,6 +13,7 @@ import io.reactivex.Observable;
 public class RequestVerifyPlayerEmailAPI extends CoreRequest {
 
     private String email = null;
+    private String newemail = null;
 
     RequestVerifyPlayerEmailAPI() {
         super();
@@ -36,6 +37,9 @@ public class RequestVerifyPlayerEmailAPI extends CoreRequest {
         JSONObject jsonData = super.generateParamsJson();
         try {
             jsonData.put("email", email);
+            if (newemail != null) {
+                jsonData.put("newemail", newemail);
+            }
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -69,6 +73,11 @@ public class RequestVerifyPlayerEmailAPI extends CoreRequest {
 
     public RequestVerifyPlayerEmailAPI setParamEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public RequestVerifyPlayerEmailAPI setParamNewEmail(String newemail) {
+        this.newemail = newemail;
         return this;
     }
 
