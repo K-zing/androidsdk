@@ -3,14 +3,12 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.Message;
+import com.kzingsdk.entity.GetMessageListResult;
 import com.kzingsdk.util.Constant;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import io.reactivex.Observable;
@@ -18,35 +16,9 @@ import io.reactivex.Observable;
 
 public class GetMessageListAPI extends CoreRequest {
 
-
     GetMessageListAPI() {
         super();
     }
-
-    @Override
-    protected Observable<String> validateParams() {
-        if(startDateCalendar == null){
-            return Observable.just("Start date is missing");
-        }
-        if(endDateCalendar == null){
-            return Observable.just("End date is missing");
-        }
-        return super.validateParams();
-    }
-    @Override
-    protected JSONObject generateParamsJson(){
-        JSONObject jsonData = super.generateParamsJson();
-        try {
-            jsonData.put("pageCount",pageCount);
-            jsonData.put("offset",offset);
-            jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
-            jsonData.put("end",Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
-            return jsonData;
-        } catch (JSONException ignored) {
-        }
-        return super.generateParamsJson();
-    }
-
 
     @Override
     protected String getAction() {
@@ -55,20 +27,39 @@ public class GetMessageListAPI extends CoreRequest {
 
     private Integer pageCount = 10;
     private Integer offset = 0;
-    private Calendar startDateCalendar,endDateCalendar;
+    private Calendar startDateCalendar, endDateCalendar;
 
     @Override
-    public Observable<ArrayList<Message>> requestRx(Context context) {
-        return super.baseExecute(context)
-                .map(jsonResponse -> {
-                    ArrayList<Message> messageList = new ArrayList<>();
-                    JSONArray response = jsonResponse.optJSONArray("response");
-                    for (int i = 0; i < response.length(); i++) {
-                        messageList.add(Message.newInstance(response.optJSONObject(i)));
-                    }
-                    return messageList;
-                });
+    protected Observable<String> validateParams() {
+        if (startDateCalendar == null) {
+            return Observable.just("Start date is missing");
+        }
+        if (endDateCalendar == null) {
+            return Observable.just("End date is missing");
+        }
+        return super.validateParams();
     }
+
+    @Override
+    protected JSONObject generateParamsJson() {
+        JSONObject jsonData = super.generateParamsJson();
+        try {
+            jsonData.put("pageCount", pageCount);
+            jsonData.put("offset", offset);
+            jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
+            jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
+            return jsonData;
+        } catch (JSONException ignored) {
+        }
+        return super.generateParamsJson();
+    }
+
+    @Override
+    public Observable<GetMessageListResult> requestRx(Context context) {
+        return super.baseExecute(context)
+                .map(GetMessageListResult::newInstance);
+    }
+
     @Override
     public void request(Context context) {
         requestRx(context).subscribe(messageList -> {
@@ -80,14 +71,15 @@ public class GetMessageListAPI extends CoreRequest {
         }, defaultOnErrorConsumer);
     }
 
-    public GetMessageListAPI addGetMessageListCallBack(GetMessageListCallBack getMessageListCallBack){
+    public GetMessageListAPI addGetMessageListCallBack(GetMessageListCallBack getMessageListCallBack) {
         kzingCallBackList.add(getMessageListCallBack);
         return this;
     }
 
-    public interface GetMessageListCallBack extends KzingCallBack{
-        void onSuccess(ArrayList<Message> messageList);
+    public interface GetMessageListCallBack extends KzingCallBack {
+        void onSuccess(GetMessageListResult messageList);
     }
+
     /**
      * @param startDateCalendar Start date of records search.
      */
@@ -119,7 +111,6 @@ public class GetMessageListAPI extends CoreRequest {
         this.pageCount = pageCount;
         return this;
     }
-
 
 
 }

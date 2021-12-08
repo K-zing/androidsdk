@@ -21,6 +21,7 @@ public class Message implements Parcelable {
     private String id;
     private String title;
     private String content;
+    private String typeId;
     private boolean isRead;
     private String created;
 
@@ -32,6 +33,7 @@ public class Message implements Parcelable {
         id = in.readString();
         title = in.readString();
         content = in.readString();
+        typeId = in.readString();
         created = in.readString();
         isRead = in.readInt() == 1;
     }
@@ -41,6 +43,7 @@ public class Message implements Parcelable {
         item.setId(rootObject.optString("id"));
         item.setTitle(rootObject.optString("title"));
         item.setContent(rootObject.optString("content"));
+        item.setTypeId(rootObject.optString("msgtypeid"));
         item.setIsRead(rootObject.optString("readStatus").equals("1"));
         item.setCreated(rootObject.optString("created"));
         return item;
@@ -92,11 +95,20 @@ public class Message implements Parcelable {
         this.isRead = isRead;
     }
 
+    public String getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
         dest.writeString(title);
         dest.writeString(content);
+        dest.writeString(typeId);
         dest.writeString(created);
         dest.writeInt(isRead ? 1 : 0);
     }
