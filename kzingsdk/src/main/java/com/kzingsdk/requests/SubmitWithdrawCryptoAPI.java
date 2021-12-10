@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import io.reactivex.Observable;
 
-public class SubmitWithdrawCryptoAPI extends CoreRequest {
+public class SubmitWithdrawCryptoAPI extends CoreRequest implements RequireCurrency {
 
     SubmitWithdrawCryptoAPI() {
         super();
@@ -27,6 +27,7 @@ public class SubmitWithdrawCryptoAPI extends CoreRequest {
     private String note;
     private String address;
     private String network;
+    private String currency;
 
     @Override
     protected JSONObject generateParamsJson() {
@@ -74,6 +75,11 @@ public class SubmitWithdrawCryptoAPI extends CoreRequest {
         return this;
     }
 
+    @Override
+    public String getCurrency() {
+        return currency;
+    }
+
     public interface SubmitWithdrawCryptoCallBack extends KzingCallBack {
         void onSuccess();
     }
@@ -110,6 +116,11 @@ public class SubmitWithdrawCryptoAPI extends CoreRequest {
 
     public SubmitWithdrawCryptoAPI setNetwork(String network) {
         this.network = network;
+        return this;
+    }
+
+    public SubmitWithdrawCryptoAPI setCurrency(String currency) {
+        this.currency = currency;
         return this;
     }
 }

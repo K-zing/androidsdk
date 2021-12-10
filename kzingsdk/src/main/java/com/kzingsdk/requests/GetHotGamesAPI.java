@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import io.reactivex.Observable;
 
-public class GetHotGamesAPI extends CoreRequest {
+public class GetHotGamesAPI extends CoreRequest implements RequireCurrency {
 
     private String type;
     private String currency;
@@ -32,9 +32,6 @@ public class GetHotGamesAPI extends CoreRequest {
         if (type == null) {
             return Observable.just("Type is missing");
         }
-//        if (currency == null) {
-//            return Observable.just("Currency is missing");
-//        }
         return super.validateParams();
     }
 
@@ -88,6 +85,11 @@ public class GetHotGamesAPI extends CoreRequest {
     public GetHotGamesAPI setType(String type) {
         this.type = type;
         return this;
+    }
+
+    @Override
+    public String getCurrency() {
+        return currency;
     }
 
     public GetHotGamesAPI setCurrency(String currency) {

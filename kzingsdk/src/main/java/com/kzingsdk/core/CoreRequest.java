@@ -221,7 +221,7 @@ public abstract class CoreRequest {
                 .parallel(toFindSet.size())
                 .runOn(Schedulers.newThread())
                 .flatMap((Function<FutureTask<String>, Publisher<String>>) futureTask -> {
-                    if (executor.isShutdown()){
+                    if (executor.isShutdown()) {
                         return Flowable.just("");
                     }
                     executor.submit(futureTask);
@@ -323,7 +323,8 @@ public abstract class CoreRequest {
             jsonData.put("sdkversion", BuildConfig.VERSION_NAME);
             if (this instanceof RequireCurrency) {
                 String currency = ((RequireCurrency) this).getCurrency();
-                jsonData.put("currency", currency);
+                if (currency != null)
+                    jsonData.put("currency", currency);
             }
             return jsonData;
         } catch (JSONException e) {

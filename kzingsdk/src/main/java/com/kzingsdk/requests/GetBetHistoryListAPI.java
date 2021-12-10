@@ -15,7 +15,7 @@ import java.util.Calendar;
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 
-public class GetBetHistoryListAPI extends CoreRequest {
+public class GetBetHistoryListAPI extends CoreRequest implements RequireCurrency {
 
     public static final String ALL = "10000";
 
@@ -133,10 +133,14 @@ public class GetBetHistoryListAPI extends CoreRequest {
         return this;
     }
 
+    @Override
+    public String getCurrency() {
+        return currency;
+    }
+
     public GetBetHistoryListAPI setParamCurrency(String currency) {
         this.currency = currency;
         return this;
     }
-
 
 }
