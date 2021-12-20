@@ -45,6 +45,7 @@ public class ClientInstantInfo implements Parcelable {
     private String pageDescription;
     private String pageFooter;
     private String pageKeyword;
+    private String appFriendReferralDomain;
     private CaptchaApiId captchaApiId = new CaptchaApiId();
     private ArrayList<String> memberPanAgentCode = new ArrayList<>();
     private ArrayList<String> memberPanPlayerGroup = new ArrayList<>();
@@ -97,6 +98,7 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setPageDescription(rootObject.optString("pageDescription"));
         clientInfo.setPageFooter(rootObject.optString("pageFooter"));
         clientInfo.setPageKeyword(rootObject.optString("pageKeyword"));
+        clientInfo.setAppFriendReferralDomain(rootObject.optString("appFriendReferralDomain"));
 
         JSONObject captchaApiIdJSONObject = rootObject.optJSONObject("captchaApiId");
         if (captchaApiIdJSONObject != null)
@@ -221,7 +223,7 @@ public class ClientInstantInfo implements Parcelable {
         pageDescription = in.readString();
         pageFooter = in.readString();
         pageKeyword = in.readString();
-
+        appFriendReferralDomain = in.readString();
         Object[] objectArray = in.readArray(ClientInstantInfo.class.getClassLoader());
         int i = 0;
         captchaApiId = (CaptchaApiId) objectArray[i++];
@@ -273,6 +275,7 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeString(pageDescription);
         dest.writeString(pageFooter);
         dest.writeString(pageKeyword);
+        dest.writeString(appFriendReferralDomain);
         dest.writeArray(new Object[]{
                 captchaApiId,
                 memberPanAgentCode,
@@ -554,6 +557,14 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setPageKeyword(String pageKeyword) {
         this.pageKeyword = pageKeyword;
+    }
+
+    public String getAppFriendReferralDomain() {
+        return appFriendReferralDomain;
+    }
+
+    public void setAppFriendReferralDomain(String appFriendReferralDomain) {
+        this.appFriendReferralDomain = appFriendReferralDomain;
     }
 
     public ArrayList<String> getMemberPanAgentCode() {

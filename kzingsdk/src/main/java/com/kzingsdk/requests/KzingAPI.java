@@ -501,8 +501,13 @@ public final class KzingAPI {
     public static GetWithdrawCryptoListAPI getWithdrawCryptoList() {
         return new GetWithdrawCryptoListAPI();
     }
+
     public static GetEpGamePlatformAPI getEpGamePlatform() {
         return new GetEpGamePlatformAPI();
+    }
+
+    public static GetGamePlatformByIconAPI getGamePlatformByIcon() {
+        return new GetGamePlatformByIconAPI();
     }
 
     public static EditWithdrawCryptoAPI editWithdrawCrypto() {
