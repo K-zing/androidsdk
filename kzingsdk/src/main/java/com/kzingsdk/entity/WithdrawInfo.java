@@ -29,6 +29,9 @@ public class WithdrawInfo {
     private boolean bankCardCityProvince = false;
     private boolean playerWithdrawEnterOtp = false;
     private String mobileBetCheckDesc;
+    private String withdrawBindNetwork;
+    private boolean withdrawBindUsdt;
+
     private BigDecimal withdrawRate = BigDecimal.ONE;
     private ArrayList<BankCard> bankCardList = new ArrayList<>();
     private ArrayList<PlayerBankCard> playerBankCardList = new ArrayList<>();
@@ -55,6 +58,8 @@ public class WithdrawInfo {
         withdrawInfo.setWaterCheckOnOff(rootObject.optBoolean("watercheckonoff", false));
         withdrawInfo.setBankCardCityProvince(rootObject.optString("bankCardCityProvince", "OFF").equalsIgnoreCase("ON"));
         withdrawInfo.setPlayerWithdrawEnterOtp(rootObject.optBoolean("playerWithdrawEnterOtp", false));
+        withdrawInfo.setWithdrawBindNetwork(rootObject.optString("withdrawbindnetwork"));
+        withdrawInfo.setWithdrawBindUsdt(rootObject.optBoolean("withdrawbindusdt", false));
 
         JSONArray cryptoArray = rootObject.optJSONArray("crypto");
         for (int i = 0; i < cryptoArray.length(); i++) {
@@ -245,6 +250,22 @@ public class WithdrawInfo {
 
     public void setPlayerWithdrawEnterOtp(boolean playerWithdrawEnterOtp) {
         this.playerWithdrawEnterOtp = playerWithdrawEnterOtp;
+    }
+
+    public String getWithdrawBindNetwork() {
+        return withdrawBindNetwork;
+    }
+
+    public void setWithdrawBindNetwork(String withdrawBindNetwork) {
+        this.withdrawBindNetwork = withdrawBindNetwork;
+    }
+
+    public boolean isWithdrawBindUsdt() {
+        return withdrawBindUsdt;
+    }
+
+    public void setWithdrawBindUsdt(boolean withdrawBindUsdt) {
+        this.withdrawBindUsdt = withdrawBindUsdt;
     }
 
     public HashMap<String, ArrayList<String>> getCryptoMap() {

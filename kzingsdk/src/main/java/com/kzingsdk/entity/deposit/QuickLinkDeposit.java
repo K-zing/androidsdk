@@ -10,6 +10,8 @@ public class QuickLinkDeposit implements Parcelable {
     protected String logo = "";
     protected String name = "";
     protected String url = "";
+    protected Integer order = 0;
+
 
     public QuickLinkDeposit() {
     }
@@ -19,6 +21,7 @@ public class QuickLinkDeposit implements Parcelable {
         quickLinkDeposit.setLogo(rootObject.optString("logo"));
         quickLinkDeposit.setName(rootObject.optString("name"));
         quickLinkDeposit.setUrl(rootObject.optString("url"));
+        quickLinkDeposit.setOrder(rootObject.optInt("quicklinkdepositorder"));
         return quickLinkDeposit;
     }
 
@@ -46,6 +49,13 @@ public class QuickLinkDeposit implements Parcelable {
         this.url = url;
     }
 
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public QuickLinkDeposit createFromParcel(Parcel in) {
@@ -61,6 +71,7 @@ public class QuickLinkDeposit implements Parcelable {
         logo = in.readString();
         name = in.readString();
         url = in.readString();
+        order = in.readInt();
     }
 
     @Override
@@ -73,6 +84,7 @@ public class QuickLinkDeposit implements Parcelable {
         dest.writeString(logo);
         dest.writeString(name);
         dest.writeString(url);
+        dest.writeInt(order);
     }
 
 }
