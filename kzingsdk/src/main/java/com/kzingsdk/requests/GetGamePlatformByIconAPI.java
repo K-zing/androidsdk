@@ -30,7 +30,7 @@ public class GetGamePlatformByIconAPI extends CoreRequest {
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            jsonData.put("frameIcon", frameIcon);
+            jsonData.put("frameicon", frameIcon);
             return jsonData;
         } catch (JSONException ignored) {
         }
