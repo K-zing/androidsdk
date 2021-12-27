@@ -9,7 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import io.reactivex.Observable;
 
@@ -54,15 +53,15 @@ public class GetPhoneSupportedCountriesAPI extends CoreRequest {
 
     public static class GetPhoneSupportedCountriesResponse {
         private ArrayList<PhoneCountry> phoneCountryArrayList;
-        private HashSet<String> popularSet;
+        private ArrayList<String> popularList;
 
         public static GetPhoneSupportedCountriesResponse newInstance(JSONObject rootObject) {
             GetPhoneSupportedCountriesResponse getPhoneSupportedCountriesResponse = new GetPhoneSupportedCountriesResponse();
             JSONArray popularArray = rootObject.optJSONArray("popular");
-            HashSet<String> popularSet = new HashSet<>();
+            ArrayList<String> popularList = new ArrayList<>();
             if (popularArray != null) {
                 for (int i = 0; i < popularArray.length(); i++) {
-                    popularSet.add(popularArray.optString(i));
+                    popularList.add(popularArray.optString(i));
                 }
             }
 
@@ -73,7 +72,7 @@ public class GetPhoneSupportedCountriesAPI extends CoreRequest {
                     phoneCountryArrayList.add(PhoneCountry.newInstance(countryListArray.optJSONObject(i)));
                 }
             }
-            getPhoneSupportedCountriesResponse.popularSet = popularSet;
+            getPhoneSupportedCountriesResponse.popularList = popularList;
             getPhoneSupportedCountriesResponse.phoneCountryArrayList = phoneCountryArrayList;
             return getPhoneSupportedCountriesResponse;
         }
@@ -86,12 +85,12 @@ public class GetPhoneSupportedCountriesAPI extends CoreRequest {
             this.phoneCountryArrayList = phoneCountryArrayList;
         }
 
-        public HashSet<String> getPopularSet() {
-            return popularSet;
+        public ArrayList<String> getPopularList() {
+            return popularList;
         }
 
-        public void setPopularSet(HashSet<String> popularSet) {
-            this.popularSet = popularSet;
+        public void setPopularList(ArrayList<String> popularList) {
+            this.popularList = popularList;
         }
     }
 
