@@ -11,6 +11,9 @@ import java.util.ArrayList;
 public class ActivityContentResult {
 
     private String webviewContent;
+    private String formTitle;
+    private String formHeader;
+    private String formTitleColor;
     private ArrayList<ActivityForm> activityFormList = new ArrayList<>();
 
     public ActivityContentResult() {
@@ -23,10 +26,16 @@ public class ActivityContentResult {
             activityContentResult.setWebviewContent(URLDecoder.decode(rootObject.optString("response"), "UTF-8"));
         } catch (UnsupportedEncodingException ignored) {
         }
-        JSONArray formDataArray = rootObject.optJSONArray("formData");
-        if (formDataArray!=null){
-            for(int i = 0 ; i < formDataArray.length();i++){
-                activityContentResult.activityFormList.add(ActivityForm.newInstance(formDataArray.optJSONObject(i)));
+        JSONObject formDataObject = rootObject.optJSONObject("formData");
+        if (formDataObject != null) {
+            activityContentResult.setFormTitle(rootObject.optString("formtitle"));
+            activityContentResult.setFormHeader(rootObject.optString("formheader"));
+            activityContentResult.setFormTitleColor(rootObject.optString("formtitlecolor"));
+            JSONArray fieldsArray = rootObject.optJSONArray("fields");
+            if (fieldsArray != null) {
+                for (int i = 0; i < fieldsArray.length(); i++) {
+                    activityContentResult.activityFormList.add(ActivityForm.newInstance(fieldsArray.optJSONObject(i)));
+                }
             }
         }
 
@@ -39,6 +48,30 @@ public class ActivityContentResult {
 
     public void setWebviewContent(String webviewContent) {
         this.webviewContent = webviewContent;
+    }
+
+    public String getFormTitle() {
+        return formTitle;
+    }
+
+    public void setFormTitle(String formTitle) {
+        this.formTitle = formTitle;
+    }
+
+    public String getFormHeader() {
+        return formHeader;
+    }
+
+    public void setFormHeader(String formHeader) {
+        this.formHeader = formHeader;
+    }
+
+    public String getFormTitleColor() {
+        return formTitleColor;
+    }
+
+    public void setFormTitleColor(String formTitleColor) {
+        this.formTitleColor = formTitleColor;
     }
 
     public ArrayList<ActivityForm> getActivityFormList() {
