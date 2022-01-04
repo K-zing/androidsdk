@@ -409,6 +409,10 @@ public final class KzingAPI {
         return new IsAccountEmailMatchAPI();
     }
 
+    public static SendWithdrawSmsAPI sendWithdrawSms() {
+        return new SendWithdrawSmsAPI();
+    }
+
     public static RequestResetPasswordByEmailAPI requestResetPasswordByEmail() {
         return new RequestResetPasswordByEmailAPI();
     }
