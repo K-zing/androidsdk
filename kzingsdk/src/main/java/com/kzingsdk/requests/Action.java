@@ -118,6 +118,7 @@ final class Action {
     static final String removeBankCard = "vw85wut";
     static final String addEWalletBankCard = "tvvthvj";
     static final String getWithdrawFields = "g4vl9mt";
+    static final String sendWithdrawSms = "78acd7c";
     static final String submitWithdraw = "acd778c";
     static final String submitWithdrawSport = "acd778d";
     static final String submitEWalletWithdraw = "rxjtghw";

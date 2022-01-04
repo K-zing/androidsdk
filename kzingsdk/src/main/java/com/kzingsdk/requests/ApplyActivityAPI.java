@@ -27,6 +27,8 @@ public class ApplyActivityAPI extends CoreRequest {
     private String phone;
     private String area;
     private String address;
+    private String formId;
+    private JSONObject formDetail;
 
     @Override
     protected Observable<String> validateParams() {
@@ -51,6 +53,10 @@ public class ApplyActivityAPI extends CoreRequest {
                 jsonData.put("area", area);
             if (address != null)
                 jsonData.put("address", address);
+            if (formId != null)
+                jsonData.put("formid", formId);
+            if (formDetail != null)
+                jsonData.put("formdetail", formDetail);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -113,6 +119,16 @@ public class ApplyActivityAPI extends CoreRequest {
 
     public ApplyActivityAPI setParamAddress(String address) {
         this.address = address;
+        return this;
+    }
+
+    public ApplyActivityAPI setParamFormId(String formId) {
+        this.formId = formId;
+        return this;
+    }
+
+    public ApplyActivityAPI setParamFormDetail(JSONObject formDetail) {
+        this.formDetail = formDetail;
         return this;
     }
 }

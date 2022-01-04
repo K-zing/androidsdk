@@ -22,7 +22,7 @@ public class SubmitAtmDepositAPI extends CoreRequest {
     private String transType = "";
     private String userbank = "";
     private String gpaid = "";
-
+    private String depositRefNo;
 
     SubmitAtmDepositAPI() {
         super();
@@ -75,6 +75,9 @@ public class SubmitAtmDepositAPI extends CoreRequest {
             }
             if (userbank != null) {
                 jsonData.put("userbank", userbank);
+            }
+            if (depositRefNo != null) {
+                jsonData.put("depositrefno", depositRefNo);
             }
             return jsonData;
         } catch (JSONException ignored) {
@@ -161,4 +164,10 @@ public class SubmitAtmDepositAPI extends CoreRequest {
         this.gpaid = gpaid;
         return this;
     }
+
+    public SubmitAtmDepositAPI setDepositRefNo(String depositRefNo) {
+        this.depositRefNo = depositRefNo;
+        return this;
+    }
+
 }

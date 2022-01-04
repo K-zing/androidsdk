@@ -17,6 +17,10 @@ public class SubmitWithdrawAPI extends CoreRequest {
     private Double amount = 0d;
     private String withdrawPassword = null;
 
+    private String smsCode = null;
+    private String smsPhoneNo = null;
+    private String smsPhoneNoCountry = null;
+
     SubmitWithdrawAPI() {
         super();
     }
@@ -47,7 +51,15 @@ public class SubmitWithdrawAPI extends CoreRequest {
             if (withdrawPassword != null) {
                 jsonData.put("wdpassword", withdrawPassword);
             }
-
+            if (smsCode != null) {
+                jsonData.put("smsCode", smsCode);
+            }
+            if (smsPhoneNo != null) {
+                jsonData.put("smsPhoneNo", smsPhoneNo);
+            }
+            if (smsPhoneNoCountry != null) {
+                jsonData.put("smsPhoneNoCountry", smsPhoneNoCountry);
+            }
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -100,5 +112,21 @@ public class SubmitWithdrawAPI extends CoreRequest {
         this.withdrawPassword = withdrawPassword;
         return this;
     }
+
+    public SubmitWithdrawAPI setParamSmsCode(String smsCode) {
+        this.smsCode = smsCode;
+        return this;
+    }
+    public SubmitWithdrawAPI setParamSmsPhoneNo(String smsPhoneNo) {
+        this.smsPhoneNo = smsPhoneNo;
+        return this;
+    }
+    public SubmitWithdrawAPI setParamSmsPhoneNoCountry(String smsPhoneNoCountry) {
+        this.smsPhoneNoCountry = smsPhoneNoCountry;
+        return this;
+    }
+
+
+
 }
 

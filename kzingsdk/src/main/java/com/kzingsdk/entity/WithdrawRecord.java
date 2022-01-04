@@ -21,6 +21,7 @@ public class WithdrawRecord implements Parcelable {
     private String transType;
     private String created;
     private String requestAmount;
+    private String successAmount;
     private String actualWithdrawAmount;
     private String withdrawFee;
     private String cardNum;
@@ -32,24 +33,9 @@ public class WithdrawRecord implements Parcelable {
     private String network;
     private StatusCode statusCode;
 
+
     public WithdrawRecord() {
 
-    }
-
-    public WithdrawRecord(Parcel in) {
-        transType = in.readString();
-        created = in.readString();
-        requestAmount = in.readString();
-        actualWithdrawAmount = in.readString();
-        withdrawFee = in.readString();
-        cardNum = in.readString();
-        bankName = in.readString();
-        status = in.readString();
-        currency = in.readString();
-        canCancel = in.readInt() == 1;
-        device = in.readString();
-        network = in.readString();
-        statusCode = StatusCode.valueOfId(in.readInt());
     }
 
     public static WithdrawRecord newInstance(JSONObject rootObject) {
@@ -58,6 +44,7 @@ public class WithdrawRecord implements Parcelable {
         item.setTransType(rootObject.optString("transtype"));
         item.setCreated(rootObject.optString("created"));
         item.setRequestAmount(rootObject.optString("amount"));
+        item.setSuccessAmount(rootObject.optString("successAmount"));
         item.setActualWithdrawAmount(rootObject.optString("actual"));
         item.setWithdrawFee(rootObject.optString("wfee"));
         item.setCardNum(rootObject.optString("cardnum"));
@@ -188,11 +175,37 @@ public class WithdrawRecord implements Parcelable {
         this.network = network;
     }
 
+    public String getSuccessAmount() {
+        return successAmount;
+    }
+
+    public void setSuccessAmount(String successAmount) {
+        this.successAmount = successAmount;
+    }
+
+    public WithdrawRecord(Parcel in) {
+        transType = in.readString();
+        created = in.readString();
+        requestAmount = in.readString();
+        successAmount = in.readString();
+        actualWithdrawAmount = in.readString();
+        withdrawFee = in.readString();
+        cardNum = in.readString();
+        bankName = in.readString();
+        status = in.readString();
+        currency = in.readString();
+        canCancel = in.readInt() == 1;
+        device = in.readString();
+        network = in.readString();
+        statusCode = StatusCode.valueOfId(in.readInt());
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(transType);
         dest.writeString(created);
         dest.writeString(requestAmount);
+        dest.writeString(successAmount);
         dest.writeString(actualWithdrawAmount);
         dest.writeString(withdrawFee);
         dest.writeString(cardNum);

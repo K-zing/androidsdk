@@ -21,6 +21,7 @@ public class DepositRecord implements Parcelable {
     private String transType;
     private String created;
     private String requestAmount;
+    private String successAmount;
     private String actualDepositAmount;
     private String status;
     private String remark;
@@ -41,6 +42,7 @@ public class DepositRecord implements Parcelable {
         item.setTransType(rootObject.optString("transtype"));
         item.setCreated(rootObject.optString("created"));
         item.setRequestAmount(rootObject.optString("amount"));
+        item.setSuccessAmount(rootObject.optString("successAmount"));
         item.setActualDepositAmount(rootObject.optString("actual"));
         item.setRemark(rootObject.optString("remark"));
         item.setStatus(rootObject.optString("status"));
@@ -151,25 +153,19 @@ public class DepositRecord implements Parcelable {
         this.network = network;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(transType);
-        dest.writeString(created);
-        dest.writeString(requestAmount);
-        dest.writeString(actualDepositAmount);
-        dest.writeString(status);
-        dest.writeString(remark);
-        dest.writeString(payName);
-        dest.writeString(currency);
-        dest.writeString(device);
-        dest.writeString(network);
-        dest.writeInt(statusCode.getId());
+    public String getSuccessAmount() {
+        return successAmount;
+    }
+
+    public void setSuccessAmount(String successAmount) {
+        this.successAmount = successAmount;
     }
 
     public DepositRecord(Parcel in) {
         transType = in.readString();
         created = in.readString();
         requestAmount = in.readString();
+        successAmount = in.readString();
         actualDepositAmount = in.readString();
         status = in.readString();
         remark = in.readString();
@@ -178,6 +174,22 @@ public class DepositRecord implements Parcelable {
         device = in.readString();
         network = in.readString();
         statusCode = StatusCode.valueOfId(in.readInt());
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(transType);
+        dest.writeString(created);
+        dest.writeString(requestAmount);
+        dest.writeString(successAmount);
+        dest.writeString(actualDepositAmount);
+        dest.writeString(status);
+        dest.writeString(remark);
+        dest.writeString(payName);
+        dest.writeString(currency);
+        dest.writeString(device);
+        dest.writeString(network);
+        dest.writeInt(statusCode.getId());
     }
 
     @Override

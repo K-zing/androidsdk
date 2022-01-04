@@ -30,7 +30,6 @@ public class CancelPostpaidBonusAPI extends CoreRequest {
         return super.validateParams();
     }
 
-
     @Override
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();

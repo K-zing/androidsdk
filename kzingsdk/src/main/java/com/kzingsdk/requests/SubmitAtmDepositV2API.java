@@ -31,6 +31,7 @@ public class SubmitAtmDepositV2API extends CoreRequest {
     private String transType = "";
     private String userbank = "";
     private String gpaid = "";
+    private String depositRefNo;
 
     @Override
     protected String getAction() {
@@ -43,15 +44,6 @@ public class SubmitAtmDepositV2API extends CoreRequest {
 
     @Override
     protected Observable<String> validateParams() {
-//        if (amount <= 0) {
-//            return Observable.just("Deposit amount must be bigger than 0.");
-//        }
-//        if (cryptoAtmPayment == null) {
-//            return Observable.just("CryptoAtmPayment is missing");
-//        }
-//        if (cryptoAtmPayment.getId() == null || cryptoAtmPayment.getId().length() == 0) {
-//            return Observable.just("CryptoAtmPayment ID is missing. CryptoAtmPayment object is invalid.");
-//        }
         return super.validateParams();
     }
 
@@ -85,6 +77,9 @@ public class SubmitAtmDepositV2API extends CoreRequest {
             }
             if (userbank != null) {
                 jsonData.put("userbank", userbank);
+            }
+            if (depositRefNo != null) {
+                jsonData.put("depositrefno", depositRefNo);
             }
             return jsonData;
         } catch (JSONException ignored) {
@@ -194,6 +189,12 @@ public class SubmitAtmDepositV2API extends CoreRequest {
         this.gpaid = gpaid;
         return this;
     }
-    
+
+    public SubmitAtmDepositV2API setDepositRefNo(String depositRefNo) {
+        this.depositRefNo = depositRefNo;
+        return this;
+    }
+
+
 }
 

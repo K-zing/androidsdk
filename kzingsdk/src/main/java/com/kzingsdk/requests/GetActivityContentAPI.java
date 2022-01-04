@@ -3,6 +3,7 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
+import com.kzingsdk.entity.ActivityContentResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,16 +45,16 @@ public class GetActivityContentAPI extends CoreRequest {
     }
 
     @Override
-    public Observable<String> requestRx(Context context) {
-        return super.baseExecute(context).map(jsonResponse -> URLDecoder.decode(jsonResponse.optString("response"), "UTF-8"));
+    public Observable<ActivityContentResult> requestRx(Context context) {
+        return super.baseExecute(context).map(ActivityContentResult::newInstance);
     }
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(activityContent -> {
+        requestRx(context).subscribe(activityContentResult -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((GetActivityListContentCallBack) kzingCallBack).onSuccess(activityContent);
+                    ((GetActivityListContentCallBack) kzingCallBack).onSuccess(activityContentResult);
                 }
             }
         }, defaultOnErrorConsumer);
@@ -65,7 +66,7 @@ public class GetActivityContentAPI extends CoreRequest {
     }
 
     public interface GetActivityListContentCallBack extends KzingCallBack{
-        void onSuccess(String htmlContent);
+        void onSuccess(ActivityContentResult activityContentResult);
     }
 
     /**
