@@ -3,9 +3,12 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
+import com.kzingsdk.entity.ActivityForm;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import io.reactivex.Observable;
 
@@ -28,7 +31,7 @@ public class ApplyActivityAPI extends CoreRequest {
     private String area;
     private String address;
     private String formId;
-    private JSONObject formDetail;
+    private ArrayList<ActivityForm> activityFormList;
 
     @Override
     protected Observable<String> validateParams() {
@@ -55,8 +58,13 @@ public class ApplyActivityAPI extends CoreRequest {
                 jsonData.put("address", address);
             if (formId != null)
                 jsonData.put("formid", formId);
-            if (formDetail != null)
-                jsonData.put("formdetail", formDetail);
+            if (activityFormList != null) {
+                JSONObject formData = new JSONObject();
+                for (ActivityForm activityForm : activityFormList) {
+                    formData.put(activityForm.getName(), activityForm.getAnswer());
+                }
+                jsonData.put("formdetail", formData);
+            }
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -127,8 +135,8 @@ public class ApplyActivityAPI extends CoreRequest {
         return this;
     }
 
-    public ApplyActivityAPI setParamFormDetail(JSONObject formDetail) {
-        this.formDetail = formDetail;
+    public ApplyActivityAPI setActivityFormList(ArrayList<ActivityForm> activityFormList) {
+        this.activityFormList = activityFormList;
         return this;
     }
 }

@@ -13,6 +13,7 @@ public class ActivityForm {
     private String name;
     private Boolean required;
     private ArrayList<String> selectionList = new ArrayList<>();
+    private String answer;
 
     public ActivityForm() {
 
@@ -71,6 +72,14 @@ public class ActivityForm {
 
     public void setSelectionList(ArrayList<String> selectionList) {
         this.selectionList = selectionList;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 }
 
