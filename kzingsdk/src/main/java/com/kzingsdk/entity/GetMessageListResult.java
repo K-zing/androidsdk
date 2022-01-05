@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class GetMessageListResult {
 
     private Integer count = 0;
+    private Integer unreadCount = 0;
     private ArrayList<Message> messageList = new ArrayList<>();
     private ArrayList<Message> importantMessageList = new ArrayList<>();
 
@@ -19,6 +20,7 @@ public class GetMessageListResult {
     public static GetMessageListResult newInstance(JSONObject rootObject) {
         GetMessageListResult getMessageListResult = new GetMessageListResult();
         getMessageListResult.count = rootObject.optInt("count");
+        getMessageListResult.unreadCount = rootObject.optInt("unreadcount");
         JSONArray importantMsg = rootObject.optJSONArray("important_msg");
         for (int i = 0; i < importantMsg.length(); i++) {
             getMessageListResult.importantMessageList.add(Message.newInstance(importantMsg.optJSONObject(i)));
@@ -36,6 +38,14 @@ public class GetMessageListResult {
 
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    public Integer getUnreadCount() {
+        return unreadCount;
+    }
+
+    public void setUnreadCount(Integer unreadCount) {
+        this.unreadCount = unreadCount;
     }
 
     public ArrayList<Message> getMessageList() {
