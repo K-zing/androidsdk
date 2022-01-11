@@ -108,6 +108,18 @@ public final class KzingAPI {
         return new ResumeAllInOneAPI();
     }
 
+    public static MobileLoginAPI mobileLogin() {
+        return new MobileLoginAPI();
+    }
+
+    public static MobileLoginBindAPI mobileLoginBind() {
+        return new MobileLoginBindAPI();
+    }
+
+    public static MobileLoginGetCodeAPI mobileLoginGetCode() {
+        return new MobileLoginGetCodeAPI();
+    }
+
     public static LogoutAPI logout() {
         return new LogoutAPI();
     }

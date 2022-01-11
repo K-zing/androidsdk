@@ -7,6 +7,9 @@ final class Action {
     static final String login = "988217c";
     static final String loginAllInOne = "917c882";
     static final String resumeAllInOne = "7c89163";
+    static final String mobileLogin = "c9z7c4m";
+    static final String mobileLoginBind = "y9yunka";
+    static final String mobileLoginGetCode = "6udjolu";
     static final String logout = "vwonvi0";
     static final String getPhoneSupportedCountries = "qoj3i81";
     static final String regParam = "833656a";

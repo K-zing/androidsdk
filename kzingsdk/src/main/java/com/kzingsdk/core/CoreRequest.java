@@ -496,6 +496,9 @@ public abstract class CoreRequest {
                     kzingCallBack.onFailure((KzingRequestException) throwable);
                 } else if (throwable instanceof KzingException) {
                     kzingCallBack.onFailure((KzingException) throwable);
+                } else if (throwable instanceof java.net.ConnectException) {
+                    failedIP.add(lastUsedIP);
+                    kzingCallBack.onFailure(new KzingException(throwable.toString()));
                 } else {
                     kzingCallBack.onFailure(new KzingException(throwable.toString()));
                 }
