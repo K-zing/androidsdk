@@ -11,8 +11,9 @@ import io.reactivex.Observable;
 
 public class RequestSendEmailRegCodeAPI extends CoreRequest {
 
+
     private String email = null;
-    private String validateCode = null;
+    private String playerName = null;
 
     RequestSendEmailRegCodeAPI() {
         super();
@@ -25,12 +26,6 @@ public class RequestSendEmailRegCodeAPI extends CoreRequest {
 
     @Override
     protected Observable<String> validateParams() {
-        if (email == null) {
-            return Observable.just("Email is missing");
-        }
-        if (validateCode == null) {
-            return Observable.just("ValidateCode is missing");
-        }
         return super.validateParams();
     }
 
@@ -39,7 +34,7 @@ public class RequestSendEmailRegCodeAPI extends CoreRequest {
         JSONObject jsonData = super.generateParamsJson();
         try {
             jsonData.put("email", email);
-            jsonData.put("validateCode", validateCode);
+            jsonData.put("playername", playerName);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -77,8 +72,8 @@ public class RequestSendEmailRegCodeAPI extends CoreRequest {
         return this;
     }
 
-    public RequestSendEmailRegCodeAPI setValidateCode(String validateCode) {
-        this.validateCode = validateCode;
+    public RequestSendEmailRegCodeAPI setPlayerName(String playerName) {
+        this.playerName = playerName;
         return this;
     }
 

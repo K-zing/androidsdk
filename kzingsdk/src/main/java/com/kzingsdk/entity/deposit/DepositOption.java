@@ -38,6 +38,12 @@ public class DepositOption implements Parcelable {
     private HashMap<String, String> activityMap = new HashMap<>();
     private ArrayList<QuickLinkDeposit> quickLinkDepositList = new ArrayList<>();
     private ArrayList<Crypto> cryptoList = new ArrayList<>();
+    private String bankDepositDesc = "";
+    private String thirdPartyDesc = "";
+    private String qrDesc = "";
+    private String phoneDepositDesc = "";
+    private String cryptoDepositDesc = "";
+    private String depositFooterDesc = "";
 
     public DepositOption() {
 
@@ -63,17 +69,26 @@ public class DepositOption implements Parcelable {
         item.atmAllowPendingCount = rootObject.optInt("atmAllowPendingCount", 0);
         item.atmProcessPendingCount = rootObject.optInt("atmProcessPendingCount", 0);
         item.cryptoAtmExchangeRate = BigDecimalUtil.optBigDecimal(rootObject, "cryptoAtm_exchange_rate");
-
         item.setProcessing(rootObject.optBoolean("process"));
         item.setAllowDeposit(rootObject.optBoolean("allowdeposit"));
         item.setAllowDecimal(rootObject.optBoolean("allowDecimal"));
-
 
         JSONArray actArray = rootObject.optJSONArray("actid");
         if (actArray != null) {
             for (int i = 0; i < actArray.length(); i++) {
                 item.activityMap.put(actArray.optJSONObject(i).optString("actid"), actArray.optJSONObject(i).optString("actname"));
             }
+        }
+
+        JSONObject depositDescObject = rootObject.optJSONObject("depositDesc");
+        if (depositDescObject != null) {
+            item.bankDepositDesc = rootObject.optString("bank_deposit_desc");
+            item.thirdPartyDesc = rootObject.optString("thirdparty_desc");
+            item.qrDesc = rootObject.optString("qr_desc");
+            item.phoneDepositDesc = rootObject.optString("phone_deposit_desc");
+            item.cryptoDepositDesc = rootObject.optString("crypto_deposit_desc");
+            item.depositFooterDesc = rootObject.optString("deposit_footer_desc");
+
         }
 
         JSONArray paymentTypeJArray = rootObject.optJSONArray("paymentType");
@@ -446,6 +461,54 @@ public class DepositOption implements Parcelable {
         this.cryptoList = cryptoList;
     }
 
+    public String getBankDepositDesc() {
+        return bankDepositDesc;
+    }
+
+    public void setBankDepositDesc(String bankDepositDesc) {
+        this.bankDepositDesc = bankDepositDesc;
+    }
+
+    public String getThirdPartyDesc() {
+        return thirdPartyDesc;
+    }
+
+    public void setThirdPartyDesc(String thirdPartyDesc) {
+        this.thirdPartyDesc = thirdPartyDesc;
+    }
+
+    public String getQrDesc() {
+        return qrDesc;
+    }
+
+    public void setQrDesc(String qrDesc) {
+        this.qrDesc = qrDesc;
+    }
+
+    public String getPhoneDepositDesc() {
+        return phoneDepositDesc;
+    }
+
+    public void setPhoneDepositDesc(String phoneDepositDesc) {
+        this.phoneDepositDesc = phoneDepositDesc;
+    }
+
+    public String getCryptoDepositDesc() {
+        return cryptoDepositDesc;
+    }
+
+    public void setCryptoDepositDesc(String cryptoDepositDesc) {
+        this.cryptoDepositDesc = cryptoDepositDesc;
+    }
+
+    public String getDepositFooterDesc() {
+        return depositFooterDesc;
+    }
+
+    public void setDepositFooterDesc(String depositFooterDesc) {
+        this.depositFooterDesc = depositFooterDesc;
+    }
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public DepositOption createFromParcel(Parcel in) {
             return new DepositOption(in);
@@ -469,6 +532,12 @@ public class DepositOption implements Parcelable {
         atmAllowPendingCount = in.readInt();
         atmProcessPendingCount = in.readInt();
         cryptoAtmExchangeRate = new BigDecimal(in.readString());
+        bankDepositDesc = in.readString();
+        thirdPartyDesc = in.readString();
+        qrDesc = in.readString();
+        phoneDepositDesc = in.readString();
+        cryptoDepositDesc = in.readString();
+        depositFooterDesc = in.readString();
         Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
         paymentGroupList = (ArrayList<PaymentGroup>) customObjects[0];
         activityMap = (HashMap<String, String>) customObjects[1];
@@ -497,7 +566,12 @@ public class DepositOption implements Parcelable {
         dest.writeInt(atmAllowPendingCount);
         dest.writeInt(atmProcessPendingCount);
         dest.writeString(cryptoAtmExchangeRate.toString());
-
+        dest.writeString(bankDepositDesc);
+        dest.writeString(thirdPartyDesc);
+        dest.writeString(qrDesc);
+        dest.writeString(phoneDepositDesc);
+        dest.writeString(cryptoDepositDesc);
+        dest.writeString(depositFooterDesc);
         Object[] customObjects = new Object[4];
         customObjects[0] = paymentGroupList;
         customObjects[1] = activityMap;
