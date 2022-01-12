@@ -113,6 +113,8 @@ public class ClientInfo implements Parcelable {
         clientInfo.setMemberLoginNeedCaptcha(rootObject.optBoolean("memberLoginNeedCaptcha", false));
         clientInfo.setAllowCryptoCurrencyWithdrawal(rootObject.optBoolean("allowcryptocurrencywithdrawal", false));
         clientInfo.setAllowPlayerDeleteCryptoAddr(rootObject.optBoolean("allowplayerdeletecryptoaddr", false));
+        clientInfo.setRegisterEmailVerify(rootObject.optBoolean("registerEmailVerify", false));
+
         clientInfo.setCryptoFixedExchangeRate(rootObject.optString("cryptofixedexchangerate"));
         clientInfo.memberPanAgentCodeList = new ArrayList<>();
         clientInfo.memberPanUsernameList = new ArrayList<>();
