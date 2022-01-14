@@ -26,15 +26,18 @@ public class ActivityContentResult {
             activityContentResult.setWebviewContent(URLDecoder.decode(rootObject.optString("response"), "UTF-8"));
         } catch (UnsupportedEncodingException ignored) {
         }
-        JSONObject formDataObject = rootObject.optJSONObject("formData");
-        if (formDataObject != null) {
-            activityContentResult.setFormTitle(rootObject.optString("formtitle"));
-            activityContentResult.setFormHeader(rootObject.optString("formheader"));
-            activityContentResult.setFormTitleColor(rootObject.optString("formtitlecolor"));
-            JSONArray fieldsArray = rootObject.optJSONArray("fields");
-            if (fieldsArray != null) {
-                for (int i = 0; i < fieldsArray.length(); i++) {
-                    activityContentResult.activityFormList.add(ActivityForm.newInstance(fieldsArray.optJSONObject(i)));
+        JSONObject formObject = rootObject.optJSONObject("formData");
+        if (formObject != null) {
+            JSONObject formDataObject = formObject.optJSONObject("data");
+            if (formDataObject != null) {
+                activityContentResult.setFormTitle(formDataObject.optString("formtitle"));
+                activityContentResult.setFormHeader(formDataObject.optString("formheader"));
+                activityContentResult.setFormTitleColor(formDataObject.optString("formtitlecolor"));
+                JSONArray fieldsArray = formDataObject.optJSONArray("fields");
+                if (fieldsArray != null) {
+                    for (int i = 0; i < fieldsArray.length(); i++) {
+                        activityContentResult.activityFormList.add(ActivityForm.newInstance(fieldsArray.optJSONObject(i)));
+                    }
                 }
             }
         }
