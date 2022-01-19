@@ -49,6 +49,9 @@ public class GamePlatformChild implements Playable {
         item.setChildName(rootObject.optString("childname"));
         item.setChildEnName(rootObject.optString("childnameen"));
         item.urlSuffix = rootObject.optString("appurl_suffix");
+        if (item.urlSuffix.equalsIgnoreCase("")){
+            item.urlSuffix = rootObject.optString("gamecode");
+        }
         item.setDisplayorder(rootObject.optInt("displayorder"));
         item.setImage(rootObject.optString("image"));
         item.setRtpPercentage(rootObject.optString("rtppercentage"));
