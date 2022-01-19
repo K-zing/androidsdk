@@ -43,6 +43,7 @@ public class RegAccountAPI extends CoreRequest {
     private String line = "";
     private String skype = "";
     private String captchaValidate = "";
+    private String emailCode = "";
 
 
     RegAccountAPI() {
@@ -107,6 +108,7 @@ public class RegAccountAPI extends CoreRequest {
             jsonData.put("line", line);
             jsonData.put("skype", skype);
             jsonData.put("captchaValidate", captchaValidate);
+            jsonData.put("emailcode", emailCode);
 
             jsonData.put("jsessionid", getSessionId());
 
@@ -272,6 +274,11 @@ public class RegAccountAPI extends CoreRequest {
 
     public RegAccountAPI setCaptchaValidate(String captchaValidate) {
         this.captchaValidate = captchaValidate;
+        return this;
+    }
+
+    public RegAccountAPI setEmailCode(String emailCode) {
+        this.emailCode = emailCode;
         return this;
     }
 
