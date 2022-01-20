@@ -105,7 +105,7 @@ final class Action {
 
 
     static final String getRecommendGames = "8asb71c";
-    static final String getGamePlatformAccountList = "ch91pzo";
+    static final String getGamePlatformAccountList = "fosjp6u";
     static final String getAllGpBalance = "p18jd1a";
     static final String getGpsBalance = "p18jd1b";
 

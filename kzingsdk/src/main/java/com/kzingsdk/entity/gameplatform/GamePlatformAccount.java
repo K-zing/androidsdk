@@ -7,6 +7,7 @@ public class GamePlatformAccount {
     private String gpAccountId = "";
     private String gpName = "";
     private int displayorder = 0;
+    private int status = 0;
     private String image = "";
 
     public GamePlatformAccount clone() {
@@ -27,6 +28,7 @@ public class GamePlatformAccount {
         item.setGpAccountId(rootObject.optString("gpaccountid"));
         item.setGpName(rootObject.optString("gpname"));
         item.setDisplayorder(rootObject.optInt("displayorder"));
+        item.setStatus(rootObject.optInt("status"));
         item.setImage(rootObject.optString("image"));
         return item;
     }
@@ -61,6 +63,14 @@ public class GamePlatformAccount {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     @Override

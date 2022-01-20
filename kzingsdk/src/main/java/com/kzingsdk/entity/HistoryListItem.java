@@ -28,6 +28,7 @@ public class HistoryListItem implements Parcelable {
     private String resultScore = "";
     private String potentialPayout = "";
     private Integer tokenStatus = 0;
+    private Integer oddStatus = 0;
     private String token = "";
     private String currency = "";
     private String conversion = "";
@@ -58,6 +59,7 @@ public class HistoryListItem implements Parcelable {
         historyListItem.setResultScore(rootObject.optString("result_score"));
         historyListItem.setPotentialPayout(rootObject.optString("potentialPayout"));
         historyListItem.setTokenStatus(rootObject.optInt("tokenstatus"));
+        historyListItem.setOddStatus(rootObject.optInt("oddstatus"));
         historyListItem.setToken(rootObject.optString("token"));
         historyListItem.setCurrency(rootObject.optString("currency"));
         historyListItem.setConversion(rootObject.optString("conversion"));
@@ -230,6 +232,14 @@ public class HistoryListItem implements Parcelable {
         this.tokenStatus = tokenStatus;
     }
 
+    public Integer getOddStatus() {
+        return oddStatus;
+    }
+
+    public void setOddStatus(Integer oddStatus) {
+        this.oddStatus = oddStatus;
+    }
+
     public String getToken() {
         return token;
     }
@@ -281,6 +291,7 @@ public class HistoryListItem implements Parcelable {
         dest.writeString(resultScore);
         dest.writeString(potentialPayout);
         dest.writeInt(tokenStatus);
+        dest.writeInt(oddStatus);
         dest.writeString(token);
         dest.writeString(currency);
         dest.writeString(conversion);
@@ -305,6 +316,7 @@ public class HistoryListItem implements Parcelable {
         resultScore = in.readString();
         potentialPayout = in.readString();
         tokenStatus = in.readInt();
+        oddStatus = in.readInt();
         token = in.readString();
         currency = in.readString();
         conversion = in.readString();

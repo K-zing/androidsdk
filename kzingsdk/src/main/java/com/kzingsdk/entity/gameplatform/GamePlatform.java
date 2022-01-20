@@ -90,7 +90,7 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
     }
 
     public GamePlatform() {
-
+        currencyDisplayOrderMap.put("default", 0);
     }
 
     public static GamePlatform createDummyInstance() {

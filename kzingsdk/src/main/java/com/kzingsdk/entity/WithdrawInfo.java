@@ -31,6 +31,8 @@ public class WithdrawInfo {
     private String mobileBetCheckDesc;
     private String withdrawBindNetwork;
     private boolean withdrawBindUsdt;
+    private boolean allowWithdrawCfg;
+    private boolean allowCryptoWithdrawCfg;
 
     private BigDecimal withdrawRate = BigDecimal.ONE;
     private ArrayList<BankCard> bankCardList = new ArrayList<>();
@@ -60,6 +62,8 @@ public class WithdrawInfo {
         withdrawInfo.setPlayerWithdrawEnterOtp(rootObject.optBoolean("playerWithdrawEnterOtp", false));
         withdrawInfo.setWithdrawBindNetwork(rootObject.optString("withdrawbindnetwork"));
         withdrawInfo.setWithdrawBindUsdt(rootObject.optBoolean("withdrawbindusdt", false));
+        withdrawInfo.setAllowWithdrawCfg(rootObject.optBoolean("allow_withdraw_cfg", false));
+        withdrawInfo.setAllowCryptoWithdrawCfg(rootObject.optBoolean("allow_crypto_withdraw_cfg", false));
 
         JSONArray cryptoArray = rootObject.optJSONArray("crypto");
         for (int i = 0; i < cryptoArray.length(); i++) {
@@ -266,6 +270,22 @@ public class WithdrawInfo {
 
     public void setWithdrawBindUsdt(boolean withdrawBindUsdt) {
         this.withdrawBindUsdt = withdrawBindUsdt;
+    }
+
+    public boolean isAllowWithdrawCfg() {
+        return allowWithdrawCfg;
+    }
+
+    public void setAllowWithdrawCfg(boolean allowWithdrawCfg) {
+        this.allowWithdrawCfg = allowWithdrawCfg;
+    }
+
+    public boolean isAllowCryptoWithdrawCfg() {
+        return allowCryptoWithdrawCfg;
+    }
+
+    public void setAllowCryptoWithdrawCfg(boolean allowCryptoWithdrawCfg) {
+        this.allowCryptoWithdrawCfg = allowCryptoWithdrawCfg;
     }
 
     public HashMap<String, ArrayList<String>> getCryptoMap() {
