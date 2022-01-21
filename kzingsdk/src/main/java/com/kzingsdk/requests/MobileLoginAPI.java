@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.MemberInfo;
-import com.kzingsdk.entity.SocialRegisterPlatform;
 import com.kzingsdk.util.Constant;
 import com.kzingsdk.util.SharePrefUtil;
 
@@ -49,12 +48,13 @@ public class MobileLoginAPI extends CoreRequest {
     @Override
     public Observable<MemberInfo> requestRx(Context context) {
         return super.baseExecute(context).map(jsonResponse -> {
-            String vcToken = jsonResponse.optString("vc", "");
-            String ccToken = jsonResponse.optString("cc", "");
+            JSONObject dataResponse = jsonResponse.optJSONObject("data");
+            String vcToken = dataResponse.optString("vc", "");
+            String ccToken = dataResponse.optString("cc", "");
             SharePrefUtil.putString(context, Constant.Pref.VCTOKEN, vcToken);
             SharePrefUtil.putString(context, Constant.Pref.CCTOKEN, ccToken);
             setLoginTokens(vcToken, ccToken);
-            return MemberInfo.newInstance(jsonResponse);
+            return MemberInfo.newInstance(dataResponse);
         });
     }
 
