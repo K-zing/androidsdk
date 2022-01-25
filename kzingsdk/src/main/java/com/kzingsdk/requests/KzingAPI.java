@@ -84,6 +84,14 @@ public final class KzingAPI {
         return new GetVipDetailAPI();
     }
 
+    public static GetSiteDomainAPI getSiteDomain() {
+        return new GetSiteDomainAPI();
+    }
+
+    public static CheckPlayerRealNameAndEmailAPI checkPlayerRealNameAndEmail() {
+        return new CheckPlayerRealNameAndEmailAPI();
+    }
+
     public static GetPlayerRecentStatAPI getPlayerRecentStat() {
         return new GetPlayerRecentStatAPI();
     }

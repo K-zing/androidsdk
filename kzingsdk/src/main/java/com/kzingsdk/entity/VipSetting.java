@@ -16,6 +16,8 @@ public class VipSetting implements Parcelable {
     private Integer rankLevel;
     private Integer withdrawTimes;
     private BigDecimal monthReward = BigDecimal.ZERO;
+    private BigDecimal dailyReward = BigDecimal.ZERO;
+    private BigDecimal weeklyReward = BigDecimal.ZERO;
     private BigDecimal birthReward = BigDecimal.ZERO;
     private BigDecimal withdrawDailyMaxLimit = BigDecimal.ZERO;
     private BigDecimal autoLevelReward = BigDecimal.ZERO;
@@ -33,6 +35,8 @@ public class VipSetting implements Parcelable {
         vipSetting.rankLevel = rootObject.optInt("ranklevel", 0);
         vipSetting.withdrawTimes = rootObject.optInt("wtdtimes", 0);
         vipSetting.monthReward = BigDecimalUtil.optBigDecimal(rootObject, "monthReward", BigDecimal.ZERO);
+        vipSetting.dailyReward = BigDecimalUtil.optBigDecimal(rootObject, "dailyReward", BigDecimal.ZERO);
+        vipSetting.weeklyReward = BigDecimalUtil.optBigDecimal(rootObject, "weeklyReward", BigDecimal.ZERO);
         vipSetting.birthReward = BigDecimalUtil.optBigDecimal(rootObject, "birthReward", BigDecimal.ZERO);
         vipSetting.withdrawDailyMaxLimit = BigDecimalUtil.optBigDecimal(rootObject, "withdrawDailyMaxLimit", BigDecimal.ZERO);
         vipSetting.autoLevelReward = BigDecimalUtil.optBigDecimal(rootObject, "autoLevelReward", BigDecimal.ZERO);
@@ -72,6 +76,22 @@ public class VipSetting implements Parcelable {
 
     public void setMonthReward(BigDecimal monthReward) {
         this.monthReward = monthReward;
+    }
+
+    public BigDecimal getDailyReward() {
+        return dailyReward;
+    }
+
+    public void setDailyReward(BigDecimal dailyReward) {
+        this.dailyReward = dailyReward;
+    }
+
+    public BigDecimal getWeeklyReward() {
+        return weeklyReward;
+    }
+
+    public void setWeeklyReward(BigDecimal weeklyReward) {
+        this.weeklyReward = weeklyReward;
     }
 
     public BigDecimal getBirthReward() {
@@ -136,6 +156,8 @@ public class VipSetting implements Parcelable {
         rankLevel = in.readInt();
         withdrawTimes = in.readInt();
         monthReward = new BigDecimal(in.readString());
+        dailyReward = new BigDecimal(in.readString());
+        weeklyReward = new BigDecimal(in.readString());
         birthReward = new BigDecimal(in.readString());
         withdrawDailyMaxLimit = new BigDecimal(in.readString());
         autoLevelReward = new BigDecimal(in.readString());
@@ -151,6 +173,8 @@ public class VipSetting implements Parcelable {
         dest.writeInt(rankLevel);
         dest.writeInt(withdrawTimes);
         dest.writeString(monthReward.toString());
+        dest.writeString(dailyReward.toString());
+        dest.writeString(weeklyReward.toString());
         dest.writeString(birthReward.toString());
         dest.writeString(withdrawDailyMaxLimit.toString());
         dest.writeString(autoLevelReward.toString());

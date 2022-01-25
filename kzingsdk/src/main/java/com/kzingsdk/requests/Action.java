@@ -24,6 +24,7 @@ final class Action {
     static final String checkAgentNameExist = "tejqigy";
     static final String getWebsiteConfig = "aynbshp";
     static final String getWebsiteContentConfig = "bynbshp";
+    static final String getSiteDomain = "bvjsdg";
     static final String getNewMobilePopup = "ldeqxay";
     static final String getHotGames = "rzqqo66";
     static final String getIpBlockSetting = "9sft2r8";
@@ -32,6 +33,7 @@ final class Action {
     static final String socialAccountBindingStatus = "gjpofu6";
     static final String getIplMatchesData = "egydymd";
     static final String getDividendPools = "liuawev";
+    static final String checkPlayerRealNameAndEmail = "xrdl2zb";
 
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";

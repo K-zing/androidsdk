@@ -33,6 +33,7 @@ public class WithdrawInfo {
     private boolean withdrawBindUsdt;
     private boolean allowWithdrawCfg;
     private boolean allowCryptoWithdrawCfg;
+    private boolean allowIFSCCode;
 
     private BigDecimal withdrawRate = BigDecimal.ONE;
     private ArrayList<BankCard> bankCardList = new ArrayList<>();
@@ -64,6 +65,7 @@ public class WithdrawInfo {
         withdrawInfo.setWithdrawBindUsdt(rootObject.optBoolean("withdrawbindusdt", false));
         withdrawInfo.setAllowWithdrawCfg(rootObject.optBoolean("allow_withdraw_cfg", false));
         withdrawInfo.setAllowCryptoWithdrawCfg(rootObject.optBoolean("allow_crypto_withdraw_cfg", false));
+        withdrawInfo.setAllowIFSCCode(rootObject.optBoolean("allowIFSCCode", false));
 
         JSONArray cryptoArray = rootObject.optJSONArray("crypto");
         for (int i = 0; i < cryptoArray.length(); i++) {
@@ -286,6 +288,14 @@ public class WithdrawInfo {
 
     public void setAllowCryptoWithdrawCfg(boolean allowCryptoWithdrawCfg) {
         this.allowCryptoWithdrawCfg = allowCryptoWithdrawCfg;
+    }
+
+    public boolean isAllowIFSCCode() {
+        return allowIFSCCode;
+    }
+
+    public void setAllowIFSCCode(boolean allowIFSCCode) {
+        this.allowIFSCCode = allowIFSCCode;
     }
 
     public HashMap<String, ArrayList<String>> getCryptoMap() {
