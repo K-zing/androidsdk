@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class GetWithdrawCryptoListResult {
 
     private ArrayList<WithdrawCrypto> withdrawCryptoList = new ArrayList<>();
-    private HashMap<String, WithdrawCryptoLimit> withdrawCryptoLimitMap = new HashMap<>();
+    private ArrayList<WithdrawCryptoLimit> withdrawCryptoLimitList = new ArrayList<>();
 
     public GetWithdrawCryptoListResult() {
 
@@ -28,7 +28,7 @@ public class GetWithdrawCryptoListResult {
         if (responseLimits != null) {
             for (int i = 0; i < responseLimits.length(); i++) {
                 WithdrawCryptoLimit withdrawCryptoLimit = WithdrawCryptoLimit.newInstance(responseLimits.optJSONObject(i));
-                getWithdrawCryptoListResult.withdrawCryptoLimitMap.put(withdrawCryptoLimit.getCurrency(), withdrawCryptoLimit);
+                getWithdrawCryptoListResult.withdrawCryptoLimitList.add(withdrawCryptoLimit);
             }
         }
         return getWithdrawCryptoListResult;
@@ -42,12 +42,12 @@ public class GetWithdrawCryptoListResult {
         this.withdrawCryptoList = withdrawCryptoList;
     }
 
-    public HashMap<String, WithdrawCryptoLimit> getWithdrawCryptoLimitMap() {
-        return withdrawCryptoLimitMap;
+    public ArrayList<WithdrawCryptoLimit> getWithdrawCryptoLimitList() {
+        return withdrawCryptoLimitList;
     }
 
-    public void setWithdrawCryptoLimitMap(HashMap<String, WithdrawCryptoLimit> withdrawCryptoLimitMap) {
-        this.withdrawCryptoLimitMap = withdrawCryptoLimitMap;
+    public void setWithdrawCryptoLimitList(ArrayList<WithdrawCryptoLimit> withdrawCryptoLimitList) {
+        this.withdrawCryptoLimitList = withdrawCryptoLimitList;
     }
 }
 
