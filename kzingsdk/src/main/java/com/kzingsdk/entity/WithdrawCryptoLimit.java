@@ -10,6 +10,7 @@ public class WithdrawCryptoLimit {
 
     private String currency;
     private String info;
+    private String network;
     private BigDecimal withdrawDayMaxCount;
     private BigDecimal withdrawMax;
     private BigDecimal withdrawMin;
@@ -22,6 +23,7 @@ public class WithdrawCryptoLimit {
         WithdrawCryptoLimit activityBonus = new WithdrawCryptoLimit();
         activityBonus.setCurrency(rootObject.optString("currency"));
         activityBonus.setInfo(rootObject.optString("winfo"));
+        activityBonus.setNetwork(rootObject.optString("network"));
         activityBonus.setWithdrawDayMaxCount(BigDecimalUtil.optBigDecimal(rootObject, "withdraw_day_max_count"));
         activityBonus.setWithdrawMax(BigDecimalUtil.optBigDecimal(rootObject, "withdraw_max"));
         activityBonus.setWithdrawMin(BigDecimalUtil.optBigDecimal(rootObject, "withdraw_min"));
@@ -42,6 +44,14 @@ public class WithdrawCryptoLimit {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public String getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(String network) {
+        this.network = network;
     }
 
     public BigDecimal getWithdrawDayMaxCount() {
