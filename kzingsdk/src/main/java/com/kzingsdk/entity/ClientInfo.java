@@ -68,7 +68,8 @@ public class ClientInfo implements Parcelable {
     private boolean allowPlayerDeleteCryptoAddr;
     private boolean registerEmailVerify;
     private String cryptoFixedExchangeRate;
-
+    private boolean playerAddress;
+    private boolean playerWithdrawBindAddress;
 
 
     public ClientInfo() {
@@ -114,6 +115,8 @@ public class ClientInfo implements Parcelable {
         clientInfo.setAllowCryptoCurrencyWithdrawal(rootObject.optBoolean("allowcryptocurrencywithdrawal", false));
         clientInfo.setAllowPlayerDeleteCryptoAddr(rootObject.optBoolean("allowplayerdeletecryptoaddr", false));
         clientInfo.setRegisterEmailVerify(rootObject.optBoolean("registerEmailVerify", false));
+        clientInfo.setPlayerAddress(rootObject.optBoolean("playerAddress", false));
+        clientInfo.setPlayerWithdrawBindAddress(rootObject.optBoolean("playerWithdrawBindAddress", false));
 
         clientInfo.setCryptoFixedExchangeRate(rootObject.optString("cryptofixedexchangerate"));
         clientInfo.memberPanAgentCodeList = new ArrayList<>();
@@ -588,6 +591,22 @@ public class ClientInfo implements Parcelable {
         this.registerEmailVerify = registerEmailVerify;
     }
 
+    public boolean isPlayerAddress() {
+        return playerAddress;
+    }
+
+    public void setPlayerAddress(boolean playerAddress) {
+        this.playerAddress = playerAddress;
+    }
+
+    public boolean isPlayerWithdrawBindAddress() {
+        return playerWithdrawBindAddress;
+    }
+
+    public void setPlayerWithdrawBindAddress(boolean playerWithdrawBindAddress) {
+        this.playerWithdrawBindAddress = playerWithdrawBindAddress;
+    }
+
     public ClientInfo(Parcel in) {
         siteName = in.readString();
         siteDomain = in.readString();
@@ -639,6 +658,8 @@ public class ClientInfo implements Parcelable {
         allowPlayerDeleteCryptoAddr = in.readInt() == 1;
         registerEmailVerify = in.readInt() == 1;
         cryptoFixedExchangeRate = in.readString();
+        playerAddress = in.readInt() == 1;
+        playerWithdrawBindAddress = in.readInt() == 1;
     }
 
 
@@ -695,6 +716,8 @@ public class ClientInfo implements Parcelable {
         dest.writeInt(allowPlayerDeleteCryptoAddr ? 1 : 0);
         dest.writeInt(registerEmailVerify ? 1 : 0);
         dest.writeString(cryptoFixedExchangeRate);
+        dest.writeInt(playerAddress ? 1 : 0);
+        dest.writeInt(playerWithdrawBindAddress ? 1 : 0);
     }
 
     @Override

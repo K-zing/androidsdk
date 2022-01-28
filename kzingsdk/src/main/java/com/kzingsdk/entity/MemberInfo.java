@@ -64,6 +64,7 @@ public class MemberInfo implements Parcelable {
     private boolean panDuplicateIP = false;
     private boolean enablePhoneRecall = false;
     private String playerCurrency = "";
+    private String address = "";
     private ArrayList<String> currencyList = new ArrayList<>();
     private ArrayList<CurrencyBalance> currencyBalanceList = new ArrayList<>();
 
@@ -118,6 +119,7 @@ public class MemberInfo implements Parcelable {
         pan = in.readString();
         enablePhoneRecall = in.readInt() == 1;
         playerCurrency = in.readString();
+        address = in.readString();
         Object[] objectArray = in.readArray(MemberInfo.class.getClassLoader());
         currencyList = (ArrayList<String>) objectArray[0];
         currencyBalanceList = (ArrayList<CurrencyBalance>) objectArray[1];
@@ -167,6 +169,7 @@ public class MemberInfo implements Parcelable {
         memberInfo.setWithdrawFrozenAmount(rootObject.optString("wtdfrozenamt"));
         memberInfo.setEnablePhoneRecall(rootObject.optBoolean("enablePhoneRecall", false));
         memberInfo.setPlayerCurrency(rootObject.optString("playerCurrency"));
+        memberInfo.setAddress(rootObject.optString("address"));
         JSONArray currencyJSONArray = rootObject.optJSONArray("currencyList");
         ArrayList<String> currencyList = new ArrayList<>();
         if (currencyJSONArray != null) {
@@ -527,6 +530,14 @@ public class MemberInfo implements Parcelable {
         this.playerCurrency = playerCurrency;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public ArrayList<String> getCurrencyList() {
         return currencyList;
     }
@@ -587,6 +598,7 @@ public class MemberInfo implements Parcelable {
         dest.writeString(pan);
         dest.writeInt(enablePhoneRecall ? 1 : 0);
         dest.writeString(playerCurrency);
+        dest.writeString(address);
         dest.writeArray(new Object[]{
                 currencyList,
                 currencyBalanceList
