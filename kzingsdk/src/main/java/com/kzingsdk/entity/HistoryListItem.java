@@ -13,6 +13,7 @@ public class HistoryListItem implements Parcelable {
 
     private String betTime = "";
     private String gpType = "";
+    private String gpTypeCode = "";
     private String gpid = "";
     private String betNo = "";
     private String betContent = "";
@@ -45,6 +46,7 @@ public class HistoryListItem implements Parcelable {
         HistoryListItem historyListItem = new HistoryListItem();
         historyListItem.setBetTime(rootObject.optString("bettime"));
         historyListItem.setGpType(rootObject.optString("gp_type"));
+        historyListItem.setGpTypeCode(rootObject.optString("gptype"));
         historyListItem.setGpid(rootObject.optString("gpid"));
         historyListItem.setBetNo(rootObject.optString("bet_no"));
         historyListItem.setBetContent(rootObject.optString("bet_content").replace("<br />", ""));
@@ -138,6 +140,14 @@ public class HistoryListItem implements Parcelable {
 
     public void setGpType(String gpType) {
         this.gpType = gpType;
+    }
+
+    public String getGpTypeCode() {
+        return gpTypeCode;
+    }
+
+    public void setGpTypeCode(String gpTypeCode) {
+        this.gpTypeCode = gpTypeCode;
     }
 
     public String getPayout() {
@@ -276,6 +286,7 @@ public class HistoryListItem implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(betTime);
         dest.writeString(gpType);
+        dest.writeString(gpTypeCode);
         dest.writeString(gpid);
         dest.writeString(betNo);
         dest.writeString(betContent);
@@ -301,6 +312,7 @@ public class HistoryListItem implements Parcelable {
     public HistoryListItem(Parcel in) {
         betTime = in.readString();
         gpType = in.readString();
+        gpTypeCode = in.readString();
         gpid = in.readString();
         betNo = in.readString();
         betContent = in.readString();

@@ -12,7 +12,7 @@ public class RegParam {
     private boolean regBirthday, regQQ, reqPhone, regEmail, withdrawPassword, regWeixin,
             reqReferCode, regRealName, regMobileVerify, regPwdConfirm, regLegalAge, isHighLevelPass, reqPhoneCountry,
             reqDisplayReferCode, hasFriendPromo, regWhatsapp, regTelegram, regFacebook, regZalo, regLine, mustFillReferral,
-            regEmailDisplay, reqPhoneDisplay, regSkype, regEmailVerify;
+            regEmailDisplay, reqPhoneDisplay, regSkype, regEmailVerify, regMarketing;
 
     private int nameMin = 4, nameMax = 11;
     private int passwordMin = 6, passwordMax = 16;
@@ -47,6 +47,7 @@ public class RegParam {
         regParam.setRegEmailDisplay(paramObject.optString("regemaildisplay").equalsIgnoreCase("ON"));
         regParam.setReqPhoneDisplay(paramObject.optString("reqphonedisplay").equalsIgnoreCase("ON"));
         regParam.setRegSkype(paramObject.optString("regskype").equalsIgnoreCase("ON"));
+        regParam.setRegMarketing(paramObject.optString("regMarketing").equalsIgnoreCase("ON"));
 
         regParam.setRegMobileVerify(paramObject.optString("registermobileverify").equalsIgnoreCase("ON"));
         regParam.setRegEmailVerify(paramObject.optString("registeremailverify").equalsIgnoreCase("ON"));
@@ -309,6 +310,14 @@ public class RegParam {
 
     public void setRegSkype(boolean regSkype) {
         this.regSkype = regSkype;
+    }
+
+    public boolean isRegMarketing() {
+        return regMarketing;
+    }
+
+    public void setRegMarketing(boolean regMarketing) {
+        this.regMarketing = regMarketing;
     }
 
     public boolean isRegEmailVerify() {
