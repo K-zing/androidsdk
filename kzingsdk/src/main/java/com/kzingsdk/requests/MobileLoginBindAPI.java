@@ -22,6 +22,7 @@ public class MobileLoginBindAPI extends CoreRequest {
     private String countryCode;
     private String smsCode;
     private String uid;
+    private String playerName;
     private String pwd;
     private String captcha;
 
@@ -43,7 +44,8 @@ public class MobileLoginBindAPI extends CoreRequest {
             jsonData.put("countrycode", countryCode);
             jsonData.put("smscode", smsCode);
             jsonData.put("uid", uid);
-            jsonData.put("pwd", pwd);
+            jsonData.put("playername", playerName);
+            jsonData.put("password", pwd);
             jsonData.put("captcha", captcha);
             jsonData.put("jsessionid", getSessionId());
             return jsonData;
@@ -102,6 +104,11 @@ public class MobileLoginBindAPI extends CoreRequest {
 
     public MobileLoginBindAPI setUid(String uid) {
         this.uid = uid;
+        return this;
+    }
+
+    public MobileLoginBindAPI setPlayerName(String playerName) {
+        this.playerName = playerName;
         return this;
     }
 
