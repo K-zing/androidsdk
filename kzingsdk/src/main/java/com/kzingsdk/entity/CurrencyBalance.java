@@ -15,6 +15,7 @@ public class CurrencyBalance implements Parcelable {
     private String symbol;
     private BigDecimal amount;
     private Integer decimalPlaces;
+    private boolean isCrypto;
 
     public static final Creator<CurrencyBalance> CREATOR = new Creator<CurrencyBalance>() {
         @Override
@@ -34,7 +35,16 @@ public class CurrencyBalance implements Parcelable {
         currencyBalance.setSymbol(rootObject.optString("symbol"));
         currencyBalance.setAmount(BigDecimalUtil.optBigDecimal(rootObject, "amount"));
         currencyBalance.setDecimalPlaces(rootObject.optInt("decimalPlaces"));
+        currencyBalance.setIsCrypto(rootObject.optInt("iscrypto") == 1);
         return currencyBalance;
+    }
+
+    public boolean isCrypto() {
+        return isCrypto;
+    }
+
+    public void setIsCrypto(boolean crypto) {
+        isCrypto = crypto;
     }
 
     public String getCurrency() {

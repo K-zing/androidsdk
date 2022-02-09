@@ -14,20 +14,24 @@ public class WithdrawCryptoLimit {
     private BigDecimal withdrawDayMaxCount;
     private BigDecimal withdrawMax;
     private BigDecimal withdrawMin;
+    private BigDecimal withdrawMaxUsdt;
+    private BigDecimal withdrawMinUsdt;
 
     public WithdrawCryptoLimit() {
 
     }
 
     public static WithdrawCryptoLimit newInstance(JSONObject rootObject) {
-        WithdrawCryptoLimit activityBonus = new WithdrawCryptoLimit();
-        activityBonus.setCurrency(rootObject.optString("currency"));
-        activityBonus.setInfo(rootObject.optString("winfo"));
-        activityBonus.setNetwork(rootObject.optString("network"));
-        activityBonus.setWithdrawDayMaxCount(BigDecimalUtil.optBigDecimal(rootObject, "withdraw_day_max_count"));
-        activityBonus.setWithdrawMax(BigDecimalUtil.optBigDecimal(rootObject, "withdraw_max"));
-        activityBonus.setWithdrawMin(BigDecimalUtil.optBigDecimal(rootObject, "withdraw_min"));
-        return activityBonus;
+        WithdrawCryptoLimit withdrawCryptoLimit = new WithdrawCryptoLimit();
+        withdrawCryptoLimit.setCurrency(rootObject.optString("currency"));
+        withdrawCryptoLimit.setInfo(rootObject.optString("winfo"));
+        withdrawCryptoLimit.setNetwork(rootObject.optString("network"));
+        withdrawCryptoLimit.setWithdrawDayMaxCount(BigDecimalUtil.optBigDecimal(rootObject, "withdraw_day_max_count"));
+        withdrawCryptoLimit.setWithdrawMax(BigDecimalUtil.optBigDecimal(rootObject, "withdraw_max"));
+        withdrawCryptoLimit.setWithdrawMin(BigDecimalUtil.optBigDecimal(rootObject, "withdraw_min"));
+        withdrawCryptoLimit.setWithdrawMaxUsdt(BigDecimalUtil.optBigDecimal(rootObject, "withdraw_max_usdt", null));
+        withdrawCryptoLimit.setWithdrawMinUsdt(BigDecimalUtil.optBigDecimal(rootObject, "withdraw_min_usdt", null));
+        return withdrawCryptoLimit;
     }
 
     public String getCurrency() {
@@ -76,6 +80,22 @@ public class WithdrawCryptoLimit {
 
     public void setWithdrawMin(BigDecimal withdrawMin) {
         this.withdrawMin = withdrawMin;
+    }
+
+    public BigDecimal getWithdrawMaxUsdt() {
+        return withdrawMaxUsdt;
+    }
+
+    public void setWithdrawMaxUsdt(BigDecimal withdrawMaxUsdt) {
+        this.withdrawMaxUsdt = withdrawMaxUsdt;
+    }
+
+    public BigDecimal getWithdrawMinUsdt() {
+        return withdrawMinUsdt;
+    }
+
+    public void setWithdrawMinUsdt(BigDecimal withdrawMinUsdt) {
+        this.withdrawMinUsdt = withdrawMinUsdt;
     }
 }
 
