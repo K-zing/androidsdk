@@ -93,6 +93,7 @@ public class CurrencyBalance implements Parcelable {
         symbol = in.readString();
         amount = new BigDecimal(in.readString());
         decimalPlaces = in.readInt();
+        isCrypto = in.readInt() == 1;
     }
 
     @Override
@@ -101,5 +102,6 @@ public class CurrencyBalance implements Parcelable {
         dest.writeString(symbol);
         dest.writeString(amount.toString());
         dest.writeInt(decimalPlaces);
+        dest.writeInt(isCrypto ? 1 : 0);
     }
 }
