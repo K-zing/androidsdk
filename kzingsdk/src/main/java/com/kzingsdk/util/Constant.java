@@ -30,6 +30,7 @@ public final class Constant {
         public static final String USE_BETTER_URL = PREF_FILE_NAME + "." + "USE_BETTER_URL";
         public static final String GAMEPLATFORM = PREF_FILE_NAME + "." + "GAMEPLATFORM";
         public static final String GAMEPLATFORMCHILD = PREF_FILE_NAME + "." + "GAMEPLATFORMCHILDARRAY";
+        public static final String DOMAIN = PREF_FILE_NAME + "." + "DOMAIN";
 
     }
 

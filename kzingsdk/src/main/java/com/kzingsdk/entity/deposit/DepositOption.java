@@ -30,6 +30,7 @@ public class DepositOption implements Parcelable {
     private boolean allowUploadDepositCredential = false;
     private boolean depositMustBindBankcard = false;
     private boolean isUploadCrypto = false;
+    private boolean isUploadCredentialCrypto = false;
     private Integer pgAllowPendingCount = 0;
     private Integer pgProcessPendingCount = 0;
     private Integer atmAllowPendingCount = 0;
@@ -66,6 +67,7 @@ public class DepositOption implements Parcelable {
         item.allowUploadDepositCredential = rootObject.optBoolean("isUpload", false);
         item.depositMustBindBankcard = rootObject.optBoolean("depositMustBindBankcard", false);
         item.isUploadCrypto = rootObject.optBoolean("isUploadCrypto", false);
+        item.isUploadCredentialCrypto = rootObject.optBoolean("uploadCredentialCrypto", false);
         item.pgAllowPendingCount = rootObject.optInt("pgAllowPendingCount", 0);
         item.pgProcessPendingCount = rootObject.optInt("pgProcessPendingCount", 0);
         item.atmAllowPendingCount = rootObject.optInt("atmAllowPendingCount", 0);
@@ -407,6 +409,14 @@ public class DepositOption implements Parcelable {
         isUploadCrypto = uploadCrypto;
     }
 
+    public boolean isUploadCredentialCrypto() {
+        return isUploadCredentialCrypto;
+    }
+
+    public void setUploadCredentialCrypto(boolean uploadCredentialCrypto) {
+        isUploadCredentialCrypto = uploadCredentialCrypto;
+    }
+
     public Integer getPgAllowPendingCount() {
         return pgAllowPendingCount;
     }
@@ -538,6 +548,7 @@ public class DepositOption implements Parcelable {
         allowUploadDepositCredential = in.readInt() == 1;
         depositMustBindBankcard = in.readInt() == 1;
         isUploadCrypto = in.readInt() == 1;
+        isUploadCredentialCrypto = in.readInt() == 1;
         pgAllowPendingCount = in.readInt();
         pgProcessPendingCount = in.readInt();
         atmAllowPendingCount = in.readInt();
@@ -573,6 +584,7 @@ public class DepositOption implements Parcelable {
         dest.writeInt(allowUploadDepositCredential ? 1 : 0);
         dest.writeInt(depositMustBindBankcard ? 1 : 0);
         dest.writeInt(isUploadCrypto ? 1 : 0);
+        dest.writeInt(isUploadCredentialCrypto ? 1 : 0);
         dest.writeInt(pgAllowPendingCount);
         dest.writeInt(pgProcessPendingCount);
         dest.writeInt(atmAllowPendingCount);
