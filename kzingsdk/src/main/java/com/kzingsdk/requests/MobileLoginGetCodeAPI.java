@@ -43,7 +43,7 @@ public class MobileLoginGetCodeAPI extends CoreRequest {
     @Override
     public Observable<String> requestRx(Context context) {
         return super.baseExecute(context).map(jsonResponse -> {
-            return jsonResponse.optString("message");
+            return jsonResponse.optString("msg");
         });
     }
 

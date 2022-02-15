@@ -7,7 +7,7 @@ android {
     defaultConfig {
         minSdkVersion 19
         versionCode 1
-        versionName "0.4.71"
+        versionName "0.4.72"
     }
     buildTypes {
         release {
