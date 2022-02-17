@@ -86,13 +86,12 @@ public class DepositOption implements Parcelable {
 
         JSONObject depositDescObject = rootObject.optJSONObject("depositdesc");
         if (depositDescObject != null) {
-            item.bankDepositDesc = rootObject.optString("bank_deposit_desc");
-            item.thirdPartyDesc = rootObject.optString("thirdparty_desc");
-            item.qrDesc = rootObject.optString("qr_desc");
-            item.phoneDepositDesc = rootObject.optString("phone_deposit_desc");
-            item.cryptoDepositDesc = rootObject.optString("crypto_deposit_desc");
-            item.depositFooterDesc = rootObject.optString("deposit_footer_desc");
-
+            item.bankDepositDesc = depositDescObject.optString("bank_deposit_desc");
+            item.thirdPartyDesc = depositDescObject.optString("thirdparty_desc");
+            item.qrDesc = depositDescObject.optString("qr_desc");
+            item.phoneDepositDesc = depositDescObject.optString("phone_deposit_desc");
+            item.cryptoDepositDesc = depositDescObject.optString("crypto_deposit_desc");
+            item.depositFooterDesc = depositDescObject.optString("deposit_footer_desc");
         }
 
         JSONArray paymentTypeJArray = rootObject.optJSONArray("paymentType");
