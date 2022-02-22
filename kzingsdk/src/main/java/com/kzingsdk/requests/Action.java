@@ -26,6 +26,7 @@ final class Action {
     static final String getWebsiteContentConfig = "bynbshp";
     static final String getSiteDomain = "bvjsdg";
     static final String getNewMobilePopup = "ldeqxay";
+    static final String getMobilePopupV2 = "qxldeay";
     static final String getHotGames = "rzqqo66";
     static final String getIpBlockSetting = "9sft2r8";
     static final String socialRegister = "bu7wlu0";

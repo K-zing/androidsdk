@@ -30,6 +30,7 @@ public class ClientInstantInfo implements Parcelable {
     private Boolean memberPanDupUUID;
     private Boolean memberPanVerify;
     private Boolean hasFriendPromo;
+    private Boolean playerSelfRedeemRakeback;
     private String siteId;
     private String cryptoFixedExchangeRate;
     private String announcement;
@@ -82,6 +83,7 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setMemberPanDupUUID(rootObject.optBoolean("memberPanDupUUID", false));
         clientInfo.setMemberPanVerify(rootObject.optBoolean("memberPanVerify", false));
         clientInfo.setHasFriendPromo(rootObject.optBoolean("hasFriendPromo", false));
+        clientInfo.setPlayerSelfRedeemRakeback(rootObject.optBoolean("playerSelfRedeemRakeback", false));
         clientInfo.setCaptchaMode(rootObject.optString("captchaMode"));
         clientInfo.setSiteId(rootObject.optString("siteId"));
         clientInfo.setCryptoFixedExchangeRate(rootObject.optString("cryptoFixedExchangeRate"));
@@ -208,6 +210,7 @@ public class ClientInstantInfo implements Parcelable {
         memberPanDupUUID = in.readInt() == 1;
         memberPanVerify = in.readInt() == 1;
         hasFriendPromo = in.readInt() == 1;
+        playerSelfRedeemRakeback = in.readInt() == 1;
         siteId = in.readString();
         cryptoFixedExchangeRate = in.readString();
         announcement = in.readString();
@@ -260,6 +263,8 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeInt(memberPanDupUUID ? 1 : 0);
         dest.writeInt(memberPanVerify ? 1 : 0);
         dest.writeInt(hasFriendPromo ? 1 : 0);
+        dest.writeInt(playerSelfRedeemRakeback ? 1 : 0);
+
         dest.writeString(siteId);
         dest.writeString(cryptoFixedExchangeRate);
         dest.writeString(announcement);
@@ -437,6 +442,14 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setHasFriendPromo(Boolean hasFriendPromo) {
         this.hasFriendPromo = hasFriendPromo;
+    }
+
+    public Boolean getPlayerSelfRedeemRakeback() {
+        return playerSelfRedeemRakeback;
+    }
+
+    public void setPlayerSelfRedeemRakeback(Boolean playerSelfRedeemRakeback) {
+        this.playerSelfRedeemRakeback = playerSelfRedeemRakeback;
     }
 
     public String getSiteId() {

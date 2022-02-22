@@ -35,6 +35,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
     private String pNum = "";
     private BigDecimal pRate = BigDecimal.ZERO;
     private Integer random = -1;
+    private boolean displayDepositName = false;
 
 
     public ThirdPartyPayment() {
@@ -45,7 +46,6 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         clone.paymentBankList = new ArrayList<>();
         return clone;
     }
-
     public static ThirdPartyPayment newInstance(JSONObject rootObject, JSONObject rootRootObject, String optionId) {
         ThirdPartyPayment item = new ThirdPartyPayment();
 
@@ -83,6 +83,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         item.setRandType(rootObject.optInt("randType", -1));
         item.setPromoRate(BigDecimalUtil.optBigDecimal(rootObject, "promorate", BigDecimal.ZERO));
         item.setSDealsRate(BigDecimalUtil.optBigDecimal(rootObject, "sdealsrate", BigDecimal.ZERO));
+        item.setDisplayDepositName(rootObject.optInt("displaydepositname", 0) == 1);
 
         JSONArray fixAmtArray = rootRootObject.optJSONArray("fixAmtArray");
         if (fixAmtArray != null) {
@@ -225,6 +226,14 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         this.sDealsRate = sDealsRate;
     }
 
+    public boolean isDisplayDepositName() {
+        return displayDepositName;
+    }
+
+    public void setDisplayDepositName(boolean displayDepositName) {
+        this.displayDepositName = displayDepositName;
+    }
+
     public Integer getBcid() {
         return bcid;
     }
@@ -313,6 +322,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         optionId = in.readString();
         useRotate = in.readInt() == 1;
         isAllowDecimal = in.readInt() == 1;
+        displayDepositName = in.readInt() == 1;
         randMax = new BigDecimal(in.readString());
         randMin = new BigDecimal(in.readString());
         randType = in.readInt();
@@ -352,6 +362,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         dest.writeString(optionId);
         dest.writeInt(useRotate ? 1 : 0);
         dest.writeInt(isAllowDecimal ? 1 : 0);
+        dest.writeInt(displayDepositName ? 1 : 0);
         dest.writeString(randMax.toString());
         dest.writeString(randMin.toString());
         dest.writeInt(randType);

@@ -16,7 +16,7 @@ public class SubmitThirdPartyDepositAPI extends CoreRequest {
     private ThirdPartyPaymentBank thirdPartyPaymentBank = null;
     private Double amount = 0d;
     private JSONObject formData = null;
-    private String activityId = null;
+    private String pgDepositUsername = null;
 
     SubmitThirdPartyDepositAPI() {
         super();
@@ -29,6 +29,7 @@ public class SubmitThirdPartyDepositAPI extends CoreRequest {
 
     @Override
     protected Observable<String> validateParams() {
+
         if (amount <= 0) {
             return Observable.just("Deposit amount must be bigger than 0.");
         }
@@ -44,6 +45,7 @@ public class SubmitThirdPartyDepositAPI extends CoreRequest {
         if (thirdPartyPaymentBank.getParent().getId() == null || thirdPartyPaymentBank.getParent().getId().length() == 0) {
             return Observable.just("ThirdPartyPayment ID is missing. ThirdPartyPaymentBank.parent object is invalid.");
         }
+
         return super.validateParams();
     }
 
@@ -57,6 +59,9 @@ public class SubmitThirdPartyDepositAPI extends CoreRequest {
             jsonData.put("amount", amount);
             if (formData != null) {
                 jsonData.put("formData", formData);
+            }
+            if (pgDepositUsername != null) {
+                jsonData.put("pgdepositusername", pgDepositUsername);
             }
             return jsonData;
         } catch (JSONException ignored) {
@@ -106,6 +111,11 @@ public class SubmitThirdPartyDepositAPI extends CoreRequest {
         return this;
     }
 
+    public SubmitThirdPartyDepositAPI setParamPgDepositUsername(String pgDepositUsername) {
+        this.pgDepositUsername = pgDepositUsername;
+        return this;
+    }
+
     public SubmitThirdPartyDepositAPI setParamActivityId(String activityId) {
         if (formData == null) {
             formData = new JSONObject();
@@ -114,7 +124,6 @@ public class SubmitThirdPartyDepositAPI extends CoreRequest {
             formData.put("actid", activityId);
         } catch (JSONException ignored) {
         }
-        this.activityId = activityId;
         return this;
     }
 }

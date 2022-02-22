@@ -263,6 +263,10 @@ public final class KzingAPI {
         return new GetNewMobilePopupAPI();
     }
 
+    public static GetMobilePopupV2API getMobilePopupV2() {
+        return new GetMobilePopupV2API();
+    }
+
     public static CrossPlayerChangePasswordAPI crossPlayerChangePassword() {
         return new CrossPlayerChangePasswordAPI();
     }
