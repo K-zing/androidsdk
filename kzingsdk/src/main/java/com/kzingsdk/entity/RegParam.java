@@ -340,6 +340,7 @@ public class RegParam {
                 ", reqReferCode=" + reqReferCode +
                 ", regRealName=" + regRealName +
                 ", regMobileVerify=" + regMobileVerify +
+                ", regEmailVerify=" + regEmailVerify +
                 ", regPwdConfirm=" + regPwdConfirm +
                 ", regLegalAge=" + regLegalAge +
                 ", highLevelPass=" + isHighLevelPass +

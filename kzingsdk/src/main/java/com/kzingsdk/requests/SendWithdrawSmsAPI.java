@@ -12,7 +12,9 @@ import io.reactivex.Observable;
 
 public class SendWithdrawSmsAPI extends CoreRequest {
 
+    private String smsPhoneNo = null;
     private String smsPhoneNoCountry = null;
+    private Integer smsType = null;
 
     SendWithdrawSmsAPI() {
         super();
@@ -33,6 +35,12 @@ public class SendWithdrawSmsAPI extends CoreRequest {
         JSONObject jsonData = super.generateParamsJson();
         try {
             jsonData.put("smsPhoneNoCountry", smsPhoneNoCountry);
+            if (smsPhoneNo != null) {
+                jsonData.put("smsPhoneNo", smsPhoneNo);
+            }
+            if (smsType != null) {
+                jsonData.put("smstype", smsType);
+            }
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -69,6 +77,15 @@ public class SendWithdrawSmsAPI extends CoreRequest {
         return this;
     }
 
+    public SendWithdrawSmsAPI setSmsPhoneNo(String smsPhoneNo) {
+        this.smsPhoneNo = smsPhoneNo;
+        return this;
+    }
+
+    public SendWithdrawSmsAPI setSmsType(Integer smsType) {
+        this.smsType = smsType;
+        return this;
+    }
 
 }
 

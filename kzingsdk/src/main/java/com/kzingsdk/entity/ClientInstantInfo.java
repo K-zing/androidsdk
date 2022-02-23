@@ -31,6 +31,7 @@ public class ClientInstantInfo implements Parcelable {
     private Boolean memberPanVerify;
     private Boolean hasFriendPromo;
     private Boolean playerSelfRedeemRakeback;
+    private Boolean showImportantPopup = false;
     private String siteId;
     private String cryptoFixedExchangeRate;
     private String announcement;
@@ -53,6 +54,7 @@ public class ClientInstantInfo implements Parcelable {
     private ArrayList<String> memberPanUsername = new ArrayList<>();
     private ArrayList<String> bannerCountdown = new ArrayList<>();
     private ArrayList<String> bannerFirstLaunch = new ArrayList<>();
+    private ArrayList<MarqueeAnnouncement> marqueeAnnouncementList = new ArrayList<>();
     private ContactInfo feedbackContactInfo = new ContactInfo();
     private ContactInfo partnershipContactInfo = new ContactInfo();
     private ContactInfo socialMediaContactInfo = new ContactInfo();
@@ -159,6 +161,21 @@ public class ClientInstantInfo implements Parcelable {
             }
         }
         clientInfo.setBannerFirstLaunch(bannerFirstLaunchList);
+
+        JSONObject marqueeAnnouncementJSONObject = rootObject.optJSONObject("marqueeAnnouncement");
+        ArrayList<MarqueeAnnouncement> marqueeAnnouncementList = new ArrayList<>();
+        if (marqueeAnnouncementJSONObject!=null){
+            clientInfo.setShowImportantPopup(marqueeAnnouncementJSONObject.optBoolean("showImportantPopup"));
+
+            JSONArray announcementJSONArray = marqueeAnnouncementJSONObject.optJSONArray("announcement");
+            if (announcementJSONArray != null) {
+                for (int i = 0; i < announcementJSONArray.length(); i++) {
+                    marqueeAnnouncementList.add(MarqueeAnnouncement.newInstance(announcementJSONArray.optJSONObject(i)));
+                }
+            }
+        }
+        clientInfo.setMarqueeAnnouncementList(marqueeAnnouncementList);
+
 
         for (int i = 301; i < 400; i++) {
             clientInfo.websiteConfigMap.put(i, rootObject.optString("wc" + i));
@@ -652,6 +669,21 @@ public class ClientInstantInfo implements Parcelable {
         this.websiteConfigMap = websiteConfigMap;
     }
 
+    public Boolean getShowImportantPopup() {
+        return showImportantPopup;
+    }
+
+    public void setShowImportantPopup(Boolean showImportantPopup) {
+        this.showImportantPopup = showImportantPopup;
+    }
+
+    public ArrayList<MarqueeAnnouncement> getMarqueeAnnouncementList() {
+        return marqueeAnnouncementList;
+    }
+
+    public void setMarqueeAnnouncementList(ArrayList<MarqueeAnnouncement> marqueeAnnouncementList) {
+        this.marqueeAnnouncementList = marqueeAnnouncementList;
+    }
 
     public static final Creator CREATOR = new Creator() {
         public ClientInstantInfo createFromParcel(Parcel in) {
