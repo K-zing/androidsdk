@@ -32,6 +32,9 @@ public class ClientInstantInfo implements Parcelable {
     private Boolean hasFriendPromo;
     private Boolean playerSelfRedeemRakeback;
     private Boolean showImportantPopup = false;
+    private Boolean memberPanUsername2 = false;
+    private Boolean memberPanPlayerGroup2 = false;
+    private Boolean memberPanAgentCode2 = false;
     private String siteId;
     private String cryptoFixedExchangeRate;
     private String announcement;
@@ -60,6 +63,7 @@ public class ClientInstantInfo implements Parcelable {
     private ContactInfo socialMediaContactInfo = new ContactInfo();
     private HashMap<Integer, String> websiteConfigMap = new HashMap<>();
 
+
     public ClientInstantInfo() {
 
     }
@@ -86,6 +90,9 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setMemberPanVerify(rootObject.optBoolean("memberPanVerify", false));
         clientInfo.setHasFriendPromo(rootObject.optBoolean("hasFriendPromo", false));
         clientInfo.setPlayerSelfRedeemRakeback(rootObject.optBoolean("playerSelfRedeemRakeback", false));
+        clientInfo.setMemberPanUsername2(rootObject.optBoolean("memberPanUsername2", false));
+        clientInfo.setMemberPanPlayerGroup2(rootObject.optBoolean("memberPanPlayerGroup2", false));
+        clientInfo.setMemberPanAgentCode2(rootObject.optBoolean("memberPanAgentCode2", false));
         clientInfo.setCaptchaMode(rootObject.optString("captchaMode"));
         clientInfo.setSiteId(rootObject.optString("siteId"));
         clientInfo.setCryptoFixedExchangeRate(rootObject.optString("cryptoFixedExchangeRate"));
@@ -164,7 +171,7 @@ public class ClientInstantInfo implements Parcelable {
 
         JSONObject marqueeAnnouncementJSONObject = rootObject.optJSONObject("marqueeAnnouncement");
         ArrayList<MarqueeAnnouncement> marqueeAnnouncementList = new ArrayList<>();
-        if (marqueeAnnouncementJSONObject!=null){
+        if (marqueeAnnouncementJSONObject != null) {
             clientInfo.setShowImportantPopup(marqueeAnnouncementJSONObject.optBoolean("showImportantPopup"));
 
             JSONArray announcementJSONArray = marqueeAnnouncementJSONObject.optJSONArray("announcement");
@@ -228,6 +235,9 @@ public class ClientInstantInfo implements Parcelable {
         memberPanVerify = in.readInt() == 1;
         hasFriendPromo = in.readInt() == 1;
         playerSelfRedeemRakeback = in.readInt() == 1;
+        memberPanUsername2 = in.readInt() == 1;
+        memberPanPlayerGroup2 = in.readInt() == 1;
+        memberPanAgentCode2 = in.readInt() == 1;
         siteId = in.readString();
         cryptoFixedExchangeRate = in.readString();
         announcement = in.readString();
@@ -281,6 +291,9 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeInt(memberPanVerify ? 1 : 0);
         dest.writeInt(hasFriendPromo ? 1 : 0);
         dest.writeInt(playerSelfRedeemRakeback ? 1 : 0);
+        dest.writeInt(memberPanUsername2 ? 1 : 0);
+        dest.writeInt(memberPanPlayerGroup2 ? 1 : 0);
+        dest.writeInt(memberPanAgentCode2 ? 1 : 0);
 
         dest.writeString(siteId);
         dest.writeString(cryptoFixedExchangeRate);
@@ -467,6 +480,30 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setPlayerSelfRedeemRakeback(Boolean playerSelfRedeemRakeback) {
         this.playerSelfRedeemRakeback = playerSelfRedeemRakeback;
+    }
+
+    public Boolean getMemberPanUsername2() {
+        return memberPanUsername2;
+    }
+
+    public void setMemberPanUsername2(Boolean memberPanUsername2) {
+        this.memberPanUsername2 = memberPanUsername2;
+    }
+
+    public Boolean getMemberPanPlayerGroup2() {
+        return memberPanPlayerGroup2;
+    }
+
+    public void setMemberPanPlayerGroup2(Boolean memberPanPlayerGroup2) {
+        this.memberPanPlayerGroup2 = memberPanPlayerGroup2;
+    }
+
+    public Boolean getMemberPanAgentCode2() {
+        return memberPanAgentCode2;
+    }
+
+    public void setMemberPanAgentCode2(Boolean memberPanAgentCode2) {
+        this.memberPanAgentCode2 = memberPanAgentCode2;
     }
 
     public String getSiteId() {

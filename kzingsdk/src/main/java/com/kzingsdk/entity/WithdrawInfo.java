@@ -60,7 +60,7 @@ public class WithdrawInfo {
         withdrawInfo.setWaterCheckBeforeWithdraw(rootObject.optString("waterCheckBeforeWithdraw", "OFF").equalsIgnoreCase("ON"));
         withdrawInfo.setWaterCheckOnOff(rootObject.optBoolean("watercheckonoff", false));
         withdrawInfo.setBankCardCityProvince(rootObject.optString("bankCardCityProvince", "OFF").equalsIgnoreCase("ON"));
-        withdrawInfo.setPlayerWithdrawEnterOtp(rootObject.optBoolean("playerWithdrawEnterOtp", false));
+        withdrawInfo.setPlayerWithdrawEnterOtp(rootObject.optString("playerWithdrawEnterOtp", "OFF").equalsIgnoreCase("ON"));
         withdrawInfo.setWithdrawBindNetwork(rootObject.optString("withdrawbindnetwork"));
         withdrawInfo.setWithdrawBindUsdt(rootObject.optBoolean("withdrawbindusdt", false));
         withdrawInfo.setAllowWithdrawCfg(rootObject.optBoolean("allow_withdraw_cfg", false));

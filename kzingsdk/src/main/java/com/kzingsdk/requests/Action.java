@@ -62,6 +62,7 @@ final class Action {
     static final String getActivityList = "93bf052";
     static final String getActivityContent = "cc13e23";
     static final String checkGiftRedeemable = "qfn2hma";
+    static final String checkActivityRedeemable = "qfn2hmb";
     static final String applyActivity = "c43e69f";
     static final String activityCanSignIn = "c948aca";
     static final String activitySignIn = "8acac94";
@@ -111,6 +112,8 @@ final class Action {
     static final String getGamePlatformAccountList = "fosjp6u";
     static final String getAllGpBalance = "p18jd1a";
     static final String getGpsBalance = "p18jd1b";
+    static final String oneClickRedeemRakeback = "2zbxrdl";
+    static final String getRakebackRedeemHistory = "x2zbrdl";
 
     static final String transferToGame = "bb85b0a";
     static final String transferGameToGame = "0fa5c4d";

@@ -27,6 +27,9 @@ public final class KzingAPI {
     public static CheckGiftRedeemableAPI checkGiftRedeemable() {
         return new CheckGiftRedeemableAPI();
     }
+    public static CheckActivityRedeemableAPI checkActivityRedeemable() {
+        return new CheckActivityRedeemableAPI();
+    }
 
     public static ApplyActivityAPI applyActivity() {
         return new ApplyActivityAPI();
@@ -219,6 +222,14 @@ public final class KzingAPI {
     public static GetClientInstantInfoAPI getClientInstantInfo() {
         return new GetClientInstantInfoAPI();
     }
+
+    public static OneClickRedeemRakebackAPI oneClickRedeemRakeback() {
+        return new OneClickRedeemRakebackAPI();
+    }
+    public static GetRakebackRedeemHistoryAPI getRakebackRedeemHistory() {
+        return new GetRakebackRedeemHistoryAPI();
+    }
+
 
     public static GetCsExtraInfoAPI getCsExtraInfo() {
         return new GetCsExtraInfoAPI();
