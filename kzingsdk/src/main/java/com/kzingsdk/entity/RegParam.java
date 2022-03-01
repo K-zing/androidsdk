@@ -47,12 +47,14 @@ public class RegParam {
     public static RegParam newInstance(JSONObject rootObject) {
         RegParam regParam = new RegParam();
         JSONObject paramObject = rootObject.optJSONObject("params");
-        regParam.setRegWithdrawPwdFormat(paramObject.optInt("regNameMin", 4));
-        regParam.setRegNameMin(paramObject.optInt("regNameMax", 11));
-        regParam.setRegNameMax(paramObject.optInt("regPwdFormat", 1));
-        regParam.setRegPwdFormat(paramObject.optInt("regPwdMin", 6));
-        regParam.setRegPwdMin(paramObject.optInt("regPwdMax", 16));
-        regParam.setRegPwdMax(paramObject.optInt("dcode", 10000));
+        regParam.setRegWithdrawPwdFormat(paramObject.optInt("regWithdrawPwdFormat", 4));
+        regParam.setRegNameMin(paramObject.optInt("regNameMin", 11));
+        regParam.setRegNameMax(paramObject.optInt("regNameMax", 1));
+        regParam.setRegPwdFormat(paramObject.optInt("regPwdFormat", 6));
+        regParam.setRegPwdMin(paramObject.optInt("regPwdMin", 16));
+        regParam.setRegPwdMax(paramObject.optInt("regPwdMax", 10000));
+        regParam.setDcode(paramObject.optInt("dcode", 10000));
+
         regParam.setRegQQ(paramObject.optBoolean("regQQ", false));
         regParam.setRegPwdConfirm(paramObject.optBoolean("regPwdConfirm", false));
         regParam.setRegBirthday(paramObject.optBoolean("regBirthday", false));
