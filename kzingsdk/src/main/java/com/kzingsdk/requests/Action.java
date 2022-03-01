@@ -12,7 +12,7 @@ final class Action {
     static final String mobileLoginGetCode = "6udjolu";
     static final String logout = "vwonvi0";
     static final String getPhoneSupportedCountries = "qoj3i81";
-    static final String regParam = "833656a";
+    static final String regParam = "xzbrdl2";
     static final String regSendSms = "mIoqWSE";
     static final String regAccount = "56fa759";
     static final String changePassword = "b787647";

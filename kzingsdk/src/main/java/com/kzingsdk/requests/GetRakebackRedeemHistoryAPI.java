@@ -22,6 +22,7 @@ public class GetRakebackRedeemHistoryAPI extends CoreRequest {
     private Calendar startDateCalendar, endDateCalendar;
     private String gpid;
     private String currency;
+    private String gpType;
 
     GetRakebackRedeemHistoryAPI() {
         super();
@@ -42,6 +43,9 @@ public class GetRakebackRedeemHistoryAPI extends CoreRequest {
             jsonData.put("offset", offset);
             jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
             jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
+            if (gpType != null) {
+                jsonData.put("gptype", gpType);
+            }
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -99,15 +103,21 @@ public class GetRakebackRedeemHistoryAPI extends CoreRequest {
         this.pageCount = pageCount;
         return this;
     }
+
     public GetRakebackRedeemHistoryAPI setGpid(String gpid) {
         this.gpid = gpid;
         return this;
     }
+
     public GetRakebackRedeemHistoryAPI setCurrency(String currency) {
         this.currency = currency;
         return this;
     }
 
+    public GetRakebackRedeemHistoryAPI setGpType(String gpType) {
+        this.gpType = gpType;
+        return this;
+    }
 
 }
 

@@ -8,350 +8,362 @@ import org.json.JSONObject;
 
 
 public class RegParam {
-
-    private boolean regBirthday, regQQ, reqPhone, regEmail, withdrawPassword, regWeixin,
-            reqReferCode, regRealName, regMobileVerify, regPwdConfirm, regLegalAge, isHighLevelPass, reqPhoneCountry,
-            reqDisplayReferCode, hasFriendPromo, regWhatsapp, regTelegram, regFacebook, regZalo, regLine, mustFillReferral,
-            regEmailDisplay, reqPhoneDisplay, regSkype, regEmailVerify, regMarketing;
-
-    private int nameMin = 4, nameMax = 11;
-    private int passwordMin = 6, passwordMax = 16;
-    private String defaultAgentCode, withdrawPasswordFormat;
+    private Boolean regQQ;
+    private Boolean regPwdConfirm;
+    private Boolean regBirthday;
+    private Boolean regEmail;
+    private Boolean regEmailDisplay;
+    private Boolean regEmailVerify;
+    private Boolean regLegalAge;
+    private Boolean regReferCode;
+    private Boolean regReferCodeDisplay;
+    private Boolean regWithdrawPwd;
+    private Boolean regMarketing;
+    private Boolean regPhone;
+    private Boolean regPhoneDisplay;
+    private Boolean regPhoneVerify;
+    private Boolean regPhoneCountry;
+    private Boolean regSendVoice;
+    private Boolean regRealname;
+    private Boolean regFacebook;
+    private Boolean regTelegram;
+    private Boolean regSkype;
+    private Boolean regWhatsapp;
+    private Boolean regWeixin;
+    private Boolean regLine;
+    private Boolean regZalo;
+    private Boolean regFriendReferCode;
+    private Boolean regFriendReferCodeDisplay;
+    private Boolean isReferrerSameAgent;
+    private Integer regWithdrawPwdFormat;
+    private Integer regNameMin;
+    private Integer regNameMax;
+    private Integer regPwdFormat;
+    private Integer regPwdMin;
+    private Integer regPwdMax;
+    private Integer dcode;
     private Bitmap verifyCode;
 
     public static RegParam newInstance(JSONObject rootObject) {
         RegParam regParam = new RegParam();
         JSONObject paramObject = rootObject.optJSONObject("params");
-        regParam.setNameMin(paramObject.optInt("regnamemin", 4));
-        regParam.setNameMax(paramObject.optInt("regnamemax", 11));
-        regParam.setPasswordMin(paramObject.optInt("regpwmin", 6));
-        regParam.setPasswordMax(paramObject.optInt("regpwmax", 16));
-        regParam.setRegBirthday(paramObject.optString("regbirthday").equalsIgnoreCase("ON"));
-        regParam.setRegEmail(paramObject.optString("regemail").equalsIgnoreCase("ON"));
-        regParam.setRegQQ(paramObject.optString("regqq").equalsIgnoreCase("ON"));
-        regParam.setReqPhone(paramObject.optString("reqphone").equalsIgnoreCase("ON"));
-        regParam.setWithdrawPassword(paramObject.optString("withdrawpassword").equalsIgnoreCase("ON"));
-        regParam.setRegWeixin(paramObject.optString("regweixin").equalsIgnoreCase("ON"));
-        regParam.setReqReferCode(paramObject.optString("reqrefercode").equalsIgnoreCase("ON"));
-        regParam.setRegRealName(paramObject.optString("regrealname").equalsIgnoreCase("ON"));
-        regParam.setRegPwdConfirm(paramObject.optString("regPwdConfirm").equalsIgnoreCase("ON"));
-        regParam.setRegLegalAge(paramObject.optString("regLegalAge").equalsIgnoreCase("ON"));
-        regParam.setHighLevelPass(paramObject.optString("highLevelPass").equalsIgnoreCase("ON"));
-        regParam.setReqDisplayReferCode(paramObject.optString("reqdisplayrefercode").equalsIgnoreCase("ON"));
-        regParam.setReqPhoneCountry(paramObject.optString("reqphonecountry").equalsIgnoreCase("ON"));
-        regParam.setRegWhatsapp(paramObject.optString("regwhatsapp").equalsIgnoreCase("ON"));
-        regParam.setRegTelegram(paramObject.optString("regtelegram").equalsIgnoreCase("ON"));
-        regParam.setRegFacebook(paramObject.optString("regfacebook").equalsIgnoreCase("ON"));
-        regParam.setRegZalo(paramObject.optString("regzalo").equalsIgnoreCase("ON"));
-        regParam.setRegLine(paramObject.optString("regline").equalsIgnoreCase("ON"));
-        regParam.setRegEmailDisplay(paramObject.optString("regemaildisplay").equalsIgnoreCase("ON"));
-        regParam.setReqPhoneDisplay(paramObject.optString("reqphonedisplay").equalsIgnoreCase("ON"));
-        regParam.setRegSkype(paramObject.optString("regskype").equalsIgnoreCase("ON"));
-        regParam.setRegMarketing(paramObject.optString("regMarketing").equalsIgnoreCase("ON"));
-
-        regParam.setRegMobileVerify(paramObject.optString("registermobileverify").equalsIgnoreCase("ON"));
-        regParam.setRegEmailVerify(paramObject.optString("registeremailverify").equalsIgnoreCase("ON"));
-
-        regParam.setWithdrawPasswordFormat(paramObject.optString("withdrawpasswordformat"));
-
-        regParam.setHasFriendPromo(paramObject.optBoolean("hasFriendPromo", false));
-        regParam.setMustFillReferral(paramObject.optBoolean("mustfillrefferal", false));
+        regParam.setRegWithdrawPwdFormat(paramObject.optInt("regNameMin", 4));
+        regParam.setRegNameMin(paramObject.optInt("regNameMax", 11));
+        regParam.setRegNameMax(paramObject.optInt("regPwdFormat", 1));
+        regParam.setRegPwdFormat(paramObject.optInt("regPwdMin", 6));
+        regParam.setRegPwdMin(paramObject.optInt("regPwdMax", 16));
+        regParam.setRegPwdMax(paramObject.optInt("dcode", 10000));
+        regParam.setRegQQ(paramObject.optBoolean("regQQ", false));
+        regParam.setRegPwdConfirm(paramObject.optBoolean("regPwdConfirm", false));
+        regParam.setRegBirthday(paramObject.optBoolean("regBirthday", false));
+        regParam.setRegEmail(paramObject.optBoolean("regEmail", false));
+        regParam.setRegEmailDisplay(paramObject.optBoolean("regEmailDisplay", false));
+        regParam.setRegEmailVerify(paramObject.optBoolean("regEmailVerify", false));
+        regParam.setRegLegalAge(paramObject.optBoolean("regLegalAge", false));
+        regParam.setRegReferCode(paramObject.optBoolean("regReferCode", false));
+        regParam.setRegReferCodeDisplay(paramObject.optBoolean("regReferCodeDisplay", false));
+        regParam.setRegWithdrawPwd(paramObject.optBoolean("regWithdrawPwd", false));
+        regParam.setRegMarketing(paramObject.optBoolean("regMarketing", false));
+        regParam.setRegPhone(paramObject.optBoolean("regPhone", false));
+        regParam.setRegPhoneDisplay(paramObject.optBoolean("regPhoneDisplay", false));
+        regParam.setRegPhoneVerify(paramObject.optBoolean("regPhoneVerify", false));
+        regParam.setRegPhoneCountry(paramObject.optBoolean("regPhoneCountry", false));
+        regParam.setRegSendVoice(paramObject.optBoolean("regSendVoice", false));
+        regParam.setRegRealname(paramObject.optBoolean("regRealname", false));
+        regParam.setRegFacebook(paramObject.optBoolean("regFacebook", false));
+        regParam.setRegTelegram(paramObject.optBoolean("regTelegram", false));
+        regParam.setRegSkype(paramObject.optBoolean("regSkype", false));
+        regParam.setRegWhatsapp(paramObject.optBoolean("regWhatsapp", false));
+        regParam.setRegWeixin(paramObject.optBoolean("regWeixin", false));
+        regParam.setRegLine(paramObject.optBoolean("regLine", false));
+        regParam.setRegZalo(paramObject.optBoolean("regZalo", false));
+        regParam.setRegFriendReferCode(paramObject.optBoolean("regFriendReferCode", false));
+        regParam.setRegFriendReferCodeDisplay(paramObject.optBoolean("regFriendReferCodeDisplay", false));
+        regParam.setReferrerSameAgent(paramObject.optBoolean("isReferrerSameAgent", false));
 
         String image = rootObject.optString("image");
         byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
         regParam.verifyCode = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-
         return regParam;
     }
 
-    public int getNameMin() {
-        return nameMin;
-    }
-
-    public void setNameMin(int nameMin) {
-        this.nameMin = nameMin;
-    }
-
-    public int getNameMax() {
-        return nameMax;
-    }
-
-    public void setNameMax(int nameMax) {
-        this.nameMax = nameMax;
-    }
-
-    public int getPasswordMin() {
-        return passwordMin;
-    }
-
-    public void setPasswordMin(int passwordMin) {
-        this.passwordMin = passwordMin;
-    }
-
-    public int getPasswordMax() {
-        return passwordMax;
-    }
-
-    public void setPasswordMax(int passwordMax) {
-        this.passwordMax = passwordMax;
-    }
-
-    public boolean isRegBirthday() {
-        return regBirthday;
-    }
-
-    public void setRegBirthday(boolean regBirthday) {
-        this.regBirthday = regBirthday;
-    }
-
-    public boolean isRegQQ() {
+    public Boolean getRegQQ() {
         return regQQ;
     }
 
-    public void setRegQQ(boolean regQQ) {
+    public void setRegQQ(Boolean regQQ) {
         this.regQQ = regQQ;
     }
 
-    public boolean isReqPhone() {
-        return reqPhone;
+    public Boolean getRegPwdConfirm() {
+        return regPwdConfirm;
     }
 
-    public void setReqPhone(boolean reqPhone) {
-        this.reqPhone = reqPhone;
+    public void setRegPwdConfirm(Boolean regPwdConfirm) {
+        this.regPwdConfirm = regPwdConfirm;
     }
 
-    public boolean isRegEmail() {
+    public Boolean getRegBirthday() {
+        return regBirthday;
+    }
+
+    public void setRegBirthday(Boolean regBirthday) {
+        this.regBirthday = regBirthday;
+    }
+
+    public Boolean getRegEmail() {
         return regEmail;
     }
 
-    public void setRegEmail(boolean regEmail) {
+    public void setRegEmail(Boolean regEmail) {
         this.regEmail = regEmail;
     }
 
-    public boolean isWithdrawPassword() {
-        return withdrawPassword;
+    public Boolean getRegEmailDisplay() {
+        return regEmailDisplay;
     }
 
-    public void setWithdrawPassword(boolean withdrawPassword) {
-        this.withdrawPassword = withdrawPassword;
+    public void setRegEmailDisplay(Boolean regEmailDisplay) {
+        this.regEmailDisplay = regEmailDisplay;
     }
 
-    public String getDefaultAgentCode() {
-        return defaultAgentCode;
+    public Boolean getRegEmailVerify() {
+        return regEmailVerify;
     }
 
-    public void setDefaultAgentCode(String defaultAgentCode) {
-        this.defaultAgentCode = defaultAgentCode;
+    public void setRegEmailVerify(Boolean regEmailVerify) {
+        this.regEmailVerify = regEmailVerify;
     }
 
-    public Bitmap getVerifyCodeBitmap() {
+    public Boolean getRegLegalAge() {
+        return regLegalAge;
+    }
+
+    public void setRegLegalAge(Boolean regLegalAge) {
+        this.regLegalAge = regLegalAge;
+    }
+
+    public Boolean getRegReferCode() {
+        return regReferCode;
+    }
+
+    public void setRegReferCode(Boolean regReferCode) {
+        this.regReferCode = regReferCode;
+    }
+
+    public Boolean getRegReferCodeDisplay() {
+        return regReferCodeDisplay;
+    }
+
+    public void setRegReferCodeDisplay(Boolean regReferCodeDisplay) {
+        this.regReferCodeDisplay = regReferCodeDisplay;
+    }
+
+    public Boolean getRegWithdrawPwd() {
+        return regWithdrawPwd;
+    }
+
+    public void setRegWithdrawPwd(Boolean regWithdrawPwd) {
+        this.regWithdrawPwd = regWithdrawPwd;
+    }
+
+    public Boolean getRegMarketing() {
+        return regMarketing;
+    }
+
+    public void setRegMarketing(Boolean regMarketing) {
+        this.regMarketing = regMarketing;
+    }
+
+    public Boolean getRegPhone() {
+        return regPhone;
+    }
+
+    public void setRegPhone(Boolean regPhone) {
+        this.regPhone = regPhone;
+    }
+
+    public Boolean getRegPhoneDisplay() {
+        return regPhoneDisplay;
+    }
+
+    public void setRegPhoneDisplay(Boolean regPhoneDisplay) {
+        this.regPhoneDisplay = regPhoneDisplay;
+    }
+
+    public Boolean getRegPhoneVerify() {
+        return regPhoneVerify;
+    }
+
+    public void setRegPhoneVerify(Boolean regPhoneVerify) {
+        this.regPhoneVerify = regPhoneVerify;
+    }
+
+    public Boolean getRegPhoneCountry() {
+        return regPhoneCountry;
+    }
+
+    public void setRegPhoneCountry(Boolean regPhoneCountry) {
+        this.regPhoneCountry = regPhoneCountry;
+    }
+
+    public Boolean getRegSendVoice() {
+        return regSendVoice;
+    }
+
+    public void setRegSendVoice(Boolean regSendVoice) {
+        this.regSendVoice = regSendVoice;
+    }
+
+    public Boolean getRegRealname() {
+        return regRealname;
+    }
+
+    public void setRegRealname(Boolean regRealname) {
+        this.regRealname = regRealname;
+    }
+
+    public Boolean getRegFacebook() {
+        return regFacebook;
+    }
+
+    public void setRegFacebook(Boolean regFacebook) {
+        this.regFacebook = regFacebook;
+    }
+
+    public Boolean getRegTelegram() {
+        return regTelegram;
+    }
+
+    public void setRegTelegram(Boolean regTelegram) {
+        this.regTelegram = regTelegram;
+    }
+
+    public Boolean getRegSkype() {
+        return regSkype;
+    }
+
+    public void setRegSkype(Boolean regSkype) {
+        this.regSkype = regSkype;
+    }
+
+    public Boolean getRegWhatsapp() {
+        return regWhatsapp;
+    }
+
+    public void setRegWhatsapp(Boolean regWhatsapp) {
+        this.regWhatsapp = regWhatsapp;
+    }
+
+    public Boolean getRegWeixin() {
+        return regWeixin;
+    }
+
+    public void setRegWeixin(Boolean regWeixin) {
+        this.regWeixin = regWeixin;
+    }
+
+    public Boolean getRegLine() {
+        return regLine;
+    }
+
+    public void setRegLine(Boolean regLine) {
+        this.regLine = regLine;
+    }
+
+    public Boolean getRegZalo() {
+        return regZalo;
+    }
+
+    public void setRegZalo(Boolean regZalo) {
+        this.regZalo = regZalo;
+    }
+
+    public Boolean getRegFriendReferCode() {
+        return regFriendReferCode;
+    }
+
+    public void setRegFriendReferCode(Boolean regFriendReferCode) {
+        this.regFriendReferCode = regFriendReferCode;
+    }
+
+    public Boolean getRegFriendReferCodeDisplay() {
+        return regFriendReferCodeDisplay;
+    }
+
+    public void setRegFriendReferCodeDisplay(Boolean regFriendReferCodeDisplay) {
+        this.regFriendReferCodeDisplay = regFriendReferCodeDisplay;
+    }
+
+    public Boolean getReferrerSameAgent() {
+        return isReferrerSameAgent;
+    }
+
+    public void setReferrerSameAgent(Boolean referrerSameAgent) {
+        isReferrerSameAgent = referrerSameAgent;
+    }
+
+    public Integer getRegWithdrawPwdFormat() {
+        return regWithdrawPwdFormat;
+    }
+
+    public void setRegWithdrawPwdFormat(Integer regWithdrawPwdFormat) {
+        this.regWithdrawPwdFormat = regWithdrawPwdFormat;
+    }
+
+    public Integer getRegNameMin() {
+        return regNameMin;
+    }
+
+    public void setRegNameMin(Integer regNameMin) {
+        this.regNameMin = regNameMin;
+    }
+
+    public Integer getRegNameMax() {
+        return regNameMax;
+    }
+
+    public void setRegNameMax(Integer regNameMax) {
+        this.regNameMax = regNameMax;
+    }
+
+    public Integer getRegPwdFormat() {
+        return regPwdFormat;
+    }
+
+    public void setRegPwdFormat(Integer regPwdFormat) {
+        this.regPwdFormat = regPwdFormat;
+    }
+
+    public Integer getRegPwdMin() {
+        return regPwdMin;
+    }
+
+    public void setRegPwdMin(Integer regPwdMin) {
+        this.regPwdMin = regPwdMin;
+    }
+
+    public Integer getRegPwdMax() {
+        return regPwdMax;
+    }
+
+    public void setRegPwdMax(Integer regPwdMax) {
+        this.regPwdMax = regPwdMax;
+    }
+
+    public Integer getDcode() {
+        return dcode;
+    }
+
+    public void setDcode(Integer dcode) {
+        this.dcode = dcode;
+    }
+
+    public Bitmap getVerifyCode() {
         return verifyCode;
     }
 
     public void setVerifyCode(Bitmap verifyCode) {
         this.verifyCode = verifyCode;
-    }
-
-    public boolean isRegWeixin() {
-        return regWeixin;
-    }
-
-    public void setRegWeixin(boolean regWeixin) {
-        this.regWeixin = regWeixin;
-    }
-
-    public boolean isReqReferCode() {
-        return reqReferCode;
-    }
-
-    public void setReqReferCode(boolean reqReferCode) {
-        this.reqReferCode = reqReferCode;
-    }
-
-    public boolean isRegRealName() {
-        return regRealName;
-    }
-
-    public void setRegRealName(boolean regRealName) {
-        this.regRealName = regRealName;
-    }
-
-    public boolean isRegMobileVerify() {
-        return regMobileVerify;
-    }
-
-    public void setRegMobileVerify(boolean regMobileVerify) {
-        this.regMobileVerify = regMobileVerify;
-    }
-
-    public boolean isRegPwdConfirm() {
-        return regPwdConfirm;
-    }
-
-    public void setRegPwdConfirm(boolean regPwdConfirm) {
-        this.regPwdConfirm = regPwdConfirm;
-    }
-
-    public boolean isRegLegalAge() {
-        return regLegalAge;
-    }
-
-    public void setRegLegalAge(boolean regLegalAge) {
-        this.regLegalAge = regLegalAge;
-    }
-
-    public boolean isHighLevelPass() {
-        return isHighLevelPass;
-    }
-
-    public void setHighLevelPass(boolean isHighLevelPass) {
-        this.isHighLevelPass = isHighLevelPass;
-    }
-
-    public boolean isReqPhoneCountry() {
-        return reqPhoneCountry;
-    }
-
-    public void setReqPhoneCountry(boolean reqPhoneCountry) {
-        this.reqPhoneCountry = reqPhoneCountry;
-    }
-
-    public boolean hasFriendPromo() {
-        return hasFriendPromo;
-    }
-
-    public void setHasFriendPromo(boolean hasFriendPromo) {
-        this.hasFriendPromo = hasFriendPromo;
-    }
-
-    public boolean isRegWhatsapp() {
-        return regWhatsapp;
-    }
-
-    public void setRegWhatsapp(boolean regWhatsapp) {
-        this.regWhatsapp = regWhatsapp;
-    }
-
-    public boolean isRegTelegram() {
-        return regTelegram;
-    }
-
-    public void setRegTelegram(boolean regTelegram) {
-        this.regTelegram = regTelegram;
-    }
-
-    public boolean isRegFacebook() {
-        return regFacebook;
-    }
-
-    public void setRegFacebook(boolean regFacebook) {
-        this.regFacebook = regFacebook;
-    }
-
-    public boolean isRegZalo() {
-        return regZalo;
-    }
-
-    public void setRegZalo(boolean regZalo) {
-        this.regZalo = regZalo;
-    }
-
-    public boolean isReqDisplayReferCode() {
-        return reqDisplayReferCode;
-    }
-
-    public void setReqDisplayReferCode(boolean reqDisplayReferCode) {
-        this.reqDisplayReferCode = reqDisplayReferCode;
-    }
-
-    public boolean isRegLine() {
-        return regLine;
-    }
-
-    public void setRegLine(boolean regLine) {
-        this.regLine = regLine;
-    }
-
-    public String getWithdrawPasswordFormat() {
-        return withdrawPasswordFormat;
-    }
-
-    public void setWithdrawPasswordFormat(String withdrawPasswordFormat) {
-        this.withdrawPasswordFormat = withdrawPasswordFormat;
-    }
-
-    public boolean isMustFillReferral() {
-        return mustFillReferral;
-    }
-
-    public void setMustFillReferral(boolean mustFillReferral) {
-        this.mustFillReferral = mustFillReferral;
-    }
-
-    public boolean isRegEmailDisplay() {
-        return regEmailDisplay;
-    }
-
-    public void setRegEmailDisplay(boolean regEmailDisplay) {
-        this.regEmailDisplay = regEmailDisplay;
-    }
-
-    public boolean isReqPhoneDisplay() {
-        return reqPhoneDisplay;
-    }
-
-    public void setReqPhoneDisplay(boolean reqPhoneDisplay) {
-        this.reqPhoneDisplay = reqPhoneDisplay;
-    }
-
-    public boolean isRegSkype() {
-        return regSkype;
-    }
-
-    public void setRegSkype(boolean regSkype) {
-        this.regSkype = regSkype;
-    }
-
-    public boolean isRegMarketing() {
-        return regMarketing;
-    }
-
-    public void setRegMarketing(boolean regMarketing) {
-        this.regMarketing = regMarketing;
-    }
-
-    public boolean isRegEmailVerify() {
-        return regEmailVerify;
-    }
-
-    public void setRegEmailVerify(boolean regEmailVerify) {
-        this.regEmailVerify = regEmailVerify;
-    }
-
-    @Override
-    public String toString() {
-        return "RegParam{" +
-                "regBirthday=" + regBirthday +
-                ", regQQ=" + regQQ +
-                ", reqPhone=" + reqPhone +
-                ", regEmail=" + regEmail +
-                ", regWeixin=" + regWeixin +
-                ", withdrawPassword=" + withdrawPassword +
-                ", reqReferCode=" + reqReferCode +
-                ", regRealName=" + regRealName +
-                ", regMobileVerify=" + regMobileVerify +
-                ", regEmailVerify=" + regEmailVerify +
-                ", regPwdConfirm=" + regPwdConfirm +
-                ", regLegalAge=" + regLegalAge +
-                ", highLevelPass=" + isHighLevelPass +
-                ", hasFriendPromo=" + hasFriendPromo +
-                ", mustFillReferral=" + mustFillReferral +
-                ", nameMin=" + nameMin +
-                ", nameMax=" + nameMax +
-                ", passwordMin=" + passwordMin +
-                ", passwordMax=" + passwordMax +
-                ", defaultAgentCode='" + defaultAgentCode + '\'' +
-                ", verifyCode=" + verifyCode +
-                '}';
     }
 }
