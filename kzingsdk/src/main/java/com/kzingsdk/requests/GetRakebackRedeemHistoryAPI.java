@@ -40,7 +40,7 @@ public class GetRakebackRedeemHistoryAPI extends CoreRequest {
         try {
             jsonData.put("gpid", gpid);
             jsonData.put("currency", currency);
-            jsonData.put("pagecount", pageCount);
+            jsonData.put("pageCount", pageCount);
             jsonData.put("offset", offset);
             jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
             jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
