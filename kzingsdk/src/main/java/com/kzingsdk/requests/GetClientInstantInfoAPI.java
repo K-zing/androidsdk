@@ -24,9 +24,7 @@ public class GetClientInstantInfoAPI extends CoreRequest {
 
     @Override
     public Observable<ClientInstantInfo> requestRx(Context context) {
-        return super.baseExecute(context).map(jsonResponse -> {
-            return ClientInstantInfo.newInstance(jsonResponse);
-        });
+        return super.baseExecute(context).map(ClientInstantInfo::newInstance);
     }
 
     @Override

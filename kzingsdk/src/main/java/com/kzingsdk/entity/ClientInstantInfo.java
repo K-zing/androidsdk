@@ -35,6 +35,8 @@ public class ClientInstantInfo implements Parcelable {
     private Boolean memberPanUsername2 = false;
     private Boolean memberPanPlayerGroup2 = false;
     private Boolean memberPanAgentCode2 = false;
+    private Boolean playerEmailVerifiedWithdraw = false;
+    private Boolean playerMobileVerifiedWithdraw = false;
     private String siteId;
     private String cryptoFixedExchangeRate;
     private String announcement;
@@ -51,6 +53,7 @@ public class ClientInstantInfo implements Parcelable {
     private String pageFooter;
     private String pageKeyword;
     private String appFriendReferralDomain;
+    private String depositAnnouncement;
     private CaptchaApiId captchaApiId = new CaptchaApiId();
     private ArrayList<String> memberPanAgentCode = new ArrayList<>();
     private ArrayList<String> memberPanPlayerGroup = new ArrayList<>();
@@ -93,6 +96,8 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setMemberPanUsername2(rootObject.optBoolean("memberPanUsername2", false));
         clientInfo.setMemberPanPlayerGroup2(rootObject.optBoolean("memberPanPlayerGroup2", false));
         clientInfo.setMemberPanAgentCode2(rootObject.optBoolean("memberPanAgentCode2", false));
+        clientInfo.setPlayerEmailVerifiedWithdraw(rootObject.optBoolean("playerEmailVerifiedWithdraw", false));
+        clientInfo.setPlayerMobileVerifiedWithdraw(rootObject.optBoolean("playerMobileVerifiedWithdraw", false));
         clientInfo.setCaptchaMode(rootObject.optString("captchaMode"));
         clientInfo.setSiteId(rootObject.optString("siteId"));
         clientInfo.setCryptoFixedExchangeRate(rootObject.optString("cryptoFixedExchangeRate"));
@@ -110,6 +115,7 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setPageFooter(rootObject.optString("pageFooter"));
         clientInfo.setPageKeyword(rootObject.optString("pageKeyword"));
         clientInfo.setAppFriendReferralDomain(rootObject.optString("appFriendReferralDomain"));
+        clientInfo.setDepositAnnouncement(rootObject.optString("depositAnnouncement"));
 
         JSONObject captchaApiIdJSONObject = rootObject.optJSONObject("captchaApiId");
         if (captchaApiIdJSONObject != null)
@@ -238,6 +244,8 @@ public class ClientInstantInfo implements Parcelable {
         memberPanUsername2 = in.readInt() == 1;
         memberPanPlayerGroup2 = in.readInt() == 1;
         memberPanAgentCode2 = in.readInt() == 1;
+        playerEmailVerifiedWithdraw = in.readInt() == 1;
+        playerMobileVerifiedWithdraw = in.readInt() == 1;
         siteId = in.readString();
         cryptoFixedExchangeRate = in.readString();
         announcement = in.readString();
@@ -254,6 +262,7 @@ public class ClientInstantInfo implements Parcelable {
         pageFooter = in.readString();
         pageKeyword = in.readString();
         appFriendReferralDomain = in.readString();
+        depositAnnouncement = in.readString();
         Object[] objectArray = in.readArray(ClientInstantInfo.class.getClassLoader());
         int i = 0;
         captchaApiId = (CaptchaApiId) objectArray[i++];
@@ -294,7 +303,8 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeInt(memberPanUsername2 ? 1 : 0);
         dest.writeInt(memberPanPlayerGroup2 ? 1 : 0);
         dest.writeInt(memberPanAgentCode2 ? 1 : 0);
-
+        dest.writeInt(playerEmailVerifiedWithdraw ? 1 : 0);
+        dest.writeInt(playerMobileVerifiedWithdraw ? 1 : 0);
         dest.writeString(siteId);
         dest.writeString(cryptoFixedExchangeRate);
         dest.writeString(announcement);
@@ -311,6 +321,7 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeString(pageFooter);
         dest.writeString(pageKeyword);
         dest.writeString(appFriendReferralDomain);
+        dest.writeString(depositAnnouncement);
         dest.writeArray(new Object[]{
                 captchaApiId,
                 memberPanAgentCode,
@@ -506,6 +517,22 @@ public class ClientInstantInfo implements Parcelable {
         this.memberPanAgentCode2 = memberPanAgentCode2;
     }
 
+    public Boolean getPlayerEmailVerifiedWithdraw() {
+        return playerEmailVerifiedWithdraw;
+    }
+
+    public void setPlayerEmailVerifiedWithdraw(Boolean playerEmailVerifiedWithdraw) {
+        this.playerEmailVerifiedWithdraw = playerEmailVerifiedWithdraw;
+    }
+
+    public Boolean getPlayerMobileVerifiedWithdraw() {
+        return playerMobileVerifiedWithdraw;
+    }
+
+    public void setPlayerMobileVerifiedWithdraw(Boolean playerMobileVerifiedWithdraw) {
+        this.playerMobileVerifiedWithdraw = playerMobileVerifiedWithdraw;
+    }
+
     public String getSiteId() {
         return siteId;
     }
@@ -632,6 +659,14 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setAppFriendReferralDomain(String appFriendReferralDomain) {
         this.appFriendReferralDomain = appFriendReferralDomain;
+    }
+
+    public String getDepositAnnouncement() {
+        return depositAnnouncement;
+    }
+
+    public void setDepositAnnouncement(String depositAnnouncement) {
+        this.depositAnnouncement = depositAnnouncement;
     }
 
     public ArrayList<String> getMemberPanAgentCode() {

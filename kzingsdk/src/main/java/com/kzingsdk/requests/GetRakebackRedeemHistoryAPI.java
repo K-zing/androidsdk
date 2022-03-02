@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.RakebackRedeemHistory;
+import com.kzingsdk.entity.RakebackRedeemHistoryResult;
 import com.kzingsdk.util.Constant;
 
 import org.json.JSONArray;
@@ -53,15 +54,8 @@ public class GetRakebackRedeemHistoryAPI extends CoreRequest {
     }
 
     @Override
-    public Observable<ArrayList<RakebackRedeemHistory>> requestRx(final Context context) {
-        return super.baseExecute(context).map(jsonResponse -> {
-            ArrayList<RakebackRedeemHistory> history = new ArrayList<>();
-            JSONArray response = jsonResponse.optJSONArray("data");
-            for (int i = 0; i < response.length(); i++) {
-                history.add(RakebackRedeemHistory.newInstance(response.optJSONObject(i)));
-            }
-            return history;
-        });
+    public Observable<RakebackRedeemHistoryResult> requestRx(final Context context) {
+        return super.baseExecute(context).map(RakebackRedeemHistoryResult::newInstance);
     }
 
     @Override
@@ -81,7 +75,7 @@ public class GetRakebackRedeemHistoryAPI extends CoreRequest {
     }
 
     public interface GetRakebackRedeemHistoryCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<RakebackRedeemHistory> activityHistory);
+        void onSuccess(RakebackRedeemHistoryResult rakebackRedeemHistoryResult);
     }
 
     public GetRakebackRedeemHistoryAPI setStartDateCalendar(Calendar startDateCalendar) {
