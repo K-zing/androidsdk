@@ -13,7 +13,7 @@ public class OneClickRedeemRakebackResult {
         OneClickRedeemRakebackResult result = new OneClickRedeemRakebackResult();
         result.status = rootObject.optInt("status");
         result.code = rootObject.optInt("code");
-        result.message = rootObject.optString("message");
+        result.message = rootObject.optString("msg");
         return result;
     }
 
