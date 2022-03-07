@@ -13,6 +13,7 @@ import com.kzingsdk.util.MD5Utils;
 import com.kzingsdk.util.RSAUtils;
 import com.kzingsdk.util.SharePrefUtil;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.reactivestreams.Publisher;
@@ -65,6 +66,8 @@ public abstract class CoreRequest {
     protected final String PLATFORM_NAME = "android";
     private static int requestTimeoutMs = 10 * 1000;
 
+    protected boolean dynamicDomainChanged = false;
+    private boolean usingDynamicDomain = false;
     private String choseDomain = "";
     private final int MAX_DOMAIN_USE = 200;
     private static int domainUsedCount = 0;
@@ -72,6 +75,7 @@ public abstract class CoreRequest {
     private final String defaultIP = "https://tvwkkq8k9e7grjbw49pk.jumzxxtu3j.com";
     private final String defaultBetterIP = "https://fsr5vqdhsspsrtz6fl93.jumzxxtu3j.com/";
     private static HashSet<String> failedIP = null;
+    private static HashSet<String> dynamicDomainSet = new HashSet<>();
 
     private final ArrayList<String> PORT_LIST = new ArrayList<String>() {{
         add("9999");
@@ -201,17 +205,70 @@ public abstract class CoreRequest {
         });
     }
 
+
+    private HashSet<String> chooseDomainSet(Context context) {
+        String domainJSONString = SharePrefUtil.getString(context, Constant.Pref.DOMAIN, null);
+        HashSet<String> toFindSet = new HashSet<>();
+        try {
+            if (domainJSONString == null) {
+                throw new JSONException("");
+            }
+            if (dynamicDomainSet.size() > 0 && !dynamicDomainChanged)
+                return dynamicDomainSet;
+            dynamicDomainChanged = false;
+            failedIP.clear();
+            JSONObject domainJSON = new JSONObject(domainJSONString);
+            JSONObject defaultObject = domainJSON.optJSONObject("default");
+            if (defaultObject == null) {
+                throw new JSONException("");
+            }
+            JSONArray aArray = defaultObject.optJSONArray("A");
+            if (aArray == null || aArray.length() <= 0) {
+                throw new JSONException("");
+            }
+            for (int i = 0; i < aArray.length(); i++) {
+                String domain = aArray.optString(i);
+                toFindSet.add(domain);
+            }
+            JSONArray bArray = defaultObject.optJSONArray("B");
+            if (bArray == null || bArray.length() <= 0) {
+                return toFindSet;
+            }
+            for (int i = 0; i < bArray.length(); i++) {
+                String domain = bArray.optString(i);
+                toFindSet.add(domain);
+            }
+            if (toFindSet.size() <= 0) {
+                throw new JSONException("");
+            }
+            usingDynamicDomain = true;
+            dynamicDomainSet = toFindSet;
+            return dynamicDomainSet;
+        } catch (JSONException ignored) {
+        }
+        usingDynamicDomain = false;
+        toFindSet = isUseBetterUrl(context) ? API_URL_SET_BETTER : API_URL_SET;
+        toFindSet = toFindIpWithPortSet(toFindSet);
+        return toFindSet;
+    }
+
     private Observable<String> findFastestIPTask(Context context) {
         HashSet<String> toFindSet;
         if (KzingSDK.getInstance().isUseCustomUrl()) {
             toFindSet = KzingSDK.getInstance().getCustomUrlSet();
         } else {
-            toFindSet = isUseBetterUrl(context) ? API_URL_SET_BETTER : API_URL_SET;
+            toFindSet = chooseDomainSet(context);
         }
-        toFindSet = toFindIpWithPortSet(toFindSet);
         if (failedIP.equals(toFindSet) || failedIP.size() >= toFindSet.size()) {
             if (KzingSDK.getInstance().isUseCustomUrl()) {
                 KzingSDK.getInstance().setUseCustomUrl(false);
+                toFindSet = chooseDomainSet(context);
+            }
+            if (usingDynamicDomain) {
+                usingDynamicDomain = false;
+                dynamicDomainChanged = false;
+                dynamicDomainSet.clear();
+                toFindSet = chooseDomainSet(context);
             }
             failedIP.clear();
         }

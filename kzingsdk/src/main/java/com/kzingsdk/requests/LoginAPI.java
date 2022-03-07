@@ -93,7 +93,15 @@ public class LoginAPI extends CoreRequest {
             SharePrefUtil.putString(context, Constant.Pref.CCTOKEN, ccToken);
             setLoginTokens(vcToken, ccToken);
             return MemberInfo.newInstance(jsonResponse);
-        });
+        })
+                .doOnNext(response -> {
+                    new GetSiteDomainAPI()
+                            .requestRx(context)
+                            .subscribe(jsonResponse -> {
+                            }, ignored -> {
+                            });
+                })
+                ;
     }
 
 

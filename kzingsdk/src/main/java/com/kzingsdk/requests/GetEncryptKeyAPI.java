@@ -23,14 +23,23 @@ public class GetEncryptKeyAPI extends CoreRequest {
 
     @Override
     public Observable<String> requestRx(Context context) {
-        return super.baseExecute(context).map(jsonResponse -> jsonResponse.optString("response"));
+        return super.baseExecute(context)
+                .map(jsonResponse -> jsonResponse.optString("response"))
+                .doOnNext(response -> {
+                    new GetSiteDomainAPI()
+                            .requestRx(context)
+                            .subscribe(jsonResponse -> {
+                            }, ignored -> {
+                            });
+                })
+                ;
     }
 
     @Override
     protected JSONObject generateParamsJson() {
         try {
             JSONObject dataObject = new JSONObject();
-            dataObject.put("getPrivateKey","");
+            dataObject.put("getPrivateKey", "");
             return dataObject;
 //            return new JSONObject("{\"getPrivateKey\": \"\"}");
         } catch (JSONException e) {
@@ -49,12 +58,12 @@ public class GetEncryptKeyAPI extends CoreRequest {
         }, defaultOnErrorConsumer);
     }
 
-    public GetEncryptKeyAPI addEncryptKeyCallBack(GetEncryptKeyCallBack getEncryptKeyCallBack){
+    public GetEncryptKeyAPI addEncryptKeyCallBack(GetEncryptKeyCallBack getEncryptKeyCallBack) {
         kzingCallBackList.add(getEncryptKeyCallBack);
         return this;
     }
 
-    public interface GetEncryptKeyCallBack extends KzingCallBack{
+    public interface GetEncryptKeyCallBack extends KzingCallBack {
         void onSuccess(String dataRsaKey);
     }
 

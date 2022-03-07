@@ -3,6 +3,10 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
+import com.kzingsdk.util.Constant;
+import com.kzingsdk.util.SharePrefUtil;
+
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -24,12 +28,12 @@ public class GetSiteDomainAPI extends CoreRequest {
         return super.baseExecute(context)
                 .map(jsonResponse -> {
                     HashMap<String, String> configValueMap = new HashMap<>();
-//                    JSONArray configs = jsonResponse.optJSONArray("configs");
-//                    for (int i = 0; i < configs.length(); i++) {
-//                        JSONObject configObject = configs.optJSONObject(i);
-//                        configValueMap.put(configObject.optString("itemKey"), configObject.optString("itemValue"));
-//                    }
+                    JSONObject response = jsonResponse.optJSONObject("response");
+                    SharePrefUtil.putString(context, Constant.Pref.DOMAIN, response.toString());
+                    dynamicDomainChanged = true;
                     return configValueMap;
+                }).doOnError(jsonResponse -> {
+                    SharePrefUtil.removeString(context, Constant.Pref.DOMAIN);
                 });
     }
 
