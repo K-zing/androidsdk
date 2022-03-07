@@ -32,10 +32,10 @@ public class AgentHistoryResult {
         agentHistoryResult.setPre(pageObject.optInt("pre"));
         agentHistoryResult.setTotalPages(pageObject.optInt("totalPages"));
         agentHistoryResult.setCurIndex(pageObject.optInt("curIndex"));
-        agentHistoryResult.setTotalDptAmt(BigDecimalUtil.optBigDecimal(rootObject, "total_dpt_amt"));
-        agentHistoryResult.setTotalWtdAmt(BigDecimalUtil.optBigDecimal(rootObject, "total_wtd_amt"));
-        agentHistoryResult.setTotalValidBetAmt(BigDecimalUtil.optBigDecimal(rootObject, "total_validbetamt"));
-        agentHistoryResult.setTotalWinloss(BigDecimalUtil.optBigDecimal(rootObject, "total_winloss"));
+        agentHistoryResult.setTotalDptAmt(BigDecimalUtil.optBigDecimal(pageObject, "total_dpt_amt"));
+        agentHistoryResult.setTotalWtdAmt(BigDecimalUtil.optBigDecimal(pageObject, "total_wtd_amt"));
+        agentHistoryResult.setTotalValidBetAmt(BigDecimalUtil.optBigDecimal(pageObject, "total_validbetamt"));
+        agentHistoryResult.setTotalWinloss(BigDecimalUtil.optBigDecimal(pageObject, "total_winloss"));
 
         JSONArray agentHistoryArray = rootObject.optJSONArray("history");
         if (agentHistoryArray != null) {
