@@ -25,16 +25,17 @@ public class GetSiteDomainAPI extends CoreRequest {
 
     @Override
     public Observable<HashMap<String, String>> requestRx(Context context) {
-        return super.baseExecute(context)
-                .map(jsonResponse -> {
-                    HashMap<String, String> configValueMap = new HashMap<>();
-                    JSONObject response = jsonResponse.optJSONObject("response");
-                    SharePrefUtil.putString(context, Constant.Pref.DOMAIN, response.toString());
-                    dynamicDomainChanged = true;
-                    return configValueMap;
-                }).doOnError(jsonResponse -> {
-                    SharePrefUtil.removeString(context, Constant.Pref.DOMAIN);
-                });
+        return Observable.just(new HashMap<>());
+//        return super.baseExecute(context)
+//                .map(jsonResponse -> {
+//                    HashMap<String, String> configValueMap = new HashMap<>();
+//                    JSONObject response = jsonResponse.optJSONObject("response");
+//                    SharePrefUtil.putString(context, Constant.Pref.DOMAIN, response.toString());
+//                    dynamicDomainChanged = true;
+//                    return configValueMap;
+//                }).doOnError(jsonResponse -> {
+//                    SharePrefUtil.removeString(context, Constant.Pref.DOMAIN);
+//                });
     }
 
     @Override

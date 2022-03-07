@@ -19,6 +19,8 @@ public class WithdrawInfo {
     private String info = "";
     private Double minAmount;
     private Double maxAmount;
+    private Double minAmountUsdt;
+    private Double maxAmountUsdt;
     private Double playerTodayAmount;
     private Double playerTodayCount;
     private Double dayMaxAmount;
@@ -49,6 +51,8 @@ public class WithdrawInfo {
         withdrawInfo.setInfo(rootObject.optString("winfo"));
         withdrawInfo.setMinAmount(rootObject.optDouble("withdraw_min"));
         withdrawInfo.setMaxAmount(rootObject.optDouble("withdraw_max"));
+        withdrawInfo.setMinAmountUsdt(rootObject.optDouble("withdraw_min_usdt"));
+        withdrawInfo.setMaxAmountUsdt(rootObject.optDouble("withdraw_max_usdt"));
         withdrawInfo.setShowWithdrawRate(rootObject.optBoolean("withdraw_show_rate", false));
         withdrawInfo.setPlayerTodayAmount(rootObject.optDouble("player_today_withdraw_amount"));
         withdrawInfo.setPlayerTodayCount(rootObject.optDouble("player_today_withdraw_count"));
@@ -127,6 +131,22 @@ public class WithdrawInfo {
 
     public void setMaxAmount(Double maxAmount) {
         this.maxAmount = maxAmount;
+    }
+
+    public Double getMinAmountUsdt() {
+        return minAmountUsdt;
+    }
+
+    public void setMinAmountUsdt(Double minAmountUsdt) {
+        this.minAmountUsdt = minAmountUsdt;
+    }
+
+    public Double getMaxAmountUsdt() {
+        return maxAmountUsdt;
+    }
+
+    public void setMaxAmountUsdt(Double maxAmountUsdt) {
+        this.maxAmountUsdt = maxAmountUsdt;
     }
 
     public Boolean getShowWithdrawRate() {
