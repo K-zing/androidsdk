@@ -17,10 +17,6 @@ public class AgentHistoryResult {
     private Integer pre;
     private Integer totalPages;
     private Integer curIndex;
-    private BigDecimal totalDptAmt;
-    private BigDecimal totalWtdAmt;
-    private BigDecimal totalValidBetAmt;
-    private BigDecimal totalWinloss;
     private ArrayList<AgentHistory> agentHistoryList = new ArrayList<>();
 
     public static AgentHistoryResult newInstance(JSONObject rootObject) {
@@ -32,10 +28,6 @@ public class AgentHistoryResult {
         agentHistoryResult.setPre(pageObject.optInt("pre"));
         agentHistoryResult.setTotalPages(pageObject.optInt("totalPages"));
         agentHistoryResult.setCurIndex(pageObject.optInt("curIndex"));
-        agentHistoryResult.setTotalDptAmt(BigDecimalUtil.optBigDecimal(pageObject, "total_dpt_amt"));
-        agentHistoryResult.setTotalWtdAmt(BigDecimalUtil.optBigDecimal(pageObject, "total_wtd_amt"));
-        agentHistoryResult.setTotalValidBetAmt(BigDecimalUtil.optBigDecimal(pageObject, "total_validbetamt"));
-        agentHistoryResult.setTotalWinloss(BigDecimalUtil.optBigDecimal(pageObject, "total_winloss"));
 
         JSONArray agentHistoryArray = rootObject.optJSONArray("history");
         if (agentHistoryArray != null) {
@@ -100,38 +92,6 @@ public class AgentHistoryResult {
 
     public void setAgentHistoryList(ArrayList<AgentHistory> agentHistoryList) {
         this.agentHistoryList = agentHistoryList;
-    }
-
-    public BigDecimal getTotalDptAmt() {
-        return totalDptAmt;
-    }
-
-    public void setTotalDptAmt(BigDecimal totalDptAmt) {
-        this.totalDptAmt = totalDptAmt;
-    }
-
-    public BigDecimal getTotalWtdAmt() {
-        return totalWtdAmt;
-    }
-
-    public void setTotalWtdAmt(BigDecimal totalWtdAmt) {
-        this.totalWtdAmt = totalWtdAmt;
-    }
-
-    public BigDecimal getTotalValidBetAmt() {
-        return totalValidBetAmt;
-    }
-
-    public void setTotalValidBetAmt(BigDecimal totalValidBetAmt) {
-        this.totalValidBetAmt = totalValidBetAmt;
-    }
-
-    public BigDecimal getTotalWinloss() {
-        return totalWinloss;
-    }
-
-    public void setTotalWinloss(BigDecimal totalWinloss) {
-        this.totalWinloss = totalWinloss;
     }
 }
 

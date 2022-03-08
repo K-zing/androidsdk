@@ -18,24 +18,32 @@ public class AgentHistory {
     private String playerId;
     private Long regDate;
     private Long lastLoginTime;
+    private BigDecimal totalDptAmt;
+    private BigDecimal totalWtdAmt;
+    private BigDecimal totalValidBetAmt;
+    private BigDecimal totalWinloss;
 
     public AgentHistory() {
 
     }
 
     public static AgentHistory newInstance(JSONObject rootObject) {
-        AgentHistory activityBonus = new AgentHistory();
-        activityBonus.setAgentName(rootObject.optString("agentname"));
-        activityBonus.setLastLoginIp(rootObject.optString("lastloginip"));
-        activityBonus.setPlayerName(rootObject.optString("playername"));
-        activityBonus.setRegDomain(rootObject.optString("regdomain"));
-        activityBonus.setLastDomain(rootObject.optString("lastdomain"));
-        activityBonus.setParentPlayerId(rootObject.optString("parentplayerid"));
-        activityBonus.setPlayerId(rootObject.optString("playerid"));
-        activityBonus.setRegDate(rootObject.optLong("regdate"));
-        activityBonus.setLastLoginTime(rootObject.optLong("lastlogintime"));
+        AgentHistory agentHistory = new AgentHistory();
+        agentHistory.setAgentName(rootObject.optString("agentname"));
+        agentHistory.setLastLoginIp(rootObject.optString("lastloginip"));
+        agentHistory.setPlayerName(rootObject.optString("playername"));
+        agentHistory.setRegDomain(rootObject.optString("regdomain"));
+        agentHistory.setLastDomain(rootObject.optString("lastdomain"));
+        agentHistory.setParentPlayerId(rootObject.optString("parentplayerid"));
+        agentHistory.setPlayerId(rootObject.optString("playerid"));
+        agentHistory.setRegDate(rootObject.optLong("regdate"));
+        agentHistory.setLastLoginTime(rootObject.optLong("lastlogintime"));
+        agentHistory.setTotalDptAmt(BigDecimalUtil.optBigDecimal(rootObject, "total_dpt_amt"));
+        agentHistory.setTotalWtdAmt(BigDecimalUtil.optBigDecimal(rootObject, "total_wtd_amt"));
+        agentHistory.setTotalValidBetAmt(BigDecimalUtil.optBigDecimal(rootObject, "total_validbetamt"));
+        agentHistory.setTotalWinloss(BigDecimalUtil.optBigDecimal(rootObject, "total_winloss"));
 
-        return activityBonus;
+        return agentHistory;
     }
 
     public String getAgentName() {
@@ -108,6 +116,38 @@ public class AgentHistory {
 
     public void setLastLoginTime(Long lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
+    }
+
+    public BigDecimal getTotalDptAmt() {
+        return totalDptAmt;
+    }
+
+    public void setTotalDptAmt(BigDecimal totalDptAmt) {
+        this.totalDptAmt = totalDptAmt;
+    }
+
+    public BigDecimal getTotalWtdAmt() {
+        return totalWtdAmt;
+    }
+
+    public void setTotalWtdAmt(BigDecimal totalWtdAmt) {
+        this.totalWtdAmt = totalWtdAmt;
+    }
+
+    public BigDecimal getTotalValidBetAmt() {
+        return totalValidBetAmt;
+    }
+
+    public void setTotalValidBetAmt(BigDecimal totalValidBetAmt) {
+        this.totalValidBetAmt = totalValidBetAmt;
+    }
+
+    public BigDecimal getTotalWinloss() {
+        return totalWinloss;
+    }
+
+    public void setTotalWinloss(BigDecimal totalWinloss) {
+        this.totalWinloss = totalWinloss;
     }
 }
 
