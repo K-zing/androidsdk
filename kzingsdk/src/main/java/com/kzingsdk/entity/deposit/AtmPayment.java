@@ -24,7 +24,8 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
     private String bcMin;
     private String bcMax;
     private String network;
-
+    private boolean quickAmountFlag = false;
+    private BigDecimal quickAmount = BigDecimal.ZERO;
 
     public AtmPayment() {
     }
@@ -48,6 +49,8 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         item.setBcMin(rootObject.optString("bcmin"));
         item.setBcMax(rootObject.optString("bcmax"));
         item.setNetwork(rootObject.optString("network"));
+        item.setQuickAmountFlag(rootObject.optInt("quickamountflag") == 1);
+        item.setQuickAmount(BigDecimalUtil.optBigDecimal(rootObject, "quickamount", BigDecimal.ZERO));
         return item;
     }
 
@@ -156,6 +159,22 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         this.network = network;
     }
 
+    public boolean isQuickAmountFlag() {
+        return quickAmountFlag;
+    }
+
+    public void setQuickAmountFlag(boolean quickAmountFlag) {
+        this.quickAmountFlag = quickAmountFlag;
+    }
+
+    public BigDecimal getQuickAmount() {
+        return quickAmount;
+    }
+
+    public void setQuickAmount(BigDecimal quickAmount) {
+        this.quickAmount = quickAmount;
+    }
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public AtmPayment createFromParcel(Parcel in) {
             return new AtmPayment(in);
@@ -189,6 +208,8 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         bcMax = in.readString();
         network = in.readString();
         formType = in.readString();
+        quickAmountFlag = in.readInt() == 1;
+        quickAmount = new BigDecimal(in.readString());
     }
 
     @Override
@@ -220,6 +241,8 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         dest.writeString(bcMax);
         dest.writeString(network);
         dest.writeString(formType);
+        dest.writeInt(quickAmountFlag ? 1 : 0);
+        dest.writeString(quickAmount.toString());
     }
 
     @Override

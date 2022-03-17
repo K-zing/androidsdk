@@ -37,6 +37,8 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
     private Integer random = -1;
     private boolean displayDepositName = false;
 
+    private boolean quickAmountFlag = false;
+    private BigDecimal quickAmount = BigDecimal.ZERO;
 
     public ThirdPartyPayment() {
     }
@@ -46,6 +48,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         clone.paymentBankList = new ArrayList<>();
         return clone;
     }
+
     public static ThirdPartyPayment newInstance(JSONObject rootObject, JSONObject rootRootObject, String optionId) {
         ThirdPartyPayment item = new ThirdPartyPayment();
 
@@ -85,6 +88,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         item.setSDealsRate(BigDecimalUtil.optBigDecimal(rootObject, "sdealsrate", BigDecimal.ZERO));
         item.setDisplayDepositName(rootObject.optInt("displaydepositname", 0) == 1);
 
+
         JSONArray fixAmtArray = rootRootObject.optJSONArray("fixAmtArray");
         if (fixAmtArray != null) {
             for (int i = 0; i < fixAmtArray.length(); i++) {
@@ -112,6 +116,8 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         random = useRotate ? rootObject.optInt("randType", 0) : settingObject.optInt("random", 0);
         minAmount = useRotate ? rootObject.optDouble("randMin", 0d) : settingObject.optDouble("min", 0d);
         maxAmount = useRotate ? rootObject.optDouble("randMax", 0d) : settingObject.optDouble("max", 0d);
+        quickAmountFlag = rootObject.optInt("quickamountflag") == 1;
+        quickAmount = BigDecimalUtil.optBigDecimal(rootObject, "quickamount", BigDecimal.ZERO);
         if (!useRotate) {
             fixAmounts = settingObject.optString("fixamount", "").split(",");
         } else {
@@ -298,6 +304,22 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         this.cOptionList = cOptionList;
     }
 
+    public boolean isQuickAmountFlag() {
+        return quickAmountFlag;
+    }
+
+    public void setQuickAmountFlag(boolean quickAmountFlag) {
+        this.quickAmountFlag = quickAmountFlag;
+    }
+
+    public BigDecimal getQuickAmount() {
+        return quickAmount;
+    }
+
+    public void setQuickAmount(BigDecimal quickAmount) {
+        this.quickAmount = quickAmount;
+    }
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public ThirdPartyPayment createFromParcel(Parcel in) {
             return new ThirdPartyPayment(in);
@@ -334,6 +356,8 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         promoRate = new BigDecimal(in.readString());
         sDealsRate = new BigDecimal(in.readString());
         formType = in.readString();
+        quickAmountFlag = in.readInt() == 1;
+        quickAmount = new BigDecimal(in.readString());
         Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
         fixAmounts = (String[]) customObjects[0];
         paymentBankList = (ArrayList<ThirdPartyPaymentBank>) customObjects[1];
@@ -374,6 +398,8 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         dest.writeString(promoRate.toString());
         dest.writeString(sDealsRate.toString());
         dest.writeString(formType);
+        dest.writeInt(quickAmountFlag ? 1 : 0);
+        dest.writeString(quickAmount.toString());
         Object[] customObjects = new Object[5];
         customObjects[0] = fixAmounts;
         customObjects[1] = paymentBankList;

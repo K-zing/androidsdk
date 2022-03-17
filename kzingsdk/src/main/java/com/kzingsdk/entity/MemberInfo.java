@@ -63,6 +63,9 @@ public class MemberInfo implements Parcelable {
     private boolean panDuplicateUUID = false;
     private boolean panDuplicateIP = false;
     private boolean enablePhoneRecall = false;
+    private boolean memberPanAgentCode = false;
+    private boolean memberPanPlayerGroup = false;
+    private boolean memberPanUsername = false;
     private String playerCurrency = "";
     private String address = "";
     private ArrayList<String> currencyList = new ArrayList<>();
@@ -118,6 +121,9 @@ public class MemberInfo implements Parcelable {
         facebook = in.readString();
         pan = in.readString();
         enablePhoneRecall = in.readInt() == 1;
+        memberPanAgentCode = in.readInt() == 1;
+        memberPanPlayerGroup = in.readInt() == 1;
+        memberPanUsername = in.readInt() == 1;
         playerCurrency = in.readString();
         address = in.readString();
         Object[] objectArray = in.readArray(MemberInfo.class.getClassLoader());
@@ -168,6 +174,9 @@ public class MemberInfo implements Parcelable {
         memberInfo.setGroupId(rootObject.optString("groupid"));
         memberInfo.setWithdrawFrozenAmount(rootObject.optString("wtdfrozenamt"));
         memberInfo.setEnablePhoneRecall(rootObject.optBoolean("enablePhoneRecall", false));
+        memberInfo.setMemberPanAgentCode(rootObject.optBoolean("memberPanAgentCode", false));
+        memberInfo.setMemberPanPlayerGroup(rootObject.optBoolean("memberPanPlayerGroup", false));
+        memberInfo.setMemberPanUsername(rootObject.optBoolean("memberPanUsername", false));
         memberInfo.setPlayerCurrency(rootObject.optString("playerCurrency"));
         memberInfo.setAddress(rootObject.optString("address"));
         JSONArray currencyJSONArray = rootObject.optJSONArray("currencyList");
@@ -522,6 +531,30 @@ public class MemberInfo implements Parcelable {
         this.enablePhoneRecall = enablePhoneRecall;
     }
 
+    public boolean isMemberPanAgentCode() {
+        return memberPanAgentCode;
+    }
+
+    public void setMemberPanAgentCode(boolean memberPanAgentCode) {
+        this.memberPanAgentCode = memberPanAgentCode;
+    }
+
+    public boolean isMemberPanPlayerGroup() {
+        return memberPanPlayerGroup;
+    }
+
+    public void setMemberPanPlayerGroup(boolean memberPanPlayerGroup) {
+        this.memberPanPlayerGroup = memberPanPlayerGroup;
+    }
+
+    public boolean isMemberPanUsername() {
+        return memberPanUsername;
+    }
+
+    public void setMemberPanUsername(boolean memberPanUsername) {
+        this.memberPanUsername = memberPanUsername;
+    }
+
     public String getPlayerCurrency() {
         return playerCurrency;
     }
@@ -597,6 +630,9 @@ public class MemberInfo implements Parcelable {
         dest.writeString(facebook);
         dest.writeString(pan);
         dest.writeInt(enablePhoneRecall ? 1 : 0);
+        dest.writeInt(memberPanAgentCode ? 1 : 0);
+        dest.writeInt(memberPanPlayerGroup ? 1 : 0);
+        dest.writeInt(memberPanUsername ? 1 : 0);
         dest.writeString(playerCurrency);
         dest.writeString(address);
         dest.writeArray(new Object[]{
