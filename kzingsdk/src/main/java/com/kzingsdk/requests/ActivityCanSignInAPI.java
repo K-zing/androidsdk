@@ -3,6 +3,7 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
+import com.kzingsdk.entity.ActivityCanSignInResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,6 +14,7 @@ public class ActivityCanSignInAPI extends CoreRequest {
 
     ActivityCanSignInAPI() {
         super();
+
     }
 
     @Override
@@ -43,16 +45,16 @@ public class ActivityCanSignInAPI extends CoreRequest {
 
 
     @Override
-    public Observable<String> requestRx(Context context) {
-        return super.baseExecute(context).map(jsonResponse -> "Success");
+    public Observable<ActivityCanSignInResult> requestRx(Context context) {
+        return super.baseExecute(context).map(ActivityCanSignInResult::newInstance);
     }
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(activityContent -> {
+        requestRx(context).subscribe(activityCanSignInResult -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((ActivityCanSignInCallBack) kzingCallBack).onSuccess();
+                    ((ActivityCanSignInCallBack) kzingCallBack).onSuccess(activityCanSignInResult);
                 }
             }
         }, defaultOnErrorConsumer);
@@ -64,7 +66,7 @@ public class ActivityCanSignInAPI extends CoreRequest {
     }
 
     public interface ActivityCanSignInCallBack extends KzingCallBack {
-        void onSuccess();
+        void onSuccess(ActivityCanSignInResult activityCanSignInResult);
     }
 
     /**

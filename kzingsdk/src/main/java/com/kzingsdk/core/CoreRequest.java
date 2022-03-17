@@ -68,6 +68,7 @@ public abstract class CoreRequest {
 
     protected boolean dynamicDomainChanged = false;
     private boolean usingDynamicDomain = false;
+    private boolean ignoreStatusCode = false;
     private String choseDomain = "";
     private final int MAX_DOMAIN_USE = 200;
     private static int domainUsedCount = 0;
@@ -450,15 +451,16 @@ public abstract class CoreRequest {
             else
                 throw new KzingException(failMsg);
         };
-        return validateParams()
+        Observable<Response<String>> baseExecuteFlow = validateParams()
                 .timeout(KzingSDK.getInstance().getRequestTimeoutMs(), TimeUnit.MILLISECONDS)
                 .flatMap(checkParams)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext(showReturnLog)
-                .doOnNext(checkResponseCodes)
-                .map(mapToGetData)
-                ;
+                .doOnNext(showReturnLog);
+        if (!ignoreStatusCode){
+            baseExecuteFlow = baseExecuteFlow.doOnNext(checkResponseCodes);
+        }
+        return baseExecuteFlow.map(mapToGetData);
     }
 
     private final Consumer<Response<String>> showReturnLog = response -> {
@@ -562,6 +564,11 @@ public abstract class CoreRequest {
             }
         }
     };
+
+    public CoreRequest setIgnoreStatusCode(boolean ignoreStatusCode) {
+        this.ignoreStatusCode = ignoreStatusCode;
+        return this;
+    }
 
     protected void log(String msg) {
         Log.d(TAG, msg);
