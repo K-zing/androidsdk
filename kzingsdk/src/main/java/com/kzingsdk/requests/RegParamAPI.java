@@ -23,7 +23,7 @@ public class RegParamAPI extends CoreRequest {
     @Override
     public Observable<RegParam> requestRx(final Context context) {
         return super.baseExecute(context).map(jsonResponse -> {
-            String sessionId = jsonResponse.optString("sessionid", "");
+            String sessionId = jsonResponse.optString("sessionId", "");
             setSessionId(sessionId);
             RegParam regParam = RegParam.newInstance(jsonResponse);
             return regParam;
