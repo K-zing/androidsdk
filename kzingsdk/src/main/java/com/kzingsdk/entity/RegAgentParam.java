@@ -20,6 +20,7 @@ public class RegAgentParam implements Parcelable {
             reqTelegram,
             reqLine,
             reqBirthdate,
+            reqFacebook,
             highLevelPassAgent,
             agentWithdrawPassword;
 
@@ -40,6 +41,8 @@ public class RegAgentParam implements Parcelable {
         regParam.setReqBirthdate(rootObject.optString("agentreqbirthdate").equals("ON"));
         regParam.setHighLevelPassAgent(rootObject.optString("highLevelPassAgent").equals("ON"));
         regParam.setAgentWithdrawPassword(rootObject.optString("agentwithdrawpassword").equals("ON"));
+        regParam.setReqFacebook(rootObject.optString("agentreqfacebook").equals("ON"));
+
         regParam.setAgentWithdrawPasswordFormat(rootObject.optString("agentwithdrawpasswordformat"));
         String image = rootObject.optString("image");
         byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
@@ -129,6 +132,14 @@ public class RegAgentParam implements Parcelable {
         this.reqBirthdate = reqBirthdate;
     }
 
+    public boolean isReqFacebook() {
+        return reqFacebook;
+    }
+
+    public void setReqFacebook(boolean reqFacebook) {
+        this.reqFacebook = reqFacebook;
+    }
+
     public boolean isHighLevelPassAgent() {
         return highLevelPassAgent;
     }
@@ -172,6 +183,7 @@ public class RegAgentParam implements Parcelable {
         reqTelegram = in.readInt() == 1;
         reqLine = in.readInt() == 1;
         reqBirthdate = in.readInt() == 1;
+        reqFacebook = in.readInt() == 1;
         highLevelPassAgent = in.readInt() == 1;
         agentWithdrawPassword = in.readInt() == 1;
         agentWithdrawPasswordFormat = in.readString();
@@ -192,6 +204,7 @@ public class RegAgentParam implements Parcelable {
         dest.writeInt(reqTelegram ? 1 : 0);
         dest.writeInt(reqLine ? 1 : 0);
         dest.writeInt(reqBirthdate ? 1 : 0);
+        dest.writeInt(reqFacebook ? 1 : 0);
         dest.writeInt(highLevelPassAgent ? 1 : 0);
         dest.writeInt(agentWithdrawPassword ? 1 : 0);
         dest.writeString(agentWithdrawPasswordFormat);
