@@ -31,6 +31,7 @@ public class RegAgentAccountAPI extends CoreRequest {
     private String birthdayDay = "";
     private String birthdayMonth = "";
     private String birthdayYear = "";
+    private String facebook = "";
     private String verifycode = "";
     private String phoneCountry = "";
     private String wdPassword = "";
@@ -100,6 +101,7 @@ public class RegAgentAccountAPI extends CoreRequest {
             jsonData.put("birthday", birthdayDay);
             jsonData.put("birthmonth", birthdayMonth);
             jsonData.put("birthyear", birthdayYear);
+            jsonData.put("facebook", facebook);
             jsonData.put("atype", "1000");
             jsonData.put("aphonecountry", phoneCountry);
             jsonData.put("captchaValidate", captchaValidate);
@@ -234,6 +236,10 @@ public class RegAgentAccountAPI extends CoreRequest {
     }
     public RegAgentAccountAPI setCaptchaValidate(String captchaValidate) {
         this.captchaValidate = captchaValidate;
+        return this;
+    }
+    public RegAgentAccountAPI setFacebook(String facebook) {
+        this.facebook = facebook;
         return this;
     }
 
