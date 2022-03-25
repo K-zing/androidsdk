@@ -38,24 +38,15 @@ public class AllInOneResult {
             SharePrefUtil.putString(context, Constant.Pref.CCTOKEN, ccToken);
         }
 
-
-        final GamePlatformCreator gamePlatformCreator = new GamePlatformCreator();
-        JSONArray gamePlatformArray = jsonResponse.optJSONArray("gamePlatformList");
-        gamePlatformCreator.setContainerJsonArray(gamePlatformArray);
-
-        SharePrefUtil.putString(context, Constant.Pref.GAMEPLATFORM, gamePlatformArray.toString());
-        String gamePlatformChildArray = jsonResponse.optString("gamePlatformChildList");
-        if (gamePlatformChildArray.length() > 0) {
-            try {
-                String subGame = GzipUtil.decompress(gamePlatformChildArray);
-                SharePrefUtil.putString(context, Constant.Pref.GAMEPLATFORMCHILD, subGame);
-                gamePlatformCreator.setSubGameJsonObject(new JSONArray(subGame));
-            } catch (IOException ignored) {
+        ArrayList<GamePlatformContainer> containers = new ArrayList<>();
+        JSONObject gamePlatformJSON = jsonResponse.optJSONObject("epGamePlatformList");
+        JSONArray gamePlatformArray = gamePlatformJSON.optJSONArray("data");
+        if (gamePlatformArray != null) {
+            for (int i = 0; i < gamePlatformArray.length(); i++) {
+                containers.add(GamePlatformContainer.newInstanceFromEp(gamePlatformArray.optJSONObject(i)));
             }
         }
-
-        allInOneResult.setGamePlatformContainerList(gamePlatformCreator.build());
-
+        allInOneResult.setGamePlatformContainerList(containers);
         ArrayList<ActivityItem> activityItemList = new ArrayList<>();
         JSONArray activityArray = jsonResponse.optJSONArray("activity");
         for (int i = 0; i < activityArray.length(); i++) {

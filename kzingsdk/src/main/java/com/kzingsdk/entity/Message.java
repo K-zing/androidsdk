@@ -23,6 +23,7 @@ public class Message implements Parcelable {
     private String content;
     private String typeId;
     private boolean isRead;
+    private boolean isImportant;
     private String created;
 
     public Message() {
@@ -36,6 +37,7 @@ public class Message implements Parcelable {
         typeId = in.readString();
         created = in.readString();
         isRead = in.readInt() == 1;
+        isImportant = in.readInt() == 1;
     }
 
     public static Message newInstance(JSONObject rootObject) {
@@ -45,6 +47,7 @@ public class Message implements Parcelable {
         item.setContent(rootObject.optString("content"));
         item.setTypeId(rootObject.optString("msgtypeid"));
         item.setIsRead(rootObject.optString("readStatus").equals("1"));
+        item.setIsImportant(rootObject.optString("important").equals("1"));
         item.setCreated(rootObject.optString("created"));
         return item;
     }
@@ -95,6 +98,14 @@ public class Message implements Parcelable {
         this.isRead = isRead;
     }
 
+    public boolean isImportant() {
+        return isImportant;
+    }
+
+    public void setIsImportant(boolean important) {
+        isImportant = important;
+    }
+
     public String getTypeId() {
         return typeId;
     }
@@ -111,6 +122,7 @@ public class Message implements Parcelable {
         dest.writeString(typeId);
         dest.writeString(created);
         dest.writeInt(isRead ? 1 : 0);
+        dest.writeInt(isImportant ? 1 : 0);
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.AllInOneResult;
+import com.kzingsdk.entity.gameplatform.GamePlatformType;
 import com.kzingsdk.util.Constant;
 import com.kzingsdk.util.SharePrefUtil;
 
@@ -15,6 +16,11 @@ import io.reactivex.Observable;
 public class ResumeAllInOneAPI extends CoreRequest {
 
     private String version = "";
+
+    private Boolean showAll = false;
+    private Boolean platformOnly = false;
+    private GamePlatformType gpType = null;
+    private Boolean showChild = false;
 
     ResumeAllInOneAPI() {
         super();
@@ -30,6 +36,11 @@ public class ResumeAllInOneAPI extends CoreRequest {
         JSONObject jsonData = super.generateParamsJson();
         try {
             jsonData.put("version", version);
+            jsonData.put("useEpGame", true);
+            jsonData.put("showall", showAll ? 1 : 0);
+            jsonData.put("platformonly", platformOnly ? 1 : 0);
+            jsonData.put("gptype", gpType == null ? 0 : gpType.getId());
+            jsonData.put("showchild", showChild ? 1 : 0);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -79,6 +90,30 @@ public class ResumeAllInOneAPI extends CoreRequest {
 
     public ResumeAllInOneAPI setVersion(String version) {
         this.version = version;
+        return this;
+    }
+
+    public ResumeAllInOneAPI setShowAll(Boolean showAll) {
+        this.showAll = showAll;
+        return this;
+    }
+
+    public ResumeAllInOneAPI setPlatformOnly(Boolean platformOnly) {
+        this.platformOnly = platformOnly;
+        return this;
+    }
+
+
+    /**
+     * @param gpType Pass null to get all
+     */
+    public ResumeAllInOneAPI setGpType(GamePlatformType gpType) {
+        this.gpType = gpType;
+        return this;
+    }
+
+    public ResumeAllInOneAPI setShowChild(Boolean showChild) {
+        this.showChild = showChild;
         return this;
     }
 }

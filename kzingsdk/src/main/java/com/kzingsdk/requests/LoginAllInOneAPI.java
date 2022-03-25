@@ -5,6 +5,7 @@ import android.content.Context;
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.AllInOneResult;
 import com.kzingsdk.entity.SocialRegisterPlatform;
+import com.kzingsdk.entity.gameplatform.GamePlatformType;
 import com.kzingsdk.util.Constant;
 import com.kzingsdk.util.SharePrefUtil;
 
@@ -31,6 +32,11 @@ public class LoginAllInOneAPI extends CoreRequest {
     private String captchaValidate = "";
     private String verifyCode = "";
     private String uuid = "";
+
+    private Boolean showAll = false;
+    private Boolean platformOnly = false;
+    private GamePlatformType gpType = null;
+    private Boolean showChild = false;
 
     @Override
     protected String getAction() {
@@ -78,6 +84,11 @@ public class LoginAllInOneAPI extends CoreRequest {
             if (uuid != null) {
                 jsonData.put("uuid", uuid);
             }
+            jsonData.put("useEpGame", true);
+            jsonData.put("showall", showAll ? 1 : 0);
+            jsonData.put("platformonly", platformOnly ? 1 : 0);
+            jsonData.put("gptype", gpType == null ? 0 : gpType.getId());
+            jsonData.put("showchild", showChild ? 1 : 0);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -167,6 +178,29 @@ public class LoginAllInOneAPI extends CoreRequest {
 
     public LoginAllInOneAPI setUuid(String uuid) {
         this.uuid = uuid;
+        return this;
+    }
+    public LoginAllInOneAPI setShowAll(Boolean showAll) {
+        this.showAll = showAll;
+        return this;
+    }
+
+    public LoginAllInOneAPI setPlatformOnly(Boolean platformOnly) {
+        this.platformOnly = platformOnly;
+        return this;
+    }
+
+
+    /**
+     * @param gpType Pass null to get all
+     */
+    public LoginAllInOneAPI setGpType(GamePlatformType gpType) {
+        this.gpType = gpType;
+        return this;
+    }
+
+    public LoginAllInOneAPI setShowChild(Boolean showChild) {
+        this.showChild = showChild;
         return this;
     }
 

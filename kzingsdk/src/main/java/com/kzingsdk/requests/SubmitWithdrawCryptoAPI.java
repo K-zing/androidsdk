@@ -28,6 +28,9 @@ public class SubmitWithdrawCryptoAPI extends CoreRequest implements RequireCurre
     private String address;
     private String network;
     private String currency;
+    private String smsPhoneNo;
+    private String smsPhoneNoCountry;
+    private String smscode;
 
     @Override
     protected JSONObject generateParamsJson() {
@@ -47,6 +50,15 @@ public class SubmitWithdrawCryptoAPI extends CoreRequest implements RequireCurre
                 jsonData.put("address", address);
             if (network != null)
                 jsonData.put("network", network);
+            if (smsPhoneNo != null) {
+                jsonData.put("smsPhoneNo", smsPhoneNo);
+            }
+            if (smsPhoneNoCountry != null) {
+                jsonData.put("smsPhoneNoCountry", smsPhoneNoCountry);
+            }
+            if (smscode != null) {
+                jsonData.put("smscode", smscode);
+            }
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -121,6 +133,21 @@ public class SubmitWithdrawCryptoAPI extends CoreRequest implements RequireCurre
 
     public SubmitWithdrawCryptoAPI setCurrency(String currency) {
         this.currency = currency;
+        return this;
+    }
+
+    public SubmitWithdrawCryptoAPI setSmsPhoneNo(String smsPhoneNo) {
+        this.smsPhoneNo = smsPhoneNo;
+        return this;
+    }
+
+    public SubmitWithdrawCryptoAPI setSmsPhoneNoCountry(String smsPhoneNoCountry) {
+        this.smsPhoneNoCountry = smsPhoneNoCountry;
+        return this;
+    }
+
+    public SubmitWithdrawCryptoAPI setSmscode(String smscode) {
+        this.smscode = smscode;
         return this;
     }
 }
