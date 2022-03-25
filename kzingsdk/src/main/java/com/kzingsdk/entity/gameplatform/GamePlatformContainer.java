@@ -26,7 +26,8 @@ public class GamePlatformContainer {
         JSONArray gamePlatformArray = rootObject.optJSONArray("gp");
         if (gamePlatformArray != null) {
             for (int i = 0; i < gamePlatformArray.length(); i++) {
-                item.gamePlatformList.add(GamePlatform.newInstanceFromEp(gamePlatformArray.optJSONObject(i)));
+                GamePlatform gp = GamePlatform.newInstanceFromEp(gamePlatformArray.optJSONObject(i), type);
+                item.gamePlatformList.add(gp);
             }
         }
         return item;

@@ -6,7 +6,6 @@ import android.content.Context;
 import com.kzingsdk.entity.LangCode;
 import com.kzingsdk.entity.gameplatform.GamePlatformContainer;
 import com.kzingsdk.entity.gameplatform.GamePlatformCreator;
-import com.kzingsdk.requests.GetGameListAPI;
 import com.kzingsdk.requests.KzingAPI;
 import com.kzingsdk.util.Constant;
 import com.kzingsdk.util.SharePrefUtil;
@@ -290,12 +289,6 @@ public final class KzingSDK {
         SharePrefUtil.putString(context, Constant.Pref.CCTOKEN, ccToken);
     }
 
-    /**
-     * Try do load gameplatforms from cache, only work when {@link KzingAPI#getGameList()} is called before. Return <b>null</b>if not exist.
-     *
-     * @param context      Will do nothing if context is null.
-     * @param needSubGames Equal to {@link GetGameListAPI#setRequestSubGame(boolean)}.
-     */
     public ArrayList<GamePlatformContainer> loadGamePlatformFromCache(Context context, boolean needSubGames) {
         if (context == null) {
             return null;

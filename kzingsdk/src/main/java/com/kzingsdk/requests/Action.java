@@ -103,10 +103,7 @@ final class Action {
     static final String getAutoRankInfo = "pbbXLy0";
     static final String getRankTierList = "jndhjfn";
 
-    static final String getGamePlatformList = "35978f7";
-    static final String getSubGameList = "80064d4";
     static final String gamePlatformOrderByPlayerBet = "im0fa5t";
-
 
     static final String getRecommendGames = "8asb71c";
     static final String getGamePlatformAccountList = "fosjp6u";

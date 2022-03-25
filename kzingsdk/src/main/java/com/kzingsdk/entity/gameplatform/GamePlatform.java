@@ -60,6 +60,7 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
     private EnumSet<PlayStatus> playStatus = EnumSet.noneOf(PlayStatus.class);
     private int statusCode = NOT_MAINTAIN;
     private int clientStatusCode = NOT_MAINTAIN;
+    private int conversion = 0;
     private boolean isDummy = false;
     private ArrayList<GamePlatformChild> childArrayList = new ArrayList<>();
     private ArrayList<GamePlatformCategory> categoryArrayList = new ArrayList<>();
@@ -75,6 +76,7 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
         gp.gpename = gpename;
         gp.url = url;
         gp.image = image;
+        gp.conversion = conversion;
         gp.gamePlatformType = gamePlatformType;
         gp.playStatus = playStatus;
         gp.statusCode = statusCode;
@@ -130,34 +132,42 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
         return item;
     }
 
-    public static GamePlatform newInstanceFromEp(JSONObject rootObject) {
+    public static GamePlatform newInstanceFromEp(JSONObject rootObject, GamePlatformType type) {
         GamePlatform item = new GamePlatform();
-        item.setUrl(rootObject.optString("app_url"));
         item.setGpAccountid(rootObject.optString("gpaccountid"));
         item.setGpid(rootObject.optString("gpid"));
-        item.setGpname(rootObject.optString("gpnameCN"));
-        item.setGpename(rootObject.optString("gpnameEN"));
+        item.setGpname(rootObject.optString("gpname"));
         item.setMaintainStart(rootObject.optLong("maintain_start", 0L));
         item.setMaintainEnd(rootObject.optLong("maintain_end", 0L));
         item.setStatusCode(rootObject.optInt("status", NOT_MAINTAIN));
         item.setClientStatusCode(rootObject.optInt("client_status", NOT_MAINTAIN));
         item.setFrameIcons(rootObject.optString("frame_icons"));
-        item.setGamePlatformType(GamePlatformType.valueOfTypeId(rootObject.optInt("gptype")));
-        int statusFlag = rootObject.optInt("enable_an_app", 0) << 1 | rootObject.optInt("enable_an_h5", 0);
-        item.setPlayStatus(PlayStatus.getPlayStatus(statusFlag));
-        item.setImage(rootObject.optString("image_an"));
+        item.setGamePlatformType(type);
+        item.setImage(rootObject.optString("logo"));
+        item.setConversion(rootObject.optInt("conversion"));
         item.setGameOrientation(GameOrientation.values()[rootObject.optInt("orientation", 0)]);
         Integer defaultCurrency = rootObject.optInt("displayorder");
         item.currencyDisplayOrderMap.put("default", defaultCurrency);
 
+        ArrayList<GamePlatformCategory> categoryList = new ArrayList<>();
+        JSONArray categorysArray = rootObject.optJSONArray("categories");
+        if (categorysArray != null) {
+            for (int j = 0; j < categorysArray.length(); j++) {
+                categoryList.add(GamePlatformCategory.newInstance(categorysArray.optJSONObject(j), item.getGpid()));
+            }
+        }
+        item.setCategoryArrayList(categoryList);
+
         JSONArray childGroupsArray = rootObject.optJSONArray("childgroups");
         if (childGroupsArray != null) {
             for (int i = 0; i < childGroupsArray.length(); i++) {
-                JSONObject childGroup  =childGroupsArray.optJSONObject(i);
+                JSONObject childGroup = childGroupsArray.optJSONObject(i);
                 JSONArray childArray = childGroup.optJSONArray("childs");
+                String childgroupid = childGroup.optString("childgroupid");
+                String childgroupname = childGroup.optString("childgroupname");
                 if (childArray != null) {
                     for (int j = 0; j < childArray.length(); j++) {
-                        item.childArrayList.add(GamePlatformChild.newInstance(childArray.optJSONObject(j),item));
+                        item.childArrayList.add(GamePlatformChild.newInstance(childArray.optJSONObject(j), item, childgroupid, childgroupname));
                     }
                 }
                 item.groupArrayList.add(GamePlatformGroup.newInstance(childGroup, item));
@@ -274,6 +284,15 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int getConversion() {
+        return conversion;
+    }
+
+    public GamePlatform setConversion(int conversion) {
+        this.conversion = conversion;
+        return this;
     }
 
     public String getFrameIcons() {

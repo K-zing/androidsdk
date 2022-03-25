@@ -10,6 +10,7 @@ public class GamePlatformChild implements Playable {
     private String gpChildId = "";
     private GamePlatform gamePlatform;
     private String childGroupId = "";
+    private String childGroupName = "";
     private String childName = "";
     private String childEnName = "";
     private String urlSuffix = "";
@@ -24,6 +25,7 @@ public class GamePlatformChild implements Playable {
         gpChild.gpChildId = gpChildId;
         gpChild.gamePlatform = gamePlatform.clone();
         gpChild.childGroupId = childGroupId;
+        gpChild.childGroupName = childGroupName;
         gpChild.childName = childName;
         gpChild.childEnName = childEnName;
         gpChild.urlSuffix = urlSuffix;
@@ -38,23 +40,27 @@ public class GamePlatformChild implements Playable {
     public GamePlatformChild() {
 
     }
-
-    ;
-
     public static GamePlatformChild newInstance(JSONObject rootObject, GamePlatform gamePlatform) {
+        return newInstance(rootObject, gamePlatform, rootObject.optString("childgroupid"), "");
+    }
+
+    public static GamePlatformChild newInstance(JSONObject rootObject, GamePlatform gamePlatform, String childGroupId , String childGroupName) {
         GamePlatformChild item = new GamePlatformChild();
-        item.setGpChildId(rootObject.optString("gpchildid"));
         item.setGamePlatform(gamePlatform);
-        item.setChildGroupId(rootObject.optString("childgroupid"));
+        item.setGpChildId(rootObject.optString("gpchildid"));
         item.setChildName(rootObject.optString("childname"));
-        item.setChildEnName(rootObject.optString("childnameen"));
+        item.setDisplayorder(rootObject.optInt("displayorder"));
         item.urlSuffix = rootObject.optString("appurl_suffix");
         if (item.urlSuffix.equalsIgnoreCase("")){
             item.urlSuffix = rootObject.optString("gamecode");
         }
-        item.setDisplayorder(rootObject.optInt("displayorder"));
-        item.setImage(rootObject.optString("image"));
         item.setRtpPercentage(rootObject.optString("rtppercentage"));
+
+        item.setChildGroupId(childGroupId);
+        item.setChildGroupName(childGroupName);
+
+        item.setChildEnName(rootObject.optString("childnameen"));
+        item.setImage(rootObject.optString("image"));
         item.setEnabled(rootObject.optString("enable_an").equals("1"));
         JSONArray categorysArray = rootObject.optJSONArray("categories");
         if (categorysArray != null) {
@@ -151,6 +157,15 @@ public class GamePlatformChild implements Playable {
 
     public void setChildGroupId(String childGroupId) {
         this.childGroupId = childGroupId;
+    }
+
+    public String getChildGroupName() {
+        return childGroupName;
+    }
+
+    public GamePlatformChild setChildGroupName(String childGroupName) {
+        this.childGroupName = childGroupName;
+        return this;
     }
 
     public String getChildEnName() {

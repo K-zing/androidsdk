@@ -3,8 +3,6 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.HistoryListSummary;
-import com.kzingsdk.entity.gameplatform.GamePlatform;
 import com.kzingsdk.entity.gameplatform.GamePlatformContainer;
 import com.kzingsdk.entity.gameplatform.GamePlatformType;
 

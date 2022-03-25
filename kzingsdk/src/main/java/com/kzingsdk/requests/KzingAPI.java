@@ -167,16 +167,6 @@ public final class KzingAPI {
         return new CancelWithdrawalAPI();
     }
 
-
-    /**
-     * Return all GamePlatform without any sub games by default.
-     * <p>
-     * {@link GetGameListAPI#setRequestSubGame(boolean)} to import sub games to the GamePlatform of {@link GamePlatformType#GAME}.
-     */
-    public static GetGameListAPI getGameList() {
-        return new GetGameListAPI();
-    }
-
     public static GetGameAccountListAPI getGameAccountList() {
         return new GetGameAccountListAPI();
     }
@@ -364,10 +354,6 @@ public final class KzingAPI {
 
     public static EnterGameAPI enterGame() {
         return new EnterGameAPI();
-    }
-
-    static GetSubGameListAPI getSubGameList() {
-        return new GetSubGameListAPI();
     }
 
     public static GetHotGamesAPI getHotGames() {

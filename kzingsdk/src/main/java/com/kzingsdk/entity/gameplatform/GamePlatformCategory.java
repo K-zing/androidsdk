@@ -17,9 +17,13 @@ public class GamePlatformCategory {
     }
 
     public static GamePlatformCategory newInstance(JSONObject rootObject) {
+        return newInstance(rootObject, rootObject.optString("gpid"));
+    }
+
+    public static GamePlatformCategory newInstance(JSONObject rootObject, String gpid) {
         GamePlatformCategory item = new GamePlatformCategory();
         item.setChildCategoryId(rootObject.optString("childcategoryid"));
-        item.setGpid(rootObject.optString("gpid"));
+        item.setGpid(gpid);
         item.setChildGroupId(rootObject.optString("childgroupid"));
         item.setCategoryName(rootObject.optString("categoryname"));
         item.setCategoryEnName(rootObject.optString("categorynameen"));

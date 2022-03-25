@@ -95,9 +95,6 @@ public class GetBetHistoryListAPI extends CoreRequest implements RequireCurrency
         void onSuccess(HistoryListSummary historyListSummary);
     }
 
-    /**
-     * @param gpId From {@link GamePlatform} returned by {@link GetGameListAPI}. {@link GetBetHistoryListAPI#ALL} to request for all gameplatform.
-     */
     public GetBetHistoryListAPI setParamGpId(String gpId) {
         if (gpId.equals(ALL)) {
             this.gpid = "10000";

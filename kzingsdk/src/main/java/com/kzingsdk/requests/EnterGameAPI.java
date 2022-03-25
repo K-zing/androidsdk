@@ -86,16 +86,10 @@ public class EnterGameAPI extends CoreRequest {
         void onSuccess(EnterGameResult enterGameResult);
     }
 
-    /**
-     * GamePlatform From {@link com.kzingsdk.entity.gameplatform.GamePlatform} OR {@link GamePlatformChild} returned by {@link GetGameListAPI}
-     *
-     * @param playable From {@link Playable} returned by {@link GetGameListAPI}
-     */
     public EnterGameAPI setPlayable(Playable playable) {
         this.playable = playable;
         return this;
     }
-
 
     public EnterGameAPI setIsDemo(boolean isDemo) {
         this.isDemo = isDemo;
