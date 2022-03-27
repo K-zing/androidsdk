@@ -34,10 +34,7 @@ public class GamePlatformGroup {
         if (childsArray != null) {
             for (int i = 0; i < childsArray.length(); i++) {
                 GamePlatformChild child = GamePlatformChild.newInstance(childsArray.optJSONObject(i), gamePlatform);
-                if (child.isEnabled()) {
-//                    checkCatagorySet.addAll(child.getCategorysSet());
-                    item.childArrayList.add(child);
-                }
+                item.childArrayList.add(child);
             }
         }
         return item;

@@ -114,9 +114,7 @@ public final class GamePlatformCreator {
                             for (int b = 0; b < childsArrayObject.length(); b++) {
                                 GamePlatformChild gpChild;
                                 gpChild = GamePlatformChild.newInstance(childsArrayObject.optJSONObject(b), gpPlatform);
-                                if (gpChild.isEnabled()) {
-                                    childList.add(gpChild);
-                                }
+                                childList.add(gpChild);
                             }
                             gpPlatform.setChildArrayList(childList);
                         } else if (childGroupArray.length() > 1) {
@@ -130,9 +128,7 @@ public final class GamePlatformCreator {
                                     if (group.getChildGroupId().equals(category.getChildGroupId())) {
                                         HashSet<Integer> checkGroupCatagorySet = new HashSet<>();
                                         for (GamePlatformChild child : group.getChildArrayList()) {
-                                            if (child.isEnabled()) {
-                                                checkGroupCatagorySet.addAll(child.getCategorysSet());
-                                            }
+                                            checkGroupCatagorySet.addAll(child.getCategorysSet());
                                         }
                                         if (checkGroupCatagorySet.contains(Integer.parseInt(category.getChildCategoryId()))) {
                                             categoryOfGroupArrayList.add(category);
