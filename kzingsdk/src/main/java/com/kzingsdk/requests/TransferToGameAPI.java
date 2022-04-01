@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import io.reactivex.Observable;
 
@@ -16,7 +17,7 @@ public class TransferToGameAPI extends CoreRequest {
 
     public static final String TRANSFER_BACK = "10000";
     private String gpAccountId;
-    private Double transferAmount;
+    private BigDecimal transferAmount;
     private Boolean isTransferAll = false;
 
 
@@ -93,8 +94,7 @@ public class TransferToGameAPI extends CoreRequest {
      */
     public TransferToGameAPI setParamTransferAmount(Double transferAmount) throws NumberFormatException {
         BigDecimal a = new BigDecimal(transferAmount);
-        BigDecimal roundOff = a.setScale(2, BigDecimal.ROUND_DOWN);
-        this.transferAmount = roundOff.doubleValue();
+        this.transferAmount = a.setScale(2, RoundingMode.CEILING);
         return this;
     }
 
