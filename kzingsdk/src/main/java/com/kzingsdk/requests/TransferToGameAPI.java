@@ -93,8 +93,7 @@ public class TransferToGameAPI extends CoreRequest {
      * @param transferAmount Optional. Default transfer all balance in player's account to target game platform. Auto round down to two decimals.
      */
     public TransferToGameAPI setParamTransferAmount(Double transferAmount) throws NumberFormatException {
-        BigDecimal a = new BigDecimal(transferAmount);
-        this.transferAmount = a.setScale(2, RoundingMode.CEILING);
+        this.transferAmount = new BigDecimal(transferAmount);
         return this;
     }
 
