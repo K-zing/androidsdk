@@ -21,13 +21,17 @@ public class GetMessageListResult {
         GetMessageListResult getMessageListResult = new GetMessageListResult();
         getMessageListResult.count = rootObject.optInt("count");
         getMessageListResult.unreadCount = rootObject.optInt("unreadcount");
-        JSONArray importantMsg = rootObject.optJSONArray("important_msg");
-        for (int i = 0; i < importantMsg.length(); i++) {
-            getMessageListResult.importantMessageList.add(Message.newInstance(importantMsg.optJSONObject(i)));
-        }
         JSONArray response = rootObject.optJSONArray("response");
-        for (int i = 0; i < response.length(); i++) {
-            getMessageListResult.messageList.add(Message.newInstance(response.optJSONObject(i)));
+        if (response != null) {
+            for (int i = 0; i < response.length(); i++) {
+                getMessageListResult.messageList.add(Message.newInstance(response.optJSONObject(i)));
+            }
+        }
+        JSONArray importantMsg = rootObject.optJSONArray("important_msg");
+        if (importantMsg != null) {
+            for (int i = 0; i < importantMsg.length(); i++) {
+                getMessageListResult.importantMessageList.add(Message.newInstance(importantMsg.optJSONObject(i)));
+            }
         }
         return getMessageListResult;
     }

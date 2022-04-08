@@ -54,6 +54,7 @@ public class ClientInstantInfo implements Parcelable {
     private String pageKeyword;
     private String appFriendReferralDomain;
     private String depositAnnouncement;
+    private String enterDepositPopup;
     private CaptchaApiId captchaApiId = new CaptchaApiId();
     private ArrayList<String> memberPanAgentCode = new ArrayList<>();
     private ArrayList<String> memberPanPlayerGroup = new ArrayList<>();
@@ -116,6 +117,7 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setPageKeyword(rootObject.optString("pageKeyword"));
         clientInfo.setAppFriendReferralDomain(rootObject.optString("appFriendReferralDomain"));
         clientInfo.setDepositAnnouncement(rootObject.optString("depositAnnouncement"));
+        clientInfo.setEnterDepositPopup(rootObject.optString("enterdepositpopup"));
 
         JSONObject captchaApiIdJSONObject = rootObject.optJSONObject("captchaApiId");
         if (captchaApiIdJSONObject != null)
@@ -263,6 +265,7 @@ public class ClientInstantInfo implements Parcelable {
         pageKeyword = in.readString();
         appFriendReferralDomain = in.readString();
         depositAnnouncement = in.readString();
+        enterDepositPopup = in.readString();
         Object[] objectArray = in.readArray(ClientInstantInfo.class.getClassLoader());
         int i = 0;
         captchaApiId = (CaptchaApiId) objectArray[i++];
@@ -322,6 +325,7 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeString(pageKeyword);
         dest.writeString(appFriendReferralDomain);
         dest.writeString(depositAnnouncement);
+        dest.writeString(enterDepositPopup);
         dest.writeArray(new Object[]{
                 captchaApiId,
                 memberPanAgentCode,
@@ -667,6 +671,15 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setDepositAnnouncement(String depositAnnouncement) {
         this.depositAnnouncement = depositAnnouncement;
+    }
+
+    public String getEnterDepositPopup() {
+        return enterDepositPopup;
+    }
+
+    public ClientInstantInfo setEnterDepositPopup(String enterDepositPopup) {
+        this.enterDepositPopup = enterDepositPopup;
+        return this;
     }
 
     public ArrayList<String> getMemberPanAgentCode() {
