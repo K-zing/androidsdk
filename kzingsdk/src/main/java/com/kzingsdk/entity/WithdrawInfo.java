@@ -32,6 +32,7 @@ public class WithdrawInfo {
     private boolean playerWithdrawEnterOtp = false;
     private String mobileBetCheckDesc;
     private String withdrawBindNetwork;
+    private String limitWithdrawalCryptoAddress;
     private boolean withdrawBindUsdt;
     private boolean allowWithdrawCfg;
     private boolean allowCryptoWithdrawCfg;
@@ -60,12 +61,13 @@ public class WithdrawInfo {
         withdrawInfo.setDayMaxAmount(rootObject.optDouble("withdraw_day_max_amount"));
         withdrawInfo.setWithdrawRate(BigDecimalUtil.optBigDecimal(rootObject, "withdraw_rate", BigDecimal.ONE));
         withdrawInfo.setMobileBetCheckDesc(rootObject.optString("mobileBetCheckDesc"));
+        withdrawInfo.setWithdrawBindNetwork(rootObject.optString("withdrawbindnetwork"));
+        withdrawInfo.setLimitWithdrawalCryptoAddress(rootObject.optString("limitWithdrawalCryptoAddress"));
         withdrawInfo.setAllowPlayerDeleteCard(rootObject.optString("allowPlayerDeleteCard", "OFF").equalsIgnoreCase("ON"));
         withdrawInfo.setWaterCheckBeforeWithdraw(rootObject.optString("waterCheckBeforeWithdraw", "OFF").equalsIgnoreCase("ON"));
         withdrawInfo.setWaterCheckOnOff(rootObject.optBoolean("watercheckonoff", false));
         withdrawInfo.setBankCardCityProvince(rootObject.optString("bankCardCityProvince", "OFF").equalsIgnoreCase("ON"));
         withdrawInfo.setPlayerWithdrawEnterOtp(rootObject.optString("playerWithdrawEnterOtp", "OFF").equalsIgnoreCase("ON"));
-        withdrawInfo.setWithdrawBindNetwork(rootObject.optString("withdrawbindnetwork"));
         withdrawInfo.setWithdrawBindUsdt(rootObject.optBoolean("withdrawbindusdt", false));
         withdrawInfo.setAllowWithdrawCfg(rootObject.optBoolean("allow_withdraw_cfg", false));
         withdrawInfo.setAllowCryptoWithdrawCfg(rootObject.optBoolean("allow_crypto_withdraw_cfg", false));
@@ -284,6 +286,15 @@ public class WithdrawInfo {
 
     public void setWithdrawBindNetwork(String withdrawBindNetwork) {
         this.withdrawBindNetwork = withdrawBindNetwork;
+    }
+
+    public String getLimitWithdrawalCryptoAddress() {
+        return limitWithdrawalCryptoAddress;
+    }
+
+    public WithdrawInfo setLimitWithdrawalCryptoAddress(String limitWithdrawalCryptoAddress) {
+        this.limitWithdrawalCryptoAddress = limitWithdrawalCryptoAddress;
+        return this;
     }
 
     public boolean isWithdrawBindUsdt() {

@@ -77,6 +77,8 @@ final class Action {
     static final String changePwdbyWithdrawal = "G11IqzR";
     static final String forgotPwdVerifyUsername = "g04xuuI";
     static final String getSendRegCodeDuration = "6hGxOfq";
+    static final String getSpecRedPacketInfo = "NP55EVP";
+    static final String redeemSpecRedPacket = "30GDPFC";
 
     static final String getClientInfo = "5f7cd5b";
     static final String getClientInstantInfo = "g3zmkvo";

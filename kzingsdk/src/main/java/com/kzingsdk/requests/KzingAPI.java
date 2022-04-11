@@ -59,6 +59,14 @@ public final class KzingAPI {
         return new GetRedPocketInfoAPI();
     }
 
+    public static GetSpecRedPacketInfoAPI getSpecRedPacketInfo() {
+        return new GetSpecRedPacketInfoAPI();
+    }
+
+    public static RedeemSpecRedPacketAPI redeemSpecRedPacket() {
+        return new RedeemSpecRedPacketAPI();
+    }
+
     public static GetMemberReferralAPI getMemberReferral() {
         return new GetMemberReferralAPI();
     }
