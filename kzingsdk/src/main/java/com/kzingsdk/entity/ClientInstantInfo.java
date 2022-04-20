@@ -37,6 +37,7 @@ public class ClientInstantInfo implements Parcelable {
     private Boolean memberPanAgentCode2 = false;
     private Boolean playerEmailVerifiedWithdraw = false;
     private Boolean playerMobileVerifiedWithdraw = false;
+    private Boolean allowPhoneCountry = false;
     private String siteId;
     private String cryptoFixedExchangeRate;
     private String announcement;
@@ -99,6 +100,7 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setMemberPanAgentCode2(rootObject.optBoolean("memberPanAgentCode2", false));
         clientInfo.setPlayerEmailVerifiedWithdraw(rootObject.optBoolean("playerEmailVerifiedWithdraw", false));
         clientInfo.setPlayerMobileVerifiedWithdraw(rootObject.optBoolean("playerMobileVerifiedWithdraw", false));
+        clientInfo.setAllowPhoneCountry(rootObject.optBoolean("allowPhoneCountry", false));
         clientInfo.setCaptchaMode(rootObject.optString("captchaMode"));
         clientInfo.setSiteId(rootObject.optString("siteId"));
         clientInfo.setCryptoFixedExchangeRate(rootObject.optString("cryptoFixedExchangeRate"));
@@ -248,6 +250,7 @@ public class ClientInstantInfo implements Parcelable {
         memberPanAgentCode2 = in.readInt() == 1;
         playerEmailVerifiedWithdraw = in.readInt() == 1;
         playerMobileVerifiedWithdraw = in.readInt() == 1;
+        allowPhoneCountry = in.readInt() == 1;
         siteId = in.readString();
         cryptoFixedExchangeRate = in.readString();
         announcement = in.readString();
@@ -308,6 +311,7 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeInt(memberPanAgentCode2 ? 1 : 0);
         dest.writeInt(playerEmailVerifiedWithdraw ? 1 : 0);
         dest.writeInt(playerMobileVerifiedWithdraw ? 1 : 0);
+        dest.writeInt(allowPhoneCountry ? 1 : 0);
         dest.writeString(siteId);
         dest.writeString(cryptoFixedExchangeRate);
         dest.writeString(announcement);
@@ -535,6 +539,14 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setPlayerMobileVerifiedWithdraw(Boolean playerMobileVerifiedWithdraw) {
         this.playerMobileVerifiedWithdraw = playerMobileVerifiedWithdraw;
+    }
+
+    public Boolean getAllowPhoneCountry() {
+        return allowPhoneCountry;
+    }
+
+    public void setAllowPhoneCountry(Boolean allowPhoneCountry) {
+        this.allowPhoneCountry = allowPhoneCountry;
     }
 
     public String getSiteId() {

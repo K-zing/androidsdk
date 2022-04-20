@@ -14,6 +14,7 @@ public class IsAccountPhoneMatchAPI extends CoreRequest {
 
     private String loginName = null;
     private String phone = null;
+    private String playerPhoneCountry = null;
 
     IsAccountPhoneMatchAPI() {
         super();
@@ -41,6 +42,7 @@ public class IsAccountPhoneMatchAPI extends CoreRequest {
         try {
             jsonData.put("name", loginName);
             jsonData.put("phone", phone);
+            jsonData.put("playerPhoneCountry", playerPhoneCountry);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -82,4 +84,8 @@ public class IsAccountPhoneMatchAPI extends CoreRequest {
         return this;
     }
 
+    public IsAccountPhoneMatchAPI setPlayerPhoneCountry(String playerPhoneCountry) {
+        this.playerPhoneCountry = playerPhoneCountry;
+        return this;
+    }
 }

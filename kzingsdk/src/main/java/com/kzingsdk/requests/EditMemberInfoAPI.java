@@ -29,6 +29,7 @@ public class EditMemberInfoAPI extends CoreRequest {
     private String line = null;
     private String skype = null;
     private String fullAddress = null;
+    private String phoneCountry = null;
     private MemberInfo.Gender gender = null;
 
 
@@ -45,7 +46,7 @@ public class EditMemberInfoAPI extends CoreRequest {
     protected Observable<String> validateParams() {
         if (email == null && phone == null && qq == null && weixin == null && realname == null && birth == null && gender == null &&
                 whatsapp == null && telegram == null && userPreferLanguage == null && zalo == null &&
-                facebook == null && line == null && skype == null && fullAddress == null) {
+                facebook == null && line == null && skype == null && fullAddress == null && phoneCountry == null) {
             return Observable.just("You must at least edit one of the infos.");
         }
         return super.validateParams();
@@ -85,6 +86,8 @@ public class EditMemberInfoAPI extends CoreRequest {
                 jsonData.put("skype", skype);
             if (fullAddress != null)
                 jsonData.put("fulladdress", fullAddress);
+            if (phoneCountry != null)
+                jsonData.put("phonecountry", phoneCountry);
 
             return jsonData;
         } catch (JSONException ignored) {
@@ -194,7 +197,10 @@ public class EditMemberInfoAPI extends CoreRequest {
         return this;
     }
 
-
+    public EditMemberInfoAPI setPhoneCountry(String phoneCountry) {
+        this.phoneCountry = phoneCountry;
+        return this;
+    }
 }
 
 
