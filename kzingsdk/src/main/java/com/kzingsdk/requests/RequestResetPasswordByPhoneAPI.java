@@ -15,7 +15,9 @@ public class RequestResetPasswordByPhoneAPI extends CoreRequest {
 
     private String loginName = null;
     private String phone = null;
+    private String playerPhoneCountry = null;
     private boolean requestVoice = false;
+
 
     RequestResetPasswordByPhoneAPI() {
         super();
@@ -43,6 +45,7 @@ public class RequestResetPasswordByPhoneAPI extends CoreRequest {
         try {
             jsonData.put("name", loginName);
             jsonData.put("phone", phone);
+            jsonData.put("playerPhoneCountry", playerPhoneCountry);
             jsonData.put("requestVoice", requestVoice);
             return jsonData;
         } catch (JSONException ignored) {
@@ -85,11 +88,12 @@ public class RequestResetPasswordByPhoneAPI extends CoreRequest {
         return this;
     }
 
-    public boolean isRequestVoice() {
-        return requestVoice;
-    }
-
     public void setRequestVoice(boolean requestVoice) {
         this.requestVoice = requestVoice;
+    }
+
+    public RequestResetPasswordByPhoneAPI setPlayerPhoneCountry(String playerPhoneCountry) {
+        this.playerPhoneCountry = playerPhoneCountry;
+        return this;
     }
 }

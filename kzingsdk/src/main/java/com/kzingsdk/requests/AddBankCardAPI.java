@@ -28,6 +28,7 @@ public class AddBankCardAPI extends CoreRequest {
     private String address;
     private String addrA = "";
     private String addrB = "";
+    private String smsPhoneNoCountry = "";
 
     AddBankCardAPI() {
         super();
@@ -72,9 +73,13 @@ public class AddBankCardAPI extends CoreRequest {
             if (address != null) {
                 jsonData.put("address", address);
             }
+            if (smsPhoneNoCountry != null) {
+                jsonData.put("smsPhoneNoCountry", smsPhoneNoCountry);
+            }
             jsonData.put("needSMS", needSMS);
             jsonData.put("addrA", addrA);
             jsonData.put("addrB", addrB);
+
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -162,6 +167,11 @@ public class AddBankCardAPI extends CoreRequest {
 
     public AddBankCardAPI setAddress(String address) {
         this.address = address;
+        return this;
+    }
+
+    public AddBankCardAPI setSmsPhoneNoCountry(String smsPhoneNoCountry) {
+        this.smsPhoneNoCountry = smsPhoneNoCountry;
         return this;
     }
 
