@@ -3,9 +3,7 @@ package com.kzingsdk.entity;
 import android.content.Context;
 
 import com.kzingsdk.entity.gameplatform.GamePlatformContainer;
-import com.kzingsdk.entity.gameplatform.GamePlatformCreator;
 import com.kzingsdk.util.Constant;
-import com.kzingsdk.util.GzipUtil;
 import com.kzingsdk.util.SharePrefUtil;
 
 import org.json.JSONArray;
@@ -25,13 +23,20 @@ public class AllInOneResult {
 
     public static AllInOneResult newInstance(JSONObject jsonResponse, Context context) throws JSONException, IOException {
         AllInOneResult allInOneResult = new AllInOneResult();
-        allInOneResult.setAppUpdateInfo(AppUpdateInfo.newInstance(jsonResponse.optJSONObject("appVersion")));
-        allInOneResult.setClientInfo(ClientInfo.newInstance(jsonResponse.optJSONObject("siteInfo")));
+        JSONObject appVersionObject = jsonResponse.optJSONObject("appVersion");
+        if (appVersionObject != null) {
+            allInOneResult.setAppUpdateInfo(AppUpdateInfo.newInstance(appVersionObject));
+        }
+
+        JSONObject siteInfoObject = jsonResponse.optJSONObject("siteInfo");
+        if (siteInfoObject != null) {
+            allInOneResult.setClientInfo(ClientInfo.newInstance(siteInfoObject));
+        }
 
         JSONObject memberInfoObject = jsonResponse.optJSONObject("memberInfo");
         if (memberInfoObject != null) {
             allInOneResult.isLogined = true;
-            allInOneResult.setMemberInfo(MemberInfo.newInstance(jsonResponse.optJSONObject("memberInfo")));
+            allInOneResult.setMemberInfo(MemberInfo.newInstance(memberInfoObject));
             String vcToken = memberInfoObject.optString("vc", "");
             String ccToken = memberInfoObject.optString("cc", "");
             SharePrefUtil.putString(context, Constant.Pref.VCTOKEN, vcToken);
@@ -40,19 +45,23 @@ public class AllInOneResult {
 
         ArrayList<GamePlatformContainer> containers = new ArrayList<>();
         JSONObject gamePlatformJSON = jsonResponse.optJSONObject("epGamePlatformList");
-        JSONArray gamePlatformArray = gamePlatformJSON.optJSONArray("data");
-        if (gamePlatformArray != null) {
-            for (int i = 0; i < gamePlatformArray.length(); i++) {
-                containers.add(GamePlatformContainer.newInstanceFromEp(gamePlatformArray.optJSONObject(i)));
+        if (gamePlatformJSON != null) {
+            JSONArray gamePlatformArray = gamePlatformJSON.optJSONArray("data");
+            if (gamePlatformArray != null) {
+                for (int i = 0; i < gamePlatformArray.length(); i++) {
+                    containers.add(GamePlatformContainer.newInstanceFromEp(gamePlatformArray.optJSONObject(i)));
+                }
             }
         }
         allInOneResult.setGamePlatformContainerList(containers);
         ArrayList<ActivityItem> activityItemList = new ArrayList<>();
         JSONArray activityArray = jsonResponse.optJSONArray("activity");
-        for (int i = 0; i < activityArray.length(); i++) {
-            activityItemList.add(ActivityItem.newInstance(activityArray.optJSONObject(i)));
+        if (activityArray != null) {
+            for (int i = 0; i < activityArray.length(); i++) {
+                activityItemList.add(ActivityItem.newInstance(activityArray.optJSONObject(i)));
+            }
+            allInOneResult.setActivityItemList(activityItemList);
         }
-        allInOneResult.setActivityItemList(activityItemList);
         return allInOneResult;
     }
 

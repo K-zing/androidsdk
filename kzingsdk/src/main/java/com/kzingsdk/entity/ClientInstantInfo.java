@@ -792,4 +792,65 @@ public class ClientInstantInfo implements Parcelable {
         }
     };
 
+    @Override
+    public String toString() {
+        return "ClientInstantInfo{" +
+                "captchaMode='" + captchaMode + '\'' +
+                ", memberLoginNeedCaptcha=" + memberLoginNeedCaptcha +
+                ", addBankCardSmsVerify=" + addBankCardSmsVerify +
+                ", allowSendEmail=" + allowSendEmail +
+                ", allowSendSms=" + allowSendSms +
+                ", allowUploadDepositCredential=" + allowUploadDepositCredential +
+                ", allowUserEditProfile=" + allowUserEditProfile +
+                ", allowCryptoCurrencyWithdrawal=" + allowCryptoCurrencyWithdrawal +
+                ", allowDeleteCryptoAddress=" + allowDeleteCryptoAddress +
+                ", allowCancelWithdrawal=" + allowCancelWithdrawal +
+                ", checkEmailVerified=" + checkEmailVerified +
+                ", checkMobileVerified=" + checkMobileVerified +
+                ", isWdPasswordOn=" + isWdPasswordOn +
+                ", allowGameTransferPopup=" + allowGameTransferPopup +
+                ", initWdPwdNeedLoginPwd=" + initWdPwdNeedLoginPwd +
+                ", memberPanDupIP=" + memberPanDupIP +
+                ", memberPanDupUUID=" + memberPanDupUUID +
+                ", memberPanVerify=" + memberPanVerify +
+                ", hasFriendPromo=" + hasFriendPromo +
+                ", playerSelfRedeemRakeback=" + playerSelfRedeemRakeback +
+                ", showImportantPopup=" + showImportantPopup +
+                ", memberPanUsername2=" + memberPanUsername2 +
+                ", memberPanPlayerGroup2=" + memberPanPlayerGroup2 +
+                ", memberPanAgentCode2=" + memberPanAgentCode2 +
+                ", playerEmailVerifiedWithdraw=" + playerEmailVerifiedWithdraw +
+                ", playerMobileVerifiedWithdraw=" + playerMobileVerifiedWithdraw +
+                ", allowPhoneCountry=" + allowPhoneCountry +
+                ", siteId='" + siteId + '\'' +
+                ", cryptoFixedExchangeRate='" + cryptoFixedExchangeRate + '\'' +
+                ", announcement='" + announcement + '\'' +
+                ", sitenameApp='" + sitenameApp + '\'' +
+                ", sitename='" + sitename + '\'' +
+                ", supportUrl='" + supportUrl + '\'' +
+                ", appDomain='" + appDomain + '\'' +
+                ", h5Domain='" + h5Domain + '\'' +
+                ", androidAppDownloadLink='" + androidAppDownloadLink + '\'' +
+                ", iosAppDownloadLink='" + iosAppDownloadLink + '\'' +
+                ", resourceDomain='" + resourceDomain + '\'' +
+                ", depositPageFooter='" + depositPageFooter + '\'' +
+                ", pageDescription='" + pageDescription + '\'' +
+                ", pageFooter='" + pageFooter + '\'' +
+                ", pageKeyword='" + pageKeyword + '\'' +
+                ", appFriendReferralDomain='" + appFriendReferralDomain + '\'' +
+                ", depositAnnouncement='" + depositAnnouncement + '\'' +
+                ", enterDepositPopup='" + enterDepositPopup + '\'' +
+                ", captchaApiId=" + captchaApiId +
+                ", memberPanAgentCode=" + memberPanAgentCode +
+                ", memberPanPlayerGroup=" + memberPanPlayerGroup +
+                ", memberPanUsername=" + memberPanUsername +
+                ", bannerCountdown=" + bannerCountdown +
+                ", bannerFirstLaunch=" + bannerFirstLaunch +
+                ", marqueeAnnouncementList=" + marqueeAnnouncementList +
+                ", feedbackContactInfo=" + feedbackContactInfo +
+                ", partnershipContactInfo=" + partnershipContactInfo +
+                ", socialMediaContactInfo=" + socialMediaContactInfo +
+                ", websiteConfigMap=" + websiteConfigMap +
+                '}';
+    }
 }

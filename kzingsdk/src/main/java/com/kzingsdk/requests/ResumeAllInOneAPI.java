@@ -21,6 +21,10 @@ public class ResumeAllInOneAPI extends CoreRequest {
     private Boolean platformOnly = false;
     private GamePlatformType gpType = null;
     private Boolean showChild = false;
+    private Boolean skipSiteInfo = false;
+    private Boolean skipGame = false;
+    private Boolean skipActivity = false;
+    private Boolean skipCheckVersion = false;
 
     ResumeAllInOneAPI() {
         super();
@@ -41,6 +45,10 @@ public class ResumeAllInOneAPI extends CoreRequest {
             jsonData.put("platformonly", platformOnly ? 1 : 0);
             jsonData.put("gptype", gpType == null ? 0 : gpType.getId());
             jsonData.put("showchild", showChild ? 1 : 0);
+            jsonData.put("skipSiteInfo", skipSiteInfo);
+            jsonData.put("skipGame", skipGame);
+            jsonData.put("skipActivity", skipActivity);
+            jsonData.put("skipCheckVersion", skipCheckVersion);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -116,5 +124,27 @@ public class ResumeAllInOneAPI extends CoreRequest {
         this.showChild = showChild;
         return this;
     }
+
+    public ResumeAllInOneAPI setSkipSiteInfo(Boolean skipSiteInfo) {
+        this.skipSiteInfo = skipSiteInfo;
+        return this;
+    }
+
+    public ResumeAllInOneAPI setSkipGame(Boolean skipGame) {
+        this.skipGame = skipGame;
+        return this;
+    }
+
+    public ResumeAllInOneAPI setSkipActivity(Boolean skipActivity) {
+        this.skipActivity = skipActivity;
+        return this;
+    }
+
+    public ResumeAllInOneAPI setSkipCheckVersion(Boolean skipCheckVersion) {
+        this.skipCheckVersion = skipCheckVersion;
+        return this;
+    }
 }
+
+
 
