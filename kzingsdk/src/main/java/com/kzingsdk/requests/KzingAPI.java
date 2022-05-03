@@ -119,6 +119,10 @@ public final class KzingAPI {
         return new LoginAPI();
     }
 
+    public static LoginWebApiAPI loginWebApi() {
+        return new LoginWebApiAPI();
+    }
+
     public static LoginAllInOneAPI loginAllInOne() {
         return new LoginAllInOneAPI();
     }

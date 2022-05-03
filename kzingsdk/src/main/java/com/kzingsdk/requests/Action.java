@@ -5,6 +5,7 @@ final class Action {
     static final String getBasicEncryptKey = "4cbe75e";
     static final String getEncryptKey = "c6ace99";
     static final String login = "988217c";
+    static final String loginWebApi = "988217d";
     static final String loginAllInOne = "917c882";
     static final String resumeAllInOne = "7c89163";
     static final String mobileLogin = "c9z7c4m";

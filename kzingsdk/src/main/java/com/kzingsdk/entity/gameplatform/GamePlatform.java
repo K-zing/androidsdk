@@ -62,6 +62,7 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
     private int clientStatusCode = NOT_MAINTAIN;
     private int conversion = 0;
     private boolean isDummy = false;
+    private boolean hasChild = false;
     private ArrayList<GamePlatformChild> childArrayList = new ArrayList<>();
     private ArrayList<GamePlatformCategory> categoryArrayList = new ArrayList<>();
     private ArrayList<GamePlatformGroup> groupArrayList = new ArrayList<>();
@@ -146,6 +147,7 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
         item.setImage(rootObject.optString("logo"));
         item.setConversion(rootObject.optInt("conversion"));
         item.setGameOrientation(GameOrientation.values()[rootObject.optInt("orientation", 0)]);
+        item.setHasChild(rootObject.optInt("haschild") == 1);
         Integer defaultCurrency = rootObject.optInt("displayorder");
         item.currencyDisplayOrderMap.put("default", defaultCurrency);
 
@@ -378,6 +380,15 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
 
     public void setGameOrientation(GameOrientation gameOrientation) {
         this.gameOrientation = gameOrientation;
+    }
+
+    public boolean isHasChild() {
+        return hasChild;
+    }
+
+    public GamePlatform setHasChild(boolean hasChild) {
+        this.hasChild = hasChild;
+        return this;
     }
 
     @Override
