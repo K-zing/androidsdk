@@ -60,7 +60,7 @@ public class LoginWebApiAPI extends CoreRequest {
             SharePrefUtil.putString(context, Constant.Pref.VCTOKEN, vcToken);
             SharePrefUtil.putString(context, Constant.Pref.CCTOKEN, ccToken);
             setLoginTokens(vcToken, ccToken);
-            return MemberInfo.newInstance(jsonResponse);
+            return MemberInfo.newInstanceFromWebapi(jsonResponse);
         })
                 .doOnNext(response -> {
                     new GetSiteDomainAPI()

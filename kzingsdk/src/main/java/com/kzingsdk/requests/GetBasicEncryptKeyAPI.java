@@ -39,12 +39,12 @@ public class GetBasicEncryptKeyAPI extends CoreRequest {
         }, defaultOnErrorConsumer);
     }
 
-    public GetBasicEncryptKeyAPI addGetBasicEncryptKeyCallBack(GetBasicEncryptKeyCallBack getBasicEncryptKeyCallBack){
+    public GetBasicEncryptKeyAPI addGetBasicEncryptKeyCallBack(GetBasicEncryptKeyCallBack getBasicEncryptKeyCallBack) {
         kzingCallBackList.add(getBasicEncryptKeyCallBack);
         return this;
     }
 
-    public interface GetBasicEncryptKeyCallBack extends KzingCallBack{
+    public interface GetBasicEncryptKeyCallBack extends KzingCallBack {
         void onSuccess(String basicRsaKey);
     }
 

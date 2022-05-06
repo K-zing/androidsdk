@@ -1,6 +1,7 @@
 package com.kzingsdk.core;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.kzingsdk.BuildConfig;
@@ -16,7 +17,6 @@ import com.kzingsdk.util.SharePrefUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.reactivestreams.Publisher;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,19 +27,17 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
+import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -73,18 +71,26 @@ public abstract class CoreRequest {
     private final int MAX_DOMAIN_USE = 200;
     private static int domainUsedCount = 0;
     private static String lastUsedIP = "";
-    private final String defaultIP = "https://tvwkkq8k9e7grjbw49pk.jumzxxtu3j.com";
-    private final String defaultBetterIP = "https://fsr5vqdhsspsrtz6fl93.jumzxxtu3j.com/";
+    private static String nextIP = "";
     private static HashSet<String> failedIP = null;
     private static HashSet<String> dynamicDomainSet = new HashSet<>();
 
     private final ArrayList<String> PORT_LIST = new ArrayList<String>() {{
         add("9496");
         add("9587");
+        add("9999");
+        add("9487");
+//        add("9119");
+//        add("9190");
+//        add("9250");
+//        add("9009");
+//        add("8888");
+//        add("8998");
         add("");
     }};
 
     private final HashSet<String> API_URL_SET = new HashSet<String>() {{
+        String defaultIP = "https://tvwkkq8k9e7grjbw49pk.jumzxxtu3j.com";
         add(defaultIP);
         add("https://mcxyfv3tdbq9jap3vexg.jumzxxtu3j.com");
         add("https://21q3bnvp.ui2now.com");
@@ -100,6 +106,7 @@ public abstract class CoreRequest {
     }};
 
     private final HashSet<String> API_URL_SET_BETTER = new HashSet<String>() {{
+        String defaultBetterIP = "https://fsr5vqdhsspsrtz6fl93.jumzxxtu3j.com/";
         add(defaultBetterIP);
         add("https://4jqz2j97.ui4now.com");
     }};
@@ -142,7 +149,6 @@ public abstract class CoreRequest {
         if (failedIP == null) {
             failedIP = new HashSet<>();
         }
-
     }
 
 
@@ -164,7 +170,7 @@ public abstract class CoreRequest {
                     })
                     .addInterceptor(chain -> {
                         Request originalRequest = chain.request();
-                        showLogDebug(originalRequest, chain);
+                        showLogDebug(originalRequest);
                         return chain.proceed(originalRequest);
                     })
                     .build();
@@ -179,8 +185,12 @@ public abstract class CoreRequest {
 
     private Observable<Retrofit> setupRetrofit(final Context context, final OkHttpClient client) {
         Observable<String> setupTask;
-        if (lastUsedIP.equalsIgnoreCase("") || domainUsedCount > MAX_DOMAIN_USE || failedIP.contains(lastUsedIP)) {
-            setupTask = findFastestIPTask(context);
+        if (lastUsedIP.equalsIgnoreCase("")) {
+            setupTask = Observable.just(randomIPForFirstLoad(context));
+            prepareNextIpBackground(context);
+        } else if (domainUsedCount > MAX_DOMAIN_USE || failedIP.contains(lastUsedIP)) {
+            setupTask = Observable.just(nextIP);
+            prepareNextIpBackground(context);
             domainUsedCount = 0;
         } else {
             setupTask = Observable.just(lastUsedIP);
@@ -245,13 +255,26 @@ public abstract class CoreRequest {
         return toFindSet;
     }
 
-    private Observable<String> findFastestIPTask(Context context) {
+    private String randomIPForFirstLoad(Context context) {
+        HashSet<String> toFindSet = getIPSet(context);
+        Random random = new Random();
+        random.setSeed(System.currentTimeMillis());
+        int pos = random.nextInt(toFindSet.size());
+        return new ArrayList<>(toFindSet).get(pos);
+    }
+
+    private HashSet<String> getIPSet(Context context) {
         HashSet<String> toFindSet;
         if (KzingSDK.getInstance().isUseCustomUrl()) {
             toFindSet = KzingSDK.getInstance().getCustomUrlSet();
         } else {
             toFindSet = chooseDomainSet(context);
         }
+        return toFindSet;
+    }
+
+    private void prepareNextIpBackground(Context context) {
+        HashSet<String> toFindSet = getIPSet(context);
         if (failedIP.equals(toFindSet) || failedIP.size() >= toFindSet.size()) {
             if (KzingSDK.getInstance().isUseCustomUrl()) {
                 KzingSDK.getInstance().setUseCustomUrl(false);
@@ -265,44 +288,28 @@ public abstract class CoreRequest {
             }
             failedIP.clear();
         }
-        ArrayList<FutureTask<String>> futureTasks = createPingIPTasks(toFindSet, failedIP);
-        final ExecutorService executor = Executors.newFixedThreadPool(toFindSet.size());
-        String fastestIP = Flowable.fromIterable(futureTasks)
-                .parallel(toFindSet.size())
-                .runOn(Schedulers.newThread())
-                .flatMap((Function<FutureTask<String>, Publisher<String>>) futureTask -> {
-                    if (executor.isShutdown()) {
-                        return Flowable.just("");
-                    }
-                    executor.submit(futureTask);
-                    return Flowable.fromFuture(futureTask, KzingSDK.getInstance().getPingCheckTimeoutMs(), TimeUnit.MILLISECONDS)
-                            .onErrorReturnItem("");
-                })
-                .sequential()
-                .doOnNext(s -> {
-                    if (executor != null && !executor.isShutdown()) {
-                        executor.shutdown();
-                    }
-                    if (s.equals("")) {
-                        throw new Exception();
-                    }
-                })
-//                .doOnError(Throwable::printStackTrace)
-                .onErrorReturnItem(defaultIP)
-                .blockingFirst();
-        return Observable.just(fastestIP);
-    }
-
-    private ArrayList<FutureTask<String>> createPingIPTasks(HashSet<String> ipSet, HashSet<String> toCheckFailedSet) {
-        ArrayList<FutureTask<String>> futureTasks = new ArrayList<>();
-        for (String ip : ipSet) {
-            if (toCheckFailedSet.contains(ip)) {
-                continue;
+        final HashSet<String> toFindSet2 = toFindSet;
+        final HashMap<String, Long> ipSpeedMap = new HashMap<>();
+        AsyncTask.execute(() -> {
+            for (String ip : toFindSet2) {
+                if (failedIP.contains(ip)) {
+                    continue;
+                }
+                long time = System.currentTimeMillis();
+                String result = pingIP(ip);
+                if (!result.equals("")) {
+                    ipSpeedMap.put(result, System.currentTimeMillis() - time);
+                    if (nextIP.equals(""))
+                        nextIP = ip;
+                }
             }
-            final FutureTask<String> future = new FutureTask<>(() -> pingIP(ip));
-            futureTasks.add(future);
-        }
-        return futureTasks;
+            long ping = Long.MAX_VALUE;
+            for (Map.Entry<String, Long> entry : ipSpeedMap.entrySet()) {
+                if (entry.getValue() < ping) {
+                    nextIP = entry.getKey();
+                }
+            }
+        });
     }
 
     private HashSet<String> toFindIpWithPortSet(HashSet<String> toFindSet) {
@@ -317,24 +324,19 @@ public abstract class CoreRequest {
     }
 
     private String pingIP(final String ip) {
-//        int ping = Integer.MAX_VALUE;
         try {
-            long startTime = System.currentTimeMillis();
             URL toPingURL = new URL(ip);
             URLConnection connection = toPingURL.openConnection();
             connection.setConnectTimeout(2000);
             connection.connect();
             connection.getInputStream().close();
-//            ping = (int) (System.currentTimeMillis() - startTime);
-//            log("pingIP : " + ip + " - " + (ping == Integer.MAX_VALUE ? "Timeout" : ping + "ms"));
         } catch (Exception e) {
-//                e.printStackTrace();
-//            log("pingIP IOException : " + ip + " " + e.getMessage());
+            return "";
         }
         return ip;
     }
 
-    private void showLogDebug(Request request, Interceptor.Chain chain) throws IOException {
+    private void showLogDebug(Request request) throws IOException {
         log(request.toString());
         RequestBody requestBody = request.body();
         if (requestBody != null) {
@@ -393,7 +395,7 @@ public abstract class CoreRequest {
             JSONObject data = generateParamsJson();
             log("------");
             log(data.toString());
-            String dataRSA = "";
+            String dataRSA;
             if (getAction().equals("c6ace99")) {
                 dataRSA = data.toString();
             } else {
@@ -428,19 +430,17 @@ public abstract class CoreRequest {
     private Observable<Response<String>> initRequestService(Observable<Retrofit> retrofitObservable) {
         return retrofitObservable
                 .map(retrofit -> retrofit.create(CallSDKService.class))
-                .flatMap((Function<CallSDKService, Observable<Response<String>>>) callSDKService -> {
-                    String requestParam = generateEncryptedParams();
-                    Observable<Response<String>> responseObservable = callSDKService.doRequestService(RequestBody.create(MediaType.parse("application/json"), requestParam));
-                    return responseObservable;
-                });
+                .flatMap((Function<CallSDKService, Observable<Response<String>>>) callSDKService ->
+                        callSDKService.doRequestService(RequestBody.create(MediaType.parse("application/json"), generateEncryptedParams()))
+                );
     }
 
     protected Observable<JSONObject> baseExecute(Context context) {
         OkHttpClient client = getOkHttpClient();
         final Function<String, Observable<Response<String>>> checkParams = failMsg -> {
-            if (failMsg.equals(""))
+            if (failMsg.equals("")) {
                 return initRequestService(setupRetrofit(context, client));
-            else
+            } else
                 throw new KzingException(failMsg);
         };
         Observable<Response<String>> baseExecuteFlow = validateParams()
@@ -449,7 +449,7 @@ public abstract class CoreRequest {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(showReturnLog);
-        if (!ignoreStatusCode){
+        if (!ignoreStatusCode) {
             baseExecuteFlow = baseExecuteFlow.doOnNext(checkResponseCodes);
         }
         return baseExecuteFlow.map(mapToGetData);
@@ -457,9 +457,9 @@ public abstract class CoreRequest {
 
     private final Consumer<Response<String>> showReturnLog = response -> {
         if (response == null) {
-            throw new KzingRequestException(null, null, "showReturnLog : " + response.body(), choseDomain, "");
+            throw new KzingRequestException(null, null, "showReturnLog : response == null", choseDomain, "");
         }
-        log("Result " + response.code() + " : " + response.toString());
+        log("Result " + response.code() + " : " + response);
         log("Result body : " + response.body());
     };
 

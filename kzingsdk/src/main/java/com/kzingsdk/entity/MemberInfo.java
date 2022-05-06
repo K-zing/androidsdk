@@ -66,11 +66,12 @@ public class MemberInfo implements Parcelable {
     private boolean memberPanAgentCode = false;
     private boolean memberPanPlayerGroup = false;
     private boolean memberPanUsername = false;
+    private boolean displayAddress = false;
+    private boolean withdrawBindAddress = false;
     private String playerCurrency = "";
     private String address = "";
     private ArrayList<String> currencyList = new ArrayList<>();
     private ArrayList<CurrencyBalance> currencyBalanceList = new ArrayList<>();
-
     private String withdrawFrozenAmount = "0";
 
 
@@ -124,6 +125,8 @@ public class MemberInfo implements Parcelable {
         memberPanAgentCode = in.readInt() == 1;
         memberPanPlayerGroup = in.readInt() == 1;
         memberPanUsername = in.readInt() == 1;
+        displayAddress = in.readInt() == 1;
+        withdrawBindAddress = in.readInt() == 1;
         playerCurrency = in.readString();
         address = in.readString();
         Object[] objectArray = in.readArray(MemberInfo.class.getClassLoader());
@@ -177,6 +180,78 @@ public class MemberInfo implements Parcelable {
         memberInfo.setMemberPanAgentCode(rootObject.optBoolean("memberPanAgentCode", false));
         memberInfo.setMemberPanPlayerGroup(rootObject.optBoolean("memberPanPlayerGroup", false));
         memberInfo.setMemberPanUsername(rootObject.optBoolean("memberPanUsername", false));
+        memberInfo.setDisplayAddress(rootObject.optBoolean("displayAddress", false));
+        memberInfo.setWithdrawBindAddress(rootObject.optBoolean("withdrawBindAddress", false));
+        memberInfo.setPlayerCurrency(rootObject.optString("playerCurrency"));
+        memberInfo.setAddress(rootObject.optString("address"));
+        JSONArray currencyJSONArray = rootObject.optJSONArray("currencyList");
+        ArrayList<String> currencyList = new ArrayList<>();
+        if (currencyJSONArray != null) {
+            for (int i = 0; i < currencyJSONArray.length(); i++) {
+                currencyList.add(currencyJSONArray.optString(i));
+            }
+        }
+        memberInfo.setCurrencyList(currencyList);
+
+        JSONArray currencyBalancesJSONArray = rootObject.optJSONArray("currencyBalances");
+        ArrayList<CurrencyBalance> currencyBalancesList = new ArrayList<>();
+        if (currencyBalancesJSONArray != null) {
+            for (int i = 0; i < currencyBalancesJSONArray.length(); i++) {
+                currencyBalancesList.add(CurrencyBalance.newInstance(currencyBalancesJSONArray.optJSONObject(i)));
+            }
+        }
+        memberInfo.setCurrencyBalanceList(currencyBalancesList);
+        return memberInfo;
+    }
+
+    public static MemberInfo newInstanceFromWebapi(JSONObject rootObject) {
+        MemberInfo memberInfo = new MemberInfo();
+        memberInfo.setRegDate(rootObject.optString("regDate"));
+        memberInfo.setJoinDays(rootObject.optString("joinDays"));
+        memberInfo.setPlayerName(rootObject.optString("playerName"));
+        memberInfo.setRealName(rootObject.optString("realName"));
+        memberInfo.setBirthday(rootObject.optString("birthday"));
+        memberInfo.setEmail(rootObject.optString("email"));
+        memberInfo.setWeixin(rootObject.optString("weixin"));
+        memberInfo.setPhone(rootObject.optString("phone"));
+        memberInfo.setQq(rootObject.optString("qq"));
+        memberInfo.setPlayerId(rootObject.optString("playerId"));
+        memberInfo.setName(rootObject.optString("name"));
+        memberInfo.setGpn(rootObject.optString("gpn"));
+        memberInfo.setGender(Gender.values()[rootObject.optInt("gender", 0)]);
+        memberInfo.setMessage(rootObject.optString("message"));
+        memberInfo.setAvatarId(rootObject.optString("avatarId", "0"));
+        memberInfo.setPhoneCountry(rootObject.optString("phoneCountry", ""));
+        memberInfo.setBalance(rootObject.optString("balance"));
+        memberInfo.setLastBouns(rootObject.optString("lastBonus"));
+        memberInfo.setLastRakeback(rootObject.optString("lastRakeback"));
+        memberInfo.setUserPreferLanguage(rootObject.optString("userPreferLanguage"));
+        memberInfo.setWhatsapp(rootObject.optString("whatsapp"));
+        memberInfo.setTelegram(rootObject.optString("telegram"));
+        memberInfo.setZalo(rootObject.optString("zalo"));
+        memberInfo.setFacebook(rootObject.optString("facebook"));
+        memberInfo.setPan(rootObject.optString("pan"));
+        memberInfo.setLine(rootObject.optString("line"));
+        memberInfo.setAgentCode(rootObject.optString("agentCode"));
+        memberInfo.setSkype(rootObject.optString("skype"));
+        memberInfo.setHasWithdrawPassword(rootObject.optString("hasWithdrawPassword").equalsIgnoreCase("ON"));
+        memberInfo.setDisplayGroupName(rootObject.optString("displayGroupName"));
+        memberInfo.setIsDisplayGroupName(rootObject.optString("isDisplayGroupName").equalsIgnoreCase("1"));
+        memberInfo.setMobileVerified(rootObject.optString("phoneVerification").equalsIgnoreCase("1"));
+        memberInfo.setEmailVerified(rootObject.optString("emailVerification").equalsIgnoreCase("1"));
+        memberInfo.setForceChangePw(rootObject.optString("forceChangePwd").equalsIgnoreCase("1"));
+        memberInfo.setRealNameSeparated(rootObject.optBoolean("isRealNameSeparated", false));
+        memberInfo.setPanStatus(rootObject.optString("panStatus", "0").equalsIgnoreCase("1"));
+        memberInfo.setPanDuplicateUUID(rootObject.optBoolean("panDuplicateUUID", false));
+        memberInfo.setPanDuplicateIP(rootObject.optBoolean("panDuplicateIP", false));
+        memberInfo.setGroupId(rootObject.optString("groupId"));
+        memberInfo.setWithdrawFrozenAmount(rootObject.optString("wtdFrozenAmt"));
+        memberInfo.setEnablePhoneRecall(rootObject.optBoolean("enablePhoneRecall", false));
+        memberInfo.setMemberPanAgentCode(rootObject.optBoolean("memberPanAgentCode", false));
+        memberInfo.setMemberPanPlayerGroup(rootObject.optBoolean("memberPanPlayerGroup", false));
+        memberInfo.setMemberPanUsername(rootObject.optBoolean("memberPanUsername", false));
+        memberInfo.setDisplayAddress(rootObject.optBoolean("displayAddress", false));
+        memberInfo.setWithdrawBindAddress(rootObject.optBoolean("withdrawBindAddress", false));
         memberInfo.setPlayerCurrency(rootObject.optString("playerCurrency"));
         memberInfo.setAddress(rootObject.optString("address"));
         JSONArray currencyJSONArray = rootObject.optJSONArray("currencyList");
@@ -555,6 +630,24 @@ public class MemberInfo implements Parcelable {
         this.memberPanUsername = memberPanUsername;
     }
 
+    public boolean isDisplayAddress() {
+        return displayAddress;
+    }
+
+    public MemberInfo setDisplayAddress(boolean displayAddress) {
+        this.displayAddress = displayAddress;
+        return this;
+    }
+
+    public boolean isWithdrawBindAddress() {
+        return withdrawBindAddress;
+    }
+
+    public MemberInfo setWithdrawBindAddress(boolean withdrawBindAddress) {
+        this.withdrawBindAddress = withdrawBindAddress;
+        return this;
+    }
+
     public String getPlayerCurrency() {
         return playerCurrency;
     }
@@ -633,6 +726,8 @@ public class MemberInfo implements Parcelable {
         dest.writeInt(memberPanAgentCode ? 1 : 0);
         dest.writeInt(memberPanPlayerGroup ? 1 : 0);
         dest.writeInt(memberPanUsername ? 1 : 0);
+        dest.writeInt(displayAddress ? 1 : 0);
+        dest.writeInt(withdrawBindAddress ? 1 : 0);
         dest.writeString(playerCurrency);
         dest.writeString(address);
         dest.writeArray(new Object[]{
