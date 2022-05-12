@@ -29,6 +29,7 @@ public class RedPocketInfo implements Parcelable {
     private String displayPage = "";
     private String displayType = "";
     private String notActiveReason = "";
+    private String image = "";
     private Integer notActiveReasonCode = 0;
     private ArrayList<RedPocketTime> redPocketTimeList = new ArrayList<>();
 
@@ -53,6 +54,12 @@ public class RedPocketInfo implements Parcelable {
                 redPocketInfo.redPocketTimeList.add(RedPocketTime.newInstance(rpTimeArray.optJSONObject(i)));
 
             }
+        }
+        JSONObject acDataObject = rootObject.optJSONObject("ac_data");
+        if (acDataObject != null) {
+            JSONObject rpActivityObject = acDataObject.optJSONObject("rp_activity");
+            if (rpActivityObject != null)
+                redPocketInfo.setImage(rpActivityObject.optString("img_url"));
         }
         return redPocketInfo;
     }
@@ -137,6 +144,15 @@ public class RedPocketInfo implements Parcelable {
         this.redPocketTimeList = redPocketTimeList;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public RedPocketInfo setImage(String image) {
+        this.image = image;
+        return this;
+    }
+
     public RedPocketInfo(Parcel in) {
         hasRedPocketActivity = in.readInt() == 1;
         chance = in.readInt();
@@ -146,6 +162,7 @@ public class RedPocketInfo implements Parcelable {
         displayPage = in.readString();
         displayType = in.readString();
         notActiveReason = in.readString();
+        image = in.readString();
         notActiveReasonCode = in.readInt();
         Object[] customObjects = in.readArray(RedPocketInfo.class.getClassLoader());
         redPocketTimeList = (ArrayList<RedPocketTime>) customObjects[0];
@@ -161,6 +178,7 @@ public class RedPocketInfo implements Parcelable {
         dest.writeString(displayPage);
         dest.writeString(displayType);
         dest.writeString(notActiveReason);
+        dest.writeString(image);
         dest.writeInt(notActiveReasonCode);
         Object[] customObjects = new Object[1];
         customObjects[0] = redPocketTimeList;

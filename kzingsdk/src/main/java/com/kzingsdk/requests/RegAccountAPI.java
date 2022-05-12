@@ -44,6 +44,7 @@ public class RegAccountAPI extends CoreRequest {
     private String skype = "";
     private String captchaValidate = "";
     private String emailCode = "";
+    private String visitorId = "";
 
 
     RegAccountAPI() {
@@ -109,6 +110,7 @@ public class RegAccountAPI extends CoreRequest {
             jsonData.put("skype", skype);
             jsonData.put("captchaValidate", captchaValidate);
             jsonData.put("emailcode", emailCode);
+            jsonData.put("visitor_id", visitorId);
 
             jsonData.put("jsessionid", getSessionId());
 
@@ -151,9 +153,6 @@ public class RegAccountAPI extends CoreRequest {
         void onSuccess();
     }
 
-    /**
-     * @param loginName Please check the length from {@link RegParam#getNameMin()} and {@link RegParam#getNameMax()}
-     */
     public RegAccountAPI setParamLoginName(String loginName) {
         this.loginName = loginName;
         return this;
@@ -282,6 +281,9 @@ public class RegAccountAPI extends CoreRequest {
         return this;
     }
 
-
+    public RegAccountAPI setVisitorId(String visitorId) {
+        this.visitorId = visitorId;
+        return this;
+    }
 }
 

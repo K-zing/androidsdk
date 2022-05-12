@@ -38,6 +38,8 @@ public class ClientInstantInfo implements Parcelable {
     private Boolean playerEmailVerifiedWithdraw = false;
     private Boolean playerMobileVerifiedWithdraw = false;
     private Boolean allowPhoneCountry = false;
+    private Boolean allowPlayerAddress = false;
+    private Boolean isWdBindPlayerAdress = false;
     private String siteId;
     private String cryptoFixedExchangeRate;
     private String announcement;
@@ -101,6 +103,8 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setPlayerEmailVerifiedWithdraw(rootObject.optBoolean("playerEmailVerifiedWithdraw", false));
         clientInfo.setPlayerMobileVerifiedWithdraw(rootObject.optBoolean("playerMobileVerifiedWithdraw", false));
         clientInfo.setAllowPhoneCountry(rootObject.optBoolean("allowPhoneCountry", false));
+        clientInfo.setAllowPlayerAddress(rootObject.optBoolean("allowPlayerAddress", false));
+        clientInfo.setWdBindPlayerAdress(rootObject.optBoolean("isWdBindPlayerAdress", false));
         clientInfo.setCaptchaMode(rootObject.optString("captchaMode"));
         clientInfo.setSiteId(rootObject.optString("siteId"));
         clientInfo.setCryptoFixedExchangeRate(rootObject.optString("cryptoFixedExchangeRate"));
@@ -251,6 +255,8 @@ public class ClientInstantInfo implements Parcelable {
         playerEmailVerifiedWithdraw = in.readInt() == 1;
         playerMobileVerifiedWithdraw = in.readInt() == 1;
         allowPhoneCountry = in.readInt() == 1;
+        allowPlayerAddress = in.readInt() == 1;
+        isWdBindPlayerAdress = in.readInt() == 1;
         siteId = in.readString();
         cryptoFixedExchangeRate = in.readString();
         announcement = in.readString();
@@ -312,6 +318,8 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeInt(playerEmailVerifiedWithdraw ? 1 : 0);
         dest.writeInt(playerMobileVerifiedWithdraw ? 1 : 0);
         dest.writeInt(allowPhoneCountry ? 1 : 0);
+        dest.writeInt(allowPlayerAddress ? 1 : 0);
+        dest.writeInt(isWdBindPlayerAdress ? 1 : 0);
         dest.writeString(siteId);
         dest.writeString(cryptoFixedExchangeRate);
         dest.writeString(announcement);
@@ -547,6 +555,24 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setAllowPhoneCountry(Boolean allowPhoneCountry) {
         this.allowPhoneCountry = allowPhoneCountry;
+    }
+
+    public Boolean getAllowPlayerAddress() {
+        return allowPlayerAddress;
+    }
+
+    public ClientInstantInfo setAllowPlayerAddress(Boolean allowPlayerAddress) {
+        this.allowPlayerAddress = allowPlayerAddress;
+        return this;
+    }
+
+    public Boolean getWdBindPlayerAdress() {
+        return isWdBindPlayerAdress;
+    }
+
+    public ClientInstantInfo setWdBindPlayerAdress(Boolean wdBindPlayerAdress) {
+        isWdBindPlayerAdress = wdBindPlayerAdress;
+        return this;
     }
 
     public String getSiteId() {
