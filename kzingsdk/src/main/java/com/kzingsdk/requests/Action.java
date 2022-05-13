@@ -156,6 +156,7 @@ final class Action {
     static final String submitThirdPartyDeposit = "ynuoff3";
     static final String submitAtmDeposit = "gjbas7d";
     static final String submitPrepaidCardDeposit = "awev89j";
+    static final String submitJarvisUTR = "vsqr4kc";
 
     static final String getActivityBonusPoint = "rqoqddd";
     static final String getPanDepositList = "x3dqzud";

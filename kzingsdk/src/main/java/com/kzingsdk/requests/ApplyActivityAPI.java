@@ -24,7 +24,6 @@ public class ApplyActivityAPI extends CoreRequest {
     }
 
     private String actid;
-
     private String giftId;
     private String receipient;
     private String phone;

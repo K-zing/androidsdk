@@ -117,7 +117,4 @@ public class LoginWebApiAPI extends CoreRequest {
         this.uuid = uuid;
         return this;
     }
-
-
 }
-

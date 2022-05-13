@@ -2,7 +2,6 @@ package com.kzingsdk.requests;
 
 import com.kzingsdk.entity.RegAgentParam;
 import com.kzingsdk.entity.RegParam;
-import com.kzingsdk.entity.gameplatform.GamePlatformType;
 
 /**
  * Interface to consolidate all public APIs.
@@ -27,6 +26,7 @@ public final class KzingAPI {
     public static CheckGiftRedeemableAPI checkGiftRedeemable() {
         return new CheckGiftRedeemableAPI();
     }
+
     public static CheckActivityRedeemableAPI checkActivityRedeemable() {
         return new CheckActivityRedeemableAPI();
     }
@@ -228,6 +228,7 @@ public final class KzingAPI {
     public static OneClickRedeemRakebackAPI oneClickRedeemRakeback() {
         return new OneClickRedeemRakebackAPI();
     }
+
     public static GetRakebackRedeemHistoryAPI getRakebackRedeemHistory() {
         return new GetRakebackRedeemHistoryAPI();
     }
@@ -407,6 +408,10 @@ public final class KzingAPI {
 
     public static SubmitThirdPartyDepositAPI submitThirdPartyDeposit() {
         return new SubmitThirdPartyDepositAPI();
+    }
+
+    public static SubmitJarvisUTRAPI submitJarvisUTR() {
+        return new SubmitJarvisUTRAPI();
     }
 
     public static SubmitAtmDepositAPI submitAtmDeposit() {
