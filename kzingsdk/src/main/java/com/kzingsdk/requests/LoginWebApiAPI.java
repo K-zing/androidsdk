@@ -23,6 +23,8 @@ public class LoginWebApiAPI extends CoreRequest {
     private String captchaValidate = "";
     private String verifyCode = "";
     private String uuid = "";
+    private String provider = "";
+    private String providerId = "";
 
     @Override
     protected String getAction() {
@@ -45,6 +47,12 @@ public class LoginWebApiAPI extends CoreRequest {
             jsonData.put("jsessionid", getSessionId());
             if (uuid != null) {
                 jsonData.put("uuid", uuid);
+            }
+            if (provider != null) {
+                jsonData.put("provider", provider);
+            }
+            if (providerId != null) {
+                jsonData.put("providerid", providerId);
             }
             return jsonData;
         } catch (JSONException ignored) {
@@ -115,6 +123,16 @@ public class LoginWebApiAPI extends CoreRequest {
 
     public LoginWebApiAPI setUuid(String uuid) {
         this.uuid = uuid;
+        return this;
+    }
+
+    public LoginWebApiAPI setProvider(String provider) {
+        this.provider = provider;
+        return this;
+    }
+
+    public LoginWebApiAPI setProviderId(String providerId) {
+        this.providerId = providerId;
         return this;
     }
 }

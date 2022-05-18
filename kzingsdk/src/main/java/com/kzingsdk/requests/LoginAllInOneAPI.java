@@ -37,6 +37,8 @@ public class LoginAllInOneAPI extends CoreRequest {
     private Boolean platformOnly = false;
     private GamePlatformType gpType = null;
     private Boolean showChild = false;
+    private String provider = "";
+    private String providerId = "";
 
     @Override
     protected String getAction() {
@@ -89,6 +91,12 @@ public class LoginAllInOneAPI extends CoreRequest {
             jsonData.put("platformonly", platformOnly ? 1 : 0);
             jsonData.put("gptype", gpType == null ? 0 : gpType.getId());
             jsonData.put("showchild", showChild ? 1 : 0);
+            if (provider != null) {
+                jsonData.put("provider", provider);
+            }
+            if (providerId != null) {
+                jsonData.put("providerid", providerId);
+            }
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -204,5 +212,14 @@ public class LoginAllInOneAPI extends CoreRequest {
         return this;
     }
 
+    public LoginAllInOneAPI setProvider(String provider) {
+        this.provider = provider;
+        return this;
+    }
+
+    public LoginAllInOneAPI setProviderId(String providerId) {
+        this.providerId = providerId;
+        return this;
+    }
 }
 

@@ -31,6 +31,10 @@ public class LoginAPI extends CoreRequest {
     private String captchaValidate = "";
     private String verifyCode = "";
     private String uuid = "";
+    private String provider;
+    private String providerId;
+
+
 
     @Override
     protected String getAction() {
@@ -77,6 +81,12 @@ public class LoginAPI extends CoreRequest {
             jsonData.put("jsessionid", getSessionId());
             if (uuid != null) {
                 jsonData.put("uuid", uuid);
+            }
+            if (provider != null) {
+                jsonData.put("provider", provider);
+            }
+            if (providerId != null) {
+                jsonData.put("providerid", providerId);
             }
             return jsonData;
         } catch (JSONException ignored) {
@@ -170,6 +180,14 @@ public class LoginAPI extends CoreRequest {
         return this;
     }
 
+    public LoginAPI setProvider(String provider) {
+        this.provider = provider;
+        return this;
+    }
 
+    public LoginAPI setProviderId(String providerId) {
+        this.providerId = providerId;
+        return this;
+    }
 }
 
