@@ -3,6 +3,8 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.entity.SocialRegisterPlatform;
+import com.kzingsdk.util.Constant;
+import com.kzingsdk.util.SharePrefUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,7 +52,15 @@ public class SocialRegisterAPI extends RegAccountAPI {
 
     @Override
     public Observable<String> requestRx(final Context context) {
-        return super.baseExecute(context).map(jsonResponse -> "Success");
+        return super.baseExecute(context).map(jsonResponse -> {
+            JSONObject responseObject = jsonResponse.optJSONObject("response");
+            String vcToken = responseObject.optString("vc", "");
+            String ccToken = responseObject.optString("cc", "");
+            SharePrefUtil.putString(context, Constant.Pref.VCTOKEN, vcToken);
+            SharePrefUtil.putString(context, Constant.Pref.CCTOKEN, ccToken);
+            setLoginTokens(vcToken, ccToken);
+            return "Success";
+        });
     }
 
     @Override
