@@ -101,6 +101,7 @@ final class Action {
     static final String getBonusList = "581eb4c";
     static final String getWaterWager = "nzfnj0h";
     static final String getSportOddsData = "kzafauu";
+    static final String getTgLink = "cb628h6";
 
     static final String switchCurrency = "x7tVfZX";
     static final String getAutoRankInfo = "pbbXLy0";

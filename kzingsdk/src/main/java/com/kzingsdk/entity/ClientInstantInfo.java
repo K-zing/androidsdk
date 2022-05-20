@@ -65,11 +65,11 @@ public class ClientInstantInfo implements Parcelable {
     private ArrayList<String> bannerCountdown = new ArrayList<>();
     private ArrayList<String> bannerFirstLaunch = new ArrayList<>();
     private ArrayList<MarqueeAnnouncement> marqueeAnnouncementList = new ArrayList<>();
+    private ArrayList<ThemeInfo> themeList = new ArrayList<>();
     private ContactInfo feedbackContactInfo = new ContactInfo();
     private ContactInfo partnershipContactInfo = new ContactInfo();
     private ContactInfo socialMediaContactInfo = new ContactInfo();
     private HashMap<Integer, String> websiteConfigMap = new HashMap<>();
-
 
     public ClientInstantInfo() {
 
@@ -197,6 +197,14 @@ public class ClientInstantInfo implements Parcelable {
         }
         clientInfo.setMarqueeAnnouncementList(marqueeAnnouncementList);
 
+        ArrayList<ThemeInfo> themeList = new ArrayList<>();
+        JSONArray themeJSONArray = rootObject.optJSONArray("theme");
+        if (themeJSONArray != null) {
+            for (int i = 0; i < themeJSONArray.length(); i++) {
+                themeList.add(ThemeInfo.newInstance(themeJSONArray.optJSONObject(i)));
+            }
+        }
+        clientInfo.setThemeList(themeList);
 
         for (int i = 301; i < 400; i++) {
             clientInfo.websiteConfigMap.put(i, rootObject.optString("wc" + i));
@@ -283,6 +291,8 @@ public class ClientInstantInfo implements Parcelable {
         memberPanUsername = (ArrayList<String>) objectArray[i++];
         bannerCountdown = (ArrayList<String>) objectArray[i++];
         bannerFirstLaunch = (ArrayList<String>) objectArray[i++];
+        marqueeAnnouncementList = (ArrayList<MarqueeAnnouncement>) objectArray[i++];
+        themeList = (ArrayList<ThemeInfo>) objectArray[i++];
         feedbackContactInfo = (ContactInfo) objectArray[i++];
         partnershipContactInfo = (ContactInfo) objectArray[i++];
         socialMediaContactInfo = (ContactInfo) objectArray[i++];
@@ -345,6 +355,8 @@ public class ClientInstantInfo implements Parcelable {
                 memberPanUsername,
                 bannerCountdown,
                 bannerFirstLaunch,
+                marqueeAnnouncementList,
+                themeList,
                 feedbackContactInfo,
                 partnershipContactInfo,
                 socialMediaContactInfo,
@@ -806,6 +818,15 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setMarqueeAnnouncementList(ArrayList<MarqueeAnnouncement> marqueeAnnouncementList) {
         this.marqueeAnnouncementList = marqueeAnnouncementList;
+    }
+
+    public ArrayList<ThemeInfo> getThemeList() {
+        return themeList;
+    }
+
+    public ClientInstantInfo setThemeList(ArrayList<ThemeInfo> themeList) {
+        this.themeList = themeList;
+        return this;
     }
 
     public static final Creator CREATOR = new Creator() {
