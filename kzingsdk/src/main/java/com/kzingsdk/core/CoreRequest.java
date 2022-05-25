@@ -55,7 +55,7 @@ public abstract class CoreRequest {
     private static OkHttpClient okHttpClient;
     protected final String CLIENT_KEY_OBJECT_NAME = "key";
     protected final String PLATFORM_OBJECT_NAME = "os";
-    protected final String DOMAIN_NAME = "domain";
+    protected final String DOMAIN_NAME = "sdkDomain";
     protected final String ACTION_OBJECT_NAME = "url";
     protected final String ACTION_OBJECT_NAME_D11 = "d11url";
     protected final String ACTION_OBJECT_NAME_K36 = "k36url";
@@ -374,6 +374,7 @@ public abstract class CoreRequest {
             jsonData.put("device", "android");
             jsonData.put("platform", "an");
             jsonData.put("sdkversion", BuildConfig.VERSION_NAME);
+            jsonData.put(DOMAIN_NAME, lastUsedIP);
             if (this instanceof RequireCurrency) {
                 String currency = ((RequireCurrency) this).getCurrency();
                 if (currency != null)
@@ -414,7 +415,6 @@ public abstract class CoreRequest {
             dataWithKey.put(ACTION_OBJECT_NAME_D11, getD11Action());
             dataWithKey.put(ACTION_OBJECT_NAME_K36, getK36Action());
             dataWithKey.put(PLATFORM_OBJECT_NAME, PLATFORM_NAME);
-            dataWithKey.put(DOMAIN_NAME, lastUsedIP);
             dataWithKey.put(SIGN_OBJECT_NAME, MD5Utils.md5(dataRSA + KzingSDK.getInstance().getMd5Key()).toUpperCase());
             log(dataWithKey.toString());
             PublicKey publicKeyBasic = RSAUtils.getPublicKey(Base64Utils.decode(KzingSDK.getInstance().getBasicRsaKey()));

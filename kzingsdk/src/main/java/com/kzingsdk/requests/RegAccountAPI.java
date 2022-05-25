@@ -45,6 +45,8 @@ public class RegAccountAPI extends CoreRequest {
     private String captchaValidate = "";
     private String emailCode = "";
     private String visitorId = "";
+    private String provider;
+    private String providerId;
 
 
     RegAccountAPI() {
@@ -111,7 +113,12 @@ public class RegAccountAPI extends CoreRequest {
             jsonData.put("captchaValidate", captchaValidate);
             jsonData.put("emailcode", emailCode);
             jsonData.put("visitor_id", visitorId);
-
+            if (provider != null) {
+                jsonData.put("provider", provider);
+            }
+            if (providerId != null) {
+                jsonData.put("providerid", providerId);
+            }
             jsonData.put("jsessionid", getSessionId());
 
             return jsonData;
@@ -283,6 +290,16 @@ public class RegAccountAPI extends CoreRequest {
 
     public RegAccountAPI setVisitorId(String visitorId) {
         this.visitorId = visitorId;
+        return this;
+    }
+
+    public RegAccountAPI setProvider(String provider) {
+        this.provider = provider;
+        return this;
+    }
+
+    public RegAccountAPI setProviderId(String providerId) {
+        this.providerId = providerId;
         return this;
     }
 }

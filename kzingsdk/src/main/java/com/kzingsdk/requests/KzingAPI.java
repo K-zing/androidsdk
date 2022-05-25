@@ -179,8 +179,12 @@ public final class KzingAPI {
         return new CancelWithdrawalAPI();
     }
 
-    public static GetTgLinkAPI GetTgLink() {
+    public static GetTgLinkAPI getTgLink() {
         return new GetTgLinkAPI();
+    }
+
+    public static GetCopyWritingContentByCategoryAPI getCopyWritingContentByCategory() {
+        return new GetCopyWritingContentByCategoryAPI();
     }
 
     public static GetGameAccountListAPI getGameAccountList() {

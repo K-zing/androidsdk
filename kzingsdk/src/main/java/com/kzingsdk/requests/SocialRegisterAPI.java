@@ -25,6 +25,8 @@ public class SocialRegisterAPI extends RegAccountAPI {
 
     private String socialId;
     private String platform;
+    private String provider;
+    private String providerId;
 
     @Override
     protected Observable<String> validateParams() {
@@ -44,6 +46,12 @@ public class SocialRegisterAPI extends RegAccountAPI {
         try {
             jsonData.put("socialid", socialId);
             jsonData.put("splatform", platform);
+            if (provider != null) {
+                jsonData.put("provider", provider);
+            }
+            if (providerId != null) {
+                jsonData.put("providerid", providerId);
+            }
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -98,6 +106,14 @@ public class SocialRegisterAPI extends RegAccountAPI {
         return this;
     }
 
+    public SocialRegisterAPI setProvider(String provider) {
+        this.provider = provider;
+        return this;
+    }
 
+    public SocialRegisterAPI setProviderId(String providerId) {
+        this.providerId = providerId;
+        return this;
+    }
 }
 
