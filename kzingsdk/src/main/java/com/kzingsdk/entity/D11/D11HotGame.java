@@ -11,6 +11,7 @@ public class D11HotGame {
     private String roomNo;
     private String gpAccountId;
     private String gpid;
+    private String gameType;
     private Integer order;
     private Integer tryPlatform;
     private Integer type;
@@ -29,6 +30,8 @@ public class D11HotGame {
             d11HotGame.setRoomNo(dataObject.optString("room_no"));
             d11HotGame.setGpAccountId(dataObject.optString("gpaccountid"));
             d11HotGame.setGpid(dataObject.optString("gpid"));
+            d11HotGame.setGameType(dataObject.optString("game_type"));
+
         }
         d11HotGame.setOrder(rootObject.optInt("order"));
         d11HotGame.setTryPlatform(rootObject.optInt("try_platform"));
@@ -106,6 +109,15 @@ public class D11HotGame {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public String getGameType() {
+        return gameType;
+    }
+
+    public D11HotGame setGameType(String gameType) {
+        this.gameType = gameType;
+        return this;
     }
 }
 

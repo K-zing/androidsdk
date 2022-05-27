@@ -165,14 +165,10 @@ public abstract class CoreRequest {
                     .writeTimeout(requestTimeoutMs, TimeUnit.MILLISECONDS)
                     .addInterceptor(chain -> {
                         Request request = chain.request().newBuilder()
-                                .addHeader("X-Kzing-APIs-Authorization", "AGnAiqwHF9B9EYFnCpfW324Tm3gSoODr")
+                                .addHeader("User-Agent","KzingAndroidSDK:"+BuildConfig.VERSION_NAME)
                                 .build();
+                        showLogDebug(request);
                         return chain.proceed(request);
-                    })
-                    .addInterceptor(chain -> {
-                        Request originalRequest = chain.request();
-                        showLogDebug(originalRequest);
-                        return chain.proceed(originalRequest);
                     })
                     .build();
         }
