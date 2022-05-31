@@ -19,7 +19,7 @@ public class TransferToGameAPI extends CoreRequest {
     private String gpAccountId;
     private BigDecimal transferAmount;
     private Boolean isTransferAll = false;
-
+    private Boolean transferByLimit = false;
 
     TransferToGameAPI() {
         super();
@@ -49,7 +49,7 @@ public class TransferToGameAPI extends CoreRequest {
             if (transferAmount != null) {
                 jsonData.put("transferAmount", transferAmount);
             }
-
+            jsonData.put("transferByLimit", transferByLimit);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -104,5 +104,9 @@ public class TransferToGameAPI extends CoreRequest {
         return this;
     }
 
+    public TransferToGameAPI setTransferByLimit(Boolean transferByLimit) {
+        this.transferByLimit = transferByLimit;
+        return this;
+    }
 }
 
