@@ -56,9 +56,11 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         String[] quickamountStrings = quickamountString.split(",");
         ArrayList<BigDecimal> quickAmountList = new ArrayList<>();
         for (String quickamount : quickamountStrings) {
-            quickAmountList.add(new BigDecimal(quickamount));
+            if (quickamountString.length() > 0) {
+                quickAmountList.add(new BigDecimal(quickamount));
+            }
+            item.setQuickAmountList(quickAmountList);
         }
-        item.setQuickAmountList(quickAmountList);
         return item;
     }
 

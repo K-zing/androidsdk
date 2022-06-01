@@ -121,9 +121,11 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         String[] quickamountStrings = quickamountString.split(",");
         ArrayList<BigDecimal> quickAmountList = new ArrayList<>();
         for (String quickamount : quickamountStrings) {
-            quickAmountList.add(new BigDecimal(quickamount));
+            if (quickamountString.length() > 0) {
+                quickAmountList.add(new BigDecimal(quickamount));
+            }
+            this.quickAmountList = quickAmountList;
         }
-        this.quickAmountList = quickAmountList;
         if (!useRotate) {
             fixAmounts = settingObject.optString("fixamount", "").split(",");
         } else {
