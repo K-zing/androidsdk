@@ -3,11 +3,13 @@ package com.kzingsdk.entity.deposit;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.kzingsdk.entity.MemberInfo;
 import com.kzingsdk.util.BigDecimalUtil;
 
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class AtmPayment extends BasePaymentMethod implements Parcelable {
 
@@ -25,7 +27,7 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
     private String bcMax;
     private String network;
     private boolean quickAmountFlag = false;
-    private BigDecimal quickAmount = BigDecimal.ZERO;
+    private ArrayList<BigDecimal> quickAmountList = new ArrayList<>();
 
     public AtmPayment() {
     }
@@ -50,7 +52,13 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         item.setBcMax(rootObject.optString("bcmax"));
         item.setNetwork(rootObject.optString("network"));
         item.setQuickAmountFlag(rootObject.optInt("quickamountflag") == 1);
-        item.setQuickAmount(BigDecimalUtil.optBigDecimal(rootObject, "quickamount", BigDecimal.ZERO));
+        String quickamountString = rootObject.optString("quickamount");
+        String[] quickamountStrings = quickamountString.split(",");
+        ArrayList<BigDecimal> quickAmountList = new ArrayList<>();
+        for (String quickamount : quickamountStrings) {
+            quickAmountList.add(new BigDecimal(quickamount));
+        }
+        item.setQuickAmountList(quickAmountList);
         return item;
     }
 
@@ -167,12 +175,12 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         this.quickAmountFlag = quickAmountFlag;
     }
 
-    public BigDecimal getQuickAmount() {
-        return quickAmount;
+    public ArrayList<BigDecimal> getQuickAmountList() {
+        return quickAmountList;
     }
 
-    public void setQuickAmount(BigDecimal quickAmount) {
-        this.quickAmount = quickAmount;
+    public void setQuickAmountList(ArrayList<BigDecimal> quickAmountList) {
+        this.quickAmountList = quickAmountList;
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -209,7 +217,8 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         network = in.readString();
         formType = in.readString();
         quickAmountFlag = in.readInt() == 1;
-        quickAmount = new BigDecimal(in.readString());
+        Object[] objectArray = in.readArray(MemberInfo.class.getClassLoader());
+        quickAmountList = (ArrayList<BigDecimal>) objectArray[0];
     }
 
     @Override
@@ -242,7 +251,9 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         dest.writeString(network);
         dest.writeString(formType);
         dest.writeInt(quickAmountFlag ? 1 : 0);
-        dest.writeString(quickAmount.toString());
+        Object[] customObjects = new Object[1];
+        customObjects[0] = quickAmountList;
+        dest.writeArray(customObjects);
     }
 
     @Override
