@@ -24,6 +24,7 @@ public class EnterGameAPI extends CoreRequest {
     private String userAgent;
     private Boolean requestMobile = true;
     private String option;
+    private Boolean transferByLimit = false;
 
     @Override
     protected String getAction() {
@@ -48,6 +49,7 @@ public class EnterGameAPI extends CoreRequest {
             jsonData.put("demo", isDemo);
             jsonData.put("useragent", userAgent);
             jsonData.put("requestMobile", requestMobile);
+            jsonData.put("transferByLimit", transferByLimit);
             if (playable instanceof GamePlatformChild) {
                 GamePlatformChild gamePlatformChild = (GamePlatformChild) playable;
                 jsonData.put("gameCode", gamePlatformChild.getUrlSuffix());
@@ -116,4 +118,8 @@ public class EnterGameAPI extends CoreRequest {
         return this;
     }
 
+    public EnterGameAPI setTransferByLimit(Boolean transferByLimit) {
+        this.transferByLimit = transferByLimit;
+        return this;
+    }
 }
