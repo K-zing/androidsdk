@@ -116,8 +116,8 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         random = useRotate ? rootObject.optInt("randType", 0) : settingObject.optInt("random", 0);
         minAmount = useRotate ? rootObject.optDouble("randMin", 0d) : settingObject.optDouble("min", 0d);
         maxAmount = useRotate ? rootObject.optDouble("randMax", 0d) : settingObject.optDouble("max", 0d);
-        quickAmountFlag = rootObject.optInt("quickamountflag") == 1;
-        String quickamountString = rootObject.optString("quickamount");
+        quickAmountFlag = settingObject.optInt("quickamountflag") == 1;
+        String quickamountString = settingObject.optString("quickamount");
         String[] quickamountStrings = quickamountString.split(",");
         ArrayList<BigDecimal> quickAmountList = new ArrayList<>();
         for (String quickamount : quickamountStrings) {
