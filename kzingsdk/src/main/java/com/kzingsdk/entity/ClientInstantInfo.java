@@ -41,6 +41,7 @@ public class ClientInstantInfo implements Parcelable {
     private Boolean allowPlayerAddress = false;
     private Boolean isWdBindPlayerAdress = false;
     private Boolean regCaptcha = false;
+    private Boolean playerBankcardVerifiedWithdraw = false;
     private String siteId;
     private String cryptoFixedExchangeRate;
     private String announcement;
@@ -107,6 +108,7 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setAllowPlayerAddress(rootObject.optBoolean("allowPlayerAddress", false));
         clientInfo.setWdBindPlayerAdress(rootObject.optBoolean("isWdBindPlayerAdress", false));
         clientInfo.setRegCaptcha(rootObject.optBoolean("regCaptcha", false));
+        clientInfo.setPlayerBankcardVerifiedWithdraw(rootObject.optBoolean("playerBankcardVerifiedWithdraw", false));
         clientInfo.setCaptchaMode(rootObject.optString("captchaMode"));
         clientInfo.setSiteId(rootObject.optString("siteId"));
         clientInfo.setCryptoFixedExchangeRate(rootObject.optString("cryptoFixedExchangeRate"));
@@ -268,6 +270,8 @@ public class ClientInstantInfo implements Parcelable {
         allowPlayerAddress = in.readInt() == 1;
         isWdBindPlayerAdress = in.readInt() == 1;
         regCaptcha = in.readInt() == 1;
+        playerBankcardVerifiedWithdraw = in.readInt() == 1;
+
         siteId = in.readString();
         cryptoFixedExchangeRate = in.readString();
         announcement = in.readString();
@@ -334,6 +338,8 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeInt(allowPlayerAddress ? 1 : 0);
         dest.writeInt(isWdBindPlayerAdress ? 1 : 0);
         dest.writeInt(regCaptcha ? 1 : 0);
+        dest.writeInt(playerBankcardVerifiedWithdraw ? 1 : 0);
+
         dest.writeString(siteId);
         dest.writeString(cryptoFixedExchangeRate);
         dest.writeString(announcement);
@@ -577,27 +583,32 @@ public class ClientInstantInfo implements Parcelable {
         return allowPlayerAddress;
     }
 
-    public ClientInstantInfo setAllowPlayerAddress(Boolean allowPlayerAddress) {
+    public void setAllowPlayerAddress(Boolean allowPlayerAddress) {
         this.allowPlayerAddress = allowPlayerAddress;
-        return this;
     }
 
     public Boolean getWdBindPlayerAdress() {
         return isWdBindPlayerAdress;
     }
 
-    public ClientInstantInfo setWdBindPlayerAdress(Boolean wdBindPlayerAdress) {
+    public void setWdBindPlayerAdress(Boolean wdBindPlayerAdress) {
         isWdBindPlayerAdress = wdBindPlayerAdress;
-        return this;
     }
 
     public Boolean getRegCaptcha() {
         return regCaptcha;
     }
 
-    public ClientInstantInfo setRegCaptcha(Boolean regCaptcha) {
+    public void setRegCaptcha(Boolean regCaptcha) {
         this.regCaptcha = regCaptcha;
-        return this;
+    }
+
+    public Boolean getPlayerBankcardVerifiedWithdraw() {
+        return playerBankcardVerifiedWithdraw;
+    }
+
+    public void setPlayerBankcardVerifiedWithdraw(Boolean playerBankcardVerifiedWithdraw) {
+        this.playerBankcardVerifiedWithdraw = playerBankcardVerifiedWithdraw;
     }
 
     public String getSiteId() {

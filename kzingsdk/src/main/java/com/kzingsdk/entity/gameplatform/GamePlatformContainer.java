@@ -22,6 +22,8 @@ public class GamePlatformContainer {
 
     public static GamePlatformContainer newInstanceFromEp(JSONObject rootObject) {
         GamePlatformType type = GamePlatformType.valueOfTypeId(rootObject.optInt("gptype"));
+        if (type != null)
+            type.setName(rootObject.optString("typename"));
         GamePlatformContainer item = new GamePlatformContainer(type);
         JSONArray gamePlatformArray = rootObject.optJSONArray("gp");
         if (gamePlatformArray != null) {

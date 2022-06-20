@@ -1,7 +1,5 @@
 package com.kzingsdk.entity.gameplatform;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,9 +7,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-
-import static com.kzingsdk.entity.gameplatform.GamePlatform.PlayStatus.ENABLE_APP;
-import static com.kzingsdk.entity.gameplatform.GamePlatform.PlayStatus.ENABLE_H5;
 
 public final class GamePlatformCreator {
 
@@ -55,7 +50,11 @@ public final class GamePlatformCreator {
             if (type == null) {
                 continue;
             }
-            type.setName(responseType.optString("gptypename"));
+            if (responseType.has("typename")) {
+                type.setName(responseType.optString("typename"));
+            } else {
+                type.setName(responseType.optString("gptypename"));
+            }
             JSONArray gamePlatformArray = responseType.optJSONArray("gp");
             if (gamePlatformArray != null && gamePlatformArray.length() > 0) {
                 for (int j = 0; j < gamePlatformArray.length(); j++) {
@@ -67,13 +66,13 @@ public final class GamePlatformCreator {
                         gp = GamePlatform.newInstance(gamePlatformArray.optJSONObject(j));
                     }
 //                    if (gp.getPlayStatus().contains(ENABLE_H5) || gp.getPlayStatus().contains(ENABLE_APP)) {
-                        if (!(gp instanceof GamePlatformCustom)) {
-                            if (!gp.getUrl().isEmpty()) {
-                                gamePlatformListList.add(gp);
-                            }
-                        } else {
+                    if (!(gp instanceof GamePlatformCustom)) {
+                        if (!gp.getUrl().isEmpty()) {
                             gamePlatformListList.add(gp);
                         }
+                    } else {
+                        gamePlatformListList.add(gp);
+                    }
 //                    }
                 }
             }
@@ -179,7 +178,7 @@ public final class GamePlatformCreator {
                         GamePlatform gpClone = gp.clone();
                         if (customGpchildid != null) {
                             if (customGpchildid.equals("0")) {
-                                gpClone.getCurrencyDisplayOrderMap().put("default",customDisplayorder);
+                                gpClone.getCurrencyDisplayOrderMap().put("default", customDisplayorder);
                                 ((GamePlatformCustom) gpPlatform).getPlayableArrayList().add(gpClone.clone());
                             } else {
                                 ArrayList<GamePlatformChild> findChildList = getAllGpChildList(gpClone);
