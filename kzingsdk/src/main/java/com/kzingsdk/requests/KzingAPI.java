@@ -51,6 +51,10 @@ public final class KzingAPI {
         return new ActivitySignInAPI();
     }
 
+    public static GetBonusWalletAPI getBonusWallet() {
+        return new GetBonusWalletAPI();
+    }
+
     public static GetNewComerActivityAPI getNewComerActivity() {
         return new GetNewComerActivityAPI();
     }
