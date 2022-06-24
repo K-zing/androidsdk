@@ -255,11 +255,6 @@ public final class KzingAPI {
         return new RegParamAPI();
     }
 
-    /**
-     * {@link RegParamAPI} Must be requested before {@link RegAccountAPI}.
-     * <]>
-     * And  {@link RegParamAPI} Must be requested again everytime to update {@link RegParam#getVerifyCodeBitmap()} if request is failed.
-     */
     public static RegAccountAPI regAccount() {
         return new RegAccountAPI();
     }
@@ -595,6 +590,10 @@ public final class KzingAPI {
 
     public static RedeemPostpaidBonusAPI redeemPostpaidBonus() {
         return new RedeemPostpaidBonusAPI();
+    }
+
+    public static BonusPromotionAPI bonusPromotion() {
+        return new BonusPromotionAPI();
     }
 
     public static GetCryptoBetWinAmountAPI getCryptoBetWinAmount() {

@@ -35,6 +35,7 @@ public class RegParam {
     private Boolean regFriendReferCode;
     private Boolean regFriendReferCodeDisplay;
     private Boolean isReferrerSameAgent;
+    private Boolean regCaptcha;
     private Integer regWithdrawPwdFormat;
     private Integer regNameMin;
     private Integer regNameMax;
@@ -82,6 +83,7 @@ public class RegParam {
         regParam.setRegFriendReferCode(paramObject.optBoolean("regFriendReferCode", false));
         regParam.setRegFriendReferCodeDisplay(paramObject.optBoolean("regFriendReferCodeDisplay", false));
         regParam.setReferrerSameAgent(paramObject.optBoolean("isReferrerSameAgent", false));
+        regParam.setRegCaptcha(paramObject.optBoolean("regCaptcha", false));
 
         String image = rootObject.optString("image");
         byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
@@ -303,6 +305,14 @@ public class RegParam {
 
     public void setReferrerSameAgent(Boolean referrerSameAgent) {
         isReferrerSameAgent = referrerSameAgent;
+    }
+
+    public Boolean getRegCaptcha() {
+        return regCaptcha;
+    }
+
+    public void setRegCaptcha(Boolean regCaptcha) {
+        this.regCaptcha = regCaptcha;
     }
 
     public Integer getRegWithdrawPwdFormat() {
