@@ -16,6 +16,7 @@ public class WithdrawCryptoLimit {
     private BigDecimal withdrawMin;
     private BigDecimal withdrawMaxUsdt;
     private BigDecimal withdrawMinUsdt;
+    private BigDecimal cryptoExchangeRate;
 
     public WithdrawCryptoLimit() {
 
@@ -31,6 +32,7 @@ public class WithdrawCryptoLimit {
         withdrawCryptoLimit.setWithdrawMin(BigDecimalUtil.optBigDecimal(rootObject, "withdraw_min"));
         withdrawCryptoLimit.setWithdrawMaxUsdt(BigDecimalUtil.optBigDecimal(rootObject, "withdraw_max_usdt", null));
         withdrawCryptoLimit.setWithdrawMinUsdt(BigDecimalUtil.optBigDecimal(rootObject, "withdraw_min_usdt", null));
+        withdrawCryptoLimit.setCryptoExchangeRate(BigDecimalUtil.optBigDecimal(rootObject, "crypto_exchange_rate", null));
         return withdrawCryptoLimit;
     }
 
@@ -96,6 +98,14 @@ public class WithdrawCryptoLimit {
 
     public void setWithdrawMinUsdt(BigDecimal withdrawMinUsdt) {
         this.withdrawMinUsdt = withdrawMinUsdt;
+    }
+
+    public BigDecimal getCryptoExchangeRate() {
+        return cryptoExchangeRate;
+    }
+
+    public void setCryptoExchangeRate(BigDecimal cryptoExchangeRate) {
+        this.cryptoExchangeRate = cryptoExchangeRate;
     }
 }
 

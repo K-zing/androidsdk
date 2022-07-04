@@ -296,6 +296,10 @@ public final class KzingAPI {
         return new ChangeWithdrawPasswordAPI();
     }
 
+    public static TransferAllBalanceToGameAPI transferAllBalanceToGame() {
+        return new TransferAllBalanceToGameAPI();
+    }
+
     public static TransferToGameAPI transferToGame() {
         return new TransferToGameAPI();
     }

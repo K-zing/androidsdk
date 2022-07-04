@@ -37,6 +37,7 @@ final class Action {
     static final String getDividendPools = "liuawev";
     static final String checkPlayerRealNameAndEmail = "xrdl2zb";
     static final String bonusPromotion  = "04xr11g";
+    static final String transferAllBalanceToGame  = "hGxg046";
 
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";
