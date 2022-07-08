@@ -42,7 +42,7 @@ public class LoginWebApiAPI extends CoreRequest {
         try {
             jsonData.put("playername", loginName);
             jsonData.put("password", password);
-            jsonData.put("captchaValidate", captchaValidate);
+            jsonData.put("captchavalidate", captchaValidate);
             jsonData.put("verifycode", verifyCode);
             jsonData.put("jsessionid", getSessionId());
             if (uuid != null) {
