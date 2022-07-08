@@ -234,12 +234,12 @@ public class MemberInfo implements Parcelable {
         memberInfo.setLine(rootObject.optString("line"));
         memberInfo.setAgentCode(rootObject.optString("agentCode"));
         memberInfo.setSkype(rootObject.optString("skype"));
-        memberInfo.setHasWithdrawPassword(rootObject.optString("hasWithdrawPassword").equalsIgnoreCase("ON"));
+        memberInfo.setHasWithdrawPassword(rootObject.optBoolean("hasWithdrawPassword"));
         memberInfo.setDisplayGroupName(rootObject.optString("displayGroupName"));
-        memberInfo.setIsDisplayGroupName(rootObject.optString("isDisplayGroupName").equalsIgnoreCase("1"));
+        memberInfo.setIsDisplayGroupName(rootObject.optBoolean("isDisplayGroupName"));
         memberInfo.setMobileVerified(rootObject.optString("phoneVerification").equalsIgnoreCase("1"));
         memberInfo.setEmailVerified(rootObject.optString("emailVerification").equalsIgnoreCase("1"));
-        memberInfo.setForceChangePw(rootObject.optString("forceChangePwd").equalsIgnoreCase("1"));
+        memberInfo.setForceChangePw(rootObject.optBoolean("forceChangePwd"));
         memberInfo.setRealNameSeparated(rootObject.optBoolean("isRealNameSeparated", false));
         memberInfo.setPanStatus(rootObject.optString("panStatus", "0").equalsIgnoreCase("1"));
         memberInfo.setPanDuplicateUUID(rootObject.optBoolean("panDuplicateUUID", false));
