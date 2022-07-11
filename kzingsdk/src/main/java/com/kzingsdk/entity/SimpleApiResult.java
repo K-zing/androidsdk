@@ -10,7 +10,11 @@ public class SimpleApiResult {
     public static SimpleApiResult newInstance(JSONObject rootObject) {
         SimpleApiResult simpleApiResult = new SimpleApiResult();
         simpleApiResult.setStatus(rootObject.optInt("status"));
-        simpleApiResult.setMessage(rootObject.optString("message"));
+        String msg = rootObject.optString("message");
+        if (msg == null){
+            msg = rootObject.optString("msg");
+        }
+        simpleApiResult.setMessage(msg);
         return simpleApiResult;
     }
 

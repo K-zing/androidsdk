@@ -38,6 +38,7 @@ final class Action {
     static final String checkPlayerRealNameAndEmail = "xrdl2zb";
     static final String bonusPromotion  = "04xr11g";
     static final String transferAllBalanceToGame  = "hGxg046";
+    static final String changeUserLanguage  = "b626hGc";
 
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";

@@ -46,6 +46,7 @@ public class DepositOption implements Parcelable {
     private String phoneDepositDesc = "";
     private String cryptoDepositDesc = "";
     private String depositFooterDesc = "";
+    private String bank2DepositDesc = "";
 
     public DepositOption() {
 
@@ -92,6 +93,7 @@ public class DepositOption implements Parcelable {
             item.phoneDepositDesc = depositDescObject.optString("phone_deposit_desc");
             item.cryptoDepositDesc = depositDescObject.optString("crypto_deposit_desc");
             item.depositFooterDesc = depositDescObject.optString("deposit_footer_desc");
+            item.bank2DepositDesc = depositDescObject.optString("bank2_deposit_desc");
         }
 
         JSONArray paymentTypeJArray = rootObject.optJSONArray("paymentType");
@@ -528,6 +530,14 @@ public class DepositOption implements Parcelable {
         this.depositFooterDesc = depositFooterDesc;
     }
 
+    public String getBank2DepositDesc() {
+        return bank2DepositDesc;
+    }
+
+    public void setBank2DepositDesc(String bank2DepositDesc) {
+        this.bank2DepositDesc = bank2DepositDesc;
+    }
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public DepositOption createFromParcel(Parcel in) {
             return new DepositOption(in);
@@ -559,6 +569,7 @@ public class DepositOption implements Parcelable {
         phoneDepositDesc = in.readString();
         cryptoDepositDesc = in.readString();
         depositFooterDesc = in.readString();
+        bank2DepositDesc = in.readString();
         Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
         paymentGroupList = (ArrayList<PaymentGroup>) customObjects[0];
         activityMap = (HashMap<String, String>) customObjects[1];
@@ -595,6 +606,7 @@ public class DepositOption implements Parcelable {
         dest.writeString(phoneDepositDesc);
         dest.writeString(cryptoDepositDesc);
         dest.writeString(depositFooterDesc);
+        dest.writeString(bank2DepositDesc);
         Object[] customObjects = new Object[4];
         customObjects[0] = paymentGroupList;
         customObjects[1] = activityMap;

@@ -300,6 +300,10 @@ public final class KzingAPI {
         return new TransferAllBalanceToGameAPI();
     }
 
+    public static ChangeUserLanguageAPI changeUserLanguage() {
+        return new ChangeUserLanguageAPI();
+    }
+
     public static TransferToGameAPI transferToGame() {
         return new TransferToGameAPI();
     }
