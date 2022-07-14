@@ -1,7 +1,6 @@
 package com.kzingsdk.requests;
 
 import com.kzingsdk.entity.RegAgentParam;
-import com.kzingsdk.entity.RegParam;
 
 /**
  * Interface to consolidate all public APIs.
@@ -302,6 +301,10 @@ public final class KzingAPI {
 
     public static ChangeUserLanguageAPI changeUserLanguage() {
         return new ChangeUserLanguageAPI();
+    }
+
+    public static GetMobileFloatingWindowAPI getMobileFloatingWindow() {
+        return new GetMobileFloatingWindowAPI();
     }
 
     public static TransferToGameAPI transferToGame() {
