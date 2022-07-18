@@ -219,6 +219,12 @@ public final class KzingAPI {
         return new GetGpsBalanceAPI();
     }
 
+
+    public static GetSingleGamePlatformBalanceAPI getSingleGamePlatformBalance() {
+        return new GetSingleGamePlatformBalanceAPI();
+    }
+
+
     public static GetMessageListAPI getMessageList() {
         return new GetMessageListAPI();
     }

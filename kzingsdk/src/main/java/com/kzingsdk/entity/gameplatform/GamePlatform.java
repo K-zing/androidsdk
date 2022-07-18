@@ -1,10 +1,12 @@
 package com.kzingsdk.entity.gameplatform;
 
 import com.kzingsdk.requests.KzingAPI;
+import com.kzingsdk.util.BigDecimalUtil;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -61,6 +63,7 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
     private int statusCode = NOT_MAINTAIN;
     private int clientStatusCode = NOT_MAINTAIN;
     private int conversion = 0;
+    private BigDecimal highestRebate = BigDecimal.ZERO;
     private boolean isDummy = false;
     private boolean hasChild = false;
     private ArrayList<GamePlatformChild> childArrayList = new ArrayList<>();
@@ -78,6 +81,7 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
         gp.url = url;
         gp.image = image;
         gp.conversion = conversion;
+        gp.highestRebate = highestRebate;
         gp.gamePlatformType = gamePlatformType;
         gp.playStatus = playStatus;
         gp.statusCode = statusCode;
@@ -146,6 +150,7 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
         item.setGamePlatformType(type);
         item.setImage(rootObject.optString("logo"));
         item.setConversion(rootObject.optInt("conversion"));
+        item.setHighestRebate(BigDecimalUtil.optBigDecimal(rootObject,"highest_rebate"));
         item.setGameOrientation(GameOrientation.values()[rootObject.optInt("orientation", 0)]);
         item.setHasChild(rootObject.optInt("haschild") == 1);
         Integer defaultCurrency = rootObject.optInt("displayorder");
@@ -295,6 +300,14 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
     public GamePlatform setConversion(int conversion) {
         this.conversion = conversion;
         return this;
+    }
+
+    public BigDecimal getHighestRebate() {
+        return highestRebate;
+    }
+
+    public void setHighestRebate(BigDecimal highestRebate) {
+        this.highestRebate = highestRebate;
     }
 
     public String getFrameIcons() {

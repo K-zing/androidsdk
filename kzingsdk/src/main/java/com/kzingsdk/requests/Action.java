@@ -121,6 +121,7 @@ final class Action {
     static final String getGamePlatformAccountList = "fosjp6u";
     static final String getAllGpBalance = "p18jd1a";
     static final String getGpsBalance = "p18jd1b";
+    static final String getSingleGamePlatformBalance = "a5tibb8";
     static final String oneClickRedeemRakeback = "2zbxrdl";
     static final String getRakebackRedeemHistory = "x2zbrdl";
 
