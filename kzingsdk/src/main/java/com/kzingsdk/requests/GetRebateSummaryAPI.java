@@ -4,17 +4,20 @@ import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.RebateSummary;
+import com.kzingsdk.util.Constant;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Calendar;
 
 import io.reactivex.Observable;
 
 public class GetRebateSummaryAPI extends CoreRequest {
 
     private String type;
-    private String start;
-    private String end;
+    private Calendar startDateCalendar;
+    private Calendar endDateCalendar;
     private String currency;
 
     @Override
@@ -36,8 +39,8 @@ public class GetRebateSummaryAPI extends CoreRequest {
         JSONObject jsonData = super.generateParamsJson();
         try {
             jsonData.put("type", type);
-            jsonData.put("start", start);
-            jsonData.put("end", end);
+            jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
+            jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
             jsonData.put("currency", currency);
             return jsonData;
         } catch (JSONException ignored) {
@@ -79,21 +82,13 @@ public class GetRebateSummaryAPI extends CoreRequest {
         return this;
     }
 
-    public String getStart() {
-        return start;
-    }
-
-    public GetRebateSummaryAPI setStart(String start) {
-        this.start = start;
+    public GetRebateSummaryAPI setStartDateCalendar(Calendar startDateCalendar) {
+        this.startDateCalendar = startDateCalendar;
         return this;
     }
 
-    public String getEnd() {
-        return end;
-    }
-
-    public GetRebateSummaryAPI setEnd(String end) {
-        this.end = end;
+    public GetRebateSummaryAPI setEndDateCalendar(Calendar endDateCalendar) {
+        this.endDateCalendar = endDateCalendar;
         return this;
     }
 
