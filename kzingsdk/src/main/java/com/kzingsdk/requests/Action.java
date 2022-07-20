@@ -36,10 +36,12 @@ final class Action {
     static final String getIplMatchesData = "egydymd";
     static final String getDividendPools = "liuawev";
     static final String checkPlayerRealNameAndEmail = "xrdl2zb";
-    static final String bonusPromotion  = "04xr11g";
-    static final String transferAllBalanceToGame  = "hGxg046";
-    static final String changeUserLanguage  = "b626hGc";
-    static final String getMobileFloatingWindow  = "6uliuap";
+    static final String bonusPromotion = "04xr11g";
+    static final String transferAllBalanceToGame = "hGxg046";
+    static final String changeUserLanguage = "b626hGc";
+    static final String getMobileFloatingWindow = "6uliuap";
+    static final String getRebateSummary = "trh6VXw";
+    static final String getRebateDetail = "GfhGcxO";
 
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";

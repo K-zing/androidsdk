@@ -219,6 +219,13 @@ public final class KzingAPI {
         return new GetGpsBalanceAPI();
     }
 
+    public static GetRebateSummaryAPI getRebateSummary() {
+        return new GetRebateSummaryAPI();
+    }
+
+    public static GetRebateDetailAPI getRebateDetail() {
+        return new GetRebateDetailAPI();
+    }
 
     public static GetSingleGamePlatformBalanceAPI getSingleGamePlatformBalance() {
         return new GetSingleGamePlatformBalanceAPI();
