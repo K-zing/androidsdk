@@ -42,6 +42,7 @@ final class Action {
     static final String getMobileFloatingWindow = "6uliuap";
     static final String getRebateSummary = "trh6VXw";
     static final String getRebateDetail = "GfhGcxO";
+    static final String checkDptTransInfo = "7wlGhcb";
 
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";

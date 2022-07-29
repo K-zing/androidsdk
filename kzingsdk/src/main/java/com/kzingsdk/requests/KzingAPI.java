@@ -226,6 +226,9 @@ public final class KzingAPI {
     public static GetRebateDetailAPI getRebateDetail() {
         return new GetRebateDetailAPI();
     }
+    public static CheckDptTransInfoAPI checkDptTransInfo() {
+        return new CheckDptTransInfoAPI();
+    }
 
     public static GetSingleGamePlatformBalanceAPI getSingleGamePlatformBalance() {
         return new GetSingleGamePlatformBalanceAPI();
