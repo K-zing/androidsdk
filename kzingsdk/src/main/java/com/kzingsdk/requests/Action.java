@@ -142,6 +142,7 @@ final class Action {
     static final String getWithdrawFields = "g4vl9mt";
     static final String sendWithdrawSms = "78acd7c";
     static final String submitWithdraw = "acd778c";
+    static final String submitWithdrawEp = "h6V5d9v";
     static final String submitWithdrawSport = "acd778d";
     static final String submitEWalletWithdraw = "rxjtghw";
     static final String getPostpaidBonus = "szmb1yr";

@@ -338,6 +338,9 @@ public final class KzingAPI {
     public static SubmitWithdrawAPI submitWithdraw() {
         return new SubmitWithdrawAPI();
     }
+    public static SubmitWithdrawEpAPI submitWithdrawEp() {
+        return new SubmitWithdrawEpAPI();
+    }
 
     public static SubmitWithdrawSportAPI submitWithdrawSport() {
         return new SubmitWithdrawSportAPI();
