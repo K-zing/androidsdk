@@ -15,6 +15,7 @@ public class VerifySmsCodeAPI extends CoreRequest {
     private String loginName = null;
     private String phone = null;
     private String validateCode = null;
+    private String type = null;
 
 
     VerifySmsCodeAPI() {
@@ -47,6 +48,7 @@ public class VerifySmsCodeAPI extends CoreRequest {
             jsonData.put("name", loginName);
             jsonData.put("phone", phone);
             jsonData.put("validateCode", validateCode);
+            jsonData.put("type", type);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -95,6 +97,11 @@ public class VerifySmsCodeAPI extends CoreRequest {
 
     public VerifySmsCodeAPI setParamValidateCode(String validateCode) {
         this.validateCode = validateCode;
+        return this;
+    }
+
+    public VerifySmsCodeAPI setType(String type) {
+        this.type = type;
         return this;
     }
 }

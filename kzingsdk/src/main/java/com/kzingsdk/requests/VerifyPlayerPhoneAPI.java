@@ -14,6 +14,7 @@ public class VerifyPlayerPhoneAPI extends CoreRequest {
     private String phone = null;
     private String phoneCountry = null;
     private String validateCode = null;
+    private String type = null;
 
     VerifyPlayerPhoneAPI() {
         super();
@@ -43,6 +44,8 @@ public class VerifyPlayerPhoneAPI extends CoreRequest {
             jsonData.put("validateCode", validateCode);
             if (phoneCountry != null)
                 jsonData.put("phoneCountry", phoneCountry);
+            if (type != null)
+                jsonData.put("type", type);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -93,4 +96,8 @@ public class VerifyPlayerPhoneAPI extends CoreRequest {
         return this;
     }
 
+    public VerifyPlayerPhoneAPI setType(String type) {
+        this.type = type;
+        return this;
+    }
 }
