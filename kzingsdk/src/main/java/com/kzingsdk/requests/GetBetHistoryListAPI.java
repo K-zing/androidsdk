@@ -22,6 +22,7 @@ public class GetBetHistoryListAPI extends CoreRequest implements RequireCurrency
     private String gpid = ALL;
     private Integer page = 1;
     private String currency;
+    private String gpType;
     private Calendar startDateCalendar, endDateCalendar;
 
     GetBetHistoryListAPI() {
@@ -60,6 +61,7 @@ public class GetBetHistoryListAPI extends CoreRequest implements RequireCurrency
             jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
             jsonData.put("startTime", Constant.TIME_FORMAT.format(startDateCalendar.getTime()));
             jsonData.put("endTime", Constant.TIME_FORMAT.format(endDateCalendar.getTime()));
+            jsonData.put("gptype", gpType);
             if (currency != null)
                 jsonData.put("currency", currency);
             return jsonData;
@@ -140,4 +142,8 @@ public class GetBetHistoryListAPI extends CoreRequest implements RequireCurrency
         return this;
     }
 
+    public GetBetHistoryListAPI setGpType(String gpType) {
+        this.gpType = gpType;
+        return this;
+    }
 }

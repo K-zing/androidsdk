@@ -223,6 +223,10 @@ public final class KzingAPI {
         return new GetRebateSummaryAPI();
     }
 
+    public static GetBetHistorySummaryAPI getBetHistorySummary() {
+        return new GetBetHistorySummaryAPI();
+    }
+
     public static GetRebateDetailAPI getRebateDetail() {
         return new GetRebateDetailAPI();
     }
