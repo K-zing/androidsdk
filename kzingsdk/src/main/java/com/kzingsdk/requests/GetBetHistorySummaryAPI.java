@@ -3,7 +3,7 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.RebateSummary;
+import com.kzingsdk.entity.BetHistorySummary;
 import com.kzingsdk.util.Constant;
 
 import org.json.JSONException;
@@ -49,8 +49,8 @@ public class GetBetHistorySummaryAPI extends CoreRequest {
     }
 
     @Override
-    public Observable<RebateSummary> requestRx(final Context context) {
-        return super.baseExecute(context).map(RebateSummary::newInstance);
+    public Observable<BetHistorySummary> requestRx(final Context context) {
+        return super.baseExecute(context).map(BetHistorySummary::newInstance);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class GetBetHistorySummaryAPI extends CoreRequest {
     }
 
     public interface GetBetHistorySummaryCallBack extends KzingCallBack {
-        void onSuccess(RebateSummary rebateSummary);
+        void onSuccess(BetHistorySummary betHistorySummary);
     }
 
     public GetBetHistorySummaryAPI setStartDateCalendar(Calendar startDateCalendar) {
@@ -92,13 +92,6 @@ public class GetBetHistorySummaryAPI extends CoreRequest {
         return this;
     }
 
-    public String getGpType() {
-        return gpType;
-    }
 
-    public GetBetHistorySummaryAPI setGpType(String gpType) {
-        this.gpType = gpType;
-        return this;
-    }
 }
 
