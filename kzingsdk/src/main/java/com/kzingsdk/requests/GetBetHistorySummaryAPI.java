@@ -92,6 +92,9 @@ public class GetBetHistorySummaryAPI extends CoreRequest {
         return this;
     }
 
-
+    public GetBetHistorySummaryAPI setGpType(String gpType) {
+        this.gpType = gpType;
+        return this;
+    }
 }
 
