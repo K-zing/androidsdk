@@ -37,11 +37,14 @@ public class WithdrawInfo {
     private boolean allowWithdrawCfg;
     private boolean allowCryptoWithdrawCfg;
     private boolean allowIFSCCode;
+    private boolean cfQuickPay;
+
 
     private BigDecimal withdrawRate = BigDecimal.ONE;
     private ArrayList<BankCard> bankCardList = new ArrayList<>();
     private ArrayList<PlayerBankCard> playerBankCardList = new ArrayList<>();
     private HashMap<String, ArrayList<String>> cryptoMap = new HashMap<>();
+    private ArrayList<QpWallet> qpWalletList = new ArrayList<>();
 
     public static WithdrawInfo newInstance(JSONObject rootObject) {
         WithdrawInfo withdrawInfo = new WithdrawInfo();
@@ -72,6 +75,7 @@ public class WithdrawInfo {
         withdrawInfo.setAllowWithdrawCfg(rootObject.optBoolean("allow_withdraw_cfg", false));
         withdrawInfo.setAllowCryptoWithdrawCfg(rootObject.optBoolean("allow_crypto_withdraw_cfg", false));
         withdrawInfo.setAllowIFSCCode(rootObject.optBoolean("allowIFSCCode", false));
+        withdrawInfo.setCfQuickPay(rootObject.optString("cfquickpay", "OFF").equalsIgnoreCase("ON"));
 
         JSONArray cryptoArray = rootObject.optJSONArray("crypto");
         for (int i = 0; i < cryptoArray.length(); i++) {
@@ -85,13 +89,21 @@ public class WithdrawInfo {
             withdrawInfo.cryptoMap.put(currency, networkList);
         }
         JSONArray playerBanksArray = rootObject.optJSONArray("wd_banks");
-        for (int i = 0; i < playerBanksArray.length(); i++) {
-            withdrawInfo.playerBankCardList.add(PlayerBankCard.newInstance(playerBanksArray.optJSONObject(i)));
-        }
+        if (playerBanksArray != null)
+            for (int i = 0; i < playerBanksArray.length(); i++) {
+                withdrawInfo.playerBankCardList.add(PlayerBankCard.newInstance(playerBanksArray.optJSONObject(i)));
+            }
         JSONArray banksArray = rootObject.optJSONArray("banks");
-        for (int i = 0; i < banksArray.length(); i++) {
-            withdrawInfo.bankCardList.add(BankCard.newInstance(banksArray.optJSONObject(i)));
-        }
+        if (banksArray != null)
+            for (int i = 0; i < banksArray.length(); i++) {
+                withdrawInfo.bankCardList.add(BankCard.newInstance(banksArray.optJSONObject(i)));
+            }
+
+        JSONArray qpwalletArray = rootObject.optJSONArray("qpwallet");
+        if (qpwalletArray != null)
+            for (int i = 0; i < qpwalletArray.length(); i++) {
+                withdrawInfo.qpWalletList.add(QpWallet.newInstance(qpwalletArray.optJSONObject(i)));
+            }
         return withdrawInfo;
     }
 
@@ -335,6 +347,24 @@ public class WithdrawInfo {
 
     public void setCryptoMap(HashMap<String, ArrayList<String>> cryptoMap) {
         this.cryptoMap = cryptoMap;
+    }
+
+    public boolean isCfQuickPay() {
+        return cfQuickPay;
+    }
+
+    public WithdrawInfo setCfQuickPay(boolean cfQuickPay) {
+        this.cfQuickPay = cfQuickPay;
+        return this;
+    }
+
+    public ArrayList<QpWallet> getQpWalletList() {
+        return qpWalletList;
+    }
+
+    public WithdrawInfo setQpWalletList(ArrayList<QpWallet> qpWalletList) {
+        this.qpWalletList = qpWalletList;
+        return this;
     }
 
     @Override
