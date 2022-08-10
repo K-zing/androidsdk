@@ -160,6 +160,7 @@ final class Action {
     static final String cryptoGetTransaction = "OuasJfO";
     static final String getCryptoDepositOption = "WBVXwCB";
     static final String getCryptoDepositAddr = "pEoMBfK";
+    static final String getCryptoDepositAddr2 = "pEoMBfl";
     static final String getActivityHistory = "SYqhEyK";
     static final String passwordVerify = "OoTfKIz";
 

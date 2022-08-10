@@ -12,6 +12,7 @@ public class CryptoDepositAddr {
     private String address;
     private String currency;
     private String msg;
+    private Integer status;
 
     public CryptoDepositAddr() {
 
@@ -22,6 +23,7 @@ public class CryptoDepositAddr {
         activityBonus.setAddress(rootObject.optString("address"));
         activityBonus.setCurrency(rootObject.optString("currency"));
         activityBonus.setMsg(rootObject.optString("msg"));
+        activityBonus.setStatus(rootObject.optInt("status"));
         return activityBonus;
     }
 
@@ -47,6 +49,15 @@ public class CryptoDepositAddr {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public CryptoDepositAddr setStatus(Integer status) {
+        this.status = status;
+        return this;
     }
 }
 

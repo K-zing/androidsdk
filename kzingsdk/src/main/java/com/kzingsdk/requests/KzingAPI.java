@@ -230,6 +230,7 @@ public final class KzingAPI {
     public static GetRebateDetailAPI getRebateDetail() {
         return new GetRebateDetailAPI();
     }
+
     public static CheckDptTransInfoAPI checkDptTransInfo() {
         return new CheckDptTransInfoAPI();
     }
@@ -342,6 +343,7 @@ public final class KzingAPI {
     public static SubmitWithdrawAPI submitWithdraw() {
         return new SubmitWithdrawAPI();
     }
+
     public static SubmitWithdrawEpAPI submitWithdrawEp() {
         return new SubmitWithdrawEpAPI();
     }
@@ -652,6 +654,10 @@ public final class KzingAPI {
 
     public static GetCryptoDepositAddrAPI getCryptoDepositAddr() {
         return new GetCryptoDepositAddrAPI();
+    }
+
+    public static GetCryptoDepositAddr2API getCryptoDepositAddr2() {
+        return new GetCryptoDepositAddr2API();
     }
 
     public static GetActivityHistoryAPI getActivityHistory() {

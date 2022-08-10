@@ -39,6 +39,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
 
     private boolean quickAmountFlag = false;
     private ArrayList<BigDecimal> quickAmountList = new ArrayList<>();
+    private ArrayList<String> displayAddressList = new ArrayList<>();
 
     public ThirdPartyPayment() {
     }
@@ -125,6 +126,13 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
                 quickAmountList.add(new BigDecimal(quickamount));
             }
             this.quickAmountList = quickAmountList;
+        }
+
+        JSONArray displayAddressArray = rootObject.optJSONArray("displayAddress");
+        if (displayAddressArray != null) {
+            for (int i = 0; i < displayAddressArray.length(); i++) {
+                displayAddressList.add(displayAddressArray.optString(i));
+            }
         }
         if (!useRotate) {
             fixAmounts = settingObject.optString("fixamount", "").split(",");
