@@ -42,6 +42,8 @@ public class ClientInstantInfo implements Parcelable {
     private Boolean isWdBindPlayerAdress = false;
     private Boolean regCaptcha = false;
     private Boolean playerBankcardVerifiedWithdraw = false;
+    private Boolean otpSms = false;
+    private Boolean otpVoice = false;
     private String siteId;
     private String cryptoFixedExchangeRate;
     private String announcement;
@@ -109,6 +111,8 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setWdBindPlayerAdress(rootObject.optBoolean("isWdBindPlayerAdress", false));
         clientInfo.setRegCaptcha(rootObject.optBoolean("regCaptcha", false));
         clientInfo.setPlayerBankcardVerifiedWithdraw(rootObject.optBoolean("playerBankcardVerifiedWithdraw", false));
+        clientInfo.setOtpSms(rootObject.optBoolean("OtpSms", false));
+        clientInfo.setOtpVoice(rootObject.optBoolean("OtpVoice", false));
         clientInfo.setCaptchaMode(rootObject.optString("captchaMode"));
         clientInfo.setSiteId(rootObject.optString("siteId"));
         clientInfo.setCryptoFixedExchangeRate(rootObject.optString("cryptoFixedExchangeRate"));
@@ -609,6 +613,24 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setPlayerBankcardVerifiedWithdraw(Boolean playerBankcardVerifiedWithdraw) {
         this.playerBankcardVerifiedWithdraw = playerBankcardVerifiedWithdraw;
+    }
+
+    public Boolean getOtpSms() {
+        return otpSms;
+    }
+
+    public ClientInstantInfo setOtpSms(Boolean otpSms) {
+        this.otpSms = otpSms;
+        return this;
+    }
+
+    public Boolean getOtpVoice() {
+        return otpVoice;
+    }
+
+    public ClientInstantInfo setOtpVoice(Boolean otpVoice) {
+        this.otpVoice = otpVoice;
+        return this;
     }
 
     public String getSiteId() {
