@@ -62,6 +62,7 @@ public class ClientInstantInfo implements Parcelable {
     private String appFriendReferralDomain;
     private String depositAnnouncement;
     private String enterDepositPopup;
+    private String dptCryptoFixedExchangeRate;
     private CaptchaApiId captchaApiId = new CaptchaApiId();
     private ArrayList<String> memberPanAgentCode = new ArrayList<>();
     private ArrayList<String> memberPanPlayerGroup = new ArrayList<>();
@@ -132,6 +133,7 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setAppFriendReferralDomain(rootObject.optString("appFriendReferralDomain"));
         clientInfo.setDepositAnnouncement(rootObject.optString("depositAnnouncement"));
         clientInfo.setEnterDepositPopup(rootObject.optString("enterdepositpopup"));
+        clientInfo.setDptCryptoFixedExchangeRate(rootObject.optString("dptCryptoFixedExchangeRate"));
 
         JSONObject captchaApiIdJSONObject = rootObject.optJSONObject("captchaApiId");
         if (captchaApiIdJSONObject != null)
@@ -275,7 +277,8 @@ public class ClientInstantInfo implements Parcelable {
         isWdBindPlayerAdress = in.readInt() == 1;
         regCaptcha = in.readInt() == 1;
         playerBankcardVerifiedWithdraw = in.readInt() == 1;
-
+        otpSms = in.readInt() == 1;
+        otpVoice = in.readInt() == 1;
         siteId = in.readString();
         cryptoFixedExchangeRate = in.readString();
         announcement = in.readString();
@@ -294,6 +297,7 @@ public class ClientInstantInfo implements Parcelable {
         appFriendReferralDomain = in.readString();
         depositAnnouncement = in.readString();
         enterDepositPopup = in.readString();
+        dptCryptoFixedExchangeRate = in.readString();
         Object[] objectArray = in.readArray(ClientInstantInfo.class.getClassLoader());
         int i = 0;
         captchaApiId = (CaptchaApiId) objectArray[i++];
@@ -343,7 +347,8 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeInt(isWdBindPlayerAdress ? 1 : 0);
         dest.writeInt(regCaptcha ? 1 : 0);
         dest.writeInt(playerBankcardVerifiedWithdraw ? 1 : 0);
-
+        dest.writeInt(otpSms ? 1 : 0);
+        dest.writeInt(otpVoice ? 1 : 0);
         dest.writeString(siteId);
         dest.writeString(cryptoFixedExchangeRate);
         dest.writeString(announcement);
@@ -362,6 +367,7 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeString(appFriendReferralDomain);
         dest.writeString(depositAnnouncement);
         dest.writeString(enterDepositPopup);
+        dest.writeString(dptCryptoFixedExchangeRate);
         dest.writeArray(new Object[]{
                 captchaApiId,
                 memberPanAgentCode,
@@ -776,6 +782,14 @@ public class ClientInstantInfo implements Parcelable {
     public ClientInstantInfo setEnterDepositPopup(String enterDepositPopup) {
         this.enterDepositPopup = enterDepositPopup;
         return this;
+    }
+
+    public String getDptCryptoFixedExchangeRate() {
+        return dptCryptoFixedExchangeRate;
+    }
+
+    public void setDptCryptoFixedExchangeRate(String dptCryptoFixedExchangeRate) {
+        this.dptCryptoFixedExchangeRate = dptCryptoFixedExchangeRate;
     }
 
     public ArrayList<String> getMemberPanAgentCode() {

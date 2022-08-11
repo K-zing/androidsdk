@@ -42,6 +42,8 @@ public class GetDepositRecordAPI extends CoreRequest implements RequireCurrency 
             jsonData.put("offset", offset);
             jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
             jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
+            if (status!=null)
+                jsonData.put("status", status);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -57,6 +59,7 @@ public class GetDepositRecordAPI extends CoreRequest implements RequireCurrency 
     private Integer offset = 0;
     private Calendar startDateCalendar, endDateCalendar;
     private String currency;
+    private String status;
 
     @Override
     public Observable<ArrayList<DepositRecord>> requestRx(Context context) {
@@ -129,6 +132,10 @@ public class GetDepositRecordAPI extends CoreRequest implements RequireCurrency 
         return this;
     }
 
+    public GetDepositRecordAPI setParamStatus(String status) {
+        this.status = status;
+        return this;
+    }
     @Override
     public String getCurrency() {
         return currency;
