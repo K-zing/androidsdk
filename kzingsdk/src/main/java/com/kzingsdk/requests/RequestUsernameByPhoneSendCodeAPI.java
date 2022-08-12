@@ -16,6 +16,7 @@ public class RequestUsernameByPhoneSendCodeAPI extends CoreRequest {
     private String uPhoneCountry = null;
     private boolean validateOnly = false;
     private boolean requestVoice = false;
+    private Boolean updatePhone = null;
 
 
     RequestUsernameByPhoneSendCodeAPI() {
@@ -43,6 +44,8 @@ public class RequestUsernameByPhoneSendCodeAPI extends CoreRequest {
             jsonData.put("playerPhoneCountry", uPhoneCountry);
             jsonData.put("validateOnly", validateOnly);
             jsonData.put("requestVoice", requestVoice);
+            if (updatePhone != null)
+                jsonData.put("updatePhone", updatePhone);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -95,5 +98,10 @@ public class RequestUsernameByPhoneSendCodeAPI extends CoreRequest {
 
     public void setRequestVoice(boolean requestVoice) {
         this.requestVoice = requestVoice;
+    }
+
+    public RequestUsernameByPhoneSendCodeAPI setUpdatePhone(Boolean updatePhone) {
+        this.updatePhone = updatePhone;
+        return this;
     }
 }
