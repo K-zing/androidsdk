@@ -3,14 +3,12 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.DepositRecord;
+import com.kzingsdk.entity.GetDepositRecordResult;
 import com.kzingsdk.util.Constant;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import io.reactivex.Observable;
@@ -42,7 +40,7 @@ public class GetDepositRecordAPI extends CoreRequest implements RequireCurrency 
             jsonData.put("offset", offset);
             jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
             jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
-            if (status!=null)
+            if (status != null)
                 jsonData.put("status", status);
             return jsonData;
         } catch (JSONException ignored) {
@@ -62,24 +60,17 @@ public class GetDepositRecordAPI extends CoreRequest implements RequireCurrency 
     private String status;
 
     @Override
-    public Observable<ArrayList<DepositRecord>> requestRx(Context context) {
+    public Observable<GetDepositRecordResult> requestRx(Context context) {
         return super.baseExecute(context)
-                .map(jsonResponse -> {
-                    ArrayList<DepositRecord> depositRecordList = new ArrayList<>();
-                    JSONArray response = jsonResponse.optJSONArray("response");
-                    for (int i = 0; i < response.length(); i++) {
-                        depositRecordList.add(DepositRecord.newInstance(response.optJSONObject(i)));
-                    }
-                    return depositRecordList;
-                });
+                .map(GetDepositRecordResult::newInstance);
     }
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(depositRecordList -> {
+        requestRx(context).subscribe(getDepositRecordResult -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((GetDepositRecordCallBack) kzingCallBack).onSuccess(depositRecordList);
+                    ((GetDepositRecordCallBack) kzingCallBack).onSuccess(getDepositRecordResult);
                 }
             }
         }, defaultOnErrorConsumer);
@@ -91,7 +82,7 @@ public class GetDepositRecordAPI extends CoreRequest implements RequireCurrency 
     }
 
     public interface GetDepositRecordCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<DepositRecord> depositRecordList);
+        void onSuccess(GetDepositRecordResult getDepositRecordResult);
     }
 
 
@@ -136,6 +127,7 @@ public class GetDepositRecordAPI extends CoreRequest implements RequireCurrency 
         this.status = status;
         return this;
     }
+
     @Override
     public String getCurrency() {
         return currency;
