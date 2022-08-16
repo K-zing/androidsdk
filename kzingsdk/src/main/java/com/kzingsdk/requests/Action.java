@@ -59,6 +59,8 @@ final class Action {
     static final String verifySmsCode = "w61KFHD";
     static final String resetPasswordByEmail = "Cs19E0X";
     static final String resetPasswordByPhone = "pB2d9RJ";
+    static final String retrieveUsrWithoutCode = "vV0h26h";
+
 
     static final String requestVerifyPlayerEmail = "mNyDtf3";
     static final String verifyPlayerEmail = "YfiB4Ig";
