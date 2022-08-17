@@ -14,7 +14,7 @@ public class RetrieveUsrWithoutCodeResult {
 
     public static RetrieveUsrWithoutCodeResult newInstance(JSONObject rootObject) {
         RetrieveUsrWithoutCodeResult sendEmailResult = new RetrieveUsrWithoutCodeResult();
-        sendEmailResult.setMessage(rootObject.optString("msg"));
+        sendEmailResult.setMessage(rootObject.optString("message"));
         sendEmailResult.setStatus(rootObject.optString("status"));
         sendEmailResult.setIntervalSec(rootObject.optInt("intervalsec"));
         return sendEmailResult;

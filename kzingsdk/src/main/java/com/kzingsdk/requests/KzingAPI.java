@@ -497,7 +497,7 @@ public final class KzingAPI {
     public static RequestResetPasswordByEmailAPI requestResetPasswordByEmail() {
         return new RequestResetPasswordByEmailAPI();
     }
-    
+
     public static RetrieveUsrWithoutCodeAPI retrieveUsrWithoutCode() {
         return new RetrieveUsrWithoutCodeAPI();
     }
