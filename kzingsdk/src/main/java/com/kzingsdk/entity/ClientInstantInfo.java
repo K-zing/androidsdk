@@ -50,6 +50,7 @@ public class ClientInstantInfo implements Parcelable {
     private String sitenameApp;
     private String sitename;
     private String supportUrl;
+    private String supportUrl2;
     private String appDomain;
     private String h5Domain;
     private String androidAppDownloadLink;
@@ -121,6 +122,7 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setSitenameApp(rootObject.optString("sitenameApp"));
         clientInfo.setSitename(rootObject.optString("sitename"));
         clientInfo.setSupportUrl(rootObject.optString("supportUrl"));
+        clientInfo.setSupportUrl2(rootObject.optString("supportUrl2"));
         clientInfo.setAppDomain(rootObject.optString("appDomain"));
         clientInfo.setH5Domain(rootObject.optString("h5Domain"));
         clientInfo.setAndroidAppDownloadLink(rootObject.optString("androidAppDownloadLink"));
@@ -285,6 +287,7 @@ public class ClientInstantInfo implements Parcelable {
         sitenameApp = in.readString();
         sitename = in.readString();
         supportUrl = in.readString();
+        supportUrl2 = in.readString();
         appDomain = in.readString();
         h5Domain = in.readString();
         androidAppDownloadLink = in.readString();
@@ -355,6 +358,7 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeString(sitenameApp);
         dest.writeString(sitename);
         dest.writeString(supportUrl);
+        dest.writeString(supportUrl2);
         dest.writeString(appDomain);
         dest.writeString(h5Domain);
         dest.writeString(androidAppDownloadLink);
@@ -685,6 +689,14 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setSupportUrl(String supportUrl) {
         this.supportUrl = supportUrl;
+    }
+
+    public String getSupportUrl2() {
+        return supportUrl2;
+    }
+
+    public void setSupportUrl2(String supportUrl2) {
+        this.supportUrl2 = supportUrl2;
     }
 
     public String getAppDomain() {
