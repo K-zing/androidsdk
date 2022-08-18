@@ -14,6 +14,7 @@ public class GetCryptoDepositAddr2API extends CoreRequest {
 
     private String ppid;
     private String platform;
+    private String cryptocurrency;
 
     GetCryptoDepositAddr2API() {
         super();
@@ -29,6 +30,7 @@ public class GetCryptoDepositAddr2API extends CoreRequest {
         JSONObject jsonData = super.generateParamsJson();
         try {
             jsonData.put("ppid", ppid);
+            jsonData.put("cryptocurrency", cryptocurrency);
             jsonData.put("platform", platform);
             return jsonData;
         } catch (JSONException ignored) {
@@ -67,6 +69,11 @@ public class GetCryptoDepositAddr2API extends CoreRequest {
 
     public GetCryptoDepositAddr2API setPpid(String ppid) {
         this.ppid = ppid;
+        return this;
+    }
+
+    public GetCryptoDepositAddr2API setCryptocurrency(String cryptocurrency) {
+        this.cryptocurrency = cryptocurrency;
         return this;
     }
 
