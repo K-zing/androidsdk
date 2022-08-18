@@ -6,6 +6,7 @@ public class GamePlatformAccount {
 
     private String gpAccountId = "";
     private String gpName = "";
+    private String isseamless = "";
     private int displayorder = 0;
     private int status = 0;
     private String image = "";
@@ -14,6 +15,7 @@ public class GamePlatformAccount {
         GamePlatformAccount gpChild = new GamePlatformAccount();
         gpChild.gpAccountId = gpAccountId;
         gpChild.gpName = gpName;
+        gpChild.isseamless = isseamless;
         gpChild.image = image;
         gpChild.displayorder = displayorder;
         return gpChild;
@@ -27,6 +29,7 @@ public class GamePlatformAccount {
         GamePlatformAccount item = new GamePlatformAccount();
         item.setGpAccountId(rootObject.optString("gpaccountid"));
         item.setGpName(rootObject.optString("gpname"));
+        item.setIsseamless(rootObject.optString("isseamless"));
         item.setDisplayorder(rootObject.optInt("displayorder"));
         item.setStatus(rootObject.optInt("status"));
         item.setImage(rootObject.optString("image"));
@@ -47,6 +50,15 @@ public class GamePlatformAccount {
 
     public void setGpName(String gpName) {
         this.gpName = gpName;
+    }
+
+    public String getIsseamless() {
+        return isseamless;
+    }
+
+    public GamePlatformAccount setIsseamless(String isseamless) {
+        this.isseamless = isseamless;
+        return this;
     }
 
     public int getDisplayorder() {
