@@ -33,13 +33,13 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
     private BigDecimal maxDpt = BigDecimal.ZERO;
     private BigDecimal minDpt = BigDecimal.ZERO;
     private String pNum = "";
+    private String cryptoCurrency = "";
     private BigDecimal pRate = BigDecimal.ZERO;
     private Integer random = -1;
     private boolean displayDepositName = false;
 
     private boolean quickAmountFlag = false;
     private ArrayList<BigDecimal> quickAmountList = new ArrayList<>();
-    private ArrayList<String> displayAddressList = new ArrayList<>();
 
     public ThirdPartyPayment() {
     }
@@ -89,6 +89,10 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         item.setSDealsRate(BigDecimalUtil.optBigDecimal(rootObject, "sdealsrate", BigDecimal.ZERO));
         item.setDisplayDepositName(rootObject.optInt("displaydepositname", 0) == 1);
 
+        JSONObject displayAddressObject = rootObject.optJSONObject("displayAddress");
+        if (displayAddressObject != null) {
+            item.setCryptoCurrency(displayAddressObject.optString("cryptocurrency"));
+        }
 
         JSONArray fixAmtArray = rootRootObject.optJSONArray("fixAmtArray");
         if (fixAmtArray != null) {
@@ -117,6 +121,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         random = useRotate ? rootObject.optInt("randType", 0) : settingObject.optInt("random", 0);
         minAmount = useRotate ? rootObject.optDouble("randMin", 0d) : settingObject.optDouble("min", 0d);
         maxAmount = useRotate ? rootObject.optDouble("randMax", 0d) : settingObject.optDouble("max", 0d);
+
         quickAmountFlag = settingObject.optInt("quickamountflag") == 1;
         String quickamountString = settingObject.optString("quickamount");
         String[] quickamountStrings = quickamountString.split(",");
@@ -128,11 +133,9 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
             this.quickAmountList = quickAmountList;
         }
 
-        JSONArray displayAddressArray = rootObject.optJSONArray("displayAddress");
-        if (displayAddressArray != null) {
-            for (int i = 0; i < displayAddressArray.length(); i++) {
-                displayAddressList.add(displayAddressArray.optString(i));
-            }
+        JSONObject displayAddressObject = rootObject.optJSONObject("displayAddress");
+        if (displayAddressObject != null) {
+            cryptoCurrency = displayAddressObject.optString("cryptocurrency");
         }
         if (!useRotate) {
             fixAmounts = settingObject.optString("fixamount", "").split(",");
@@ -336,6 +339,15 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         this.quickAmountList = quickAmountList;
     }
 
+    public String getCryptoCurrency() {
+        return cryptoCurrency;
+    }
+
+    public ThirdPartyPayment setCryptoCurrency(String cryptoCurrency) {
+        this.cryptoCurrency = cryptoCurrency;
+        return this;
+    }
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public ThirdPartyPayment createFromParcel(Parcel in) {
             return new ThirdPartyPayment(in);
@@ -366,6 +378,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         randType = in.readInt();
         bcid = in.readInt();
         pNum = in.readString();
+        cryptoCurrency = in.readString();
         maxDpt = new BigDecimal(in.readString());
         minDpt = new BigDecimal(in.readString());
         pRate = new BigDecimal(in.readString());
@@ -408,6 +421,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         dest.writeInt(randType);
         dest.writeInt(bcid);
         dest.writeString(pNum);
+        dest.writeString(cryptoCurrency);
         dest.writeString(maxDpt.toString());
         dest.writeString(minDpt.toString());
         dest.writeString(pRate.toString());
