@@ -71,6 +71,7 @@ public class ClientInstantInfo implements Parcelable {
     private ArrayList<String> bannerCountdown = new ArrayList<>();
     private ArrayList<String> bannerFirstLaunch = new ArrayList<>();
     private ArrayList<MarqueeAnnouncement> marqueeAnnouncementList = new ArrayList<>();
+    private ArrayList<MarqueeActivity> marqueeActivityList = new ArrayList<>();
     private ArrayList<ThemeInfo> themeList = new ArrayList<>();
     private ContactInfo feedbackContactInfo = new ContactInfo();
     private ContactInfo partnershipContactInfo = new ContactInfo();
@@ -195,6 +196,19 @@ public class ClientInstantInfo implements Parcelable {
         }
         clientInfo.setBannerFirstLaunch(bannerFirstLaunchList);
 
+        JSONObject marqueeActivityJSONObject = rootObject.optJSONObject("marqueeActivity");
+        ArrayList<MarqueeActivity> marqueeActivityList = new ArrayList<>();
+        if (marqueeActivityJSONObject != null) {
+            JSONArray activityJSONArray = marqueeActivityJSONObject.optJSONArray("activity");
+            if (activityJSONArray != null) {
+                for (int i = 0; i < activityJSONArray.length(); i++) {
+                    marqueeActivityList.add(MarqueeActivity.newInstance(activityJSONArray.optJSONObject(i)));
+                }
+            }
+        }
+        clientInfo.setMarqueeActivityList(marqueeActivityList);
+
+
         JSONObject marqueeAnnouncementJSONObject = rootObject.optJSONObject("marqueeAnnouncement");
         ArrayList<MarqueeAnnouncement> marqueeAnnouncementList = new ArrayList<>();
         if (marqueeAnnouncementJSONObject != null) {
@@ -310,6 +324,7 @@ public class ClientInstantInfo implements Parcelable {
         bannerCountdown = (ArrayList<String>) objectArray[i++];
         bannerFirstLaunch = (ArrayList<String>) objectArray[i++];
         marqueeAnnouncementList = (ArrayList<MarqueeAnnouncement>) objectArray[i++];
+        marqueeActivityList = (ArrayList<MarqueeActivity>) objectArray[i++];
         themeList = (ArrayList<ThemeInfo>) objectArray[i++];
         feedbackContactInfo = (ContactInfo) objectArray[i++];
         partnershipContactInfo = (ContactInfo) objectArray[i++];
@@ -380,6 +395,7 @@ public class ClientInstantInfo implements Parcelable {
                 bannerCountdown,
                 bannerFirstLaunch,
                 marqueeAnnouncementList,
+                marqueeActivityList,
                 themeList,
                 feedbackContactInfo,
                 partnershipContactInfo,
@@ -890,6 +906,15 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setMarqueeAnnouncementList(ArrayList<MarqueeAnnouncement> marqueeAnnouncementList) {
         this.marqueeAnnouncementList = marqueeAnnouncementList;
+    }
+
+    public ArrayList<MarqueeActivity> getMarqueeActivityList() {
+        return marqueeActivityList;
+    }
+
+    public ClientInstantInfo setMarqueeActivityList(ArrayList<MarqueeActivity> marqueeActivityList) {
+        this.marqueeActivityList = marqueeActivityList;
+        return this;
     }
 
     public ArrayList<ThemeInfo> getThemeList() {

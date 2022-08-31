@@ -676,6 +676,14 @@ public final class KzingAPI {
         return new CancelPostpaidBonusAPI();
     }
 
+    public static AnnouncementDeleteStatusAPI announcementDeleteStatus() {
+        return new AnnouncementDeleteStatusAPI();
+    }
+
+    public static AnnouncementReadStatusAPI announcementReadStatus() {
+        return new AnnouncementReadStatusAPI();
+    }
+
     public static GetProvinceInfoAPI getProvinceInfo() {
         return new GetProvinceInfoAPI();
     }

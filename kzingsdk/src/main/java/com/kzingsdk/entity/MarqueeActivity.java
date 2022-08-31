@@ -3,29 +3,25 @@ package com.kzingsdk.entity;
 import org.json.JSONObject;
 
 
-public class MarqueeAnnouncement {
+public class MarqueeActivity {
 
 
     private String id;
     private String title;
     private String content;
-    private String important;
-    private String ticker;
     private String unread;
     private String status;
     private String created;
 
-    public MarqueeAnnouncement() {
+    public MarqueeActivity() {
 
     }
 
-    public static MarqueeAnnouncement newInstance(JSONObject rootObject) {
-        MarqueeAnnouncement marqueeAnnouncement = new MarqueeAnnouncement();
+    public static MarqueeActivity newInstance(JSONObject rootObject) {
+        MarqueeActivity marqueeAnnouncement = new MarqueeActivity();
         marqueeAnnouncement.setId(rootObject.optString("id"));
         marqueeAnnouncement.setTitle(rootObject.optString("title"));
         marqueeAnnouncement.setContent(rootObject.optString("content"));
-        marqueeAnnouncement.setImportant(rootObject.optString("important"));
-        marqueeAnnouncement.setTicker(rootObject.optString("ticker"));
         marqueeAnnouncement.setUnread(rootObject.optString("unread"));
         marqueeAnnouncement.setStatus(rootObject.optString("status"));
         marqueeAnnouncement.setCreated(rootObject.optString("created"));
@@ -56,27 +52,11 @@ public class MarqueeAnnouncement {
         this.content = content;
     }
 
-    public String getImportant() {
-        return important;
-    }
-
-    public void setImportant(String important) {
-        this.important = important;
-    }
-
-    public String getTicker() {
-        return ticker;
-    }
-
-    public void setTicker(String ticker) {
-        this.ticker = ticker;
-    }
-
     public String getUnread() {
         return unread;
     }
 
-    public MarqueeAnnouncement setUnread(String unread) {
+    public MarqueeActivity setUnread(String unread) {
         this.unread = unread;
         return this;
     }

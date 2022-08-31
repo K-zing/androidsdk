@@ -4,8 +4,8 @@ import org.json.JSONObject;
 
 public class SimpleApiResult {
 
-    private Integer status;
-    private String message = "";
+    protected Integer status;
+    protected String message = "";
 
     public static SimpleApiResult newInstance(JSONObject rootObject) {
         SimpleApiResult simpleApiResult = new SimpleApiResult();
