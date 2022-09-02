@@ -6,6 +6,8 @@ import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.ActivityItem;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -17,10 +19,25 @@ public class GetActivityListAPI extends CoreRequest {
         super();
     }
 
+    
     @Override
     protected String getAction() {
         return Action.getActivityList;
     }
+
+    private String isDeposit;
+
+    @Override
+    protected JSONObject generateParamsJson() {
+        JSONObject jsonData = super.generateParamsJson();
+        try {
+            jsonData.put("isdeposit", isDeposit);
+            return jsonData;
+        } catch (JSONException ignored) {
+        }
+        return super.generateParamsJson();
+    }
+
 
     @Override
     public Observable<ArrayList<ActivityItem>> requestRx(Context context) {
@@ -46,13 +63,17 @@ public class GetActivityListAPI extends CoreRequest {
         }, defaultOnErrorConsumer);
     }
 
-    public GetActivityListAPI addGetActivityListCallBack(GetActivityListCallBack getActivityListCallBack){
+    public GetActivityListAPI addGetActivityListCallBack(GetActivityListCallBack getActivityListCallBack) {
         kzingCallBackList.add(getActivityListCallBack);
         return this;
     }
 
-    public interface GetActivityListCallBack extends KzingCallBack{
+    public interface GetActivityListCallBack extends KzingCallBack {
         void onSuccess(ArrayList<ActivityItem> activityItemList);
     }
 
+    public GetActivityListAPI setIsDeposit(String isDeposit) {
+        this.isDeposit = isDeposit;
+        return this;
+    }
 }
