@@ -77,42 +77,41 @@ public abstract class CoreRequest {
     private static HashSet<String> dynamicDomainSet = new HashSet<>();
 
     private final ArrayList<String> PORT_LIST = new ArrayList<String>() {{
-//        add("9496");
-//        add("9587");
-//        add("9999");
-//        add("9487");
-////        add("9119");
-////        add("9190");
-////        add("9250");
-////        add("9009");
-////        add("8888");
-////        add("8998");
+        add("9496");
+        add("9587");
+        add("9999");
+        add("9487");
+//        add("9119");
+//        add("9190");
+//        add("9250");
+//        add("9009");
+//        add("8888");
+//        add("8998");
         add("");
     }};
 
     private final HashSet<String> API_URL_SET = new HashSet<String>() {{
-        add("https://miracle-apis-dev.qijixitong.com");
-
-//        String defaultIP = "https://tvwkkq8k9e7grjbw49pk.jumzxxtu3j.com";
-//        add(defaultIP);
-//        add("https://mcxyfv3tdbq9jap3vexg.jumzxxtu3j.com");
-//        add("https://21q3bnvp.ui2now.com");
-//        add("https://szburu19.semiconductorTech.net");
-//        add("https://weijinlai.com");
-//        add("https://hsrjah.com");
-//        add("https://nqj4hrthz4dtaytvbxnu.t8arxezlq7.com");
-//        add("https://nwlzzv.marnnfnzqpnz.com");
-//        add("https://arxzjq.epmmthxqvnfn.com");
-//        add("https://erpnfh.qutfdbjapxmd.com");
-//        add("https://xjgnfy.pzgktkvcwbch.com");
-//        add("https://pnoeee.draxetggrjqu.com");
+//        add("https://miracle-apis-dev.qijixitong.com");
+        String defaultIP = "https://tvwkkq8k9e7grjbw49pk.jumzxxtu3j.com";
+        add(defaultIP);
+        add("https://mcxyfv3tdbq9jap3vexg.jumzxxtu3j.com");
+        add("https://21q3bnvp.ui2now.com");
+        add("https://szburu19.semiconductorTech.net");
+        add("https://weijinlai.com");
+        add("https://hsrjah.com");
+        add("https://nqj4hrthz4dtaytvbxnu.t8arxezlq7.com");
+        add("https://nwlzzv.marnnfnzqpnz.com");
+        add("https://arxzjq.epmmthxqvnfn.com");
+        add("https://erpnfh.qutfdbjapxmd.com");
+        add("https://xjgnfy.pzgktkvcwbch.com");
+        add("https://pnoeee.draxetggrjqu.com");
     }};
 
     private final HashSet<String> API_URL_SET_BETTER = new HashSet<String>() {{
-        add("https://miracle-apis-dev.qijixitong.com");
-//        String defaultBetterIP = "https://fsr5vqdhsspsrtz6fl93.jumzxxtu3j.com/";
-//        add(defaultBetterIP);
-//        add("https://4jqz2j97.ui4now.com");
+//        add("https://miracle-apis-dev.qijixitong.com");
+        String defaultBetterIP = "https://fsr5vqdhsspsrtz6fl93.jumzxxtu3j.com/";
+        add(defaultBetterIP);
+        add("https://4jqz2j97.ui4now.com");
     }};
 
     protected ArrayList<KzingCallBack> kzingCallBackList = new ArrayList<>();

@@ -26,6 +26,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
     private BigDecimal promoRate = BigDecimal.ZERO;
     private BigDecimal sDealsRate = BigDecimal.ZERO;
     private ArrayList<COption> cOptionList = new ArrayList<>();
+    private String code = "";
 
     //extra for phone deposit
     private Integer bcid = -1;
@@ -76,6 +77,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         item.setId(rootObject.optString("ppid"));
         item.setPaymentName(rootObject.optString("ptalias"));
         item.setBankCode(rootObject.optString("bankcode"));
+        item.setCode(rootObject.optString("code"));
         item.setImage(rootObject.optString("bankcss"));
         item.setDisplayOrder(rootObject.optInt("sort"));
         item.setFormType(rootObject.optString("formtype"));
@@ -343,6 +345,15 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         return cryptoCurrency;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public ThirdPartyPayment setCode(String code) {
+        this.code = code;
+        return this;
+    }
+
     public ThirdPartyPayment setCryptoCurrency(String cryptoCurrency) {
         this.cryptoCurrency = cryptoCurrency;
         return this;
@@ -384,6 +395,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         pRate = new BigDecimal(in.readString());
         promoRate = new BigDecimal(in.readString());
         sDealsRate = new BigDecimal(in.readString());
+        code = new BigDecimal(in.readString());
         formType = in.readString();
         quickAmountFlag = in.readInt() == 1;
         Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
@@ -427,6 +439,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         dest.writeString(pRate.toString());
         dest.writeString(promoRate.toString());
         dest.writeString(sDealsRate.toString());
+        dest.writeString(code);
         dest.writeString(formType);
         dest.writeInt(quickAmountFlag ? 1 : 0);
         Object[] customObjects = new Object[6];
