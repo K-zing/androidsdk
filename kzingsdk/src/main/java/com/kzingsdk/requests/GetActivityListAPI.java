@@ -19,7 +19,7 @@ public class GetActivityListAPI extends CoreRequest {
         super();
     }
 
-    
+
     @Override
     protected String getAction() {
         return Action.getActivityList;
