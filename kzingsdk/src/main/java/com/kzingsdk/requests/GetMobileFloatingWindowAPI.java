@@ -40,10 +40,10 @@ public class GetMobileFloatingWindowAPI extends CoreRequest {
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(getMobileFloatingWindowList -> {
+        requestRx(context).subscribe(getMobileFloatingWindow -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((GetMobileFloatingWindowCallBack) kzingCallBack).onSuccess(getMobileFloatingWindowList);
+                    ((GetMobileFloatingWindowCallBack) kzingCallBack).onSuccess(getMobileFloatingWindow);
                 }
             }
         }, defaultOnErrorConsumer);

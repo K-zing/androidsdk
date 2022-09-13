@@ -18,6 +18,7 @@ public class MobileFloatingWindow {
     private String floatingImageId;
     private String floatingImagePath;
 
+
     public static MobileFloatingWindow newInstance(JSONObject rootObject) {
         MobileFloatingWindow mobileFloatingWindow = new MobileFloatingWindow();
         mobileFloatingWindow.setFloatingActivity(rootObject.optString("floatingActivity"));

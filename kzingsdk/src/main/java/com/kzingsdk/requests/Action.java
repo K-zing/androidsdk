@@ -40,11 +40,11 @@ final class Action {
     static final String transferAllBalanceToGame = "hGxg046";
     static final String changeUserLanguage = "b626hGc";
     static final String getMobileFloatingWindow = "6uliuap";
+    static final String getMobileFloatingWindowV2 = "23h89jq";
     static final String getRebateSummary = "trh6VXw";
     static final String getRebateDetail = "GfhGcxO";
     static final String checkDptTransInfo = "7wlGhcb";
     static final String getBetHistorySummary = "vh64xV0";
-
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";
     static final String requestUsernameByPhoneSendCode = "XXLy0yX";

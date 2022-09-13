@@ -327,6 +327,9 @@ public final class KzingAPI {
     public static GetMobileFloatingWindowAPI getMobileFloatingWindow() {
         return new GetMobileFloatingWindowAPI();
     }
+    public static GetMobileFloatingWindowV2API getMobileFloatingWindowV2() {
+        return new GetMobileFloatingWindowV2API();
+    }
 
     public static TransferToGameAPI transferToGame() {
         return new TransferToGameAPI();

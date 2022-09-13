@@ -35,6 +35,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
     private BigDecimal minDpt = BigDecimal.ZERO;
     private String pNum = "";
     private String cryptoCurrency = "";
+    private ArrayList<String> cryptoCurrencyList = new ArrayList<>();
     private BigDecimal pRate = BigDecimal.ZERO;
     private Integer random = -1;
     private boolean displayDepositName = false;
@@ -93,7 +94,13 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
 
         JSONObject displayAddressObject = rootObject.optJSONObject("displayAddress");
         if (displayAddressObject != null) {
-            item.setCryptoCurrency(displayAddressObject.optString("cryptocurrency"));
+            JSONArray cryptocurrencyArray = displayAddressObject.optJSONArray("cryptocurrency");
+            if (cryptocurrencyArray!=null){
+                for (int i = 0; i < cryptocurrencyArray.length(); i++) {
+                    String fixAmt = cryptocurrencyArray.optString(i);
+                    item.cryptoCurrencyList.add(cryptocurrencyArray.optString(i));
+                }
+            }
         }
 
         JSONArray fixAmtArray = rootRootObject.optJSONArray("fixAmtArray");
@@ -137,8 +144,15 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
 
         JSONObject displayAddressObject = rootObject.optJSONObject("displayAddress");
         if (displayAddressObject != null) {
-            cryptoCurrency = displayAddressObject.optString("cryptocurrency");
+            JSONArray cryptocurrencyArray = displayAddressObject.optJSONArray("cryptocurrency");
+            if (cryptocurrencyArray!=null){
+                for (int i = 0; i < cryptocurrencyArray.length(); i++) {
+                    String fixAmt = cryptocurrencyArray.optString(i);
+                    this.cryptoCurrencyList.add(cryptocurrencyArray.optString(i));
+                }
+            }
         }
+
         if (!useRotate) {
             fixAmounts = settingObject.optString("fixamount", "").split(",");
         } else {
