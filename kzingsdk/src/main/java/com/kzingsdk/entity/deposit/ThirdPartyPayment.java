@@ -368,6 +368,14 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         return this;
     }
 
+    public ArrayList<String> getCryptoCurrencyList() {
+        return cryptoCurrencyList;
+    }
+
+    public void setCryptoCurrencyList(ArrayList<String> cryptoCurrencyList) {
+        this.cryptoCurrencyList = cryptoCurrencyList;
+    }
+
     public ThirdPartyPayment setCryptoCurrency(String cryptoCurrency) {
         this.cryptoCurrency = cryptoCurrency;
         return this;
