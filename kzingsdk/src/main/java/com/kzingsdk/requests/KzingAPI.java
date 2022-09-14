@@ -366,7 +366,7 @@ public final class KzingAPI {
     public static ChangePwdbyWithdrawalAPI changePwdbyWithdrawal() {
         return new ChangePwdbyWithdrawalAPI();
     }
-    
+
     public static Fun88UpdatePreferredLangAPI fun88UpdatePreferredLang() {
         return new Fun88UpdatePreferredLangAPI();
     }

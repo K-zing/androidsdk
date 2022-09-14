@@ -3,11 +3,13 @@ package com.kzingsdk.entity.deposit;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.kzingsdk.entity.MemberInfo;
 import com.kzingsdk.util.BigDecimalUtil;
 
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
 
@@ -26,6 +28,8 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
     private Integer showField;
     private Integer number;
     private Integer bcOptionType;
+    private boolean quickAmountFlag = false;
+    private ArrayList<BigDecimal> quickAmountList = new ArrayList<>();
 
     public MicroAtmPayment() {
     }
@@ -51,6 +55,18 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
         item.setSDealsRate(BigDecimalUtil.optBigDecimal(rootObject, "sdealsrate", BigDecimal.ZERO));
         item.setBcMin(BigDecimalUtil.optBigDecimal(rootObject, "bcmin", BigDecimal.ZERO));
         item.setBcMax(BigDecimalUtil.optBigDecimal(rootObject, "bcmax", BigDecimal.ZERO));
+        item.setQrcode(rootObject.optString("qrcode"));
+        item.setQuickAmountFlag(rootObject.optInt("quickamountflag") == 1);
+        String quickamountString = rootObject.optString("quickamount");
+        String[] quickamountStrings = quickamountString.split(",");
+        ArrayList<BigDecimal> quickAmountList = new ArrayList<>();
+        for (String quickamount : quickamountStrings) {
+            if (quickamount.length() > 0) {
+                quickAmountList.add(new BigDecimal(quickamount));
+            }
+            item.setQuickAmountList(quickAmountList);
+        }
+
         return item;
     }
 
@@ -174,6 +190,22 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
         this.bcMax = bcMax;
     }
 
+    public boolean isQuickAmountFlag() {
+        return quickAmountFlag;
+    }
+
+    public void setQuickAmountFlag(boolean quickAmountFlag) {
+        this.quickAmountFlag = quickAmountFlag;
+    }
+
+    public ArrayList<BigDecimal> getQuickAmountList() {
+        return quickAmountList;
+    }
+
+    public void setQuickAmountList(ArrayList<BigDecimal> quickAmountList) {
+        this.quickAmountList = quickAmountList;
+    }
+
     public static final Creator CREATOR = new Creator() {
         public MicroAtmPayment createFromParcel(Parcel in) {
             return new MicroAtmPayment(in);
@@ -195,7 +227,7 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
         maxAmount = in.readDouble();
         formType = in.readString();
         isAllowDecimal = in.readInt() == 1;
-
+        quickAmountFlag = in.readInt() == 1;
         ptAlias = in.readString();
         accountId = in.readString();
         atmNo = in.readString();
@@ -211,6 +243,8 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
         showField = in.readInt();
         number = in.readInt();
         bcOptionType = in.readInt();
+        Object[] objectArray = in.readArray(MicroAtmPayment.class.getClassLoader());
+        quickAmountList = (ArrayList<BigDecimal>) objectArray[0];
     }
 
     @Override
@@ -230,6 +264,7 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
         dest.writeDouble(maxAmount);
         dest.writeString(formType);
         dest.writeInt(isAllowDecimal ? 1 : 0);
+        dest.writeInt(quickAmountFlag ? 1 : 0);
         dest.writeString(ptAlias);
         dest.writeString(accountId);
         dest.writeString(atmNo);
@@ -245,6 +280,9 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
         dest.writeInt(showField);
         dest.writeInt(number);
         dest.writeInt(bcOptionType);
+        Object[] customObjects = new Object[1];
+        customObjects[0] = quickAmountList;
+        dest.writeArray(customObjects);
     }
 
 }

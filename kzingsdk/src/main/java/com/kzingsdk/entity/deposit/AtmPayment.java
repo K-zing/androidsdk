@@ -219,7 +219,7 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         network = in.readString();
         formType = in.readString();
         quickAmountFlag = in.readInt() == 1;
-        Object[] objectArray = in.readArray(MemberInfo.class.getClassLoader());
+        Object[] objectArray = in.readArray(AtmPayment.class.getClassLoader());
         quickAmountList = (ArrayList<BigDecimal>) objectArray[0];
     }
 
