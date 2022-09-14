@@ -45,6 +45,8 @@ final class Action {
     static final String getRebateDetail = "GfhGcxO";
     static final String checkDptTransInfo = "7wlGhcb";
     static final String getBetHistorySummary = "vh64xV0";
+    static final String fun88UpdatePreferredLang = "1d89jsj";
+
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";
     static final String requestUsernameByPhoneSendCode = "XXLy0yX";
