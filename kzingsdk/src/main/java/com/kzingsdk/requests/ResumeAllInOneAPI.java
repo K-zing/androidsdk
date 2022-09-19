@@ -49,6 +49,7 @@ public class ResumeAllInOneAPI extends CoreRequest {
             jsonData.put("skipGame", skipGame);
             jsonData.put("skipActivity", skipActivity);
             jsonData.put("skipCheckVersion", skipCheckVersion);
+            jsonData.put("useWebApi", true);
             return jsonData;
         } catch (JSONException ignored) {
         }

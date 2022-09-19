@@ -97,6 +97,7 @@ public class LoginAllInOneAPI extends CoreRequest {
             if (providerId != null) {
                 jsonData.put("providerid", providerId);
             }
+            jsonData.put("useWebApi", true);
             return jsonData;
         } catch (JSONException ignored) {
         }

@@ -5,6 +5,9 @@ import android.content.Context;
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.MemberInfo;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import io.reactivex.Observable;
 
 public class GetMemberInfoAPI extends CoreRequest {
@@ -19,8 +22,19 @@ public class GetMemberInfoAPI extends CoreRequest {
     }
 
     @Override
+    protected JSONObject generateParamsJson() {
+        JSONObject jsonData = super.generateParamsJson();
+        try {
+            jsonData.put("useWebApi", true);
+            return jsonData;
+        } catch (JSONException ignored) {
+        }
+        return super.generateParamsJson();
+    }
+
+    @Override
     public Observable<MemberInfo> requestRx(Context context) {
-        return super.baseExecute(context).map(MemberInfo::newInstance);
+        return super.baseExecute(context).map(MemberInfo::newInstanceFromWebapi);
     }
 
 

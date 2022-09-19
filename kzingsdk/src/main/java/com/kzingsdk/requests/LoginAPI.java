@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import io.reactivex.Observable;
 
+@Deprecated
 public class LoginAPI extends CoreRequest {
 
     LoginAPI() {

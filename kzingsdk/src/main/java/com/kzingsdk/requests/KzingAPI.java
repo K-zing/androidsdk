@@ -118,6 +118,7 @@ public final class KzingAPI {
         return new GetBounsListAPI();
     }
 
+    @Deprecated
     public static LoginAPI login() {
         return new LoginAPI();
     }

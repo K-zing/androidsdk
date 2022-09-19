@@ -260,26 +260,11 @@ public final class KzingSDK {
         setDataRsaKey(dataRsaKey);
     }
 
-
-    /**
-     * Set you own user's login token to SDK without using  {@link KzingAPI#login()} without saving in shared preferences.
-     * Use {@link KzingSDK#setCustomTokensWithCache(String, String, Context)} if you need to.
-     *
-     * @param ccToken
-     * @param vcToken
-     */
     public void setCustomTokens(String ccToken, String vcToken) {
         this.ccToken = ccToken;
         this.vcToken = vcToken;
     }
 
-    /**
-     * Set you own user's login token to SDK without using  {@link KzingAPI#login()} and save tokens in shared preferences.
-     *
-     * @param ccToken
-     * @param vcToken
-     * @param context
-     */
     public void setCustomTokensWithCache(String ccToken, String vcToken, Context context) {
         setCustomTokens(ccToken, vcToken);
         if (context == null) {

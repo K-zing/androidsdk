@@ -36,7 +36,7 @@ public class AllInOneResult {
         JSONObject memberInfoObject = jsonResponse.optJSONObject("memberInfo");
         if (memberInfoObject != null) {
             allInOneResult.isLogined = true;
-            allInOneResult.setMemberInfo(MemberInfo.newInstance(memberInfoObject));
+            allInOneResult.setMemberInfo(MemberInfo.newInstanceFromWebapi(memberInfoObject));
             String vcToken = memberInfoObject.optString("vc", "");
             String ccToken = memberInfoObject.optString("cc", "");
             SharePrefUtil.putString(context, Constant.Pref.VCTOKEN, vcToken);
