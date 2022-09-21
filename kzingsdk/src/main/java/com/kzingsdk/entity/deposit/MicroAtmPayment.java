@@ -21,6 +21,7 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
     private String atmAddr;
     private String qrcode;
     private String key;
+    private String atmFeremark;
     private BigDecimal promoRate = BigDecimal.ZERO;
     private BigDecimal sDealsRate = BigDecimal.ZERO;
     private BigDecimal bcMin = BigDecimal.ZERO;
@@ -46,6 +47,9 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
         item.setAtmName(rootObject.optString("atmname"));
         item.setAtmBankCode(rootObject.optString("atm_bankcode"));
         item.setAtmAddr(rootObject.optString("atm_addr"));
+        item.setQrcode(rootObject.optString("qrcode"));
+        item.setKey(rootObject.optString("key"));
+        item.setAtmFeremark(rootObject.optString("atm_feremark"));
         item.setDisplayOrder(rootObject.optInt("displayorder"));
         item.setRandom(rootObject.optInt("random"));
         item.setShowField(rootObject.optInt("showfield"));
@@ -55,7 +59,6 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
         item.setSDealsRate(BigDecimalUtil.optBigDecimal(rootObject, "sdealsrate", BigDecimal.ZERO));
         item.setBcMin(BigDecimalUtil.optBigDecimal(rootObject, "bcmin", BigDecimal.ZERO));
         item.setBcMax(BigDecimalUtil.optBigDecimal(rootObject, "bcmax", BigDecimal.ZERO));
-        item.setQrcode(rootObject.optString("qrcode"));
         item.setQuickAmountFlag(rootObject.optInt("quickamountflag") == 1);
         String quickamountString = rootObject.optString("quickamount");
         String[] quickamountStrings = quickamountString.split(",");
@@ -206,6 +209,14 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
         this.quickAmountList = quickAmountList;
     }
 
+    public String getAtmFeremark() {
+        return atmFeremark;
+    }
+
+    public void setAtmFeremark(String atmFeremark) {
+        this.atmFeremark = atmFeremark;
+    }
+
     public static final Creator CREATOR = new Creator() {
         public MicroAtmPayment createFromParcel(Parcel in) {
             return new MicroAtmPayment(in);
@@ -236,6 +247,7 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
         atmAddr = in.readString();
         qrcode = in.readString();
         key = in.readString();
+        atmFeremark = in.readString();
         promoRate = new BigDecimal(in.readString());
         sDealsRate = new BigDecimal(in.readString());
         bcMin = new BigDecimal(in.readString());
@@ -273,6 +285,7 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
         dest.writeString(atmAddr);
         dest.writeString(qrcode);
         dest.writeString(key);
+        dest.writeString(atmFeremark);
         dest.writeString(promoRate.toString());
         dest.writeString(sDealsRate.toString());
         dest.writeString(bcMin.toString());

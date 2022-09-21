@@ -26,6 +26,7 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
     private String bcMin;
     private String bcMax;
     private String network;
+    private String atmFeremark;
     private boolean quickAmountFlag = false;
     private ArrayList<BigDecimal> quickAmountList = new ArrayList<>();
 
@@ -51,6 +52,7 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         item.setBcMin(rootObject.optString("bcmin"));
         item.setBcMax(rootObject.optString("bcmax"));
         item.setNetwork(rootObject.optString("network"));
+        item.setAtmFeremark(rootObject.optString("atm_feremark"));
         item.setQuickAmountFlag(rootObject.optInt("quickamountflag") == 1);
         String quickamountString = rootObject.optString("quickamount");
         String[] quickamountStrings = quickamountString.split(",");
@@ -169,6 +171,14 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         this.network = network;
     }
 
+    public String getAtmFeremark() {
+        return atmFeremark;
+    }
+
+    public void setAtmFeremark(String atmFeremark) {
+        this.atmFeremark = atmFeremark;
+    }
+
     public boolean isQuickAmountFlag() {
         return quickAmountFlag;
     }
@@ -218,6 +228,7 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         bcMax = in.readString();
         network = in.readString();
         formType = in.readString();
+        atmFeremark = in.readString();
         quickAmountFlag = in.readInt() == 1;
         Object[] objectArray = in.readArray(AtmPayment.class.getClassLoader());
         quickAmountList = (ArrayList<BigDecimal>) objectArray[0];
@@ -252,6 +263,7 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         dest.writeString(bcMax);
         dest.writeString(network);
         dest.writeString(formType);
+        dest.writeString(atmFeremark);
         dest.writeInt(quickAmountFlag ? 1 : 0);
         Object[] customObjects = new Object[1];
         customObjects[0] = quickAmountList;
