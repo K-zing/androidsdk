@@ -5,11 +5,14 @@ import android.content.Context;
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.SimpleApiResult;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import io.reactivex.Observable;
 
 public class Fun88UpdatePreferredLangAPI extends CoreRequest {
+
+    String preferLanguage;
 
     @Override
     protected String getAction() {
@@ -25,12 +28,16 @@ public class Fun88UpdatePreferredLangAPI extends CoreRequest {
         return super.validateParams();
     }
 
-
     @Override
     protected JSONObject generateParamsJson() {
+        JSONObject jsonData = super.generateParamsJson();
+        try {
+            jsonData.put("prefer_language", preferLanguage);
+            return jsonData;
+        } catch (JSONException ignored) {
+        }
         return super.generateParamsJson();
     }
-
     @Override
     public Observable<SimpleApiResult> requestRx(final Context context) {
         return super.baseExecute(context).map(SimpleApiResult::newInstance);
@@ -54,6 +61,11 @@ public class Fun88UpdatePreferredLangAPI extends CoreRequest {
 
     public interface Fun88UpdatePreferredLangCallBack extends KzingCallBack {
         void onSuccess(SimpleApiResult simpleApiResult);
+    }
+
+    public Fun88UpdatePreferredLangAPI setPreferLanguage(String preferLanguage) {
+        this.preferLanguage = preferLanguage;
+        return this;
     }
 }
 
