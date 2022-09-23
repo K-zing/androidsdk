@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import io.reactivex.Observable;
 
 
-public class AddWithdrawalCryptoAPI extends CoreRequest implements RequireCurrency{
+public class AddWithdrawalCryptoAPI extends CoreRequest implements RequireCurrency {
 
     AddWithdrawalCryptoAPI() {
         super();
@@ -27,6 +27,9 @@ public class AddWithdrawalCryptoAPI extends CoreRequest implements RequireCurren
     private String address;
     private String note;
     private String currency;
+    private String smsPhoneNo;
+    private String smsPhoneNoCountry;
+    private String smscode;
 
     @Override
     protected JSONObject generateParamsJson() {
@@ -42,6 +45,12 @@ public class AddWithdrawalCryptoAPI extends CoreRequest implements RequireCurren
                 jsonData.put("address", address);
             if (note != null)
                 jsonData.put("note", note);
+            if (smsPhoneNo != null)
+                jsonData.put("smsPhoneNo", smsPhoneNo);
+            if (smsPhoneNoCountry != null)
+                jsonData.put("smsPhoneNoCountry", smsPhoneNoCountry);
+            if (smscode != null)
+                jsonData.put("smscode", smscode);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -110,5 +119,18 @@ public class AddWithdrawalCryptoAPI extends CoreRequest implements RequireCurren
         return currency;
     }
 
+    public AddWithdrawalCryptoAPI setSmsPhoneNo(String smsPhoneNo) {
+        this.smsPhoneNo = smsPhoneNo;
+        return this;
+    }
 
+    public AddWithdrawalCryptoAPI setSmsPhoneNoCountry(String smsPhoneNoCountry) {
+        this.smsPhoneNoCountry = smsPhoneNoCountry;
+        return this;
+    }
+
+    public AddWithdrawalCryptoAPI setSmsCode(String smscode) {
+        this.smscode = smscode;
+        return this;
+    }
 }
