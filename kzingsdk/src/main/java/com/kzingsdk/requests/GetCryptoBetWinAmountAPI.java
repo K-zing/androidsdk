@@ -17,6 +17,9 @@ public class GetCryptoBetWinAmountAPI extends CoreRequest {
 
     private String gpType;
     private String randomNum;
+    private String start;
+    private String end;
+    private String skipFake;
 
     GetCryptoBetWinAmountAPI() {
         super();
@@ -34,6 +37,12 @@ public class GetCryptoBetWinAmountAPI extends CoreRequest {
             jsonData.put("gptype", gpType);
             if (randomNum != null)
                 jsonData.put("random_num", randomNum);
+            if (start != null)
+                jsonData.put("start", start);
+            if (end != null)
+                jsonData.put("end", end);
+            if (skipFake != null)
+                jsonData.put("skip_fake", skipFake);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -81,6 +90,21 @@ public class GetCryptoBetWinAmountAPI extends CoreRequest {
 
     public GetCryptoBetWinAmountAPI setRandomNum(String randomNum) {
         this.randomNum = randomNum;
+        return this;
+    }
+
+    public GetCryptoBetWinAmountAPI setStart(String start) {
+        this.start = start;
+        return this;
+    }
+
+    public GetCryptoBetWinAmountAPI setEnd(String end) {
+        this.end = end;
+        return this;
+    }
+
+    public GetCryptoBetWinAmountAPI setSkipFake(String skipFake) {
+        this.skipFake = skipFake;
         return this;
     }
 }
