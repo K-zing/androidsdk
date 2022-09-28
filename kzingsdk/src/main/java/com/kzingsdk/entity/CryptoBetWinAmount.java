@@ -11,6 +11,7 @@ public class CryptoBetWinAmount {
 
     private String currency;
     private String playerName;
+    private String game;
     private BigDecimal payout;
 
     public CryptoBetWinAmount() {
@@ -21,6 +22,7 @@ public class CryptoBetWinAmount {
         CryptoBetWinAmount activityBonus = new CryptoBetWinAmount();
         activityBonus.setCurrency(rootObject.optString("currency"));
         activityBonus.setPlayerName(rootObject.optString("playername"));
+        activityBonus.setGame(rootObject.optString("game"));
         activityBonus.setPayout(BigDecimalUtil.optBigDecimal(rootObject, "payout"));
         return activityBonus;
     }
@@ -39,6 +41,14 @@ public class CryptoBetWinAmount {
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
+    }
+
+    public String getGame() {
+        return game;
+    }
+
+    public void setGame(String game) {
+        this.game = game;
     }
 
     public BigDecimal getPayout() {

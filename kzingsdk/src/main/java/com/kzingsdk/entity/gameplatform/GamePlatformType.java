@@ -15,6 +15,7 @@ public enum GamePlatformType {
     ANIMAL(10234, ""),
     ARCADE(11234, ""),
     RUMMY(12234, ""),
+    TVGAME(13234, ""),
     ;
 
     private final int id;
