@@ -3,34 +3,38 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.ActivityHistory;
+import com.kzingsdk.entity.SimpleApiResult;
 import com.kzingsdk.util.Constant;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import io.reactivex.Observable;
 
-public class GetActivityHistoryAPI extends CoreRequest {
+public class GetTWDHistoryAPI extends CoreRequest {
 
     private Integer pageCount = 10;
     private Integer offset = 0;
     private String status;
+    private String type;
     private Calendar startDateCalendar, endDateCalendar;
-    
-    GetActivityHistoryAPI() {
+
+    @Override
+    protected String getAction() {
+        return Action.getTWDHistory;
+    }
+
+    GetTWDHistoryAPI() {
         super();
     }
 
     @Override
-    protected String getAction() {
-        return Action.getActivityHistory;
+    protected Observable<String> validateParams() {
+        return super.validateParams();
     }
-    
+
     @Override
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
@@ -38,6 +42,7 @@ public class GetActivityHistoryAPI extends CoreRequest {
             jsonData.put("pagecount", pageCount);
             jsonData.put("offset", offset);
             jsonData.put("status", status);
+            jsonData.put("type", type);
             jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
             jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
             return jsonData;
@@ -45,74 +50,72 @@ public class GetActivityHistoryAPI extends CoreRequest {
         }
         return super.generateParamsJson();
     }
-
     @Override
-    public Observable<ArrayList<ActivityHistory>> requestRx(final Context context) {
-        return super.baseExecute(context).map(jsonResponse -> {
-            ArrayList<ActivityHistory> actHistories = new ArrayList<>();
-            JSONArray response = jsonResponse.optJSONArray("data");
-            for (int i = 0; i < response.length(); i++) {
-                actHistories.add(ActivityHistory.newInstance(response.optJSONObject(i)));
-            }
-            return actHistories;
-        });
+    public Observable<SimpleApiResult> requestRx(final Context context) {
+        return super.baseExecute(context).map(SimpleApiResult::newInstance);
     }
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(activityHistory -> {
+        requestRx(context).subscribe(simpleApiResult -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((GetActivityHistoryCallBack) kzingCallBack).onSuccess(activityHistory);
+                    ((GetTWDHistoryCallBack) kzingCallBack).onSuccess(simpleApiResult);
                 }
             }
         }, defaultOnErrorConsumer);
     }
 
-    public GetActivityHistoryAPI addGetActivityHistoryCallBack(GetActivityHistoryCallBack getActivityHistoryCallBack) {
-        kzingCallBackList.add(getActivityHistoryCallBack);
+    public GetTWDHistoryAPI addGetTWDHistoryCallBack(GetTWDHistoryCallBack getTWDHistoryCallBack) {
+        kzingCallBackList.add(getTWDHistoryCallBack);
         return this;
     }
 
-    public interface GetActivityHistoryCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<ActivityHistory> activityHistory);
+    public interface GetTWDHistoryCallBack extends KzingCallBack {
+        void onSuccess(SimpleApiResult simpleApiResult);
     }
 
-    public GetActivityHistoryAPI setStartDateCalendar(Calendar startDateCalendar) {
+
+
+    public GetTWDHistoryAPI setStartDateCalendar(Calendar startDateCalendar) {
         this.startDateCalendar = startDateCalendar;
         return this;
     }
 
-    public GetActivityHistoryAPI setEndDateCalendar(Calendar endDateCalendar) {
+    public GetTWDHistoryAPI setEndDateCalendar(Calendar endDateCalendar) {
         this.endDateCalendar = endDateCalendar;
         return this;
     }
 
-    public GetActivityHistoryAPI setOffset(int offset) {
+    public GetTWDHistoryAPI setOffset(int offset) {
         this.offset = offset;
         return this;
     }
 
-    public GetActivityHistoryAPI setPageCount(int pageCount) {
+    public GetTWDHistoryAPI setPageCount(int pageCount) {
         this.pageCount = pageCount;
         return this;
     }
 
-    public GetActivityHistoryAPI setPageCount(Integer pageCount) {
+    public GetTWDHistoryAPI setPageCount(Integer pageCount) {
         this.pageCount = pageCount;
         return this;
     }
 
-    public GetActivityHistoryAPI setOffset(Integer offset) {
+    public GetTWDHistoryAPI setOffset(Integer offset) {
         this.offset = offset;
         return this;
     }
 
 
-    public GetActivityHistoryAPI setStatus(String status) {
+    public GetTWDHistoryAPI setStatus(String status) {
         this.status = status;
         return this;
     }
 
+    public GetTWDHistoryAPI setType(String type) {
+        this.type = type;
+        return this;
+    }
 }
 

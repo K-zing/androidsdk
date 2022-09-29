@@ -77,10 +77,10 @@ public abstract class CoreRequest {
     private static HashSet<String> dynamicDomainSet = new HashSet<>();
 
     private final ArrayList<String> PORT_LIST = new ArrayList<String>() {{
-        add("9496");
-        add("9587");
-        add("9999");
-        add("9487");
+//        add("9496");
+//        add("9587");
+//        add("9999");
+//        add("9487");
 //        add("9119");
 //        add("9190");
 //        add("9250");
