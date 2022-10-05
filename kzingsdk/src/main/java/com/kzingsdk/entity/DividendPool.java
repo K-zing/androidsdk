@@ -20,7 +20,8 @@ public class DividendPool {
     private BigDecimal playerTotalToken;
     private BigDecimal playerTotalTokenConvert;
     private BigDecimal rateTotal;
-
+    private BigDecimal poolTotalRate;
+    private BigDecimal poolTotalPercent;
     private CryptoDividend ethCryptoDividend;
     private CryptoDividend mbtcCryptoDividend;
     private CryptoDividend usdtCryptoDividend;
@@ -42,6 +43,8 @@ public class DividendPool {
         dividendPool.setPlayerTotalToken(BigDecimalUtil.optBigDecimal(rootObject, "player_Total_token"));
         dividendPool.setPlayerTotalTokenConvert(BigDecimalUtil.optBigDecimal(rootObject, "player_Total_token_convert"));
         dividendPool.setRateTotal(BigDecimalUtil.optBigDecimal(rootObject, "rate_Total"));
+        dividendPool.setPoolTotalRate(BigDecimalUtil.optBigDecimal(rootObject, "pool_Total_rate"));
+        dividendPool.setPoolTotalPercent(BigDecimalUtil.optBigDecimal(rootObject, "pool_Total_percent"));
         dividendPool.setEthCryptoDividend(CryptoDividend.newInstance(rootObject.optJSONObject("ETH")));
         dividendPool.setMbtcCryptoDividend(CryptoDividend.newInstance(rootObject.optJSONObject("mBTC")));
         dividendPool.setUsdtCryptoDividend(CryptoDividend.newInstance(rootObject.optJSONObject("USDT")));
@@ -134,6 +137,22 @@ public class DividendPool {
 
     public void setRateTotal(BigDecimal rateTotal) {
         this.rateTotal = rateTotal;
+    }
+
+    public BigDecimal getPoolTotalRate() {
+        return poolTotalRate;
+    }
+
+    public void setPoolTotalRate(BigDecimal poolTotalRate) {
+        this.poolTotalRate = poolTotalRate;
+    }
+
+    public BigDecimal getPoolTotalPercent() {
+        return poolTotalPercent;
+    }
+
+    public void setPoolTotalPercent(BigDecimal poolTotalPercent) {
+        this.poolTotalPercent = poolTotalPercent;
     }
 
     public CryptoDividend getEthCryptoDividend() {

@@ -20,9 +20,7 @@ public class GetDividendPoolsAPI extends CoreRequest {
 
     @Override
     public Observable<DividendPool> requestRx(final Context context) {
-        return super.baseExecute(context).map(jsonResponse -> {
-            return DividendPool.newInstance(jsonResponse.optJSONObject("response"));
-        });
+        return super.baseExecute(context).map(jsonResponse -> DividendPool.newInstance(jsonResponse.optJSONObject("response")));
     }
 
     @Override
