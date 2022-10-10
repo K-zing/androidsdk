@@ -24,6 +24,7 @@ public class ActivityHistory {
     private String platform;
     private String currency;
     private String brandId;
+    private String statusText;
     private Integer promoType;
     private BigDecimal depositAmount;
     private BigDecimal bonusAmount;
@@ -49,6 +50,7 @@ public class ActivityHistory {
         activityHistory.setPlatform(rootObject.optString("platform"));
         activityHistory.setCurrency(rootObject.optString("currency"));
         activityHistory.setBrandId(rootObject.optString("brandid"));
+        activityHistory.setStatusText(rootObject.optString("statusText"));
         activityHistory.setPromoType(rootObject.optInt("promotype"));
         activityHistory.setDepositAmount(BigDecimalUtil.optBigDecimal(rootObject, "depositamount"));
         activityHistory.setBonusAmount(BigDecimalUtil.optBigDecimal(rootObject, "bonusamount"));
@@ -173,6 +175,14 @@ public class ActivityHistory {
 
     public void setBrandId(String brandId) {
         this.brandId = brandId;
+    }
+
+    public String getStatusText() {
+        return statusText;
+    }
+
+    public void setStatusText(String statusText) {
+        this.statusText = statusText;
     }
 
     public Integer getPromoType() {
