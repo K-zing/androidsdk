@@ -13,11 +13,13 @@ import java.util.Iterator;
 
 public class HistoryListSummary implements Parcelable {
 
+    private String total = "";
     private String totalBet = "";
     private String totalWin = "";
     private String totalBetAmt = "";
     private String totalValidBetAmt = "";
     private ArrayList<HistoryListItem> betItems = new ArrayList<>();
+    private HashMap<String, HistoryListCurrencySummary> currencySummaryMap = new HashMap<>();
     private boolean noMoreData = false;
 
     public HistoryListSummary() {
@@ -37,6 +39,7 @@ public class HistoryListSummary implements Parcelable {
         }
 
         historyListSummary.setNoMoreData(imageObject == null);
+        historyListSummary.setTotal(rootObject.optString("total"));
         historyListSummary.setTotalBet(rootObject.optString("totalbets"));
         historyListSummary.setTotalWin(rootObject.optString("totalwin"));
         historyListSummary.setTotalBetAmt(rootObject.optString("totalbetamt"));
@@ -50,7 +53,24 @@ public class HistoryListSummary implements Parcelable {
                 historyListSummary.betItems.add(historyListItem);
             }
         }
+
+        JSONArray currencyTotalJSONArray = rootObject.optJSONArray("currencytotal");
+        if (currencyTotalJSONArray != null) {
+            for (int i = 0; i < currencyTotalJSONArray.length(); i++) {
+                JSONObject betObject = currencyTotalJSONArray.optJSONObject(i);
+                HistoryListCurrencySummary historyListCurrencySummary = HistoryListCurrencySummary.newInstance(betObject);
+                historyListSummary.currencySummaryMap.put(historyListCurrencySummary.getCurrency(), historyListCurrencySummary);
+            }
+        }
         return historyListSummary;
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
     }
 
     public String getTotalBet() {
@@ -101,6 +121,14 @@ public class HistoryListSummary implements Parcelable {
         this.noMoreData = noMoreData;
     }
 
+    public HashMap<String, HistoryListCurrencySummary> getCurrencySummaryMap() {
+        return currencySummaryMap;
+    }
+
+    public void setCurrencySummaryMap(HashMap<String, HistoryListCurrencySummary> currencySummaryMap) {
+        this.currencySummaryMap = currencySummaryMap;
+    }
+
     public static final Creator<HistoryListSummary> CREATOR = new Creator<HistoryListSummary>() {
         @Override
         public HistoryListSummary createFromParcel(Parcel in) {
@@ -115,23 +143,29 @@ public class HistoryListSummary implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(total);
         dest.writeString(totalBet);
         dest.writeString(totalWin);
         dest.writeString(totalBetAmt);
         dest.writeString(totalValidBetAmt);
         dest.writeInt(noMoreData ? 1 : 0);
         dest.writeArray(new Object[]{
-                betItems
+                betItems,
+                currencySummaryMap
         });
     }
 
     public HistoryListSummary(Parcel in) {
+        total= in.readString();
         totalBet = in.readString();
         totalWin = in.readString();
         totalBetAmt = in.readString();
         totalValidBetAmt = in.readString();
         noMoreData = in.readInt() == 1;
-        betItems = (ArrayList<HistoryListItem>) in.readArray(HistoryListSummary.class.getClassLoader())[0];
+        Object[] objectArray = in.readArray(HistoryListSummary.class.getClassLoader());
+        betItems = (ArrayList<HistoryListItem>) objectArray[0];
+        currencySummaryMap = (HashMap<String, HistoryListCurrencySummary>) objectArray[1];
+
     }
 
     @Override
