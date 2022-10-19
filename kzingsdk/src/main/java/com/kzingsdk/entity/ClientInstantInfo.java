@@ -64,6 +64,8 @@ public class ClientInstantInfo implements Parcelable {
     private String depositAnnouncement;
     private String enterDepositPopup;
     private String dptCryptoFixedExchangeRate;
+    private Integer marqueeAnnouncementUnreadCount = 0;
+    private Integer marqueeActivityUnreadCount = 0;
     private CaptchaApiId captchaApiId = new CaptchaApiId();
     private ArrayList<String> memberPanAgentCode = new ArrayList<>();
     private ArrayList<String> memberPanPlayerGroup = new ArrayList<>();
@@ -195,10 +197,10 @@ public class ClientInstantInfo implements Parcelable {
             }
         }
         clientInfo.setBannerFirstLaunch(bannerFirstLaunchList);
-
         JSONObject marqueeActivityJSONObject = rootObject.optJSONObject("marqueeActivity");
         ArrayList<MarqueeActivity> marqueeActivityList = new ArrayList<>();
         if (marqueeActivityJSONObject != null) {
+            clientInfo.setMarqueeActivityUnreadCount(marqueeActivityJSONObject.optInt("unreadcount"));
             JSONArray activityJSONArray = marqueeActivityJSONObject.optJSONArray("activity");
             if (activityJSONArray != null) {
                 for (int i = 0; i < activityJSONArray.length(); i++) {
@@ -212,8 +214,8 @@ public class ClientInstantInfo implements Parcelable {
         JSONObject marqueeAnnouncementJSONObject = rootObject.optJSONObject("marqueeAnnouncement");
         ArrayList<MarqueeAnnouncement> marqueeAnnouncementList = new ArrayList<>();
         if (marqueeAnnouncementJSONObject != null) {
+            clientInfo.setMarqueeAnnouncementUnreadCount(marqueeAnnouncementJSONObject.optInt("unreadcount"));
             clientInfo.setShowImportantPopup(marqueeAnnouncementJSONObject.optBoolean("showImportantPopup"));
-
             JSONArray announcementJSONArray = marqueeAnnouncementJSONObject.optJSONArray("announcement");
             if (announcementJSONArray != null) {
                 for (int i = 0; i < announcementJSONArray.length(); i++) {
@@ -924,6 +926,22 @@ public class ClientInstantInfo implements Parcelable {
     public ClientInstantInfo setThemeList(ArrayList<ThemeInfo> themeList) {
         this.themeList = themeList;
         return this;
+    }
+
+    public Integer getMarqueeAnnouncementUnreadCount() {
+        return marqueeAnnouncementUnreadCount;
+    }
+
+    public void setMarqueeAnnouncementUnreadCount(Integer marqueeAnnouncementUnreadCount) {
+        this.marqueeAnnouncementUnreadCount = marqueeAnnouncementUnreadCount;
+    }
+
+    public Integer getMarqueeActivityUnreadCount() {
+        return marqueeActivityUnreadCount;
+    }
+
+    public void setMarqueeActivityUnreadCount(Integer marqueeActivityUnreadCount) {
+        this.marqueeActivityUnreadCount = marqueeActivityUnreadCount;
     }
 
     public static final Creator CREATOR = new Creator() {
