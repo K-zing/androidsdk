@@ -3,7 +3,8 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.SimpleApiResult;
+import com.kzingsdk.entity.GetTWDHistoryResult;
+import com.kzingsdk.entity.GetTWDHistoryResult;
 import com.kzingsdk.util.Constant;
 
 import org.json.JSONException;
@@ -14,7 +15,7 @@ import java.util.Calendar;
 import io.reactivex.Observable;
 
 public class GetTWDHistoryAPI extends CoreRequest {
-
+    
     private Integer pageCount = 10;
     private Integer offset = 0;
     private String status;
@@ -51,8 +52,8 @@ public class GetTWDHistoryAPI extends CoreRequest {
         return super.generateParamsJson();
     }
     @Override
-    public Observable<SimpleApiResult> requestRx(final Context context) {
-        return super.baseExecute(context).map(SimpleApiResult::newInstance);
+    public Observable<GetTWDHistoryResult> requestRx(final Context context) {
+        return super.baseExecute(context).map(GetTWDHistoryResult::newInstance);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class GetTWDHistoryAPI extends CoreRequest {
     }
 
     public interface GetTWDHistoryCallBack extends KzingCallBack {
-        void onSuccess(SimpleApiResult simpleApiResult);
+        void onSuccess(GetTWDHistoryResult simpleApiResult);
     }
 
 

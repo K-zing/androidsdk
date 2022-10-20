@@ -187,6 +187,14 @@ public final class KzingAPI {
         return new GetTgLinkAPI();
     }
 
+    public static SetDefaultCryptoWithdrawAddressAPI setDefaultCryptoWithdrawAddress() {
+        return new SetDefaultCryptoWithdrawAddressAPI();
+    }
+
+    public static GetTWDHistoryAPI getTWDHistory() {
+        return new GetTWDHistoryAPI();
+    }
+
     public static GetCopyWritingContentByCategoryAPI getCopyWritingContentByCategory() {
         return new GetCopyWritingContentByCategoryAPI();
     }
