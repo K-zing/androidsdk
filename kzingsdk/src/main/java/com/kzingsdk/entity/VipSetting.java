@@ -13,6 +13,7 @@ public class VipSetting implements Parcelable {
 
     private String groupId;
     private String groupName;
+    private String currency;
     private Integer rankLevel;
     private Integer withdrawTimes;
     private BigDecimal monthReward = BigDecimal.ZERO;
@@ -32,6 +33,7 @@ public class VipSetting implements Parcelable {
         VipSetting vipSetting = new VipSetting();
         vipSetting.groupId = rootObject.optString("groupId");
         vipSetting.groupName = rootObject.optString("groupName");
+        vipSetting.currency = rootObject.optString("currency");
         vipSetting.rankLevel = rootObject.optInt("ranklevel", 0);
         vipSetting.withdrawTimes = rootObject.optInt("wtdtimes", 0);
         vipSetting.monthReward = BigDecimalUtil.optBigDecimal(rootObject, "monthReward", BigDecimal.ZERO);
@@ -60,6 +62,14 @@ public class VipSetting implements Parcelable {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     public Integer getWithdrawTimes() {
@@ -153,6 +163,7 @@ public class VipSetting implements Parcelable {
     protected VipSetting(Parcel in) {
         groupId = in.readString();
         groupName = in.readString();
+        currency = in.readString();
         rankLevel = in.readInt();
         withdrawTimes = in.readInt();
         monthReward = new BigDecimal(in.readString());
@@ -170,6 +181,7 @@ public class VipSetting implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(groupId);
         dest.writeString(groupName);
+        dest.writeString(currency);
         dest.writeInt(rankLevel);
         dest.writeInt(withdrawTimes);
         dest.writeString(monthReward.toString());
