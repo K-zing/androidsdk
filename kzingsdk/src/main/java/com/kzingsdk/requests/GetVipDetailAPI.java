@@ -5,10 +5,15 @@ import android.content.Context;
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.VipDetail;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import io.reactivex.Observable;
 
 
 public class GetVipDetailAPI extends CoreRequest {
+
+    private String currency;
 
     GetVipDetailAPI() {
         super();
@@ -17,6 +22,17 @@ public class GetVipDetailAPI extends CoreRequest {
     @Override
     protected String getAction() {
         return Action.getVipDetail;
+    }
+
+    @Override
+    protected JSONObject generateParamsJson() {
+        JSONObject jsonData = super.generateParamsJson();
+        try {
+            jsonData.put("currency", currency);
+            return jsonData;
+        } catch (JSONException ignored) {
+        }
+        return super.generateParamsJson();
     }
 
 
@@ -45,5 +61,8 @@ public class GetVipDetailAPI extends CoreRequest {
         void onSuccess(VipDetail vipDetail);
     }
 
-
+    public GetVipDetailAPI setCurrency(String currency) {
+        this.currency = currency;
+        return this;
+    }
 }
