@@ -84,12 +84,12 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         item.setDisplayOrder(rootObject.optInt("sort"));
         item.setFormType(rootObject.optString("formtype"));
         item.setOptionId(optionId);
-        item.setName(rootRootObject.optString("name"));
         item.setUseRotate(rootObject.optBoolean("useRotate", false));
         item.importSettingFromJson(rootObject);
-        item.setRandMax(BigDecimalUtil.optBigDecimal(rootObject, "randMax", BigDecimal.ZERO));
-        item.setRandMin(BigDecimalUtil.optBigDecimal(rootObject, "randMin", BigDecimal.ZERO));
-        item.setRandType(rootObject.optInt("randType", -1));
+        item.setName(rootRootObject.optString("name"));
+        item.setRandMax(BigDecimalUtil.optBigDecimal(rootRootObject, "randMax", BigDecimal.ZERO));
+        item.setRandMin(BigDecimalUtil.optBigDecimal(rootRootObject, "randMin", BigDecimal.ZERO));
+        item.setRandType(rootRootObject.optInt("randType", -1));
         item.setPromoRate(BigDecimalUtil.optBigDecimal(rootObject, "promorate", BigDecimal.ZERO));
         item.setSDealsRate(BigDecimalUtil.optBigDecimal(rootObject, "sdealsrate", BigDecimal.ZERO));
         item.setDisplayDepositName(rootObject.optInt("displaydepositname", 0) == 1);
