@@ -191,6 +191,10 @@ public final class KzingAPI {
         return new SetDefaultCryptoWithdrawAddressAPI();
     }
 
+    public static CopyCryptoAddressAPI copyCryptoAddress() {
+        return new CopyCryptoAddressAPI();
+    }
+
     public static GetTWDHistoryAPI getTWDHistory() {
         return new GetTWDHistoryAPI();
     }
@@ -455,6 +459,10 @@ public final class KzingAPI {
 
     public static GetDepositOptionAPI getDepositOption() {
         return new GetDepositOptionAPI();
+    }
+
+    public static GetDepositOptionRawJsonAPI getDepositOptionRawJson() {
+        return new GetDepositOptionRawJsonAPI();
     }
 
     public static GetDepositFormFieldsAPI getDepositFormFields() {

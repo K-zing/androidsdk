@@ -48,6 +48,7 @@ final class Action {
     static final String fun88UpdatePreferredLang = "1d89jsj";
     static final String getTWDHistory = "trhj1d8";
     static final String setDefaultCryptoWithdrawAddress = "b62trh8";
+    static final String copyCryptoAddress = "1Iqztbx";
 
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";
