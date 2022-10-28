@@ -146,17 +146,12 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
 
         JSONArray fixAmountArray = settingObject.optJSONArray("fixAmtArr");
         if (fixAmountArray != null) {
+            String[] items = new String[fixAmountArray.length()];
             for (int i = 0; i < fixAmountArray.length(); i++) {
-                JSONObject fixAmountJObject = fixAmountArray.optJSONObject(i);
-                JSONArray itemsArray = fixAmountJObject.optJSONArray("items");
-                if (itemsArray != null) {
-                    String[] items = new String[itemsArray.length()];
-                    for (int j = 0; j < itemsArray.length(); j++) {
-                        items[j] = itemsArray.optString(j);
-                    }
-                    fixAmtArr = items;
-                }
+                String fixAmount = fixAmountArray.optString(i);
+                items[i] = fixAmount;
             }
+            fixAmtArr = items;
         }
 
         paymentBankList = new ArrayList<>();
