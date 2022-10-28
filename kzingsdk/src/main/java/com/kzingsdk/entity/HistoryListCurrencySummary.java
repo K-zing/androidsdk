@@ -13,6 +13,7 @@ public class HistoryListCurrencySummary implements Parcelable {
     private String betAmt = "";
     private String payout = "";
     private String validAmt = "";
+    private String invalidBet = "";
     private String winlossAsValidBet = "";
     private String currency = "";
 
@@ -27,6 +28,7 @@ public class HistoryListCurrencySummary implements Parcelable {
         historyListCurrencySummary.setBetAmt(rootObject.optString("betamt"));
         historyListCurrencySummary.setPayout(rootObject.optString("payout"));
         historyListCurrencySummary.setValidAmt(rootObject.optString("validamt"));
+        historyListCurrencySummary.setInvalidBet(rootObject.optString("invalidbet"));
         historyListCurrencySummary.setWinlossAsValidBet(rootObject.optString("winlossasvalidbet"));
         historyListCurrencySummary.setCurrency(rootObject.optString("currency"));
         return historyListCurrencySummary;
@@ -88,6 +90,14 @@ public class HistoryListCurrencySummary implements Parcelable {
         this.currency = currency;
     }
 
+    public String getInvalidBet() {
+        return invalidBet;
+    }
+
+    public void setInvalidBet(String invalidBet) {
+        this.invalidBet = invalidBet;
+    }
+
     public static final Creator<HistoryListCurrencySummary> CREATOR = new Creator<HistoryListCurrencySummary>() {
         @Override
         public HistoryListCurrencySummary createFromParcel(Parcel in) {
@@ -107,6 +117,7 @@ public class HistoryListCurrencySummary implements Parcelable {
         dest.writeString(betAmt);
         dest.writeString(payout);
         dest.writeString(validAmt);
+        dest.writeString(invalidBet);
         dest.writeString(winlossAsValidBet);
         dest.writeString(currency);
 
@@ -118,6 +129,7 @@ public class HistoryListCurrencySummary implements Parcelable {
         betAmt = in.readString();
         payout = in.readString();
         validAmt = in.readString();
+        invalidBet = in.readString();
         winlossAsValidBet = in.readString();
         currency = in.readString();
     }
