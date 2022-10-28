@@ -17,6 +17,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
     private boolean useRotate = false;
     private String optionId = "";
     private String[] fixAmounts = new String[]{};
+    private String[] fixAmtArr = new String[]{};
     private ArrayList<ThirdPartyPaymentBank> paymentBankList = new ArrayList<>();
     private ArrayList<BigDecimal> fixAmtArray = new ArrayList<>();
     private String name = "";
@@ -84,6 +85,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         item.setFormType(rootObject.optString("formtype"));
         item.setOptionId(optionId);
         item.setName(rootRootObject.optString("name"));
+        item.setUseRotate(rootObject.optBoolean("useRotate", false));
         item.importSettingFromJson(rootObject);
         item.setRandMax(BigDecimalUtil.optBigDecimal(rootObject, "randMax", BigDecimal.ZERO));
         item.setRandMin(BigDecimalUtil.optBigDecimal(rootObject, "randMin", BigDecimal.ZERO));
@@ -95,7 +97,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         JSONObject displayAddressObject = rootObject.optJSONObject("displayAddress");
         if (displayAddressObject != null) {
             JSONArray cryptocurrencyArray = displayAddressObject.optJSONArray("cryptocurrency");
-            if (cryptocurrencyArray!=null){
+            if (cryptocurrencyArray != null) {
                 for (int i = 0; i < cryptocurrencyArray.length(); i++) {
                     String fixAmt = cryptocurrencyArray.optString(i);
                     item.cryptoCurrencyList.add(cryptocurrencyArray.optString(i));
@@ -126,10 +128,9 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
                 cOptionList.add(COption.newInstance(cOptionArray.optJSONObject(i)));
             }
         }
-        useRotate = rootObject.optBoolean("useRotate", false);
-        random = useRotate ? rootObject.optInt("randType", 0) : settingObject.optInt("random", 0);
-        minAmount = useRotate ? rootObject.optDouble("randMin", 0d) : settingObject.optDouble("min", 0d);
-        maxAmount = useRotate ? rootObject.optDouble("randMax", 0d) : settingObject.optDouble("max", 0d);
+        random = settingObject.optInt("random", 0);
+        minAmount = settingObject.optDouble("min", 0d);
+        maxAmount = settingObject.optDouble("max", 0d);
 
         quickAmountFlag = settingObject.optInt("quickamountflag") == 1;
         String quickamountString = settingObject.optString("quickamount");
@@ -141,36 +142,23 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
             }
             this.quickAmountList = quickAmountList;
         }
+        fixAmounts = settingObject.optString("fixamount", "").split(",");
 
-        JSONObject displayAddressObject = rootObject.optJSONObject("displayAddress");
-        if (displayAddressObject != null) {
-            JSONArray cryptocurrencyArray = displayAddressObject.optJSONArray("cryptocurrency");
-            if (cryptocurrencyArray!=null){
-                for (int i = 0; i < cryptocurrencyArray.length(); i++) {
-                    String fixAmt = cryptocurrencyArray.optString(i);
-                    this.cryptoCurrencyList.add(cryptocurrencyArray.optString(i));
-                }
-            }
-        }
-
-        if (!useRotate) {
-            fixAmounts = settingObject.optString("fixamount", "").split(",");
-        } else {
-            JSONArray fixAmountArray = rootObject.optJSONArray("fixAmtArr");
-            if (fixAmountArray != null) {
-                for (int i = 0; i < fixAmountArray.length(); i++) {
-                    JSONObject fixAmountJObject = fixAmountArray.optJSONObject(i);
-                    JSONArray itemsArray = fixAmountJObject.optJSONArray("items");
-                    if (itemsArray != null) {
-                        String[] items = new String[itemsArray.length()];
-                        for (int j = 0; j < itemsArray.length(); j++) {
-                            items[j] = itemsArray.optString(j);
-                        }
-                        fixAmounts = items;
+        JSONArray fixAmountArray = settingObject.optJSONArray("fixAmtArr");
+        if (fixAmountArray != null) {
+            for (int i = 0; i < fixAmountArray.length(); i++) {
+                JSONObject fixAmountJObject = fixAmountArray.optJSONObject(i);
+                JSONArray itemsArray = fixAmountJObject.optJSONArray("items");
+                if (itemsArray != null) {
+                    String[] items = new String[itemsArray.length()];
+                    for (int j = 0; j < itemsArray.length(); j++) {
+                        items[j] = itemsArray.optString(j);
                     }
+                    fixAmtArr = items;
                 }
             }
         }
+
         paymentBankList = new ArrayList<>();
         JSONArray channelArray = rootObject.optJSONArray("bank_json");
         for (int i = 0; i < channelArray.length(); i++) {
@@ -209,6 +197,14 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
 
     public void setFixAmounts(String[] fixAmounts) {
         this.fixAmounts = fixAmounts;
+    }
+
+    public String[] getFixAmtArr() {
+        return fixAmtArr;
+    }
+
+    public void setFixAmtArr(String[] fixAmtArr) {
+        this.fixAmtArr = fixAmtArr;
     }
 
     public ArrayList<BigDecimal> getFixAmtArray() {
