@@ -54,7 +54,7 @@ public class SubmitThirdPartyDepositAPI extends CoreRequest {
         JSONObject jsonData = super.generateParamsJson();
         try {
             jsonData.put("bank", thirdPartyPaymentBank.getId());
-            jsonData.put("optionid", thirdPartyPaymentBank.getParent().getOptionId());
+            jsonData.put("optionid", thirdPartyPaymentBank.getParent().getOriOptionId());
             jsonData.put("ppid", thirdPartyPaymentBank.getParent().getId());
             jsonData.put("amount", amount);
             if (formData != null) {
