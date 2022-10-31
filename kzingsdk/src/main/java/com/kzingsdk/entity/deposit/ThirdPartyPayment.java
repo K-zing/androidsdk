@@ -16,6 +16,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
 
     private boolean useRotate = false;
     private String optionId = "";
+    private String oriOptionId = "";
     private String[] fixAmounts = new String[]{};
     private String[] fixAmtArr = new String[]{};
     private ArrayList<ThirdPartyPaymentBank> paymentBankList = new ArrayList<>();
@@ -77,6 +78,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         }
 
         item.setId(rootObject.optString("ppid"));
+        item.setOriOptionId(rootObject.optString("orioptionid"));
         item.setPaymentName(rootObject.optString("ptalias"));
         item.setBankCode(rootObject.optString("bankcode"));
         item.setCode(rootObject.optString("code"));
@@ -168,6 +170,14 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
 
     public void setOptionId(String optionId) {
         this.optionId = optionId;
+    }
+
+    public String getOriOptionId() {
+        return oriOptionId;
+    }
+
+    public void setOriOptionId(String oriOptionId) {
+        this.oriOptionId = oriOptionId;
     }
 
     public ArrayList<ThirdPartyPaymentBank> getPaymentBankList() {
@@ -394,6 +404,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         minAmount = in.readDouble();
         maxAmount = in.readDouble();
         optionId = in.readString();
+        oriOptionId = in.readString();
         useRotate = in.readInt() == 1;
         isAllowDecimal = in.readInt() == 1;
         displayDepositName = in.readInt() == 1;
@@ -438,6 +449,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         dest.writeDouble(minAmount);
         dest.writeDouble(maxAmount);
         dest.writeString(optionId);
+        dest.writeString(oriOptionId);
         dest.writeInt(useRotate ? 1 : 0);
         dest.writeInt(isAllowDecimal ? 1 : 0);
         dest.writeInt(displayDepositName ? 1 : 0);
