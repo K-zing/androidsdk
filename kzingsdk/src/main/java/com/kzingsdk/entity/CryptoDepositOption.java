@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 
 public class CryptoDepositOption {
 
+    private String accountId;
     private String ppid;
     private String bcid;
     private String platform;
@@ -24,6 +25,7 @@ public class CryptoDepositOption {
 
     public static CryptoDepositOption newInstance(JSONObject rootObject) {
         CryptoDepositOption cryptoDepositOption = new CryptoDepositOption();
+        cryptoDepositOption.setAccountId(rootObject.optString("accountid"));
         cryptoDepositOption.setPpid(rootObject.optString("ppid"));
         cryptoDepositOption.setBcid(rootObject.optString("bcid"));
         cryptoDepositOption.setPlatform(rootObject.optString("platform"));
@@ -41,6 +43,14 @@ public class CryptoDepositOption {
 
     public void setPpid(String ppid) {
         this.ppid = ppid;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
     public String getBcid() {
