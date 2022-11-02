@@ -429,7 +429,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         fixAmountList = (ArrayList<BigDecimal>) customObjects[3];
         cOptionList = (ArrayList<COption>) customObjects[4];
         quickAmountList = (ArrayList<BigDecimal>) customObjects[5];
-        fixAmtArr = (String[]) customObjects[5];
+        fixAmtArr = (String[]) customObjects[6];
     }
 
 
