@@ -79,6 +79,8 @@ public class ClientInstantInfo implements Parcelable {
     private ContactInfo partnershipContactInfo = new ContactInfo();
     private ContactInfo socialMediaContactInfo = new ContactInfo();
     private HashMap<Integer, String> websiteConfigMap = new HashMap<>();
+    private SpecialEvent specialEvent = new SpecialEvent();
+
 
     public ClientInstantInfo() {
 
@@ -237,6 +239,11 @@ public class ClientInstantInfo implements Parcelable {
         for (int i = 301; i < 400; i++) {
             clientInfo.websiteConfigMap.put(i, rootObject.optString("wc" + i));
         }
+
+        JSONObject specialEventJSONObject = rootObject.optJSONObject("specialEvent");
+        if (specialEventJSONObject != null) {
+            clientInfo.setSpecialEvent(SpecialEvent.newInstance(specialEventJSONObject));
+        }
         return clientInfo;
     }
 
@@ -332,6 +339,7 @@ public class ClientInstantInfo implements Parcelable {
         partnershipContactInfo = (ContactInfo) objectArray[i++];
         socialMediaContactInfo = (ContactInfo) objectArray[i++];
         websiteConfigMap = (HashMap<Integer, String>) objectArray[i++];
+        specialEvent = (SpecialEvent) objectArray[i++];
     }
 
 
@@ -403,6 +411,7 @@ public class ClientInstantInfo implements Parcelable {
                 partnershipContactInfo,
                 socialMediaContactInfo,
                 websiteConfigMap,
+                specialEvent,
         });
     }
 
@@ -942,6 +951,14 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setMarqueeActivityUnreadCount(Integer marqueeActivityUnreadCount) {
         this.marqueeActivityUnreadCount = marqueeActivityUnreadCount;
+    }
+
+    public SpecialEvent getSpecialEvent() {
+        return specialEvent;
+    }
+
+    public void setSpecialEvent(SpecialEvent specialEvent) {
+        this.specialEvent = specialEvent;
     }
 
     public static final Creator CREATOR = new Creator() {

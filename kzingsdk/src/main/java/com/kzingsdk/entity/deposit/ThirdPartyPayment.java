@@ -423,12 +423,13 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         formType = in.readString();
         quickAmountFlag = in.readInt() == 1;
         Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
-        fixAmounts = (String[]) customObjects[0];
-        paymentBankList = (ArrayList<ThirdPartyPaymentBank>) customObjects[1];
-        fixAmtArray = (ArrayList<BigDecimal>) customObjects[2];
-        fixAmountList = (ArrayList<BigDecimal>) customObjects[3];
-        cOptionList = (ArrayList<COption>) customObjects[4];
-        quickAmountList = (ArrayList<BigDecimal>) customObjects[5];
+        int i = 0;
+        fixAmounts = (String[]) customObjects[i++];
+        paymentBankList = (ArrayList<ThirdPartyPaymentBank>) customObjects[i++];
+        fixAmtArray = (ArrayList<BigDecimal>) customObjects[i++];
+        fixAmountList = (ArrayList<BigDecimal>) customObjects[i++];
+        cOptionList = (ArrayList<COption>) customObjects[i++];
+        quickAmountList = (ArrayList<BigDecimal>) customObjects[i++];
     }
 
 
@@ -467,14 +468,14 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         dest.writeString(code);
         dest.writeString(formType);
         dest.writeInt(quickAmountFlag ? 1 : 0);
-        Object[] customObjects = new Object[6];
-        customObjects[0] = fixAmounts;
-        customObjects[1] = paymentBankList;
-        customObjects[2] = fixAmtArray;
-        customObjects[3] = fixAmountList;
-        customObjects[4] = cOptionList;
-        customObjects[5] = quickAmountList;
-        dest.writeArray(customObjects);
+        dest.writeArray(new Object[]{
+                fixAmounts,
+                paymentBankList,
+                fixAmtArray,
+                fixAmountList,
+                cOptionList,
+                quickAmountList,
+        });
     }
 
     @Override
