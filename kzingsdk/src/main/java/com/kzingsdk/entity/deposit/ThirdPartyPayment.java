@@ -430,6 +430,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         fixAmountList = (ArrayList<BigDecimal>) customObjects[i++];
         cOptionList = (ArrayList<COption>) customObjects[i++];
         quickAmountList = (ArrayList<BigDecimal>) customObjects[i++];
+        fixAmtArr = (String[]) customObjects[i++];
     }
 
 
@@ -475,6 +476,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
                 fixAmountList,
                 cOptionList,
                 quickAmountList,
+                fixAmtArr,
         });
     }
 
