@@ -278,11 +278,37 @@ public final class KzingAPI {
         return new GetRakebackRedeemHistoryAPI();
     }
 
-
     public static GetCsExtraInfoAPI getCsExtraInfo() {
         return new GetCsExtraInfoAPI();
     }
 
+    public static UpdatePreferContactMethodAPI updatePreferContactMethod() {
+        return new UpdatePreferContactMethodAPI();
+    }
+
+    public static GetMemberJoinableActivityListAPI getMemberJoinableActivityList() {
+        return new GetMemberJoinableActivityListAPI();
+    }
+
+    public static UpdateDptPGStatusAPI updateDptPGStatus() {
+        return new UpdateDptPGStatusAPI();
+    }
+
+    public static UpdateWtdPGStatusAPI updateWtdPGStatus() {
+        return new UpdateWtdPGStatusAPI();
+    }
+
+    public static UploadDepositProofAPI uploadDepositProof() {
+        return new UploadDepositProofAPI();
+    }
+
+    public static SubmitBankTransferAPI submitBankTransfer() {
+        return new SubmitBankTransferAPI();
+    }
+
+    public static GetFixAmountRangeAPI getFixAmountRange() {
+        return new GetFixAmountRangeAPI();
+    }
 
     public static RegParamAPI getRegParam() {
         return new RegParamAPI();
@@ -340,6 +366,7 @@ public final class KzingAPI {
     public static GetMobileFloatingWindowAPI getMobileFloatingWindow() {
         return new GetMobileFloatingWindowAPI();
     }
+
     public static GetMobileFloatingWindowV2API getMobileFloatingWindowV2() {
         return new GetMobileFloatingWindowV2API();
     }

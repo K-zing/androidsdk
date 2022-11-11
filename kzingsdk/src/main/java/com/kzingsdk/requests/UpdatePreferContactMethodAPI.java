@@ -10,18 +10,18 @@ import org.json.JSONObject;
 
 import io.reactivex.Observable;
 
-public class CopyCryptoAddressAPI extends CoreRequest {
+public class UpdatePreferContactMethodAPI extends CoreRequest {
 
-    private String currency;
-    private String cryptoAddress;
-    private String accountId;
+    private String phone;
+    private String sms;
+    private String email;
 
     @Override
     protected String getAction() {
-        return Action.copyCryptoAddress;
+        return Action.updatePreferContactMethod;
     }
 
-    CopyCryptoAddressAPI() {
+    UpdatePreferContactMethodAPI() {
         super();
     }
 
@@ -34,9 +34,9 @@ public class CopyCryptoAddressAPI extends CoreRequest {
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            jsonData.put("currency", currency);
-            jsonData.put("cryptoaddress", cryptoAddress);
-            jsonData.put("accountid", accountId);
+            jsonData.put("phone", phone);
+            jsonData.put("sms", sms);
+            jsonData.put("email", email);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -52,31 +52,34 @@ public class CopyCryptoAddressAPI extends CoreRequest {
         requestRx(context).subscribe(simpleApiResult -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((CopyCryptoAddressCallBack) kzingCallBack).onSuccess(simpleApiResult);
+                    ((UpdatePreferContactMethodCallBack) kzingCallBack).onSuccess(simpleApiResult);
                 }
             }
         }, defaultOnErrorConsumer);
     }
 
-    public CopyCryptoAddressAPI addCopyCryptoAddressCallBack(CopyCryptoAddressCallBack copyCryptoAddressCallBack) {
-        kzingCallBackList.add(copyCryptoAddressCallBack);
+    public UpdatePreferContactMethodAPI addUpdatePreferContactMethodCallBack(UpdatePreferContactMethodCallBack updatePreferContactMethodCallBack) {
+        kzingCallBackList.add(updatePreferContactMethodCallBack);
         return this;
     }
 
-    public interface CopyCryptoAddressCallBack extends KzingCallBack {
+    public interface UpdatePreferContactMethodCallBack extends KzingCallBack {
         void onSuccess(SimpleApiResult simpleApiResult);
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public UpdatePreferContactMethodAPI setPhone(String phone) {
+        this.phone = phone;
+        return this;
     }
 
-    public void setCryptoAddress(String cryptoAddress) {
-        this.cryptoAddress = cryptoAddress;
+    public UpdatePreferContactMethodAPI setSms(String sms) {
+        this.sms = sms;
+        return this;
     }
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
+    public UpdatePreferContactMethodAPI setEmail(String email) {
+        this.email = email;
+        return this;
     }
 }
 

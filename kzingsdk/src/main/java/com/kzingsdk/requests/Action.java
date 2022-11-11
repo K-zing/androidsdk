@@ -97,6 +97,13 @@ final class Action {
     static final String redeemSpecRedPacket = "30GDPFC";
     static final String getBonusWallet = "11dlIbr";
 
+    static final String updatePreferContactMethod = "7n8rf5o";
+    static final String getMemberJoinableActivityList = "28dnhha";
+    static final String updateDptPGStatus = "yocplgy";
+    static final String updateWtdPGStatus = "qs0crew";
+    static final String uploadDepositProof = "c8x0o9j";
+    static final String submitBankTransfer = "otfkqel";
+    static final String getFixAmountRange = "xpmu8x1";
 
     static final String getClientInfo = "5f7cd5b";
     static final String getClientInstantInfo = "g3zmkvo";

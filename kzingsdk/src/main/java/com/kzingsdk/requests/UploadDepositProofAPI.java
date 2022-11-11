@@ -10,18 +10,16 @@ import org.json.JSONObject;
 
 import io.reactivex.Observable;
 
-public class CopyCryptoAddressAPI extends CoreRequest {
-
-    private String currency;
-    private String cryptoAddress;
-    private String accountId;
+public class UploadDepositProofAPI extends CoreRequest {
+    private String dno;
+    private String depositSlip;
 
     @Override
     protected String getAction() {
-        return Action.copyCryptoAddress;
+        return Action.uploadDepositProof;
     }
 
-    CopyCryptoAddressAPI() {
+    UploadDepositProofAPI() {
         super();
     }
 
@@ -34,9 +32,8 @@ public class CopyCryptoAddressAPI extends CoreRequest {
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            jsonData.put("currency", currency);
-            jsonData.put("cryptoaddress", cryptoAddress);
-            jsonData.put("accountid", accountId);
+            jsonData.put("dno", dno);
+            jsonData.put("depositslip", depositSlip);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -52,31 +49,28 @@ public class CopyCryptoAddressAPI extends CoreRequest {
         requestRx(context).subscribe(simpleApiResult -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((CopyCryptoAddressCallBack) kzingCallBack).onSuccess(simpleApiResult);
+                    ((UploadDepositProofCallBack) kzingCallBack).onSuccess(simpleApiResult);
                 }
             }
         }, defaultOnErrorConsumer);
     }
 
-    public CopyCryptoAddressAPI addCopyCryptoAddressCallBack(CopyCryptoAddressCallBack copyCryptoAddressCallBack) {
-        kzingCallBackList.add(copyCryptoAddressCallBack);
+    public UploadDepositProofAPI addUploadDepositProofCallBack(UploadDepositProofCallBack uploadDepositProofCallBack) {
+        kzingCallBackList.add(uploadDepositProofCallBack);
         return this;
     }
 
-    public interface CopyCryptoAddressCallBack extends KzingCallBack {
+    public interface UploadDepositProofCallBack extends KzingCallBack {
         void onSuccess(SimpleApiResult simpleApiResult);
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setDno(String dno) {
+        this.dno = dno;
     }
 
-    public void setCryptoAddress(String cryptoAddress) {
-        this.cryptoAddress = cryptoAddress;
+    public void setDepositSlip(String depositSlip) {
+        this.depositSlip = depositSlip;
     }
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
-    }
 }
 

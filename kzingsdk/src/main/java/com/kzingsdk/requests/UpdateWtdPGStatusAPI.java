@@ -10,18 +10,16 @@ import org.json.JSONObject;
 
 import io.reactivex.Observable;
 
-public class CopyCryptoAddressAPI extends CoreRequest {
-
-    private String currency;
-    private String cryptoAddress;
-    private String accountId;
+public class UpdateWtdPGStatusAPI extends CoreRequest {
+    private String dno;
+    private String nextStatus;
 
     @Override
     protected String getAction() {
-        return Action.copyCryptoAddress;
+        return Action.updateWtdPGStatus;
     }
 
-    CopyCryptoAddressAPI() {
+    UpdateWtdPGStatusAPI() {
         super();
     }
 
@@ -34,9 +32,8 @@ public class CopyCryptoAddressAPI extends CoreRequest {
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            jsonData.put("currency", currency);
-            jsonData.put("cryptoaddress", cryptoAddress);
-            jsonData.put("accountid", accountId);
+            jsonData.put("dno", dno);
+            jsonData.put("nextStatus", nextStatus);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -52,31 +49,28 @@ public class CopyCryptoAddressAPI extends CoreRequest {
         requestRx(context).subscribe(simpleApiResult -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((CopyCryptoAddressCallBack) kzingCallBack).onSuccess(simpleApiResult);
+                    ((UpdateWtdPGStatusCallBack) kzingCallBack).onSuccess(simpleApiResult);
                 }
             }
         }, defaultOnErrorConsumer);
     }
 
-    public CopyCryptoAddressAPI addCopyCryptoAddressCallBack(CopyCryptoAddressCallBack copyCryptoAddressCallBack) {
-        kzingCallBackList.add(copyCryptoAddressCallBack);
+    public UpdateWtdPGStatusAPI addUpdateWtdPGStatusCallBack(UpdateWtdPGStatusCallBack updateWtdPGStatusCallBack) {
+        kzingCallBackList.add(updateWtdPGStatusCallBack);
         return this;
     }
 
-    public interface CopyCryptoAddressCallBack extends KzingCallBack {
+    public interface UpdateWtdPGStatusCallBack extends KzingCallBack {
         void onSuccess(SimpleApiResult simpleApiResult);
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setDno(String dno) {
+        this.dno = dno;
     }
 
-    public void setCryptoAddress(String cryptoAddress) {
-        this.cryptoAddress = cryptoAddress;
+    public void setNextStatus(String nextStatus) {
+        this.nextStatus = nextStatus;
     }
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
-    }
 }
 

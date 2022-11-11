@@ -24,6 +24,9 @@ public class TWDHistory {
     private String remark;
     private String created;
     private String updated;
+    private String ppid;
+    private String nextStatus;
+    private Boolean isUploaded;
     private Boolean manualAdjusted;
 
     public static TWDHistory newInstance(JSONObject rootObject) {
@@ -43,6 +46,9 @@ public class TWDHistory {
         twdHistory.remark = rootObject.optString("remark");
         twdHistory.created = rootObject.optString("created");
         twdHistory.updated = rootObject.optString("updated");
+        twdHistory.ppid = rootObject.optString("ppid");
+        twdHistory.nextStatus = rootObject.optString("nextStatus");
+        twdHistory.isUploaded = rootObject.optBoolean("isUploaded");
         twdHistory.manualAdjusted = rootObject.optBoolean("manualAdjusted");
         return twdHistory;
     }
@@ -173,6 +179,30 @@ public class TWDHistory {
 
     public void setManualAdjusted(Boolean manualAdjusted) {
         this.manualAdjusted = manualAdjusted;
+    }
+
+    public String getPpid() {
+        return ppid;
+    }
+
+    public void setPpid(String ppid) {
+        this.ppid = ppid;
+    }
+
+    public String getNextStatus() {
+        return nextStatus;
+    }
+
+    public void setNextStatus(String nextStatus) {
+        this.nextStatus = nextStatus;
+    }
+
+    public Boolean getUploaded() {
+        return isUploaded;
+    }
+
+    public void setUploaded(Boolean uploaded) {
+        isUploaded = uploaded;
     }
 }
 
