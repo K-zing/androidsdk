@@ -96,8 +96,10 @@ public class RequestUsernameByPhoneSendCodeAPI extends CoreRequest {
         return requestVoice;
     }
 
-    public void setRequestVoice(boolean requestVoice) {
+
+    public RequestUsernameByPhoneSendCodeAPI setRequestVoice(boolean requestVoice) {
         this.requestVoice = requestVoice;
+        return this;
     }
 
     public RequestUsernameByPhoneSendCodeAPI setUpdatePhone(Boolean updatePhone) {

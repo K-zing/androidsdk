@@ -175,6 +175,10 @@ public final class KzingAPI {
         return new GetPanDepositListAPI();
     }
 
+    public static GetPGLiveConversionRateAPI getPGLiveConversionRate() {
+        return new GetPGLiveConversionRateAPI();
+    }
+
     public static UpdatePanAPI updatePan() {
         return new UpdatePanAPI();
     }

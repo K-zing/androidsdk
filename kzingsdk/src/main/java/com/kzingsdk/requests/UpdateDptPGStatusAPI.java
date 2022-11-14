@@ -64,13 +64,14 @@ public class UpdateDptPGStatusAPI extends CoreRequest {
         void onSuccess(SimpleApiResult simpleApiResult);
     }
 
-    public void setDno(String dno) {
+    public UpdateDptPGStatusAPI setDno(String dno) {
         this.dno = dno;
+        return this;
     }
 
-    public void setNextStatus(String nextStatus) {
+    public UpdateDptPGStatusAPI setNextStatus(String nextStatus) {
         this.nextStatus = nextStatus;
+        return this;
     }
-
 }
 

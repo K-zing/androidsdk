@@ -64,13 +64,14 @@ public class GetFixAmountRangeAPI extends CoreRequest {
         void onSuccess(GetFixAmountRangeResult getFixAmountRangeResult);
     }
 
-    public void setPpid(String ppid) {
+    public GetFixAmountRangeAPI setPpid(String ppid) {
         this.ppid = ppid;
+        return this;
     }
 
-    public void setOptionId(String optionId) {
+    public GetFixAmountRangeAPI setOptionId(String optionId) {
         this.optionId = optionId;
+        return this;
     }
-
 }
 

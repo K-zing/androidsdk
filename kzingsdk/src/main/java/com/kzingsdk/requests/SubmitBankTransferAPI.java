@@ -82,44 +82,54 @@ public class SubmitBankTransferAPI extends CoreRequest {
         void onSuccess(SubmitBankTransferResult submitBankTransferResult);
     }
 
-    public void setPpid(String ppid) {
+    public SubmitBankTransferAPI setPpid(String ppid) {
         this.ppid = ppid;
+        return this;
     }
 
-    public void setOptionId(String optionId) {
+    public SubmitBankTransferAPI setOptionId(String optionId) {
         this.optionId = optionId;
+        return this;
     }
 
-    public void setDepositUser(String depositUser) {
+    public SubmitBankTransferAPI setDepositUser(String depositUser) {
         this.depositUser = depositUser;
+        return this;
     }
 
-    public void setAmount(String amount) {
+    public SubmitBankTransferAPI setAmount(String amount) {
         this.amount = amount;
+        return this;
     }
 
-    public void setBank(String bank) {
+    public SubmitBankTransferAPI setBank(String bank) {
         this.bank = bank;
+        return this;
     }
 
-    public void setUtmCode(String utmCode) {
+    public SubmitBankTransferAPI setUtmCode(String utmCode) {
         this.utmCode = utmCode;
+        return this;
     }
 
-    public void setAc(String ac) {
+    public SubmitBankTransferAPI setAc(String ac) {
         this.ac = ac;
+        return this;
     }
 
-    public void setFormData(String formData) {
+    public SubmitBankTransferAPI setFormData(String formData) {
         this.formData = formData;
+        return this;
     }
 
-    public void setPgDepositUserName(String pgDepositUserName) {
+    public SubmitBankTransferAPI setPgDepositUserName(String pgDepositUserName) {
         this.pgDepositUserName = pgDepositUserName;
+        return this;
     }
 
-    public void setProtocol(String protocol) {
+    public SubmitBankTransferAPI setProtocol(String protocol) {
         this.protocol = protocol;
+        return this;
     }
 }
 

@@ -67,16 +67,19 @@ public class CopyCryptoAddressAPI extends CoreRequest {
         void onSuccess(SimpleApiResult simpleApiResult);
     }
 
-    public void setCurrency(String currency) {
+    public CopyCryptoAddressAPI setCurrency(String currency) {
         this.currency = currency;
+        return this;
     }
 
-    public void setCryptoAddress(String cryptoAddress) {
+    public CopyCryptoAddressAPI setCryptoAddress(String cryptoAddress) {
         this.cryptoAddress = cryptoAddress;
+        return this;
     }
 
-    public void setAccountId(String accountId) {
+    public CopyCryptoAddressAPI setAccountId(String accountId) {
         this.accountId = accountId;
+        return this;
     }
 }
 

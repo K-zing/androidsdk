@@ -64,13 +64,14 @@ public class UpdateWtdPGStatusAPI extends CoreRequest {
         void onSuccess(SimpleApiResult simpleApiResult);
     }
 
-    public void setDno(String dno) {
+    public UpdateWtdPGStatusAPI setDno(String dno) {
         this.dno = dno;
+        return this;
     }
 
-    public void setNextStatus(String nextStatus) {
+    public UpdateWtdPGStatusAPI setNextStatus(String nextStatus) {
         this.nextStatus = nextStatus;
+        return this;
     }
-
 }
 

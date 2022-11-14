@@ -48,6 +48,10 @@ public class DepositOption implements Parcelable {
     private String depositFooterDesc = "";
     private String bank2DepositDesc = "";
 
+    private ArrayList<PayOptionSortData> payOptionSortDataList = new ArrayList<>();
+    private ArrayList<AvailablePaymentGroup> availablePaymentGroupList = new ArrayList<>();
+    private ArrayList<ExcludeTLCBankTransfer> excludeTLCBankTransferList = new ArrayList<>();
+
     public DepositOption() {
 
     }
@@ -82,6 +86,26 @@ public class DepositOption implements Parcelable {
         if (actArray != null) {
             for (int i = 0; i < actArray.length(); i++) {
                 item.activityMap.put(actArray.optJSONObject(i).optString("actid"), actArray.optJSONObject(i).optString("actname"));
+            }
+        }
+
+        JSONArray newPayOptionSortData = rootObject.optJSONArray("newPayOptionSortData");
+        if (newPayOptionSortData != null) {
+            for (int i = 0; i < newPayOptionSortData.length(); i++) {
+                item.payOptionSortDataList.add(PayOptionSortData.newInstance(newPayOptionSortData.optJSONObject(i)));
+            }
+        }
+
+        JSONArray availablePaymentGroup = rootObject.optJSONArray("availablePaymentGroup");
+        if (availablePaymentGroup != null) {
+            for (int i = 0; i < availablePaymentGroup.length(); i++) {
+                item.availablePaymentGroupList.add(AvailablePaymentGroup.newInstance(availablePaymentGroup.optJSONObject(i)));
+            }
+        }
+        JSONArray excludeTLCBankTransfer = rootObject.optJSONArray("excludeTLCBankTransfer");
+        if (excludeTLCBankTransfer != null) {
+            for (int i = 0; i < excludeTLCBankTransfer.length(); i++) {
+                item.excludeTLCBankTransferList.add(ExcludeTLCBankTransfer.newInstance(excludeTLCBankTransfer.optJSONObject(i)));
             }
         }
 
@@ -570,11 +594,15 @@ public class DepositOption implements Parcelable {
         cryptoDepositDesc = in.readString();
         depositFooterDesc = in.readString();
         bank2DepositDesc = in.readString();
+        int i = 0;
         Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
-        paymentGroupList = (ArrayList<PaymentGroup>) customObjects[0];
-        activityMap = (HashMap<String, String>) customObjects[1];
-        quickLinkDepositList = (ArrayList<QuickLinkDeposit>) customObjects[2];
-        cryptoList = (ArrayList<Crypto>) customObjects[3];
+        paymentGroupList = (ArrayList<PaymentGroup>) customObjects[i++];
+        activityMap = (HashMap<String, String>) customObjects[i++];
+        quickLinkDepositList = (ArrayList<QuickLinkDeposit>) customObjects[i++];
+        cryptoList = (ArrayList<Crypto>) customObjects[i++];
+        payOptionSortDataList = (ArrayList<PayOptionSortData>) customObjects[i++];
+        availablePaymentGroupList = (ArrayList<AvailablePaymentGroup>) customObjects[i++];
+        excludeTLCBankTransferList = (ArrayList<ExcludeTLCBankTransfer>) customObjects[i++];
 
 
     }
@@ -607,12 +635,20 @@ public class DepositOption implements Parcelable {
         dest.writeString(cryptoDepositDesc);
         dest.writeString(depositFooterDesc);
         dest.writeString(bank2DepositDesc);
-        Object[] customObjects = new Object[4];
-        customObjects[0] = paymentGroupList;
-        customObjects[1] = activityMap;
-        customObjects[2] = quickLinkDepositList;
-        customObjects[3] = cryptoList;
-        dest.writeArray(customObjects);
+        dest.writeArray(new Object[]{
+                paymentGroupList,
+                activityMap,
+                quickLinkDepositList,
+                cryptoList,
+                payOptionSortDataList,
+                availablePaymentGroupList,
+                excludeTLCBankTransferList,
+        });
+
+
+        ArrayList<PayOptionSortData> payOptionSortDataList = new ArrayList<>();
+        ArrayList<AvailablePaymentGroup> availablePaymentGroupList = new ArrayList<>();
+        ArrayList<ExcludeTLCBankTransfer> excludeTLCBankTransferList = new ArrayList<>();
     }
 
     @Override

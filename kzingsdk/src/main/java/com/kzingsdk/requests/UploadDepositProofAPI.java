@@ -64,13 +64,14 @@ public class UploadDepositProofAPI extends CoreRequest {
         void onSuccess(SimpleApiResult simpleApiResult);
     }
 
-    public void setDno(String dno) {
+    public UploadDepositProofAPI setDno(String dno) {
         this.dno = dno;
+        return this;
     }
 
-    public void setDepositSlip(String depositSlip) {
+    public UploadDepositProofAPI setDepositSlip(String depositSlip) {
         this.depositSlip = depositSlip;
+        return this;
     }
-
 }
 
