@@ -3,10 +3,15 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
+import com.kzingsdk.entity.ActivityItem;
 import com.kzingsdk.entity.GetPGLiveConversionRateResult;
+import com.kzingsdk.entity.HistoryListSummary;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import io.reactivex.Observable;
 
@@ -45,16 +50,24 @@ public class GetPGLiveConversionRateAPI extends CoreRequest {
         return super.generateParamsJson();
     }
     @Override
-    public Observable<GetPGLiveConversionRateResult> requestRx(final Context context) {
-        return super.baseExecute(context).map(GetPGLiveConversionRateResult::newInstance);
+    public Observable<ArrayList<GetPGLiveConversionRateResult>> requestRx(final Context context) {
+        return super.baseExecute(context)
+                .map(jsonResponse -> {
+                    ArrayList<GetPGLiveConversionRateResult> list = new ArrayList<>();
+                    JSONArray response = jsonResponse.optJSONArray("data");
+                    for (int i = 0; i < response.length(); i++) {
+                        list.add(GetPGLiveConversionRateResult.newInstance(response.optJSONObject(i)));
+                    }
+                    return list;
+                });
     }
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(getPGLiveConversionRateResult -> {
+        requestRx(context).subscribe(list -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((GetPGLiveConversionRateCallBack) kzingCallBack).onSuccess(getPGLiveConversionRateResult);
+                    ((GetPGLiveConversionRateCallBack) kzingCallBack).onSuccess(list);
                 }
             }
         }, defaultOnErrorConsumer);
@@ -66,7 +79,7 @@ public class GetPGLiveConversionRateAPI extends CoreRequest {
     }
 
     public interface GetPGLiveConversionRateCallBack extends KzingCallBack {
-        void onSuccess(GetPGLiveConversionRateResult getPGLiveConversionRateResult);
+        void onSuccess(ArrayList<GetPGLiveConversionRateResult> list);
     }
 
     public GetPGLiveConversionRateAPI setPpid(String ppid) {
