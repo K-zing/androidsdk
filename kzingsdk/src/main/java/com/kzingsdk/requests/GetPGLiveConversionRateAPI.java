@@ -3,15 +3,10 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.ActivityItem;
 import com.kzingsdk.entity.GetPGLiveConversionRateResult;
-import com.kzingsdk.entity.HistoryListSummary;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import io.reactivex.Observable;
 
@@ -20,7 +15,6 @@ public class GetPGLiveConversionRateAPI extends CoreRequest {
     private String ppid;
     private String currencyFrom;
     private String currencyTo;
-
 
 
     @Override
@@ -42,32 +36,29 @@ public class GetPGLiveConversionRateAPI extends CoreRequest {
         JSONObject jsonData = super.generateParamsJson();
         try {
             jsonData.put("ppid", ppid);
-            jsonData.put("currency_from",currencyFrom);
-            jsonData.put("currency_to",currencyTo);
+            jsonData.put("currency_from", currencyFrom);
+            jsonData.put("currency_to", currencyTo);
             return jsonData;
         } catch (JSONException ignored) {
         }
         return super.generateParamsJson();
     }
+
     @Override
-    public Observable<ArrayList<GetPGLiveConversionRateResult>> requestRx(final Context context) {
+    public Observable<GetPGLiveConversionRateResult> requestRx(final Context context) {
         return super.baseExecute(context)
                 .map(jsonResponse -> {
-                    ArrayList<GetPGLiveConversionRateResult> list = new ArrayList<>();
-                    JSONArray response = jsonResponse.optJSONArray("data");
-                    for (int i = 0; i < response.length(); i++) {
-                        list.add(GetPGLiveConversionRateResult.newInstance(response.optJSONObject(i)));
-                    }
-                    return list;
+                    JSONObject response = jsonResponse.optJSONObject("data");
+                    return GetPGLiveConversionRateResult.newInstance(response);
                 });
     }
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(list -> {
+        requestRx(context).subscribe(result -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((GetPGLiveConversionRateCallBack) kzingCallBack).onSuccess(list);
+                    ((GetPGLiveConversionRateCallBack) kzingCallBack).onSuccess(result);
                 }
             }
         }, defaultOnErrorConsumer);
@@ -79,7 +70,7 @@ public class GetPGLiveConversionRateAPI extends CoreRequest {
     }
 
     public interface GetPGLiveConversionRateCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<GetPGLiveConversionRateResult> list);
+        void onSuccess(GetPGLiveConversionRateResult result);
     }
 
     public GetPGLiveConversionRateAPI setPpid(String ppid) {
