@@ -41,6 +41,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
     private BigDecimal pRate = BigDecimal.ZERO;
     private Integer random = -1;
     private boolean displayDepositName = false;
+    private boolean isQrScanMethod = false;
 
     private boolean quickAmountFlag = false;
     private ArrayList<BigDecimal> quickAmountList = new ArrayList<>();
@@ -98,10 +99,10 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
 
         JSONObject displayAddressObject = rootObject.optJSONObject("displayAddress");
         if (displayAddressObject != null) {
+            item.setQrScanMethod(displayAddressObject.optBoolean("isQrScanMethod"));
             JSONArray cryptocurrencyArray = displayAddressObject.optJSONArray("cryptocurrency");
             if (cryptocurrencyArray != null) {
                 for (int i = 0; i < cryptocurrencyArray.length(); i++) {
-                    String fixAmt = cryptocurrencyArray.optString(i);
                     item.cryptoCurrencyList.add(cryptocurrencyArray.optString(i));
                 }
             }
@@ -276,6 +277,14 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         this.displayDepositName = displayDepositName;
     }
 
+    public boolean isQrScanMethod() {
+        return isQrScanMethod;
+    }
+
+    public void setQrScanMethod(boolean qrScanMethod) {
+        isQrScanMethod = qrScanMethod;
+    }
+
     public Integer getBcid() {
         return bcid;
     }
@@ -422,6 +431,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         code = in.readString();
         formType = in.readString();
         quickAmountFlag = in.readInt() == 1;
+        isQrScanMethod = in.readInt() == 1;
         Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
         int i = 0;
         fixAmounts = (String[]) customObjects[i++];
@@ -470,6 +480,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         dest.writeString(code);
         dest.writeString(formType);
         dest.writeInt(quickAmountFlag ? 1 : 0);
+        dest.writeInt(isQrScanMethod ? 1 : 0);
         dest.writeArray(new Object[]{
                 fixAmounts,
                 paymentBankList,

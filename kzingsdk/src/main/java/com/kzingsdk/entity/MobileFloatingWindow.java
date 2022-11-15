@@ -14,6 +14,7 @@ public class MobileFloatingWindow {
     private String floatingStyleValue;
     private String id;
     private String lang;
+    private Integer order;
     private Integer status;
     private String floatingImageId;
     private String floatingImagePath;
@@ -30,6 +31,7 @@ public class MobileFloatingWindow {
         mobileFloatingWindow.setFloatingStyleValue(rootObject.optString("floatingStyleValue"));
         mobileFloatingWindow.setId(rootObject.optString("id"));
         mobileFloatingWindow.setLang(rootObject.optString("lang"));
+        mobileFloatingWindow.setOrder(rootObject.optInt("order"));
         mobileFloatingWindow.setStatus(rootObject.optInt("status"));
         JSONObject floatingImageObject = rootObject.optJSONObject("floatingImage");
         if (floatingImageObject != null) {
@@ -135,5 +137,12 @@ public class MobileFloatingWindow {
         this.floatingImagePath = floatingImagePath;
     }
 
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
 }
 
