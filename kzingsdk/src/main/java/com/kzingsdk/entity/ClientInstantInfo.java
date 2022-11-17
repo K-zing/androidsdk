@@ -44,6 +44,7 @@ public class ClientInstantInfo implements Parcelable {
     private Boolean playerBankcardVerifiedWithdraw = false;
     private Boolean otpSms = false;
     private Boolean otpVoice = false;
+    private Boolean selfServiceActivate = false;
     private String siteId;
     private String cryptoFixedExchangeRate;
     private String announcement;
@@ -120,6 +121,7 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setPlayerBankcardVerifiedWithdraw(rootObject.optBoolean("playerBankcardVerifiedWithdraw", false));
         clientInfo.setOtpSms(rootObject.optBoolean("OtpSms", false));
         clientInfo.setOtpVoice(rootObject.optBoolean("OtpVoice", false));
+        clientInfo.setSelfServiceActivate(rootObject.optBoolean("selfserviceActivate", false));
         clientInfo.setCaptchaMode(rootObject.optString("captchaMode"));
         clientInfo.setSiteId(rootObject.optString("siteId"));
         clientInfo.setCryptoFixedExchangeRate(rootObject.optString("cryptoFixedExchangeRate"));
@@ -304,6 +306,7 @@ public class ClientInstantInfo implements Parcelable {
         playerBankcardVerifiedWithdraw = in.readInt() == 1;
         otpSms = in.readInt() == 1;
         otpVoice = in.readInt() == 1;
+        selfServiceActivate = in.readInt() == 1;
         siteId = in.readString();
         cryptoFixedExchangeRate = in.readString();
         announcement = in.readString();
@@ -377,6 +380,7 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeInt(playerBankcardVerifiedWithdraw ? 1 : 0);
         dest.writeInt(otpSms ? 1 : 0);
         dest.writeInt(otpVoice ? 1 : 0);
+        dest.writeInt(selfServiceActivate ? 1 : 0);
         dest.writeString(siteId);
         dest.writeString(cryptoFixedExchangeRate);
         dest.writeString(announcement);
@@ -668,6 +672,14 @@ public class ClientInstantInfo implements Parcelable {
     public ClientInstantInfo setOtpVoice(Boolean otpVoice) {
         this.otpVoice = otpVoice;
         return this;
+    }
+
+    public Boolean getSelfServiceActivate() {
+        return selfServiceActivate;
+    }
+
+    public void setSelfServiceActivate(Boolean selfServiceActivate) {
+        this.selfServiceActivate = selfServiceActivate;
     }
 
     public String getSiteId() {
