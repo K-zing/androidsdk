@@ -45,6 +45,61 @@ public class ExcludeTLCBankTransfer implements Parcelable {
         return item;
     }
 
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRandMin() {
+        return randMin;
+    }
+
+    public void setRandMin(String randMin) {
+        this.randMin = randMin;
+    }
+
+    public String getRandMax() {
+        return randMax;
+    }
+
+    public void setRandMax(String randMax) {
+        this.randMax = randMax;
+    }
+
+    public String getRandType() {
+        return randType;
+    }
+
+    public void setRandType(String randType) {
+        this.randType = randType;
+    }
+
+    public ArrayList<String> getFixAmtArray() {
+        return fixAmtArray;
+    }
+
+    public void setFixAmtArray(ArrayList<String> fixAmtArray) {
+        this.fixAmtArray = fixAmtArray;
+    }
+
+    public ArrayList<ThirdPartyPayment> getValueArray() {
+        return valueArray;
+    }
+
+    public void setValueArray(ArrayList<ThirdPartyPayment> valueArray) {
+        this.valueArray = valueArray;
+    }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public ExcludeTLCBankTransfer createFromParcel(Parcel in) {

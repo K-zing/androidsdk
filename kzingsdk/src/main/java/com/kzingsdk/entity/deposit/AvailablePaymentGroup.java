@@ -50,6 +50,102 @@ public class AvailablePaymentGroup implements Parcelable{
         return item;
     }
 
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getOpName() {
+        return opName;
+    }
+
+    public void setOpName(String opName) {
+        this.opName = opName;
+    }
+
+    public String getDisplayOrder() {
+        return displayOrder;
+    }
+
+    public void setDisplayOrder(String displayOrder) {
+        this.displayOrder = displayOrder;
+    }
+
+    public String getDepositAmountFormat() {
+        return depositAmountFormat;
+    }
+
+    public void setDepositAmountFormat(String depositAmountFormat) {
+        this.depositAmountFormat = depositAmountFormat;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getIsMain() {
+        return isMain;
+    }
+
+    public void setIsMain(String isMain) {
+        this.isMain = isMain;
+    }
+
+    public String getPtCss() {
+        return ptCss;
+    }
+
+    public void setPtCss(String ptCss) {
+        this.ptCss = ptCss;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    public String getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(String updated) {
+        this.updated = updated;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public String getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(String brandId) {
+        this.brandId = brandId;
+    }
+
+    public ArrayList<String> getAvailableChannel() {
+        return availableChannel;
+    }
+
+    public void setAvailableChannel(ArrayList<String> availableChannel) {
+        this.availableChannel = availableChannel;
+    }
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public AvailablePaymentGroup createFromParcel(Parcel in) {
             return new AvailablePaymentGroup(in);
