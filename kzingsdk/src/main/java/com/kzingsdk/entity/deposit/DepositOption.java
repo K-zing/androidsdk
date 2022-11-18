@@ -562,6 +562,30 @@ public class DepositOption implements Parcelable {
         this.bank2DepositDesc = bank2DepositDesc;
     }
 
+    public ArrayList<PayOptionSortData> getPayOptionSortDataList() {
+        return payOptionSortDataList;
+    }
+
+    public void setPayOptionSortDataList(ArrayList<PayOptionSortData> payOptionSortDataList) {
+        this.payOptionSortDataList = payOptionSortDataList;
+    }
+
+    public ArrayList<AvailablePaymentGroup> getAvailablePaymentGroupList() {
+        return availablePaymentGroupList;
+    }
+
+    public void setAvailablePaymentGroupList(ArrayList<AvailablePaymentGroup> availablePaymentGroupList) {
+        this.availablePaymentGroupList = availablePaymentGroupList;
+    }
+
+    public ArrayList<ExcludeTLCBankTransfer> getExcludeTLCBankTransferList() {
+        return excludeTLCBankTransferList;
+    }
+
+    public void setExcludeTLCBankTransferList(ArrayList<ExcludeTLCBankTransfer> excludeTLCBankTransferList) {
+        this.excludeTLCBankTransferList = excludeTLCBankTransferList;
+    }
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public DepositOption createFromParcel(Parcel in) {
             return new DepositOption(in);
