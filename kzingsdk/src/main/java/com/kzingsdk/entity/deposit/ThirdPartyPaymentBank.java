@@ -11,6 +11,7 @@ public class ThirdPartyPaymentBank implements Parcelable {
     private String id;
     private String name;
     private String image;
+    private String css;
 
     public ThirdPartyPaymentBank() {
 
@@ -20,7 +21,8 @@ public class ThirdPartyPaymentBank implements Parcelable {
         ThirdPartyPaymentBank item = new ThirdPartyPaymentBank();
         item.setId(rootObject.optString("key"));
         item.setName(rootObject.optString("name"));
-        item.setImage(rootObject.optString("css"));
+        item.setCss(rootObject.optString("css"));
+        item.setImage(rootObject.optString("bankcss"));
         try {
             item.parent = thirdPartyPayment.clone();
         } catch (CloneNotSupportedException e) {
@@ -60,6 +62,13 @@ public class ThirdPartyPaymentBank implements Parcelable {
         this.parent = parent;
     }
 
+    public String getCss() {
+        return css;
+    }
+
+    public void setCss(String css) {
+        this.css = css;
+    }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public ThirdPartyPaymentBank createFromParcel(Parcel in) {
@@ -74,6 +83,7 @@ public class ThirdPartyPaymentBank implements Parcelable {
     public ThirdPartyPaymentBank(Parcel in) {
         id = in.readString();
         name = in.readString();
+        css = in.readString();
         image = in.readString();
         Object[] customObjects = in.readArray(ThirdPartyPaymentBank.class.getClassLoader());
         parent = (ThirdPartyPayment) customObjects[0];
@@ -88,6 +98,7 @@ public class ThirdPartyPaymentBank implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
         dest.writeString(name);
+        dest.writeString(css);
         dest.writeString(image);
         Object[] customObjects = new Object[1];
         customObjects[0] = parent;
