@@ -12,6 +12,9 @@ public class ThirdPartyPaymentBank implements Parcelable {
     private String name;
     private String image;
     private String css;
+    private String logoType;
+    private String type;
+    private String translateKey;
 
     public ThirdPartyPaymentBank() {
 
@@ -23,6 +26,9 @@ public class ThirdPartyPaymentBank implements Parcelable {
         item.setName(rootObject.optString("name"));
         item.setCss(rootObject.optString("css"));
         item.setImage(rootObject.optString("bankcss"));
+        item.setLogoType(rootObject.optString("logotype"));
+        item.setType(rootObject.optString("type"));
+        item.setTranslateKey(rootObject.optString("translatekey"));
         try {
             item.parent = thirdPartyPayment.clone();
         } catch (CloneNotSupportedException e) {
@@ -70,6 +76,30 @@ public class ThirdPartyPaymentBank implements Parcelable {
         this.css = css;
     }
 
+    public String getLogoType() {
+        return logoType;
+    }
+
+    public void setLogoType(String logoType) {
+        this.logoType = logoType;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getTranslateKey() {
+        return translateKey;
+    }
+
+    public void setTranslateKey(String translateKey) {
+        this.translateKey = translateKey;
+    }
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public ThirdPartyPaymentBank createFromParcel(Parcel in) {
             return new ThirdPartyPaymentBank(in);
@@ -85,6 +115,9 @@ public class ThirdPartyPaymentBank implements Parcelable {
         name = in.readString();
         css = in.readString();
         image = in.readString();
+        logoType = in.readString();
+        type = in.readString();
+        translateKey = in.readString();
         Object[] customObjects = in.readArray(ThirdPartyPaymentBank.class.getClassLoader());
         parent = (ThirdPartyPayment) customObjects[0];
     }
@@ -100,6 +133,9 @@ public class ThirdPartyPaymentBank implements Parcelable {
         dest.writeString(name);
         dest.writeString(css);
         dest.writeString(image);
+        dest.writeString(logoType);
+        dest.writeString(type);
+        dest.writeString(translateKey);
         Object[] customObjects = new Object[1];
         customObjects[0] = parent;
         dest.writeArray(customObjects);
