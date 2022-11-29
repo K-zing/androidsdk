@@ -194,6 +194,10 @@ public final class KzingAPI {
     public static SetDefaultCryptoWithdrawAddressAPI setDefaultCryptoWithdrawAddress() {
         return new SetDefaultCryptoWithdrawAddressAPI();
     }
+    
+    public static SetDefaultWtdCardAPI setDefaultWtdCard() {
+        return new SetDefaultWtdCardAPI();
+    }
 
     public static CopyCryptoAddressAPI copyCryptoAddress() {
         return new CopyCryptoAddressAPI();

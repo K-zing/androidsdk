@@ -105,6 +105,7 @@ final class Action {
     static final String submitBankTransfer = "otfkqel";
     static final String getFixAmountRange = "xpmu8x1";
     static final String getPGLiveConversionRate = "yoxpmcp";
+    static final String setDefaultWtdCard = "5hcphpm";
 
 
     static final String getClientInfo = "5f7cd5b";
