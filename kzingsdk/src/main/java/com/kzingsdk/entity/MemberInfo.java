@@ -74,7 +74,8 @@ public class MemberInfo implements Parcelable {
     private ArrayList<String> currencyList = new ArrayList<>();
     private ArrayList<CurrencyBalance> currencyBalanceList = new ArrayList<>();
     private String withdrawFrozenAmount = "0";
-
+    private int verifyRemainCountSms = 0;
+    private int verifyRemainCountEmail = 0;
 
     private MemberInfo() {
 
@@ -131,6 +132,8 @@ public class MemberInfo implements Parcelable {
         withdrawBindAddress = in.readInt() == 1;
         playerCurrency = in.readString();
         address = in.readString();
+        verifyRemainCountSms = in.readInt();
+        verifyRemainCountEmail = in.readInt();
         Object[] objectArray = in.readArray(MemberInfo.class.getClassLoader());
         currencyList = (ArrayList<String>) objectArray[0];
         currencyBalanceList = (ArrayList<CurrencyBalance>) objectArray[1];
@@ -187,6 +190,13 @@ public class MemberInfo implements Parcelable {
         memberInfo.setWithdrawBindAddress(rootObject.optBoolean("withdrawBindAddress", false));
         memberInfo.setPlayerCurrency(rootObject.optString("playerCurrency"));
         memberInfo.setAddress(rootObject.optString("address"));
+
+        JSONObject verifyremaincountJSON = rootObject.optJSONObject("verifyremaincount");
+        if (verifyremaincountJSON != null) {
+            memberInfo.setVerifyRemainCountSms(verifyremaincountJSON.optInt("sms"));
+            memberInfo.setVerifyRemainCountEmail(verifyremaincountJSON.optInt("email"));
+        }
+
         JSONArray currencyJSONArray = rootObject.optJSONArray("currencyList");
         ArrayList<String> currencyList = new ArrayList<>();
         if (currencyJSONArray != null) {
@@ -258,6 +268,13 @@ public class MemberInfo implements Parcelable {
         memberInfo.setWithdrawBindAddress(rootObject.optBoolean("withdrawBindAddress", false));
         memberInfo.setPlayerCurrency(rootObject.optString("playerCurrency"));
         memberInfo.setAddress(rootObject.optString("address"));
+
+        JSONObject verifyremaincountJSON = rootObject.optJSONObject("verifyremaincount");
+        if (verifyremaincountJSON != null) {
+            memberInfo.setVerifyRemainCountSms(verifyremaincountJSON.optInt("sms"));
+            memberInfo.setVerifyRemainCountEmail(verifyremaincountJSON.optInt("email"));
+        }
+
         JSONArray currencyJSONArray = rootObject.optJSONArray("currencyList");
         ArrayList<String> currencyList = new ArrayList<>();
         if (currencyJSONArray != null) {
@@ -692,6 +709,22 @@ public class MemberInfo implements Parcelable {
         this.currencyBalanceList = currencyBalanceList;
     }
 
+    public int getVerifyRemainCountSms() {
+        return verifyRemainCountSms;
+    }
+
+    public void setVerifyRemainCountSms(int verifyRemainCountSms) {
+        this.verifyRemainCountSms = verifyRemainCountSms;
+    }
+
+    public int getVerifyRemainCountEmail() {
+        return verifyRemainCountEmail;
+    }
+
+    public void setVerifyRemainCountEmail(int verifyRemainCountEmail) {
+        this.verifyRemainCountEmail = verifyRemainCountEmail;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(regDate);
@@ -743,6 +776,8 @@ public class MemberInfo implements Parcelable {
         dest.writeInt(withdrawBindAddress ? 1 : 0);
         dest.writeString(playerCurrency);
         dest.writeString(address);
+        dest.writeInt(verifyRemainCountSms);
+        dest.writeInt(verifyRemainCountEmail);
         dest.writeArray(new Object[]{
                 currencyList,
                 currencyBalanceList
