@@ -23,12 +23,11 @@ public class LogoutAPI extends CoreRequest {
     }
 
 
-
     @Override
     public Observable<String> requestRx(Context context) {
-        SharePrefUtil.putString(context,Constant.Pref.VCTOKEN,null);
-        SharePrefUtil.putString(context, Constant.Pref.CCTOKEN,null);
-        setLoginTokens(null,null);
+        SharePrefUtil.putString(context, Constant.Pref.VCTOKEN, null);
+        SharePrefUtil.putString(context, Constant.Pref.CCTOKEN, null);
+        setLoginTokens(null, null);
         return Observable.just("Success");
     }
 
@@ -44,26 +43,25 @@ public class LogoutAPI extends CoreRequest {
         }, defaultOnErrorConsumer);
     }
 
-    public LogoutAPI addLogoutCallBack(LogoutAPI.LogoutCallBack logoutCallBack){
+    public LogoutAPI addLogoutCallBack(LogoutAPI.LogoutCallBack logoutCallBack) {
         kzingCallBackList.add(logoutCallBack);
         return this;
     }
 
-    public interface LogoutCallBack extends KzingCallBack{
-        void onSuccess();
-    }
-
     @Override
-    protected JSONObject generateParamsJson(){
+    protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            jsonData.put("playername","");
-            jsonData.put("password","");
+            jsonData.put("playername", "");
+            jsonData.put("password", "");
         } catch (JSONException ignored) {
         }
         return super.generateParamsJson();
     }
 
+    public interface LogoutCallBack extends KzingCallBack {
+        void onSuccess();
+    }
 
 
 }

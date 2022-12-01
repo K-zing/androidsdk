@@ -15,13 +15,13 @@ public class SetDefaultCryptoWithdrawAddressAPI extends CoreRequest {
     private String wdBankId;
     private String network;
 
+    SetDefaultCryptoWithdrawAddressAPI() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.setDefaultCryptoWithdrawAddress;
-    }
-
-    SetDefaultCryptoWithdrawAddressAPI() {
-        super();
     }
 
     @Override
@@ -40,6 +40,7 @@ public class SetDefaultCryptoWithdrawAddressAPI extends CoreRequest {
         }
         return super.generateParamsJson();
     }
+
     @Override
     public Observable<SimpleApiResult> requestRx(final Context context) {
         return super.baseExecute(context).map(SimpleApiResult::newInstance);
@@ -61,10 +62,6 @@ public class SetDefaultCryptoWithdrawAddressAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetTWDHistoryCallBack extends KzingCallBack {
-        void onSuccess(SimpleApiResult simpleApiResult);
-    }
-
     public SetDefaultCryptoWithdrawAddressAPI setWdBankId(String wdBankId) {
         this.wdBankId = wdBankId;
         return this;
@@ -73,6 +70,10 @@ public class SetDefaultCryptoWithdrawAddressAPI extends CoreRequest {
     public SetDefaultCryptoWithdrawAddressAPI setNetwork(String network) {
         this.network = network;
         return this;
+    }
+
+    public interface GetTWDHistoryCallBack extends KzingCallBack {
+        void onSuccess(SimpleApiResult simpleApiResult);
     }
 }
 

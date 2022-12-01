@@ -36,6 +36,21 @@ public class DepositRecord implements Parcelable {
     }
 
 
+    public DepositRecord(Parcel in) {
+        transType = in.readString();
+        created = in.readString();
+        requestAmount = in.readString();
+        successAmount = in.readString();
+        actualDepositAmount = in.readString();
+        status = in.readString();
+        remark = in.readString();
+        payName = in.readString();
+        currency = in.readString();
+        device = in.readString();
+        network = in.readString();
+        statusCode = StatusCode.valueOfId(in.readInt());
+    }
+
     public static DepositRecord newInstance(JSONObject rootObject) {
         DepositRecord item = new DepositRecord();
         item.setDno(rootObject.optString("dno"));
@@ -159,21 +174,6 @@ public class DepositRecord implements Parcelable {
 
     public void setSuccessAmount(String successAmount) {
         this.successAmount = successAmount;
-    }
-
-    public DepositRecord(Parcel in) {
-        transType = in.readString();
-        created = in.readString();
-        requestAmount = in.readString();
-        successAmount = in.readString();
-        actualDepositAmount = in.readString();
-        status = in.readString();
-        remark = in.readString();
-        payName = in.readString();
-        currency = in.readString();
-        device = in.readString();
-        network = in.readString();
-        statusCode = StatusCode.valueOfId(in.readInt());
     }
 
     @Override

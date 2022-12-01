@@ -17,6 +17,10 @@ import io.reactivex.Observable;
 
 public class GetBounsListAPI extends CoreRequest {
 
+    private int offset = 0;
+    private int pageCount = 100;
+    private Calendar startDateCalendar, endDateCalendar;
+
     public GetBounsListAPI() {
         super();
     }
@@ -28,27 +32,23 @@ public class GetBounsListAPI extends CoreRequest {
 
     @Override
     protected Observable<String> validateParams() {
-        if(startDateCalendar == null){
+        if (startDateCalendar == null) {
             return Observable.just("Start date is missing");
         }
-        if(endDateCalendar == null){
+        if (endDateCalendar == null) {
             return Observable.just("End date is missing");
         }
         return super.validateParams();
     }
 
-    private int offset = 0;
-    private int pageCount = 100;
-    private Calendar startDateCalendar,endDateCalendar;
-
     @Override
-    protected JSONObject generateParamsJson(){
+    protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
             jsonData.put("offset", offset);
-            jsonData.put("pageCount",pageCount);
+            jsonData.put("pageCount", pageCount);
             jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
-            jsonData.put("end",Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
+            jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -79,13 +79,9 @@ public class GetBounsListAPI extends CoreRequest {
         }, defaultOnErrorConsumer);
     }
 
-    public GetBounsListAPI addGetBounsListCallBack(GetBounsListAPI.GetBounsListCallBack GetBounsListCallBack){
+    public GetBounsListAPI addGetBounsListCallBack(GetBounsListAPI.GetBounsListCallBack GetBounsListCallBack) {
         kzingCallBackList.add(GetBounsListCallBack);
         return this;
-    }
-
-    public interface GetBounsListCallBack extends KzingCallBack{
-        void onSuccess(ArrayList<BonusReturn> bonusReturnList);
     }
 
     /**
@@ -120,6 +116,9 @@ public class GetBounsListAPI extends CoreRequest {
         return this;
     }
 
+    public interface GetBounsListCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<BonusReturn> bonusReturnList);
+    }
 
 
 }

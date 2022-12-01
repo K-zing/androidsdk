@@ -14,13 +14,13 @@ import io.reactivex.Observable;
 
 public class GetMemberAgentAllDownLineAPI extends CoreRequest {
 
+    GetMemberAgentAllDownLineAPI() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.getMemberAgentAllDownLine;
-    }
-
-    GetMemberAgentAllDownLineAPI() {
-        super();
     }
 
     @Override

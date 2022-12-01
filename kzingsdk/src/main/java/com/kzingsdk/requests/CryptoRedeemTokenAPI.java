@@ -26,6 +26,7 @@ public class CryptoRedeemTokenAPI extends CoreRequest {
     public Observable<String> requestRx(final Context context) {
         return super.baseExecute(context).map(jsonResponse -> "Success");
     }
+
     @Override
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
@@ -54,13 +55,13 @@ public class CryptoRedeemTokenAPI extends CoreRequest {
         return this;
     }
 
-    public interface CryptoRedeemTokenCallBack extends KzingCallBack {
-        void onSuccess(String success);
-    }
-
     public CryptoRedeemTokenAPI setToken(String token) {
         this.token = token;
         return this;
+    }
+
+    public interface CryptoRedeemTokenCallBack extends KzingCallBack {
+        void onSuccess(String success);
     }
 }
 

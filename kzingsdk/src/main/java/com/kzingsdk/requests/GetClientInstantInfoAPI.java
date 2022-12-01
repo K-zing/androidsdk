@@ -3,10 +3,7 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.ClientInfo;
 import com.kzingsdk.entity.ClientInstantInfo;
-import com.kzingsdk.util.Constant;
-import com.kzingsdk.util.SharePrefUtil;
 
 import io.reactivex.Observable;
 
@@ -38,12 +35,12 @@ public class GetClientInstantInfoAPI extends CoreRequest {
         }, defaultOnErrorConsumer);
     }
 
-    public GetClientInstantInfoAPI addGetSiteInfoCallBack(GetClientInstantInfoAPI.GetSiteInfoCallBack getSiteInfoCallBack){
+    public GetClientInstantInfoAPI addGetSiteInfoCallBack(GetClientInstantInfoAPI.GetSiteInfoCallBack getSiteInfoCallBack) {
         kzingCallBackList.add(getSiteInfoCallBack);
         return this;
     }
 
-    public interface GetSiteInfoCallBack extends KzingCallBack{
+    public interface GetSiteInfoCallBack extends KzingCallBack {
         void onSuccess(ClientInstantInfo clientInstantInfo);
     }
 

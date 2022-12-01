@@ -12,17 +12,17 @@ import io.reactivex.Observable;
 
 public class BindSocialAccountAPI extends CoreRequest {
 
-    @Override
-    protected String getAction() {
-        return Action.bindSocialAccount;
-    }
+    private String socialId;
+    private String platform;
 
     BindSocialAccountAPI() {
         super();
     }
 
-    private String socialId;
-    private String platform;
+    @Override
+    protected String getAction() {
+        return Action.bindSocialAccount;
+    }
 
     @Override
     protected Observable<String> validateParams() {
@@ -69,10 +69,6 @@ public class BindSocialAccountAPI extends CoreRequest {
         return this;
     }
 
-    public interface BindSocialAccountCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public BindSocialAccountAPI setSocialId(String socialId) {
         this.socialId = socialId;
         return this;
@@ -86,6 +82,10 @@ public class BindSocialAccountAPI extends CoreRequest {
     public BindSocialAccountAPI setPlatform(SocialRegisterPlatform platform) {
         this.platform = platform.name();
         return this;
+    }
+
+    public interface BindSocialAccountCallBack extends KzingCallBack {
+        void onSuccess();
     }
 
 }

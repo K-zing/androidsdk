@@ -12,12 +12,11 @@ import io.reactivex.Observable;
 
 public class CheckGiftRedeemableAPI extends CoreRequest {
 
+    private String actid;
+    private String giftId;
     CheckGiftRedeemableAPI() {
         super();
     }
-
-    private String actid;
-    private String giftId;
 
     @Override
     protected String getAction() {
@@ -65,10 +64,6 @@ public class CheckGiftRedeemableAPI extends CoreRequest {
         return this;
     }
 
-    public interface CheckGiftRedeemableCallBack extends KzingCallBack {
-        void onSuccess(CheckGiftRedeemableResult checkGiftRedeemableResult);
-    }
-
     /**
      * @param actid From {@link com.kzingsdk.entity.ActivityItem} returned by {@link GetActivityListAPI}
      */
@@ -77,10 +72,14 @@ public class CheckGiftRedeemableAPI extends CoreRequest {
         return this;
     }
 
-
     public CheckGiftRedeemableAPI setParamGiftId(String giftId) {
         this.giftId = giftId;
         return this;
+    }
+
+
+    public interface CheckGiftRedeemableCallBack extends KzingCallBack {
+        void onSuccess(CheckGiftRedeemableResult checkGiftRedeemableResult);
     }
 
 

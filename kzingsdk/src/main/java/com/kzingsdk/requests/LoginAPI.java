@@ -16,26 +16,21 @@ import io.reactivex.Observable;
 @Deprecated
 public class LoginAPI extends CoreRequest {
 
-    LoginAPI() {
-        super();
-    }
-
     //normal login
     private String loginName;
     private String password;
-
     //social login
     private String socialId;
     private String platform;
     private String token;
-
     private String captchaValidate = "";
     private String verifyCode = "";
     private String uuid = "";
     private String provider;
     private String providerId;
-
-
+    LoginAPI() {
+        super();
+    }
 
     @Override
     protected String getAction() {
@@ -132,10 +127,6 @@ public class LoginAPI extends CoreRequest {
         return this;
     }
 
-    public interface LoginCallBack extends KzingCallBack {
-        void onSuccess(MemberInfo memberInfo);
-    }
-
     public LoginAPI setParamLoginName(String loginName) {
         this.loginName = loginName;
         return this;
@@ -189,6 +180,10 @@ public class LoginAPI extends CoreRequest {
     public LoginAPI setProviderId(String providerId) {
         this.providerId = providerId;
         return this;
+    }
+
+    public interface LoginCallBack extends KzingCallBack {
+        void onSuccess(MemberInfo memberInfo);
     }
 }
 

@@ -19,6 +19,11 @@ import io.reactivex.Observable;
 public class GetTransferRecordAPI extends CoreRequest implements RequireCurrency {
 
 
+    private Integer pageCount = 10;
+    private Integer offset = 0;
+    private Calendar startDateCalendar, endDateCalendar;
+    private String currency;
+
     GetTransferRecordAPI() {
         super();
     }
@@ -54,11 +59,6 @@ public class GetTransferRecordAPI extends CoreRequest implements RequireCurrency
         return Action.getTHistoryList;
     }
 
-    private Integer pageCount = 10;
-    private Integer offset = 0;
-    private Calendar startDateCalendar, endDateCalendar;
-    private String currency;
-
     @Override
     public Observable<ArrayList<TransferRecord>> requestRx(Context context) {
         return super.baseExecute(context)
@@ -86,10 +86,6 @@ public class GetTransferRecordAPI extends CoreRequest implements RequireCurrency
     public GetTransferRecordAPI addGetDepositRecordCallBack(GetTransferRecordCallBack getTransferRecordCallBack) {
         kzingCallBackList.add(getTransferRecordCallBack);
         return this;
-    }
-
-    public interface GetTransferRecordCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<TransferRecord> transferRecordList);
     }
 
     /**
@@ -124,7 +120,6 @@ public class GetTransferRecordAPI extends CoreRequest implements RequireCurrency
         return this;
     }
 
-
     public GetTransferRecordAPI setParamCurrency(String currency) {
         this.currency = currency;
         return this;
@@ -133,6 +128,10 @@ public class GetTransferRecordAPI extends CoreRequest implements RequireCurrency
     @Override
     public String getCurrency() {
         return currency;
+    }
+
+    public interface GetTransferRecordCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<TransferRecord> transferRecordList);
     }
 
 

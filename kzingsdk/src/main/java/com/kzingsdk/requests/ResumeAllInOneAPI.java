@@ -93,10 +93,6 @@ public class ResumeAllInOneAPI extends CoreRequest {
         return this;
     }
 
-    public interface ResumeAllInOneCallBack extends KzingCallBack {
-        void onSuccess(AllInOneResult allInOneResult);
-    }
-
     public ResumeAllInOneAPI setVersion(String version) {
         this.version = version;
         return this;
@@ -111,7 +107,6 @@ public class ResumeAllInOneAPI extends CoreRequest {
         this.platformOnly = platformOnly;
         return this;
     }
-
 
     /**
      * @param gpType Pass null to get all
@@ -144,6 +139,10 @@ public class ResumeAllInOneAPI extends CoreRequest {
     public ResumeAllInOneAPI setSkipCheckVersion(Boolean skipCheckVersion) {
         this.skipCheckVersion = skipCheckVersion;
         return this;
+    }
+
+    public interface ResumeAllInOneCallBack extends KzingCallBack {
+        void onSuccess(AllInOneResult allInOneResult);
     }
 }
 

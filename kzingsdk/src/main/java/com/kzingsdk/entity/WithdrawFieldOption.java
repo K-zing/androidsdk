@@ -7,15 +7,6 @@ import org.json.JSONObject;
 
 public class WithdrawFieldOption implements Parcelable {
 
-    public static Creator getCREATOR() {
-        return CREATOR;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
     public static final Creator CREATOR = new Creator() {
         public WithdrawFieldOption createFromParcel(Parcel in) {
             return new WithdrawFieldOption(in);
@@ -28,8 +19,17 @@ public class WithdrawFieldOption implements Parcelable {
     private String code;
     private String css;
     private String name;
-
     private WithdrawFieldOption() {
+    }
+    public WithdrawFieldOption(Parcel in) {
+
+        code = in.readString();
+        css = in.readString();
+        name = in.readString();
+    }
+
+    public static Creator getCREATOR() {
+        return CREATOR;
     }
 
     public static WithdrawFieldOption newInstance(JSONObject rootObject) {
@@ -38,6 +38,11 @@ public class WithdrawFieldOption implements Parcelable {
         withdrawField.setCss(rootObject.optString("css"));
         withdrawField.setName(rootObject.optString("name"));
         return withdrawField;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public String getCode() {
@@ -62,13 +67,6 @@ public class WithdrawFieldOption implements Parcelable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public WithdrawFieldOption(Parcel in) {
-
-        code = in.readString();
-        css = in.readString();
-        name = in.readString();
     }
 
     @Override

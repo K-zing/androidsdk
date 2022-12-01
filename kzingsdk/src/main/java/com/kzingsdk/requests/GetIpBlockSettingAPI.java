@@ -57,12 +57,12 @@ public class GetIpBlockSettingAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetIpBlockSettingCallBack extends KzingCallBack {
-        void onSuccess(IpBlockSetting ipBlockSetting);
-    }
-
     public GetIpBlockSettingAPI setAppId(String appId) {
         this.appId = appId;
         return this;
+    }
+
+    public interface GetIpBlockSettingCallBack extends KzingCallBack {
+        void onSuccess(IpBlockSetting ipBlockSetting);
     }
 }

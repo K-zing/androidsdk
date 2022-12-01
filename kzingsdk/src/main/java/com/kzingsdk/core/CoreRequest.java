@@ -53,6 +53,12 @@ import retrofit2.http.POST;
 public abstract class CoreRequest {
 
     private static OkHttpClient okHttpClient;
+    private static int requestTimeoutMs = 10 * 1000;
+    private static int domainUsedCount = 0;
+    private static String lastUsedIP = "";
+    private static String nextIP = "";
+    private static HashSet<String> failedIP = null;
+    private static HashSet<String> dynamicDomainSet = new HashSet<>();
     protected final String CLIENT_KEY_OBJECT_NAME = "key";
     protected final String PLATFORM_OBJECT_NAME = "os";
     protected final String DOMAIN_NAME = "sdkDomain";
@@ -63,19 +69,30 @@ public abstract class CoreRequest {
     protected final String SIGN_OBJECT_NAME = "sign";
     protected final String CLIENT_OBJECT_NAME = "aid";
     protected final String PLATFORM_NAME = "android";
-    private static int requestTimeoutMs = 10 * 1000;
-
-    protected boolean dynamicDomainChanged = false;
-    private boolean usingDynamicDomain = false;
-    private boolean ignoreStatusCode = false;
-    private String choseDomain = "";
+    protected final Function<Response<String>, JSONObject> mapToGetData = stringResponse -> {
+        String body = "";
+        try {
+            body = stringResponse.body();
+            JSONObject responseJson = new JSONObject(body);
+            if (responseJson.optJSONArray("data") != null) {
+                JSONObject responseArrayJson = new JSONObject();
+                responseArrayJson.put("data", responseJson.optJSONArray("data"));
+                responseArrayJson.put("msg", responseJson.optString("msg", ""));
+                return responseArrayJson;
+            }
+            if (responseJson.optJSONObject("data") != null) {
+                JSONObject dataJSONObject = responseJson.optJSONObject("data");
+                if (dataJSONObject.optString("msg", "").length() == 0) {
+                    dataJSONObject.put("msg", responseJson.optString("msg", ""));
+                }
+                return responseJson.optJSONObject("data");
+            }
+            return new JSONObject();
+        } catch (JSONException ignored) {
+            throw new KzingException("Unknown response error : " + body);
+        }
+    };
     private final int MAX_DOMAIN_USE = 200;
-    private static int domainUsedCount = 0;
-    private static String lastUsedIP = "";
-    private static String nextIP = "";
-    private static HashSet<String> failedIP = null;
-    private static HashSet<String> dynamicDomainSet = new HashSet<>();
-
     private final ArrayList<String> PORT_LIST = new ArrayList<String>() {{
 //        add("9496");
 //        add("9587");
@@ -89,7 +106,6 @@ public abstract class CoreRequest {
 //        add("8998");
         add("");
     }};
-
     private final HashSet<String> API_URL_SET = new HashSet<String>() {{
 //        add("https://miracle-apis-dev.qijixitong.com");
         String defaultIP = "https://tvwkkq8k9e7grjbw49pk.jumzxxtu3j.com";
@@ -106,22 +122,76 @@ public abstract class CoreRequest {
         add("https://xjgnfy.pzgktkvcwbch.com");
         add("https://pnoeee.draxetggrjqu.com");
     }};
-
     private final HashSet<String> API_URL_SET_BETTER = new HashSet<String>() {{
 //        add("https://miracle-apis-dev.qijixitong.com");
         String defaultBetterIP = "https://fsr5vqdhsspsrtz6fl93.jumzxxtu3j.com/";
         add(defaultBetterIP);
         add("https://4jqz2j97.ui4now.com");
     }};
-
-    protected ArrayList<KzingCallBack> kzingCallBackList = new ArrayList<>();
     private final String TAG = "CoreRequest";
+    protected boolean dynamicDomainChanged = false;
+    protected ArrayList<KzingCallBack> kzingCallBackList = new ArrayList<>();
+    protected final Consumer<Throwable> defaultOnErrorConsumer = throwable -> {
+        //log(throwable.toString());
+        if (kzingCallBackList.size() > 0) {
+            for (KzingCallBack kzingCallBack : kzingCallBackList) {
+                if (throwable instanceof KzingRequestException) {
+                    kzingCallBack.onFailure((KzingRequestException) throwable);
+                } else if (throwable instanceof KzingException) {
+                    kzingCallBack.onFailure((KzingException) throwable);
+                } else if (throwable instanceof java.net.ConnectException) {
+                    failedIP.add(lastUsedIP);
+                    kzingCallBack.onFailure(new KzingException(throwable.toString()));
+                } else {
+                    kzingCallBack.onFailure(new KzingException(throwable.toString()));
+                }
+            }
+        }
+    };
+    private boolean usingDynamicDomain = false;
+    private boolean ignoreStatusCode = false;
+    private String choseDomain = "";
+    private final Consumer<Response<String>> showReturnLog = response -> {
+        if (response == null) {
+            throw new KzingRequestException(null, null, "showReturnLog : response == null", choseDomain, "");
+        }
+        //log("Result " + response.code() + " : " + response);
+        //log("Result body : " + response.body());
+    };
+    private final Consumer<Response<String>> checkResponseCodes = response -> {
+        int statusCode = response.code();
+        int kzingCode = 0;
+        if (response.body() != null) {
+            try {
+                JSONObject responseJson = new JSONObject(response.body());
+                kzingCode = responseJson.optInt("status", 0);
+                String errorMsg = responseJson.optString("msg", "");
+                String apiPath = responseJson.optString("apiPath", "");
+                if (kzingCode != 0 && !errorMsg.isEmpty()) {
+                    throw new KzingRequestException(statusCode, kzingCode, errorMsg, choseDomain, apiPath);
+                }
+            } catch (JSONException e) {
+                throw new KzingRequestException(statusCode, kzingCode, "Unknown response error : " + response.body(), choseDomain, "");
+            }
+        }
+        if (statusCode != 200 || kzingCode != 0) {
+            failedIP.add(lastUsedIP);
+            String errorBody = "";
+            try {
+                if (response.errorBody() != null) {
+                    errorBody = response.errorBody().string();
+                }
+            } catch (IOException e) {
+                errorBody = "Response is empty.";
+            }
+            throw new KzingRequestException(statusCode, kzingCode, errorBody, choseDomain, "");
+        }
+    };
 
-    interface CallSDKService {
-        @POST("/")
-        @Headers("Content-Type: application/text")
-        Observable<Response<String>> doRequestService(
-                @Body RequestBody json);
+    protected CoreRequest() {
+        if (failedIP == null) {
+            failedIP = new HashSet<>();
+        }
     }
 
     /**
@@ -148,13 +218,6 @@ public abstract class CoreRequest {
         return Observable.just("");
     }
 
-    protected CoreRequest() {
-        if (failedIP == null) {
-            failedIP = new HashSet<>();
-        }
-    }
-
-
     private OkHttpClient getOkHttpClient() {
         if (okHttpClient == null
                 || okHttpClient.connectionPool().connectionCount() == 0
@@ -167,7 +230,7 @@ public abstract class CoreRequest {
                     .writeTimeout(requestTimeoutMs, TimeUnit.MILLISECONDS)
                     .addInterceptor(chain -> {
                         Request request = chain.request().newBuilder()
-                                .addHeader("User-Agent","KzingAndroidSDK:"+BuildConfig.VERSION_NAME)
+                                .addHeader("User-Agent", "KzingAndroidSDK:" + BuildConfig.VERSION_NAME)
                                 .build();
                         showLogDebug(request);
                         return chain.proceed(request);
@@ -206,7 +269,6 @@ public abstract class CoreRequest {
                     .build();
         });
     }
-
 
     private HashSet<String> chooseDomainSet(Context context) {
         String domainJSONString = SharePrefUtil.getString(context, Constant.Pref.DOMAIN, null);
@@ -336,7 +398,7 @@ public abstract class CoreRequest {
     }
 
     private void showLogDebug(Request request) throws IOException {
-        log(request.toString());
+        //log(request.toString());
         RequestBody requestBody = request.body();
         if (requestBody != null) {
             Buffer buffer = new Buffer();
@@ -347,10 +409,10 @@ public abstract class CoreRequest {
                 charset = contentType.charset(charset);
             }
             if (charset != null) {
-                log(buffer.readString(charset));
+                log(KzingSDK.getInstance().getAid() + " : " + buffer.readString(charset));
             }
         } else {
-            log("requestBody == null");
+            //log("requestBody == null");
         }
     }
 
@@ -393,8 +455,8 @@ public abstract class CoreRequest {
                 throw new KzingException("MD5 Key is not set yet.");
             }
             JSONObject data = generateParamsJson();
-            log("------");
-            log(data.toString());
+            //log("------");
+            //log(data.toString());
             String dataRSA;
             if (getAction().equals("c6ace99")) {
                 dataRSA = data.toString();
@@ -414,7 +476,7 @@ public abstract class CoreRequest {
             dataWithKey.put(ACTION_OBJECT_NAME_K36, getK36Action());
             dataWithKey.put(PLATFORM_OBJECT_NAME, PLATFORM_NAME);
             dataWithKey.put(SIGN_OBJECT_NAME, MD5Utils.md5(dataRSA + KzingSDK.getInstance().getMd5Key()).toUpperCase());
-            log(dataWithKey.toString());
+//            log(KzingSDK.getInstance().getAid() + " : " + dataWithKey.toString());
             PublicKey publicKeyBasic = RSAUtils.getPublicKey(Base64Utils.decode(KzingSDK.getInstance().getBasicRsaKey()));
             byte[] encryptByteBasic = RSAUtils.encryptLongData(dataWithKey.toString().getBytes(), publicKeyBasic);
             return Base64Utils.encode(encryptByteBasic);
@@ -455,76 +517,9 @@ public abstract class CoreRequest {
         return baseExecuteFlow.map(mapToGetData);
     }
 
-    private final Consumer<Response<String>> showReturnLog = response -> {
-        if (response == null) {
-            throw new KzingRequestException(null, null, "showReturnLog : response == null", choseDomain, "");
-        }
-        log("Result " + response.code() + " : " + response);
-        log("Result body : " + response.body());
-    };
-
-    private final Consumer<Response<String>> checkResponseCodes = response -> {
-        int statusCode = response.code();
-        int kzingCode = 0;
-        if (response.body() != null) {
-            try {
-                JSONObject responseJson = new JSONObject(response.body());
-                kzingCode = responseJson.optInt("status", 0);
-                String errorMsg = responseJson.optString("msg", "");
-                String apiPath = responseJson.optString("apiPath", "");
-                if (kzingCode != 0 && !errorMsg.isEmpty()) {
-                    throw new KzingRequestException(statusCode, kzingCode, errorMsg, choseDomain, apiPath);
-                }
-            } catch (JSONException e) {
-                throw new KzingRequestException(statusCode, kzingCode, "Unknown response error : " + response.body(), choseDomain, "");
-            }
-        }
-        if (statusCode != 200 || kzingCode != 0) {
-            failedIP.add(lastUsedIP);
-            String errorBody = "";
-            try {
-                if (response.errorBody() != null) {
-                    errorBody = response.errorBody().string();
-                }
-            } catch (IOException e) {
-                errorBody = "Response is empty.";
-            }
-            throw new KzingRequestException(statusCode, kzingCode, errorBody, choseDomain, "");
-        }
-    };
-
-    protected final Function<Response<String>, JSONObject> mapToGetData = stringResponse -> {
-        String body = "";
-        try {
-            body = stringResponse.body();
-            JSONObject responseJson = new JSONObject(body);
-            if (responseJson.optJSONArray("data") != null) {
-                JSONObject responseArrayJson = new JSONObject();
-                responseArrayJson.put("data", responseJson.optJSONArray("data"));
-                responseArrayJson.put("msg", responseJson.optString("msg", ""));
-                return responseArrayJson;
-            }
-            if (responseJson.optJSONObject("data") != null) {
-                JSONObject dataJSONObject = responseJson.optJSONObject("data");
-                if (dataJSONObject.optString("msg", "").length() == 0) {
-                    dataJSONObject.put("msg", responseJson.optString("msg", ""));
-                }
-                return responseJson.optJSONObject("data");
-            }
-            return new JSONObject();
-        } catch (JSONException ignored) {
-            throw new KzingException("Unknown response error : " + body);
-        }
-    };
-
-
     protected void setLoginTokens(String vcToken, String ccToken) {
         KzingSDK.getInstance().setCcToken(ccToken);
         KzingSDK.getInstance().setVcToken(vcToken);
-    }
-
-    protected void setSessionId(String sessionId) {
-        KzingSDK.getInstance().setSessionId(sessionId);
     }
 
     public String getChoseDomain() {
@@ -535,27 +530,13 @@ public abstract class CoreRequest {
         return KzingSDK.getInstance().getSessionId();
     }
 
+    protected void setSessionId(String sessionId) {
+        KzingSDK.getInstance().setSessionId(sessionId);
+    }
+
     public void clearCallBackList() {
         kzingCallBackList = new ArrayList<>();
     }
-
-    protected final Consumer<Throwable> defaultOnErrorConsumer = throwable -> {
-        log(throwable.toString());
-        if (kzingCallBackList.size() > 0) {
-            for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                if (throwable instanceof KzingRequestException) {
-                    kzingCallBack.onFailure((KzingRequestException) throwable);
-                } else if (throwable instanceof KzingException) {
-                    kzingCallBack.onFailure((KzingException) throwable);
-                } else if (throwable instanceof java.net.ConnectException) {
-                    failedIP.add(lastUsedIP);
-                    kzingCallBack.onFailure(new KzingException(throwable.toString()));
-                } else {
-                    kzingCallBack.onFailure(new KzingException(throwable.toString()));
-                }
-            }
-        }
-    };
 
     public CoreRequest setIgnoreStatusCode(boolean ignoreStatusCode) {
         this.ignoreStatusCode = ignoreStatusCode;
@@ -564,6 +545,13 @@ public abstract class CoreRequest {
 
     protected void log(String msg) {
         Log.d(TAG, msg);
+    }
+
+    interface CallSDKService {
+        @POST("/")
+        @Headers("Content-Type: application/text")
+        Observable<Response<String>> doRequestService(
+                @Body RequestBody json);
     }
 
 }

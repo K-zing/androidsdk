@@ -16,13 +16,13 @@ public class CopyCryptoAddressAPI extends CoreRequest {
     private String cryptoAddress;
     private String accountId;
 
+    CopyCryptoAddressAPI() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.copyCryptoAddress;
-    }
-
-    CopyCryptoAddressAPI() {
-        super();
     }
 
     @Override
@@ -42,6 +42,7 @@ public class CopyCryptoAddressAPI extends CoreRequest {
         }
         return super.generateParamsJson();
     }
+
     @Override
     public Observable<SimpleApiResult> requestRx(final Context context) {
         return super.baseExecute(context).map(SimpleApiResult::newInstance);
@@ -63,10 +64,6 @@ public class CopyCryptoAddressAPI extends CoreRequest {
         return this;
     }
 
-    public interface CopyCryptoAddressCallBack extends KzingCallBack {
-        void onSuccess(SimpleApiResult simpleApiResult);
-    }
-
     public CopyCryptoAddressAPI setCurrency(String currency) {
         this.currency = currency;
         return this;
@@ -80,6 +77,10 @@ public class CopyCryptoAddressAPI extends CoreRequest {
     public CopyCryptoAddressAPI setAccountId(String accountId) {
         this.accountId = accountId;
         return this;
+    }
+
+    public interface CopyCryptoAddressCallBack extends KzingCallBack {
+        void onSuccess(SimpleApiResult simpleApiResult);
     }
 }
 

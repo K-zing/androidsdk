@@ -10,6 +10,15 @@ import org.json.JSONObject;
 import java.math.BigDecimal;
 
 public class SubmitDataCrypto implements Parcelable {
+    public static final Creator CREATOR = new Creator() {
+        public SubmitDataCrypto createFromParcel(Parcel in) {
+            return new SubmitDataCrypto(in);
+        }
+
+        public SubmitDataCrypto[] newArray(int size) {
+            return new SubmitDataCrypto[size];
+        }
+    };
     private String address;
     private BigDecimal amount = BigDecimal.ZERO;
     private BigDecimal cryptoAmount = BigDecimal.ZERO;
@@ -18,6 +27,14 @@ public class SubmitDataCrypto implements Parcelable {
 
     public SubmitDataCrypto() {
 
+    }
+
+    public SubmitDataCrypto(Parcel in) {
+        address = in.readString();
+        amount = new BigDecimal(in.readString());
+        cryptoAmount = new BigDecimal(in.readString());
+        cryptoCurrency = in.readString();
+        currency = in.readString();
     }
 
     public static SubmitDataCrypto newInstance(JSONObject rootObject) {
@@ -68,24 +85,6 @@ public class SubmitDataCrypto implements Parcelable {
 
     public void setCurrency(String currency) {
         this.currency = currency;
-    }
-
-    public static final Creator CREATOR = new Creator() {
-        public SubmitDataCrypto createFromParcel(Parcel in) {
-            return new SubmitDataCrypto(in);
-        }
-
-        public SubmitDataCrypto[] newArray(int size) {
-            return new SubmitDataCrypto[size];
-        }
-    };
-
-    public SubmitDataCrypto(Parcel in) {
-        address = in.readString();
-        amount = new BigDecimal(in.readString());
-        cryptoAmount = new BigDecimal(in.readString());
-        cryptoCurrency = in.readString();
-        currency = in.readString();
     }
 
     @Override

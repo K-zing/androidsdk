@@ -15,6 +15,9 @@ import io.reactivex.Observable;
 
 public class GetCsHistoryDetailByIdAPI extends BaseD11API {
 
+    private String qhId;
+    private Integer type = 1;
+
     GetCsHistoryDetailByIdAPI() {
         super();
     }
@@ -23,10 +26,6 @@ public class GetCsHistoryDetailByIdAPI extends BaseD11API {
     protected String getD11Action() {
         return Action.getCsHistoryDetailById;
     }
-
-    private String qhId;
-    private Integer type = 1;
-
 
     @Override
     protected Observable<String> validateParams() {
@@ -90,10 +89,6 @@ public class GetCsHistoryDetailByIdAPI extends BaseD11API {
         return this;
     }
 
-    public interface GetCsHistoryDetailByIdCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<CsHistoryDetail> csHistoryDetailList);
-    }
-
     public GetCsHistoryDetailByIdAPI setQhId(String qhId) {
         this.qhId = qhId;
         return this;
@@ -102,6 +97,10 @@ public class GetCsHistoryDetailByIdAPI extends BaseD11API {
     public GetCsHistoryDetailByIdAPI setType(int type) {
         this.type = type;
         return this;
+    }
+
+    public interface GetCsHistoryDetailByIdCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<CsHistoryDetail> csHistoryDetailList);
     }
 
 }

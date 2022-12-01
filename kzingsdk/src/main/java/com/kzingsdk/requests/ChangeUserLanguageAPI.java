@@ -12,15 +12,15 @@ import io.reactivex.Observable;
 
 public class ChangeUserLanguageAPI extends CoreRequest {
 
-    @Override
-    protected String getAction() {
-        return Action.changeUserLanguage;
-    }
-
     private String lang = "";
 
     ChangeUserLanguageAPI() {
         super();
+    }
+
+    @Override
+    protected String getAction() {
+        return Action.changeUserLanguage;
     }
 
     @Override
@@ -61,11 +61,6 @@ public class ChangeUserLanguageAPI extends CoreRequest {
         return this;
     }
 
-    public interface ChangeUserLanguageCallBack extends KzingCallBack {
-        void onSuccess(SimpleApiResult simpleApiResult);
-    }
-
-
     public String getLang() {
         return lang;
     }
@@ -73,6 +68,10 @@ public class ChangeUserLanguageAPI extends CoreRequest {
     public ChangeUserLanguageAPI setLang(String lang) {
         this.lang = lang;
         return this;
+    }
+
+    public interface ChangeUserLanguageCallBack extends KzingCallBack {
+        void onSuccess(SimpleApiResult simpleApiResult);
     }
 
 }

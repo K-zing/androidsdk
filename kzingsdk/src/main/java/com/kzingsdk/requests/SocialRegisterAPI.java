@@ -14,19 +14,18 @@ import io.reactivex.Observable;
 public class SocialRegisterAPI extends RegAccountAPI {
 
 
-    @Override
-    protected String getAction() {
-        return Action.socialRegister;
-    }
-
-    SocialRegisterAPI() {
-        super();
-    }
-
     private String socialId;
     private String platform;
     private String provider;
     private String providerId;
+    SocialRegisterAPI() {
+        super();
+    }
+
+    @Override
+    protected String getAction() {
+        return Action.socialRegister;
+    }
 
     @Override
     protected Observable<String> validateParams() {
@@ -87,10 +86,6 @@ public class SocialRegisterAPI extends RegAccountAPI {
         return this;
     }
 
-    public interface SocialRegisterCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public SocialRegisterAPI setSocialId(String socialId) {
         this.socialId = socialId;
         return this;
@@ -114,6 +109,10 @@ public class SocialRegisterAPI extends RegAccountAPI {
     public SocialRegisterAPI setProviderId(String providerId) {
         this.providerId = providerId;
         return this;
+    }
+
+    public interface SocialRegisterCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }
 

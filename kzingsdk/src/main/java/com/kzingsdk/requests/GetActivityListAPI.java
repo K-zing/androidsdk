@@ -15,17 +15,17 @@ import io.reactivex.Observable;
 
 public class GetActivityListAPI extends CoreRequest {
 
+    private String isDeposit;
+
+
     GetActivityListAPI() {
         super();
     }
-
 
     @Override
     protected String getAction() {
         return Action.getActivityList;
     }
-
-    private String isDeposit;
 
     @Override
     protected JSONObject generateParamsJson() {
@@ -68,12 +68,12 @@ public class GetActivityListAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetActivityListCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<ActivityItem> activityItemList);
-    }
-
     public GetActivityListAPI setIsDeposit(String isDeposit) {
         this.isDeposit = isDeposit;
         return this;
+    }
+
+    public interface GetActivityListCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<ActivityItem> activityItemList);
     }
 }

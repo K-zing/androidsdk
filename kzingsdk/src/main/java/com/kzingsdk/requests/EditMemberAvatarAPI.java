@@ -63,14 +63,14 @@ public class EditMemberAvatarAPI extends CoreRequest {
         return this;
     }
 
-    public interface EditMemberAvatarCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
-
     public EditMemberAvatarAPI setParamAvatarId(String avatarId) {
         this.avatarId = avatarId;
         return this;
+    }
+
+
+    public interface EditMemberAvatarCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }
 

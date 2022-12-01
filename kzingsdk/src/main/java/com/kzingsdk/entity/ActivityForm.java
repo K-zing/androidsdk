@@ -26,8 +26,8 @@ public class ActivityForm {
         activityForm.setName(rootObject.optString("name"));
         activityForm.setRequired(rootObject.optBoolean("required"));
         JSONArray selectionArray = rootObject.optJSONArray("selection");
-        if (selectionArray!=null){
-            for(int i = 0 ; i < selectionArray.length();i++){
+        if (selectionArray != null) {
+            for (int i = 0; i < selectionArray.length(); i++) {
                 activityForm.selectionList.add(selectionArray.optString(i));
             }
         }

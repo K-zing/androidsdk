@@ -59,10 +59,6 @@ public class SubmitKycAPI extends CoreRequest {
         return this;
     }
 
-    public interface SubmitKycCallBack extends KzingCallBack {
-        void onSuccess(String success);
-    }
-
     public SubmitKycAPI setKycType(String kycType) {
         this.kycType = kycType;
         return this;
@@ -76,5 +72,9 @@ public class SubmitKycAPI extends CoreRequest {
     public SubmitKycAPI setImage2(String image2) {
         this.image2 = image2;
         return this;
+    }
+
+    public interface SubmitKycCallBack extends KzingCallBack {
+        void onSuccess(String success);
     }
 }

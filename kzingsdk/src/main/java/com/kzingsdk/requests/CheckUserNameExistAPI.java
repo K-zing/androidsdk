@@ -11,6 +11,8 @@ import io.reactivex.Observable;
 
 public class CheckUserNameExistAPI extends CoreRequest {
 
+    private String userName;
+
     CheckUserNameExistAPI() {
         super();
     }
@@ -19,8 +21,6 @@ public class CheckUserNameExistAPI extends CoreRequest {
     protected String getAction() {
         return Action.checkUserNameExist;
     }
-
-    private String userName;
 
     @Override
     protected Observable<String> validateParams() {
@@ -63,13 +63,13 @@ public class CheckUserNameExistAPI extends CoreRequest {
         return this;
     }
 
-    public interface CheckUserNameExistCallBack extends KzingCallBack {
-        void onSuccess(Boolean isExist);
-    }
-
     public CheckUserNameExistAPI setParamUserName(String userName) {
         this.userName = userName;
         return this;
+    }
+
+    public interface CheckUserNameExistCallBack extends KzingCallBack {
+        void onSuccess(Boolean isExist);
     }
 
 }

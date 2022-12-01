@@ -2,11 +2,9 @@ package com.kzingsdk.entity;
 
 import com.kzingsdk.util.BigDecimalUtil;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 public class BetHistory {
 
@@ -29,8 +27,8 @@ public class BetHistory {
         betHistory.setGpType(rootObject.optString("gp_type"));
         betHistory.setConversionCurrency(rootObject.optString("conversioncurrency"));
         betHistory.setConversion(rootObject.optInt("conversion"));
-        betHistory.setBetAmt(BigDecimalUtil.optBigDecimal(rootObject,"betamt",BigDecimal.ZERO));
-        betHistory.setWin(BigDecimalUtil.optBigDecimal(rootObject,"win",BigDecimal.ZERO));
+        betHistory.setBetAmt(BigDecimalUtil.optBigDecimal(rootObject, "betamt", BigDecimal.ZERO));
+        betHistory.setWin(BigDecimalUtil.optBigDecimal(rootObject, "win", BigDecimal.ZERO));
         return betHistory;
     }
 

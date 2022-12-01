@@ -78,10 +78,6 @@ public class ResetPasswordByEmailAPI extends CoreRequest {
         return this;
     }
 
-    public interface ResetPasswordByEmailCallBack extends KzingCallBack {
-        void onSuccess(Boolean success);
-    }
-
     public ResetPasswordByEmailAPI setParamLoginName(String loginName) {
         this.loginName = loginName;
         return this;
@@ -108,5 +104,9 @@ public class ResetPasswordByEmailAPI extends CoreRequest {
     public ResetPasswordByEmailAPI setParamValidateCode(String validateCode) {
         this.validateCode = validateCode;
         return this;
+    }
+
+    public interface ResetPasswordByEmailCallBack extends KzingCallBack {
+        void onSuccess(Boolean success);
     }
 }

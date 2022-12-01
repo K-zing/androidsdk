@@ -17,11 +17,11 @@ import io.reactivex.Observable;
 
 public class GetGpsBalanceAPI extends CoreRequest {
 
+    private Set<String> gpAccountSet = new HashSet<>();
+
     GetGpsBalanceAPI() {
         super();
     }
-
-    private Set<String> gpAccountSet = new HashSet<>();
 
     @Override
     protected String getAction() {
@@ -77,13 +77,13 @@ public class GetGpsBalanceAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetAllGpBalanceCallBack extends KzingCallBack {
-        void onSuccess(Map<String, String> gpBalanceMap);
-    }
-
     public GetGpsBalanceAPI addGpAccountId(String gpAccountId) {
         gpAccountSet.add(gpAccountId);
         return this;
+    }
+
+    public interface GetAllGpBalanceCallBack extends KzingCallBack {
+        void onSuccess(Map<String, String> gpBalanceMap);
     }
 
 }

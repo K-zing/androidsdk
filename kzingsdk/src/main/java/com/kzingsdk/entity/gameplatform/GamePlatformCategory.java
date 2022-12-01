@@ -5,14 +5,14 @@ import org.json.JSONObject;
 public class GamePlatformCategory {
 
     private String childCategoryId = "-1";
-    private String gpid = "" ;
-    private String childGroupId = "" ;
-    private String categoryName = "" ;
+    private String gpid = "";
+    private String childGroupId = "";
+    private String categoryName = "";
     private String categoryEnName = "";
-    private String image = "" ;
-    private int displayorder = 0 ;
+    private String image = "";
+    private int displayorder = 0;
 
-    public GamePlatformCategory(){
+    public GamePlatformCategory() {
 
     }
 

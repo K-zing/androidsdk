@@ -11,6 +11,17 @@ import java.math.BigDecimal;
 
 public class VipSetting implements Parcelable {
 
+    public static final Creator<VipSetting> CREATOR = new Creator<VipSetting>() {
+        @Override
+        public VipSetting createFromParcel(Parcel in) {
+            return new VipSetting(in);
+        }
+
+        @Override
+        public VipSetting[] newArray(int size) {
+            return new VipSetting[size];
+        }
+    };
     private String groupId;
     private String groupName;
     private String currency;
@@ -27,6 +38,23 @@ public class VipSetting implements Parcelable {
     private BigDecimal autoRemainTargetBet = BigDecimal.ZERO;
 
     public VipSetting() {
+    }
+
+    protected VipSetting(Parcel in) {
+        groupId = in.readString();
+        groupName = in.readString();
+        currency = in.readString();
+        rankLevel = in.readInt();
+        withdrawTimes = in.readInt();
+        monthReward = new BigDecimal(in.readString());
+        dailyReward = new BigDecimal(in.readString());
+        weeklyReward = new BigDecimal(in.readString());
+        birthReward = new BigDecimal(in.readString());
+        withdrawDailyMaxLimit = new BigDecimal(in.readString());
+        autoLevelReward = new BigDecimal(in.readString());
+        autoUpTargetDeposit = new BigDecimal(in.readString());
+        autoUpTargetBet = new BigDecimal(in.readString());
+        autoRemainTargetBet = new BigDecimal(in.readString());
     }
 
     public static VipSetting newInstance(JSONObject rootObject) {
@@ -160,23 +188,6 @@ public class VipSetting implements Parcelable {
         this.rankLevel = rankLevel;
     }
 
-    protected VipSetting(Parcel in) {
-        groupId = in.readString();
-        groupName = in.readString();
-        currency = in.readString();
-        rankLevel = in.readInt();
-        withdrawTimes = in.readInt();
-        monthReward = new BigDecimal(in.readString());
-        dailyReward = new BigDecimal(in.readString());
-        weeklyReward = new BigDecimal(in.readString());
-        birthReward = new BigDecimal(in.readString());
-        withdrawDailyMaxLimit = new BigDecimal(in.readString());
-        autoLevelReward = new BigDecimal(in.readString());
-        autoUpTargetDeposit = new BigDecimal(in.readString());
-        autoUpTargetBet = new BigDecimal(in.readString());
-        autoRemainTargetBet = new BigDecimal(in.readString());
-    }
-
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(groupId);
@@ -199,18 +210,6 @@ public class VipSetting implements Parcelable {
     public int describeContents() {
         return 0;
     }
-
-    public static final Creator<VipSetting> CREATOR = new Creator<VipSetting>() {
-        @Override
-        public VipSetting createFromParcel(Parcel in) {
-            return new VipSetting(in);
-        }
-
-        @Override
-        public VipSetting[] newArray(int size) {
-            return new VipSetting[size];
-        }
-    };
 
 
 }

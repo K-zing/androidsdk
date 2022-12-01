@@ -4,17 +4,14 @@ import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.CryptoDepositOption;
-import com.kzingsdk.entity.CryptoDepositOption;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import io.reactivex.Observable;
 
-public class GetCryptoDepositOptionAPI extends CoreRequest implements RequireCurrency{
+public class GetCryptoDepositOptionAPI extends CoreRequest implements RequireCurrency {
 
     private String currency;
 

@@ -16,29 +16,25 @@ import io.reactivex.Observable;
 
 public class LoginAllInOneAPI extends CoreRequest {
 
-    LoginAllInOneAPI() {
-        super();
-    }
-
     //normal login
     private String loginName;
     private String password;
-
     //social login
     private String socialId;
     private String platform;
     private String token;
-
     private String captchaValidate = "";
     private String verifyCode = "";
     private String uuid = "";
-
     private Boolean showAll = false;
     private Boolean platformOnly = false;
     private GamePlatformType gpType = null;
     private Boolean showChild = false;
     private String provider = "";
     private String providerId = "";
+    LoginAllInOneAPI() {
+        super();
+    }
 
     @Override
     protected String getAction() {
@@ -141,10 +137,6 @@ public class LoginAllInOneAPI extends CoreRequest {
         return this;
     }
 
-    public interface LoginAllInOneCallBack extends KzingCallBack {
-        void onSuccess(AllInOneResult allInOneResult);
-    }
-
     public LoginAllInOneAPI setParamLoginName(String loginName) {
         this.loginName = loginName;
         return this;
@@ -189,6 +181,7 @@ public class LoginAllInOneAPI extends CoreRequest {
         this.uuid = uuid;
         return this;
     }
+
     public LoginAllInOneAPI setShowAll(Boolean showAll) {
         this.showAll = showAll;
         return this;
@@ -198,7 +191,6 @@ public class LoginAllInOneAPI extends CoreRequest {
         this.platformOnly = platformOnly;
         return this;
     }
-
 
     /**
      * @param gpType Pass null to get all
@@ -221,6 +213,10 @@ public class LoginAllInOneAPI extends CoreRequest {
     public LoginAllInOneAPI setProviderId(String providerId) {
         this.providerId = providerId;
         return this;
+    }
+
+    public interface LoginAllInOneCallBack extends KzingCallBack {
+        void onSuccess(AllInOneResult allInOneResult);
     }
 }
 

@@ -14,13 +14,13 @@ public class GetFixAmountRangeAPI extends CoreRequest {
     private String ppid;
     private String optionId;
 
+    GetFixAmountRangeAPI() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.getFixAmountRange;
-    }
-
-    GetFixAmountRangeAPI() {
-        super();
     }
 
     @Override
@@ -39,6 +39,7 @@ public class GetFixAmountRangeAPI extends CoreRequest {
         }
         return super.generateParamsJson();
     }
+
     @Override
     public Observable<GetFixAmountRangeResult> requestRx(final Context context) {
         return super.baseExecute(context).map(GetFixAmountRangeResult::newInstance);
@@ -60,10 +61,6 @@ public class GetFixAmountRangeAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetFixAmountRangeCallBack extends KzingCallBack {
-        void onSuccess(GetFixAmountRangeResult getFixAmountRangeResult);
-    }
-
     public GetFixAmountRangeAPI setPpid(String ppid) {
         this.ppid = ppid;
         return this;
@@ -72,6 +69,10 @@ public class GetFixAmountRangeAPI extends CoreRequest {
     public GetFixAmountRangeAPI setOptionId(String optionId) {
         this.optionId = optionId;
         return this;
+    }
+
+    public interface GetFixAmountRangeCallBack extends KzingCallBack {
+        void onSuccess(GetFixAmountRangeResult getFixAmountRangeResult);
     }
 }
 

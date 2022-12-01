@@ -11,11 +11,11 @@ import io.reactivex.Observable;
 
 public class CheckActivityRedeemableAPI extends CoreRequest {
 
+    private String actid;
+
     CheckActivityRedeemableAPI() {
         super();
     }
-
-    private String actid;
 
     @Override
     protected String getAction() {
@@ -64,13 +64,13 @@ public class CheckActivityRedeemableAPI extends CoreRequest {
         return this;
     }
 
-    public interface CheckActivityRedeemableCallBack extends KzingCallBack {
-        void onSuccess(Boolean isRedeemable);
-    }
-
     public CheckActivityRedeemableAPI setParamActid(String actid) {
         this.actid = actid;
         return this;
+    }
+
+    public interface CheckActivityRedeemableCallBack extends KzingCallBack {
+        void onSuccess(Boolean isRedeemable);
     }
 
 

@@ -16,13 +16,13 @@ public class UpdatePreferContactMethodAPI extends CoreRequest {
     private String sms;
     private String email;
 
+    UpdatePreferContactMethodAPI() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.updatePreferContactMethod;
-    }
-
-    UpdatePreferContactMethodAPI() {
-        super();
     }
 
     @Override
@@ -42,6 +42,7 @@ public class UpdatePreferContactMethodAPI extends CoreRequest {
         }
         return super.generateParamsJson();
     }
+
     @Override
     public Observable<SimpleApiResult> requestRx(final Context context) {
         return super.baseExecute(context).map(SimpleApiResult::newInstance);
@@ -63,10 +64,6 @@ public class UpdatePreferContactMethodAPI extends CoreRequest {
         return this;
     }
 
-    public interface UpdatePreferContactMethodCallBack extends KzingCallBack {
-        void onSuccess(SimpleApiResult simpleApiResult);
-    }
-
     public UpdatePreferContactMethodAPI setPhone(String phone) {
         this.phone = phone;
         return this;
@@ -80,6 +77,10 @@ public class UpdatePreferContactMethodAPI extends CoreRequest {
     public UpdatePreferContactMethodAPI setEmail(String email) {
         this.email = email;
         return this;
+    }
+
+    public interface UpdatePreferContactMethodCallBack extends KzingCallBack {
+        void onSuccess(SimpleApiResult simpleApiResult);
     }
 }
 

@@ -4,27 +4,23 @@ import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.DptTransInfo;
-import com.kzingsdk.entity.RebateDetail;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import io.reactivex.Observable;
 
 public class CheckDptTransInfoAPI extends CoreRequest {
 
-    @Override
-    protected String getAction() {
-        return Action.checkDptTransInfo;
-    }
-
     private String dno;
 
     CheckDptTransInfoAPI() {
         super();
+    }
+
+    @Override
+    protected String getAction() {
+        return Action.checkDptTransInfo;
     }
 
     @Override
@@ -65,13 +61,13 @@ public class CheckDptTransInfoAPI extends CoreRequest {
         return this;
     }
 
-    public interface CheckDptTransInfoCallBack extends KzingCallBack {
-        void onSuccess(DptTransInfo dptTransInfo);
-    }
-
     public CheckDptTransInfoAPI setDno(String dno) {
         this.dno = dno;
         return this;
+    }
+
+    public interface CheckDptTransInfoCallBack extends KzingCallBack {
+        void onSuccess(DptTransInfo dptTransInfo);
     }
 }
 

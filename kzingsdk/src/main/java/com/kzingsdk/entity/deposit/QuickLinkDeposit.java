@@ -7,13 +7,28 @@ import org.json.JSONObject;
 
 public class QuickLinkDeposit implements Parcelable {
 
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public QuickLinkDeposit createFromParcel(Parcel in) {
+            return new QuickLinkDeposit(in);
+        }
+
+        public QuickLinkDeposit[] newArray(int size) {
+            return new QuickLinkDeposit[size];
+        }
+    };
     protected String logo = "";
     protected String name = "";
     protected String url = "";
     protected Integer order = 0;
 
-
     public QuickLinkDeposit() {
+    }
+
+    public QuickLinkDeposit(Parcel in) {
+        logo = in.readString();
+        name = in.readString();
+        url = in.readString();
+        order = in.readInt();
     }
 
     public static QuickLinkDeposit newInstance(JSONObject rootObject) {
@@ -55,23 +70,6 @@ public class QuickLinkDeposit implements Parcelable {
 
     public void setOrder(Integer order) {
         this.order = order;
-    }
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public QuickLinkDeposit createFromParcel(Parcel in) {
-            return new QuickLinkDeposit(in);
-        }
-
-        public QuickLinkDeposit[] newArray(int size) {
-            return new QuickLinkDeposit[size];
-        }
-    };
-
-    public QuickLinkDeposit(Parcel in) {
-        logo = in.readString();
-        name = in.readString();
-        url = in.readString();
-        order = in.readInt();
     }
 
     @Override

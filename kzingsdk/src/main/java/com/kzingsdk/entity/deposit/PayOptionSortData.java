@@ -7,6 +7,15 @@ import org.json.JSONObject;
 
 public class PayOptionSortData implements Parcelable {
 
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public PayOptionSortData createFromParcel(Parcel in) {
+            return new PayOptionSortData(in);
+        }
+
+        public PayOptionSortData[] newArray(int size) {
+            return new PayOptionSortData[size];
+        }
+    };
     private String id;
     private String categoryId;
     private String opCode;
@@ -22,6 +31,19 @@ public class PayOptionSortData implements Parcelable {
 
     }
 
+    public PayOptionSortData(Parcel in) {
+        id = in.readString();
+        categoryId = in.readString();
+        opCode = in.readString();
+        opName = in.readString();
+        displayOrder = in.readString();
+        status = in.readString();
+        created = in.readString();
+        updated = in.readString();
+        currency = in.readString();
+        brandId = in.readString();
+    }
+
     public static PayOptionSortData newInstance(JSONObject rootObject) {
         PayOptionSortData item = new PayOptionSortData();
         item.id = rootObject.optString("id");
@@ -35,29 +57,6 @@ public class PayOptionSortData implements Parcelable {
         item.currency = rootObject.optString("currency");
         item.brandId = rootObject.optString("brandid");
         return item;
-    }
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public PayOptionSortData createFromParcel(Parcel in) {
-            return new PayOptionSortData(in);
-        }
-
-        public PayOptionSortData[] newArray(int size) {
-            return new PayOptionSortData[size];
-        }
-    };
-
-    public PayOptionSortData(Parcel in) {
-        id = in.readString();
-        categoryId = in.readString();
-        opCode = in.readString();
-        opName = in.readString();
-        displayOrder = in.readString();
-        status = in.readString();
-        created = in.readString();
-        updated = in.readString();
-        currency = in.readString();
-        brandId = in.readString();
     }
 
     @Override

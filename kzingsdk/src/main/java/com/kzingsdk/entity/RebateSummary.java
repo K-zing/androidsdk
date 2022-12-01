@@ -15,9 +15,9 @@ public class RebateSummary {
 
     public static RebateSummary newInstance(JSONObject rootObject) {
         RebateSummary rebateSummary = new RebateSummary();
-        rebateSummary.setTotal(BigDecimalUtil.optBigDecimal(rootObject,"total",BigDecimal.ZERO));
+        rebateSummary.setTotal(BigDecimalUtil.optBigDecimal(rootObject, "total", BigDecimal.ZERO));
         JSONArray dataArray = rootObject.optJSONArray("data");
-        if (dataArray!=null){
+        if (dataArray != null) {
             for (int i = 0; i < dataArray.length(); i++) {
                 rebateSummary.rebateGameDetailList.add(RebateGameDetail.newInstance(dataArray.optJSONObject(i)));
             }

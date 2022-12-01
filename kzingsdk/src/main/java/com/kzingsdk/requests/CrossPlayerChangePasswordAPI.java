@@ -11,13 +11,12 @@ import io.reactivex.Observable;
 
 public class CrossPlayerChangePasswordAPI extends CoreRequest {
 
-    CrossPlayerChangePasswordAPI() {
-        super();
-    }
-
     private String userName = "";
     private String password = "";
     private String lastDigit = "";
+    CrossPlayerChangePasswordAPI() {
+        super();
+    }
 
     @Override
     protected String getAction() {
@@ -69,10 +68,6 @@ public class CrossPlayerChangePasswordAPI extends CoreRequest {
         return this;
     }
 
-    public interface ChangePasswordCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public CrossPlayerChangePasswordAPI setPassword(String password) {
         this.password = password;
         return this;
@@ -86,6 +81,10 @@ public class CrossPlayerChangePasswordAPI extends CoreRequest {
     public CrossPlayerChangePasswordAPI setLastDigit(String lastDigit) {
         this.lastDigit = lastDigit;
         return this;
+    }
+
+    public interface ChangePasswordCallBack extends KzingCallBack {
+        void onSuccess();
     }
 
 }

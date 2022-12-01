@@ -11,16 +11,6 @@ public class GamePlatformAccount {
     private int status = 0;
     private String image = "";
 
-    public GamePlatformAccount clone() {
-        GamePlatformAccount gpChild = new GamePlatformAccount();
-        gpChild.gpAccountId = gpAccountId;
-        gpChild.gpName = gpName;
-        gpChild.isseamless = isseamless;
-        gpChild.image = image;
-        gpChild.displayorder = displayorder;
-        return gpChild;
-    }
-
     public GamePlatformAccount() {
 
     }
@@ -34,6 +24,16 @@ public class GamePlatformAccount {
         item.setStatus(rootObject.optInt("status"));
         item.setImage(rootObject.optString("image"));
         return item;
+    }
+
+    public GamePlatformAccount clone() {
+        GamePlatformAccount gpChild = new GamePlatformAccount();
+        gpChild.gpAccountId = gpAccountId;
+        gpChild.gpName = gpName;
+        gpChild.isseamless = isseamless;
+        gpChild.image = image;
+        gpChild.displayorder = displayorder;
+        return gpChild;
     }
 
     public String getGpAccountId() {

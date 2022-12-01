@@ -26,6 +26,15 @@ public enum GamePlatformType {
         this.name = name;
     }
 
+    public static GamePlatformType valueOfTypeId(int typeId) {
+        for (GamePlatformType type : GamePlatformType.values()) {
+            if (type.getId() == typeId) {
+                return type;
+            }
+        }
+        return null;
+    }
+
     public int getId() {
         return id;
     }
@@ -40,14 +49,5 @@ public enum GamePlatformType {
 
     public GamePlatformType origin() {
         return GamePlatformType.valueOfTypeId(id);
-    }
-
-    public static GamePlatformType valueOfTypeId(int typeId) {
-        for (GamePlatformType type : GamePlatformType.values()) {
-            if (type.getId() == typeId) {
-                return type;
-            }
-        }
-        return null;
     }
 }

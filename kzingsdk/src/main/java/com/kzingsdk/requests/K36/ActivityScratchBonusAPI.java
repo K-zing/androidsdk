@@ -12,6 +12,8 @@ import io.reactivex.Observable;
 
 public class ActivityScratchBonusAPI extends BaseK36API {
 
+    private String actid;
+
     ActivityScratchBonusAPI() {
         super();
     }
@@ -20,8 +22,6 @@ public class ActivityScratchBonusAPI extends BaseK36API {
     protected String getK36Action() {
         return Action.activityScratchBonus;
     }
-
-    private String actid;
 
     @Override
     protected Observable<String> validateParams() {
@@ -66,13 +66,13 @@ public class ActivityScratchBonusAPI extends BaseK36API {
         return this;
     }
 
-    public interface ActivityScratchBonusCallBack extends KzingCallBack {
-        void onSuccess(K36ActivityInfo activityScratchBonus);
-    }
-
     public ActivityScratchBonusAPI setActid(String actid) {
         this.actid = actid;
         return this;
+    }
+
+    public interface ActivityScratchBonusCallBack extends KzingCallBack {
+        void onSuccess(K36ActivityInfo activityScratchBonus);
     }
 
 }

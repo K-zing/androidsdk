@@ -22,6 +22,8 @@ import java.util.HashSet;
 public final class KzingSDK {
 
     private static KzingSDK instance;
+    private final int DEFAULT_REQUEST_TIMEOUT_MS = 1000 * 20;
+    private final int DEFAULT_PING_CHECK_TIMEOUT_MS = 1000 * 2;
     private String vcToken;
     private String ccToken;
     private String aid;
@@ -31,27 +33,13 @@ public final class KzingSDK {
     private String apiKey;
     private String sessionId;
     private LangCode langCode = LangCode.CHS;
-
-    private final int DEFAULT_REQUEST_TIMEOUT_MS = 1000 * 20;
-    private final int DEFAULT_PING_CHECK_TIMEOUT_MS = 1000 * 2;
     private int requestTimeoutMs = DEFAULT_REQUEST_TIMEOUT_MS;
     private int pingCheckTimeoutMs = DEFAULT_PING_CHECK_TIMEOUT_MS;
 
     private boolean useCustomUrl = false;
     private HashSet<String> customUrlSet = new HashSet<>();
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        throw new CloneNotSupportedException();
-    }
-
     private KzingSDK() {
-    }
-
-    void validate() {
-        if (apiKey == null) {
-            throw new KzingException("ApiKey is not set yet.");
-        }
     }
 
     public synchronized static KzingSDK getInstance() {
@@ -59,6 +47,17 @@ public final class KzingSDK {
             instance = new KzingSDK();
         }
         return instance;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        throw new CloneNotSupportedException();
+    }
+
+    void validate() {
+        if (apiKey == null) {
+            throw new KzingException("ApiKey is not set yet.");
+        }
     }
 
     /**
@@ -309,12 +308,12 @@ public final class KzingSDK {
         return requestTimeoutMs;
     }
 
-    public int getPingCheckTimeoutMs() {
-        return pingCheckTimeoutMs;
-    }
-
     public void setRequestTimeoutMs(int requestTimeoutMs) {
         this.requestTimeoutMs = requestTimeoutMs;
+    }
+
+    public int getPingCheckTimeoutMs() {
+        return pingCheckTimeoutMs;
     }
 
     public void setPingCheckTimeoutMs(int pingCheckTimeoutMs) {
@@ -361,12 +360,12 @@ public final class KzingSDK {
         this.useCustomUrl = useCustomUrl;
     }
 
-    public void setCustomUrlSet(HashSet<String> customUrlSet) {
-        this.customUrlSet = customUrlSet;
-    }
-
     public HashSet<String> getCustomUrlSet() {
         return customUrlSet;
+    }
+
+    public void setCustomUrlSet(HashSet<String> customUrlSet) {
+        this.customUrlSet = customUrlSet;
     }
 
 }

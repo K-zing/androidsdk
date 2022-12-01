@@ -12,15 +12,15 @@ import io.reactivex.Observable;
 
 public class TransferAllBalanceToGameAPI extends CoreRequest {
 
-    @Override
-    protected String getAction() {
-        return Action.transferAllBalanceToGame;
-    }
-
     private String gpid = "";
 
     TransferAllBalanceToGameAPI() {
         super();
+    }
+
+    @Override
+    protected String getAction() {
+        return Action.transferAllBalanceToGame;
     }
 
     @Override
@@ -61,11 +61,6 @@ public class TransferAllBalanceToGameAPI extends CoreRequest {
         return this;
     }
 
-    public interface TransferAllBalanceToGameCallBack extends KzingCallBack {
-        void onSuccess(SimpleApiResult simpleApiResult);
-    }
-
-
     public String getGpid() {
         return gpid;
     }
@@ -73,6 +68,10 @@ public class TransferAllBalanceToGameAPI extends CoreRequest {
     public TransferAllBalanceToGameAPI setGpid(String gpid) {
         this.gpid = gpid;
         return this;
+    }
+
+    public interface TransferAllBalanceToGameCallBack extends KzingCallBack {
+        void onSuccess(SimpleApiResult simpleApiResult);
     }
 
 }

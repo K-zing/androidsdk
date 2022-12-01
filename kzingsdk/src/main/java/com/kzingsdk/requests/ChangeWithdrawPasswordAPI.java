@@ -11,13 +11,12 @@ import io.reactivex.Observable;
 
 public class ChangeWithdrawPasswordAPI extends CoreRequest {
 
-    ChangeWithdrawPasswordAPI() {
-        super();
-    }
-
     private String accPassword = "";
     private String oldPassword = "";
     private String newPassword = "";
+    ChangeWithdrawPasswordAPI() {
+        super();
+    }
 
     @Override
     protected String getAction() {
@@ -66,10 +65,6 @@ public class ChangeWithdrawPasswordAPI extends CoreRequest {
         return this;
     }
 
-    public interface ChangePasswordCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public ChangeWithdrawPasswordAPI setParamNewPassword(String newpassword) {
         this.newPassword = newpassword;
         return this;
@@ -79,9 +74,14 @@ public class ChangeWithdrawPasswordAPI extends CoreRequest {
         this.oldPassword = oldPassword;
         return this;
     }
+
     public ChangeWithdrawPasswordAPI setParamAccPassword(String accPassword) {
         this.accPassword = accPassword;
         return this;
+    }
+
+    public interface ChangePasswordCallBack extends KzingCallBack {
+        void onSuccess();
     }
 
 }

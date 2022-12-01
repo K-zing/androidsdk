@@ -20,15 +20,14 @@ public class GetMemberAgentWithdrawalAPI extends CoreRequest {
     private Integer currentIndex = 1; //  (Starting from: 1)
     private Calendar startDateCalendar, endDateCalendar;
 
-    @Override
-    protected String getAction() {
-        return Action.getMemberAgentWithdrawal;
-    }
-
     GetMemberAgentWithdrawalAPI() {
         super();
     }
 
+    @Override
+    protected String getAction() {
+        return Action.getMemberAgentWithdrawal;
+    }
 
     @Override
     protected Observable<String> validateParams() {
@@ -87,10 +86,6 @@ public class GetMemberAgentWithdrawalAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetMemberAgentWithdrawalCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<AgentWithdrawal> agentWithdrawalList);
-    }
-
     public GetMemberAgentWithdrawalAPI setCurrentIndex(Integer currentIndex) {
         this.currentIndex = currentIndex;
         return this;
@@ -104,6 +99,10 @@ public class GetMemberAgentWithdrawalAPI extends CoreRequest {
     public GetMemberAgentWithdrawalAPI setEndDateCalendar(Calendar endDateCalendar) {
         this.endDateCalendar = endDateCalendar;
         return this;
+    }
+
+    public interface GetMemberAgentWithdrawalCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<AgentWithdrawal> agentWithdrawalList);
     }
 
 }

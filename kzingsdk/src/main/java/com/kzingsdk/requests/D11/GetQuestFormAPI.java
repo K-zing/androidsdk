@@ -15,6 +15,8 @@ import io.reactivex.Observable;
 
 public class GetQuestFormAPI extends BaseD11API {
 
+    private String sqtId;
+
     GetQuestFormAPI() {
         super();
     }
@@ -23,8 +25,6 @@ public class GetQuestFormAPI extends BaseD11API {
     protected String getD11Action() {
         return Action.getQuestForm;
     }
-
-    private String sqtId;
 
     @Override
     protected Observable<String> validateParams() {
@@ -77,12 +77,12 @@ public class GetQuestFormAPI extends BaseD11API {
         return this;
     }
 
-    public interface GetQuestFormCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<QuestQuestion> questQuestionList);
-    }
-
     public GetQuestFormAPI setSqtId(String sqtId) {
         this.sqtId = sqtId;
         return this;
+    }
+
+    public interface GetQuestFormCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<QuestQuestion> questQuestionList);
     }
 }

@@ -73,15 +73,10 @@ public class SubmitEWalletWithdrawAPI extends CoreRequest {
         return this;
     }
 
-    public interface SubmitEWalletWithdrawCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public SubmitEWalletWithdrawAPI setParamBid(String playerBankId) {
         this.bid = playerBankId;
         return this;
     }
-
 
     public SubmitEWalletWithdrawAPI setParamAmount(Double amount) {
         this.amount = amount;
@@ -94,6 +89,10 @@ public class SubmitEWalletWithdrawAPI extends CoreRequest {
     public SubmitEWalletWithdrawAPI setParamWithdrawPassword(String withdrawPassword) {
         this.withdrawPassword = withdrawPassword;
         return this;
+    }
+
+    public interface SubmitEWalletWithdrawCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }
 

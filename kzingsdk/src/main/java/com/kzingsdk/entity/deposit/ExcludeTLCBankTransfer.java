@@ -10,6 +10,15 @@ import java.util.ArrayList;
 
 public class ExcludeTLCBankTransfer implements Parcelable {
 
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public ExcludeTLCBankTransfer createFromParcel(Parcel in) {
+            return new ExcludeTLCBankTransfer(in);
+        }
+
+        public ExcludeTLCBankTransfer[] newArray(int size) {
+            return new ExcludeTLCBankTransfer[size];
+        }
+    };
     private String key;
     private String name;
     private String randMin;
@@ -18,10 +27,22 @@ public class ExcludeTLCBankTransfer implements Parcelable {
     private ArrayList<String> fixAmtArray = new ArrayList<>();
     private ArrayList<ThirdPartyPayment> valueArray = new ArrayList<>();
 
+
     public ExcludeTLCBankTransfer() {
 
     }
 
+    public ExcludeTLCBankTransfer(Parcel in) {
+        key = in.readString();
+        name = in.readString();
+        randMin = in.readString();
+        randMax = in.readString();
+        randType = in.readString();
+        int i = 0;
+        Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
+        fixAmtArray = (ArrayList<String>) customObjects[i++];
+        valueArray = (ArrayList<ThirdPartyPayment>) customObjects[i++];
+    }
 
     public static ExcludeTLCBankTransfer newInstance(JSONObject rootObject) {
         ExcludeTLCBankTransfer item = new ExcludeTLCBankTransfer();
@@ -99,28 +120,6 @@ public class ExcludeTLCBankTransfer implements Parcelable {
 
     public void setValueArray(ArrayList<ThirdPartyPayment> valueArray) {
         this.valueArray = valueArray;
-    }
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public ExcludeTLCBankTransfer createFromParcel(Parcel in) {
-            return new ExcludeTLCBankTransfer(in);
-        }
-
-        public ExcludeTLCBankTransfer[] newArray(int size) {
-            return new ExcludeTLCBankTransfer[size];
-        }
-    };
-
-    public ExcludeTLCBankTransfer(Parcel in) {
-        key = in.readString();
-        name = in.readString();
-        randMin = in.readString();
-        randMax = in.readString();
-        randType = in.readString();
-        int i = 0;
-        Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
-        fixAmtArray = (ArrayList<String>) customObjects[i++];
-        valueArray = (ArrayList<ThirdPartyPayment>) customObjects[i++];
     }
 
     @Override

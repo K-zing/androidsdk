@@ -68,10 +68,6 @@ public class GetGiftHistoryAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetGiftHistoryCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<GiftHistory> giftHistoryArrayList);
-    }
-
     public GetGiftHistoryAPI setParamStartDateCalendar(Calendar startDateCalendar) {
         this.startDateCalendar = startDateCalendar;
         return this;
@@ -80,6 +76,10 @@ public class GetGiftHistoryAPI extends CoreRequest {
     public GetGiftHistoryAPI setParamEndDateCalendar(Calendar endDateCalendar) {
         this.endDateCalendar = endDateCalendar;
         return this;
+    }
+
+    public interface GetGiftHistoryCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<GiftHistory> giftHistoryArrayList);
     }
 
 }

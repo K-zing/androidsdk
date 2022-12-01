@@ -38,6 +38,23 @@ public class WithdrawRecord implements Parcelable {
 
     }
 
+    public WithdrawRecord(Parcel in) {
+        transType = in.readString();
+        created = in.readString();
+        requestAmount = in.readString();
+        successAmount = in.readString();
+        actualWithdrawAmount = in.readString();
+        withdrawFee = in.readString();
+        cardNum = in.readString();
+        bankName = in.readString();
+        status = in.readString();
+        currency = in.readString();
+        canCancel = in.readInt() == 1;
+        device = in.readString();
+        network = in.readString();
+        statusCode = StatusCode.valueOfId(in.readInt());
+    }
+
     public static WithdrawRecord newInstance(JSONObject rootObject) {
         WithdrawRecord item = new WithdrawRecord();
         item.setDno(rootObject.optString("dno"));
@@ -183,23 +200,6 @@ public class WithdrawRecord implements Parcelable {
         this.successAmount = successAmount;
     }
 
-    public WithdrawRecord(Parcel in) {
-        transType = in.readString();
-        created = in.readString();
-        requestAmount = in.readString();
-        successAmount = in.readString();
-        actualWithdrawAmount = in.readString();
-        withdrawFee = in.readString();
-        cardNum = in.readString();
-        bankName = in.readString();
-        status = in.readString();
-        currency = in.readString();
-        canCancel = in.readInt() == 1;
-        device = in.readString();
-        network = in.readString();
-        statusCode = StatusCode.valueOfId(in.readInt());
-    }
-
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(transType);
@@ -223,6 +223,23 @@ public class WithdrawRecord implements Parcelable {
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "WithdrawRecord{" +
+                "dno='" + dno + '\'' +
+                ", transType='" + transType + '\'' +
+                ", created='" + created + '\'' +
+                ", requestAmount='" + requestAmount + '\'' +
+                ", actualWithdrawAmount='" + actualWithdrawAmount + '\'' +
+                ", withdrawFee='" + withdrawFee + '\'' +
+                ", cardNum='" + cardNum + '\'' +
+                ", name='" + bankName + '\'' +
+                ", status='" + status + '\'' +
+                ", canCancel='" + canCancel + '\'' +
+                ", statusCode=" + statusCode +
+                '}';
     }
 
     public enum StatusCode {
@@ -250,22 +267,5 @@ public class WithdrawRecord implements Parcelable {
         public int getId() {
             return id;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "WithdrawRecord{" +
-                "dno='" + dno + '\'' +
-                ", transType='" + transType + '\'' +
-                ", created='" + created + '\'' +
-                ", requestAmount='" + requestAmount + '\'' +
-                ", actualWithdrawAmount='" + actualWithdrawAmount + '\'' +
-                ", withdrawFee='" + withdrawFee + '\'' +
-                ", cardNum='" + cardNum + '\'' +
-                ", name='" + bankName + '\'' +
-                ", status='" + status + '\'' +
-                ", canCancel='" + canCancel + '\'' +
-                ", statusCode=" + statusCode +
-                '}';
     }
 }

@@ -1,7 +1,6 @@
 package com.kzingsdk.core;
 
 import android.os.Build;
-import android.util.Log;
 import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.WebChromeClient;
@@ -12,9 +11,6 @@ import android.webkit.WebViewClient;
 import com.kzingsdk.entity.ClientInfo;
 import com.kzingsdk.entity.MemberInfo;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 import io.reactivex.annotations.NonNull;
 
 /**
@@ -23,7 +19,8 @@ import io.reactivex.annotations.NonNull;
  */
 public final class WebViewHelper {
     private static final String TAG = "SDK";
-    public static WebView gameWebViewSetup(@NonNull WebView webView) throws KzingException{
+
+    public static WebView gameWebViewSetup(@NonNull WebView webView) throws KzingException {
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webView.setWebViewClient(new WebViewClient());
@@ -47,11 +44,11 @@ public final class WebViewHelper {
     }
 
     /**
-    * Please use {@link WebViewHelper#gameWebViewSetup(WebView) } instead
+     * Please use {@link WebViewHelper#gameWebViewSetup(WebView) } instead
      */
     @Deprecated
-    public static WebView gameWebViewSetup(@NonNull WebView webView,@NonNull ClientInfo clientInfo,@NonNull MemberInfo memberInfo) throws KzingException{
-        if(!KzingSDK.getInstance().hasToken()){
+    public static WebView gameWebViewSetup(@NonNull WebView webView, @NonNull ClientInfo clientInfo, @NonNull MemberInfo memberInfo) throws KzingException {
+        if (!KzingSDK.getInstance().hasToken()) {
             throw new KzingException("You are not logined");
         }
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
@@ -77,20 +74,20 @@ public final class WebViewHelper {
         CookieManager cookieManager = CookieManager.getInstance();
         cookieManager.setAcceptCookie(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            cookieManager.setAcceptThirdPartyCookies(webView,true);
+            cookieManager.setAcceptThirdPartyCookies(webView, true);
         }
         String cookieVCString = "vc" + clientInfo.getSiteId() + "=" + KzingSDK.getInstance().getVcToken() + "; domain=" + formatCookieDomain(clientInfo.getSiteDomain());
         cookieManager.setCookie(clientInfo.getSiteDomain(), cookieVCString);
         String cookieCCString = "cc" + clientInfo.getSiteId() + "=" + KzingSDK.getInstance().getCcToken() + "; domain=" + formatCookieDomain(clientInfo.getSiteDomain());
         cookieManager.setCookie(clientInfo.getSiteDomain(), cookieCCString);
         String cookieUnameString = "u" + clientInfo.getSiteId() + "=" + memberInfo.getPlayerName() + "; domain=" + formatCookieDomain(clientInfo.getSiteDomain());
-        cookieManager.setCookie(clientInfo.getSiteDomain(),cookieUnameString );
+        cookieManager.setCookie(clientInfo.getSiteDomain(), cookieUnameString);
         String cookieCfString = "cf=1" + "; domain=" + formatCookieDomain(clientInfo.getSiteDomain());
-        cookieManager.setCookie(clientInfo.getSiteDomain(),cookieCfString );
+        cookieManager.setCookie(clientInfo.getSiteDomain(), cookieCfString);
         return webView;
     }
 
-    public static WebView csWebViewSetup(WebView webView){
+    public static WebView csWebViewSetup(WebView webView) {
         webView.setWebViewClient(new WebViewClient());
         webView.setWebChromeClient(new WebChromeClient());
         webView.getSettings().setLoadsImagesAutomatically(true);
@@ -107,16 +104,16 @@ public final class WebViewHelper {
      * Please use {@link WebViewHelper#depositsWebViewSetup(WebView) } instead
      */
     @Deprecated
-    public static WebView depositsWebViewSetup(WebView webView)throws KzingException{
+    public static WebView depositsWebViewSetup(WebView webView) throws KzingException {
         return gameWebViewSetup(webView);
     }
 
-    public static WebView depositsWebViewSetup(WebView webView, ClientInfo clientInfo,MemberInfo memberInfo)throws KzingException{
-        return gameWebViewSetup(webView,clientInfo,memberInfo);
+    public static WebView depositsWebViewSetup(WebView webView, ClientInfo clientInfo, MemberInfo memberInfo) throws KzingException {
+        return gameWebViewSetup(webView, clientInfo, memberInfo);
     }
 
-    private static String formatCookieDomain(String domain){
-        return domain.replaceFirst("http://","").replaceFirst("https://","");
+    private static String formatCookieDomain(String domain) {
+        return domain.replaceFirst("http://", "").replaceFirst("https://", "");
     }
 
 }

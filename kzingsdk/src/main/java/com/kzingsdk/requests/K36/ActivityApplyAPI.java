@@ -2,7 +2,6 @@ package com.kzingsdk.requests.K36;
 
 import android.content.Context;
 
-import com.kzingsdk.entity.K36.K36ActivityInfo;
 import com.kzingsdk.requests.KzingCallBack;
 
 import org.json.JSONException;
@@ -12,6 +11,8 @@ import io.reactivex.Observable;
 
 public class ActivityApplyAPI extends BaseK36API {
 
+    private String actid;
+
     ActivityApplyAPI() {
         super();
     }
@@ -20,8 +21,6 @@ public class ActivityApplyAPI extends BaseK36API {
     protected String getK36Action() {
         return Action.activityApply;
     }
-
-    private String actid;
 
     @Override
     protected Observable<String> validateParams() {
@@ -66,14 +65,14 @@ public class ActivityApplyAPI extends BaseK36API {
         return this;
     }
 
-    public interface ActivityApplyAPICallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
-
     public ActivityApplyAPI setActid(String actid) {
         this.actid = actid;
         return this;
+    }
+
+
+    public interface ActivityApplyAPICallBack extends KzingCallBack {
+        void onSuccess();
     }
 
 }

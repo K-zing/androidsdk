@@ -11,6 +11,9 @@ import io.reactivex.Observable;
 
 public class ActivityApplyScratchBonusAPI extends BaseK36API {
 
+    private String actid;
+    private String dno;
+    private String gpid;
     ActivityApplyScratchBonusAPI() {
         super();
     }
@@ -19,11 +22,6 @@ public class ActivityApplyScratchBonusAPI extends BaseK36API {
     protected String getK36Action() {
         return Action.activityApplyScratchBonus;
     }
-
-
-    private String actid;
-    private String dno;
-    private String gpid;
 
     @Override
     protected Observable<String> validateParams() {
@@ -70,11 +68,6 @@ public class ActivityApplyScratchBonusAPI extends BaseK36API {
         return this;
     }
 
-    public interface ActivityApplyScratchBonusAPICallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
-
     public ActivityApplyScratchBonusAPI setActid(String actid) {
         this.actid = actid;
         return this;
@@ -88,6 +81,10 @@ public class ActivityApplyScratchBonusAPI extends BaseK36API {
     public ActivityApplyScratchBonusAPI setGpid(String gpid) {
         this.gpid = gpid;
         return this;
+    }
+
+    public interface ActivityApplyScratchBonusAPICallBack extends KzingCallBack {
+        void onSuccess();
     }
 
 }

@@ -37,6 +37,22 @@ public class TransferRecord implements Parcelable {
 
     }
 
+    public TransferRecord(Parcel in) {
+        created = in.readString();
+        remark = in.readString();
+        finalResult = in.readString();
+        transAmount = in.readString();
+        successAmount = in.readString();
+        inGpid = in.readString();
+        inGpName = in.readString();
+        outGpid = in.readString();
+        outGpName = in.readString();
+        inGpImage = in.readString();
+        outGpImage = in.readString();
+        currency = in.readString();
+        statusCode = StatusCode.valueOfId(in.readInt());
+    }
+
     public static TransferRecord newInstance(JSONObject rootObject) {
         TransferRecord item = new TransferRecord();
         item.setDno(rootObject.optString("dno"));
@@ -175,22 +191,6 @@ public class TransferRecord implements Parcelable {
         this.successAmount = successAmount;
     }
 
-    public TransferRecord(Parcel in) {
-        created = in.readString();
-        remark = in.readString();
-        finalResult = in.readString();
-        transAmount = in.readString();
-        successAmount = in.readString();
-        inGpid = in.readString();
-        inGpName = in.readString();
-        outGpid = in.readString();
-        outGpName = in.readString();
-        inGpImage = in.readString();
-        outGpImage = in.readString();
-        currency = in.readString();
-        statusCode = StatusCode.valueOfId(in.readInt());
-    }
-
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(created);
@@ -211,6 +211,24 @@ public class TransferRecord implements Parcelable {
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "TransferRecord{" +
+                "dno='" + dno + '\'' +
+                ", created='" + created + '\'' +
+                ", remark='" + remark + '\'' +
+                ", finalResult='" + finalResult + '\'' +
+                ", transAmount='" + transAmount + '\'' +
+                ", inGpid='" + inGpid + '\'' +
+                ", inGpName='" + inGpName + '\'' +
+                ", inGpImage='" + inGpImage + '\'' +
+                ", outGpid='" + outGpid + '\'' +
+                ", outGpName='" + outGpName + '\'' +
+                ", outGpImage='" + outGpImage + '\'' +
+                ", statusCode=" + statusCode +
+                '}';
     }
 
     public enum StatusCode {
@@ -236,23 +254,5 @@ public class TransferRecord implements Parcelable {
         public int getId() {
             return id;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "TransferRecord{" +
-                "dno='" + dno + '\'' +
-                ", created='" + created + '\'' +
-                ", remark='" + remark + '\'' +
-                ", finalResult='" + finalResult + '\'' +
-                ", transAmount='" + transAmount + '\'' +
-                ", inGpid='" + inGpid + '\'' +
-                ", inGpName='" + inGpName + '\'' +
-                ", inGpImage='" + inGpImage + '\'' +
-                ", outGpid='" + outGpid + '\'' +
-                ", outGpName='" + outGpName + '\'' +
-                ", outGpImage='" + outGpImage + '\'' +
-                ", statusCode=" + statusCode +
-                '}';
     }
 }

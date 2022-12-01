@@ -78,10 +78,6 @@ public class GetHotGamesAPI extends CoreRequest implements RequireCurrency {
         return this;
     }
 
-    public interface GetHotGamesCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<HotGame> hotGame);
-    }
-
     public GetHotGamesAPI setType(String type) {
         this.type = type;
         return this;
@@ -95,5 +91,9 @@ public class GetHotGamesAPI extends CoreRequest implements RequireCurrency {
     public GetHotGamesAPI setCurrency(String currency) {
         this.currency = currency;
         return this;
+    }
+
+    public interface GetHotGamesCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<HotGame> hotGame);
     }
 }

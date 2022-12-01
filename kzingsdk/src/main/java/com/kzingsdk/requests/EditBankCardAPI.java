@@ -11,6 +11,10 @@ import io.reactivex.Observable;
 
 public class EditBankCardAPI extends CoreRequest {
 
+    private String wdbankid;
+    private String note = null;
+    private String ifsccode = null;
+
     EditBankCardAPI() {
         super();
     }
@@ -19,11 +23,6 @@ public class EditBankCardAPI extends CoreRequest {
     protected String getAction() {
         return Action.editBankCard;
     }
-
-    private String wdbankid;
-
-    private String note = null;
-    private String ifsccode = null;
 
     @Override
     protected Observable<String> validateParams() {
@@ -75,10 +74,6 @@ public class EditBankCardAPI extends CoreRequest {
         return this;
     }
 
-    public interface EditBankCardCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public EditBankCardAPI addWdBankId(String wdbankid) {
         this.wdbankid = wdbankid;
         return this;
@@ -92,5 +87,9 @@ public class EditBankCardAPI extends CoreRequest {
     public EditBankCardAPI setIfsccode(String ifsccode) {
         this.ifsccode = ifsccode;
         return this;
+    }
+
+    public interface EditBankCardCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }

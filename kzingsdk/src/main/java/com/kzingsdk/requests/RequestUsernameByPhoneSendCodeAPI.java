@@ -73,10 +73,6 @@ public class RequestUsernameByPhoneSendCodeAPI extends CoreRequest {
         return this;
     }
 
-    public interface RequestUsernameByPhoneSendCodeCallBack extends KzingCallBack {
-        void onSuccess(RequestUsernameResult requestUsernameResult);
-    }
-
     public RequestUsernameByPhoneSendCodeAPI setPhone(String phone) {
         this.phone = phone;
         return this;
@@ -96,7 +92,6 @@ public class RequestUsernameByPhoneSendCodeAPI extends CoreRequest {
         return requestVoice;
     }
 
-
     public RequestUsernameByPhoneSendCodeAPI setRequestVoice(boolean requestVoice) {
         this.requestVoice = requestVoice;
         return this;
@@ -105,5 +100,9 @@ public class RequestUsernameByPhoneSendCodeAPI extends CoreRequest {
     public RequestUsernameByPhoneSendCodeAPI setUpdatePhone(Boolean updatePhone) {
         this.updatePhone = updatePhone;
         return this;
+    }
+
+    public interface RequestUsernameByPhoneSendCodeCallBack extends KzingCallBack {
+        void onSuccess(RequestUsernameResult requestUsernameResult);
     }
 }

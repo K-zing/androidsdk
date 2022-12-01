@@ -109,50 +109,6 @@ public class ActivityItem implements Parcelable {
         currency = in.readString();
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(actId);
-        dest.writeString(actName);
-        dest.writeString(actDesc);
-        dest.writeString(content);
-        dest.writeString(cover);
-        dest.writeString(created);
-        dest.writeInt(canJoin ? 1 : 0);
-        dest.writeInt(isGift ? 1 : 0);
-        dest.writeString(show);
-        dest.writeArray(new Object[]{
-                activityType,
-                activityGift,
-                groupNames,
-                activityReferDpt,
-                activityFrontType,
-                activitySignIn7Days,
-                restrictedPlatform,
-        });
-        dest.writeString(redirectUrl);
-        dest.writeString(redirectType.name().toUpperCase());
-        dest.writeInt(displayOrder);
-        dest.writeLong(publishDate);
-        dest.writeLong(expiredDate);
-        dest.writeString(bgColor);
-        dest.writeString(fontColor);
-        dest.writeInt(isPublic ? 1 : 0);
-        dest.writeInt(applyStatus);
-        dest.writeString(availableDptAmt.toString());
-        dest.writeInt(showProgressBar ? 1 : 0);
-        dest.writeInt(applyPeriod);
-        dest.writeString(depositAmount.toString());
-        dest.writeString(fixBonusAmount.toString());
-        dest.writeInt(isPostPaidReward ? 1 : 0);
-        dest.writeInt(expiredDays);
-        dest.writeLong(displayStartTime);
-        dest.writeLong(displayEndTime);
-        dest.writeString(keyFeature);
-        dest.writeString(currency);
-
-    }
-
-
     public static ActivityItem newInstance(JSONObject rootObject) {
         ActivityItem item = new ActivityItem();
         item.setActId(rootObject.optString("actid"));
@@ -215,6 +171,48 @@ public class ActivityItem implements Parcelable {
         return item;
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(actId);
+        dest.writeString(actName);
+        dest.writeString(actDesc);
+        dest.writeString(content);
+        dest.writeString(cover);
+        dest.writeString(created);
+        dest.writeInt(canJoin ? 1 : 0);
+        dest.writeInt(isGift ? 1 : 0);
+        dest.writeString(show);
+        dest.writeArray(new Object[]{
+                activityType,
+                activityGift,
+                groupNames,
+                activityReferDpt,
+                activityFrontType,
+                activitySignIn7Days,
+                restrictedPlatform,
+        });
+        dest.writeString(redirectUrl);
+        dest.writeString(redirectType.name().toUpperCase());
+        dest.writeInt(displayOrder);
+        dest.writeLong(publishDate);
+        dest.writeLong(expiredDate);
+        dest.writeString(bgColor);
+        dest.writeString(fontColor);
+        dest.writeInt(isPublic ? 1 : 0);
+        dest.writeInt(applyStatus);
+        dest.writeString(availableDptAmt.toString());
+        dest.writeInt(showProgressBar ? 1 : 0);
+        dest.writeInt(applyPeriod);
+        dest.writeString(depositAmount.toString());
+        dest.writeString(fixBonusAmount.toString());
+        dest.writeInt(isPostPaidReward ? 1 : 0);
+        dest.writeInt(expiredDays);
+        dest.writeLong(displayStartTime);
+        dest.writeLong(displayEndTime);
+        dest.writeString(keyFeature);
+        dest.writeString(currency);
+
+    }
 
     private void setCanJoin(boolean canJoin) {
         this.canJoin = canJoin;

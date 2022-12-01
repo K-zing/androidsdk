@@ -35,6 +35,19 @@ public class GamePlatformContainer {
         return item;
     }
 
+    public static GamePlatform findGamePlatform(ArrayList<GamePlatformContainer> gamePlatformContainerList, String gpid) {
+
+        for (GamePlatformContainer gpContainer : gamePlatformContainerList) {
+            for (GamePlatform gpPlatform : gpContainer.getGamePlatformList()) {
+                String id = gpPlatform instanceof GamePlatformCustom ? ((GamePlatformCustom) gpPlatform).getCustomgpid() : gpPlatform.getGpid();
+                if (gpid.equals(id)) {
+                    return gpPlatform;
+                }
+            }
+        }
+        return null;
+    }
+
     public GamePlatformType getType() {
         return type;
     }
@@ -49,20 +62,6 @@ public class GamePlatformContainer {
 
     public void setGamePlatformList(ArrayList<GamePlatform> gamePlatformList) {
         this.gamePlatformList = (ArrayList<GamePlatform>) gamePlatformList.clone();
-    }
-
-
-    public static GamePlatform findGamePlatform(ArrayList<GamePlatformContainer> gamePlatformContainerList, String gpid) {
-
-        for (GamePlatformContainer gpContainer : gamePlatformContainerList) {
-            for (GamePlatform gpPlatform : gpContainer.getGamePlatformList()) {
-                String id = gpPlatform instanceof GamePlatformCustom ? ((GamePlatformCustom) gpPlatform).getCustomgpid() : gpPlatform.getGpid();
-                if (gpid.equals(id)) {
-                    return gpPlatform;
-                }
-            }
-        }
-        return null;
     }
 
 

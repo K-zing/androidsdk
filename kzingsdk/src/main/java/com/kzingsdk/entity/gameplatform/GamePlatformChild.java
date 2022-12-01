@@ -20,38 +20,22 @@ public class GamePlatformChild implements Playable {
     private boolean isEnabled = false;
     private HashSet<Integer> categorysSet = new HashSet<>();
 
-    public GamePlatformChild clone() {
-        GamePlatformChild gpChild = new GamePlatformChild();
-        gpChild.gpChildId = gpChildId;
-        gpChild.gamePlatform = gamePlatform.clone();
-        gpChild.childGroupId = childGroupId;
-        gpChild.childGroupName = childGroupName;
-        gpChild.childName = childName;
-        gpChild.childEnName = childEnName;
-        gpChild.urlSuffix = urlSuffix;
-        gpChild.image = image;
-        gpChild.rtpPercentage = rtpPercentage;
-        gpChild.displayorder = displayorder;
-        gpChild.isEnabled = isEnabled;
-        gpChild.categorysSet = (HashSet<Integer>) categorysSet.clone();
-        return gpChild;
-    }
-
     public GamePlatformChild() {
 
     }
+
     public static GamePlatformChild newInstance(JSONObject rootObject, GamePlatform gamePlatform) {
         return newInstance(rootObject, gamePlatform, rootObject.optString("childgroupid"), "");
     }
 
-    public static GamePlatformChild newInstance(JSONObject rootObject, GamePlatform gamePlatform, String childGroupId , String childGroupName) {
+    public static GamePlatformChild newInstance(JSONObject rootObject, GamePlatform gamePlatform, String childGroupId, String childGroupName) {
         GamePlatformChild item = new GamePlatformChild();
         item.setGamePlatform(gamePlatform);
         item.setGpChildId(rootObject.optString("gpchildid"));
         item.setChildName(rootObject.optString("childname"));
         item.setDisplayorder(rootObject.optInt("displayorder"));
         item.urlSuffix = rootObject.optString("appurl_suffix");
-        if (item.urlSuffix.equalsIgnoreCase("")){
+        if (item.urlSuffix.equalsIgnoreCase("")) {
             item.urlSuffix = rootObject.optString("gamecode");
         }
         item.setRtpPercentage(rootObject.optString("rtppercentage"));
@@ -71,6 +55,22 @@ public class GamePlatformChild implements Playable {
         return item;
     }
 
+    public GamePlatformChild clone() {
+        GamePlatformChild gpChild = new GamePlatformChild();
+        gpChild.gpChildId = gpChildId;
+        gpChild.gamePlatform = gamePlatform.clone();
+        gpChild.childGroupId = childGroupId;
+        gpChild.childGroupName = childGroupName;
+        gpChild.childName = childName;
+        gpChild.childEnName = childEnName;
+        gpChild.urlSuffix = urlSuffix;
+        gpChild.image = image;
+        gpChild.rtpPercentage = rtpPercentage;
+        gpChild.displayorder = displayorder;
+        gpChild.isEnabled = isEnabled;
+        gpChild.categorysSet = (HashSet<Integer>) categorysSet.clone();
+        return gpChild;
+    }
 
     @Override
     public String getGpid() {

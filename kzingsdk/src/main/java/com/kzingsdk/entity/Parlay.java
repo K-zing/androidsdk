@@ -8,6 +8,17 @@ import org.json.JSONObject;
 
 public class Parlay implements Parcelable {
 
+    public static final Creator<Parlay> CREATOR = new Creator<Parlay>() {
+        @Override
+        public Parlay createFromParcel(Parcel in) {
+            return new Parlay(in);
+        }
+
+        @Override
+        public Parlay[] newArray(int size) {
+            return new Parlay[size];
+        }
+    };
     private String period = "";
     private String betTypeDesc = "";
     private String awayTeamHtScore = "";
@@ -29,6 +40,27 @@ public class Parlay implements Parcelable {
 
     public Parlay() {
 
+    }
+
+    public Parlay(Parcel in) {
+        period = in.readString();
+        betTypeDesc = in.readString();
+        awayTeamHtScore = in.readString();
+        handicap = in.readString();
+        wagerHomeTeamScore = in.readString();
+        awayTeamFtScore = in.readString();
+        type = in.readString();
+        homeTeamFtScore = in.readString();
+        market = in.readString();
+        awayTeamName = in.readString();
+        selection = in.readString();
+        competitionName = in.readString();
+        homeTeamName = in.readString();
+        odds = in.readString();
+        oddType = in.readString();
+        homeTeamHtScore = in.readString();
+        eventDateTime = in.readString();
+        wagerAwayTeamScore = in.readString();
     }
 
     public static Parlay newInstance(JSONObject rootObject) {
@@ -198,18 +230,6 @@ public class Parlay implements Parcelable {
         this.wagerAwayTeamScore = wagerAwayTeamScore;
     }
 
-    public static final Creator<Parlay> CREATOR = new Creator<Parlay>() {
-        @Override
-        public Parlay createFromParcel(Parcel in) {
-            return new Parlay(in);
-        }
-
-        @Override
-        public Parlay[] newArray(int size) {
-            return new Parlay[size];
-        }
-    };
-
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(period);
@@ -230,27 +250,6 @@ public class Parlay implements Parcelable {
         dest.writeString(homeTeamHtScore);
         dest.writeString(eventDateTime);
         dest.writeString(wagerAwayTeamScore);
-    }
-
-    public Parlay(Parcel in) {
-        period = in.readString();
-        betTypeDesc = in.readString();
-        awayTeamHtScore = in.readString();
-        handicap = in.readString();
-        wagerHomeTeamScore = in.readString();
-        awayTeamFtScore = in.readString();
-        type = in.readString();
-        homeTeamFtScore = in.readString();
-        market = in.readString();
-        awayTeamName = in.readString();
-        selection = in.readString();
-        competitionName = in.readString();
-        homeTeamName = in.readString();
-        odds = in.readString();
-        oddType = in.readString();
-        homeTeamHtScore = in.readString();
-        eventDateTime = in.readString();
-        wagerAwayTeamScore = in.readString();
     }
 
     @Override

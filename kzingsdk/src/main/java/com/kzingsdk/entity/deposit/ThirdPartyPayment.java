@@ -14,6 +14,15 @@ import java.util.Arrays;
 
 public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, Cloneable {
 
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public ThirdPartyPayment createFromParcel(Parcel in) {
+            return new ThirdPartyPayment(in);
+        }
+
+        public ThirdPartyPayment[] newArray(int size) {
+            return new ThirdPartyPayment[size];
+        }
+    };
     private boolean useRotate = false;
     private String optionId = "";
     private String oriOptionId = "";
@@ -29,7 +38,6 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
     private BigDecimal sDealsRate = BigDecimal.ZERO;
     private ArrayList<COption> cOptionList = new ArrayList<>();
     private String code = "";
-
     //extra for phone deposit
     private Integer bcid = -1;
     private ArrayList<BigDecimal> fixAmountList = new ArrayList<>();
@@ -42,17 +50,52 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
     private Integer random = -1;
     private boolean displayDepositName = false;
     private boolean isQrScanMethod = false;
-
     private boolean quickAmountFlag = false;
     private ArrayList<BigDecimal> quickAmountList = new ArrayList<>();
 
     public ThirdPartyPayment() {
     }
 
-    public ThirdPartyPayment clone() throws CloneNotSupportedException {
-        ThirdPartyPayment clone = (ThirdPartyPayment) super.clone();
-        clone.paymentBankList = new ArrayList<>();
-        return clone;
+    public ThirdPartyPayment(Parcel in) {
+        id = in.readString();
+        paymentName = in.readString();
+        image = in.readString();
+        bankCode = in.readString();
+        displayOrder = in.readInt();
+        random = in.readInt();
+        name = in.readString();
+        minAmount = in.readDouble();
+        maxAmount = in.readDouble();
+        optionId = in.readString();
+        oriOptionId = in.readString();
+        useRotate = in.readInt() == 1;
+        isAllowDecimal = in.readInt() == 1;
+        displayDepositName = in.readInt() == 1;
+        randMax = new BigDecimal(in.readString());
+        randMin = new BigDecimal(in.readString());
+        randType = in.readInt();
+        bcid = in.readInt();
+        pNum = in.readString();
+        cryptoCurrency = in.readString();
+        maxDpt = new BigDecimal(in.readString());
+        minDpt = new BigDecimal(in.readString());
+        pRate = new BigDecimal(in.readString());
+        promoRate = new BigDecimal(in.readString());
+        sDealsRate = new BigDecimal(in.readString());
+        code = in.readString();
+        formType = in.readString();
+        quickAmountFlag = in.readInt() == 1;
+        isQrScanMethod = in.readInt() == 1;
+        Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
+        int i = 0;
+        fixAmounts = (String[]) customObjects[i++];
+        paymentBankList = (ArrayList<ThirdPartyPaymentBank>) customObjects[i++];
+        fixAmtArray = (ArrayList<BigDecimal>) customObjects[i++];
+        fixAmountList = (ArrayList<BigDecimal>) customObjects[i++];
+        cOptionList = (ArrayList<COption>) customObjects[i++];
+        quickAmountList = (ArrayList<BigDecimal>) customObjects[i++];
+        cryptoCurrencyList = (ArrayList<String>) customObjects[i++];
+        fixAmtArr = (String[]) customObjects[i++];
     }
 
     public static ThirdPartyPayment newInstance(JSONObject rootObject, JSONObject rootRootObject, String optionId) {
@@ -117,6 +160,12 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         }
 
         return item;
+    }
+
+    public ThirdPartyPayment clone() throws CloneNotSupportedException {
+        ThirdPartyPayment clone = (ThirdPartyPayment) super.clone();
+        clone.paymentBankList = new ArrayList<>();
+        return clone;
     }
 
     public void importSettingFromJson(JSONObject rootObject) {
@@ -369,6 +418,11 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         return cryptoCurrency;
     }
 
+    public ThirdPartyPayment setCryptoCurrency(String cryptoCurrency) {
+        this.cryptoCurrency = cryptoCurrency;
+        return this;
+    }
+
     public String getCode() {
         return code;
     }
@@ -385,65 +439,6 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
     public void setCryptoCurrencyList(ArrayList<String> cryptoCurrencyList) {
         this.cryptoCurrencyList = cryptoCurrencyList;
     }
-
-    public ThirdPartyPayment setCryptoCurrency(String cryptoCurrency) {
-        this.cryptoCurrency = cryptoCurrency;
-        return this;
-    }
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public ThirdPartyPayment createFromParcel(Parcel in) {
-            return new ThirdPartyPayment(in);
-        }
-
-        public ThirdPartyPayment[] newArray(int size) {
-            return new ThirdPartyPayment[size];
-        }
-    };
-
-
-    public ThirdPartyPayment(Parcel in) {
-        id = in.readString();
-        paymentName = in.readString();
-        image = in.readString();
-        bankCode = in.readString();
-        displayOrder = in.readInt();
-        random = in.readInt();
-        name = in.readString();
-        minAmount = in.readDouble();
-        maxAmount = in.readDouble();
-        optionId = in.readString();
-        oriOptionId = in.readString();
-        useRotate = in.readInt() == 1;
-        isAllowDecimal = in.readInt() == 1;
-        displayDepositName = in.readInt() == 1;
-        randMax = new BigDecimal(in.readString());
-        randMin = new BigDecimal(in.readString());
-        randType = in.readInt();
-        bcid = in.readInt();
-        pNum = in.readString();
-        cryptoCurrency = in.readString();
-        maxDpt = new BigDecimal(in.readString());
-        minDpt = new BigDecimal(in.readString());
-        pRate = new BigDecimal(in.readString());
-        promoRate = new BigDecimal(in.readString());
-        sDealsRate = new BigDecimal(in.readString());
-        code = in.readString();
-        formType = in.readString();
-        quickAmountFlag = in.readInt() == 1;
-        isQrScanMethod = in.readInt() == 1;
-        Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
-        int i = 0;
-        fixAmounts = (String[]) customObjects[i++];
-        paymentBankList = (ArrayList<ThirdPartyPaymentBank>) customObjects[i++];
-        fixAmtArray = (ArrayList<BigDecimal>) customObjects[i++];
-        fixAmountList = (ArrayList<BigDecimal>) customObjects[i++];
-        cOptionList = (ArrayList<COption>) customObjects[i++];
-        quickAmountList = (ArrayList<BigDecimal>) customObjects[i++];
-        cryptoCurrencyList = (ArrayList<String>) customObjects[i++];
-        fixAmtArr = (String[]) customObjects[i++];
-    }
-
 
     @Override
     public int describeContents() {

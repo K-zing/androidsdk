@@ -14,13 +14,13 @@ public class UpdateWtdPGStatusAPI extends CoreRequest {
     private String dno;
     private String nextStatus;
 
+    UpdateWtdPGStatusAPI() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.updateWtdPGStatus;
-    }
-
-    UpdateWtdPGStatusAPI() {
-        super();
     }
 
     @Override
@@ -39,6 +39,7 @@ public class UpdateWtdPGStatusAPI extends CoreRequest {
         }
         return super.generateParamsJson();
     }
+
     @Override
     public Observable<SimpleApiResult> requestRx(final Context context) {
         return super.baseExecute(context).map(SimpleApiResult::newInstance);
@@ -60,10 +61,6 @@ public class UpdateWtdPGStatusAPI extends CoreRequest {
         return this;
     }
 
-    public interface UpdateWtdPGStatusCallBack extends KzingCallBack {
-        void onSuccess(SimpleApiResult simpleApiResult);
-    }
-
     public UpdateWtdPGStatusAPI setDno(String dno) {
         this.dno = dno;
         return this;
@@ -72,6 +69,10 @@ public class UpdateWtdPGStatusAPI extends CoreRequest {
     public UpdateWtdPGStatusAPI setNextStatus(String nextStatus) {
         this.nextStatus = nextStatus;
         return this;
+    }
+
+    public interface UpdateWtdPGStatusCallBack extends KzingCallBack {
+        void onSuccess(SimpleApiResult simpleApiResult);
     }
 }
 

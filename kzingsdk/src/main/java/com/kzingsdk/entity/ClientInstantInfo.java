@@ -11,6 +11,15 @@ import java.util.HashMap;
 
 public class ClientInstantInfo implements Parcelable {
 
+    public static final Creator CREATOR = new Creator() {
+        public ClientInstantInfo createFromParcel(Parcel in) {
+            return new ClientInstantInfo(in);
+        }
+
+        public ClientInstantInfo[] newArray(int size) {
+            return new ClientInstantInfo[size];
+        }
+    };
     private String captchaMode;
     private Boolean memberLoginNeedCaptcha;
     private Boolean addBankCardSmsVerify;
@@ -83,9 +92,81 @@ public class ClientInstantInfo implements Parcelable {
     private HashMap<Integer, String> websiteConfigMap = new HashMap<>();
     private SpecialEvent specialEvent = new SpecialEvent();
 
-
     public ClientInstantInfo() {
 
+    }
+
+    public ClientInstantInfo(Parcel in) {
+        captchaMode = in.readString();
+        memberLoginNeedCaptcha = in.readInt() == 1;
+        addBankCardSmsVerify = in.readInt() == 1;
+        allowSendEmail = in.readInt() == 1;
+        allowSendSms = in.readInt() == 1;
+        allowUploadDepositCredential = in.readInt() == 1;
+        allowUserEditProfile = in.readInt() == 1;
+        allowCryptoCurrencyWithdrawal = in.readInt() == 1;
+        allowDeleteCryptoAddress = in.readInt() == 1;
+        allowCancelWithdrawal = in.readInt() == 1;
+        checkEmailVerified = in.readInt() == 1;
+        checkMobileVerified = in.readInt() == 1;
+        isWdPasswordOn = in.readInt() == 1;
+        allowGameTransferPopup = in.readInt() == 1;
+        initWdPwdNeedLoginPwd = in.readInt() == 1;
+        memberPanDupIP = in.readInt() == 1;
+        memberPanDupUUID = in.readInt() == 1;
+        memberPanVerify = in.readInt() == 1;
+        hasFriendPromo = in.readInt() == 1;
+        playerSelfRedeemRakeback = in.readInt() == 1;
+        memberPanUsername2 = in.readInt() == 1;
+        memberPanPlayerGroup2 = in.readInt() == 1;
+        memberPanAgentCode2 = in.readInt() == 1;
+        playerEmailVerifiedWithdraw = in.readInt() == 1;
+        playerMobileVerifiedWithdraw = in.readInt() == 1;
+        allowPhoneCountry = in.readInt() == 1;
+        allowPlayerAddress = in.readInt() == 1;
+        isWdBindPlayerAdress = in.readInt() == 1;
+        regCaptcha = in.readInt() == 1;
+        playerBankcardVerifiedWithdraw = in.readInt() == 1;
+        otpSms = in.readInt() == 1;
+        otpVoice = in.readInt() == 1;
+        selfServiceActivate = in.readInt() == 1;
+        allowBindCryptoAddress = in.readInt() == 1;
+        siteId = in.readString();
+        cryptoFixedExchangeRate = in.readString();
+        announcement = in.readString();
+        sitenameApp = in.readString();
+        sitename = in.readString();
+        supportUrl = in.readString();
+        supportUrl2 = in.readString();
+        appDomain = in.readString();
+        h5Domain = in.readString();
+        androidAppDownloadLink = in.readString();
+        iosAppDownloadLink = in.readString();
+        resourceDomain = in.readString();
+        depositPageFooter = in.readString();
+        pageDescription = in.readString();
+        pageFooter = in.readString();
+        pageKeyword = in.readString();
+        appFriendReferralDomain = in.readString();
+        depositAnnouncement = in.readString();
+        enterDepositPopup = in.readString();
+        dptCryptoFixedExchangeRate = in.readString();
+        Object[] objectArray = in.readArray(ClientInstantInfo.class.getClassLoader());
+        int i = 0;
+        captchaApiId = (CaptchaApiId) objectArray[i++];
+        memberPanAgentCode = (ArrayList<String>) objectArray[i++];
+        memberPanPlayerGroup = (ArrayList<String>) objectArray[i++];
+        memberPanUsername = (ArrayList<String>) objectArray[i++];
+        bannerCountdown = (ArrayList<String>) objectArray[i++];
+        bannerFirstLaunch = (ArrayList<String>) objectArray[i++];
+        marqueeAnnouncementList = (ArrayList<MarqueeAnnouncement>) objectArray[i++];
+        marqueeActivityList = (ArrayList<MarqueeActivity>) objectArray[i++];
+        themeList = (ArrayList<ThemeInfo>) objectArray[i++];
+        feedbackContactInfo = (ContactInfo) objectArray[i++];
+        partnershipContactInfo = (ContactInfo) objectArray[i++];
+        socialMediaContactInfo = (ContactInfo) objectArray[i++];
+        websiteConfigMap = (HashMap<Integer, String>) objectArray[i++];
+        specialEvent = (SpecialEvent) objectArray[i++];
     }
 
     public static ClientInstantInfo newInstance(JSONObject rootObject) {
@@ -271,84 +352,6 @@ public class ClientInstantInfo implements Parcelable {
         return memberLoginNeedCaptcha;
     }
 
-    public void setMemberLoginNeedCaptcha(Boolean memberLoginNeedCaptcha) {
-        this.memberLoginNeedCaptcha = memberLoginNeedCaptcha;
-    }
-
-    public ClientInstantInfo(Parcel in) {
-        captchaMode = in.readString();
-        memberLoginNeedCaptcha = in.readInt() == 1;
-        addBankCardSmsVerify = in.readInt() == 1;
-        allowSendEmail = in.readInt() == 1;
-        allowSendSms = in.readInt() == 1;
-        allowUploadDepositCredential = in.readInt() == 1;
-        allowUserEditProfile = in.readInt() == 1;
-        allowCryptoCurrencyWithdrawal = in.readInt() == 1;
-        allowDeleteCryptoAddress = in.readInt() == 1;
-        allowCancelWithdrawal = in.readInt() == 1;
-        checkEmailVerified = in.readInt() == 1;
-        checkMobileVerified = in.readInt() == 1;
-        isWdPasswordOn = in.readInt() == 1;
-        allowGameTransferPopup = in.readInt() == 1;
-        initWdPwdNeedLoginPwd = in.readInt() == 1;
-        memberPanDupIP = in.readInt() == 1;
-        memberPanDupUUID = in.readInt() == 1;
-        memberPanVerify = in.readInt() == 1;
-        hasFriendPromo = in.readInt() == 1;
-        playerSelfRedeemRakeback = in.readInt() == 1;
-        memberPanUsername2 = in.readInt() == 1;
-        memberPanPlayerGroup2 = in.readInt() == 1;
-        memberPanAgentCode2 = in.readInt() == 1;
-        playerEmailVerifiedWithdraw = in.readInt() == 1;
-        playerMobileVerifiedWithdraw = in.readInt() == 1;
-        allowPhoneCountry = in.readInt() == 1;
-        allowPlayerAddress = in.readInt() == 1;
-        isWdBindPlayerAdress = in.readInt() == 1;
-        regCaptcha = in.readInt() == 1;
-        playerBankcardVerifiedWithdraw = in.readInt() == 1;
-        otpSms = in.readInt() == 1;
-        otpVoice = in.readInt() == 1;
-        selfServiceActivate = in.readInt() == 1;
-        allowBindCryptoAddress = in.readInt() == 1;
-        siteId = in.readString();
-        cryptoFixedExchangeRate = in.readString();
-        announcement = in.readString();
-        sitenameApp = in.readString();
-        sitename = in.readString();
-        supportUrl = in.readString();
-        supportUrl2 = in.readString();
-        appDomain = in.readString();
-        h5Domain = in.readString();
-        androidAppDownloadLink = in.readString();
-        iosAppDownloadLink = in.readString();
-        resourceDomain = in.readString();
-        depositPageFooter = in.readString();
-        pageDescription = in.readString();
-        pageFooter = in.readString();
-        pageKeyword = in.readString();
-        appFriendReferralDomain = in.readString();
-        depositAnnouncement = in.readString();
-        enterDepositPopup = in.readString();
-        dptCryptoFixedExchangeRate = in.readString();
-        Object[] objectArray = in.readArray(ClientInstantInfo.class.getClassLoader());
-        int i = 0;
-        captchaApiId = (CaptchaApiId) objectArray[i++];
-        memberPanAgentCode = (ArrayList<String>) objectArray[i++];
-        memberPanPlayerGroup = (ArrayList<String>) objectArray[i++];
-        memberPanUsername = (ArrayList<String>) objectArray[i++];
-        bannerCountdown = (ArrayList<String>) objectArray[i++];
-        bannerFirstLaunch = (ArrayList<String>) objectArray[i++];
-        marqueeAnnouncementList = (ArrayList<MarqueeAnnouncement>) objectArray[i++];
-        marqueeActivityList = (ArrayList<MarqueeActivity>) objectArray[i++];
-        themeList = (ArrayList<ThemeInfo>) objectArray[i++];
-        feedbackContactInfo = (ContactInfo) objectArray[i++];
-        partnershipContactInfo = (ContactInfo) objectArray[i++];
-        socialMediaContactInfo = (ContactInfo) objectArray[i++];
-        websiteConfigMap = (HashMap<Integer, String>) objectArray[i++];
-        specialEvent = (SpecialEvent) objectArray[i++];
-    }
-
-
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(captchaMode);
@@ -430,6 +433,10 @@ public class ClientInstantInfo implements Parcelable {
 
     public boolean isMemberLoginNeedCaptcha() {
         return memberLoginNeedCaptcha;
+    }
+
+    public void setMemberLoginNeedCaptcha(Boolean memberLoginNeedCaptcha) {
+        this.memberLoginNeedCaptcha = memberLoginNeedCaptcha;
     }
 
     public void setMemberLoginNeedCaptcha(boolean memberLoginNeedCaptcha) {
@@ -984,16 +991,6 @@ public class ClientInstantInfo implements Parcelable {
     public void setSpecialEvent(SpecialEvent specialEvent) {
         this.specialEvent = specialEvent;
     }
-
-    public static final Creator CREATOR = new Creator() {
-        public ClientInstantInfo createFromParcel(Parcel in) {
-            return new ClientInstantInfo(in);
-        }
-
-        public ClientInstantInfo[] newArray(int size) {
-            return new ClientInstantInfo[size];
-        }
-    };
 
     @Override
     public String toString() {

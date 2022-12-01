@@ -11,6 +11,12 @@ import io.reactivex.Observable;
 
 public class ManageWithdrawCryptoAPI extends CoreRequest {
 
+    private String wdbankid;
+    private String address;
+    private String network;
+    private String note;
+    private String status;
+    private String wdpassword;
     ManageWithdrawCryptoAPI() {
         super();
     }
@@ -19,13 +25,6 @@ public class ManageWithdrawCryptoAPI extends CoreRequest {
     protected String getAction() {
         return Action.manageWithdrawCrypto;
     }
-
-    private String wdbankid;
-    private String address;
-    private String network;
-    private String note;
-    private String status;
-    private String wdpassword;
 
     @Override
     protected JSONObject generateParamsJson() {
@@ -71,10 +70,6 @@ public class ManageWithdrawCryptoAPI extends CoreRequest {
         return this;
     }
 
-    public interface ManageWithdrawCryptoCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public ManageWithdrawCryptoAPI setWdbankid(String wdbankid) {
         this.wdbankid = wdbankid;
         return this;
@@ -103,5 +98,9 @@ public class ManageWithdrawCryptoAPI extends CoreRequest {
     public ManageWithdrawCryptoAPI setWdpassword(String wdpassword) {
         this.wdpassword = wdpassword;
         return this;
+    }
+
+    public interface ManageWithdrawCryptoCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }

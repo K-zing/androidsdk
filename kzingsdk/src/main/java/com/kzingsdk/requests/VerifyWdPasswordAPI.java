@@ -48,7 +48,7 @@ public class VerifyWdPasswordAPI extends CoreRequest {
 
     @Override
     public Observable<Boolean> requestRx(final Context context) {
-        return super.baseExecute(context).map((result)-> true);
+        return super.baseExecute(context).map((result) -> true);
     }
 
     @Override
@@ -67,10 +67,6 @@ public class VerifyWdPasswordAPI extends CoreRequest {
         return this;
     }
 
-    public interface VerifyWdPasswordCallBack extends KzingCallBack {
-        void onSuccess(Boolean success);
-    }
-
     public VerifyWdPasswordAPI setWdpassword(String wdpassword) {
         this.wdpassword = wdpassword;
         return this;
@@ -79,6 +75,10 @@ public class VerifyWdPasswordAPI extends CoreRequest {
     public VerifyWdPasswordAPI setUsername(String username) {
         this.username = username;
         return this;
+    }
+
+    public interface VerifyWdPasswordCallBack extends KzingCallBack {
+        void onSuccess(Boolean success);
     }
 
 }

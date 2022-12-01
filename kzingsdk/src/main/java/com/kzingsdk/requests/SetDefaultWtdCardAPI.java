@@ -14,13 +14,13 @@ public class SetDefaultWtdCardAPI extends CoreRequest {
 
     private String bankId;
 
+    SetDefaultWtdCardAPI() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.setDefaultWtdCard;
-    }
-
-    SetDefaultWtdCardAPI() {
-        super();
     }
 
     @Override
@@ -60,13 +60,13 @@ public class SetDefaultWtdCardAPI extends CoreRequest {
         return this;
     }
 
-    public interface SetDefaultWtdCardCallBack extends KzingCallBack {
-        void onSuccess(SimpleApiResult result);
-    }
-
     public SetDefaultWtdCardAPI setBankId(String bankId) {
         this.bankId = bankId;
         return this;
+    }
+
+    public interface SetDefaultWtdCardCallBack extends KzingCallBack {
+        void onSuccess(SimpleApiResult result);
     }
 }
 

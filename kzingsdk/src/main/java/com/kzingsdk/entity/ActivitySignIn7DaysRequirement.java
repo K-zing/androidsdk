@@ -32,6 +32,18 @@ public class ActivitySignIn7DaysRequirement implements Parcelable {
     public ActivitySignIn7DaysRequirement() {
     }
 
+    public ActivitySignIn7DaysRequirement(Parcel in) {
+        validBetAmount = in.readString();
+        dayOne = in.readString();
+        dayTwo = in.readString();
+        dayThree = in.readString();
+        dayFour = in.readString();
+        dayFive = in.readString();
+        daySix = in.readString();
+        daySeven = in.readString();
+        sevenDaysBonus = in.readString();
+    }
+
     public static ActivitySignIn7DaysRequirement newInstance(JSONObject rootObject) {
         ActivitySignIn7DaysRequirement item = new ActivitySignIn7DaysRequirement();
         item.setValidBetAmount(rootObject.optString("validbet_amount"));
@@ -44,19 +56,6 @@ public class ActivitySignIn7DaysRequirement implements Parcelable {
         item.setDaySeven(rootObject.optString("day_seven"));
         item.setSevenDaysBonus(rootObject.optString("sevendays_bonus"));
         return item;
-    }
-
-
-    public ActivitySignIn7DaysRequirement(Parcel in) {
-        validBetAmount = in.readString();
-        dayOne = in.readString();
-        dayTwo = in.readString();
-        dayThree = in.readString();
-        dayFour = in.readString();
-        dayFive = in.readString();
-        daySix = in.readString();
-        daySeven = in.readString();
-        sevenDaysBonus = in.readString();
     }
 
     @Override

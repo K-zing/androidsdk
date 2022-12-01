@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.deposit.DepositOption;
-import com.kzingsdk.util.Constant;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,11 +12,11 @@ import io.reactivex.Observable;
 
 public class GetDepositOptionAPI extends CoreRequest {
 
+    private boolean isV2 = false;
+
     GetDepositOptionAPI() {
         super();
     }
-
-    private boolean isV2 = false;
 
     @Override
     protected String getAction() {
@@ -61,12 +60,12 @@ public class GetDepositOptionAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetDepositOptionCallBack extends KzingCallBack {
-        void onSuccess(DepositOption depositOption);
-    }
-
     public GetDepositOptionAPI setV2(boolean v2) {
         isV2 = v2;
         return this;
+    }
+
+    public interface GetDepositOptionCallBack extends KzingCallBack {
+        void onSuccess(DepositOption depositOption);
     }
 }

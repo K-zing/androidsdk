@@ -11,11 +11,6 @@ import io.reactivex.Observable;
 
 public class AddBankCardAPI extends CoreRequest {
 
-    @Override
-    protected String getAction() {
-        return Action.addBankCard;
-    }
-
     private String bankCode = null;
     private String accountRealName = null;
     private String cardNumber = null;
@@ -29,9 +24,13 @@ public class AddBankCardAPI extends CoreRequest {
     private String addrA = "";
     private String addrB = "";
     private String smsPhoneNoCountry = "";
-
     AddBankCardAPI() {
         super();
+    }
+
+    @Override
+    protected String getAction() {
+        return Action.addBankCard;
     }
 
     @Override
@@ -105,10 +104,6 @@ public class AddBankCardAPI extends CoreRequest {
     public AddBankCardAPI addAddBankCardCallBack(AddBankCardCallBack addBankCardCallBack) {
         kzingCallBackList.add(addBankCardCallBack);
         return this;
-    }
-
-    public interface AddBankCardCallBack extends KzingCallBack {
-        void onSuccess();
     }
 
     public AddBankCardAPI setParamBankCode(String bankCode) {
@@ -185,6 +180,9 @@ public class AddBankCardAPI extends CoreRequest {
         return this;
     }
 
+    public interface AddBankCardCallBack extends KzingCallBack {
+        void onSuccess();
+    }
 
 
 }

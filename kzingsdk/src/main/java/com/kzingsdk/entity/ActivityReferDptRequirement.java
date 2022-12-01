@@ -34,6 +34,17 @@ public class ActivityReferDptRequirement implements Parcelable {
     public ActivityReferDptRequirement() {
     }
 
+    public ActivityReferDptRequirement(Parcel in) {
+        depositAmount = new BigDecimal(in.readString());
+        fixBonusAmount = new BigDecimal(in.readString());
+        moneyPercentage = new BigDecimal(in.readString());
+        watergateMultiplier = new BigDecimal(in.readString());
+        extraBonusAmount = new BigDecimal(in.readString());
+        maxDistributeAmount = new BigDecimal(in.readString());
+        bType = in.readInt();
+        cType = in.readInt();
+    }
+
     public static ActivityReferDptRequirement newInstance(JSONObject rootObject) {
         ActivityReferDptRequirement item = new ActivityReferDptRequirement();
         item.depositAmount = BigDecimalUtil.optBigDecimal(rootObject, "deposit_amount", BigDecimal.ZERO);
@@ -47,16 +58,8 @@ public class ActivityReferDptRequirement implements Parcelable {
         return item;
     }
 
-
-    public ActivityReferDptRequirement(Parcel in) {
-        depositAmount = new BigDecimal(in.readString());
-        fixBonusAmount = new BigDecimal(in.readString());
-        moneyPercentage = new BigDecimal(in.readString());
-        watergateMultiplier = new BigDecimal(in.readString());
-        extraBonusAmount = new BigDecimal(in.readString());
-        maxDistributeAmount = new BigDecimal(in.readString());
-        bType = in.readInt();
-        cType = in.readInt();
+    public static Creator getCREATOR() {
+        return CREATOR;
     }
 
     @Override
@@ -76,10 +79,6 @@ public class ActivityReferDptRequirement implements Parcelable {
         dest.writeInt(cType);
 
 
-    }
-
-    public static Creator getCREATOR() {
-        return CREATOR;
     }
 
     public BigDecimal getDepositAmount() {

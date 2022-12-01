@@ -70,10 +70,6 @@ public class IsAccountPhoneMatchAPI extends CoreRequest {
         return this;
     }
 
-    public interface IsAccountPhoneMatchCallBack extends KzingCallBack {
-        void onSuccess(Boolean success);
-    }
-
     public IsAccountPhoneMatchAPI setParamLoginName(String loginName) {
         this.loginName = loginName;
         return this;
@@ -87,5 +83,9 @@ public class IsAccountPhoneMatchAPI extends CoreRequest {
     public IsAccountPhoneMatchAPI setPlayerPhoneCountry(String playerPhoneCountry) {
         this.playerPhoneCountry = playerPhoneCountry;
         return this;
+    }
+
+    public interface IsAccountPhoneMatchCallBack extends KzingCallBack {
+        void onSuccess(Boolean success);
     }
 }

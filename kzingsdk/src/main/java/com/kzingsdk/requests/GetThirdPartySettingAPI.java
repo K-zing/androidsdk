@@ -76,13 +76,13 @@ public class GetThirdPartySettingAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetThirdPartySettingCallBack extends KzingCallBack {
-        void onSuccess(ThirdPartyPayment thirdPartyPayment);
-    }
-
     public GetThirdPartySettingAPI setParamThirdPartyPayment(ThirdPartyPayment thirdPartyPayment) {
         this.thirdPartyPayment = thirdPartyPayment;
         return this;
+    }
+
+    public interface GetThirdPartySettingCallBack extends KzingCallBack {
+        void onSuccess(ThirdPartyPayment thirdPartyPayment);
     }
 
 

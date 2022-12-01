@@ -2,7 +2,6 @@ package com.kzingsdk.core;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -16,24 +15,24 @@ import retrofit2.Retrofit;
 
 final class KzingConverterFactory extends Converter.Factory {
 
-    public static KzingConverterFactory create() {
-        return new KzingConverterFactory();
+    private KzingConverterFactory() {
     }
 
-    private KzingConverterFactory() {
+    public static KzingConverterFactory create() {
+        return new KzingConverterFactory();
     }
 
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations,
                                                             Retrofit retrofit) {
-        if(type == Bitmap.class){
+        if (type == Bitmap.class) {
             return KZingConverter.ByteArrayResponseBodyConverter.INSTANCE;
         }
         return KZingConverter.StringResponseBodyConverter.INSTANCE;
 
     }
 
-    private static final class KZingConverter{
+    private static final class KZingConverter {
 
         private KZingConverter() {
         }
@@ -43,7 +42,7 @@ final class KzingConverterFactory extends Converter.Factory {
 
             @Override
             public String convert(ResponseBody value) throws IOException {
-                byte[] returnByte =  value.bytes();
+                byte[] returnByte = value.bytes();
                 String returnString = new String(returnByte, StandardCharsets.UTF_8);
                 value.close();
                 return returnString;
@@ -62,7 +61,6 @@ final class KzingConverterFactory extends Converter.Factory {
         }
 
     }
-
 
 
 }

@@ -13,6 +13,10 @@ import io.reactivex.Observable;
 
 public class ActivityTransferBonusAPI extends BaseK36API {
 
+    private String actid;
+    private String gpid;
+    private BigDecimal amount = BigDecimal.ZERO;
+    private boolean transfer = false;
     ActivityTransferBonusAPI() {
         super();
     }
@@ -21,11 +25,6 @@ public class ActivityTransferBonusAPI extends BaseK36API {
     protected String getK36Action() {
         return Action.activityTransferBonus;
     }
-
-    private String actid;
-    private String gpid;
-    private BigDecimal amount = BigDecimal.ZERO;
-    private boolean transfer = false;
 
     @Override
     protected Observable<String> validateParams() {
@@ -73,11 +72,6 @@ public class ActivityTransferBonusAPI extends BaseK36API {
         return this;
     }
 
-    public interface ActivityTransferBonusAPICallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
-
     public ActivityTransferBonusAPI setActid(String actid) {
         this.actid = actid;
         return this;
@@ -96,5 +90,9 @@ public class ActivityTransferBonusAPI extends BaseK36API {
     public ActivityTransferBonusAPI setTransfer(boolean transfer) {
         this.transfer = transfer;
         return this;
+    }
+
+    public interface ActivityTransferBonusAPICallBack extends KzingCallBack {
+        void onSuccess();
     }
 }

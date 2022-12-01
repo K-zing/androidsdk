@@ -11,13 +11,11 @@ import io.reactivex.Observable;
 
 public class AddOtherPhoneRecallNoAPI extends BaseD11API {
 
+    private String phoneNo;
+    private String phoneCountry;
     AddOtherPhoneRecallNoAPI() {
         super();
     }
-
-
-    private String phoneNo;
-    private String phoneCountry;
 
     @Override
     protected String getD11Action() {
@@ -70,10 +68,6 @@ public class AddOtherPhoneRecallNoAPI extends BaseD11API {
         return this;
     }
 
-    public interface AddOtherPhoneRecallNoCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public AddOtherPhoneRecallNoAPI setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
         return this;
@@ -82,5 +76,9 @@ public class AddOtherPhoneRecallNoAPI extends BaseD11API {
     public AddOtherPhoneRecallNoAPI setPhoneCountry(String phoneCountry) {
         this.phoneCountry = phoneCountry;
         return this;
+    }
+
+    public interface AddOtherPhoneRecallNoCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }

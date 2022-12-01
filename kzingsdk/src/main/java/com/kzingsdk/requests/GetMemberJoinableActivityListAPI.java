@@ -12,17 +12,17 @@ import io.reactivex.Observable;
 
 public class GetMemberJoinableActivityListAPI extends CoreRequest {
 
+    private String gpAccountId;
+
+
     GetMemberJoinableActivityListAPI() {
         super();
     }
-
 
     @Override
     protected String getAction() {
         return Action.getMemberJoinableActivityList;
     }
-
-    private String gpAccountId;
 
     @Override
     protected JSONObject generateParamsJson() {
@@ -58,12 +58,12 @@ public class GetMemberJoinableActivityListAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetMemberJoinableActivityListCallBack extends KzingCallBack {
-        void onSuccess(GetMemberJoinableActivityListResult result);
-    }
-
     public GetMemberJoinableActivityListAPI setGpAccountId(String gpAccountId) {
         this.gpAccountId = gpAccountId;
         return this;
+    }
+
+    public interface GetMemberJoinableActivityListCallBack extends KzingCallBack {
+        void onSuccess(GetMemberJoinableActivityListResult result);
     }
 }

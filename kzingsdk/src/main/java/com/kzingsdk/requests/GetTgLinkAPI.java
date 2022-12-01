@@ -11,6 +11,9 @@ import io.reactivex.Observable;
 
 public class GetTgLinkAPI extends CoreRequest {
 
+    private String type;
+    private String origin;
+
     GetTgLinkAPI() {
         super();
     }
@@ -19,9 +22,6 @@ public class GetTgLinkAPI extends CoreRequest {
     protected String getAction() {
         return Action.getTgLink;
     }
-
-    private String type;
-    private String origin;
 
     @Override
     protected Observable<String> validateParams() {
@@ -62,10 +62,6 @@ public class GetTgLinkAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetTgLinkCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public GetTgLinkAPI setType(String type) {
         this.type = type;
         return this;
@@ -74,5 +70,9 @@ public class GetTgLinkAPI extends CoreRequest {
     public GetTgLinkAPI setOrigin(String origin) {
         this.origin = origin;
         return this;
+    }
+
+    public interface GetTgLinkCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }

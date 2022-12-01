@@ -11,6 +11,8 @@ import io.reactivex.Observable;
 
 public class RemoveBankCardAPI extends CoreRequest {
 
+    private String wdbankid;
+
     RemoveBankCardAPI() {
         super();
     }
@@ -19,8 +21,6 @@ public class RemoveBankCardAPI extends CoreRequest {
     protected String getAction() {
         return Action.removeBankCard;
     }
-
-    private String wdbankid;
 
     @Override
     protected Observable<String> validateParams() {
@@ -63,13 +63,13 @@ public class RemoveBankCardAPI extends CoreRequest {
         return this;
     }
 
-    public interface RemoveBankCardCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public RemoveBankCardAPI addWdBankId(String wdbankid) {
         this.wdbankid = wdbankid;
         return this;
+    }
+
+    public interface RemoveBankCardCallBack extends KzingCallBack {
+        void onSuccess();
     }
 
 }

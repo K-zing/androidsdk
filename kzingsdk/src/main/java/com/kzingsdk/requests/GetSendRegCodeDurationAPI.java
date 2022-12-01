@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import io.reactivex.Observable;
@@ -32,7 +31,7 @@ public class GetSendRegCodeDurationAPI extends CoreRequest {
 
     @Override
     public Observable<Integer> requestRx(final Context context) {
-        return super.baseExecute(context).map((result)-> result.optInt("response"));
+        return super.baseExecute(context).map((result) -> result.optInt("response"));
     }
 
     @Override

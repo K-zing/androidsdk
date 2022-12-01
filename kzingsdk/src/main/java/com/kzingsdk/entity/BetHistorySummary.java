@@ -16,10 +16,10 @@ public class BetHistorySummary {
 
     public static BetHistorySummary newInstance(JSONObject rootObject) {
         BetHistorySummary rebateSummary = new BetHistorySummary();
-        rebateSummary.setTotalWin(BigDecimalUtil.optBigDecimal(rootObject,"totalwin",BigDecimal.ZERO));
-        rebateSummary.setTotalBetAmt(BigDecimalUtil.optBigDecimal(rootObject,"totalbetamt",BigDecimal.ZERO));
+        rebateSummary.setTotalWin(BigDecimalUtil.optBigDecimal(rootObject, "totalwin", BigDecimal.ZERO));
+        rebateSummary.setTotalBetAmt(BigDecimalUtil.optBigDecimal(rootObject, "totalbetamt", BigDecimal.ZERO));
         JSONArray dataArray = rootObject.optJSONArray("data");
-        if (dataArray!=null){
+        if (dataArray != null) {
             for (int i = 0; i < dataArray.length(); i++) {
                 rebateSummary.betHistoryList.add(BetHistory.newInstance(dataArray.optJSONObject(i)));
             }

@@ -12,13 +12,11 @@ import io.reactivex.Observable;
 
 public class IplSendWhatsappAPI extends CoreRequest {
 
+    private String whatsapp = "";
+    private String username = "";
     IplSendWhatsappAPI() {
         super();
     }
-
-
-    private String whatsapp = "";
-    private String username = "";
 
     @Override
     protected String getAction() {
@@ -63,10 +61,6 @@ public class IplSendWhatsappAPI extends CoreRequest {
         return this;
     }
 
-    public interface IplSendWhatsappCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public IplSendWhatsappAPI setWhatsapp(String whatsapp) {
         this.whatsapp = whatsapp;
         return this;
@@ -75,5 +69,9 @@ public class IplSendWhatsappAPI extends CoreRequest {
     public IplSendWhatsappAPI setUsername(String username) {
         this.username = username;
         return this;
+    }
+
+    public interface IplSendWhatsappCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }

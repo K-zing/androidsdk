@@ -25,39 +25,14 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
 
     public static final int MAINTAIN = 0;
     public static final int NOT_MAINTAIN = 1;
-
-    public enum PlayStatus {
-        ENABLE_H5(1 << 0),
-        ENABLE_APP(1 << 1);
-
-        private final int playStatusValue;
-
-        PlayStatus(int playStatusValue) {
-            this.playStatusValue = playStatusValue;
-        }
-
-        public int getPlayStatusValue() {
-            return playStatusValue;
-        }
-
-        public static EnumSet<PlayStatus> getPlayStatus(int statusValue) {
-            EnumSet statusFlags = EnumSet.noneOf(PlayStatus.class);
-            for (PlayStatus playStatus : PlayStatus.values()) {
-                if ((playStatus.getPlayStatusValue() & statusValue) == playStatus.getPlayStatusValue()) {
-                    statusFlags.add(playStatus);
-                }
-            }
-            return statusFlags;
-        }
-    }
-
+    protected String image = "";
+    protected HashMap<String, Integer> currencyDisplayOrderMap = new HashMap<>();
     private String gpaccountid = "";
     private String gpename = "";
     private String frameIcons = "0";
     private long maintainStart = 0L;
     private long maintainEnd = 0L;
     private String url = "";
-    protected String image = "";
     private GamePlatformType gamePlatformType;
     private EnumSet<PlayStatus> playStatus = EnumSet.noneOf(PlayStatus.class);
     private int statusCode = NOT_MAINTAIN;
@@ -70,32 +45,6 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
     private ArrayList<GamePlatformCategory> categoryArrayList = new ArrayList<>();
     private ArrayList<GamePlatformGroup> groupArrayList = new ArrayList<>();
     private GameOrientation gameOrientation = PORTRAIT;
-    protected HashMap<String, Integer> currencyDisplayOrderMap = new HashMap<>();
-
-    public GamePlatform clone() {
-        GamePlatform gp = new GamePlatform();
-        gp.gpid = gpid;
-        gp.gpaccountid = gpaccountid;
-        gp.gpname = gpname;
-        gp.gpename = gpename;
-        gp.url = url;
-        gp.image = image;
-        gp.conversion = conversion;
-        gp.highestRebate = highestRebate;
-        gp.gamePlatformType = gamePlatformType;
-        gp.playStatus = playStatus;
-        gp.statusCode = statusCode;
-        gp.clientStatusCode = clientStatusCode;
-        gp.frameIcons = frameIcons;
-        gp.isDummy = isDummy;
-        gp.childArrayList = (ArrayList<GamePlatformChild>) childArrayList.clone();
-        gp.categoryArrayList = (ArrayList<GamePlatformCategory>) categoryArrayList.clone();
-        gp.groupArrayList = (ArrayList<GamePlatformGroup>) groupArrayList.clone();
-        gp.currencyDisplayOrderMap = (HashMap<String, Integer>) currencyDisplayOrderMap.clone();
-        gp.gameOrientation = gameOrientation;
-        return gp;
-    }
-
     public GamePlatform() {
         currencyDisplayOrderMap.put("default", 0);
     }
@@ -150,7 +99,7 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
         item.setGamePlatformType(type);
         item.setImage(rootObject.optString("logo"));
         item.setConversion(rootObject.optInt("conversion"));
-        item.setHighestRebate(BigDecimalUtil.optBigDecimal(rootObject,"highest_rebate"));
+        item.setHighestRebate(BigDecimalUtil.optBigDecimal(rootObject, "highest_rebate"));
         item.setGameOrientation(GameOrientation.values()[rootObject.optInt("orientation", 0)]);
         item.setHasChild(rootObject.optInt("haschild") == 1);
         Integer defaultCurrency = rootObject.optInt("displayorder");
@@ -201,6 +150,30 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
         return newChildInstance();
     }
 
+    public GamePlatform clone() {
+        GamePlatform gp = new GamePlatform();
+        gp.gpid = gpid;
+        gp.gpaccountid = gpaccountid;
+        gp.gpname = gpname;
+        gp.gpename = gpename;
+        gp.url = url;
+        gp.image = image;
+        gp.conversion = conversion;
+        gp.highestRebate = highestRebate;
+        gp.gamePlatformType = gamePlatformType;
+        gp.playStatus = playStatus;
+        gp.statusCode = statusCode;
+        gp.clientStatusCode = clientStatusCode;
+        gp.frameIcons = frameIcons;
+        gp.isDummy = isDummy;
+        gp.childArrayList = (ArrayList<GamePlatformChild>) childArrayList.clone();
+        gp.categoryArrayList = (ArrayList<GamePlatformCategory>) categoryArrayList.clone();
+        gp.groupArrayList = (ArrayList<GamePlatformGroup>) groupArrayList.clone();
+        gp.currencyDisplayOrderMap = (HashMap<String, Integer>) currencyDisplayOrderMap.clone();
+        gp.gameOrientation = gameOrientation;
+        return gp;
+    }
+
     public ArrayList<GamePlatformChild> getChildListByCategory(GamePlatformCategory gamePlatformCategory) {
         ArrayList<GamePlatformChild> resultList = new ArrayList<>();
         for (GamePlatformChild child : childArrayList) {
@@ -210,7 +183,6 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
         }
         return resultList;
     }
-
 
     @Override
     public String getGpAccountId() {
@@ -424,6 +396,31 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
                 ", categoryArrayList=" + categoryArrayList +
                 ", groupArrayList=" + groupArrayList +
                 '}';
+    }
+
+    public enum PlayStatus {
+        ENABLE_H5(1 << 0),
+        ENABLE_APP(1 << 1);
+
+        private final int playStatusValue;
+
+        PlayStatus(int playStatusValue) {
+            this.playStatusValue = playStatusValue;
+        }
+
+        public static EnumSet<PlayStatus> getPlayStatus(int statusValue) {
+            EnumSet statusFlags = EnumSet.noneOf(PlayStatus.class);
+            for (PlayStatus playStatus : PlayStatus.values()) {
+                if ((playStatus.getPlayStatusValue() & statusValue) == playStatus.getPlayStatusValue()) {
+                    statusFlags.add(playStatus);
+                }
+            }
+            return statusFlags;
+        }
+
+        public int getPlayStatusValue() {
+            return playStatusValue;
+        }
     }
 
 }

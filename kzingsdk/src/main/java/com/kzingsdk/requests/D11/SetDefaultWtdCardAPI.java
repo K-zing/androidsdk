@@ -11,11 +11,11 @@ import io.reactivex.Observable;
 
 public class SetDefaultWtdCardAPI extends BaseD11API {
 
+    private String bankId;
+
     SetDefaultWtdCardAPI() {
         super();
     }
-
-    private String bankId;
 
     @Override
     protected String getD11Action() {
@@ -64,13 +64,13 @@ public class SetDefaultWtdCardAPI extends BaseD11API {
         return this;
     }
 
-    public interface SetDefaultWtdCardCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public SetDefaultWtdCardAPI setBankId(String bankId) {
         this.bankId = bankId;
         return this;
+    }
+
+    public interface SetDefaultWtdCardCallBack extends KzingCallBack {
+        void onSuccess();
     }
 
 }

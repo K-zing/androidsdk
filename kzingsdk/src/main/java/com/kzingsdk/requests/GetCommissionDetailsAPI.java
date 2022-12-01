@@ -11,13 +11,13 @@ import io.reactivex.Observable;
 
 public class GetCommissionDetailsAPI extends CoreRequest {
 
+    GetCommissionDetailsAPI() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.getCommissionDetails;
-    }
-
-    GetCommissionDetailsAPI() {
-        super();
     }
 
     @Override

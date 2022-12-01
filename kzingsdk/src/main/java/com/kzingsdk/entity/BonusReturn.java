@@ -33,6 +33,18 @@ public class BonusReturn implements Parcelable {
 
     }
 
+    public BonusReturn(Parcel in) {
+        actName = in.readString();
+        dno = in.readString();
+        amount = in.readString();
+        validBet = in.readString();
+        gp = in.readString();
+        type = in.readString();
+        typeId = in.readString();
+        created = in.readString();
+        currency = in.readString();
+    }
+
     public static BonusReturn newInstance(JSONObject rootObject) {
         BonusReturn bonusReturn = new BonusReturn();
         bonusReturn.setActName(rootObject.optString("actname"));
@@ -120,18 +132,6 @@ public class BonusReturn implements Parcelable {
 
     public void setTypeId(String typeId) {
         this.typeId = typeId;
-    }
-
-    public BonusReturn(Parcel in) {
-        actName = in.readString();
-        dno = in.readString();
-        amount = in.readString();
-        validBet = in.readString();
-        gp = in.readString();
-        type = in.readString();
-        typeId = in.readString();
-        created = in.readString();
-        currency = in.readString();
     }
 
     @Override

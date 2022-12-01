@@ -116,11 +116,6 @@ public class EditMemberInfoAPI extends CoreRequest {
         return this;
     }
 
-    public interface EditMemberInfoCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
-
     public EditMemberInfoAPI setParamQq(String qq) {
         this.qq = qq;
         return this;
@@ -145,7 +140,6 @@ public class EditMemberInfoAPI extends CoreRequest {
         this.weixin = weixin;
         return this;
     }
-
 
     public EditMemberInfoAPI setRealName(String realname) {
         this.realname = realname;
@@ -200,6 +194,10 @@ public class EditMemberInfoAPI extends CoreRequest {
     public EditMemberInfoAPI setPhoneCountry(String phoneCountry) {
         this.phoneCountry = phoneCountry;
         return this;
+    }
+
+    public interface EditMemberInfoCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }
 

@@ -8,17 +8,15 @@ import com.kzingsdk.entity.ActivityContentResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URLDecoder;
-
 import io.reactivex.Observable;
 
 public class GetActivityContentAPI extends CoreRequest {
 
+    private String actid;
+
     GetActivityContentAPI() {
         super();
     }
-
-    private String actid ;
 
     @Override
     protected String getAction() {
@@ -27,17 +25,17 @@ public class GetActivityContentAPI extends CoreRequest {
 
     @Override
     protected Observable<String> validateParams() {
-        if(actid == null || actid.length() == 0){
+        if (actid == null || actid.length() == 0) {
             return Observable.just("ActID is not valid");
         }
         return super.validateParams();
     }
 
     @Override
-    protected JSONObject generateParamsJson(){
+    protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            jsonData.put("actid",actid);
+            jsonData.put("actid", actid);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -60,13 +58,9 @@ public class GetActivityContentAPI extends CoreRequest {
         }, defaultOnErrorConsumer);
     }
 
-    public GetActivityContentAPI addGetActivityListContentCallBack(GetActivityListContentCallBack getActivityListCallBack){
+    public GetActivityContentAPI addGetActivityListContentCallBack(GetActivityListContentCallBack getActivityListCallBack) {
         kzingCallBackList.add(getActivityListCallBack);
         return this;
-    }
-
-    public interface GetActivityListContentCallBack extends KzingCallBack{
-        void onSuccess(ActivityContentResult activityContentResult);
     }
 
     /**
@@ -75,6 +69,10 @@ public class GetActivityContentAPI extends CoreRequest {
     public GetActivityContentAPI setParamActid(String actid) {
         this.actid = actid;
         return this;
+    }
+
+    public interface GetActivityListContentCallBack extends KzingCallBack {
+        void onSuccess(ActivityContentResult activityContentResult);
     }
 
 }

@@ -11,12 +11,6 @@ import java.math.BigDecimal;
 
 public class CurrencyBalance implements Parcelable {
 
-    private String currency;
-    private String symbol;
-    private BigDecimal amount;
-    private Integer decimalPlaces;
-    private boolean isCrypto;
-
     public static final Creator<CurrencyBalance> CREATOR = new Creator<CurrencyBalance>() {
         @Override
         public CurrencyBalance createFromParcel(Parcel in) {
@@ -28,6 +22,23 @@ public class CurrencyBalance implements Parcelable {
             return new CurrencyBalance[size];
         }
     };
+    private String currency;
+    private String symbol;
+    private BigDecimal amount;
+    private Integer decimalPlaces;
+    private boolean isCrypto;
+
+    public CurrencyBalance() {
+
+    }
+
+    public CurrencyBalance(Parcel in) {
+        currency = in.readString();
+        symbol = in.readString();
+        amount = new BigDecimal(in.readString());
+        decimalPlaces = in.readInt();
+        isCrypto = in.readInt() == 1;
+    }
 
     public static CurrencyBalance newInstance(JSONObject rootObject) {
         CurrencyBalance currencyBalance = new CurrencyBalance();
@@ -86,18 +97,6 @@ public class CurrencyBalance implements Parcelable {
     @Override
     public int describeContents() {
         return 0;
-    }
-
-    public CurrencyBalance() {
-
-    }
-
-    public CurrencyBalance(Parcel in) {
-        currency = in.readString();
-        symbol = in.readString();
-        amount = new BigDecimal(in.readString());
-        decimalPlaces = in.readInt();
-        isCrypto = in.readInt() == 1;
     }
 
     @Override

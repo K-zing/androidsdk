@@ -21,6 +21,15 @@ import static com.kzingsdk.entity.deposit.PaymentType.THIRD_PARTY;
 
 public class DepositOption implements Parcelable {
 
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public DepositOption createFromParcel(Parcel in) {
+            return new DepositOption(in);
+        }
+
+        public DepositOption[] newArray(int size) {
+            return new DepositOption[size];
+        }
+    };
     private boolean isProcessing;
     private boolean isAllowDeposit;
     private boolean isAllowDecimal;
@@ -31,6 +40,7 @@ public class DepositOption implements Parcelable {
     private boolean depositMustBindBankcard = false;
     private boolean isUploadCrypto = false;
     private boolean isUploadCredentialCrypto = false;
+    private boolean depositRealNameVerify = false;
     private Integer pgAllowPendingCount = 0;
     private Integer pgProcessPendingCount = 0;
     private Integer atmAllowPendingCount = 0;
@@ -47,12 +57,47 @@ public class DepositOption implements Parcelable {
     private String cryptoDepositDesc = "";
     private String depositFooterDesc = "";
     private String bank2DepositDesc = "";
-
     private ArrayList<PayOptionSortData> payOptionSortDataList = new ArrayList<>();
     private ArrayList<AvailablePaymentGroup> availablePaymentGroupList = new ArrayList<>();
     private ArrayList<ExcludeTLCBankTransfer> excludeTLCBankTransferList = new ArrayList<>();
 
     public DepositOption() {
+
+    }
+
+    public DepositOption(Parcel in) {
+        isProcessing = in.readInt() == 1;
+        isAllowDeposit = in.readInt() == 1;
+        isAllowDecimal = in.readInt() == 1;
+        isV2 = in.readInt() == 1;
+        useRotate = in.readInt() == 1;
+        allowUploadDepositCredential = in.readInt() == 1;
+        depositMustBindBankcard = in.readInt() == 1;
+        isUploadCrypto = in.readInt() == 1;
+        isUploadCredentialCrypto = in.readInt() == 1;
+        depositRealNameVerify = in.readInt() == 1;
+        pgAllowPendingCount = in.readInt();
+        pgProcessPendingCount = in.readInt();
+        atmAllowPendingCount = in.readInt();
+        atmProcessPendingCount = in.readInt();
+        cryptoAtmExchangeRate = new BigDecimal(in.readString());
+        bankDepositDesc = in.readString();
+        thirdPartyDesc = in.readString();
+        qrDesc = in.readString();
+        phoneDepositDesc = in.readString();
+        cryptoDepositDesc = in.readString();
+        depositFooterDesc = in.readString();
+        bank2DepositDesc = in.readString();
+        int i = 0;
+        Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
+        paymentGroupList = (ArrayList<PaymentGroup>) customObjects[i++];
+        activityMap = (HashMap<String, String>) customObjects[i++];
+        quickLinkDepositList = (ArrayList<QuickLinkDeposit>) customObjects[i++];
+        cryptoList = (ArrayList<Crypto>) customObjects[i++];
+        payOptionSortDataList = (ArrayList<PayOptionSortData>) customObjects[i++];
+        availablePaymentGroupList = (ArrayList<AvailablePaymentGroup>) customObjects[i++];
+        excludeTLCBankTransferList = (ArrayList<ExcludeTLCBankTransfer>) customObjects[i++];
+
 
     }
 
@@ -73,6 +118,8 @@ public class DepositOption implements Parcelable {
         item.depositMustBindBankcard = rootObject.optBoolean("depositMustBindBankcard", false);
         item.isUploadCrypto = rootObject.optBoolean("isUploadCrypto", false);
         item.isUploadCredentialCrypto = rootObject.optBoolean("uploadCredentialCrypto", false);
+        item.depositRealNameVerify = rootObject.optBoolean("depositrealnameverify", false);
+
         item.pgAllowPendingCount = rootObject.optInt("pgAllowPendingCount", 0);
         item.pgProcessPendingCount = rootObject.optInt("pgProcessPendingCount", 0);
         item.atmAllowPendingCount = rootObject.optInt("atmAllowPendingCount", 0);
@@ -262,7 +309,6 @@ public class DepositOption implements Parcelable {
         return cryptoAtmPaymentList;
     }
 
-
     private static ArrayList<MicroAtmPayment> createPaymentAtmMicroList(JSONArray jArray) {
         ArrayList<MicroAtmPayment> microAtmPaymentList = new ArrayList<>();
         if (jArray != null) {
@@ -277,7 +323,6 @@ public class DepositOption implements Parcelable {
         }
         return microAtmPaymentList;
     }
-
 
     private static ArrayList<AtmPayment> createAtmPaymentList(JSONArray jArray, JSONArray sortingArray, boolean isQrcode) {
         ArrayList<AtmPayment> atmPaymentList = new ArrayList<>();
@@ -352,7 +397,6 @@ public class DepositOption implements Parcelable {
         }
         return thirdPartyPaymentMap;
     }
-
 
     public boolean isProcessing() {
         return isProcessing;
@@ -440,6 +484,14 @@ public class DepositOption implements Parcelable {
 
     public void setUploadCredentialCrypto(boolean uploadCredentialCrypto) {
         isUploadCredentialCrypto = uploadCredentialCrypto;
+    }
+
+    public boolean isDepositRealNameVerify() {
+        return depositRealNameVerify;
+    }
+
+    public void setDepositRealNameVerify(boolean depositRealNameVerify) {
+        this.depositRealNameVerify = depositRealNameVerify;
     }
 
     public Integer getPgAllowPendingCount() {
@@ -586,51 +638,6 @@ public class DepositOption implements Parcelable {
         this.excludeTLCBankTransferList = excludeTLCBankTransferList;
     }
 
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public DepositOption createFromParcel(Parcel in) {
-            return new DepositOption(in);
-        }
-
-        public DepositOption[] newArray(int size) {
-            return new DepositOption[size];
-        }
-    };
-
-    public DepositOption(Parcel in) {
-        isProcessing = in.readInt() == 1;
-        isAllowDeposit = in.readInt() == 1;
-        isAllowDecimal = in.readInt() == 1;
-        isV2 = in.readInt() == 1;
-        useRotate = in.readInt() == 1;
-        allowUploadDepositCredential = in.readInt() == 1;
-        depositMustBindBankcard = in.readInt() == 1;
-        isUploadCrypto = in.readInt() == 1;
-        isUploadCredentialCrypto = in.readInt() == 1;
-        pgAllowPendingCount = in.readInt();
-        pgProcessPendingCount = in.readInt();
-        atmAllowPendingCount = in.readInt();
-        atmProcessPendingCount = in.readInt();
-        cryptoAtmExchangeRate = new BigDecimal(in.readString());
-        bankDepositDesc = in.readString();
-        thirdPartyDesc = in.readString();
-        qrDesc = in.readString();
-        phoneDepositDesc = in.readString();
-        cryptoDepositDesc = in.readString();
-        depositFooterDesc = in.readString();
-        bank2DepositDesc = in.readString();
-        int i = 0;
-        Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
-        paymentGroupList = (ArrayList<PaymentGroup>) customObjects[i++];
-        activityMap = (HashMap<String, String>) customObjects[i++];
-        quickLinkDepositList = (ArrayList<QuickLinkDeposit>) customObjects[i++];
-        cryptoList = (ArrayList<Crypto>) customObjects[i++];
-        payOptionSortDataList = (ArrayList<PayOptionSortData>) customObjects[i++];
-        availablePaymentGroupList = (ArrayList<AvailablePaymentGroup>) customObjects[i++];
-        excludeTLCBankTransferList = (ArrayList<ExcludeTLCBankTransfer>) customObjects[i++];
-
-
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -647,6 +654,7 @@ public class DepositOption implements Parcelable {
         dest.writeInt(depositMustBindBankcard ? 1 : 0);
         dest.writeInt(isUploadCrypto ? 1 : 0);
         dest.writeInt(isUploadCredentialCrypto ? 1 : 0);
+        dest.writeInt(depositRealNameVerify ? 1 : 0);
         dest.writeInt(pgAllowPendingCount);
         dest.writeInt(pgProcessPendingCount);
         dest.writeInt(atmAllowPendingCount);

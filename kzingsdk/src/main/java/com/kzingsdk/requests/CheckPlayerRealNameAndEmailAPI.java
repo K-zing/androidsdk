@@ -4,8 +4,6 @@ import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
 
-import java.util.HashMap;
-
 import io.reactivex.Observable;
 
 public class CheckPlayerRealNameAndEmailAPI extends CoreRequest {

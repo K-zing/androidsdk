@@ -92,10 +92,6 @@ public class SubmitThirdPartyDepositAPI extends CoreRequest {
         return this;
     }
 
-    public interface SubmitThirdPartyDepositCallBack extends KzingCallBack {
-        void onSuccess(ThirdPartyPaymentSubmitAction thirdPartyPaymentSubmitAction);
-    }
-
     public SubmitThirdPartyDepositAPI setParamThirdPartyPaymentBank(ThirdPartyPaymentBank thirdPartyPaymentBank) {
         this.thirdPartyPaymentBank = thirdPartyPaymentBank;
         return this;
@@ -125,5 +121,9 @@ public class SubmitThirdPartyDepositAPI extends CoreRequest {
         } catch (JSONException ignored) {
         }
         return this;
+    }
+
+    public interface SubmitThirdPartyDepositCallBack extends KzingCallBack {
+        void onSuccess(ThirdPartyPaymentSubmitAction thirdPartyPaymentSubmitAction);
     }
 }

@@ -31,14 +31,14 @@ public class TransferBonusActivity {
         transferBonusActivity.setActivityPeriod(rootObject.optString("activityperiod"));
         JSONArray platformArray = rootObject.optJSONArray("platform");
         if (platformArray != null) {
-            for(int i = 0 ; i < platformArray.length();i++){
+            for (int i = 0; i < platformArray.length(); i++) {
                 JSONObject dataObject = platformArray.optJSONObject(i);
                 transferBonusActivity.simpleGamePlatformArrayList.add(SimpleGamePlatform.newInstance(dataObject));
             }
         }
         JSONArray acDataArray = rootObject.optJSONArray("ac_data");
         if (acDataArray != null) {
-            for(int i = 0 ; i < acDataArray.length();i++){
+            for (int i = 0; i < acDataArray.length(); i++) {
                 JSONObject dataObject = acDataArray.optJSONObject(i);
                 transferBonusActivity.activityRequirementArrayList.add(ActivityRequirement.newInstance(dataObject));
             }

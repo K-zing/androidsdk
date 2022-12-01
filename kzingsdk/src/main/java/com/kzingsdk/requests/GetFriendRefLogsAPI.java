@@ -81,10 +81,6 @@ public class GetFriendRefLogsAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetFriendRefLogsCallBack extends KzingCallBack {
-        void onSuccess(GetFriendRefLogResult getFriendRefLogResult);
-    }
-
     public GetFriendRefLogsAPI setStartDateCalendar(Calendar startDateCalendar) {
         this.startDateCalendar = startDateCalendar;
         return this;
@@ -100,10 +96,14 @@ public class GetFriendRefLogsAPI extends CoreRequest {
         return this;
     }
 
-
     public GetFriendRefLogsAPI addStatus(Integer status) {
         this.statusSet.add(status);
         return this;
+    }
+
+
+    public interface GetFriendRefLogsCallBack extends KzingCallBack {
+        void onSuccess(GetFriendRefLogResult getFriendRefLogResult);
     }
 
 

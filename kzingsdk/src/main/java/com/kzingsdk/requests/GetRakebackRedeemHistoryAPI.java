@@ -3,15 +3,12 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.RakebackRedeemHistory;
 import com.kzingsdk.entity.RakebackRedeemHistoryResult;
 import com.kzingsdk.util.Constant;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import io.reactivex.Observable;
@@ -74,10 +71,6 @@ public class GetRakebackRedeemHistoryAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetRakebackRedeemHistoryCallBack extends KzingCallBack {
-        void onSuccess(RakebackRedeemHistoryResult rakebackRedeemHistoryResult);
-    }
-
     public GetRakebackRedeemHistoryAPI setStartDateCalendar(Calendar startDateCalendar) {
         this.startDateCalendar = startDateCalendar;
         return this;
@@ -111,6 +104,10 @@ public class GetRakebackRedeemHistoryAPI extends CoreRequest {
     public GetRakebackRedeemHistoryAPI setGpType(String gpType) {
         this.gpType = gpType;
         return this;
+    }
+
+    public interface GetRakebackRedeemHistoryCallBack extends KzingCallBack {
+        void onSuccess(RakebackRedeemHistoryResult rakebackRedeemHistoryResult);
     }
 
 }

@@ -68,12 +68,12 @@ public class GetGamePlatformByIconAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetGamePlatformByIconCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<GamePlatform> gamePlatformContainerList);
-    }
-
     public GetGamePlatformByIconAPI setFrameIcon(Integer frameIcon) {
         this.frameIcon = frameIcon;
         return this;
+    }
+
+    public interface GetGamePlatformByIconCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<GamePlatform> gamePlatformContainerList);
     }
 }

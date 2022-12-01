@@ -11,6 +11,15 @@ import java.math.BigDecimal;
 
 public class CryptoAtmPayment extends BasePaymentMethod implements Parcelable {
 
+    public static final Creator CREATOR = new Creator() {
+        public CryptoAtmPayment createFromParcel(Parcel in) {
+            return new CryptoAtmPayment(in);
+        }
+
+        public CryptoAtmPayment[] newArray(int size) {
+            return new CryptoAtmPayment[size];
+        }
+    };
     private String address;
     private String desc;
     private int showField;
@@ -25,6 +34,31 @@ public class CryptoAtmPayment extends BasePaymentMethod implements Parcelable {
     private int displayFlag;
 
     public CryptoAtmPayment() {
+    }
+
+    public CryptoAtmPayment(Parcel in) {
+        id = in.readString();
+        paymentName = in.readString();
+        image = in.readString();
+        displayOrder = in.readInt();
+        displayFlag = in.readInt();
+        minAmount = in.readDouble();
+        maxAmount = in.readDouble();
+        desc = in.readString();
+        bankCode = in.readString();
+        address = in.readString();
+        qrcode = in.readString();
+        showField = in.readInt();
+        random = in.readInt();
+        isAllowDecimal = in.readInt() == 1;
+        promoRate = new BigDecimal(in.readString());
+        sDealsRate = new BigDecimal(in.readString());
+        formType = in.readString();
+        accountId = in.readString();
+        dpAddress = in.readString();
+        key = in.readString();
+        ptAlias = in.readString();
+        number = in.readInt();
     }
 
     public static CryptoAtmPayment newInstance(JSONObject rootObject) {
@@ -151,41 +185,6 @@ public class CryptoAtmPayment extends BasePaymentMethod implements Parcelable {
 
     public void setDisplayFlag(int displayFlag) {
         this.displayFlag = displayFlag;
-    }
-
-    public static final Creator CREATOR = new Creator() {
-        public CryptoAtmPayment createFromParcel(Parcel in) {
-            return new CryptoAtmPayment(in);
-        }
-
-        public CryptoAtmPayment[] newArray(int size) {
-            return new CryptoAtmPayment[size];
-        }
-    };
-
-    public CryptoAtmPayment(Parcel in) {
-        id = in.readString();
-        paymentName = in.readString();
-        image = in.readString();
-        displayOrder = in.readInt();
-        displayFlag = in.readInt();
-        minAmount = in.readDouble();
-        maxAmount = in.readDouble();
-        desc = in.readString();
-        bankCode = in.readString();
-        address = in.readString();
-        qrcode = in.readString();
-        showField = in.readInt();
-        random = in.readInt();
-        isAllowDecimal = in.readInt() == 1;
-        promoRate = new BigDecimal(in.readString());
-        sDealsRate = new BigDecimal(in.readString());
-        formType = in.readString();
-        accountId = in.readString();
-        dpAddress = in.readString();
-        key = in.readString();
-        ptAlias = in.readString();
-        number = in.readInt();
     }
 
     @Override

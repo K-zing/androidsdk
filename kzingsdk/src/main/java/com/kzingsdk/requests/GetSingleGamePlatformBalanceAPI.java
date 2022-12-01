@@ -13,11 +13,11 @@ import io.reactivex.Observable;
 
 public class GetSingleGamePlatformBalanceAPI extends CoreRequest {
 
+    private String gpaccid;
+
     GetSingleGamePlatformBalanceAPI() {
         super();
     }
-
-    private String gpaccid;
 
     @Override
     protected String getAction() {
@@ -59,12 +59,12 @@ public class GetSingleGamePlatformBalanceAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetSingleGamePlatformBalanceCallBack extends KzingCallBack {
-        void onSuccess(BigDecimal balance);
-    }
-
     public GetSingleGamePlatformBalanceAPI setGpaccid(String gpaccid) {
         this.gpaccid = gpaccid;
         return this;
+    }
+
+    public interface GetSingleGamePlatformBalanceCallBack extends KzingCallBack {
+        void onSuccess(BigDecimal balance);
     }
 }

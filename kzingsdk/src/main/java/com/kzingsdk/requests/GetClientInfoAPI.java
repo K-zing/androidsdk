@@ -40,12 +40,12 @@ public class GetClientInfoAPI extends CoreRequest {
         }, defaultOnErrorConsumer);
     }
 
-    public GetClientInfoAPI addGetSiteInfoCallBack(GetClientInfoAPI.GetSiteInfoCallBack getSiteInfoCallBack){
+    public GetClientInfoAPI addGetSiteInfoCallBack(GetClientInfoAPI.GetSiteInfoCallBack getSiteInfoCallBack) {
         kzingCallBackList.add(getSiteInfoCallBack);
         return this;
     }
 
-    public interface GetSiteInfoCallBack extends KzingCallBack{
+    public interface GetSiteInfoCallBack extends KzingCallBack {
         void onSuccess(ClientInfo clientInfo);
     }
 

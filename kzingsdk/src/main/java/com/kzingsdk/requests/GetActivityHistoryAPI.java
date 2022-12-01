@@ -21,7 +21,7 @@ public class GetActivityHistoryAPI extends CoreRequest {
     private Integer offset = 0;
     private String status;
     private Calendar startDateCalendar, endDateCalendar;
-    
+
     GetActivityHistoryAPI() {
         super();
     }
@@ -30,7 +30,7 @@ public class GetActivityHistoryAPI extends CoreRequest {
     protected String getAction() {
         return Action.getActivityHistory;
     }
-    
+
     @Override
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
@@ -74,10 +74,6 @@ public class GetActivityHistoryAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetActivityHistoryCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<ActivityHistory> activityHistory);
-    }
-
     public GetActivityHistoryAPI setStartDateCalendar(Calendar startDateCalendar) {
         this.startDateCalendar = startDateCalendar;
         return this;
@@ -108,10 +104,14 @@ public class GetActivityHistoryAPI extends CoreRequest {
         return this;
     }
 
-
     public GetActivityHistoryAPI setStatus(String status) {
         this.status = status;
         return this;
+    }
+
+
+    public interface GetActivityHistoryCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<ActivityHistory> activityHistory);
     }
 
 }

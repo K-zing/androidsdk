@@ -27,6 +27,13 @@ public class RedPocketTime implements Parcelable {
 
     }
 
+    public RedPocketTime(Parcel in) {
+        shiftName = in.readString();
+        shiftStartTime = in.readString();
+        shiftEndTime = in.readString();
+        shiftShowTime = in.readInt();
+    }
+
     public static RedPocketTime newInstance(JSONObject rootObject) {
         RedPocketTime redPocketTime = new RedPocketTime();
         redPocketTime.setShiftName(rootObject.optString("shift_name", ""));
@@ -66,13 +73,6 @@ public class RedPocketTime implements Parcelable {
 
     public void setShiftShowTime(Integer shiftShowTime) {
         this.shiftShowTime = shiftShowTime;
-    }
-
-    public RedPocketTime(Parcel in) {
-        shiftName = in.readString();
-        shiftStartTime = in.readString();
-        shiftEndTime = in.readString();
-        shiftShowTime = in.readInt();
     }
 
     @Override

@@ -34,6 +34,15 @@ public class MemberReferralInfo implements Parcelable {
 
     }
 
+    public MemberReferralInfo(Parcel in) {
+        cover = in.readString();
+        content = in.readString();
+        referCount = in.readInt();
+        firstDepositCount = in.readInt();
+        todayBonusAmount = new BigDecimal(in.readString());
+        bonusAmount = new BigDecimal(in.readString());
+    }
+
     public static MemberReferralInfo newInstance(JSONObject rootObject) {
         MemberReferralInfo memberReferralInfo = new MemberReferralInfo();
         memberReferralInfo.setCover(rootObject.optString("cover"));
@@ -94,15 +103,6 @@ public class MemberReferralInfo implements Parcelable {
 
     public void setBonusAmount(BigDecimal bonusAmount) {
         this.bonusAmount = bonusAmount;
-    }
-
-    public MemberReferralInfo(Parcel in) {
-        cover = in.readString();
-        content = in.readString();
-        referCount = in.readInt();
-        firstDepositCount = in.readInt();
-        todayBonusAmount = new BigDecimal(in.readString());
-        bonusAmount = new BigDecimal(in.readString());
     }
 
     @Override

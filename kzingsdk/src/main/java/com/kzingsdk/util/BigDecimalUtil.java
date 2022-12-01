@@ -15,7 +15,7 @@ public class BigDecimalUtil {
             return fallback;
         }
         String valueString = jsonObject.optString(key, "")
-                .replaceAll(",","");
+                .replaceAll(",", "");
         try {
             return new BigDecimal(valueString);
         } catch (NumberFormatException e) {

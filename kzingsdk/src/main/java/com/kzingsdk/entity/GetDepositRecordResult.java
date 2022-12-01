@@ -7,7 +7,6 @@ import org.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 
 public class GetDepositRecordResult {

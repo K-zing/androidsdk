@@ -11,9 +11,6 @@ import java.util.ArrayList;
 
 public class ActivityGift implements Parcelable {
 
-    public static String FIRST_DEPOSIT = "FIRST_DEPOSIT";
-    public static String MONTHLY_BET = "MONTHLY_BET";
-
     public static final Creator CREATOR = new Creator() {
         public ActivityGift createFromParcel(Parcel in) {
             return new ActivityGift(in);
@@ -23,6 +20,8 @@ public class ActivityGift implements Parcelable {
             return new ActivityGift[size];
         }
     };
+    public static String FIRST_DEPOSIT = "FIRST_DEPOSIT";
+    public static String MONTHLY_BET = "MONTHLY_BET";
     private String isRequiredVerifyMobile;
     private String calcTotalDepositHour;
     private String calcMethod;
@@ -32,6 +31,17 @@ public class ActivityGift implements Parcelable {
     private ArrayList<ActivityGiftRequirement> giftRequirementList = new ArrayList<>();
 
     public ActivityGift() {
+    }
+
+    public ActivityGift(Parcel in) {
+        isRequiredVerifyMobile = in.readString();
+        calcTotalDepositHour = in.readString();
+        calcMethod = in.readString();
+        depositValidHours = in.readString();
+        maxJoin = in.readString();
+        isCalcTotalDeposit = in.readInt() == 1;
+        Object[] objectArray = in.readArray(ActivityGift.class.getClassLoader());
+        giftRequirementList = (ArrayList<ActivityGiftRequirement>) objectArray[0];
     }
 
     public static ActivityGift newInstance(JSONObject rootObject) {
@@ -51,18 +61,6 @@ public class ActivityGift implements Parcelable {
             item.setGiftRequirementList(giftRequirementList);
         }
         return item;
-    }
-
-
-    public ActivityGift(Parcel in) {
-        isRequiredVerifyMobile = in.readString();
-        calcTotalDepositHour = in.readString();
-        calcMethod = in.readString();
-        depositValidHours = in.readString();
-        maxJoin = in.readString();
-        isCalcTotalDeposit = in.readInt() == 1;
-        Object[] objectArray = in.readArray(ActivityGift.class.getClassLoader());
-        giftRequirementList = (ArrayList<ActivityGiftRequirement>) objectArray[0];
     }
 
     @Override

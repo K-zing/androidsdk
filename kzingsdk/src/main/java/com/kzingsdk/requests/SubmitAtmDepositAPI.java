@@ -107,10 +107,6 @@ public class SubmitAtmDepositAPI extends CoreRequest {
         return this;
     }
 
-    public interface SubmitAtmDepositCallBack extends KzingCallBack {
-        void onSuccess(String url);
-    }
-
     public SubmitAtmDepositAPI setParamThirdPartyPayment(AtmPayment atmPayment) {
         this.atmPayment = atmPayment;
         return this;
@@ -121,18 +117,15 @@ public class SubmitAtmDepositAPI extends CoreRequest {
         return this;
     }
 
-
     public SubmitAtmDepositAPI setParamTransactionNumber(String transactionNumber) {
         this.transactionNumber = transactionNumber;
         return this;
     }
 
-
     public SubmitAtmDepositAPI setParamDepositDate(String depositDate) {
         this.depositDate = depositDate;
         return this;
     }
-
 
     public SubmitAtmDepositAPI setParamDepositorName(String depositorName) {
         this.depositorName = depositorName;
@@ -143,7 +136,6 @@ public class SubmitAtmDepositAPI extends CoreRequest {
         this.depositSlip = depositSlip;
         return this;
     }
-
 
     public SubmitAtmDepositAPI setParamUtmCode(String utmCode) {
         this.utmCode = utmCode;
@@ -168,6 +160,10 @@ public class SubmitAtmDepositAPI extends CoreRequest {
     public SubmitAtmDepositAPI setDepositRefNo(String depositRefNo) {
         this.depositRefNo = depositRefNo;
         return this;
+    }
+
+    public interface SubmitAtmDepositCallBack extends KzingCallBack {
+        void onSuccess(String url);
     }
 
 }

@@ -87,10 +87,6 @@ public class SubmitWithdrawAPI extends CoreRequest {
         return this;
     }
 
-    public interface SubmitWithdrawCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     /**
      * @param playerBankId Equal to {@link PlayerBankCard#getPlayerBankId()}
      */
@@ -98,7 +94,6 @@ public class SubmitWithdrawAPI extends CoreRequest {
         this.playerBankId = playerBankId;
         return this;
     }
-
 
     public SubmitWithdrawAPI setParamAmount(Double amount) {
         this.amount = amount;
@@ -117,15 +112,20 @@ public class SubmitWithdrawAPI extends CoreRequest {
         this.smsCode = smsCode;
         return this;
     }
+
     public SubmitWithdrawAPI setParamSmsPhoneNo(String smsPhoneNo) {
         this.smsPhoneNo = smsPhoneNo;
         return this;
     }
+
     public SubmitWithdrawAPI setParamSmsPhoneNoCountry(String smsPhoneNoCountry) {
         this.smsPhoneNoCountry = smsPhoneNoCountry;
         return this;
     }
 
+    public interface SubmitWithdrawCallBack extends KzingCallBack {
+        void onSuccess();
+    }
 
 
 }

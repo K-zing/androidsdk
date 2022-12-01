@@ -3,7 +3,6 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.deposit.DepositOption;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,11 +11,11 @@ import io.reactivex.Observable;
 
 public class GetDepositOptionRawJsonAPI extends CoreRequest {
 
+    private boolean isV2 = false;
+
     GetDepositOptionRawJsonAPI() {
         super();
     }
-
-    private boolean isV2 = false;
 
     @Override
     protected String getAction() {
@@ -60,12 +59,12 @@ public class GetDepositOptionRawJsonAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetDepositOptionCallBack extends KzingCallBack {
-        void onSuccess(JSONObject jsonObject);
-    }
-
     public GetDepositOptionRawJsonAPI setV2(boolean v2) {
         isV2 = v2;
         return this;
+    }
+
+    public interface GetDepositOptionCallBack extends KzingCallBack {
+        void onSuccess(JSONObject jsonObject);
     }
 }

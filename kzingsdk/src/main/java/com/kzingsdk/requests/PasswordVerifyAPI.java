@@ -54,13 +54,13 @@ public class PasswordVerifyAPI extends CoreRequest {
         return this;
     }
 
-    public interface PasswordVerifyCallBack extends KzingCallBack {
-        void onSuccess(String success);
-    }
-
     public PasswordVerifyAPI setPassword(String password) {
         this.password = password;
         return this;
+    }
+
+    public interface PasswordVerifyCallBack extends KzingCallBack {
+        void onSuccess(String success);
     }
 }
 

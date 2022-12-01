@@ -11,11 +11,11 @@ import io.reactivex.Observable;
 
 public class DeleteEWalletBankCardAPI extends CoreRequest {
 
+    private String id = null;
+
     DeleteEWalletBankCardAPI() {
         super();
     }
-
-    private String id = null;
 
     @Override
     protected String getAction() {
@@ -62,13 +62,13 @@ public class DeleteEWalletBankCardAPI extends CoreRequest {
         return this;
     }
 
-    public interface DeleteEWalletBankCardCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public DeleteEWalletBankCardAPI setId(String id) {
         this.id = id;
         return this;
+    }
+
+    public interface DeleteEWalletBankCardCallBack extends KzingCallBack {
+        void onSuccess();
     }
 
 }

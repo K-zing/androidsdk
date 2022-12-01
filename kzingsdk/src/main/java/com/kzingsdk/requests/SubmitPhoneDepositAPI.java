@@ -80,10 +80,6 @@ public class SubmitPhoneDepositAPI extends CoreRequest {
         return this;
     }
 
-    public interface SubmitPhoneDepositCallBack extends KzingCallBack {
-        void onSuccess(String success);
-    }
-
     public SubmitPhoneDepositAPI setBank(String bank) {
         this.bank = bank;
         return this;
@@ -127,6 +123,10 @@ public class SubmitPhoneDepositAPI extends CoreRequest {
     public SubmitPhoneDepositAPI setTransno(String transno) {
         this.transno = transno;
         return this;
+    }
+
+    public interface SubmitPhoneDepositCallBack extends KzingCallBack {
+        void onSuccess(String success);
     }
 
 

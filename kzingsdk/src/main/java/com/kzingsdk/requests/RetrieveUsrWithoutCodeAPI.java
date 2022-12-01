@@ -60,13 +60,13 @@ public class RetrieveUsrWithoutCodeAPI extends CoreRequest {
         return this;
     }
 
-    public interface RetrieveUsrWithoutCodeCallBack extends KzingCallBack {
-        void onSuccess(RetrieveUsrWithoutCodeResult retrieveUsrWithoutCodeResult);
-    }
-
     public RetrieveUsrWithoutCodeAPI setEmail(String email) {
         this.email = email;
         return this;
+    }
+
+    public interface RetrieveUsrWithoutCodeCallBack extends KzingCallBack {
+        void onSuccess(RetrieveUsrWithoutCodeResult retrieveUsrWithoutCodeResult);
     }
 
 }

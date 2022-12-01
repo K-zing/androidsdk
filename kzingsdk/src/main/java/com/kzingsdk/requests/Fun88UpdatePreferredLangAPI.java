@@ -14,13 +14,13 @@ public class Fun88UpdatePreferredLangAPI extends CoreRequest {
 
     String preferLanguage;
 
+    Fun88UpdatePreferredLangAPI() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.fun88UpdatePreferredLang;
-    }
-
-    Fun88UpdatePreferredLangAPI() {
-        super();
     }
 
     @Override
@@ -38,6 +38,7 @@ public class Fun88UpdatePreferredLangAPI extends CoreRequest {
         }
         return super.generateParamsJson();
     }
+
     @Override
     public Observable<SimpleApiResult> requestRx(final Context context) {
         return super.baseExecute(context).map(SimpleApiResult::newInstance);
@@ -59,13 +60,13 @@ public class Fun88UpdatePreferredLangAPI extends CoreRequest {
         return this;
     }
 
-    public interface Fun88UpdatePreferredLangCallBack extends KzingCallBack {
-        void onSuccess(SimpleApiResult simpleApiResult);
-    }
-
     public Fun88UpdatePreferredLangAPI setPreferLanguage(String preferLanguage) {
         this.preferLanguage = preferLanguage;
         return this;
+    }
+
+    public interface Fun88UpdatePreferredLangCallBack extends KzingCallBack {
+        void onSuccess(SimpleApiResult simpleApiResult);
     }
 }
 

@@ -13,16 +13,16 @@ import io.reactivex.Observable;
 
 public class AnnouncementDeleteStatusAPI extends CoreRequest {
 
-    @Override
-    protected String getAction() {
-        return Action.announcementDeleteStatus;
-    }
+    private JSONArray announcementIdArray;
 
     AnnouncementDeleteStatusAPI() {
         super();
     }
 
-    private JSONArray announcementIdArray;
+    @Override
+    protected String getAction() {
+        return Action.announcementDeleteStatus;
+    }
 
     @Override
     protected Observable<String> validateParams() {
@@ -61,13 +61,13 @@ public class AnnouncementDeleteStatusAPI extends CoreRequest {
         return this;
     }
 
-    public interface AnnouncementDeleteStatusCallBack extends KzingCallBack {
-        void onSuccess(AnnouncementStatusApiResult announcementStatusApiResult);
-    }
-
     public AnnouncementDeleteStatusAPI setAnnouncementIdArray(JSONArray announcementIdArray) {
         this.announcementIdArray = announcementIdArray;
         return this;
+    }
+
+    public interface AnnouncementDeleteStatusCallBack extends KzingCallBack {
+        void onSuccess(AnnouncementStatusApiResult announcementStatusApiResult);
     }
 }
 

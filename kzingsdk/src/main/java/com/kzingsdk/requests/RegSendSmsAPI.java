@@ -76,10 +76,6 @@ public class RegSendSmsAPI extends CoreRequest {
         return this;
     }
 
-    public interface RegSendSmsCallBack extends KzingCallBack {
-        void onSuccess(RegSendSmsResult regSendSmsResult);
-    }
-
     public RegSendSmsAPI setParamLoginName(String loginName) {
         this.loginName = loginName;
         return this;
@@ -101,5 +97,9 @@ public class RegSendSmsAPI extends CoreRequest {
 
     public void setRequestVoice(boolean requestVoice) {
         this.requestVoice = requestVoice;
+    }
+
+    public interface RegSendSmsCallBack extends KzingCallBack {
+        void onSuccess(RegSendSmsResult regSendSmsResult);
     }
 }

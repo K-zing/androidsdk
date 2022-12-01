@@ -14,15 +14,6 @@ import io.reactivex.Observable;
 
 public class ApplyActivityAPI extends CoreRequest {
 
-    ApplyActivityAPI() {
-        super();
-    }
-
-    @Override
-    protected String getAction() {
-        return Action.applyActivity;
-    }
-
     private String actid;
     private String giftId;
     private String receipient;
@@ -31,6 +22,14 @@ public class ApplyActivityAPI extends CoreRequest {
     private String address;
     private String formId;
     private ArrayList<ActivityForm> activityFormList;
+    ApplyActivityAPI() {
+        super();
+    }
+
+    @Override
+    protected String getAction() {
+        return Action.applyActivity;
+    }
 
     @Override
     protected Observable<String> validateParams() {
@@ -92,10 +91,6 @@ public class ApplyActivityAPI extends CoreRequest {
         return this;
     }
 
-    public interface ActivityApplyCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     /**
      * @param actid From {@link com.kzingsdk.entity.ActivityItem} returned by {@link GetActivityListAPI}
      */
@@ -137,5 +132,9 @@ public class ApplyActivityAPI extends CoreRequest {
     public ApplyActivityAPI setActivityFormList(ArrayList<ActivityForm> activityFormList) {
         this.activityFormList = activityFormList;
         return this;
+    }
+
+    public interface ActivityApplyCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }

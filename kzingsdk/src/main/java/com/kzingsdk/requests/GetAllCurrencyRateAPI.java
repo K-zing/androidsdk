@@ -68,12 +68,12 @@ public class GetAllCurrencyRateAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetAllCurrencyRateCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<CurrencyRate> currencyRateList);
-    }
-
     public GetAllCurrencyRateAPI setForDisplay(Integer forDisplay) {
         this.forDisplay = forDisplay;
         return this;
+    }
+
+    public interface GetAllCurrencyRateCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<CurrencyRate> currencyRateList);
     }
 }

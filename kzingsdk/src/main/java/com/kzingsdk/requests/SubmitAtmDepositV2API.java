@@ -3,8 +3,6 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.deposit.AtmPayment;
-import com.kzingsdk.entity.deposit.CryptoAtmPayment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +20,7 @@ public class SubmitAtmDepositV2API extends CoreRequest {
     private BigDecimal cryptoRate;
     private String address;
 
-//    private CryptoAtmPayment cryptoAtmPayment = null;
+    //    private CryptoAtmPayment cryptoAtmPayment = null;
     private Double amount = 0d;
     private String transactionNumber = "";
     private String depositDate = "";
@@ -33,13 +31,13 @@ public class SubmitAtmDepositV2API extends CoreRequest {
     private String gpaid = "";
     private String depositRefNo;
 
+    SubmitAtmDepositV2API() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.submitAtmDepositV2;
-    }
-
-    SubmitAtmDepositV2API() {
-        super();
     }
 
     @Override
@@ -108,10 +106,6 @@ public class SubmitAtmDepositV2API extends CoreRequest {
         return this;
     }
 
-    public interface SubmitAtmDepositV2CallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public SubmitAtmDepositV2API setDepositUser(String depositUser) {
         this.depositUser = depositUser;
         return this;
@@ -142,22 +136,20 @@ public class SubmitAtmDepositV2API extends CoreRequest {
         return this;
     }
 
-//    public SubmitAtmDepositV2API setCryptoAtmPayment(CryptoAtmPayment cryptoAtmPayment) {
-//        this.cryptoAtmPayment = cryptoAtmPayment;
-//        return this;
-//    }
-
     public SubmitAtmDepositV2API setAmount(Double amount) {
         this.amount = amount;
         return this;
     }
 
+//    public SubmitAtmDepositV2API setCryptoAtmPayment(CryptoAtmPayment cryptoAtmPayment) {
+//        this.cryptoAtmPayment = cryptoAtmPayment;
+//        return this;
+//    }
 
     public SubmitAtmDepositV2API setTransactionNumber(String transactionNumber) {
         this.transactionNumber = transactionNumber;
         return this;
     }
-
 
     public SubmitAtmDepositV2API setDepositDate(String depositDate) {
         this.depositDate = depositDate;
@@ -168,7 +160,6 @@ public class SubmitAtmDepositV2API extends CoreRequest {
         this.depositSlip = depositSlip;
         return this;
     }
-
 
     public SubmitAtmDepositV2API setUtmCode(String utmCode) {
         this.utmCode = utmCode;
@@ -193,6 +184,10 @@ public class SubmitAtmDepositV2API extends CoreRequest {
     public SubmitAtmDepositV2API setDepositRefNo(String depositRefNo) {
         this.depositRefNo = depositRefNo;
         return this;
+    }
+
+    public interface SubmitAtmDepositV2CallBack extends KzingCallBack {
+        void onSuccess();
     }
 
 

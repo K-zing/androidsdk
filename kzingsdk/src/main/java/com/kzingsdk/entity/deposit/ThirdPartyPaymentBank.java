@@ -7,6 +7,15 @@ import org.json.JSONObject;
 
 public class ThirdPartyPaymentBank implements Parcelable {
 
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public ThirdPartyPaymentBank createFromParcel(Parcel in) {
+            return new ThirdPartyPaymentBank(in);
+        }
+
+        public ThirdPartyPaymentBank[] newArray(int size) {
+            return new ThirdPartyPaymentBank[size];
+        }
+    };
     private ThirdPartyPayment parent;
     private String id;
     private String name;
@@ -18,6 +27,18 @@ public class ThirdPartyPaymentBank implements Parcelable {
 
     public ThirdPartyPaymentBank() {
 
+    }
+
+    public ThirdPartyPaymentBank(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        css = in.readString();
+        image = in.readString();
+        logoType = in.readString();
+        type = in.readString();
+        translateKey = in.readString();
+        Object[] customObjects = in.readArray(ThirdPartyPaymentBank.class.getClassLoader());
+        parent = (ThirdPartyPayment) customObjects[0];
     }
 
     public static ThirdPartyPaymentBank newInstance(JSONObject rootObject, ThirdPartyPayment thirdPartyPayment) {
@@ -98,28 +119,6 @@ public class ThirdPartyPaymentBank implements Parcelable {
 
     public void setTranslateKey(String translateKey) {
         this.translateKey = translateKey;
-    }
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public ThirdPartyPaymentBank createFromParcel(Parcel in) {
-            return new ThirdPartyPaymentBank(in);
-        }
-
-        public ThirdPartyPaymentBank[] newArray(int size) {
-            return new ThirdPartyPaymentBank[size];
-        }
-    };
-
-    public ThirdPartyPaymentBank(Parcel in) {
-        id = in.readString();
-        name = in.readString();
-        css = in.readString();
-        image = in.readString();
-        logoType = in.readString();
-        type = in.readString();
-        translateKey = in.readString();
-        Object[] customObjects = in.readArray(ThirdPartyPaymentBank.class.getClassLoader());
-        parent = (ThirdPartyPayment) customObjects[0];
     }
 
     @Override

@@ -13,16 +13,16 @@ import io.reactivex.Observable;
 
 public class AnnouncementReadStatusAPI extends CoreRequest {
 
-    @Override
-    protected String getAction() {
-        return Action.announcementReadStatus;
-    }
+    private JSONArray announcementIdArray;
 
     AnnouncementReadStatusAPI() {
         super();
     }
 
-    private JSONArray announcementIdArray;
+    @Override
+    protected String getAction() {
+        return Action.announcementReadStatus;
+    }
 
     @Override
     protected Observable<String> validateParams() {
@@ -61,13 +61,13 @@ public class AnnouncementReadStatusAPI extends CoreRequest {
         return this;
     }
 
-    public interface AnnouncementReadStatusCallBack extends KzingCallBack {
-        void onSuccess(AnnouncementStatusApiResult announcementStatusApiResult);
-    }
-
     public AnnouncementReadStatusAPI setAnnouncementIdArray(JSONArray announcementIdArray) {
         this.announcementIdArray = announcementIdArray;
         return this;
+    }
+
+    public interface AnnouncementReadStatusCallBack extends KzingCallBack {
+        void onSuccess(AnnouncementStatusApiResult announcementStatusApiResult);
     }
 }
 

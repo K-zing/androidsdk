@@ -12,6 +12,8 @@ import io.reactivex.Observable;
 
 public class CancelWithdrawalAPI extends CoreRequest {
 
+    private String dno;
+
     CancelWithdrawalAPI() {
         super();
     }
@@ -20,8 +22,6 @@ public class CancelWithdrawalAPI extends CoreRequest {
     protected String getAction() {
         return Action.cancelWithdrawal;
     }
-
-    private String dno;
 
     @Override
     protected Observable<String> validateParams() {
@@ -64,13 +64,13 @@ public class CancelWithdrawalAPI extends CoreRequest {
         return this;
     }
 
-    public interface CancelWithdrawalCallBack extends KzingCallBack {
-        void onSuccess(CancelWithdrawalResult cancelWithdrawalResult);
-    }
-
     public CancelWithdrawalAPI setParamDno(String dno) {
         this.dno = dno;
         return this;
+    }
+
+    public interface CancelWithdrawalCallBack extends KzingCallBack {
+        void onSuccess(CancelWithdrawalResult cancelWithdrawalResult);
     }
 
 }

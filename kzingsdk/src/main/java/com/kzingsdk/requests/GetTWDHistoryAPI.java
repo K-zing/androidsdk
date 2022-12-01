@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.GetTWDHistoryResult;
-import com.kzingsdk.entity.GetTWDHistoryResult;
 import com.kzingsdk.util.Constant;
 
 import org.json.JSONException;
@@ -15,20 +14,20 @@ import java.util.Calendar;
 import io.reactivex.Observable;
 
 public class GetTWDHistoryAPI extends CoreRequest {
-    
+
     private Integer pageCount = 10;
     private Integer offset = 0;
     private String status;
     private String type;
     private Calendar startDateCalendar, endDateCalendar;
 
+    GetTWDHistoryAPI() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.getTWDHistory;
-    }
-
-    GetTWDHistoryAPI() {
-        super();
     }
 
     @Override
@@ -40,7 +39,7 @@ public class GetTWDHistoryAPI extends CoreRequest {
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            jsonData.put("pagecount", pageCount);
+            jsonData.put("pageCount", pageCount);
             jsonData.put("offset", offset);
             jsonData.put("status", status);
             jsonData.put("type", type);
@@ -51,6 +50,7 @@ public class GetTWDHistoryAPI extends CoreRequest {
         }
         return super.generateParamsJson();
     }
+
     @Override
     public Observable<GetTWDHistoryResult> requestRx(final Context context) {
         return super.baseExecute(context).map(GetTWDHistoryResult::newInstance);
@@ -71,12 +71,6 @@ public class GetTWDHistoryAPI extends CoreRequest {
         kzingCallBackList.add(getTWDHistoryCallBack);
         return this;
     }
-
-    public interface GetTWDHistoryCallBack extends KzingCallBack {
-        void onSuccess(GetTWDHistoryResult simpleApiResult);
-    }
-
-
 
     public GetTWDHistoryAPI setStartDateCalendar(Calendar startDateCalendar) {
         this.startDateCalendar = startDateCalendar;
@@ -108,7 +102,6 @@ public class GetTWDHistoryAPI extends CoreRequest {
         return this;
     }
 
-
     public GetTWDHistoryAPI setStatus(String status) {
         this.status = status;
         return this;
@@ -117,6 +110,10 @@ public class GetTWDHistoryAPI extends CoreRequest {
     public GetTWDHistoryAPI setType(String type) {
         this.type = type;
         return this;
+    }
+
+    public interface GetTWDHistoryCallBack extends KzingCallBack {
+        void onSuccess(GetTWDHistoryResult simpleApiResult);
     }
 }
 

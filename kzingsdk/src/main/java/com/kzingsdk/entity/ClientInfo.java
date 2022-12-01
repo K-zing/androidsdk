@@ -14,7 +14,15 @@ public class ClientInfo implements Parcelable {
 
     public static final int USE_ACTIVITYS_BANNER = 1;
     public static final int USE_CLIENTINFO_BANNER = 2;
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public ClientInfo createFromParcel(Parcel in) {
+            return new ClientInfo(in);
+        }
 
+        public ClientInfo[] newArray(int size) {
+            return new ClientInfo[size];
+        }
+    };
     private String siteName;
     private String siteDomain;
     private String siteId;
@@ -50,13 +58,10 @@ public class ClientInfo implements Parcelable {
     private boolean registerSendVoice;
     private boolean memberPanDupIp;
     private boolean memberPanDupUuid;
-
-
     private String rankLevel;
     private String appResourceDomain;
     private ArrayList<String> memberPanAgentCodeList;
     private ArrayList<String> memberPanUsernameList;
-
     private HashMap<Integer, String> websiteConfigMap = new HashMap<>();
     private ContactInfo feedbackContactInfo = new ContactInfo();
     private ContactInfo partnershipContactInfo = new ContactInfo();
@@ -71,9 +76,63 @@ public class ClientInfo implements Parcelable {
     private boolean playerAddress;
     private boolean playerWithdrawBindAddress;
 
-
     public ClientInfo() {
 
+    }
+
+    public ClientInfo(Parcel in) {
+        siteName = in.readString();
+        siteDomain = in.readString();
+        siteId = in.readString();
+        siteLogoBig = in.readString();
+        siteLogoSmall = in.readString();
+        siteLogoSimple = in.readString();
+        support = in.readString();
+        support2 = in.readString();
+        announcement = in.readString();
+        useBanner = in.readInt();
+        Object[] objectArray = in.readArray(ClientInfo.class.getClassLoader());
+        int i = 0;
+        clientThemeMap = (HashMap<String, ThemeInfo>) objectArray[i++];
+        websiteConfigMap = (HashMap<Integer, String>) objectArray[i++];
+        bannerCountdownList = (ArrayList<String>) objectArray[i++];
+        bannerFirstLaunchList = (ArrayList<String>) objectArray[i++];
+        memberPanPlayerGroup = (HashSet<String>) objectArray[i++];
+        feedbackContactInfo = (ContactInfo) objectArray[i++];
+        partnershipContactInfo = (ContactInfo) objectArray[i++];
+        socialMediaContactInfo = (ContactInfo) objectArray[i++];
+        captchaApiId = (CaptchaApiId) objectArray[i++];
+        memberPanAgentCodeList = (ArrayList<String>) objectArray[i++];
+        memberPanUsernameList = (ArrayList<String>) objectArray[i++];
+        hasRedPocket = in.readInt() == 1;
+        redPocketImageUrl = in.readString();
+        defaultViewMode = in.readString();
+        mobilePopUp = in.readString();
+        isWdpasswordOn = in.readInt() == 1;
+        allowSendEmail = in.readInt() == 1;
+        allowSendSms = in.readInt() == 1;
+        registerMobileVerify = in.readInt() == 1;
+        withdrawalMobileVerify = in.readInt() == 1;
+        shouldCheckMobileVerified = in.readInt() == 1;
+        shouldCheckEmailVerified = in.readInt() == 1;
+        allowUploadDepositCredential = in.readInt() == 1;
+        hasGameTransferPopup = in.readInt() == 1;
+        hasFriendPromo = in.readInt() == 1;
+        canCancelWithdrawal = in.readInt() == 1;
+        initWdPwdNeedLoginPwd = in.readInt() == 1;
+        rankLevel = in.readString();
+        memberPanVerify = in.readInt() == 1;
+        registerSendVoice = in.readInt() == 1;
+        memberPanDupIp = in.readInt() == 1;
+        memberPanDupUuid = in.readInt() == 1;
+        captchaMode = in.readString();
+        memberLoginNeedCaptcha = in.readInt() == 1;
+        allowCryptoCurrencyWithdrawal = in.readInt() == 1;
+        allowPlayerDeleteCryptoAddr = in.readInt() == 1;
+        registerEmailVerify = in.readInt() == 1;
+        cryptoFixedExchangeRate = in.readString();
+        playerAddress = in.readInt() == 1;
+        playerWithdrawBindAddress = in.readInt() == 1;
     }
 
     public static ClientInfo newInstance(JSONObject rootObject) {
@@ -369,7 +428,6 @@ public class ClientInfo implements Parcelable {
         this.withdrawalMobileVerify = withdrawalMobileVerify;
     }
 
-
     public boolean hasFriendPromo() {
         return hasFriendPromo;
     }
@@ -453,7 +511,6 @@ public class ClientInfo implements Parcelable {
     public void setAppResourceDomain(String appResourceDomain) {
         this.appResourceDomain = appResourceDomain;
     }
-
 
     public ContactInfo getFeedbackContactInfo() {
         return feedbackContactInfo;
@@ -607,62 +664,6 @@ public class ClientInfo implements Parcelable {
         this.playerWithdrawBindAddress = playerWithdrawBindAddress;
     }
 
-    public ClientInfo(Parcel in) {
-        siteName = in.readString();
-        siteDomain = in.readString();
-        siteId = in.readString();
-        siteLogoBig = in.readString();
-        siteLogoSmall = in.readString();
-        siteLogoSimple = in.readString();
-        support = in.readString();
-        support2 = in.readString();
-        announcement = in.readString();
-        useBanner = in.readInt();
-        Object[] objectArray = in.readArray(ClientInfo.class.getClassLoader());
-        int i = 0;
-        clientThemeMap = (HashMap<String, ThemeInfo>) objectArray[i++];
-        websiteConfigMap = (HashMap<Integer, String>) objectArray[i++];
-        bannerCountdownList = (ArrayList<String>) objectArray[i++];
-        bannerFirstLaunchList = (ArrayList<String>) objectArray[i++];
-        memberPanPlayerGroup = (HashSet<String>) objectArray[i++];
-        feedbackContactInfo = (ContactInfo) objectArray[i++];
-        partnershipContactInfo = (ContactInfo) objectArray[i++];
-        socialMediaContactInfo = (ContactInfo) objectArray[i++];
-        captchaApiId = (CaptchaApiId) objectArray[i++];
-        memberPanAgentCodeList = (ArrayList<String>) objectArray[i++];
-        memberPanUsernameList = (ArrayList<String>) objectArray[i++];
-        hasRedPocket = in.readInt() == 1;
-        redPocketImageUrl = in.readString();
-        defaultViewMode = in.readString();
-        mobilePopUp = in.readString();
-        isWdpasswordOn = in.readInt() == 1;
-        allowSendEmail = in.readInt() == 1;
-        allowSendSms = in.readInt() == 1;
-        registerMobileVerify = in.readInt() == 1;
-        withdrawalMobileVerify = in.readInt() == 1;
-        shouldCheckMobileVerified = in.readInt() == 1;
-        shouldCheckEmailVerified = in.readInt() == 1;
-        allowUploadDepositCredential = in.readInt() == 1;
-        hasGameTransferPopup = in.readInt() == 1;
-        hasFriendPromo = in.readInt() == 1;
-        canCancelWithdrawal = in.readInt() == 1;
-        initWdPwdNeedLoginPwd = in.readInt() == 1;
-        rankLevel = in.readString();
-        memberPanVerify = in.readInt() == 1;
-        registerSendVoice = in.readInt() == 1;
-        memberPanDupIp = in.readInt() == 1;
-        memberPanDupUuid = in.readInt() == 1;
-        captchaMode = in.readString();
-        memberLoginNeedCaptcha = in.readInt() == 1;
-        allowCryptoCurrencyWithdrawal = in.readInt() == 1;
-        allowPlayerDeleteCryptoAddr = in.readInt() == 1;
-        registerEmailVerify = in.readInt() == 1;
-        cryptoFixedExchangeRate = in.readString();
-        playerAddress = in.readInt() == 1;
-        playerWithdrawBindAddress = in.readInt() == 1;
-    }
-
-
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(siteName);
@@ -755,15 +756,5 @@ public class ClientInfo implements Parcelable {
 
                 '}';
     }
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public ClientInfo createFromParcel(Parcel in) {
-            return new ClientInfo(in);
-        }
-
-        public ClientInfo[] newArray(int size) {
-            return new ClientInfo[size];
-        }
-    };
 
 }

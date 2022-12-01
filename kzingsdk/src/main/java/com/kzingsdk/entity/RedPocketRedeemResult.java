@@ -25,6 +25,11 @@ public class RedPocketRedeemResult implements Parcelable {
 
     }
 
+    public RedPocketRedeemResult(Parcel in) {
+        award = in.readDouble();
+        chance = in.readInt();
+    }
+
     public static RedPocketRedeemResult newInstance(JSONObject rootObject) {
         RedPocketRedeemResult redPocketInfo = new RedPocketRedeemResult();
         redPocketInfo.setAward(rootObject.optDouble("Award"));
@@ -40,19 +45,12 @@ public class RedPocketRedeemResult implements Parcelable {
         this.chance = chance;
     }
 
-
     public Double getAward() {
         return award;
     }
 
     public void setAward(Double award) {
         this.award = award;
-    }
-
-
-    public RedPocketRedeemResult(Parcel in) {
-        award = in.readDouble();
-        chance = in.readInt();
     }
 
     @Override

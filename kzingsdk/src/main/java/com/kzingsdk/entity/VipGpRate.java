@@ -14,6 +14,17 @@ import java.util.ArrayList;
 public class VipGpRate implements Parcelable {
 
 
+    public static final Creator<VipGpRate> CREATOR = new Creator<VipGpRate>() {
+        @Override
+        public VipGpRate createFromParcel(Parcel in) {
+            return new VipGpRate(in);
+        }
+
+        @Override
+        public VipGpRate[] newArray(int size) {
+            return new VipGpRate[size];
+        }
+    };
     private boolean isStepped = false;
     private Integer rankLevel;
     private String gpid;
@@ -25,6 +36,18 @@ public class VipGpRate implements Parcelable {
 
     public VipGpRate() {
 
+    }
+
+    protected VipGpRate(Parcel in) {
+        isStepped = in.readByte() != 0;
+        gpid = in.readString();
+        groupId = in.readString();
+        rankLevel = in.readInt();
+        groupName = in.readString();
+        fixRate = new BigDecimal(in.readString());
+        limit = new BigDecimal(in.readString());
+        Object[] objectArray = in.readArray(VipGpRate.class.getClassLoader());
+        ladderRateList = (ArrayList<LadderRate>) objectArray[0];
     }
 
     public static VipGpRate newInstance(JSONObject rootObject) {
@@ -114,30 +137,6 @@ public class VipGpRate implements Parcelable {
         return 0;
     }
 
-    public static final Creator<VipGpRate> CREATOR = new Creator<VipGpRate>() {
-        @Override
-        public VipGpRate createFromParcel(Parcel in) {
-            return new VipGpRate(in);
-        }
-
-        @Override
-        public VipGpRate[] newArray(int size) {
-            return new VipGpRate[size];
-        }
-    };
-
-    protected VipGpRate(Parcel in) {
-        isStepped = in.readByte() != 0;
-        gpid = in.readString();
-        groupId = in.readString();
-        rankLevel = in.readInt();
-        groupName = in.readString();
-        fixRate = new BigDecimal(in.readString());
-        limit = new BigDecimal(in.readString());
-        Object[] objectArray = in.readArray(VipGpRate.class.getClassLoader());
-        ladderRateList = (ArrayList<LadderRate>) objectArray[0];
-    }
-
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeByte((byte) (isStepped ? 1 : 0));
@@ -155,6 +154,17 @@ public class VipGpRate implements Parcelable {
 
     public static class LadderRate implements Parcelable {
 
+        public static final Creator<LadderRate> CREATOR = new Creator<LadderRate>() {
+            @Override
+            public LadderRate createFromParcel(Parcel in) {
+                return new LadderRate(in);
+            }
+
+            @Override
+            public LadderRate[] newArray(int size) {
+                return new LadderRate[size];
+            }
+        };
         private BigDecimal ladder = BigDecimal.ZERO;
         private BigDecimal rate = BigDecimal.ZERO;
 
@@ -178,18 +188,6 @@ public class VipGpRate implements Parcelable {
         public int describeContents() {
             return 0;
         }
-
-        public static final Creator<LadderRate> CREATOR = new Creator<LadderRate>() {
-            @Override
-            public LadderRate createFromParcel(Parcel in) {
-                return new LadderRate(in);
-            }
-
-            @Override
-            public LadderRate[] newArray(int size) {
-                return new LadderRate[size];
-            }
-        };
 
         public BigDecimal getLadder() {
             return ladder;

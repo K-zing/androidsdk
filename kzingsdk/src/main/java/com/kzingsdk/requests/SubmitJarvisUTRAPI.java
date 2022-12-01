@@ -61,10 +61,6 @@ public class SubmitJarvisUTRAPI extends CoreRequest {
         return this;
     }
 
-    public interface SubmitJarvisUTRCallBack extends KzingCallBack {
-        void onSuccess(String success);
-    }
-
     public String getBcid() {
         return bcid;
     }
@@ -99,5 +95,9 @@ public class SubmitJarvisUTRAPI extends CoreRequest {
     public SubmitJarvisUTRAPI setUtrcode(String utrcode) {
         this.utrcode = utrcode;
         return this;
+    }
+
+    public interface SubmitJarvisUTRCallBack extends KzingCallBack {
+        void onSuccess(String success);
     }
 }

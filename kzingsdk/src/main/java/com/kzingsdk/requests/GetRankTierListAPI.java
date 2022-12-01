@@ -3,17 +3,17 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.D11.QuestQuestion;
 import com.kzingsdk.entity.RankTier;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import io.reactivex.Observable;
 
 public class GetRankTierListAPI extends CoreRequest implements RequireCurrency {
+
+    private String currency;
 
     GetRankTierListAPI() {
         super();
@@ -23,7 +23,6 @@ public class GetRankTierListAPI extends CoreRequest implements RequireCurrency {
     protected String getAction() {
         return Action.getRankTierList;
     }
-
 
     @Override
     protected Observable<String> validateParams() {
@@ -60,20 +59,18 @@ public class GetRankTierListAPI extends CoreRequest implements RequireCurrency {
         return this;
     }
 
-    private String currency;
-
     @Override
     public String getCurrency() {
         return currency;
     }
 
-    public interface GetRankTierListCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<RankTier> rankTierList);
-    }
-
     public GetRankTierListAPI setCurrency(String currency) {
         this.currency = currency;
         return this;
+    }
+
+    public interface GetRankTierListCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<RankTier> rankTierList);
     }
 
 }

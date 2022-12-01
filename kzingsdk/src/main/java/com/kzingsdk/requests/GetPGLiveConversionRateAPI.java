@@ -17,13 +17,13 @@ public class GetPGLiveConversionRateAPI extends CoreRequest {
     private String currencyTo;
 
 
+    GetPGLiveConversionRateAPI() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.getPGLiveConversionRate;
-    }
-
-    GetPGLiveConversionRateAPI() {
-        super();
     }
 
     @Override
@@ -69,10 +69,6 @@ public class GetPGLiveConversionRateAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetPGLiveConversionRateCallBack extends KzingCallBack {
-        void onSuccess(GetPGLiveConversionRateResult result);
-    }
-
     public GetPGLiveConversionRateAPI setPpid(String ppid) {
         this.ppid = ppid;
         return this;
@@ -86,6 +82,10 @@ public class GetPGLiveConversionRateAPI extends CoreRequest {
     public GetPGLiveConversionRateAPI setCurrencyTo(String currencyTo) {
         this.currencyTo = currencyTo;
         return this;
+    }
+
+    public interface GetPGLiveConversionRateCallBack extends KzingCallBack {
+        void onSuccess(GetPGLiveConversionRateResult result);
     }
 }
 

@@ -11,6 +11,17 @@ import java.util.ArrayList;
 
 public class HistoryListItem implements Parcelable {
 
+    public static final Creator<HistoryListItem> CREATOR = new Creator<HistoryListItem>() {
+        @Override
+        public HistoryListItem createFromParcel(Parcel in) {
+            return new HistoryListItem(in);
+        }
+
+        @Override
+        public HistoryListItem[] newArray(int size) {
+            return new HistoryListItem[size];
+        }
+    };
     private String betTime = "";
     private String gpType = "";
     private String gpTypeCode = "";
@@ -34,13 +45,38 @@ public class HistoryListItem implements Parcelable {
     private String currency = "";
     private String conversion = "";
     private String conversionCurrency = "";
-
     private ArrayList<Parlay> parlayList = new ArrayList<>();
+
 
     public HistoryListItem() {
 
     }
 
+    public HistoryListItem(Parcel in) {
+        betTime = in.readString();
+        gpType = in.readString();
+        gpTypeCode = in.readString();
+        gpid = in.readString();
+        betNo = in.readString();
+        betContent = in.readString();
+        settleName = in.readString();
+        settleId = in.readString();
+        betAmt = in.readString();
+        payout = in.readString();
+        win = in.readString();
+        validAmt = in.readString();
+        gpImage = in.readString();
+        eventDateTime = in.readString();
+        comboType = in.readString();
+        resultScore = in.readString();
+        potentialPayout = in.readString();
+        tokenStatus = in.readInt();
+        oddStatus = in.readInt();
+        token = in.readString();
+        currency = in.readString();
+        conversion = in.readString();
+        conversionCurrency = in.readString();
+    }
 
     public static HistoryListItem newInstance(JSONObject rootObject) {
         HistoryListItem historyListItem = new HistoryListItem();
@@ -222,18 +258,6 @@ public class HistoryListItem implements Parcelable {
         this.parlayList = parlayList;
     }
 
-    public static final Creator<HistoryListItem> CREATOR = new Creator<HistoryListItem>() {
-        @Override
-        public HistoryListItem createFromParcel(Parcel in) {
-            return new HistoryListItem(in);
-        }
-
-        @Override
-        public HistoryListItem[] newArray(int size) {
-            return new HistoryListItem[size];
-        }
-    };
-
     public Integer getTokenStatus() {
         return tokenStatus;
     }
@@ -307,32 +331,6 @@ public class HistoryListItem implements Parcelable {
         dest.writeString(currency);
         dest.writeString(conversion);
         dest.writeString(conversionCurrency);
-    }
-
-    public HistoryListItem(Parcel in) {
-        betTime = in.readString();
-        gpType = in.readString();
-        gpTypeCode = in.readString();
-        gpid = in.readString();
-        betNo = in.readString();
-        betContent = in.readString();
-        settleName = in.readString();
-        settleId = in.readString();
-        betAmt = in.readString();
-        payout = in.readString();
-        win = in.readString();
-        validAmt = in.readString();
-        gpImage = in.readString();
-        eventDateTime = in.readString();
-        comboType = in.readString();
-        resultScore = in.readString();
-        potentialPayout = in.readString();
-        tokenStatus = in.readInt();
-        oddStatus = in.readInt();
-        token = in.readString();
-        currency = in.readString();
-        conversion = in.readString();
-        conversionCurrency = in.readString();
     }
 
     @Override

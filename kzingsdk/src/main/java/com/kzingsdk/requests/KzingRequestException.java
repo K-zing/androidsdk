@@ -30,12 +30,12 @@ public class KzingRequestException extends KzingException {
         return httpStatusCode;
     }
 
-    public Integer getKzingStatusCode() {
-        return kzingStatusCode;
-    }
-
     public void setHttpStatusCode(Integer httpStatusCode) {
         this.httpStatusCode = httpStatusCode;
+    }
+
+    public Integer getKzingStatusCode() {
+        return kzingStatusCode;
     }
 
     public void setKzingStatusCode(Integer kzingStatusCode) {

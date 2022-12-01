@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.HistoryListSummary;
-import com.kzingsdk.entity.gameplatform.GamePlatform;
 import com.kzingsdk.util.Constant;
 
 import org.json.JSONException;
@@ -92,11 +91,6 @@ public class GetBetHistoryListAPI extends CoreRequest implements RequireCurrency
         return this;
     }
 
-
-    public interface GetBetHistoryListCallBack extends KzingCallBack {
-        void onSuccess(HistoryListSummary historyListSummary);
-    }
-
     public GetBetHistoryListAPI setParamGpId(String gpId) {
         if (gpId.equals(ALL)) {
             this.gpid = "10000";
@@ -145,5 +139,9 @@ public class GetBetHistoryListAPI extends CoreRequest implements RequireCurrency
     public GetBetHistoryListAPI setGpType(String gpType) {
         this.gpType = gpType;
         return this;
+    }
+
+    public interface GetBetHistoryListCallBack extends KzingCallBack {
+        void onSuccess(HistoryListSummary historyListSummary);
     }
 }

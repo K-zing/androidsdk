@@ -2,10 +2,9 @@ package com.kzingsdk.util;
 
 import java.security.NoSuchAlgorithmException;
 
-public final class MD5Utils
-{
+public final class MD5Utils {
 
-    private MD5Utils(){
+    private MD5Utils() {
 
     }
 

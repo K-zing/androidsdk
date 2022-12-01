@@ -14,13 +14,13 @@ public class UploadDepositProofAPI extends CoreRequest {
     private String dno;
     private String depositSlip;
 
+    UploadDepositProofAPI() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.uploadDepositProof;
-    }
-
-    UploadDepositProofAPI() {
-        super();
     }
 
     @Override
@@ -39,6 +39,7 @@ public class UploadDepositProofAPI extends CoreRequest {
         }
         return super.generateParamsJson();
     }
+
     @Override
     public Observable<SimpleApiResult> requestRx(final Context context) {
         return super.baseExecute(context).map(SimpleApiResult::newInstance);
@@ -60,10 +61,6 @@ public class UploadDepositProofAPI extends CoreRequest {
         return this;
     }
 
-    public interface UploadDepositProofCallBack extends KzingCallBack {
-        void onSuccess(SimpleApiResult simpleApiResult);
-    }
-
     public UploadDepositProofAPI setDno(String dno) {
         this.dno = dno;
         return this;
@@ -72,6 +69,10 @@ public class UploadDepositProofAPI extends CoreRequest {
     public UploadDepositProofAPI setDepositSlip(String depositSlip) {
         this.depositSlip = depositSlip;
         return this;
+    }
+
+    public interface UploadDepositProofCallBack extends KzingCallBack {
+        void onSuccess(SimpleApiResult simpleApiResult);
     }
 }
 

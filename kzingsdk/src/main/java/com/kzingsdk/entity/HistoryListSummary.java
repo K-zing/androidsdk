@@ -13,6 +13,17 @@ import java.util.Iterator;
 
 public class HistoryListSummary implements Parcelable {
 
+    public static final Creator<HistoryListSummary> CREATOR = new Creator<HistoryListSummary>() {
+        @Override
+        public HistoryListSummary createFromParcel(Parcel in) {
+            return new HistoryListSummary(in);
+        }
+
+        @Override
+        public HistoryListSummary[] newArray(int size) {
+            return new HistoryListSummary[size];
+        }
+    };
     private String total = "";
     private String totalBet = "";
     private String totalWin = "";
@@ -23,6 +34,19 @@ public class HistoryListSummary implements Parcelable {
     private boolean noMoreData = false;
 
     public HistoryListSummary() {
+
+    }
+
+    public HistoryListSummary(Parcel in) {
+        total = in.readString();
+        totalBet = in.readString();
+        totalWin = in.readString();
+        totalBetAmt = in.readString();
+        totalValidBetAmt = in.readString();
+        noMoreData = in.readInt() == 1;
+        Object[] objectArray = in.readArray(HistoryListSummary.class.getClassLoader());
+        betItems = (ArrayList<HistoryListItem>) objectArray[0];
+        currencySummaryMap = (HashMap<String, HistoryListCurrencySummary>) objectArray[1];
 
     }
 
@@ -129,18 +153,6 @@ public class HistoryListSummary implements Parcelable {
         this.currencySummaryMap = currencySummaryMap;
     }
 
-    public static final Creator<HistoryListSummary> CREATOR = new Creator<HistoryListSummary>() {
-        @Override
-        public HistoryListSummary createFromParcel(Parcel in) {
-            return new HistoryListSummary(in);
-        }
-
-        @Override
-        public HistoryListSummary[] newArray(int size) {
-            return new HistoryListSummary[size];
-        }
-    };
-
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(total);
@@ -153,19 +165,6 @@ public class HistoryListSummary implements Parcelable {
                 betItems,
                 currencySummaryMap
         });
-    }
-
-    public HistoryListSummary(Parcel in) {
-        total= in.readString();
-        totalBet = in.readString();
-        totalWin = in.readString();
-        totalBetAmt = in.readString();
-        totalValidBetAmt = in.readString();
-        noMoreData = in.readInt() == 1;
-        Object[] objectArray = in.readArray(HistoryListSummary.class.getClassLoader());
-        betItems = (ArrayList<HistoryListItem>) objectArray[0];
-        currencySummaryMap = (HashMap<String, HistoryListCurrencySummary>) objectArray[1];
-
     }
 
     @Override

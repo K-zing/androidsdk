@@ -12,6 +12,8 @@ import io.reactivex.Observable;
 
 public class RedeemSpecRedPacketAPI extends CoreRequest {
 
+    private String actid;
+
     RedeemSpecRedPacketAPI() {
         super();
     }
@@ -20,8 +22,6 @@ public class RedeemSpecRedPacketAPI extends CoreRequest {
     protected String getAction() {
         return Action.redeemSpecRedPacket;
     }
-
-    private String actid;
 
     @Override
     protected Observable<String> validateParams() {
@@ -64,13 +64,13 @@ public class RedeemSpecRedPacketAPI extends CoreRequest {
         return this;
     }
 
-    public interface RedeemSpecRedPacketCallBack extends KzingCallBack {
-        void onSuccess(RedeemSpecRedPacketResult redeemSpecRedPacketResult);
-    }
-
     public RedeemSpecRedPacketAPI setActid(String actid) {
         this.actid = actid;
         return this;
+    }
+
+    public interface RedeemSpecRedPacketCallBack extends KzingCallBack {
+        void onSuccess(RedeemSpecRedPacketResult redeemSpecRedPacketResult);
     }
 
 }

@@ -20,7 +20,7 @@ public class GetPGLiveConversionRateResult {
 
         result.setStatus(rootObject.optInt("status"));
         String msg = rootObject.optString("message");
-        if (msg == null){
+        if (msg == null) {
             msg = rootObject.optString("msg");
         }
         result.setMessage(msg);

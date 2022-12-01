@@ -77,11 +77,6 @@ public class GetEpGamePlatformAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetEpGamePlatformCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<GamePlatformContainer> gamePlatformContainerList);
-    }
-
-
     public GetEpGamePlatformAPI setShowAll(Boolean showAll) {
         this.showAll = showAll;
         return this;
@@ -91,7 +86,6 @@ public class GetEpGamePlatformAPI extends CoreRequest {
         this.platformOnly = platformOnly;
         return this;
     }
-
 
     /**
      * @param gpType Pass null to get all
@@ -104,5 +98,9 @@ public class GetEpGamePlatformAPI extends CoreRequest {
     public GetEpGamePlatformAPI setShowChild(Boolean showChild) {
         this.showChild = showChild;
         return this;
+    }
+
+    public interface GetEpGamePlatformCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<GamePlatformContainer> gamePlatformContainerList);
     }
 }

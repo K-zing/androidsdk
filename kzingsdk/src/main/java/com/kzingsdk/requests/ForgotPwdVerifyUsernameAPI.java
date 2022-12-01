@@ -63,13 +63,13 @@ public class ForgotPwdVerifyUsernameAPI extends CoreRequest {
         return this;
     }
 
-    public interface ForgotPwdVerifyUsernameCallBack extends KzingCallBack {
-        void onSuccess(ForgotPwdVerifyUsernameResult forgotPwdVerifyUsernameResult);
-    }
-
     public ForgotPwdVerifyUsernameAPI setUsername(String username) {
         this.username = username;
         return this;
+    }
+
+    public interface ForgotPwdVerifyUsernameCallBack extends KzingCallBack {
+        void onSuccess(ForgotPwdVerifyUsernameResult forgotPwdVerifyUsernameResult);
     }
 
 

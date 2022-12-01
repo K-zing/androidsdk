@@ -15,17 +15,17 @@ import io.reactivex.Observable;
 
 public class GetAgentPlayerHistoryAPI extends CoreRequest {
 
-    @Override
-    protected String getAction() {
-        return Action.getAgentPlayerHistory;
-    }
+    private Calendar startDateCalendar, endDateCalendar;
+    private Integer currentIndex = 1; //  (Starting from: 1)
 
     GetAgentPlayerHistoryAPI() {
         super();
     }
 
-    private Calendar startDateCalendar, endDateCalendar;
-    private Integer currentIndex = 1; //  (Starting from: 1)
+    @Override
+    protected String getAction() {
+        return Action.getAgentPlayerHistory;
+    }
 
     @Override
     protected Observable<String> validateParams() {
@@ -76,11 +76,6 @@ public class GetAgentPlayerHistoryAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetAgentPlayerHistoryCallBack extends KzingCallBack {
-        void onSuccess(AgentHistoryResult agentHistoryResult);
-    }
-
-
     public GetAgentPlayerHistoryAPI setCurrentIndex(Integer currentIndex) {
         this.currentIndex = currentIndex;
         return this;
@@ -94,6 +89,10 @@ public class GetAgentPlayerHistoryAPI extends CoreRequest {
     public GetAgentPlayerHistoryAPI setEndDateCalendar(Calendar endDateCalendar) {
         this.endDateCalendar = endDateCalendar;
         return this;
+    }
+
+    public interface GetAgentPlayerHistoryCallBack extends KzingCallBack {
+        void onSuccess(AgentHistoryResult agentHistoryResult);
     }
 
 

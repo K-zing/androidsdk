@@ -47,6 +47,29 @@ public class GiftHistory implements Parcelable {
 
     }
 
+    public GiftHistory(Parcel in) {
+        refNo = in.readString();
+        giftId = in.readString();
+        actId = in.readString();
+        actName = in.readString();
+        calcMethod = in.readString();
+        depositValidHours = in.readString();
+        isCalcTotalDeposit = in.readInt() == 1;
+        calcTotalDepositHour = in.readInt();
+        giftName = in.readString();
+        giftPicUrl = in.readString();
+        requirementAmount = new BigDecimal(in.readString());
+        resultAmount = new BigDecimal(in.readString());
+        created = in.readLong();
+        startTime = in.readLong();
+        endTime = in.readLong();
+        redeemTime = in.readLong();
+        courierNo = in.readString();
+        playerRedeemStatus = in.readString();
+        sno = in.readString();
+        playerRedeemStatusName = in.readString();
+    }
+
     public static GiftHistory newInstance(JSONObject rootObject) {
         GiftHistory item = new GiftHistory();
         item.setRefNo(rootObject.optString("refno"));
@@ -254,29 +277,6 @@ public class GiftHistory implements Parcelable {
         dest.writeString(playerRedeemStatus);
         dest.writeString(sno);
         dest.writeString(playerRedeemStatusName);
-    }
-
-    public GiftHistory(Parcel in) {
-        refNo = in.readString();
-        giftId = in.readString();
-        actId = in.readString();
-        actName = in.readString();
-        calcMethod = in.readString();
-        depositValidHours = in.readString();
-        isCalcTotalDeposit = in.readInt() == 1;
-        calcTotalDepositHour = in.readInt();
-        giftName = in.readString();
-        giftPicUrl = in.readString();
-        requirementAmount = new BigDecimal(in.readString());
-        resultAmount = new BigDecimal(in.readString());
-        created = in.readLong();
-        startTime = in.readLong();
-        endTime = in.readLong();
-        redeemTime = in.readLong();
-        courierNo = in.readString();
-        playerRedeemStatus = in.readString();
-        sno = in.readString();
-        playerRedeemStatusName = in.readString();
     }
 
     @Override

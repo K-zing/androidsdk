@@ -13,15 +13,6 @@ import io.reactivex.Observable;
 
 public class GetSupportFaqAPI extends BaseD11API {
 
-    GetSupportFaqAPI() {
-        super();
-    }
-
-    @Override
-    protected String getD11Action() {
-        return Action.getSupportFaq;
-    }
-
     private final String[] titleArray = new String[]{
             "accountGuide",
             "depositGuide",
@@ -32,6 +23,15 @@ public class GetSupportFaqAPI extends BaseD11API {
             "techSupport",
             "withdrawalGuide"
     };
+
+    GetSupportFaqAPI() {
+        super();
+    }
+
+    @Override
+    protected String getD11Action() {
+        return Action.getSupportFaq;
+    }
 
     @Override
     public Observable<ArrayList<SupportFaqGroup>> requestRx(Context context) {

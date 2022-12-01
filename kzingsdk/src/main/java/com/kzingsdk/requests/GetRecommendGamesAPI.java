@@ -15,11 +15,11 @@ import io.reactivex.Observable;
 
 public class GetRecommendGamesAPI extends CoreRequest {
 
+    private int limit = 10;
+
     GetRecommendGamesAPI() {
         super();
     }
-
-    private int limit = 10;
 
     @Override
     protected String getAction() {
@@ -72,13 +72,13 @@ public class GetRecommendGamesAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetRecommendGamesCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<RecommendGames> recommendGames);
-    }
-
     public GetRecommendGamesAPI setLimit(int limit) {
         this.limit = limit;
         return this;
+    }
+
+    public interface GetRecommendGamesCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<RecommendGames> recommendGames);
     }
 
 }

@@ -3,7 +3,6 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.CopyWritingContent;
 import com.kzingsdk.entity.MobileFloatingWindow;
 
 import org.json.JSONArray;
@@ -15,13 +14,13 @@ import io.reactivex.Observable;
 
 public class GetMobileFloatingWindowV2API extends CoreRequest {
 
+    GetMobileFloatingWindowV2API() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.getMobileFloatingWindowV2;
-    }
-
-    GetMobileFloatingWindowV2API() {
-        super();
     }
 
     @Override

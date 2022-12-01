@@ -18,9 +18,9 @@ public class RebateDetail {
     public static RebateDetail newInstance(JSONObject rootObject) {
         RebateDetail rebateDetail = new RebateDetail();
         rebateDetail.setSid(rootObject.optString("sid"));
-        rebateDetail.setBetTotal(BigDecimalUtil.optBigDecimal(rootObject,"bettotal",BigDecimal.ZERO));
-        rebateDetail.setRakebackTotal(BigDecimalUtil.optBigDecimal(rootObject,"rakebacktotal",BigDecimal.ZERO));
-        rebateDetail.setrRate(BigDecimalUtil.optBigDecimal(rootObject,"rrate",BigDecimal.ZERO));
+        rebateDetail.setBetTotal(BigDecimalUtil.optBigDecimal(rootObject, "bettotal", BigDecimal.ZERO));
+        rebateDetail.setRakebackTotal(BigDecimalUtil.optBigDecimal(rootObject, "rakebacktotal", BigDecimal.ZERO));
+        rebateDetail.setrRate(BigDecimalUtil.optBigDecimal(rootObject, "rrate", BigDecimal.ZERO));
         rebateDetail.setRkDate(rootObject.optString("rkdate"));
         return rebateDetail;
     }

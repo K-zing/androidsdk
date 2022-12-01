@@ -8,6 +8,7 @@ import com.kzingsdk.entity.OneClickRedeemRakebackResult;
 import org.json.JSONObject;
 
 import io.reactivex.Observable;
+
 public class OneClickRedeemRakebackAPI extends CoreRequest {
 
     OneClickRedeemRakebackAPI() {

@@ -16,6 +16,9 @@ import io.reactivex.Observable;
 
 public class GetMessageListAPI extends CoreRequest {
 
+    private Integer pageCount = 10;
+    private Integer offset = 0;
+    private Calendar startDateCalendar, endDateCalendar;
     GetMessageListAPI() {
         super();
     }
@@ -24,10 +27,6 @@ public class GetMessageListAPI extends CoreRequest {
     protected String getAction() {
         return Action.getMessageList;
     }
-
-    private Integer pageCount = 10;
-    private Integer offset = 0;
-    private Calendar startDateCalendar, endDateCalendar;
 
     @Override
     protected Observable<String> validateParams() {
@@ -76,10 +75,6 @@ public class GetMessageListAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetMessageListCallBack extends KzingCallBack {
-        void onSuccess(GetMessageListResult messageList);
-    }
-
     /**
      * @param startDateCalendar Start date of records search.
      */
@@ -110,6 +105,10 @@ public class GetMessageListAPI extends CoreRequest {
     public GetMessageListAPI setParamPageCount(int pageCount) {
         this.pageCount = pageCount;
         return this;
+    }
+
+    public interface GetMessageListCallBack extends KzingCallBack {
+        void onSuccess(GetMessageListResult messageList);
     }
 
 

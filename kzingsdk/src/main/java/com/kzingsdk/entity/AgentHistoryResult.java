@@ -1,11 +1,8 @@
 package com.kzingsdk.entity;
 
-import com.kzingsdk.util.BigDecimalUtil;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 

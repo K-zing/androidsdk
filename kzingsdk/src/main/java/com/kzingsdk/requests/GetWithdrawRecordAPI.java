@@ -53,7 +53,7 @@ public class GetWithdrawRecordAPI extends CoreRequest implements RequireCurrency
             jsonData.put("offset", offset);
             jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
             jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
-            if (status!=null)
+            if (status != null)
                 jsonData.put("status", status);
 
             return jsonData;
@@ -90,10 +90,6 @@ public class GetWithdrawRecordAPI extends CoreRequest implements RequireCurrency
     public GetWithdrawRecordAPI addGetWithdrawRecordCallBack(GetWithdrawRecordCallBack getWithdrawRecordCallBack) {
         kzingCallBackList.add(getWithdrawRecordCallBack);
         return this;
-    }
-
-    public interface GetWithdrawRecordCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<WithdrawRecord> withdrawRecordList);
     }
 
     /**
@@ -141,6 +137,10 @@ public class GetWithdrawRecordAPI extends CoreRequest implements RequireCurrency
     @Override
     public String getCurrency() {
         return currency;
+    }
+
+    public interface GetWithdrawRecordCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<WithdrawRecord> withdrawRecordList);
     }
 
 }

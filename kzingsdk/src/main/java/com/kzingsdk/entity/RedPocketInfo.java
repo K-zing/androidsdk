@@ -39,6 +39,22 @@ public class RedPocketInfo implements Parcelable {
 
     }
 
+    public RedPocketInfo(Parcel in) {
+        hasRedPocketActivity = in.readInt() == 1;
+        chance = in.readInt();
+        isRedeemable = in.readInt() == 1;
+        nextEventTime = in.readString();
+        floatingPosition = in.readString();
+        displayPage = in.readString();
+        displayType = in.readString();
+        notActiveReason = in.readString();
+        image = in.readString();
+        imgOption = in.readString();
+        notActiveReasonCode = in.readInt();
+        Object[] customObjects = in.readArray(RedPocketInfo.class.getClassLoader());
+        redPocketTimeList = (ArrayList<RedPocketTime>) customObjects[0];
+    }
+
     public static RedPocketInfo newInstance(JSONObject rootObject) {
         RedPocketInfo redPocketInfo = new RedPocketInfo();
         redPocketInfo.setHasRedPocketActivity(rootObject.optBoolean("hasRedPocketActivity"));
@@ -60,7 +76,7 @@ public class RedPocketInfo implements Parcelable {
         JSONObject acDataObject = rootObject.optJSONObject("ac_data");
         if (acDataObject != null) {
             JSONObject rpActivityObject = acDataObject.optJSONObject("rp_activity");
-            if (rpActivityObject != null){
+            if (rpActivityObject != null) {
                 redPocketInfo.setImage(rpActivityObject.optString("img_url"));
                 redPocketInfo.setImgOption(rpActivityObject.optString("img_option"));
             }
@@ -165,22 +181,6 @@ public class RedPocketInfo implements Parcelable {
     public RedPocketInfo setImgOption(String imgOption) {
         this.imgOption = imgOption;
         return this;
-    }
-
-    public RedPocketInfo(Parcel in) {
-        hasRedPocketActivity = in.readInt() == 1;
-        chance = in.readInt();
-        isRedeemable = in.readInt() == 1;
-        nextEventTime = in.readString();
-        floatingPosition = in.readString();
-        displayPage = in.readString();
-        displayType = in.readString();
-        notActiveReason = in.readString();
-        image = in.readString();
-        imgOption = in.readString();
-        notActiveReasonCode = in.readInt();
-        Object[] customObjects = in.readArray(RedPocketInfo.class.getClassLoader());
-        redPocketTimeList = (ArrayList<RedPocketTime>) customObjects[0];
     }
 
     @Override

@@ -14,17 +14,16 @@ import io.reactivex.Observable;
 
 public class AddEWalletBankCardAPI extends CoreRequest {
 
-    @Override
-    protected String getAction() {
-        return Action.addEWalletBankCard;
-    }
-
     private String bid = null;
     private String cryptoType = null;
     private ArrayList<WithdrawField> withdrawFieldList = null;
-
     AddEWalletBankCardAPI() {
         super();
+    }
+
+    @Override
+    protected String getAction() {
+        return Action.addEWalletBankCard;
     }
 
     @Override
@@ -78,10 +77,6 @@ public class AddEWalletBankCardAPI extends CoreRequest {
         return this;
     }
 
-    public interface AddEWalletBankCardCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public AddEWalletBankCardAPI setBid(String bid) {
         this.bid = bid;
         return this;
@@ -95,6 +90,10 @@ public class AddEWalletBankCardAPI extends CoreRequest {
     public AddEWalletBankCardAPI setWithdrawFieldList(ArrayList<WithdrawField> withdrawFieldList) {
         this.withdrawFieldList = withdrawFieldList;
         return this;
+    }
+
+    public interface AddEWalletBankCardCallBack extends KzingCallBack {
+        void onSuccess();
     }
 
 }

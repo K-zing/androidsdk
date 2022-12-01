@@ -55,13 +55,13 @@ public class GetAllWithdrawEWalletsAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetAllWithdrawEWalletsCallBack extends KzingCallBack {
-        void onSuccess(WithdrawEWalletInfo withdrawEWalletInfo);
-    }
-
     public GetAllWithdrawEWalletsAPI setCurrency(String currency) {
         this.currency = currency;
         return this;
+    }
+
+    public interface GetAllWithdrawEWalletsCallBack extends KzingCallBack {
+        void onSuccess(WithdrawEWalletInfo withdrawEWalletInfo);
     }
 }
 

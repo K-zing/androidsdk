@@ -15,6 +15,9 @@ import io.reactivex.Observable;
 
 public class GetCopyWritingContentByCategoryAPI extends CoreRequest {
 
+    private int gameType = 0;
+    private String order = "desc";
+    private int limit = 50;
     GetCopyWritingContentByCategoryAPI() {
         super();
     }
@@ -23,11 +26,6 @@ public class GetCopyWritingContentByCategoryAPI extends CoreRequest {
     protected String getAction() {
         return Action.getCopyWritingContentByCategory;
     }
-
-    private int gameType = 0;
-    private String order = "desc";
-    private int limit = 50;
-
 
     @Override
     protected Observable<String> validateParams() {
@@ -78,10 +76,6 @@ public class GetCopyWritingContentByCategoryAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetCopyWritingContentByCategoryCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<CopyWritingContent> copyWritingContentList);
-    }
-
     public int getGameType() {
         return gameType;
     }
@@ -107,5 +101,9 @@ public class GetCopyWritingContentByCategoryAPI extends CoreRequest {
     public GetCopyWritingContentByCategoryAPI setLimit(int limit) {
         this.limit = limit;
         return this;
+    }
+
+    public interface GetCopyWritingContentByCategoryCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<CopyWritingContent> copyWritingContentList);
     }
 }

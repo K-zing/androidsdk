@@ -10,6 +10,8 @@ import io.reactivex.Observable;
 
 public class SwitchCurrencyAPI extends CoreRequest implements RequireCurrency {
 
+    private String currency;
+
     SwitchCurrencyAPI() {
         super();
     }
@@ -51,20 +53,18 @@ public class SwitchCurrencyAPI extends CoreRequest implements RequireCurrency {
         return this;
     }
 
-    private String currency;
-
     @Override
     public String getCurrency() {
         return currency;
     }
 
-    public interface SwitchCurrencyCallBack extends KzingCallBack {
-        void onSuccess(Boolean isSuccess);
-    }
-
     public SwitchCurrencyAPI setCurrency(String currency) {
         this.currency = currency;
         return this;
+    }
+
+    public interface SwitchCurrencyCallBack extends KzingCallBack {
+        void onSuccess(Boolean isSuccess);
     }
 
 }

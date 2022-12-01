@@ -10,10 +10,6 @@ import java.util.ArrayList;
 
 public class MemberInfo implements Parcelable {
 
-    public enum Gender {
-        PRIVATE, MALE, FEMALE
-    }
-
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public MemberInfo createFromParcel(Parcel in) {
             return new MemberInfo(in);
@@ -76,7 +72,6 @@ public class MemberInfo implements Parcelable {
     private String withdrawFrozenAmount = "0";
     private int verifyRemainCountSms = 0;
     private int verifyRemainCountEmail = 0;
-
     private MemberInfo() {
 
     }
@@ -419,10 +414,6 @@ public class MemberInfo implements Parcelable {
         return hasWithdrawPassword;
     }
 
-    public void setHasWithdrawPassword(boolean hasWithdrawPassword) {
-        this.hasWithdrawPassword = hasWithdrawPassword;
-    }
-
     public String getGroupId() {
         return groupId;
     }
@@ -467,16 +458,20 @@ public class MemberInfo implements Parcelable {
         return hasWithdrawPassword;
     }
 
+    public void setHasWithdrawPassword(boolean hasWithdrawPassword) {
+        this.hasWithdrawPassword = hasWithdrawPassword;
+    }
+
     public String getDisplayGroupName() {
         return displayGroupName;
     }
 
-    public void setDisplayGroupName(String displayGroupName) {
-        this.displayGroupName = displayGroupName;
-    }
-
     public boolean isDisplayGroupName() {
         return isDisplayGroupName;
+    }
+
+    public void setDisplayGroupName(String displayGroupName) {
+        this.displayGroupName = displayGroupName;
     }
 
     public void setIsDisplayGroupName(boolean displayGroupName) {
@@ -785,7 +780,6 @@ public class MemberInfo implements Parcelable {
 
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -821,5 +815,9 @@ public class MemberInfo implements Parcelable {
                 ", withdrawFrozenAmount=" + withdrawFrozenAmount +
 
                 '}';
+    }
+
+    public enum Gender {
+        PRIVATE, MALE, FEMALE
     }
 }

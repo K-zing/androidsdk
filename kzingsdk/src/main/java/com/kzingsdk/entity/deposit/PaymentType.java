@@ -21,22 +21,6 @@ public enum PaymentType {
         this.name = name;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public PaymentType origin() {
-        return PaymentType.valueOfTypeId(id);
-    }
-
     public static PaymentType valueOfTypeId(String typeId) {
         for (PaymentType type : PaymentType.values()) {
             if (type.getId().equalsIgnoreCase(typeId)) {
@@ -53,6 +37,22 @@ public enum PaymentType {
             }
         }
         return OTHER;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public PaymentType origin() {
+        return PaymentType.valueOfTypeId(id);
     }
 
     @Override

@@ -74,10 +74,6 @@ public class VerifyEmailCodeAPI extends CoreRequest {
         return this;
     }
 
-    public interface VerifyEmailCodeCallBack extends KzingCallBack {
-        void onSuccess(Boolean success);
-    }
-
     public VerifyEmailCodeAPI setParamLoginName(String loginName) {
         this.loginName = loginName;
         return this;
@@ -88,7 +84,6 @@ public class VerifyEmailCodeAPI extends CoreRequest {
         return this;
     }
 
-
     public String getValidateCode() {
         return validateCode;
     }
@@ -96,5 +91,9 @@ public class VerifyEmailCodeAPI extends CoreRequest {
     public VerifyEmailCodeAPI setParamValidateCode(String validateCode) {
         this.validateCode = validateCode;
         return this;
+    }
+
+    public interface VerifyEmailCodeCallBack extends KzingCallBack {
+        void onSuccess(Boolean success);
     }
 }

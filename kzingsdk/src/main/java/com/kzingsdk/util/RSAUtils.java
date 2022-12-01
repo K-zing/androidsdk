@@ -15,28 +15,25 @@ import javax.crypto.Cipher;
 
 public final class RSAUtils {
 
-    private RSAUtils(){
-    }
-
+    private static final int MAX_ENCRYPT_BLOCK = 117;
     private static String RSA = "RSA";
 
+    private RSAUtils() {
+    }
+
     public static byte[] encryptData(byte[] data, PublicKey publicKey) {
-        try{
+        try {
             Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
             cipher.init(Cipher.ENCRYPT_MODE, publicKey);
             return cipher.doFinal(data);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    private static final int MAX_ENCRYPT_BLOCK = 117;
-
-    public static byte[] encryptLongData(byte[] data, PublicKey publicKey)
-    {
-        try
-        {
+    public static byte[] encryptLongData(byte[] data, PublicKey publicKey) {
+        try {
             Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
             cipher.init(Cipher.ENCRYPT_MODE, publicKey);
             int inputLen = data.length;
@@ -58,8 +55,7 @@ public final class RSAUtils {
             out.close();
             return encryptedData;
 
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -81,7 +77,7 @@ public final class RSAUtils {
         while ((readLine = br.readLine()) != null) {
             if (readLine.charAt(0) == '-') {
                 continue;
-            } else{
+            } else {
                 sb.append(readLine);
                 sb.append('\r');
             }

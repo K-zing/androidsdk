@@ -11,13 +11,13 @@ import io.reactivex.Observable;
 
 public class SocialAccountBindingStatusAPI extends CoreRequest {
 
+    SocialAccountBindingStatusAPI() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.socialAccountBindingStatus;
-    }
-
-    SocialAccountBindingStatusAPI() {
-        super();
     }
 
     @Override

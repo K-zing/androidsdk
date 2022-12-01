@@ -7,6 +7,15 @@ import org.json.JSONObject;
 
 public class Crypto implements Parcelable {
 
+    public static final Creator CREATOR = new Creator() {
+        public Crypto createFromParcel(Parcel in) {
+            return new Crypto(in);
+        }
+
+        public Crypto[] newArray(int size) {
+            return new Crypto[size];
+        }
+    };
     private String txid;
     private String bcid;
     private String qrcode;
@@ -15,6 +24,15 @@ public class Crypto implements Parcelable {
     private String recommended;
 
     public Crypto() {
+    }
+
+    public Crypto(Parcel in) {
+        txid = in.readString();
+        bcid = in.readString();
+        qrcode = in.readString();
+        network = in.readString();
+        bankcode = in.readString();
+        recommended = in.readString();
     }
 
     public static Crypto newInstance(JSONObject rootObject) {
@@ -74,25 +92,6 @@ public class Crypto implements Parcelable {
 
     public void setRecommended(String recommended) {
         this.recommended = recommended;
-    }
-
-    public static final Creator CREATOR = new Creator() {
-        public Crypto createFromParcel(Parcel in) {
-            return new Crypto(in);
-        }
-
-        public Crypto[] newArray(int size) {
-            return new Crypto[size];
-        }
-    };
-
-    public Crypto(Parcel in) {
-        txid = in.readString();
-        bcid = in.readString();
-        qrcode = in.readString();
-        network = in.readString();
-        bankcode = in.readString();
-        recommended = in.readString();
     }
 
     @Override

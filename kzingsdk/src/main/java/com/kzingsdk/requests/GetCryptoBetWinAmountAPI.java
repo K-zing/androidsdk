@@ -79,10 +79,6 @@ public class GetCryptoBetWinAmountAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetCryptoBetWinAmountCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<CryptoBetWinAmount> cryptoBetWinAmountList);
-    }
-
     public GetCryptoBetWinAmountAPI setGpType(String gpType) {
         this.gpType = gpType;
         return this;
@@ -106,5 +102,9 @@ public class GetCryptoBetWinAmountAPI extends CoreRequest {
     public GetCryptoBetWinAmountAPI setSkipFake(String skipFake) {
         this.skipFake = skipFake;
         return this;
+    }
+
+    public interface GetCryptoBetWinAmountCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<CryptoBetWinAmount> cryptoBetWinAmountList);
     }
 }

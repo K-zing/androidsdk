@@ -83,15 +83,11 @@ public class CryptoGetTransactionAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetCryptoTransactionsCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<CryptoTransaction> cryptoTransactions);
-    }
-    
     public CryptoGetTransactionAPI setStartDateCalendar(Calendar startDateCalendar) {
         this.startDateCalendar = startDateCalendar;
         return this;
     }
-    
+
     public CryptoGetTransactionAPI setEndDateCalendar(Calendar endDateCalendar) {
         this.endDateCalendar = endDateCalendar;
         return this;
@@ -106,6 +102,10 @@ public class CryptoGetTransactionAPI extends CoreRequest {
         this.pageCount = pageCount;
         return this;
     }
-    
+
+    public interface GetCryptoTransactionsCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<CryptoTransaction> cryptoTransactions);
+    }
+
 }
 

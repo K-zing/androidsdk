@@ -12,15 +12,6 @@ import io.reactivex.Observable;
 
 public class AddWithdrawalCryptoAPI extends CoreRequest implements RequireCurrency {
 
-    AddWithdrawalCryptoAPI() {
-        super();
-    }
-
-    @Override
-    protected String getAction() {
-        return Action.addWithdrawalCrypto;
-    }
-
     private String wdpassword;
     private String bankcode;
     private String network;
@@ -30,6 +21,14 @@ public class AddWithdrawalCryptoAPI extends CoreRequest implements RequireCurren
     private String smsPhoneNo;
     private String smsPhoneNoCountry;
     private String smscode;
+    AddWithdrawalCryptoAPI() {
+        super();
+    }
+
+    @Override
+    protected String getAction() {
+        return Action.addWithdrawalCrypto;
+    }
 
     @Override
     protected JSONObject generateParamsJson() {
@@ -79,10 +78,6 @@ public class AddWithdrawalCryptoAPI extends CoreRequest implements RequireCurren
         return this;
     }
 
-    public interface AddWithdrawalCryptoCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public AddWithdrawalCryptoAPI setBankCode(String bankcode) {
         this.bankcode = bankcode;
         return this;
@@ -92,7 +87,6 @@ public class AddWithdrawalCryptoAPI extends CoreRequest implements RequireCurren
         this.network = network;
         return this;
     }
-
 
     public AddWithdrawalCryptoAPI setAddress(String address) {
         this.address = address;
@@ -109,14 +103,14 @@ public class AddWithdrawalCryptoAPI extends CoreRequest implements RequireCurren
         return this;
     }
 
-    public AddWithdrawalCryptoAPI setCurrency(String currency) {
-        this.currency = currency;
-        return this;
-    }
-
     @Override
     public String getCurrency() {
         return currency;
+    }
+
+    public AddWithdrawalCryptoAPI setCurrency(String currency) {
+        this.currency = currency;
+        return this;
     }
 
     public AddWithdrawalCryptoAPI setSmsPhoneNo(String smsPhoneNo) {
@@ -132,5 +126,9 @@ public class AddWithdrawalCryptoAPI extends CoreRequest implements RequireCurren
     public AddWithdrawalCryptoAPI setSmsCode(String smscode) {
         this.smscode = smscode;
         return this;
+    }
+
+    public interface AddWithdrawalCryptoCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }

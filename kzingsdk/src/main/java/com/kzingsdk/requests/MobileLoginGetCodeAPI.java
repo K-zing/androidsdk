@@ -11,12 +11,11 @@ import io.reactivex.Observable;
 
 public class MobileLoginGetCodeAPI extends CoreRequest {
 
+    private String phone;
+    private String countryCode;
     MobileLoginGetCodeAPI() {
         super();
     }
-
-    private String phone;
-    private String countryCode;
 
     @Override
     protected String getAction() {
@@ -64,10 +63,6 @@ public class MobileLoginGetCodeAPI extends CoreRequest {
         return this;
     }
 
-    public interface MobileLoginGetCodeCallBack extends KzingCallBack {
-        void onSuccess(String message);
-    }
-
     public MobileLoginGetCodeAPI setPhone(String phone) {
         this.phone = phone;
         return this;
@@ -76,6 +71,10 @@ public class MobileLoginGetCodeAPI extends CoreRequest {
     public MobileLoginGetCodeAPI setCountryCode(String countryCode) {
         this.countryCode = countryCode;
         return this;
+    }
+
+    public interface MobileLoginGetCodeCallBack extends KzingCallBack {
+        void onSuccess(String message);
     }
 
 

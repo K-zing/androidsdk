@@ -68,10 +68,6 @@ public class IsAccountEmailMatchAPI extends CoreRequest {
         return this;
     }
 
-    public interface IsAccountEmailMatchCallBack extends KzingCallBack {
-        void onSuccess(Boolean success);
-    }
-
     public IsAccountEmailMatchAPI setParamLoginName(String loginName) {
         this.loginName = loginName;
         return this;
@@ -80,6 +76,10 @@ public class IsAccountEmailMatchAPI extends CoreRequest {
     public IsAccountEmailMatchAPI setParamEmail(String email) {
         this.email = email;
         return this;
+    }
+
+    public interface IsAccountEmailMatchCallBack extends KzingCallBack {
+        void onSuccess(Boolean success);
     }
 
 }

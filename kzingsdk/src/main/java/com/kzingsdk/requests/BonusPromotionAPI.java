@@ -3,7 +3,6 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.ActivityItem;
 import com.kzingsdk.entity.BonusPromotion;
 
 import org.json.JSONArray;
@@ -16,17 +15,16 @@ import io.reactivex.Observable;
 
 public class BonusPromotionAPI extends CoreRequest {
 
-    @Override
-    protected String getAction() {
-        return Action.bonusPromotion;
-    }
-
     private String gpid = "";
     private String startDate = "";
     private String endDate = "";
-
     BonusPromotionAPI() {
         super();
+    }
+
+    @Override
+    protected String getAction() {
+        return Action.bonusPromotion;
     }
 
     @Override
@@ -76,11 +74,6 @@ public class BonusPromotionAPI extends CoreRequest {
         return this;
     }
 
-    public interface BonusPromotionCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<BonusPromotion> bonusPromotionList);
-    }
-
-
     public String getGpid() {
         return gpid;
     }
@@ -106,6 +99,10 @@ public class BonusPromotionAPI extends CoreRequest {
     public BonusPromotionAPI setEndDate(String endDate) {
         this.endDate = endDate;
         return this;
+    }
+
+    public interface BonusPromotionCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<BonusPromotion> bonusPromotionList);
     }
 }
 

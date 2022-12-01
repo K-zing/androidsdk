@@ -11,10 +11,6 @@ import io.reactivex.Observable;
 
 public class SubmitPhoneRecallFormAPI extends BaseD11API {
 
-    SubmitPhoneRecallFormAPI() {
-        super();
-    }
-
     private String phoneNo;
     private String callbackDate;
     private String callbackStart;
@@ -22,6 +18,9 @@ public class SubmitPhoneRecallFormAPI extends BaseD11API {
     private String cid;
     private String scid;
     private String description;
+    SubmitPhoneRecallFormAPI() {
+        super();
+    }
 
     @Override
     protected String getD11Action() {
@@ -73,10 +72,6 @@ public class SubmitPhoneRecallFormAPI extends BaseD11API {
         return this;
     }
 
-    public interface SubmitPhoneRecallFormCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public SubmitPhoneRecallFormAPI setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
         return this;
@@ -110,5 +105,9 @@ public class SubmitPhoneRecallFormAPI extends BaseD11API {
     public SubmitPhoneRecallFormAPI setDescription(String description) {
         this.description = description;
         return this;
+    }
+
+    public interface SubmitPhoneRecallFormCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }

@@ -10,7 +10,6 @@ import io.reactivex.Observable;
 public class RegParamAPI extends CoreRequest {
 
 
-
     RegParamAPI() {
         super();
     }
@@ -41,12 +40,12 @@ public class RegParamAPI extends CoreRequest {
         }, defaultOnErrorConsumer);
     }
 
-    public RegParamAPI addRegParamCallBack(RegParamCallBack regParamCallBack){
+    public RegParamAPI addRegParamCallBack(RegParamCallBack regParamCallBack) {
         kzingCallBackList.add(regParamCallBack);
         return this;
     }
 
-    public interface RegParamCallBack extends KzingCallBack{
+    public interface RegParamCallBack extends KzingCallBack {
         void onSuccess(RegParam regParam);
     }
 

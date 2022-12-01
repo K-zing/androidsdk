@@ -11,13 +11,13 @@ import io.reactivex.Observable;
 
 public class GetMobileFloatingWindowAPI extends CoreRequest {
 
+    GetMobileFloatingWindowAPI() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.getMobileFloatingWindow;
-    }
-
-    GetMobileFloatingWindowAPI() {
-        super();
     }
 
     @Override

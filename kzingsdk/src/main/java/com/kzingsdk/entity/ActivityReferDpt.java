@@ -38,6 +38,21 @@ public class ActivityReferDpt implements Parcelable {
     public ActivityReferDpt() {
     }
 
+    public ActivityReferDpt(Parcel in) {
+        applyMethod = in.readInt();
+        criteriaType = in.readInt();
+        refereeCriteriaType = in.readInt();
+        refereeBonusType = in.readInt();
+        bonusType = in.readInt();
+        maxJoin = in.readInt();
+        waterGateMultiplier = new BigDecimal(in.readString());
+        Object[] objectArray = in.readArray(ActivityReferDpt.class.getClassLoader());
+        gpidList = (ArrayList<String>) objectArray[0];
+        referrerDptRequirement = (ArrayList<ActivityReferDptRequirement>) objectArray[1];
+        refereeDptRequirement = (ArrayList<ActivityReferDptRequirement>) objectArray[2];
+
+    }
+
     public static ActivityReferDpt newInstance(JSONObject rootObject) {
         ActivityReferDpt item = new ActivityReferDpt();
         item.applyMethod = rootObject.optInt("apply_method");
@@ -72,20 +87,8 @@ public class ActivityReferDpt implements Parcelable {
         return item;
     }
 
-
-    public ActivityReferDpt(Parcel in) {
-        applyMethod = in.readInt();
-        criteriaType = in.readInt();
-        refereeCriteriaType = in.readInt();
-        refereeBonusType = in.readInt();
-        bonusType = in.readInt();
-        maxJoin = in.readInt();
-        waterGateMultiplier = new BigDecimal(in.readString());
-        Object[] objectArray = in.readArray(ActivityReferDpt.class.getClassLoader());
-        gpidList = (ArrayList<String>) objectArray[0];
-        referrerDptRequirement = (ArrayList<ActivityReferDptRequirement>) objectArray[1];
-        refereeDptRequirement = (ArrayList<ActivityReferDptRequirement>) objectArray[2];
-
+    public static Creator getCREATOR() {
+        return CREATOR;
     }
 
     @Override
@@ -107,10 +110,6 @@ public class ActivityReferDpt implements Parcelable {
                 referrerDptRequirement,
                 refereeDptRequirement,
         });
-    }
-
-    public static Creator getCREATOR() {
-        return CREATOR;
     }
 
     public Integer getApplyMethod() {

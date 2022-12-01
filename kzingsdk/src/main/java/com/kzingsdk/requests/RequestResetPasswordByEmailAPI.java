@@ -69,10 +69,6 @@ public class RequestResetPasswordByEmailAPI extends CoreRequest {
         return this;
     }
 
-    public interface RequestResetPasswordByEmailCallBack extends KzingCallBack {
-        void onSuccess(SendEmailResult sendEmailResult);
-    }
-
     public RequestResetPasswordByEmailAPI setParamLoginName(String loginName) {
         this.loginName = loginName;
         return this;
@@ -81,6 +77,10 @@ public class RequestResetPasswordByEmailAPI extends CoreRequest {
     public RequestResetPasswordByEmailAPI setParamEmail(String email) {
         this.email = email;
         return this;
+    }
+
+    public interface RequestResetPasswordByEmailCallBack extends KzingCallBack {
+        void onSuccess(SendEmailResult sendEmailResult);
     }
 
 }

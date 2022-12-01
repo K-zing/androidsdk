@@ -36,6 +36,18 @@ public class ActivitySignIn7Days implements Parcelable {
     public ActivitySignIn7Days() {
     }
 
+    public ActivitySignIn7Days(Parcel in) {
+        isUniqueBankCard = in.readInt() == 1;
+        isUniqueRealName = in.readInt() == 1;
+        isUniqueRegIp = in.readInt() == 1;
+        isUniqueUuid = in.readInt() == 1;
+        applyMethod = in.readInt();
+        maxJoin = in.readInt();
+        Object[] objectArray = in.readArray(ActivitySignIn7Days.class.getClassLoader());
+        gpidSet = (HashSet<String>) objectArray[0];
+        signIn7DaysRequirementList = (ArrayList<ActivitySignIn7DaysRequirement>) objectArray[1];
+    }
+
     public static ActivitySignIn7Days newInstance(JSONObject rootObject) {
         ActivitySignIn7Days item = new ActivitySignIn7Days();
         item.setUniqueBankCard(rootObject.optBoolean("is_unique_bankcard"));
@@ -57,19 +69,6 @@ public class ActivitySignIn7Days implements Parcelable {
             }
         }
         return item;
-    }
-
-
-    public ActivitySignIn7Days(Parcel in) {
-        isUniqueBankCard = in.readInt() == 1;
-        isUniqueRealName = in.readInt() == 1;
-        isUniqueRegIp = in.readInt() == 1;
-        isUniqueUuid = in.readInt() == 1;
-        applyMethod = in.readInt();
-        maxJoin = in.readInt();
-        Object[] objectArray = in.readArray(ActivitySignIn7Days.class.getClassLoader());
-        gpidSet = (HashSet<String>) objectArray[0];
-        signIn7DaysRequirementList = (ArrayList<ActivitySignIn7DaysRequirement>) objectArray[1];
     }
 
     @Override

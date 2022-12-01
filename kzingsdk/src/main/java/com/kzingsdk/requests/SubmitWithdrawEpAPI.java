@@ -3,8 +3,6 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.PlayerBankCard;
-import com.kzingsdk.entity.WithdrawInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -103,10 +101,6 @@ public class SubmitWithdrawEpAPI extends CoreRequest {
     public SubmitWithdrawEpAPI addSubmitWithdrawEpCallBack(SubmitWithdrawEpCallBack submitWithdrawEpCallBack) {
         kzingCallBackList.add(submitWithdrawEpCallBack);
         return this;
-    }
-
-    public interface SubmitWithdrawEpCallBack extends KzingCallBack {
-        void onSuccess(String dno);
     }
 
     public SubmitWithdrawEpAPI setAmount(String amount) {
@@ -222,6 +216,10 @@ public class SubmitWithdrawEpAPI extends CoreRequest {
     public SubmitWithdrawEpAPI setQpaypg(String qpaypg) {
         this.qpaypg = qpaypg;
         return this;
+    }
+
+    public interface SubmitWithdrawEpCallBack extends KzingCallBack {
+        void onSuccess(String dno);
     }
 }
 

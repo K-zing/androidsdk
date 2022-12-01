@@ -11,12 +11,11 @@ import io.reactivex.Observable;
 
 public class LikeGameAPI extends BaseD11API {
 
+    private Boolean isThumb;
+    private String gpid;
     LikeGameAPI() {
         super();
     }
-
-    private Boolean isThumb;
-    private String gpid;
 
     @Override
     protected String getD11Action() {
@@ -69,10 +68,6 @@ public class LikeGameAPI extends BaseD11API {
         return this;
     }
 
-    public interface LikeGameCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public LikeGameAPI setIsThumb(boolean isThumb) {
         this.isThumb = isThumb;
         return this;
@@ -81,6 +76,10 @@ public class LikeGameAPI extends BaseD11API {
     public LikeGameAPI setGpid(String gpid) {
         this.gpid = gpid;
         return this;
+    }
+
+    public interface LikeGameCallBack extends KzingCallBack {
+        void onSuccess();
     }
 
 }

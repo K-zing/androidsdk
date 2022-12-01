@@ -68,14 +68,14 @@ public class SubmitPrepaidCardDepositAPI extends CoreRequest {
         return this;
     }
 
-    public interface SubmitPrepaidCardDepositCallBack extends KzingCallBack {
-        void onSuccess(SubmitPrepaidCardDepositResult submitPrepaidCardDepositResult);
-    }
-
-
     public SubmitPrepaidCardDepositAPI setParamSerialId(String serialid) {
         this.serialid = serialid;
         return this;
+    }
+
+
+    public interface SubmitPrepaidCardDepositCallBack extends KzingCallBack {
+        void onSuccess(SubmitPrepaidCardDepositResult submitPrepaidCardDepositResult);
     }
 
     public static class SubmitPrepaidCardDepositResult {

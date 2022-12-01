@@ -11,11 +11,11 @@ import io.reactivex.Observable;
 
 public class AddMyFavGameAPI extends BaseD11API {
 
+    private String gpid;
+
     AddMyFavGameAPI() {
         super();
     }
-
-    private String gpid;
 
     @Override
     protected String getD11Action() {
@@ -64,13 +64,13 @@ public class AddMyFavGameAPI extends BaseD11API {
         return this;
     }
 
-    public interface AddMyFavGameCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public AddMyFavGameAPI setGpid(String gpid) {
         this.gpid = gpid;
         return this;
+    }
+
+    public interface AddMyFavGameCallBack extends KzingCallBack {
+        void onSuccess();
     }
 
 }

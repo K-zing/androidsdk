@@ -20,13 +20,13 @@ public class GetRebateSummaryAPI extends CoreRequest {
     private Calendar endDateCalendar;
     private String currency;
 
+    GetRebateSummaryAPI() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.getRebateSummary;
-    }
-
-    GetRebateSummaryAPI() {
-        super();
     }
 
     @Override
@@ -69,10 +69,6 @@ public class GetRebateSummaryAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetRebateSummaryCallBack extends KzingCallBack {
-        void onSuccess(RebateSummary rebateSummary);
-    }
-
     public String getType() {
         return type;
     }
@@ -99,6 +95,10 @@ public class GetRebateSummaryAPI extends CoreRequest {
     public GetRebateSummaryAPI setCurrency(String currency) {
         this.currency = currency;
         return this;
+    }
+
+    public interface GetRebateSummaryCallBack extends KzingCallBack {
+        void onSuccess(RebateSummary rebateSummary);
     }
 
 

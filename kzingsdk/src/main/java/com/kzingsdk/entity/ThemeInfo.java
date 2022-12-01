@@ -8,6 +8,17 @@ import org.json.JSONObject;
 
 public class ThemeInfo implements Parcelable {
 
+    public static final Creator<ThemeInfo> CREATOR = new Creator<ThemeInfo>() {
+        @Override
+        public ThemeInfo createFromParcel(Parcel in) {
+            return new ThemeInfo(in);
+        }
+
+        @Override
+        public ThemeInfo[] newArray(int size) {
+            return new ThemeInfo[size];
+        }
+    };
     @Deprecated
     private String colorId = "";
     @Deprecated
@@ -18,10 +29,19 @@ public class ThemeInfo implements Parcelable {
     private int layout;
     private boolean swapable;
 
+
     public ThemeInfo() {
 
     }
 
+    public ThemeInfo(Parcel in) {
+        colorId = in.readString();
+        rgbWhite = in.readString();
+        rgbBlack = in.readString();
+        theme = in.readString();
+        layout = in.readInt();
+        swapable = in.readInt() == 1;
+    }
 
     public static ThemeInfo newInstance(JSONObject rootObject) {
         ThemeInfo themeInfo = new ThemeInfo();
@@ -61,18 +81,6 @@ public class ThemeInfo implements Parcelable {
         this.rgbBlack = rgbBlack;
     }
 
-    public static final Creator<ThemeInfo> CREATOR = new Creator<ThemeInfo>() {
-        @Override
-        public ThemeInfo createFromParcel(Parcel in) {
-            return new ThemeInfo(in);
-        }
-
-        @Override
-        public ThemeInfo[] newArray(int size) {
-            return new ThemeInfo[size];
-        }
-    };
-
     public String getTheme() {
         return theme;
     }
@@ -108,15 +116,6 @@ public class ThemeInfo implements Parcelable {
         dest.writeString(theme);
         dest.writeInt(layout);
         dest.writeInt(swapable ? 1 : 0);
-    }
-
-    public ThemeInfo(Parcel in) {
-        colorId = in.readString();
-        rgbWhite = in.readString();
-        rgbBlack = in.readString();
-        theme = in.readString();
-        layout = in.readInt();
-        swapable = in.readInt() == 1;
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.kzingsdk.entity.deposit;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.kzingsdk.entity.MemberInfo;
 import com.kzingsdk.util.BigDecimalUtil;
 
 import org.json.JSONObject;
@@ -14,6 +13,15 @@ import java.util.ArrayList;
 public class AtmPayment extends BasePaymentMethod implements Parcelable {
 
 
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public AtmPayment createFromParcel(Parcel in) {
+            return new AtmPayment(in);
+        }
+
+        public AtmPayment[] newArray(int size) {
+            return new AtmPayment[size];
+        }
+    };
     private String name;
     private String address;
     private String accountNumber;
@@ -31,6 +39,36 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
     private ArrayList<BigDecimal> quickAmountList = new ArrayList<>();
 
     public AtmPayment() {
+    }
+
+
+    public AtmPayment(Parcel in) {
+        id = in.readString();
+        paymentName = in.readString();
+        image = in.readString();
+        displayOrder = in.readInt();
+        minAmount = in.readDouble();
+        maxAmount = in.readDouble();
+        name = in.readString();
+        desc = in.readString();
+        bankCode = in.readString();
+        address = in.readString();
+        accountNumber = in.readString();
+        qrcode = in.readString();
+        showField = in.readInt();
+        random = in.readInt();
+        isQrcode = in.readInt() == 1;
+        isAllowDecimal = in.readInt() == 1;
+        promoRate = new BigDecimal(in.readString());
+        sDealsRate = new BigDecimal(in.readString());
+        bcMin = in.readString();
+        bcMax = in.readString();
+        network = in.readString();
+        formType = in.readString();
+        atmFeremark = in.readString();
+        quickAmountFlag = in.readInt() == 1;
+        Object[] objectArray = in.readArray(AtmPayment.class.getClassLoader());
+        quickAmountList = (ArrayList<BigDecimal>) objectArray[0];
     }
 
     public static AtmPayment newInstance(JSONObject rootObject) {
@@ -65,7 +103,6 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         }
         return item;
     }
-
 
     public String getName() {
         return name;
@@ -111,12 +148,12 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
         return qrcode;
     }
 
-    public void setQrcode(String qrcode) {
-        this.qrcode = qrcode;
-    }
-
     public boolean isQrcode() {
         return isQrcode;
+    }
+
+    public void setQrcode(String qrcode) {
+        this.qrcode = qrcode;
     }
 
     public void setIsQrcode(boolean qrcode) {
@@ -193,45 +230,6 @@ public class AtmPayment extends BasePaymentMethod implements Parcelable {
 
     public void setQuickAmountList(ArrayList<BigDecimal> quickAmountList) {
         this.quickAmountList = quickAmountList;
-    }
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public AtmPayment createFromParcel(Parcel in) {
-            return new AtmPayment(in);
-        }
-
-        public AtmPayment[] newArray(int size) {
-            return new AtmPayment[size];
-        }
-    };
-
-    public AtmPayment(Parcel in) {
-        id = in.readString();
-        paymentName = in.readString();
-        image = in.readString();
-        displayOrder = in.readInt();
-        minAmount = in.readDouble();
-        maxAmount = in.readDouble();
-        name = in.readString();
-        desc = in.readString();
-        bankCode = in.readString();
-        address = in.readString();
-        accountNumber = in.readString();
-        qrcode = in.readString();
-        showField = in.readInt();
-        random = in.readInt();
-        isQrcode = in.readInt() == 1;
-        isAllowDecimal = in.readInt() == 1;
-        promoRate = new BigDecimal(in.readString());
-        sDealsRate = new BigDecimal(in.readString());
-        bcMin = in.readString();
-        bcMax = in.readString();
-        network = in.readString();
-        formType = in.readString();
-        atmFeremark = in.readString();
-        quickAmountFlag = in.readInt() == 1;
-        Object[] objectArray = in.readArray(AtmPayment.class.getClassLoader());
-        quickAmountList = (ArrayList<BigDecimal>) objectArray[0];
     }
 
     @Override

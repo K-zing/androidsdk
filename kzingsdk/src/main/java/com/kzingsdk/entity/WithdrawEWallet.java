@@ -7,15 +7,6 @@ import org.json.JSONObject;
 
 public class WithdrawEWallet implements Parcelable {
 
-    public static Creator getCREATOR() {
-        return CREATOR;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
     public static final Creator CREATOR = new Creator() {
         public WithdrawEWallet createFromParcel(Parcel in) {
             return new WithdrawEWallet(in);
@@ -37,8 +28,26 @@ public class WithdrawEWallet implements Parcelable {
     private String tag;
     private Double minAmount;
     private Double maxAmount;
-
     public WithdrawEWallet() {
+    }
+    public WithdrawEWallet(Parcel in) {
+
+        bankEn = in.readString();
+        wType = in.readString();
+        id = in.readString();
+        bankName = in.readString();
+        bankCode = in.readString();
+        bankCss = in.readString();
+        ppid = in.readString();
+        minDuration = in.readInt();
+        maxDuration = in.readInt();
+        tag = in.readString();
+        minAmount = in.readDouble();
+        maxAmount = in.readDouble();
+    }
+
+    public static Creator getCREATOR() {
+        return CREATOR;
     }
 
     public static WithdrawEWallet newInstance(JSONObject rootObject) {
@@ -57,6 +66,11 @@ public class WithdrawEWallet implements Parcelable {
         withdrawEWallet.setTag(rootObject.optString("tag"));
 
         return withdrawEWallet;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public String getBankEn() {
@@ -153,22 +167,6 @@ public class WithdrawEWallet implements Parcelable {
 
     public void setMaxAmount(Double maxAmount) {
         this.maxAmount = maxAmount;
-    }
-
-    public WithdrawEWallet(Parcel in) {
-
-        bankEn = in.readString();
-        wType = in.readString();
-        id = in.readString();
-        bankName = in.readString();
-        bankCode = in.readString();
-        bankCss = in.readString();
-        ppid = in.readString();
-        minDuration = in.readInt();
-        maxDuration = in.readInt();
-        tag = in.readString();
-        minAmount = in.readDouble();
-        maxAmount = in.readDouble();
     }
 
     @Override

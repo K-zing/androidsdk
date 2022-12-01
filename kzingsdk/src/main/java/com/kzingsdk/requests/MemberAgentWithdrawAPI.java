@@ -11,11 +11,11 @@ import io.reactivex.Observable;
 
 public class MemberAgentWithdrawAPI extends CoreRequest {
 
+    private Double amount = 0d;
+
     MemberAgentWithdrawAPI() {
         super();
     }
-
-    private Double amount = 0d;
 
     @Override
     protected String getAction() {
@@ -62,13 +62,13 @@ public class MemberAgentWithdrawAPI extends CoreRequest {
         return this;
     }
 
-    public interface MemberAgentWithdrawCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public MemberAgentWithdrawAPI setAmount(Double amount) {
         this.amount = amount;
         return this;
+    }
+
+    public interface MemberAgentWithdrawCallBack extends KzingCallBack {
+        void onSuccess();
     }
 
 }

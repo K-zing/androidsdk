@@ -65,10 +65,6 @@ public class FinishDepositAPI extends CoreRequest {
         return this;
     }
 
-    public interface FinishDepositCallBack extends KzingCallBack {
-        void onSuccess(Boolean success);
-    }
-
     public String getStatus() {
         return status;
     }
@@ -76,5 +72,9 @@ public class FinishDepositAPI extends CoreRequest {
     public FinishDepositAPI setParamStatus(String status) {
         this.status = status;
         return this;
+    }
+
+    public interface FinishDepositCallBack extends KzingCallBack {
+        void onSuccess(Boolean success);
     }
 }

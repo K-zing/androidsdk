@@ -11,6 +11,8 @@ import io.reactivex.Observable;
 
 public class HasWaterGateAPI extends CoreRequest {
 
+    private String gpAccountId;
+
     HasWaterGateAPI() {
         super();
     }
@@ -19,8 +21,6 @@ public class HasWaterGateAPI extends CoreRequest {
     protected String getAction() {
         return Action.hasWaterGate;
     }
-
-    private String gpAccountId;
 
     @Override
     protected Observable<String> validateParams() {
@@ -63,13 +63,13 @@ public class HasWaterGateAPI extends CoreRequest {
         return this;
     }
 
-    public interface HasWaterGateCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public HasWaterGateAPI setGpAccountId(String gpaccountid) {
         this.gpAccountId = gpaccountid;
         return this;
+    }
+
+    public interface HasWaterGateCallBack extends KzingCallBack {
+        void onSuccess();
     }
 
 }

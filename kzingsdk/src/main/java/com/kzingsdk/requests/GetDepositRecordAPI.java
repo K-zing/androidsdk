@@ -16,6 +16,11 @@ import io.reactivex.Observable;
 
 public class GetDepositRecordAPI extends CoreRequest implements RequireCurrency {
 
+    private Integer pageCount = 10;
+    private Integer offset = 0;
+    private Calendar startDateCalendar, endDateCalendar;
+    private String currency;
+    private String status;
     GetDepositRecordAPI() {
         super();
     }
@@ -53,12 +58,6 @@ public class GetDepositRecordAPI extends CoreRequest implements RequireCurrency 
         return Action.getDHistoryList;
     }
 
-    private Integer pageCount = 10;
-    private Integer offset = 0;
-    private Calendar startDateCalendar, endDateCalendar;
-    private String currency;
-    private String status;
-
     @Override
     public Observable<GetDepositRecordResult> requestRx(Context context) {
         return super.baseExecute(context)
@@ -80,11 +79,6 @@ public class GetDepositRecordAPI extends CoreRequest implements RequireCurrency 
         kzingCallBackList.add(GetDepositRecordCallBack);
         return this;
     }
-
-    public interface GetDepositRecordCallBack extends KzingCallBack {
-        void onSuccess(GetDepositRecordResult getDepositRecordResult);
-    }
-
 
     /**
      * @param startDateCalendar Start date of records search.
@@ -131,6 +125,10 @@ public class GetDepositRecordAPI extends CoreRequest implements RequireCurrency 
     @Override
     public String getCurrency() {
         return currency;
+    }
+
+    public interface GetDepositRecordCallBack extends KzingCallBack {
+        void onSuccess(GetDepositRecordResult getDepositRecordResult);
     }
 
 }

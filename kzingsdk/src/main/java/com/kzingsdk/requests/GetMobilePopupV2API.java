@@ -3,7 +3,6 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.MobilePopup;
 import com.kzingsdk.entity.MobilePopupV2;
 
 import org.json.JSONArray;
@@ -36,7 +35,7 @@ public class GetMobilePopupV2API extends CoreRequest {
 
     @Override
     public Observable<ArrayList<MobilePopupV2>> requestRx(Context context) {
-        return super.baseExecute(context).map(jsonResponse->{
+        return super.baseExecute(context).map(jsonResponse -> {
             ArrayList<MobilePopupV2> mobilePopupV2List = new ArrayList<>();
             JSONArray dataArray = jsonResponse.optJSONArray("data");
             if (dataArray != null) {

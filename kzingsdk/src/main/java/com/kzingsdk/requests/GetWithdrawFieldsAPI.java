@@ -67,13 +67,13 @@ public class GetWithdrawFieldsAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetWithdrawFieldsCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<WithdrawField> withdrawFieldList);
-    }
-
     public GetWithdrawFieldsAPI setPpid(String ppid) {
         this.ppid = ppid;
         return this;
+    }
+
+    public interface GetWithdrawFieldsCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<WithdrawField> withdrawFieldList);
     }
 }
 

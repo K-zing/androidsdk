@@ -61,6 +61,10 @@ public class Message implements Parcelable {
         return content;
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public String getId() {
         return id;
     }
@@ -68,11 +72,6 @@ public class Message implements Parcelable {
     public void setId(String id) {
         this.id = id;
     }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
 
     public String getCreated() {
         return created;

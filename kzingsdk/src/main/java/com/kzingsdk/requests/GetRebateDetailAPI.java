@@ -17,20 +17,19 @@ import io.reactivex.Observable;
 
 public class GetRebateDetailAPI extends CoreRequest {
 
-    @Override
-    protected String getAction() {
-        return Action.getRebateDetail;
-    }
-
     private String gpid;
     private Calendar startDateCalendar;
     private Calendar endDateCalendar;
     private String currency;
     private Integer offset = 0;
     private Integer pageCount = 20;
-
     GetRebateDetailAPI() {
         super();
+    }
+
+    @Override
+    protected String getAction() {
+        return Action.getRebateDetail;
     }
 
     @Override
@@ -85,10 +84,6 @@ public class GetRebateDetailAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetRebateDetailCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<RebateDetail> rebateDetailList);
-    }
-
     public String getGpid() {
         return gpid;
     }
@@ -133,6 +128,10 @@ public class GetRebateDetailAPI extends CoreRequest {
     public GetRebateDetailAPI setPageCount(Integer pageCount) {
         this.pageCount = pageCount;
         return this;
+    }
+
+    public interface GetRebateDetailCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<RebateDetail> rebateDetailList);
     }
 }
 

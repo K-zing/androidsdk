@@ -7,6 +7,10 @@ import java.text.SimpleDateFormat;
 
 public final class Constant {
 
+    public static final SimpleDateFormat FULL_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    public static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm:ss");
+
     private Constant() {
 
     }
@@ -33,10 +37,6 @@ public final class Constant {
         public static final String DOMAIN = PREF_FILE_NAME + "." + "DOMAIN";
 
     }
-
-    public static final SimpleDateFormat FULL_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-    public static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm:ss");
 
 
 }

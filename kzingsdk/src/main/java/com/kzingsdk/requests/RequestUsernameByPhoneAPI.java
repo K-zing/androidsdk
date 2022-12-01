@@ -73,10 +73,6 @@ public class RequestUsernameByPhoneAPI extends CoreRequest {
         return this;
     }
 
-    public interface RequestUsernameByPhoneCallBack extends KzingCallBack {
-        void onSuccess(RequestUsernameResult requestUsernameResult);
-    }
-
     public RequestUsernameByPhoneAPI setPhone(String phone) {
         this.phone = phone;
         return this;
@@ -98,5 +94,9 @@ public class RequestUsernameByPhoneAPI extends CoreRequest {
 
     public void setRequestVoice(boolean requestVoice) {
         this.requestVoice = requestVoice;
+    }
+
+    public interface RequestUsernameByPhoneCallBack extends KzingCallBack {
+        void onSuccess(RequestUsernameResult requestUsernameResult);
     }
 }

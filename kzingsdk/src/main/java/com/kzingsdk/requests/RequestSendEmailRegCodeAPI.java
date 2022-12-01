@@ -63,10 +63,6 @@ public class RequestSendEmailRegCodeAPI extends CoreRequest {
         return this;
     }
 
-    public interface RequestSendEmailRegCodeCallBack extends KzingCallBack {
-        void onSuccess(Integer duration);
-    }
-
     public RequestSendEmailRegCodeAPI setEmail(String email) {
         this.email = email;
         return this;
@@ -75,6 +71,10 @@ public class RequestSendEmailRegCodeAPI extends CoreRequest {
     public RequestSendEmailRegCodeAPI setPlayerName(String playerName) {
         this.playerName = playerName;
         return this;
+    }
+
+    public interface RequestSendEmailRegCodeCallBack extends KzingCallBack {
+        void onSuccess(Integer duration);
     }
 
 }

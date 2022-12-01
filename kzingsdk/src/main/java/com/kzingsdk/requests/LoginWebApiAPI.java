@@ -14,10 +14,6 @@ import io.reactivex.Observable;
 
 public class LoginWebApiAPI extends CoreRequest {
 
-    LoginWebApiAPI() {
-        super();
-    }
-
     private String loginName;
     private String password;
     private String captchaValidate = "";
@@ -25,6 +21,9 @@ public class LoginWebApiAPI extends CoreRequest {
     private String uuid = "";
     private String provider = "";
     private String providerId = "";
+    LoginWebApiAPI() {
+        super();
+    }
 
     @Override
     protected String getAction() {
@@ -97,10 +96,6 @@ public class LoginWebApiAPI extends CoreRequest {
         return this;
     }
 
-    public interface LoginCallBack extends KzingCallBack {
-        void onSuccess(MemberInfo memberInfo);
-    }
-
     public LoginWebApiAPI setParamLoginName(String loginName) {
         this.loginName = loginName;
         return this;
@@ -134,5 +129,9 @@ public class LoginWebApiAPI extends CoreRequest {
     public LoginWebApiAPI setProviderId(String providerId) {
         this.providerId = providerId;
         return this;
+    }
+
+    public interface LoginCallBack extends KzingCallBack {
+        void onSuccess(MemberInfo memberInfo);
     }
 }

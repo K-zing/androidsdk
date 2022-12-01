@@ -21,15 +21,14 @@ public class GetMemberAgentSalesHistoryAPI extends CoreRequest {
     private Integer currentIndex = 1; //  (Starting from: 1)
     private Calendar startDateCalendar, endDateCalendar;
 
-    @Override
-    protected String getAction() {
-        return Action.getMemberAgentSalesHistory;
-    }
-
     GetMemberAgentSalesHistoryAPI() {
         super();
     }
 
+    @Override
+    protected String getAction() {
+        return Action.getMemberAgentSalesHistory;
+    }
 
     @Override
     protected Observable<String> validateParams() {
@@ -92,10 +91,6 @@ public class GetMemberAgentSalesHistoryAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetMemberAgentSalesHistoryCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<AgentCommissionSummary> agentCommissionSummaryList);
-    }
-
     public GetMemberAgentSalesHistoryAPI setCurrentIndex(Integer currentIndex) {
         this.currentIndex = currentIndex;
         return this;
@@ -114,6 +109,10 @@ public class GetMemberAgentSalesHistoryAPI extends CoreRequest {
     public GetMemberAgentSalesHistoryAPI setEndDateCalendar(Calendar endDateCalendar) {
         this.endDateCalendar = endDateCalendar;
         return this;
+    }
+
+    public interface GetMemberAgentSalesHistoryCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<AgentCommissionSummary> agentCommissionSummaryList);
     }
 
 }

@@ -7,19 +7,6 @@ import java.util.ArrayList;
 
 public class DepositFormField {
 
-    public enum DepositFormFieldType {
-        SELECT, RADIO, TEXT, PASSWORD;
-
-        public static DepositFormFieldType valueOfName(String name) {
-            for (DepositFormFieldType type : DepositFormFieldType.values()) {
-                if (type.name().equalsIgnoreCase(name)) {
-                    return type;
-                }
-            }
-            return SELECT;
-        }
-    }
-
     private DepositFormFieldType depositFormFieldType;
     private int rowId;
     private int order;
@@ -121,6 +108,19 @@ public class DepositFormField {
 
     public void setOptionList(ArrayList<DepositFormFieldOption> optionList) {
         this.optionList = optionList;
+    }
+
+    public enum DepositFormFieldType {
+        SELECT, RADIO, TEXT, PASSWORD;
+
+        public static DepositFormFieldType valueOfName(String name) {
+            for (DepositFormFieldType type : DepositFormFieldType.values()) {
+                if (type.name().equalsIgnoreCase(name)) {
+                    return type;
+                }
+            }
+            return SELECT;
+        }
     }
 
     public static class DepositFormFieldRule {

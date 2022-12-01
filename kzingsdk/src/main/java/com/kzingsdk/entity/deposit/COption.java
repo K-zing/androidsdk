@@ -6,13 +6,27 @@ import android.os.Parcelable;
 import org.json.JSONObject;
 
 public class COption implements Parcelable {
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public COption createFromParcel(Parcel in) {
+            return new COption(in);
+        }
+
+        public COption[] newArray(int size) {
+            return new COption[size];
+        }
+    };
     private String display;
     private String logo;
     private String value;
 
-
     public COption() {
 
+    }
+
+    public COption(Parcel in) {
+        display = in.readString();
+        logo = in.readString();
+        value = in.readString();
     }
 
     public static COption newInstance(JSONObject rootObject) {
@@ -45,23 +59,6 @@ public class COption implements Parcelable {
 
     public void setValue(String value) {
         this.value = value;
-    }
-
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public COption createFromParcel(Parcel in) {
-            return new COption(in);
-        }
-
-        public COption[] newArray(int size) {
-            return new COption[size];
-        }
-    };
-
-    public COption(Parcel in) {
-        display = in.readString();
-        logo = in.readString();
-        value = in.readString();
     }
 
     @Override

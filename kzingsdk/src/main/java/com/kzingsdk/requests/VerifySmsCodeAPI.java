@@ -76,10 +76,6 @@ public class VerifySmsCodeAPI extends CoreRequest {
         return this;
     }
 
-    public interface VerifySmsCodeCallBack extends KzingCallBack {
-        void onSuccess(Boolean success);
-    }
-
     public VerifySmsCodeAPI setParamLoginName(String loginName) {
         this.loginName = loginName;
         return this;
@@ -89,7 +85,6 @@ public class VerifySmsCodeAPI extends CoreRequest {
         this.phone = phone;
         return this;
     }
-
 
     public String getValidateCode() {
         return validateCode;
@@ -103,5 +98,9 @@ public class VerifySmsCodeAPI extends CoreRequest {
     public VerifySmsCodeAPI setType(String type) {
         this.type = type;
         return this;
+    }
+
+    public interface VerifySmsCodeCallBack extends KzingCallBack {
+        void onSuccess(Boolean success);
     }
 }

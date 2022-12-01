@@ -57,12 +57,12 @@ public class GetVipDetailAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetVipDetailCallBack extends KzingCallBack {
-        void onSuccess(VipDetail vipDetail);
-    }
-
     public GetVipDetailAPI setCurrency(String currency) {
         this.currency = currency;
         return this;
+    }
+
+    public interface GetVipDetailCallBack extends KzingCallBack {
+        void onSuccess(VipDetail vipDetail);
     }
 }

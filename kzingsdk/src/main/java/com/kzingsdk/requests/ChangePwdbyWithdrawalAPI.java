@@ -53,7 +53,7 @@ public class ChangePwdbyWithdrawalAPI extends CoreRequest {
 
     @Override
     public Observable<Boolean> requestRx(final Context context) {
-        return super.baseExecute(context).map((result)-> true);
+        return super.baseExecute(context).map((result) -> true);
     }
 
     @Override
@@ -72,10 +72,6 @@ public class ChangePwdbyWithdrawalAPI extends CoreRequest {
         return this;
     }
 
-    public interface ChangePwdbyWithdrawalCallBack extends KzingCallBack {
-        void onSuccess(Boolean success);
-    }
-
     public ChangePwdbyWithdrawalAPI setWdpassword(String wdpassword) {
         this.wdpassword = wdpassword;
         return this;
@@ -91,6 +87,9 @@ public class ChangePwdbyWithdrawalAPI extends CoreRequest {
         return this;
     }
 
+    public interface ChangePwdbyWithdrawalCallBack extends KzingCallBack {
+        void onSuccess(Boolean success);
+    }
 
 
 }

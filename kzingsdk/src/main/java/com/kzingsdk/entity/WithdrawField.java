@@ -10,15 +10,6 @@ import java.util.ArrayList;
 
 public class WithdrawField implements Parcelable {
 
-    public static Creator getCREATOR() {
-        return CREATOR;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
     public static final Creator CREATOR = new Creator() {
         public WithdrawField createFromParcel(Parcel in) {
             return new WithdrawField(in);
@@ -39,8 +30,26 @@ public class WithdrawField implements Parcelable {
     private Integer maxLength;
     private String prefix;
     private ArrayList<WithdrawFieldOption> withdrawFieldOptionList = new ArrayList<>();
-
     private WithdrawField() {
+    }
+    public WithdrawField(Parcel in) {
+
+        field = in.readString();
+        label = in.readString();
+        type = in.readString();
+        error = in.readString();
+        input = in.readString();
+        placeholder = in.readString();
+        digits = in.readInt() == 1;
+        minLength = in.readInt();
+        maxLength = in.readInt();
+        prefix = in.readString();
+        Object[] objectArray = in.readArray(WithdrawField.class.getClassLoader());
+        withdrawFieldOptionList = (ArrayList<WithdrawFieldOption>) objectArray[0];
+    }
+
+    public static Creator getCREATOR() {
+        return CREATOR;
     }
 
     public static WithdrawField newInstance(JSONObject rootObject) {
@@ -61,6 +70,11 @@ public class WithdrawField implements Parcelable {
             }
         }
         return withdrawField;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public String getField() {
@@ -149,22 +163,6 @@ public class WithdrawField implements Parcelable {
 
     public void setWithdrawFieldOptionList(ArrayList<WithdrawFieldOption> withdrawFieldOptionList) {
         this.withdrawFieldOptionList = withdrawFieldOptionList;
-    }
-
-    public WithdrawField(Parcel in) {
-
-        field = in.readString();
-        label = in.readString();
-        type = in.readString();
-        error = in.readString();
-        input = in.readString();
-        placeholder = in.readString();
-        digits = in.readInt() == 1;
-        minLength = in.readInt();
-        maxLength = in.readInt();
-        prefix = in.readString();
-        Object[] objectArray = in.readArray(WithdrawField.class.getClassLoader());
-        withdrawFieldOptionList = (ArrayList<WithdrawFieldOption>) objectArray[0];
     }
 
     @Override

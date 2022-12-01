@@ -11,6 +11,8 @@ import io.reactivex.Observable;
 
 public class UpdatePanAPI extends CoreRequest {
 
+    private String pan;
+
     UpdatePanAPI() {
         super();
     }
@@ -19,8 +21,6 @@ public class UpdatePanAPI extends CoreRequest {
     protected String getAction() {
         return Action.updatePan;
     }
-
-    private String pan;
 
     @Override
     protected Observable<String> validateParams() {
@@ -63,12 +63,12 @@ public class UpdatePanAPI extends CoreRequest {
         return this;
     }
 
-    public interface UpdatePanCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public UpdatePanAPI setPan(String pan) {
         this.pan = pan;
         return this;
+    }
+
+    public interface UpdatePanCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }

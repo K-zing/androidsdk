@@ -12,6 +12,8 @@ import io.reactivex.Observable;
 
 public class ActivitySignInAPI extends BaseK36API {
 
+    private String actid;
+
     ActivitySignInAPI() {
         super();
     }
@@ -20,8 +22,6 @@ public class ActivitySignInAPI extends BaseK36API {
     protected String getK36Action() {
         return Action.activitySignIn;
     }
-
-    private String actid;
 
     @Override
     protected Observable<String> validateParams() {
@@ -66,13 +66,13 @@ public class ActivitySignInAPI extends BaseK36API {
         return this;
     }
 
-    public interface ActivitySignInAPICallBack extends KzingCallBack {
-        void onSuccess(GetNewComerActivityResult getNewComerActivityResult);
-    }
-
     public ActivitySignInAPI setActid(String actid) {
         this.actid = actid;
         return this;
+    }
+
+    public interface ActivitySignInAPICallBack extends KzingCallBack {
+        void onSuccess(GetNewComerActivityResult getNewComerActivityResult);
     }
 
 }

@@ -13,6 +13,9 @@ import io.reactivex.Observable;
 
 public class GetCommonCslinkAPI extends BaseD11API {
 
+    public final String TOP = "top";
+    public final String BOTTOM = "bottom";
+
     GetCommonCslinkAPI() {
         super();
     }
@@ -21,9 +24,6 @@ public class GetCommonCslinkAPI extends BaseD11API {
     protected String getD11Action() {
         return Action.getCommonCslink;
     }
-
-    public final String TOP = "top";
-    public final String BOTTOM = "bottom";
 
     @Override
     public Observable<HashMap<String, CsLink>> requestRx(Context context) {

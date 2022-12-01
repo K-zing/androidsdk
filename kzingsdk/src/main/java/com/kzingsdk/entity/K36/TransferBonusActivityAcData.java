@@ -2,7 +2,6 @@ package com.kzingsdk.entity.K36;
 
 import com.kzingsdk.util.BigDecimalUtil;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;

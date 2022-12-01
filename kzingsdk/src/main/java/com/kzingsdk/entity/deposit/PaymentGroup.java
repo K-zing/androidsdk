@@ -9,6 +9,15 @@ import java.util.ArrayList;
 
 public class PaymentGroup implements Parcelable {
 
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public PaymentGroup createFromParcel(Parcel in) {
+            return new PaymentGroup(in);
+        }
+
+        public PaymentGroup[] newArray(int size) {
+            return new PaymentGroup[size];
+        }
+    };
     private String id;
     private String image;
     private String name;
@@ -17,10 +26,23 @@ public class PaymentGroup implements Parcelable {
     private Integer displayorder;
     private ArrayList<BasePaymentMethod> paymentList = new ArrayList<>();
 
+
     public PaymentGroup() {
 
     }
 
+    public PaymentGroup(Parcel in) {
+        paymentType = PaymentType.valueOfTypeId(in.readString());
+        name = in.readString();
+        image = in.readString();
+        if (paymentType == PaymentType.PREPAIDCARD) return;
+        id = in.readString();
+        desc = in.readString();
+        displayorder = in.readInt();
+        Object[] customObjects = in.readArray(ThirdPartyPaymentBank.class.getClassLoader());
+        int i = 0;
+        paymentList = (ArrayList<BasePaymentMethod>) customObjects[i++];
+    }
 
     public static PaymentGroup newInstance(JSONObject rootObject) {
         PaymentGroup item = new PaymentGroup();
@@ -73,7 +95,6 @@ public class PaymentGroup implements Parcelable {
         this.displayorder = displayorder;
     }
 
-
     public ArrayList<BasePaymentMethod> getPaymentList() {
         return paymentList;
     }
@@ -88,29 +109,6 @@ public class PaymentGroup implements Parcelable {
 
     public void setDesc(String desc) {
         this.desc = desc;
-    }
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public PaymentGroup createFromParcel(Parcel in) {
-            return new PaymentGroup(in);
-        }
-
-        public PaymentGroup[] newArray(int size) {
-            return new PaymentGroup[size];
-        }
-    };
-
-    public PaymentGroup(Parcel in) {
-        paymentType = PaymentType.valueOfTypeId(in.readString());
-        name = in.readString();
-        image = in.readString();
-        if (paymentType == PaymentType.PREPAIDCARD) return;
-        id = in.readString();
-        desc = in.readString();
-        displayorder = in.readInt();
-        Object[] customObjects = in.readArray(ThirdPartyPaymentBank.class.getClassLoader());
-        int i = 0;
-        paymentList = (ArrayList<BasePaymentMethod>) customObjects[i++];
     }
 
     @Override

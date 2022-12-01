@@ -16,7 +16,7 @@ public final class SharePrefUtil {
         if (apiKey == null || apiKey.length() < 30) {
             return;
         }
-        if (value == null){
+        if (value == null) {
             SharePrefUtil.removeString(context, key);
             return;
         }

@@ -11,16 +11,16 @@ import io.reactivex.Observable;
 
 public class RedeemPostpaidBonusAPI extends CoreRequest {
 
-    @Override
-    protected String getAction() {
-        return Action.redeemPostpaidBonus;
-    }
+    private String dno;
 
     RedeemPostpaidBonusAPI() {
         super();
     }
 
-    private String dno;
+    @Override
+    protected String getAction() {
+        return Action.redeemPostpaidBonus;
+    }
 
     @Override
     protected Observable<String> validateParams() {
@@ -63,14 +63,14 @@ public class RedeemPostpaidBonusAPI extends CoreRequest {
         return this;
     }
 
-    public interface RedeemPostpaidBonusCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
-
     public RedeemPostpaidBonusAPI setDno(String dno) {
         this.dno = dno;
         return this;
+    }
+
+
+    public interface RedeemPostpaidBonusCallBack extends KzingCallBack {
+        void onSuccess();
     }
 
 }

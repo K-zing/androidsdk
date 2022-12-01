@@ -67,10 +67,6 @@ public class RequestVerifyPlayerEmailAPI extends CoreRequest {
         return this;
     }
 
-    public interface RequestVerifyPlayerEmailCallBack extends KzingCallBack {
-        void onSuccess(SendEmailResult sendEmailResult);
-    }
-
     public RequestVerifyPlayerEmailAPI setParamEmail(String email) {
         this.email = email;
         return this;
@@ -79,6 +75,10 @@ public class RequestVerifyPlayerEmailAPI extends CoreRequest {
     public RequestVerifyPlayerEmailAPI setParamNewEmail(String newemail) {
         this.newemail = newemail;
         return this;
+    }
+
+    public interface RequestVerifyPlayerEmailCallBack extends KzingCallBack {
+        void onSuccess(SendEmailResult sendEmailResult);
     }
 
 }

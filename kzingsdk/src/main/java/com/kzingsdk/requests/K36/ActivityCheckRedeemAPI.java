@@ -3,7 +3,6 @@ package com.kzingsdk.requests.K36;
 import android.content.Context;
 
 import com.kzingsdk.entity.K36.K36ActivityInfo;
-import com.kzingsdk.requests.ActivitySignInAPI;
 import com.kzingsdk.requests.KzingCallBack;
 
 import org.json.JSONException;
@@ -13,6 +12,8 @@ import io.reactivex.Observable;
 
 public class ActivityCheckRedeemAPI extends BaseK36API {
 
+    private String actid;
+
     ActivityCheckRedeemAPI() {
         super();
     }
@@ -21,8 +22,6 @@ public class ActivityCheckRedeemAPI extends BaseK36API {
     protected String getK36Action() {
         return Action.activityCheckRedeem;
     }
-
-    private String actid;
 
     @Override
     protected Observable<String> validateParams() {
@@ -67,14 +66,14 @@ public class ActivityCheckRedeemAPI extends BaseK36API {
         return this;
     }
 
-    public interface ActivityCheckRedeemAPICallBack extends KzingCallBack {
-        void onSuccess(K36ActivityInfo k36ActivityInfo);
-    }
-
-
     public ActivityCheckRedeemAPI setActid(String actid) {
         this.actid = actid;
         return this;
+    }
+
+
+    public interface ActivityCheckRedeemAPICallBack extends KzingCallBack {
+        void onSuccess(K36ActivityInfo k36ActivityInfo);
     }
 
 }

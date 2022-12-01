@@ -3,21 +3,23 @@ package com.kzingsdk.requests.K36;
 import android.content.Context;
 
 import com.kzingsdk.entity.K36.GetNewComerActivityResult;
-import com.kzingsdk.entity.K36.K36ActivityInfo;
-import com.kzingsdk.entity.gameplatform.SimpleGamePlatform;
 import com.kzingsdk.requests.KzingCallBack;
-import com.kzingsdk.util.BigDecimalUtil;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import io.reactivex.Observable;
 
 public class GetNewComerActivityAPI extends BaseK36API {
+
+    public static final String[] actTypeIds = new String[]{
+            "5012",
+            "5013",
+            "6000",
+            "6001",
+            "6002"
+    };
 
     GetNewComerActivityAPI() {
         super();
@@ -27,14 +29,6 @@ public class GetNewComerActivityAPI extends BaseK36API {
     protected String getK36Action() {
         return Action.getNewComerActivity;
     }
-
-    public static final String[] actTypeIds = new String[]{
-            "5012",
-            "5013",
-            "6000",
-            "6001",
-            "6002"
-    };
 
     @Override
     public Observable<HashMap<String, GetNewComerActivityResult>> requestRx(Context context) {
@@ -70,7 +64,6 @@ public class GetNewComerActivityAPI extends BaseK36API {
     public interface GetNewComerActivityAPICallBack extends KzingCallBack {
         void onSuccess(HashMap<String, GetNewComerActivityResult> getNewComerActivityResultMap);
     }
-
 
 
 }

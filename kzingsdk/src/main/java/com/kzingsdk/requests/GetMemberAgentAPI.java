@@ -11,13 +11,13 @@ import io.reactivex.Observable;
 
 public class GetMemberAgentAPI extends CoreRequest {
 
+    GetMemberAgentAPI() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.getMemberAgent;
-    }
-
-    GetMemberAgentAPI() {
-        super();
     }
 
     @Override

@@ -98,13 +98,13 @@ public class GetDepositFormFieldsAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetDepositFormFieldsCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<DepositFormFieldRow> rowArrayList);
-    }
-
     public GetDepositFormFieldsAPI setThirdPartyPayment(ThirdPartyPayment thirdPartyPayment) {
         this.thirdPartyPayment = thirdPartyPayment;
         return this;
+    }
+
+    public interface GetDepositFormFieldsCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<DepositFormFieldRow> rowArrayList);
     }
 
 

@@ -66,10 +66,6 @@ public class RequestUsernameByEmailSendCodeAPI extends CoreRequest {
         return this;
     }
 
-    public interface RequestUsernameByEmailSendCodeCallBack extends KzingCallBack {
-        void onSuccess(RequestUsernameResult requestUsernameResult);
-    }
-
     public RequestUsernameByEmailSendCodeAPI setEmail(String email) {
         this.email = email;
         return this;
@@ -78,6 +74,10 @@ public class RequestUsernameByEmailSendCodeAPI extends CoreRequest {
     public RequestUsernameByEmailSendCodeAPI setValidateOnly(boolean validateOnly) {
         this.validateOnly = validateOnly;
         return this;
+    }
+
+    public interface RequestUsernameByEmailSendCodeCallBack extends KzingCallBack {
+        void onSuccess(RequestUsernameResult requestUsernameResult);
     }
 
 }

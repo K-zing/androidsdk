@@ -23,13 +23,13 @@ public class SubmitBankTransferAPI extends CoreRequest {
     private String pgDepositUserName;
     private String protocol;
 
+    SubmitBankTransferAPI() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.submitBankTransfer;
-    }
-
-    SubmitBankTransferAPI() {
-        super();
     }
 
     @Override
@@ -76,10 +76,6 @@ public class SubmitBankTransferAPI extends CoreRequest {
     public SubmitBankTransferAPI addSubmitBankTransferCallBack(SubmitBankTransferCallBack submitBankTransferCallBack) {
         kzingCallBackList.add(submitBankTransferCallBack);
         return this;
-    }
-
-    public interface SubmitBankTransferCallBack extends KzingCallBack {
-        void onSuccess(SubmitBankTransferResult submitBankTransferResult);
     }
 
     public SubmitBankTransferAPI setPpid(String ppid) {
@@ -130,6 +126,10 @@ public class SubmitBankTransferAPI extends CoreRequest {
     public SubmitBankTransferAPI setProtocol(String protocol) {
         this.protocol = protocol;
         return this;
+    }
+
+    public interface SubmitBankTransferCallBack extends KzingCallBack {
+        void onSuccess(SubmitBankTransferResult submitBankTransferResult);
     }
 }
 

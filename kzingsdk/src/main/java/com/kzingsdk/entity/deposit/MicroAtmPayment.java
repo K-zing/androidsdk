@@ -3,7 +3,6 @@ package com.kzingsdk.entity.deposit;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.kzingsdk.entity.MemberInfo;
 import com.kzingsdk.util.BigDecimalUtil;
 
 import org.json.JSONObject;
@@ -13,6 +12,15 @@ import java.util.ArrayList;
 
 public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
 
+    public static final Creator CREATOR = new Creator() {
+        public MicroAtmPayment createFromParcel(Parcel in) {
+            return new MicroAtmPayment(in);
+        }
+
+        public MicroAtmPayment[] newArray(int size) {
+            return new MicroAtmPayment[size];
+        }
+    };
     private String ptAlias;
     private String accountId;
     private String atmNo;
@@ -33,6 +41,38 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
     private ArrayList<BigDecimal> quickAmountList = new ArrayList<>();
 
     public MicroAtmPayment() {
+    }
+
+    public MicroAtmPayment(Parcel in) {
+        id = in.readString();
+        paymentName = in.readString();
+        image = in.readString();
+        bankCode = in.readString();
+        displayOrder = in.readInt();
+        random = in.readInt();
+        minAmount = in.readDouble();
+        maxAmount = in.readDouble();
+        formType = in.readString();
+        isAllowDecimal = in.readInt() == 1;
+        quickAmountFlag = in.readInt() == 1;
+        ptAlias = in.readString();
+        accountId = in.readString();
+        atmNo = in.readString();
+        atmName = in.readString();
+        atmBankCode = in.readString();
+        atmAddr = in.readString();
+        qrcode = in.readString();
+        key = in.readString();
+        atmFeremark = in.readString();
+        promoRate = new BigDecimal(in.readString());
+        sDealsRate = new BigDecimal(in.readString());
+        bcMin = new BigDecimal(in.readString());
+        bcMax = new BigDecimal(in.readString());
+        showField = in.readInt();
+        number = in.readInt();
+        bcOptionType = in.readInt();
+        Object[] objectArray = in.readArray(MicroAtmPayment.class.getClassLoader());
+        quickAmountList = (ArrayList<BigDecimal>) objectArray[0];
     }
 
     public static MicroAtmPayment newInstance(JSONObject rootObject) {
@@ -215,48 +255,6 @@ public class MicroAtmPayment extends BasePaymentMethod implements Parcelable {
 
     public void setAtmFeremark(String atmFeremark) {
         this.atmFeremark = atmFeremark;
-    }
-
-    public static final Creator CREATOR = new Creator() {
-        public MicroAtmPayment createFromParcel(Parcel in) {
-            return new MicroAtmPayment(in);
-        }
-
-        public MicroAtmPayment[] newArray(int size) {
-            return new MicroAtmPayment[size];
-        }
-    };
-
-    public MicroAtmPayment(Parcel in) {
-        id = in.readString();
-        paymentName = in.readString();
-        image = in.readString();
-        bankCode = in.readString();
-        displayOrder = in.readInt();
-        random = in.readInt();
-        minAmount = in.readDouble();
-        maxAmount = in.readDouble();
-        formType = in.readString();
-        isAllowDecimal = in.readInt() == 1;
-        quickAmountFlag = in.readInt() == 1;
-        ptAlias = in.readString();
-        accountId = in.readString();
-        atmNo = in.readString();
-        atmName = in.readString();
-        atmBankCode = in.readString();
-        atmAddr = in.readString();
-        qrcode = in.readString();
-        key = in.readString();
-        atmFeremark = in.readString();
-        promoRate = new BigDecimal(in.readString());
-        sDealsRate = new BigDecimal(in.readString());
-        bcMin = new BigDecimal(in.readString());
-        bcMax = new BigDecimal(in.readString());
-        showField = in.readInt();
-        number = in.readInt();
-        bcOptionType = in.readInt();
-        Object[] objectArray = in.readArray(MicroAtmPayment.class.getClassLoader());
-        quickAmountList = (ArrayList<BigDecimal>) objectArray[0];
     }
 
     @Override

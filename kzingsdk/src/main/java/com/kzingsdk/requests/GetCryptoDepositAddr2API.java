@@ -62,11 +62,6 @@ public class GetCryptoDepositAddr2API extends CoreRequest {
         return this;
     }
 
-    public interface GetCryptoDepositAddr2CallBack extends KzingCallBack {
-        void onSuccess(CryptoDepositAddr cryptoDepositAddr);
-    }
-
-
     public GetCryptoDepositAddr2API setPpid(String ppid) {
         this.ppid = ppid;
         return this;
@@ -80,6 +75,10 @@ public class GetCryptoDepositAddr2API extends CoreRequest {
     public GetCryptoDepositAddr2API setPlatform(String platform) {
         this.platform = platform;
         return this;
+    }
+
+    public interface GetCryptoDepositAddr2CallBack extends KzingCallBack {
+        void onSuccess(CryptoDepositAddr cryptoDepositAddr);
     }
 }
 

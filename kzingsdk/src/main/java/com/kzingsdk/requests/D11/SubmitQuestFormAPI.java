@@ -15,15 +15,14 @@ import io.reactivex.Observable;
 
 public class SubmitQuestFormAPI extends BaseD11API {
 
-    SubmitQuestFormAPI() {
-        super();
-    }
-
     private String qgtId;
     private String sqtId;
     private String verifyCode;
     private ArrayList<String> coverList = new ArrayList<>();
     private ArrayList<QuestQuestion> questQuestionList = new ArrayList<>();
+    SubmitQuestFormAPI() {
+        super();
+    }
 
     @Override
     protected String getD11Action() {
@@ -100,10 +99,6 @@ public class SubmitQuestFormAPI extends BaseD11API {
         return this;
     }
 
-    public interface SubmitQuestFormCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public SubmitQuestFormAPI setQgtId(String qgtId) {
         this.qgtId = qgtId;
         return this;
@@ -137,5 +132,9 @@ public class SubmitQuestFormAPI extends BaseD11API {
     public SubmitQuestFormAPI setQuestQuestionList(ArrayList<QuestQuestion> questQuestionList) {
         this.questQuestionList = questQuestionList;
         return this;
+    }
+
+    public interface SubmitQuestFormCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }

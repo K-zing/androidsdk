@@ -14,6 +14,10 @@ import io.reactivex.Observable;
 
 public class GetCsHistoryAPI extends BaseD11API {
 
+    private String dno = "";
+    private Integer curIndex = 1;
+    private Calendar startDateCalendar = null;
+    private Calendar endDateCalendar = null;
     GetCsHistoryAPI() {
         super();
     }
@@ -22,12 +26,6 @@ public class GetCsHistoryAPI extends BaseD11API {
     protected String getD11Action() {
         return Action.getCsHistory;
     }
-
-    private String dno = "";
-    private Integer curIndex = 1;
-    private Calendar startDateCalendar = null;
-    private Calendar endDateCalendar = null;
-
 
     @Override
     protected JSONObject generateParamsJson() {
@@ -70,10 +68,6 @@ public class GetCsHistoryAPI extends BaseD11API {
         return this;
     }
 
-    public interface GetCsHistoryCallBack extends KzingCallBack {
-        void onSuccess(GetCsHistoryResult getCsHistoryResult);
-    }
-
     public GetCsHistoryAPI setDno(String dno) {
         this.dno = dno;
         return this;
@@ -92,6 +86,10 @@ public class GetCsHistoryAPI extends BaseD11API {
     public GetCsHistoryAPI setEndDateCalendar(Calendar endDateCalendar) {
         this.endDateCalendar = endDateCalendar;
         return this;
+    }
+
+    public interface GetCsHistoryCallBack extends KzingCallBack {
+        void onSuccess(GetCsHistoryResult getCsHistoryResult);
     }
 
 }

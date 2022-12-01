@@ -1,10 +1,6 @@
 package com.kzingsdk.entity;
 
-import com.kzingsdk.util.BigDecimalUtil;
-
 import org.json.JSONObject;
-
-import java.math.BigDecimal;
 
 
 public class WebsiteContentConfig {
@@ -12,6 +8,7 @@ public class WebsiteContentConfig {
     private String itemKey;
     private String itemVal;
     private String title;
+
     public WebsiteContentConfig() {
 
     }

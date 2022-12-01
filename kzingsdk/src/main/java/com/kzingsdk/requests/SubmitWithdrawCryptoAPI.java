@@ -11,15 +11,6 @@ import io.reactivex.Observable;
 
 public class SubmitWithdrawCryptoAPI extends CoreRequest implements RequireCurrency {
 
-    SubmitWithdrawCryptoAPI() {
-        super();
-    }
-
-    @Override
-    protected String getAction() {
-        return Action.submitWithdrawCrypto;
-    }
-
     private String amount;
     private String cryptoRate;
     private String wdpassword;
@@ -31,6 +22,14 @@ public class SubmitWithdrawCryptoAPI extends CoreRequest implements RequireCurre
     private String smsPhoneNo;
     private String smsPhoneNoCountry;
     private String smscode;
+    SubmitWithdrawCryptoAPI() {
+        super();
+    }
+
+    @Override
+    protected String getAction() {
+        return Action.submitWithdrawCrypto;
+    }
 
     @Override
     protected JSONObject generateParamsJson() {
@@ -92,8 +91,9 @@ public class SubmitWithdrawCryptoAPI extends CoreRequest implements RequireCurre
         return currency;
     }
 
-    public interface SubmitWithdrawCryptoCallBack extends KzingCallBack {
-        void onSuccess();
+    public SubmitWithdrawCryptoAPI setCurrency(String currency) {
+        this.currency = currency;
+        return this;
     }
 
     public SubmitWithdrawCryptoAPI setAmount(String amount) {
@@ -131,11 +131,6 @@ public class SubmitWithdrawCryptoAPI extends CoreRequest implements RequireCurre
         return this;
     }
 
-    public SubmitWithdrawCryptoAPI setCurrency(String currency) {
-        this.currency = currency;
-        return this;
-    }
-
     public SubmitWithdrawCryptoAPI setSmsPhoneNo(String smsPhoneNo) {
         this.smsPhoneNo = smsPhoneNo;
         return this;
@@ -149,5 +144,9 @@ public class SubmitWithdrawCryptoAPI extends CoreRequest implements RequireCurre
     public SubmitWithdrawCryptoAPI setSmscode(String smscode) {
         this.smscode = smscode;
         return this;
+    }
+
+    public interface SubmitWithdrawCryptoCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }

@@ -77,10 +77,6 @@ public class TransferToGameAPI extends CoreRequest {
         return this;
     }
 
-    public interface TransferToGameCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     /**
      * @param gpAccountId is equal to {@link GamePlatform#getGpAccountId()}. {@link TransferToGameAPI#TRANSFER_BACK} to get back all balance from all GamePlatforms.
      */
@@ -107,6 +103,10 @@ public class TransferToGameAPI extends CoreRequest {
     public TransferToGameAPI setTransferByLimit(Boolean transferByLimit) {
         this.transferByLimit = transferByLimit;
         return this;
+    }
+
+    public interface TransferToGameCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }
 

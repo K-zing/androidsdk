@@ -3,7 +3,6 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.RegParam;
 import com.kzingsdk.util.Constant;
 import com.kzingsdk.util.SharePrefUtil;
 
@@ -156,10 +155,6 @@ public class RegAccountAPI extends CoreRequest {
         return this;
     }
 
-    public interface RegAccountCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public RegAccountAPI setParamLoginName(String loginName) {
         this.loginName = loginName;
         return this;
@@ -301,6 +296,10 @@ public class RegAccountAPI extends CoreRequest {
     public RegAccountAPI setProviderId(String providerId) {
         this.providerId = providerId;
         return this;
+    }
+
+    public interface RegAccountCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }
 

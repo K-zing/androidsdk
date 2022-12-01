@@ -20,13 +20,13 @@ public class GetBetHistorySummaryAPI extends CoreRequest {
     private String currency;
     private String gpType;
 
+    GetBetHistorySummaryAPI() {
+        super();
+    }
+
     @Override
     protected String getAction() {
         return Action.getBetHistorySummary;
-    }
-
-    GetBetHistorySummaryAPI() {
-        super();
     }
 
     @Override
@@ -69,10 +69,6 @@ public class GetBetHistorySummaryAPI extends CoreRequest {
         return this;
     }
 
-    public interface GetBetHistorySummaryCallBack extends KzingCallBack {
-        void onSuccess(BetHistorySummary betHistorySummary);
-    }
-
     public GetBetHistorySummaryAPI setStartDateCalendar(Calendar startDateCalendar) {
         this.startDateCalendar = startDateCalendar;
         return this;
@@ -95,6 +91,10 @@ public class GetBetHistorySummaryAPI extends CoreRequest {
     public GetBetHistorySummaryAPI setGpType(String gpType) {
         this.gpType = gpType;
         return this;
+    }
+
+    public interface GetBetHistorySummaryCallBack extends KzingCallBack {
+        void onSuccess(BetHistorySummary betHistorySummary);
     }
 }
 

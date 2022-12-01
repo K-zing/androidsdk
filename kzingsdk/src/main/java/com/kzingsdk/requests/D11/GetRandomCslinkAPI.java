@@ -11,6 +11,9 @@ import io.reactivex.Observable;
 
 public class GetRandomCslinkAPI extends BaseD11API {
 
+    public final String TOP = "top";
+    public final String BOTTOM = "bottom";
+
     GetRandomCslinkAPI() {
         super();
     }
@@ -19,9 +22,6 @@ public class GetRandomCslinkAPI extends BaseD11API {
     protected String getD11Action() {
         return Action.getRandomCslink;
     }
-
-    public final String TOP = "top";
-    public final String BOTTOM = "bottom";
 
     @Override
     public Observable<CsLink> requestRx(Context context) {

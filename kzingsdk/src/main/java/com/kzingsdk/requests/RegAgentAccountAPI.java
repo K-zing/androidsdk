@@ -136,10 +136,6 @@ public class RegAgentAccountAPI extends CoreRequest {
         return this;
     }
 
-    public interface RegAccountCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     /**
      * @param loginName Please check the length from {@link RegParam#getNameMin()} and {@link RegParam#getNameMax()}
      */
@@ -196,15 +192,15 @@ public class RegAgentAccountAPI extends CoreRequest {
         return this;
     }
 
-//    public RegAgentAccountAPI setParamWithdrawPassword(String wdpassword) {
-//        this.wdpassword = wdpassword;
-//        return this;
-//    }
-
     public RegAgentAccountAPI setParamVerifycode(String verifycode) {
         this.verifycode = verifycode;
         return this;
     }
+
+//    public RegAgentAccountAPI setParamWithdrawPassword(String wdpassword) {
+//        this.wdpassword = wdpassword;
+//        return this;
+//    }
 
     public RegAgentAccountAPI setParamPhoneCountry(String phoneCountry) {
         this.phoneCountry = phoneCountry;
@@ -230,17 +226,24 @@ public class RegAgentAccountAPI extends CoreRequest {
         this.line = line;
         return this;
     }
+
     public RegAgentAccountAPI setWdPassword(String wdPassword) {
         this.wdPassword = wdPassword;
         return this;
     }
+
     public RegAgentAccountAPI setCaptchaValidate(String captchaValidate) {
         this.captchaValidate = captchaValidate;
         return this;
     }
+
     public RegAgentAccountAPI setFacebook(String facebook) {
         this.facebook = facebook;
         return this;
+    }
+
+    public interface RegAccountCallBack extends KzingCallBack {
+        void onSuccess();
     }
 
 

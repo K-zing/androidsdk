@@ -14,10 +14,6 @@ import io.reactivex.Observable;
 
 public class EnterGameAPI extends CoreRequest {
 
-    public EnterGameAPI() {
-        super();
-    }
-
     private boolean isDemo = false;
     private boolean isAutoTransfer = true;
     private Playable playable;
@@ -25,6 +21,9 @@ public class EnterGameAPI extends CoreRequest {
     private Boolean requestMobile = true;
     private String option;
     private Boolean transferByLimit = false;
+    public EnterGameAPI() {
+        super();
+    }
 
     @Override
     protected String getAction() {
@@ -84,10 +83,6 @@ public class EnterGameAPI extends CoreRequest {
         return this;
     }
 
-    public interface EnterGameCallBack extends KzingCallBack {
-        void onSuccess(EnterGameResult enterGameResult);
-    }
-
     public EnterGameAPI setPlayable(Playable playable) {
         this.playable = playable;
         return this;
@@ -121,5 +116,9 @@ public class EnterGameAPI extends CoreRequest {
     public EnterGameAPI setTransferByLimit(Boolean transferByLimit) {
         this.transferByLimit = transferByLimit;
         return this;
+    }
+
+    public interface EnterGameCallBack extends KzingCallBack {
+        void onSuccess(EnterGameResult enterGameResult);
     }
 }

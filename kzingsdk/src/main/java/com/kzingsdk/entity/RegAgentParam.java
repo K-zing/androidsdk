@@ -11,6 +11,15 @@ import org.json.JSONObject;
 
 public class RegAgentParam implements Parcelable {
 
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public RegAgentParam createFromParcel(Parcel in) {
+            return new RegAgentParam(in);
+        }
+
+        public RegAgentParam[] newArray(int size) {
+            return new RegAgentParam[size];
+        }
+    };
     private boolean regQQ, reqPhone, regEmail;
     private boolean
             reqRealName,
@@ -23,9 +32,32 @@ public class RegAgentParam implements Parcelable {
             reqFacebook,
             highLevelPassAgent,
             agentWithdrawPassword;
-
     private Bitmap verifyCode;
     private String agentWithdrawPasswordFormat;
+
+
+    public RegAgentParam(Parcel in) {
+        regQQ = in.readInt() == 1;
+        reqPhone = in.readInt() == 1;
+        regEmail = in.readInt() == 1;
+        reqRealName = in.readInt() == 1;
+        reqPhoneCountry = in.readInt() == 1;
+        reqWeixin = in.readInt() == 1;
+        reqWhatsapp = in.readInt() == 1;
+        reqTelegram = in.readInt() == 1;
+        reqLine = in.readInt() == 1;
+        reqBirthdate = in.readInt() == 1;
+        reqFacebook = in.readInt() == 1;
+        highLevelPassAgent = in.readInt() == 1;
+        agentWithdrawPassword = in.readInt() == 1;
+        agentWithdrawPasswordFormat = in.readString();
+        Object[] objectArray = in.readArray(RegAgentParam.class.getClassLoader());
+        verifyCode = (Bitmap) objectArray[0];
+    }
+
+    public RegAgentParam() {
+
+    }
 
     public static RegAgentParam newInstance(JSONObject rootObject) {
         RegAgentParam regParam = new RegAgentParam();
@@ -50,7 +82,6 @@ public class RegAgentParam implements Parcelable {
 
         return regParam;
     }
-
 
     public boolean isRegQQ() {
         return regQQ;
@@ -172,26 +203,6 @@ public class RegAgentParam implements Parcelable {
         this.agentWithdrawPasswordFormat = agentWithdrawPasswordFormat;
     }
 
-    public RegAgentParam(Parcel in) {
-        regQQ = in.readInt() == 1;
-        reqPhone = in.readInt() == 1;
-        regEmail = in.readInt() == 1;
-        reqRealName = in.readInt() == 1;
-        reqPhoneCountry = in.readInt() == 1;
-        reqWeixin = in.readInt() == 1;
-        reqWhatsapp = in.readInt() == 1;
-        reqTelegram = in.readInt() == 1;
-        reqLine = in.readInt() == 1;
-        reqBirthdate = in.readInt() == 1;
-        reqFacebook = in.readInt() == 1;
-        highLevelPassAgent = in.readInt() == 1;
-        agentWithdrawPassword = in.readInt() == 1;
-        agentWithdrawPasswordFormat = in.readString();
-        Object[] objectArray = in.readArray(RegAgentParam.class.getClassLoader());
-        verifyCode = (Bitmap) objectArray[0];
-    }
-
-
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(regQQ ? 1 : 0);
@@ -216,21 +227,6 @@ public class RegAgentParam implements Parcelable {
     @Override
     public int describeContents() {
         return 0;
-    }
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public RegAgentParam createFromParcel(Parcel in) {
-            return new RegAgentParam(in);
-        }
-
-        public RegAgentParam[] newArray(int size) {
-            return new RegAgentParam[size];
-        }
-    };
-
-
-    public RegAgentParam() {
-
     }
 
     @Override

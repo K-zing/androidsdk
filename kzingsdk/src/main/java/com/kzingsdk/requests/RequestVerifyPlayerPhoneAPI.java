@@ -76,10 +76,6 @@ public class RequestVerifyPlayerPhoneAPI extends CoreRequest {
         return this;
     }
 
-    public interface RequestVerifyPlayerPhoneCallBack extends KzingCallBack {
-        void onSuccess(SendSmsResult sendSmsResult);
-    }
-
     public RequestVerifyPlayerPhoneAPI setParamPhone(String phone) {
         this.phone = phone;
         return this;
@@ -107,5 +103,9 @@ public class RequestVerifyPlayerPhoneAPI extends CoreRequest {
     public RequestVerifyPlayerPhoneAPI setUpdatePhone(boolean updatePhone) {
         this.updatePhone = updatePhone;
         return this;
+    }
+
+    public interface RequestVerifyPlayerPhoneCallBack extends KzingCallBack {
+        void onSuccess(SendSmsResult sendSmsResult);
     }
 }

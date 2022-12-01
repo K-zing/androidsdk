@@ -77,10 +77,6 @@ public class RequestResetPasswordByPhoneAPI extends CoreRequest {
         return this;
     }
 
-    public interface RequestResetPasswordByPhoneCallBack extends KzingCallBack {
-        void onSuccess(SendSmsResult sendSmsResult);
-    }
-
     public RequestResetPasswordByPhoneAPI setParamLoginName(String loginName) {
         this.loginName = loginName;
         return this;
@@ -103,5 +99,9 @@ public class RequestResetPasswordByPhoneAPI extends CoreRequest {
     public RequestResetPasswordByPhoneAPI setUpdatePhone(Boolean updatePhone) {
         this.updatePhone = updatePhone;
         return this;
+    }
+
+    public interface RequestResetPasswordByPhoneCallBack extends KzingCallBack {
+        void onSuccess(SendSmsResult sendSmsResult);
     }
 }

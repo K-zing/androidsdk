@@ -4,44 +4,12 @@ import org.json.JSONObject;
 
 public class ThirdPartyPaymentSubmitAction {
 
-    public enum ActionType {
-        QRCODE(1),
-        URL_DIRECT(2),
-        HTML_FORM(3),
-        URL_DIRECT_SELF(4),
-        CRYPTO(6),
-        ;
-
-        private final int id;
-
-        ActionType(int id) {
-            this.id = id;
-        }
-
-        public ActionType origin() {
-            return ActionType.valueOfTypeId(id);
-        }
-
-        public static ActionType valueOfTypeId(int typeId) {
-            for (ActionType type : ActionType.values()) {
-                if (type.id == typeId) {
-                    return type;
-                }
-            }
-            return null;
-        }
-
-    }
-
     private String toSubmitData;
     private SubmitDataCrypto submitDataCrypto;
     private ActionType actionType = null;
     private JSONObject resultJSON = new JSONObject();
-
-
     public ThirdPartyPaymentSubmitAction() {
     }
-
 
     public static ThirdPartyPaymentSubmitAction newInstance(JSONObject rootObject) {
         ThirdPartyPaymentSubmitAction item = new ThirdPartyPaymentSubmitAction();
@@ -105,6 +73,35 @@ public class ThirdPartyPaymentSubmitAction {
                 "toSubmitData='" + toSubmitData + '\'' +
                 ", actionType=" + actionType +
                 '}';
+    }
+
+    public enum ActionType {
+        QRCODE(1),
+        URL_DIRECT(2),
+        HTML_FORM(3),
+        URL_DIRECT_SELF(4),
+        CRYPTO(6),
+        ;
+
+        private final int id;
+
+        ActionType(int id) {
+            this.id = id;
+        }
+
+        public static ActionType valueOfTypeId(int typeId) {
+            for (ActionType type : ActionType.values()) {
+                if (type.id == typeId) {
+                    return type;
+                }
+            }
+            return null;
+        }
+
+        public ActionType origin() {
+            return ActionType.valueOfTypeId(id);
+        }
+
     }
 }
 

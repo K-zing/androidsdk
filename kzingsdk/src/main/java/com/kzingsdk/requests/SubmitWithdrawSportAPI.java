@@ -75,10 +75,6 @@ public class SubmitWithdrawSportAPI extends CoreRequest {
         return this;
     }
 
-    public interface SubmitWithdrawSportCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     /**
      * @param playerBankId Equal to {@link PlayerBankCard#getPlayerBankId()}
      */
@@ -86,7 +82,6 @@ public class SubmitWithdrawSportAPI extends CoreRequest {
         this.playerBankId = playerBankId;
         return this;
     }
-
 
     public SubmitWithdrawSportAPI setParamAmount(Double amount) {
         this.amount = amount;
@@ -99,6 +94,10 @@ public class SubmitWithdrawSportAPI extends CoreRequest {
     public SubmitWithdrawSportAPI setParamWithdrawPassword(String withdrawPassword) {
         this.withdrawPassword = withdrawPassword;
         return this;
+    }
+
+    public interface SubmitWithdrawSportCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }
 

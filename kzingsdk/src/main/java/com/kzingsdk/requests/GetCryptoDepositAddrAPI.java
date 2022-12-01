@@ -66,10 +66,6 @@ public class GetCryptoDepositAddrAPI extends CoreRequest implements RequireCurre
         return currency;
     }
 
-    public interface GetCryptoDepositAddrCallBack extends KzingCallBack {
-        void onSuccess(CryptoDepositAddr cryptoDepositAddr);
-    }
-
     public GetCryptoDepositAddrAPI setCurrency(String currency) {
         this.currency = currency;
         return this;
@@ -83,6 +79,10 @@ public class GetCryptoDepositAddrAPI extends CoreRequest implements RequireCurre
     public GetCryptoDepositAddrAPI setPlatform(String platform) {
         this.platform = platform;
         return this;
+    }
+
+    public interface GetCryptoDepositAddrCallBack extends KzingCallBack {
+        void onSuccess(CryptoDepositAddr cryptoDepositAddr);
     }
 }
 

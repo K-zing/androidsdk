@@ -12,6 +12,8 @@ import io.reactivex.Observable;
 
 public class ActivityCanSignInAPI extends CoreRequest {
 
+    private String actid;
+
     ActivityCanSignInAPI() {
         super();
 
@@ -21,8 +23,6 @@ public class ActivityCanSignInAPI extends CoreRequest {
     protected String getAction() {
         return Action.activityCanSignIn;
     }
-
-    private String actid;
 
     @Override
     protected Observable<String> validateParams() {
@@ -65,16 +65,16 @@ public class ActivityCanSignInAPI extends CoreRequest {
         return this;
     }
 
-    public interface ActivityCanSignInCallBack extends KzingCallBack {
-        void onSuccess(ActivityCanSignInResult activityCanSignInResult);
-    }
-
     /**
      * @param actid From {@link com.kzingsdk.entity.ActivityItem} returned by {@link GetActivityListAPI}
      */
     public ActivityCanSignInAPI setActid(String actid) {
         this.actid = actid;
         return this;
+    }
+
+    public interface ActivityCanSignInCallBack extends KzingCallBack {
+        void onSuccess(ActivityCanSignInResult activityCanSignInResult);
     }
 
 }

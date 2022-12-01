@@ -8,6 +8,17 @@ import org.json.JSONObject;
 
 public class HistoryListCurrencySummary implements Parcelable {
 
+    public static final Creator<HistoryListCurrencySummary> CREATOR = new Creator<HistoryListCurrencySummary>() {
+        @Override
+        public HistoryListCurrencySummary createFromParcel(Parcel in) {
+            return new HistoryListCurrencySummary(in);
+        }
+
+        @Override
+        public HistoryListCurrencySummary[] newArray(int size) {
+            return new HistoryListCurrencySummary[size];
+        }
+    };
     private String total = "";
     private String win = "";
     private String betAmt = "";
@@ -19,6 +30,17 @@ public class HistoryListCurrencySummary implements Parcelable {
 
     public HistoryListCurrencySummary() {
 
+    }
+
+    public HistoryListCurrencySummary(Parcel in) {
+        total = in.readString();
+        win = in.readString();
+        betAmt = in.readString();
+        payout = in.readString();
+        validAmt = in.readString();
+        invalidBet = in.readString();
+        winlossAsValidBet = in.readString();
+        currency = in.readString();
     }
 
     public static HistoryListCurrencySummary newInstance(JSONObject rootObject) {
@@ -98,18 +120,6 @@ public class HistoryListCurrencySummary implements Parcelable {
         this.invalidBet = invalidBet;
     }
 
-    public static final Creator<HistoryListCurrencySummary> CREATOR = new Creator<HistoryListCurrencySummary>() {
-        @Override
-        public HistoryListCurrencySummary createFromParcel(Parcel in) {
-            return new HistoryListCurrencySummary(in);
-        }
-
-        @Override
-        public HistoryListCurrencySummary[] newArray(int size) {
-            return new HistoryListCurrencySummary[size];
-        }
-    };
-
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(total);
@@ -121,17 +131,6 @@ public class HistoryListCurrencySummary implements Parcelable {
         dest.writeString(winlossAsValidBet);
         dest.writeString(currency);
 
-    }
-
-    public HistoryListCurrencySummary(Parcel in) {
-        total = in.readString();
-        win = in.readString();
-        betAmt = in.readString();
-        payout = in.readString();
-        validAmt = in.readString();
-        invalidBet = in.readString();
-        winlossAsValidBet = in.readString();
-        currency = in.readString();
     }
 
     @Override

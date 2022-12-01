@@ -76,10 +76,6 @@ public class TransferGameToGameAPI extends CoreRequest {
         return this;
     }
 
-    public interface TransferToGameCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     /**
      * @param fromGpAccountId is equal to {@link GamePlatform#getGpAccountId()}.
      */
@@ -104,6 +100,10 @@ public class TransferGameToGameAPI extends CoreRequest {
     public TransferGameToGameAPI setParamTransferAmount(String transferAmount) throws NumberFormatException {
         this.transferAmount = new BigDecimal(transferAmount).setScale(2, RoundingMode.HALF_UP);
         return this;
+    }
+
+    public interface TransferToGameCallBack extends KzingCallBack {
+        void onSuccess();
     }
 
 }

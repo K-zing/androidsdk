@@ -16,6 +16,9 @@ import io.reactivex.Observable;
 
 public class ReadMessageAPI extends CoreRequest {
 
+    private Set<String> idSet = new HashSet<>();
+    private boolean isReadAll = false;
+
     ReadMessageAPI() {
         super();
     }
@@ -24,9 +27,6 @@ public class ReadMessageAPI extends CoreRequest {
     protected String getAction() {
         return Action.readMessage;
     }
-
-    private Set<String> idSet = new HashSet<>();
-    private boolean isReadAll = false;
 
     @Override
     protected Observable<String> validateParams() {
@@ -78,10 +78,6 @@ public class ReadMessageAPI extends CoreRequest {
         return this;
     }
 
-    public interface ReadMessageCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     public ReadMessageAPI setReadAll(boolean isReadAll) {
         this.isReadAll = isReadAll;
         return this;
@@ -90,5 +86,9 @@ public class ReadMessageAPI extends CoreRequest {
     public ReadMessageAPI addIds(Collection<String> idCollection) {
         this.idSet.addAll(idCollection);
         return this;
+    }
+
+    public interface ReadMessageCallBack extends KzingCallBack {
+        void onSuccess();
     }
 }

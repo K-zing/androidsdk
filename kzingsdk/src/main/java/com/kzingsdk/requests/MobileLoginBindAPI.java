@@ -14,16 +14,15 @@ import io.reactivex.Observable;
 
 public class MobileLoginBindAPI extends CoreRequest {
 
-    MobileLoginBindAPI() {
-        super();
-    }
-
     private String phone;
     private String countryCode;
     private String smsCode;
     private String playerName;
     private String pwd;
     private String captcha;
+    MobileLoginBindAPI() {
+        super();
+    }
 
     @Override
     protected String getAction() {
@@ -81,10 +80,6 @@ public class MobileLoginBindAPI extends CoreRequest {
         return this;
     }
 
-    public interface MobileLoginBindCallBack extends KzingCallBack {
-        void onSuccess(MemberInfo memberInfo);
-    }
-
     public MobileLoginBindAPI setPhone(String phone) {
         this.phone = phone;
         return this;
@@ -113,6 +108,10 @@ public class MobileLoginBindAPI extends CoreRequest {
     public MobileLoginBindAPI setCaptcha(String captcha) {
         this.captcha = captcha;
         return this;
+    }
+
+    public interface MobileLoginBindCallBack extends KzingCallBack {
+        void onSuccess(MemberInfo memberInfo);
     }
 
 

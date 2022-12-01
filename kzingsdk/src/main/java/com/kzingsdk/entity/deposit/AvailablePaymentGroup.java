@@ -8,9 +8,18 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class AvailablePaymentGroup implements Parcelable{
+public class AvailablePaymentGroup implements Parcelable {
 
 
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public AvailablePaymentGroup createFromParcel(Parcel in) {
+            return new AvailablePaymentGroup(in);
+        }
+
+        public AvailablePaymentGroup[] newArray(int size) {
+            return new AvailablePaymentGroup[size];
+        }
+    };
     private String categoryId;
     private String opName;
     private String displayOrder;
@@ -26,6 +35,23 @@ public class AvailablePaymentGroup implements Parcelable{
 
     public AvailablePaymentGroup() {
 
+    }
+
+    public AvailablePaymentGroup(Parcel in) {
+        categoryId = in.readString();
+        opName = in.readString();
+        displayOrder = in.readString();
+        depositAmountFormat = in.readString();
+        status = in.readString();
+        isMain = in.readString();
+        ptCss = in.readString();
+        created = in.readString();
+        updated = in.readString();
+        currency = in.readString();
+        brandId = in.readString();
+        int i = 0;
+        Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
+        availableChannel = (ArrayList<String>) customObjects[i++];
     }
 
     public static AvailablePaymentGroup newInstance(JSONObject rootObject) {
@@ -144,33 +170,6 @@ public class AvailablePaymentGroup implements Parcelable{
 
     public void setAvailableChannel(ArrayList<String> availableChannel) {
         this.availableChannel = availableChannel;
-    }
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public AvailablePaymentGroup createFromParcel(Parcel in) {
-            return new AvailablePaymentGroup(in);
-        }
-
-        public AvailablePaymentGroup[] newArray(int size) {
-            return new AvailablePaymentGroup[size];
-        }
-    };
-
-    public AvailablePaymentGroup(Parcel in) {
-        categoryId = in.readString();
-        opName = in.readString();
-        displayOrder = in.readString();
-        depositAmountFormat = in.readString();
-        status = in.readString();
-        isMain = in.readString();
-        ptCss = in.readString();
-        created = in.readString();
-        updated = in.readString();
-        currency = in.readString();
-        brandId = in.readString();
-        int i = 0;
-        Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
-        availableChannel = (ArrayList<String>) customObjects[i++];
     }
 
     @Override

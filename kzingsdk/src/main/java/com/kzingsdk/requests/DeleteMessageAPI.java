@@ -16,11 +16,11 @@ import io.reactivex.Observable;
 
 public class DeleteMessageAPI extends CoreRequest {
 
+    private List<String> idList = new ArrayList<>();
+
     DeleteMessageAPI() {
         super();
     }
-
-    private List<String> idList = new ArrayList<>();
 
     @Override
     protected String getAction() {
@@ -71,10 +71,6 @@ public class DeleteMessageAPI extends CoreRequest {
         return this;
     }
 
-    public interface DeleteMessageCallBack extends KzingCallBack {
-        void onSuccess();
-    }
-
     /**
      * @param id From {@link com.kzingsdk.entity.Message} returned by {@link GetMessageListAPI}
      */
@@ -86,6 +82,10 @@ public class DeleteMessageAPI extends CoreRequest {
     public DeleteMessageAPI clearParamIds() {
         idList.clear();
         return this;
+    }
+
+    public interface DeleteMessageCallBack extends KzingCallBack {
+        void onSuccess();
     }
 
 

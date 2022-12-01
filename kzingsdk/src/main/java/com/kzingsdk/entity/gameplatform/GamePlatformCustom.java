@@ -8,19 +8,21 @@ import java.util.ArrayList;
 /**
  * GamePlatfrom fall into GamePlatformCustom is something not a real GamePlatform. Which is a self-define group of games like "Fishing" is including many difference fishing games from difference GamePlatfrom.
  */
-public class GamePlatformCustom extends GamePlatform{
+public class GamePlatformCustom extends GamePlatform {
 
-    private String customgpid = "" ;
-    private String customgpname = "" ;
-    private String customgpename = "" ;
-    private String banner = "" ;
-    private boolean isBig = false ;
+    private String customgpid = "";
+    private String customgpname = "";
+    private String customgpename = "";
+    private String banner = "";
+    private boolean isBig = false;
     private ArrayList<Playable> playableArrayList = new ArrayList<>();
 
 
-    public GamePlatformCustom(){
+    public GamePlatformCustom() {
 
-    };
+    }
+
+    ;
 
     public static GamePlatformCustom newInstance(JSONObject rootObject) {
         GamePlatformCustom item = new GamePlatformCustom();
@@ -36,14 +38,14 @@ public class GamePlatformCustom extends GamePlatform{
         item.setPlayStatus(PlayStatus.getPlayStatus(statusFlag));
 
         JSONArray groupsArray = rootObject.optJSONArray("childs");
-        if(groupsArray!=null){
-            for(int i = 0 ; i < groupsArray.length() ; i++){
-                GamePlatform gp = GamePlatform.newInstance(groupsArray.optJSONObject(i),true);
-                if(gp.getChildArrayList().size()>0 && gp.getChildArrayList().get(0).isEnabled()){
+        if (groupsArray != null) {
+            for (int i = 0; i < groupsArray.length(); i++) {
+                GamePlatform gp = GamePlatform.newInstance(groupsArray.optJSONObject(i), true);
+                if (gp.getChildArrayList().size() > 0 && gp.getChildArrayList().get(0).isEnabled()) {
                     item.playableArrayList.add(gp);
-                }else if( gp.getChildArrayList().size()==0 &&
+                } else if (gp.getChildArrayList().size() == 0 &&
                         (gp.getPlayStatus().contains(PlayStatus.ENABLE_APP) || gp.getPlayStatus().contains(PlayStatus.ENABLE_H5)
-                        ) ){
+                        )) {
                     item.playableArrayList.add(gp);
                 }
             }

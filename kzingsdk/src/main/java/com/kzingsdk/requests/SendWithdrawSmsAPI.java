@@ -68,10 +68,6 @@ public class SendWithdrawSmsAPI extends CoreRequest {
         return this;
     }
 
-    public interface SendWithdrawSmsCallBack extends KzingCallBack {
-        void onSuccess(RegSendSmsResult regSendSmsResult);
-    }
-
     public SendWithdrawSmsAPI setSmsPhoneNoCountry(String smsPhoneNoCountry) {
         this.smsPhoneNoCountry = smsPhoneNoCountry;
         return this;
@@ -85,6 +81,10 @@ public class SendWithdrawSmsAPI extends CoreRequest {
     public SendWithdrawSmsAPI setSmsType(Integer smsType) {
         this.smsType = smsType;
         return this;
+    }
+
+    public interface SendWithdrawSmsCallBack extends KzingCallBack {
+        void onSuccess(RegSendSmsResult regSendSmsResult);
     }
 
 }

@@ -14,13 +14,12 @@ import io.reactivex.Observable;
 
 public class MobileLoginAPI extends CoreRequest {
 
-    MobileLoginAPI() {
-        super();
-    }
-
     private String phone;
     private String countryCode;
     private String smsCode;
+    MobileLoginAPI() {
+        super();
+    }
 
     @Override
     protected String getAction() {
@@ -75,10 +74,6 @@ public class MobileLoginAPI extends CoreRequest {
         return this;
     }
 
-    public interface MobileLoginCallBack extends KzingCallBack {
-        void onSuccess(MemberInfo memberInfo);
-    }
-
     public MobileLoginAPI setPhone(String phone) {
         this.phone = phone;
         return this;
@@ -92,6 +87,10 @@ public class MobileLoginAPI extends CoreRequest {
     public MobileLoginAPI setSmsCode(String smsCode) {
         this.smsCode = smsCode;
         return this;
+    }
+
+    public interface MobileLoginCallBack extends KzingCallBack {
+        void onSuccess(MemberInfo memberInfo);
     }
 
 
