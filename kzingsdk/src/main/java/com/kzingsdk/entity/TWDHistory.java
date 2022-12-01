@@ -14,7 +14,9 @@ public class TWDHistory {
     private BigDecimal bonus;
     private BigDecimal ddeals;
     private BigDecimal wFee;
+    private BigDecimal transAmount;
     private Integer statusCode;
+    private Integer finalResultCode;
     private String status;
     private String currency;
     private String dno;
@@ -33,6 +35,17 @@ public class TWDHistory {
     private String cryptoAddress;
     private String cryptoAddress1;
     private String cryptoAddress2;
+    private String finalResult;
+    private String inImageAn;
+    private String inImageH5;
+    private String inImageIos;
+    private String inGpid;
+    private String inGpName;
+    private String outImageAn;
+    private String outImageH5;
+    private String outImageIos;
+    private String outGpid;
+    private String outGpName;
     private Boolean isUploaded;
     private Boolean manualAdjusted;
     private Boolean canCancal;
@@ -43,8 +56,10 @@ public class TWDHistory {
         twdHistory.amount = BigDecimalUtil.optBigDecimal(rootObject, "amount");
         twdHistory.bonus = BigDecimalUtil.optBigDecimal(rootObject, "bonus");
         twdHistory.ddeals = BigDecimalUtil.optBigDecimal(rootObject, "ddeals");
+        twdHistory.transAmount = BigDecimalUtil.optBigDecimal(rootObject, "transamount");
         twdHistory.wFee = BigDecimalUtil.optBigDecimal(rootObject, "wfee");
         twdHistory.statusCode = rootObject.optInt("status_code");
+        twdHistory.finalResultCode = rootObject.optInt("finalresult_code");
         twdHistory.status = rootObject.optString("status");
         twdHistory.currency = rootObject.optString("currency");
         twdHistory.dno = rootObject.optString("dno");
@@ -63,6 +78,17 @@ public class TWDHistory {
         twdHistory.cryptoAddress = rootObject.optString("cryptoAddress");
         twdHistory.cryptoAddress1 = rootObject.optString("cryptoAddress1");
         twdHistory.cryptoAddress2 = rootObject.optString("cryptoAddress2");
+        twdHistory.finalResult = rootObject.optString("finalresult");
+        twdHistory.inImageAn = rootObject.optString("in_image_an");
+        twdHistory.inImageH5 = rootObject.optString("in_image_h5");
+        twdHistory.inImageIos = rootObject.optString("in_image_ios");
+        twdHistory.inGpid = rootObject.optString("ingpid");
+        twdHistory.inGpName = rootObject.optString("ingpname");
+        twdHistory.outImageAn = rootObject.optString("out_image_an");
+        twdHistory.outImageH5 = rootObject.optString("out_image_h5");
+        twdHistory.outImageIos = rootObject.optString("out_image_ios");
+        twdHistory.outGpid= rootObject.optString("outgpid");
+        twdHistory.outGpName = rootObject.optString("outgpname");
         twdHistory.isUploaded = rootObject.optBoolean("isUploaded");
         twdHistory.manualAdjusted = rootObject.optBoolean("manualAdjusted");
         twdHistory.canCancal = rootObject.optBoolean("canCancal");
@@ -283,6 +309,110 @@ public class TWDHistory {
 
     public void setCanCancal(Boolean canCancal) {
         this.canCancal = canCancal;
+    }
+
+    public BigDecimal getTransAmount() {
+        return transAmount;
+    }
+
+    public void setTransAmount(BigDecimal transAmount) {
+        this.transAmount = transAmount;
+    }
+
+    public Integer getFinalResultCode() {
+        return finalResultCode;
+    }
+
+    public void setFinalResultCode(Integer finalResultCode) {
+        this.finalResultCode = finalResultCode;
+    }
+
+    public String getFinalResult() {
+        return finalResult;
+    }
+
+    public void setFinalResult(String finalResult) {
+        this.finalResult = finalResult;
+    }
+
+    public String getInImageAn() {
+        return inImageAn;
+    }
+
+    public void setInImageAn(String inImageAn) {
+        this.inImageAn = inImageAn;
+    }
+
+    public String getInImageH5() {
+        return inImageH5;
+    }
+
+    public void setInImageH5(String inImageH5) {
+        this.inImageH5 = inImageH5;
+    }
+
+    public String getInImageIos() {
+        return inImageIos;
+    }
+
+    public void setInImageIos(String inImageIos) {
+        this.inImageIos = inImageIos;
+    }
+
+    public String getInGpid() {
+        return inGpid;
+    }
+
+    public void setInGpid(String inGpid) {
+        this.inGpid = inGpid;
+    }
+
+    public String getInGpName() {
+        return inGpName;
+    }
+
+    public void setInGpName(String inGpName) {
+        this.inGpName = inGpName;
+    }
+
+    public String getOutImageAn() {
+        return outImageAn;
+    }
+
+    public void setOutImageAn(String outImageAn) {
+        this.outImageAn = outImageAn;
+    }
+
+    public String getOutImageH5() {
+        return outImageH5;
+    }
+
+    public void setOutImageH5(String outImageH5) {
+        this.outImageH5 = outImageH5;
+    }
+
+    public String getOutImageIos() {
+        return outImageIos;
+    }
+
+    public void setOutImageIos(String outImageIos) {
+        this.outImageIos = outImageIos;
+    }
+
+    public String getOutGpid() {
+        return outGpid;
+    }
+
+    public void setOutGpid(String outGpid) {
+        this.outGpid = outGpid;
+    }
+
+    public String getOutGpName() {
+        return outGpName;
+    }
+
+    public void setOutGpName(String outGpName) {
+        this.outGpName = outGpName;
     }
 }
 
