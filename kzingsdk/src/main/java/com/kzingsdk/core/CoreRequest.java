@@ -132,7 +132,7 @@ public abstract class CoreRequest {
     protected boolean dynamicDomainChanged = false;
     protected ArrayList<KzingCallBack> kzingCallBackList = new ArrayList<>();
     protected final Consumer<Throwable> defaultOnErrorConsumer = throwable -> {
-        //log(throwable.toString());
+        log(throwable.toString());
         if (kzingCallBackList.size() > 0) {
             for (KzingCallBack kzingCallBack : kzingCallBackList) {
                 if (throwable instanceof KzingRequestException) {
@@ -155,8 +155,8 @@ public abstract class CoreRequest {
         if (response == null) {
             throw new KzingRequestException(null, null, "showReturnLog : response == null", choseDomain, "");
         }
-        //log("Result " + response.code() + " : " + response);
-        //log("Result body : " + response.body());
+        log("Result " + response.code() + " : " + response);
+        log("Result body : " + response.body());
     };
     private final Consumer<Response<String>> checkResponseCodes = response -> {
         int statusCode = response.code();
@@ -398,7 +398,7 @@ public abstract class CoreRequest {
     }
 
     private void showLogDebug(Request request) throws IOException {
-        //log(request.toString());
+        log(request.toString());
         RequestBody requestBody = request.body();
         if (requestBody != null) {
             Buffer buffer = new Buffer();
@@ -409,10 +409,10 @@ public abstract class CoreRequest {
                 charset = contentType.charset(charset);
             }
             if (charset != null) {
-                log(KzingSDK.getInstance().getAid() + " : " + buffer.readString(charset));
+                log(buffer.readString(charset));
             }
         } else {
-            //log("requestBody == null");
+            log("requestBody == null");
         }
     }
 
@@ -455,8 +455,8 @@ public abstract class CoreRequest {
                 throw new KzingException("MD5 Key is not set yet.");
             }
             JSONObject data = generateParamsJson();
-            //log("------");
-            //log(data.toString());
+            log("------");
+            log(data.toString());
             String dataRSA;
             if (getAction().equals("c6ace99")) {
                 dataRSA = data.toString();
@@ -476,7 +476,7 @@ public abstract class CoreRequest {
             dataWithKey.put(ACTION_OBJECT_NAME_K36, getK36Action());
             dataWithKey.put(PLATFORM_OBJECT_NAME, PLATFORM_NAME);
             dataWithKey.put(SIGN_OBJECT_NAME, MD5Utils.md5(dataRSA + KzingSDK.getInstance().getMd5Key()).toUpperCase());
-//            log(KzingSDK.getInstance().getAid() + " : " + dataWithKey.toString());
+            log(dataWithKey.toString());
             PublicKey publicKeyBasic = RSAUtils.getPublicKey(Base64Utils.decode(KzingSDK.getInstance().getBasicRsaKey()));
             byte[] encryptByteBasic = RSAUtils.encryptLongData(dataWithKey.toString().getBytes(), publicKeyBasic);
             return Base64Utils.encode(encryptByteBasic);
