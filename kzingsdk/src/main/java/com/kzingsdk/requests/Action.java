@@ -49,7 +49,9 @@ final class Action {
     static final String getTWDHistory = "trhj1d8";
     static final String setDefaultCryptoWithdrawAddress = "b62trh8";
     static final String copyCryptoAddress = "1Iqztbx";
-
+    static final String getMemberRewardVip = "wppim4f";
+    static final String getRewardVipAutoBonus = "h1fsfbi";
+    static final String getRewardVipTurnover = "74jjnvx";
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";
     static final String requestUsernameByPhoneSendCode = "XXLy0yX";

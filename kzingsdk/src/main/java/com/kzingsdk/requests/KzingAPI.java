@@ -318,6 +318,18 @@ public final class KzingAPI {
         return new GetFixAmountRangeAPI();
     }
 
+    public static GetMemberRewardVipAPI getMemberRewardVip() {
+        return new GetMemberRewardVipAPI();
+    }
+
+    public static GetRewardVipAutoBonusAPI getRewardVipAutoBonus() {
+        return new GetRewardVipAutoBonusAPI();
+    }
+
+    public static GetRewardVipTurnoverAPI getRewardVipTurnover() {
+        return new GetRewardVipTurnoverAPI();
+    }
+
     public static RegParamAPI getRegParam() {
         return new RegParamAPI();
     }
