@@ -147,7 +147,7 @@ public class ActivityItem implements Parcelable {
         item.setIsGift(rootObject.optBoolean("isGift"));
         item.setShow(rootObject.optString("show"));
         item.setDisplayOrder(rootObject.optInt("displayorder", 0));
-        item.setRedirectType(RedirectType.valueOf(rootObject.optString("redirect_to").toUpperCase()));
+        item.setRedirectType(RedirectType.valueOfName(rootObject.optString("redirect_to")));
         item.setRedirectUrl(rootObject.optString("redirect_url"));
         item.setBgColor(rootObject.optString("bgColor"));
         item.setFontColor(rootObject.optString("fontColor"));
@@ -166,8 +166,8 @@ public class ActivityItem implements Parcelable {
         item.setCGroupIds(rootObject.optString(" cgroupids"));
         item.setGroupIds(rootObject.optString(" groupids"));
         item.setTargetUserType(rootObject.optString(" targetusertype"));
-        item.setActiveApply(rootObject.optInt(" activeapply") == 1);
-        item.setPendingPayoutActivity(rootObject.optInt(" ispendingpayoutactivity") == 1);
+        item.setActiveApply(rootObject.optString(" activeapply").equals("1"));
+        item.setPendingPayoutActivity(rootObject.optString(" ispendingpayoutactivity").equals("1"));
         item.setPers(rootObject.optInt(" pers"));
         item.setPersDuration(rootObject.optInt(" persduration"));
         item.setResetPeriod(rootObject.optInt(" resetperiod"));
@@ -696,7 +696,16 @@ public class ActivityItem implements Parcelable {
     }
 
     public enum RedirectType {
-        ACTIVITY, WEB
+        ACTIVITY, WEB;
+
+        public static RedirectType valueOfName(String name) {
+            for (RedirectType type : RedirectType.values()) {
+                if (type.name().equalsIgnoreCase(name)) {
+                    return type;
+                }
+            }
+            return ACTIVITY;
+        }
     }
 
     public static class ActivityType implements Parcelable {
