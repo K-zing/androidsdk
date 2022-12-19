@@ -161,14 +161,14 @@ public class ActivityItem implements Parcelable {
         item.setDisplayEndTime(rootObject.optLong("displayendtime"));
         item.setKeyFeature(rootObject.optString("keyfeature"));
 
-        item.setAcTypeId(rootObject.optString(" actypeid"));
-        item.setAgentCodes(rootObject.optString(" agentcodes"));
-        item.setCGroupIds(rootObject.optString(" cgroupids"));
-        item.setGroupIds(rootObject.optString(" groupids"));
-        item.setTargetUserType(rootObject.optString(" targetusertype"));
-        item.setActiveApply(rootObject.optString(" activeapply").equals("1"));
-        item.setPendingPayoutActivity(rootObject.optString(" ispendingpayoutactivity").equals("1"));
-        item.setPers(rootObject.optInt(" pers"));
+        item.setAcTypeId(rootObject.optString("actypeid"));
+        item.setAgentCodes(rootObject.optString("agentcodes"));
+        item.setCGroupIds(rootObject.optString("cgroupids"));
+        item.setGroupIds(rootObject.optString("groupids"));
+        item.setTargetUserType(rootObject.optString("targetusertype"));
+        item.setActiveApply(rootObject.optString("activeapply").equals("1"));
+        item.setPendingPayoutActivity(rootObject.optString("ispendingpayoutactivity").equals("1"));
+        item.setPers(rootObject.optInt("pers"));
         item.setPersDuration(rootObject.optInt(" persduration"));
         item.setResetPeriod(rootObject.optInt(" resetperiod"));
         item.setRunEveryday(rootObject.optInt(" run_everyday"));
@@ -178,8 +178,10 @@ public class ActivityItem implements Parcelable {
         item.restrictedPlatform.addAll(Arrays.asList(restrictedPlatformArray));
 
         JSONArray groupNamesJSONArray = rootObject.optJSONArray("groupnames");
-        for (int i = 0; i < groupNamesJSONArray.length(); i++) {
-            item.getGroupNames().add(groupNamesJSONArray.optString(i));
+        if (groupNamesJSONArray!=null){
+            for (int i = 0; i < groupNamesJSONArray.length(); i++) {
+                item.getGroupNames().add(groupNamesJSONArray.optString(i));
+            }
         }
         JSONObject acDataJSONObject = rootObject.optJSONObject("ac_data");
         if (acDataJSONObject != null) {
