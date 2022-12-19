@@ -17,6 +17,7 @@ public class TransferGameToGameAPI extends CoreRequest {
 
     private String fromGpAccountId;
     private String toGpAccountId;
+    private String actId;
     private BigDecimal transferAmount;
 
     TransferGameToGameAPI() {
@@ -29,25 +30,12 @@ public class TransferGameToGameAPI extends CoreRequest {
     }
 
     @Override
-    protected Observable<String> validateParams() {
-        if (fromGpAccountId == null) {
-            return Observable.just("From GP Account ID is missing");
-        }
-        if (toGpAccountId == null) {
-            return Observable.just("To GP Account ID is missing");
-        }
-        if (transferAmount == null) {
-            return Observable.just("Transfer amount missing");
-        }
-        return super.validateParams();
-    }
-
-    @Override
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
             jsonData.put("fromid", fromGpAccountId);
             jsonData.put("toid", toGpAccountId);
+            jsonData.put("actid", actId);
             jsonData.put("transferAmount", transferAmount);
             return jsonData;
         } catch (JSONException ignored) {
@@ -94,6 +82,11 @@ public class TransferGameToGameAPI extends CoreRequest {
 
     public TransferGameToGameAPI setParamTransferAmount(BigDecimal transferAmount) throws NumberFormatException {
         this.transferAmount = transferAmount;
+        return this;
+    }
+
+    public TransferGameToGameAPI setParamActId(String actId) {
+        this.actId = actId;
         return this;
     }
 
