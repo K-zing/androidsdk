@@ -65,6 +65,18 @@ public class ActivityItem implements Parcelable {
     private HashSet<String> restrictedPlatform = new HashSet<>();
     private String currency;
 
+    private String acTypeId;
+    private String agentCodes;
+    private String cGroupIds;
+    private String groupIds;
+    private String targetUserType;
+    private Boolean activeApply;
+    private Boolean isPendingPayoutActivity;
+    private Integer pers;
+    private Integer persDuration;
+    private Integer resetPeriod;
+    private Integer runEveryday;
+
     public ActivityItem() {
 
     }
@@ -107,6 +119,17 @@ public class ActivityItem implements Parcelable {
         displayEndTime = in.readLong();
         keyFeature = in.readString();
         currency = in.readString();
+        acTypeId = in.readString();
+        agentCodes = in.readString();
+        cGroupIds = in.readString();
+        groupIds = in.readString();
+        targetUserType = in.readString();
+        activeApply = in.readInt() == 1;
+        isPendingPayoutActivity = in.readInt() == 1;
+        pers = in.readInt();
+        persDuration = in.readInt();
+        resetPeriod = in.readInt();
+        runEveryday = in.readInt();
     }
 
     public static ActivityItem newInstance(JSONObject rootObject) {
@@ -137,6 +160,18 @@ public class ActivityItem implements Parcelable {
         item.setDisplayStartTime(rootObject.optLong("displaystarttime"));
         item.setDisplayEndTime(rootObject.optLong("displayendtime"));
         item.setKeyFeature(rootObject.optString("keyfeature"));
+
+        item.setAcTypeId(rootObject.optString(" actypeid"));
+        item.setAgentCodes(rootObject.optString(" agentcodes"));
+        item.setCGroupIds(rootObject.optString(" cgroupids"));
+        item.setGroupIds(rootObject.optString(" groupids"));
+        item.setTargetUserType(rootObject.optString(" targetusertype"));
+        item.setActiveApply(rootObject.optInt(" activeapply") == 1);
+        item.setPendingPayoutActivity(rootObject.optInt(" ispendingpayoutactivity") == 1);
+        item.setPers(rootObject.optInt(" pers"));
+        item.setPersDuration(rootObject.optInt(" persduration"));
+        item.setResetPeriod(rootObject.optInt(" resetperiod"));
+        item.setRunEveryday(rootObject.optInt(" run_everyday"));
 
         String restrictedPlatformArrayString = rootObject.optString("restricted_platform");
         String[] restrictedPlatformArray = restrictedPlatformArrayString.split(",");
@@ -211,7 +246,17 @@ public class ActivityItem implements Parcelable {
         dest.writeLong(displayEndTime);
         dest.writeString(keyFeature);
         dest.writeString(currency);
-
+        dest.writeString(acTypeId);
+        dest.writeString(agentCodes);
+        dest.writeString(cGroupIds);
+        dest.writeString(groupIds);
+        dest.writeString(targetUserType);
+        dest.writeInt(activeApply ? 1 : 0);
+        dest.writeInt(isPendingPayoutActivity ? 1 : 0);
+        dest.writeInt(pers);
+        dest.writeInt(persDuration);
+        dest.writeInt(resetPeriod);
+        dest.writeInt(runEveryday);
     }
 
     private void setCanJoin(boolean canJoin) {
@@ -535,6 +580,94 @@ public class ActivityItem implements Parcelable {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public String getAcTypeId() {
+        return acTypeId;
+    }
+
+    public void setAcTypeId(String acTypeId) {
+        this.acTypeId = acTypeId;
+    }
+
+    public String getAgentCodes() {
+        return agentCodes;
+    }
+
+    public void setAgentCodes(String agentCodes) {
+        this.agentCodes = agentCodes;
+    }
+
+    public String getCGroupIds() {
+        return cGroupIds;
+    }
+
+    public void setCGroupIds(String cGroupIds) {
+        this.cGroupIds = cGroupIds;
+    }
+
+    public String getGroupIds() {
+        return groupIds;
+    }
+
+    public void setGroupIds(String groupIds) {
+        this.groupIds = groupIds;
+    }
+
+    public String getTargetUserType() {
+        return targetUserType;
+    }
+
+    public void setTargetUserType(String targetUserType) {
+        this.targetUserType = targetUserType;
+    }
+
+    public Boolean getActiveApply() {
+        return activeApply;
+    }
+
+    public void setActiveApply(Boolean activeApply) {
+        this.activeApply = activeApply;
+    }
+
+    public Boolean getPendingPayoutActivity() {
+        return isPendingPayoutActivity;
+    }
+
+    public void setPendingPayoutActivity(Boolean pendingPayoutActivity) {
+        isPendingPayoutActivity = pendingPayoutActivity;
+    }
+
+    public Integer getPers() {
+        return pers;
+    }
+
+    public void setPers(Integer pers) {
+        this.pers = pers;
+    }
+
+    public Integer getPersDuration() {
+        return persDuration;
+    }
+
+    public void setPersDuration(Integer persDuration) {
+        this.persDuration = persDuration;
+    }
+
+    public Integer getResetPeriod() {
+        return resetPeriod;
+    }
+
+    public void setResetPeriod(Integer resetPeriod) {
+        this.resetPeriod = resetPeriod;
+    }
+
+    public Integer getRunEveryday() {
+        return runEveryday;
+    }
+
+    public void setRunEveryday(Integer runEveryday) {
+        this.runEveryday = runEveryday;
     }
 
     @Override

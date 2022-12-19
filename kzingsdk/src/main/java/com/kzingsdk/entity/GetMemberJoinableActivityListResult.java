@@ -21,12 +21,11 @@ public class GetMemberJoinableActivityListResult extends SimpleApiResult {
         result.setStatus(simpleApiResult.getStatus());
         JSONObject responseObject = rootObject.optJSONObject("response");
         if (responseObject != null) {
-            result.mainWallet = rootObject.optBoolean("mainwallet");
-        } else {
-            JSONArray responseArray = rootObject.optJSONArray("response");
-            if (responseArray != null) {
-                for (int i = 0; i < responseArray.length(); i++) {
-                    result.activityItemList.add(ActivityItem.newInstance(responseArray.optJSONObject(i)));
+            result.mainWallet = responseObject.optBoolean("mainwallet");
+            JSONArray listArray = responseObject.optJSONArray("list");
+            if (listArray != null) {
+                for (int i = 0; i < listArray.length(); i++) {
+                    result.activityItemList.add(ActivityItem.newInstance(listArray.optJSONObject(i)));
                 }
             }
         }
