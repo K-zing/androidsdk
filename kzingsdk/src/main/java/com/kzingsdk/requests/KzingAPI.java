@@ -330,6 +330,10 @@ public final class KzingAPI {
         return new GetRewardVipTurnoverAPI();
     }
 
+    public static GetPlayerReferralReportAPI getPlayerReferralReport() {
+        return new GetPlayerReferralReportAPI();
+    }
+
     public static RegParamAPI getRegParam() {
         return new RegParamAPI();
     }

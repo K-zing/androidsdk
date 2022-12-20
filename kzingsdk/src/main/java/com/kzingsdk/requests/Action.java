@@ -52,6 +52,7 @@ final class Action {
     static final String getMemberRewardVip = "wppim4f";
     static final String getRewardVipAutoBonus = "h1fsfbi";
     static final String getRewardVipTurnover = "74jjnvx";
+    static final String getPlayerReferralReport = "jjnv74x";
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";
     static final String requestUsernameByPhoneSendCode = "XXLy0yX";
