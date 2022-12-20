@@ -4,19 +4,20 @@ import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.GetPlayerReferralReport;
+import com.kzingsdk.util.Constant;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import io.reactivex.Observable;
 
 public class GetPlayerReferralReportAPI extends CoreRequest {
 
-    private String start;
-    private String end;
+    private Calendar startDateCalendar, endDateCalendar;
     private String currency;
 
     GetPlayerReferralReportAPI() {
@@ -37,8 +38,8 @@ public class GetPlayerReferralReportAPI extends CoreRequest {
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            jsonData.put("start", start);
-            jsonData.put("end", end);
+            jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
+            jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
             jsonData.put("currency", currency);
             return jsonData;
         } catch (JSONException ignored) {
@@ -78,13 +79,13 @@ public class GetPlayerReferralReportAPI extends CoreRequest {
         void onSuccess(ArrayList<GetPlayerReferralReport> result);
     }
 
-    public GetPlayerReferralReportAPI setStart(String start) {
-        this.start = start;
+    public GetPlayerReferralReportAPI setStartDateCalendar(Calendar startDateCalendar) {
+        this.startDateCalendar = startDateCalendar;
         return this;
     }
 
-    public GetPlayerReferralReportAPI setEnd(String end) {
-        this.end = end;
+    public GetPlayerReferralReportAPI setEndDateCalendar(Calendar endDateCalendar) {
+        this.endDateCalendar = endDateCalendar;
         return this;
     }
 
