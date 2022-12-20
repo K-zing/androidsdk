@@ -705,6 +705,10 @@ public class ClientInstantInfo implements Parcelable {
         this.allowBindCryptoAddress = allowBindCryptoAddress;
     }
 
+    public Boolean getAllowPlayerReferralReport() {
+        return allowPlayerReferralReport;
+    }
+
     public ClientInstantInfo setAllowPlayerReferralReport(Boolean allowPlayerReferralReport) {
         this.allowPlayerReferralReport = allowPlayerReferralReport;
         return this;
