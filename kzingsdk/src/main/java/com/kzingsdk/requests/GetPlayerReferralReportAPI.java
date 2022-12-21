@@ -38,8 +38,8 @@ public class GetPlayerReferralReportAPI extends CoreRequest {
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
-            jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
+            jsonData.put("start", Constant.DATE_FORMAT.format(startDateCalendar.getTime()));
+            jsonData.put("end", Constant.DATE_FORMAT.format(endDateCalendar.getTime()));
             jsonData.put("currency", currency);
             return jsonData;
         } catch (JSONException ignored) {
