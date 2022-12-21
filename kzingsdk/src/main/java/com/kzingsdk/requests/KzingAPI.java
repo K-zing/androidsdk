@@ -334,6 +334,10 @@ public final class KzingAPI {
         return new GetPlayerReferralReportAPI();
     }
 
+    public static GetAllRewardVipAPI getAllRewardVip() {
+        return new GetAllRewardVipAPI();
+    }
+
     public static RegParamAPI getRegParam() {
         return new RegParamAPI();
     }
