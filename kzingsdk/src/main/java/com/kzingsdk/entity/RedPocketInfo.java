@@ -31,6 +31,8 @@ public class RedPocketInfo implements Parcelable {
     private String notActiveReason = "";
     private String image = "";
     private String imgOption = "";
+    private String isPublic = "";
+
 
     private Integer notActiveReasonCode = 0;
     private ArrayList<RedPocketTime> redPocketTimeList = new ArrayList<>();
@@ -50,6 +52,7 @@ public class RedPocketInfo implements Parcelable {
         notActiveReason = in.readString();
         image = in.readString();
         imgOption = in.readString();
+        isPublic = in.readString();
         notActiveReasonCode = in.readInt();
         Object[] customObjects = in.readArray(RedPocketInfo.class.getClassLoader());
         redPocketTimeList = (ArrayList<RedPocketTime>) customObjects[0];
@@ -66,6 +69,8 @@ public class RedPocketInfo implements Parcelable {
         redPocketInfo.setDisplayType(rootObject.optString("display_type", ""));
         redPocketInfo.setNotActiveReason(rootObject.optString("not_active_reason"));
         redPocketInfo.setNotActiveReasonCode(rootObject.optInt("not_active_reason_code"));
+        redPocketInfo.setIsPublic(rootObject.optString("ispublic"));
+
         JSONArray rpTimeArray = rootObject.optJSONArray("rpTime");
         if (rpTimeArray != null) {
             for (int i = 0; i < rpTimeArray.length(); i++) {
@@ -183,6 +188,15 @@ public class RedPocketInfo implements Parcelable {
         return this;
     }
 
+    public String getIsPublic() {
+        return isPublic;
+    }
+
+    public RedPocketInfo setIsPublic(String isPublic) {
+        this.isPublic = isPublic;
+        return this;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(hasRedPocketActivity ? 1 : 0);
@@ -195,6 +209,7 @@ public class RedPocketInfo implements Parcelable {
         dest.writeString(notActiveReason);
         dest.writeString(image);
         dest.writeString(imgOption);
+        dest.writeString(isPublic);
         dest.writeInt(notActiveReasonCode);
         Object[] customObjects = new Object[1];
         customObjects[0] = redPocketTimeList;
