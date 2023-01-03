@@ -10,6 +10,7 @@ public class HotGame {
     private String code;
     private String gpid;
     private String gpName;
+    private String gpType;
     private String name;
     private String gpChildId;
     private String currency;
@@ -24,6 +25,7 @@ public class HotGame {
         item.setCode(rootObject.optString("code"));
         item.setGpid(rootObject.optString("gpid"));
         item.setGpName(rootObject.optString("gpname"));
+        item.setGpType(rootObject.optString("gptype"));
         item.setName(rootObject.optString("name"));
         item.setGpChildId(rootObject.optString("gpchildid"));
         item.setCurrency(rootObject.optString("currency"));
@@ -78,6 +80,15 @@ public class HotGame {
 
     public void setGpName(String gpName) {
         this.gpName = gpName;
+    }
+
+    public String getGpType() {
+        return gpType;
+    }
+
+    public HotGame setGpType(String gpType) {
+        this.gpType = gpType;
+        return this;
     }
 
     public String getName() {
