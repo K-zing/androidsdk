@@ -76,6 +76,8 @@ public class ClientInstantInfo implements Parcelable {
     private String depositAnnouncement;
     private String enterDepositPopup;
     private String dptCryptoFixedExchangeRate;
+    private String enterwithdrawalpopup;
+
     private Integer marqueeAnnouncementUnreadCount = 0;
     private Integer marqueeActivityUnreadCount = 0;
     private CaptchaApiId captchaApiId = new CaptchaApiId();
@@ -153,6 +155,7 @@ public class ClientInstantInfo implements Parcelable {
         depositAnnouncement = in.readString();
         enterDepositPopup = in.readString();
         dptCryptoFixedExchangeRate = in.readString();
+        enterwithdrawalpopup = in.readString();
         Object[] objectArray = in.readArray(ClientInstantInfo.class.getClassLoader());
         int i = 0;
         captchaApiId = (CaptchaApiId) objectArray[i++];
@@ -229,6 +232,7 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setDepositAnnouncement(rootObject.optString("depositAnnouncement"));
         clientInfo.setEnterDepositPopup(rootObject.optString("enterdepositpopup"));
         clientInfo.setDptCryptoFixedExchangeRate(rootObject.optString("dptCryptoFixedExchangeRate"));
+        clientInfo.setEnterwithdrawalpopup(rootObject.optString("enterwithdrawalpopup"));
 
         JSONObject captchaApiIdJSONObject = rootObject.optJSONObject("captchaApiId");
         if (captchaApiIdJSONObject != null)
@@ -412,6 +416,8 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeString(depositAnnouncement);
         dest.writeString(enterDepositPopup);
         dest.writeString(dptCryptoFixedExchangeRate);
+        dest.writeString(enterwithdrawalpopup);
+
         dest.writeArray(new Object[]{
                 captchaApiId,
                 memberPanAgentCode,
@@ -873,6 +879,14 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setDptCryptoFixedExchangeRate(String dptCryptoFixedExchangeRate) {
         this.dptCryptoFixedExchangeRate = dptCryptoFixedExchangeRate;
+    }
+
+    public String getEnterwithdrawalpopup() {
+        return enterwithdrawalpopup;
+    }
+
+    public void setEnterwithdrawalpopup(String enterwithdrawalpopup) {
+        this.enterwithdrawalpopup = enterwithdrawalpopup;
     }
 
     public ArrayList<String> getMemberPanAgentCode() {
