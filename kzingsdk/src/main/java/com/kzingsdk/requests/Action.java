@@ -53,7 +53,11 @@ final class Action {
     static final String getRewardVipAutoBonus = "h1fsfbi";
     static final String getRewardVipTurnover = "74jjnvx";
     static final String getPlayerReferralReport = "jjnv74x";
-    static final String getAllRewardVip = "jjnv74x";
+    static final String getAllRewardVip = "8dnvcdv";
+    static final String getProfileImages = "2pkl2sv";
+    static final String getPlayerProfileImages = "jw66uai";
+    static final String uploadProfileImages = "q1pwhft";
+    static final String updateProfileImages = "fo5o61t";
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";
     static final String requestUsernameByPhoneSendCode = "XXLy0yX";

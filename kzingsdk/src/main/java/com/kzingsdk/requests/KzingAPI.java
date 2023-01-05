@@ -338,6 +338,22 @@ public final class KzingAPI {
         return new GetAllRewardVipAPI();
     }
 
+    public static GetProfileImagesAPI getProfileImages() {
+        return new GetProfileImagesAPI();
+    }
+
+    public static GetPlayerProfileImagesAPI getPlayerProfileImages() {
+        return new GetPlayerProfileImagesAPI();
+    }
+
+    public static UploadProfileImagesAPI uploadProfileImages() {
+        return new UploadProfileImagesAPI();
+    }
+
+    public static UpdateProfileImagesAPI updateProfileImages() {
+        return new UpdateProfileImagesAPI();
+    }
+
     public static RegParamAPI getRegParam() {
         return new RegParamAPI();
     }
