@@ -14,8 +14,8 @@ public class MobileFloatingWindow {
     private String floatingStyleValue;
     private String id;
     private String lang;
-    private Integer order;
-    private Integer status;
+    private Integer order = 0;
+    private Integer status = 0;
     private String floatingImageId;
     private String floatingImagePath;
 
