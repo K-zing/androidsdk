@@ -40,7 +40,13 @@ public class GetFeMaintenanceStatusAPI extends CoreRequest {
 
     @Override
     public Observable<GetFeMaintenanceStatusResult> requestRx(final Context context) {
-        return super.baseExecute(context).map(GetFeMaintenanceStatusResult::newInstance);
+        return super.baseExecute(context)
+                .map(jsonResponse -> {
+                    if (jsonResponse.optJSONObject("data") != null) {
+                        return GetFeMaintenanceStatusResult.newInstance(jsonResponse.optJSONObject("data"));
+                    }
+                    return new GetFeMaintenanceStatusResult();
+                });
     }
 
     @Override

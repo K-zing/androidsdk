@@ -358,6 +358,10 @@ public final class KzingAPI {
         return new GetFeMaintenanceStatusAPI();
     }
 
+    public static SecurityCodeVerificationAPI securityCodeVerification() {
+        return new SecurityCodeVerificationAPI();
+    }
+
     public static RegParamAPI getRegParam() {
         return new RegParamAPI();
     }
