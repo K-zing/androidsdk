@@ -58,6 +58,7 @@ final class Action {
     static final String getPlayerProfileImages = "jw66uai";
     static final String uploadProfileImages = "q1pwhft";
     static final String updateProfileImages = "fo5o61t";
+    static final String getFeMaintenanceStatus = "0o1f8xt";
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";
     static final String requestUsernameByPhoneSendCode = "XXLy0yX";

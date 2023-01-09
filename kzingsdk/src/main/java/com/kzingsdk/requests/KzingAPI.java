@@ -354,6 +354,10 @@ public final class KzingAPI {
         return new UpdateProfileImagesAPI();
     }
 
+    public static GetFeMaintenanceStatusAPI getFeMaintenanceStatus() {
+        return new GetFeMaintenanceStatusAPI();
+    }
+
     public static RegParamAPI getRegParam() {
         return new RegParamAPI();
     }
