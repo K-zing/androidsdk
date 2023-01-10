@@ -33,6 +33,7 @@ public class WithdrawInfo {
     private String mobileBetCheckDesc;
     private String withdrawBindNetwork;
     private String limitWithdrawalCryptoAddress;
+    private String withdrawAllowBindOtherName;
     private boolean withdrawBindUsdt;
     private boolean allowWithdrawCfg;
     private boolean allowCryptoWithdrawCfg;
@@ -67,6 +68,7 @@ public class WithdrawInfo {
         withdrawInfo.setMobileBetCheckDesc(rootObject.optString("mobileBetCheckDesc"));
         withdrawInfo.setWithdrawBindNetwork(rootObject.optString("withdrawbindnetwork"));
         withdrawInfo.setLimitWithdrawalCryptoAddress(rootObject.optString("limitWithdrawalCryptoAddress"));
+        withdrawInfo.setWithdrawAllowBindOtherName(rootObject.optString("withdrawallowbindothername"));
         withdrawInfo.setAllowPlayerDeleteCard(rootObject.optString("allowPlayerDeleteCard", "OFF").equalsIgnoreCase("ON"));
         withdrawInfo.setWaterCheckBeforeWithdraw(rootObject.optString("waterCheckBeforeWithdraw", "OFF").equalsIgnoreCase("ON"));
         withdrawInfo.setWaterCheckOnOff(rootObject.optBoolean("watercheckonoff", false));
@@ -309,6 +311,14 @@ public class WithdrawInfo {
     public WithdrawInfo setLimitWithdrawalCryptoAddress(String limitWithdrawalCryptoAddress) {
         this.limitWithdrawalCryptoAddress = limitWithdrawalCryptoAddress;
         return this;
+    }
+
+    public String getWithdrawAllowBindOtherName() {
+        return withdrawAllowBindOtherName;
+    }
+
+    public void setWithdrawAllowBindOtherName(String withdrawAllowBindOtherName) {
+        this.withdrawAllowBindOtherName = withdrawAllowBindOtherName;
     }
 
     public boolean isWithdrawBindUsdt() {

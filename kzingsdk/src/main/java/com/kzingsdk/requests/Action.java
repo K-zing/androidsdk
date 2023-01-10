@@ -60,6 +60,7 @@ final class Action {
     static final String updateProfileImages = "fo5o61t";
     static final String getFeMaintenanceStatus = "0o1f8xt";
     static final String securityCodeVerification = "luv0fbi";
+    static final String getSuperdoorDomain = "luv0fbi";
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";
     static final String requestUsernameByPhoneSendCode = "XXLy0yX";

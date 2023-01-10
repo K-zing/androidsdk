@@ -362,6 +362,10 @@ public final class KzingAPI {
         return new SecurityCodeVerificationAPI();
     }
 
+    public static GetSuperdoorDomainAPI getSuperdoorDomain() {
+        return new GetSuperdoorDomainAPI();
+    }
+
     public static RegParamAPI getRegParam() {
         return new RegParamAPI();
     }
