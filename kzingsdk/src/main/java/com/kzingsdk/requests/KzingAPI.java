@@ -366,6 +366,10 @@ public final class KzingAPI {
         return new GetSuperdoorDomainAPI();
     }
 
+    public static GetReferralDataAPI getReferralData() {
+        return new GetReferralDataAPI();
+    }
+
     public static RegParamAPI getRegParam() {
         return new RegParamAPI();
     }
