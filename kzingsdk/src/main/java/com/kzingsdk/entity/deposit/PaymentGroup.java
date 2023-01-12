@@ -22,6 +22,7 @@ public class PaymentGroup implements Parcelable {
     private String image;
     private String name;
     private String desc;
+    private String icon;
     private PaymentType paymentType;
     private Integer displayorder;
     private ArrayList<BasePaymentMethod> paymentList = new ArrayList<>();
@@ -38,6 +39,7 @@ public class PaymentGroup implements Parcelable {
         if (paymentType == PaymentType.PREPAIDCARD) return;
         id = in.readString();
         desc = in.readString();
+        icon = in.readString();
         displayorder = in.readInt();
         Object[] customObjects = in.readArray(ThirdPartyPaymentBank.class.getClassLoader());
         int i = 0;
@@ -51,6 +53,7 @@ public class PaymentGroup implements Parcelable {
         item.setDisplayorder(rootObject.optInt("displayorder"));
         item.setImage(rootObject.optString("image"));
         item.setDesc(rootObject.optString("desc"));
+        item.setIcon(rootObject.optString("icon"));
         item.setPaymentType(PaymentType.valueOfTypeName(rootObject.optString("type")));
         return item;
     }
@@ -111,6 +114,14 @@ public class PaymentGroup implements Parcelable {
         this.desc = desc;
     }
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -124,6 +135,7 @@ public class PaymentGroup implements Parcelable {
         if (paymentType == PaymentType.PREPAIDCARD) return;
         dest.writeString(id);
         dest.writeString(desc);
+        dest.writeString(icon);
         dest.writeInt(displayorder);
         Object[] customObjects = new Object[1];
         int i = 0;
