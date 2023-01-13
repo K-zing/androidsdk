@@ -62,6 +62,7 @@ final class Action {
     static final String securityCodeVerification = "luv0fbi";
     static final String getSuperdoorDomain = "luv0fbi";
     static final String getReferralData = "jwh6guv";
+    static final String resetReferralShortenLink = "eqvtuxq";
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";
     static final String requestUsernameByPhoneSendCode = "XXLy0yX";

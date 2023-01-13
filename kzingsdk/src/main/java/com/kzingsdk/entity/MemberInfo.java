@@ -67,6 +67,7 @@ public class MemberInfo implements Parcelable {
     private boolean withdrawBindAddress = false;
     private String playerCurrency = "";
     private String address = "";
+    private String shortenLink = "";
     private ArrayList<String> currencyList = new ArrayList<>();
     private ArrayList<CurrencyBalance> currencyBalanceList = new ArrayList<>();
     private String withdrawFrozenAmount = "0";
@@ -127,6 +128,7 @@ public class MemberInfo implements Parcelable {
         withdrawBindAddress = in.readInt() == 1;
         playerCurrency = in.readString();
         address = in.readString();
+        shortenLink = in.readString();
         verifyRemainCountSms = in.readInt();
         verifyRemainCountEmail = in.readInt();
         Object[] objectArray = in.readArray(MemberInfo.class.getClassLoader());
@@ -185,6 +187,7 @@ public class MemberInfo implements Parcelable {
         memberInfo.setWithdrawBindAddress(rootObject.optBoolean("withdrawBindAddress", false));
         memberInfo.setPlayerCurrency(rootObject.optString("playerCurrency"));
         memberInfo.setAddress(rootObject.optString("address"));
+        memberInfo.setShortenLink(rootObject.optString("shortenlink"));
 
         JSONObject verifyremaincountJSON = rootObject.optJSONObject("verifyremaincount");
         if (verifyremaincountJSON != null) {
@@ -263,6 +266,8 @@ public class MemberInfo implements Parcelable {
         memberInfo.setWithdrawBindAddress(rootObject.optBoolean("withdrawBindAddress", false));
         memberInfo.setPlayerCurrency(rootObject.optString("playerCurrency"));
         memberInfo.setAddress(rootObject.optString("address"));
+        memberInfo.setShortenLink(rootObject.optString("shortenLink"));
+
 
         JSONObject verifyremaincountJSON = rootObject.optJSONObject("verifyremaincount");
         if (verifyremaincountJSON != null) {
@@ -688,6 +693,14 @@ public class MemberInfo implements Parcelable {
         this.address = address;
     }
 
+    public String getShortenLink() {
+        return shortenLink;
+    }
+
+    public void setShortenLink(String shortenLink) {
+        this.shortenLink = shortenLink;
+    }
+
     public ArrayList<String> getCurrencyList() {
         return currencyList;
     }
@@ -771,6 +784,7 @@ public class MemberInfo implements Parcelable {
         dest.writeInt(withdrawBindAddress ? 1 : 0);
         dest.writeString(playerCurrency);
         dest.writeString(address);
+        dest.writeString(shortenLink);
         dest.writeInt(verifyRemainCountSms);
         dest.writeInt(verifyRemainCountEmail);
         dest.writeArray(new Object[]{
