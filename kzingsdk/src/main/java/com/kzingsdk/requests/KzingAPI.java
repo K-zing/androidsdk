@@ -714,6 +714,10 @@ public final class KzingAPI {
         return new EditWithdrawCryptoAPI();
     }
 
+    public static ResetReferralShortenLinkAPI resetReferralShortenLink() {
+        return new ResetReferralShortenLinkAPI();
+    }
+
     public static AddWithdrawalCryptoAPI addWithdrawalCrypto() {
         return new AddWithdrawalCryptoAPI();
     }
