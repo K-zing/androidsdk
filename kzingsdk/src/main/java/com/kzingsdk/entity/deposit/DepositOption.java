@@ -125,6 +125,7 @@ public class DepositOption implements Parcelable {
         item.atmAllowPendingCount = rootObject.optInt("atmAllowPendingCount", 0);
         item.atmProcessPendingCount = rootObject.optInt("atmProcessPendingCount", 0);
         item.cryptoAtmExchangeRate = BigDecimalUtil.optBigDecimal(rootObject, "cryptoAtm_exchange_rate");
+        String prepaidCardIcon = rootObject.optString("prepaidCardicon");
         item.setProcessing(rootObject.optBoolean("process"));
         item.setAllowDeposit(rootObject.optBoolean("allowdeposit"));
         item.setAllowDecimal(rootObject.optBoolean("allowDecimal"));
@@ -218,6 +219,7 @@ public class DepositOption implements Parcelable {
                     paymentGroupPrepaid.setName(displayName);
                     paymentGroupPrepaid.setImage(bankcss);
                     paymentGroupPrepaid.setPaymentType(PREPAIDCARD);
+                    paymentGroupPrepaid.setIcon(prepaidCardIcon);
                     item.paymentGroupList.add(paymentGroupPrepaid);
                     break;
                 case "3":
