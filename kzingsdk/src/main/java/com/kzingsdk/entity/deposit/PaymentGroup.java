@@ -36,10 +36,10 @@ public class PaymentGroup implements Parcelable {
         paymentType = PaymentType.valueOfTypeId(in.readString());
         name = in.readString();
         image = in.readString();
+        icon = in.readString();
         if (paymentType == PaymentType.PREPAIDCARD) return;
         id = in.readString();
         desc = in.readString();
-        icon = in.readString();
         displayorder = in.readInt();
         Object[] customObjects = in.readArray(ThirdPartyPaymentBank.class.getClassLoader());
         int i = 0;
@@ -132,10 +132,10 @@ public class PaymentGroup implements Parcelable {
         dest.writeString(paymentType.getId());
         dest.writeString(name);
         dest.writeString(image);
+        dest.writeString(icon);
         if (paymentType == PaymentType.PREPAIDCARD) return;
         dest.writeString(id);
         dest.writeString(desc);
-        dest.writeString(icon);
         dest.writeInt(displayorder);
         Object[] customObjects = new Object[1];
         int i = 0;
