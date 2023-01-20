@@ -270,6 +270,7 @@ public final class KzingAPI {
     }
 
 
+    @Deprecated
     public static GetClientInfoAPI getSiteInfo() {
         return new GetClientInfoAPI();
     }

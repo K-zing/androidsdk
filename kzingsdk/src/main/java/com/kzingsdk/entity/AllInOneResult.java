@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class AllInOneResult {
     private MemberInfo memberInfo;
-    private ClientInfo clientInfo;
+    private ClientInstantInfo clientInfo;
     private ArrayList<GamePlatformContainer> gamePlatformContainerList;
     private ArrayList<ActivityItem> activityItemList;
     private boolean isLogined = false;
@@ -30,7 +30,7 @@ public class AllInOneResult {
 
         JSONObject siteInfoObject = jsonResponse.optJSONObject("siteInfo");
         if (siteInfoObject != null) {
-            allInOneResult.setClientInfo(ClientInfo.newInstance(siteInfoObject));
+            allInOneResult.setClientInfo(ClientInstantInfo.newInstance(siteInfoObject));
         }
 
         JSONObject memberInfoObject = jsonResponse.optJSONObject("memberInfo");
@@ -73,11 +73,11 @@ public class AllInOneResult {
         this.memberInfo = memberInfo;
     }
 
-    public ClientInfo getClientInfo() {
+    public ClientInstantInfo getClientInfo() {
         return clientInfo;
     }
 
-    public void setClientInfo(ClientInfo clientInfo) {
+    public void setClientInfo(ClientInstantInfo clientInfo) {
         this.clientInfo = clientInfo;
     }
 

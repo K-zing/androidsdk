@@ -50,6 +50,7 @@ public class ResumeAllInOneAPI extends CoreRequest {
             jsonData.put("skipActivity", skipActivity);
             jsonData.put("skipCheckVersion", skipCheckVersion);
             jsonData.put("useWebApi", true);
+            jsonData.put("useEpSiteInfo", true);
             return jsonData;
         } catch (JSONException ignored) {
         }

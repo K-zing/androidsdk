@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+@Deprecated
 public class ClientInfo implements Parcelable {
 
     public static final int USE_ACTIVITYS_BANNER = 1;

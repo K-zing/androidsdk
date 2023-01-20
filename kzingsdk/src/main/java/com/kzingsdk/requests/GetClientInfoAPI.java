@@ -10,6 +10,7 @@ import com.kzingsdk.util.SharePrefUtil;
 import io.reactivex.Observable;
 
 
+@Deprecated
 public class GetClientInfoAPI extends CoreRequest {
     GetClientInfoAPI() {
         super();
