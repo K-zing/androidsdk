@@ -719,6 +719,10 @@ public final class KzingAPI {
         return new ResetReferralShortenLinkAPI();
     }
 
+    public static GetVipSettingsV2API getVipSettingsV2() {
+        return new GetVipSettingsV2API();
+    }
+
     public static AddWithdrawalCryptoAPI addWithdrawalCrypto() {
         return new AddWithdrawalCryptoAPI();
     }
