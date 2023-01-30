@@ -15,6 +15,7 @@ public class ActivityContentResult {
     private String formTitle;
     private String formHeader;
     private String formTitleColor;
+    private String show;
     private ArrayList<ActivityForm> activityFormList = new ArrayList<>();
 
     public ActivityContentResult() {
@@ -28,6 +29,7 @@ public class ActivityContentResult {
         } catch (UnsupportedEncodingException ignored) {
         }
         activityContentResult.formId = rootObject.optString("formid");
+        activityContentResult.show = rootObject.optString("show");
         JSONObject formObject = rootObject.optJSONObject("formData");
         if (formObject != null) {
             JSONObject formDataObject = formObject.optJSONObject("data");
@@ -53,6 +55,14 @@ public class ActivityContentResult {
 
     public void setFormId(String formId) {
         this.formId = formId;
+    }
+
+    public String getShow() {
+        return show;
+    }
+
+    public void setShow(String show) {
+        this.show = show;
     }
 
     public String getWebviewContent() {
