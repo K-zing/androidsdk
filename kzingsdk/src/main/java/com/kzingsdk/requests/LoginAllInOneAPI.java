@@ -83,7 +83,7 @@ public class LoginAllInOneAPI extends CoreRequest {
                 jsonData.put("uuid", uuid);
             }
             jsonData.put("useEpGame", true);
-            jsonData.put("useEpSiteInfo", true);
+            jsonData.put("useEpSiteInfo", false);
             jsonData.put("showall", showAll ? 1 : 0);
             jsonData.put("platformonly", platformOnly ? 1 : 0);
             jsonData.put("gptype", gpType == null ? 0 : gpType.getId());
