@@ -11,7 +11,6 @@ import org.json.JSONObject;
 import io.reactivex.Observable;
 
 public class GetRewardMemberDetailsAPI extends CoreRequest {
-    private String cover;
 
     GetRewardMemberDetailsAPI() {
         super();
@@ -29,12 +28,6 @@ public class GetRewardMemberDetailsAPI extends CoreRequest {
 
     @Override
     protected JSONObject generateParamsJson() {
-        JSONObject jsonData = super.generateParamsJson();
-        try {
-            jsonData.put("cover", cover);
-            return jsonData;
-        } catch (JSONException ignored) {
-        }
         return super.generateParamsJson();
     }
 
@@ -63,9 +56,5 @@ public class GetRewardMemberDetailsAPI extends CoreRequest {
         void onSuccess(GetRewardMemberDetailsResult simpleApiResult);
     }
 
-    public GetRewardMemberDetailsAPI setCover(String cover) {
-        this.cover = cover;
-        return this;
-    }
 }
 
