@@ -610,6 +610,10 @@ public final class KzingAPI {
         return new RequestResetPasswordByEmailAPI();
     }
 
+    public static GetRewardMemberDetailsAPI getRewardMemberDetails() {
+        return new GetRewardMemberDetailsAPI();
+    }
+
     public static RetrieveUsrWithoutCodeAPI retrieveUsrWithoutCode() {
         return new RetrieveUsrWithoutCodeAPI();
     }
