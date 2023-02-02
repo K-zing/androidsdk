@@ -432,6 +432,9 @@ public abstract class CoreRequest {
             if (KzingSDK.getInstance().getAid() != null) {
                 jsonData.put(CLIENT_OBJECT_NAME, KzingSDK.getInstance().getAid());
             }
+            if (KzingSDK.getInstance().getAppVersion() != null) {
+                jsonData.put("appversion", KzingSDK.getInstance().getAppVersion());
+            }
             jsonData.put("device", "android");
             jsonData.put("platform", "an");
             jsonData.put("sdkversion", BuildConfig.VERSION_NAME);

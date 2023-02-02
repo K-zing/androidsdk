@@ -32,6 +32,7 @@ public final class KzingSDK {
     private String basicRsaKey;
     private String apiKey;
     private String sessionId;
+    private String appVersion;
     private LangCode langCode = LangCode.CHS;
     private int requestTimeoutMs = DEFAULT_REQUEST_TIMEOUT_MS;
     private int pingCheckTimeoutMs = DEFAULT_PING_CHECK_TIMEOUT_MS;
@@ -368,4 +369,11 @@ public final class KzingSDK {
         this.customUrlSet = customUrlSet;
     }
 
+    public void setAppVersion(String appVersion) {
+        this.appVersion = appVersion;
+    }
+
+    String getAppVersion() {
+        return appVersion;
+    }
 }
