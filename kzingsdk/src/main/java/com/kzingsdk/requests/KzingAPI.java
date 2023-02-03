@@ -569,6 +569,14 @@ public final class KzingAPI {
         return new SubmitJarvisUTRAPI();
     }
 
+    public static AtmOldBankGetBankCardAPI atmOldBankGetBankCard() {
+        return new AtmOldBankGetBankCardAPI();
+    }
+
+    public static SubmitAtmOldBankDepositAPI submitAtmOldBankDeposit() {
+        return new SubmitAtmOldBankDepositAPI();
+    }
+
     public static SubmitAtmDepositAPI submitAtmDeposit() {
         return new SubmitAtmDepositAPI();
     }

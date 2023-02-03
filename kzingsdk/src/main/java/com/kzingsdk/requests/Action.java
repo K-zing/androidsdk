@@ -65,6 +65,8 @@ final class Action {
     static final String resetReferralShortenLink = "eqvtuxq";
     static final String getVipSettingsV2 = "sfeq1fb";
     static final String getRewardMemberDetails = "ftux1sf";
+    static final String atmOldBankGetBankCard = "61tffoq";
+    static final String submitAtmOldBankDeposit = "x1sjnvu";
 
 
 

@@ -40,9 +40,10 @@ public class GetBannersAPI extends CoreRequest {
                 .map(jsonResponse -> {
                     ArrayList<Banner> bannerArrayList = new ArrayList<>();
                     JSONArray response = jsonResponse.optJSONArray("data");
-                    for (int i = 0; i < response.length(); i++) {
-                        bannerArrayList.add(Banner.newInstance(response.optJSONObject(i)));
-                    }
+                    if (response != null)
+                        for (int i = 0; i < response.length(); i++) {
+                            bannerArrayList.add(Banner.newInstance(response.optJSONObject(i)));
+                        }
                     return bannerArrayList;
                 });
     }

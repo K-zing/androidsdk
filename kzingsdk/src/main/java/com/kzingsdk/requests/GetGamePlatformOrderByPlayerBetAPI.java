@@ -39,10 +39,11 @@ public class GetGamePlatformOrderByPlayerBetAPI extends CoreRequest {
                 .map(jsonResponse -> {
                     HashMap<String, Integer> gpidOrderMap = new HashMap<>();
                     JSONArray response = jsonResponse.optJSONArray("data");
-                    for (int i = 0; i < response.length(); i++) {
-                        JSONObject orderObject = response.optJSONObject(i);
-                        gpidOrderMap.put(orderObject.optString("gpid"), orderObject.optInt("displayorder"));
-                    }
+                    if (response != null)
+                        for (int i = 0; i < response.length(); i++) {
+                            JSONObject orderObject = response.optJSONObject(i);
+                            gpidOrderMap.put(orderObject.optString("gpid"), orderObject.optInt("displayorder"));
+                        }
                     return gpidOrderMap;
                 });
     }

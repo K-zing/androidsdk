@@ -52,12 +52,12 @@ public class GetHotGamesAPI extends CoreRequest implements RequireCurrency {
     @Override
     public Observable<ArrayList<HotGame>> requestRx(Context context) {
         return super.baseExecute(context).map(jsonResponse -> {
-
             ArrayList<HotGame> hotGamesList = new ArrayList<>();
             JSONArray response = jsonResponse.optJSONArray("data");
-            for (int i = 0; i < response.length(); i++) {
-                hotGamesList.add(HotGame.newInstance(response.optJSONObject(i)));
-            }
+            if (response != null)
+                for (int i = 0; i < response.length(); i++) {
+                    hotGamesList.add(HotGame.newInstance(response.optJSONObject(i)));
+                }
             return hotGamesList;
         });
     }

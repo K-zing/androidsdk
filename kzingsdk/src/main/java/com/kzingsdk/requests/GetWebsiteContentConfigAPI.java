@@ -28,9 +28,10 @@ public class GetWebsiteContentConfigAPI extends CoreRequest {
                 .map(jsonResponse -> {
                     ArrayList<WebsiteContentConfig> currencyRateList = new ArrayList<>();
                     JSONArray response = jsonResponse.optJSONArray("data");
-                    for (int i = 0; i < response.length(); i++) {
-                        currencyRateList.add(WebsiteContentConfig.newInstance(response.optJSONObject(i)));
-                    }
+                    if (response != null)
+                        for (int i = 0; i < response.length(); i++) {
+                            currencyRateList.add(WebsiteContentConfig.newInstance(response.optJSONObject(i)));
+                        }
                     return currencyRateList;
                 });
     }

@@ -48,9 +48,10 @@ public class GetRewardVipTurnoverAPI extends CoreRequest {
         return super.baseExecute(context).map(jsonResponse -> {
             ArrayList<GetRewardVipTurnoverResult> lists = new ArrayList<>();
             JSONArray response = jsonResponse.optJSONArray("data");
-            for (int i = 0; i < response.length(); i++) {
-                lists.add(GetRewardVipTurnoverResult.newInstance(response.optJSONObject(i)));
-            }
+            if (response != null)
+                for (int i = 0; i < response.length(); i++) {
+                    lists.add(GetRewardVipTurnoverResult.newInstance(response.optJSONObject(i)));
+                }
             return lists;
         });
     }

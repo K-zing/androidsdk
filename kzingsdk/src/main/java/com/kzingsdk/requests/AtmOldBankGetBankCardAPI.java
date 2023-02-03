@@ -3,24 +3,27 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.AllRewardVip;
+import com.kzingsdk.entity.AtmOldBank;
+import com.kzingsdk.entity.AtmOldBank;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import io.reactivex.Observable;
 
-public class GetAllRewardVipAPI extends CoreRequest {
+public class AtmOldBankGetBankCardAPI extends CoreRequest {
 
-    GetAllRewardVipAPI() {
+
+    AtmOldBankGetBankCardAPI() {
         super();
     }
 
     @Override
     protected String getAction() {
-        return Action.getAllRewardVip;
+        return Action.atmOldBankGetBankCard;
     }
 
     @Override
@@ -34,36 +37,38 @@ public class GetAllRewardVipAPI extends CoreRequest {
     }
 
     @Override
-    public Observable<ArrayList<AllRewardVip>> requestRx(final Context context) {
+    public Observable<ArrayList<AtmOldBank>> requestRx(final Context context) {
         return super.baseExecute(context).map(jsonResponse -> {
-            ArrayList<AllRewardVip> lists = new ArrayList<>();
+            ArrayList<AtmOldBank> lists = new ArrayList<>();
             JSONArray response = jsonResponse.optJSONArray("data");
-            if (response != null)
+            if (response!=null){
                 for (int i = 0; i < response.length(); i++) {
-                    lists.add(AllRewardVip.newInstance(response.optJSONObject(i)));
+                    lists.add(AtmOldBank.newInstance(response.optJSONObject(i)));
                 }
+            }
             return lists;
         });
     }
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(result -> {
+        requestRx(context).subscribe(atmOldBanks -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((GetAllRewardVipCallBack) kzingCallBack).onSuccess(result);
+                    ((AtmOldBankGetBankCardCallBack) kzingCallBack).onSuccess(atmOldBanks);
                 }
             }
         }, defaultOnErrorConsumer);
     }
 
-    public GetAllRewardVipAPI addGetAllRewardVipCallBack(GetAllRewardVipCallBack getAllRewardVipCallBack) {
-        kzingCallBackList.add(getAllRewardVipCallBack);
+    public AtmOldBankGetBankCardAPI addAtmOldBankGetBankCardCallBack(AtmOldBankGetBankCardCallBack atmOldBankGetBankCardCallBack) {
+        kzingCallBackList.add(atmOldBankGetBankCardCallBack);
         return this;
     }
 
-    public interface GetAllRewardVipCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<AllRewardVip> result);
+    public interface AtmOldBankGetBankCardCallBack extends KzingCallBack {
+        void onSuccess(ArrayList<AtmOldBank> atmOldBanks);
     }
+
 }
 

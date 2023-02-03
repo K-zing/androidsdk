@@ -56,9 +56,10 @@ public class GetCryptoBetWinAmountAPI extends CoreRequest {
                 .map(jsonResponse -> {
                     ArrayList<CryptoBetWinAmount> cryptoBetWinAmountList = new ArrayList<>();
                     JSONArray response = jsonResponse.optJSONArray("data");
-                    for (int i = 0; i < response.length(); i++) {
-                        cryptoBetWinAmountList.add(CryptoBetWinAmount.newInstance(response.optJSONObject(i)));
-                    }
+                    if (response != null)
+                        for (int i = 0; i < response.length(); i++) {
+                            cryptoBetWinAmountList.add(CryptoBetWinAmount.newInstance(response.optJSONObject(i)));
+                        }
                     return cryptoBetWinAmountList;
                 });
     }

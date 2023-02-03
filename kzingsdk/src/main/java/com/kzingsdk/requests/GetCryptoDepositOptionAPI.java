@@ -29,9 +29,10 @@ public class GetCryptoDepositOptionAPI extends CoreRequest implements RequireCur
         return super.baseExecute(context).map(jsonResponse -> {
             ArrayList<CryptoDepositOption> cryptoTransactions = new ArrayList<>();
             JSONArray response = jsonResponse.optJSONArray("data");
-            for (int i = 0; i < response.length(); i++) {
-                cryptoTransactions.add(CryptoDepositOption.newInstance(response.optJSONObject(i)));
-            }
+            if (response != null)
+                for (int i = 0; i < response.length(); i++) {
+                    cryptoTransactions.add(CryptoDepositOption.newInstance(response.optJSONObject(i)));
+                }
             return cryptoTransactions;
         });
     }
