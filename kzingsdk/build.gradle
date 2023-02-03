@@ -1,18 +1,17 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'
 
 android {
 
-    compileSdkVersion 32
+    compileSdkVersion 29
     defaultConfig {
         minSdkVersion 24
         versionCode 1
         versionName "0.6.40"
-//        buildConfigField("String","VERSION_NAME","\"${defaultConfig.versionName}\"")
     }
     buildTypes {
         release {
             minifyEnabled false
+            useProguard false
         }
     }
     compileOptions {
