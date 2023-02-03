@@ -1,7 +1,8 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
 
 android {
-
+    group = 'com.github.K-zing'
     compileSdkVersion 29
     defaultConfig {
         minSdkVersion 24
