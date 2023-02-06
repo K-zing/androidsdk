@@ -18,6 +18,7 @@ public class GetCopyWritingContentByCategoryAPI extends CoreRequest {
     private int gameType = 0;
     private String order = "desc";
     private int limit = 50;
+
     GetCopyWritingContentByCategoryAPI() {
         super();
     }

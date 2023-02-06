@@ -30,8 +30,10 @@ public class WithdrawField implements Parcelable {
     private Integer maxLength;
     private String prefix;
     private ArrayList<WithdrawFieldOption> withdrawFieldOptionList = new ArrayList<>();
+
     private WithdrawField() {
     }
+
     public WithdrawField(Parcel in) {
 
         field = in.readString();

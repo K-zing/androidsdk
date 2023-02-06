@@ -14,6 +14,7 @@ public class CheckGiftRedeemableAPI extends CoreRequest {
 
     private String actid;
     private String giftId;
+
     CheckGiftRedeemableAPI() {
         super();
     }

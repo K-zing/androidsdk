@@ -20,6 +20,7 @@ public class MobileLoginBindAPI extends CoreRequest {
     private String playerName;
     private String pwd;
     private String captcha;
+
     MobileLoginBindAPI() {
         super();
     }

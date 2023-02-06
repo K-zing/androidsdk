@@ -21,6 +21,7 @@ public class GetDepositRecordAPI extends CoreRequest implements RequireCurrency 
     private Calendar startDateCalendar, endDateCalendar;
     private String currency;
     private String status;
+
     GetDepositRecordAPI() {
         super();
     }

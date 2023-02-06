@@ -21,6 +21,7 @@ public class EnterGameAPI extends CoreRequest {
     private Boolean requestMobile = true;
     private String option;
     private Boolean transferByLimit = false;
+
     public EnterGameAPI() {
         super();
     }

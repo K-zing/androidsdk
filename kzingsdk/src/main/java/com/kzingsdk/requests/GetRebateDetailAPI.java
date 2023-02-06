@@ -23,6 +23,7 @@ public class GetRebateDetailAPI extends CoreRequest {
     private String currency;
     private Integer offset = 0;
     private Integer pageCount = 20;
+
     GetRebateDetailAPI() {
         super();
     }

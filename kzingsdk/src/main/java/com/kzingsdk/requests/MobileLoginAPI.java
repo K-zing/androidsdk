@@ -17,6 +17,7 @@ public class MobileLoginAPI extends CoreRequest {
     private String phone;
     private String countryCode;
     private String smsCode;
+
     MobileLoginAPI() {
         super();
     }

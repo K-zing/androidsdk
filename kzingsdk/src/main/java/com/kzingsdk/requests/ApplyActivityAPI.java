@@ -22,6 +22,7 @@ public class ApplyActivityAPI extends CoreRequest {
     private String address;
     private String formId;
     private ArrayList<ActivityForm> activityFormList;
+
     ApplyActivityAPI() {
         super();
     }

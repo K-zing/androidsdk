@@ -2,7 +2,7 @@ package com.kzingsdk.entity;
 
 import org.json.JSONObject;
 
-public class ResetReferralShortenLinkResult extends SimpleApiResult{
+public class ResetReferralShortenLinkResult extends SimpleApiResult {
 
     protected String response;
 

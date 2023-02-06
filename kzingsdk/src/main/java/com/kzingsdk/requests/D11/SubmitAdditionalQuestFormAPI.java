@@ -18,6 +18,7 @@ public class SubmitAdditionalQuestFormAPI extends BaseD11API {
     private String qhId;
     private ArrayList<String> coverList = new ArrayList<>();
     private ArrayList<CsHistoryDetail> csHistoryDetailList = new ArrayList<>();
+
     SubmitAdditionalQuestFormAPI() {
         super();
     }

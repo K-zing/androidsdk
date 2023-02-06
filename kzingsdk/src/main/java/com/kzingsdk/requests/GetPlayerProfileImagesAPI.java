@@ -4,14 +4,11 @@ import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.ProfileImage;
-import com.kzingsdk.util.Constant;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import io.reactivex.Observable;
 
@@ -66,7 +63,7 @@ public class GetPlayerProfileImagesAPI extends CoreRequest {
         kzingCallBackList.add(getPlayerProfileImagesCallBack);
         return this;
     }
-    
+
     public interface GetPlayerProfileImagesCallBack extends KzingCallBack {
         void onSuccess(ArrayList<ProfileImage> bonusReturnList);
     }

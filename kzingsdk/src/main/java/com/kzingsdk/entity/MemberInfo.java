@@ -73,6 +73,7 @@ public class MemberInfo implements Parcelable {
     private String withdrawFrozenAmount = "0";
     private int verifyRemainCountSms = 0;
     private int verifyRemainCountEmail = 0;
+
     private MemberInfo() {
 
     }

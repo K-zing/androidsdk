@@ -178,7 +178,7 @@ public class ActivityItem implements Parcelable {
         item.restrictedPlatform.addAll(Arrays.asList(restrictedPlatformArray));
 
         JSONArray groupNamesJSONArray = rootObject.optJSONArray("groupnames");
-        if (groupNamesJSONArray!=null){
+        if (groupNamesJSONArray != null) {
             for (int i = 0; i < groupNamesJSONArray.length(); i++) {
                 item.getGroupNames().add(groupNamesJSONArray.optString(i));
             }

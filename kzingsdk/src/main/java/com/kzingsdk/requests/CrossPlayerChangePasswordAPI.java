@@ -14,6 +14,7 @@ public class CrossPlayerChangePasswordAPI extends CoreRequest {
     private String userName = "";
     private String password = "";
     private String lastDigit = "";
+
     CrossPlayerChangePasswordAPI() {
         super();
     }

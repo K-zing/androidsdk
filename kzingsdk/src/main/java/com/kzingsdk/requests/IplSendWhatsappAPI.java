@@ -14,6 +14,7 @@ public class IplSendWhatsappAPI extends CoreRequest {
 
     private String whatsapp = "";
     private String username = "";
+
     IplSendWhatsappAPI() {
         super();
     }

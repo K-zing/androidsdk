@@ -18,6 +18,7 @@ public class SocialRegisterAPI extends RegAccountAPI {
     private String platform;
     private String provider;
     private String providerId;
+
     SocialRegisterAPI() {
         super();
     }

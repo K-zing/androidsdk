@@ -18,6 +18,7 @@ public class GetCsHistoryAPI extends BaseD11API {
     private Integer curIndex = 1;
     private Calendar startDateCalendar = null;
     private Calendar endDateCalendar = null;
+
     GetCsHistoryAPI() {
         super();
     }

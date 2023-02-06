@@ -1,14 +1,6 @@
 package com.kzingsdk.entity;
 
-import com.kzingsdk.entity.gameplatform.GamePlatformType;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
 
 public class VipSettingRuleV2 {
 

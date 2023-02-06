@@ -19,8 +19,10 @@ public class WithdrawFieldOption implements Parcelable {
     private String code;
     private String css;
     private String name;
+
     private WithdrawFieldOption() {
     }
+
     public WithdrawFieldOption(Parcel in) {
 
         code = in.readString();

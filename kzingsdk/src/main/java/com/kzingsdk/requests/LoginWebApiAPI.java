@@ -21,6 +21,7 @@ public class LoginWebApiAPI extends CoreRequest {
     private String uuid = "";
     private String provider = "";
     private String providerId = "";
+
     LoginWebApiAPI() {
         super();
     }

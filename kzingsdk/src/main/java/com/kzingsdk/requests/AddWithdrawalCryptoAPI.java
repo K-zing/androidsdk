@@ -21,6 +21,7 @@ public class AddWithdrawalCryptoAPI extends CoreRequest implements RequireCurren
     private String smsPhoneNo;
     private String smsPhoneNoCountry;
     private String smscode;
+
     AddWithdrawalCryptoAPI() {
         super();
     }

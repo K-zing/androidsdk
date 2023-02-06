@@ -4,10 +4,8 @@ import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.AtmOldBank;
-import com.kzingsdk.entity.AtmOldBank;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -41,7 +39,7 @@ public class AtmOldBankGetBankCardAPI extends CoreRequest {
         return super.baseExecute(context).map(jsonResponse -> {
             ArrayList<AtmOldBank> lists = new ArrayList<>();
             JSONArray response = jsonResponse.optJSONArray("data");
-            if (response!=null){
+            if (response != null) {
                 for (int i = 0; i < response.length(); i++) {
                     lists.add(AtmOldBank.newInstance(response.optJSONObject(i)));
                 }

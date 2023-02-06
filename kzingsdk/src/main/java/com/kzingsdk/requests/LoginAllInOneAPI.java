@@ -32,6 +32,7 @@ public class LoginAllInOneAPI extends CoreRequest {
     private Boolean showChild = false;
     private String provider = "";
     private String providerId = "";
+
     LoginAllInOneAPI() {
         super();
     }

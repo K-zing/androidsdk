@@ -13,6 +13,7 @@ public class LikeGameAPI extends BaseD11API {
 
     private Boolean isThumb;
     private String gpid;
+
     LikeGameAPI() {
         super();
     }

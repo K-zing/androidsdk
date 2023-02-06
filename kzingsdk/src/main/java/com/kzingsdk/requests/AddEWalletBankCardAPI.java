@@ -17,6 +17,7 @@ public class AddEWalletBankCardAPI extends CoreRequest {
     private String bid = null;
     private String cryptoType = null;
     private ArrayList<WithdrawField> withdrawFieldList = null;
+
     AddEWalletBankCardAPI() {
         super();
     }

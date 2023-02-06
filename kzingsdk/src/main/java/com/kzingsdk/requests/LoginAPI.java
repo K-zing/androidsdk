@@ -28,6 +28,7 @@ public class LoginAPI extends CoreRequest {
     private String uuid = "";
     private String provider;
     private String providerId;
+
     LoginAPI() {
         super();
     }

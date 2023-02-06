@@ -18,6 +18,7 @@ public class GetAgentTeamHistoryAPI extends CoreRequest {
     private Calendar startDateCalendar, endDateCalendar;
     private Integer currentIndex = 1; //  (Starting from: 1)
     private String agent;
+
     GetAgentTeamHistoryAPI() {
         super();
     }

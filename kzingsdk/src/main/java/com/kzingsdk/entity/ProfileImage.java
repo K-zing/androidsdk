@@ -1,9 +1,6 @@
 package com.kzingsdk.entity;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 
 public class ProfileImage {
@@ -22,9 +19,9 @@ public class ProfileImage {
     public static ProfileImage newInstance(JSONObject rootObject) {
         ProfileImage profileImage = new ProfileImage();
         profileImage.setId(rootObject.optString("id"));
-        if (rootObject.optString("images").length() == 0){
+        if (rootObject.optString("images").length() == 0) {
             profileImage.setImages(rootObject.optString("img"));
-        }else{
+        } else {
             profileImage.setImages(rootObject.optString("images"));
         }
         profileImage.setCreated(rootObject.optString("created"));

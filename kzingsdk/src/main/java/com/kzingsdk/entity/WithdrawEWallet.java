@@ -28,8 +28,10 @@ public class WithdrawEWallet implements Parcelable {
     private String tag;
     private Double minAmount;
     private Double maxAmount;
+
     public WithdrawEWallet() {
     }
+
     public WithdrawEWallet(Parcel in) {
 
         bankEn = in.readString();

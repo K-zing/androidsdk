@@ -5,9 +5,6 @@ import android.content.Context;
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.GetMemberRewardVipResult;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import io.reactivex.Observable;
 
 public class GetMemberRewardVipAPI extends CoreRequest {

@@ -20,6 +20,7 @@ public class SubmitQuestFormAPI extends BaseD11API {
     private String verifyCode;
     private ArrayList<String> coverList = new ArrayList<>();
     private ArrayList<QuestQuestion> questQuestionList = new ArrayList<>();
+
     SubmitQuestFormAPI() {
         super();
     }

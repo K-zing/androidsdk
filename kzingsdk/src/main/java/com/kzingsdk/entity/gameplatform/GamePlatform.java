@@ -45,6 +45,7 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
     private ArrayList<GamePlatformCategory> categoryArrayList = new ArrayList<>();
     private ArrayList<GamePlatformGroup> groupArrayList = new ArrayList<>();
     private GameOrientation gameOrientation = PORTRAIT;
+
     public GamePlatform() {
         currencyDisplayOrderMap.put("default", 0);
     }

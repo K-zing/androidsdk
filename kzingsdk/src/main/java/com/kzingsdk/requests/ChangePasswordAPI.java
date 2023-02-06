@@ -13,6 +13,7 @@ public class ChangePasswordAPI extends CoreRequest {
 
     private String oldPassword = "";
     private String newPassword = "";
+
     ChangePasswordAPI() {
         super();
     }

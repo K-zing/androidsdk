@@ -19,7 +19,7 @@ public class GetRewardMemberDetailsResult extends SimpleApiResult {
         result.status = simpleApiResult.status;
         result.message = simpleApiResult.message;
         JSONObject dataJSON = rootObject.optJSONObject("data");
-        if (dataJSON!=null) {
+        if (dataJSON != null) {
             result.memberCode = dataJSON.optString("memberCode");
             result.userName = dataJSON.optString("userName");
             result.vipLevel = dataJSON.optString("vipLevel");

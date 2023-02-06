@@ -13,6 +13,7 @@ public class MobileLoginGetCodeAPI extends CoreRequest {
 
     private String phone;
     private String countryCode;
+
     MobileLoginGetCodeAPI() {
         super();
     }

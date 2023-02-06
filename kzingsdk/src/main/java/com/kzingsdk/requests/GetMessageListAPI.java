@@ -19,6 +19,7 @@ public class GetMessageListAPI extends CoreRequest {
     private Integer pageCount = 10;
     private Integer offset = 0;
     private Calendar startDateCalendar, endDateCalendar;
+
     GetMessageListAPI() {
         super();
     }

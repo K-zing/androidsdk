@@ -14,6 +14,7 @@ public class ActivityApplyScratchBonusAPI extends BaseK36API {
     private String actid;
     private String dno;
     private String gpid;
+
     ActivityApplyScratchBonusAPI() {
         super();
     }

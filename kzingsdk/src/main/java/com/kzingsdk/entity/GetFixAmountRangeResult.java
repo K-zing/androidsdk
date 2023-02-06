@@ -21,28 +21,31 @@ public class GetFixAmountRangeResult {
 
     public static GetFixAmountRangeResult newInstance(JSONObject rootObject) {
         GetFixAmountRangeResult result = new GetFixAmountRangeResult();
-        JSONArray listArray = rootObject.optJSONArray("list");
+        JSONArray listArray = rootObject.optJSONArray("data");
         if (listArray != null) {
             for (int i = 0; i < listArray.length(); i++) {
                 result.fixAmountList.add(FixAmount.newInstance(listArray.optJSONObject(i)));
             }
         }
 
-        result.paymentMethod = rootObject.optString("paymentMethod");
-        result.cryptoCurrency = rootObject.optString("cryptoCurrency");
-        result.minTransAmount = BigDecimalUtil.optBigDecimal(rootObject, "minTransAmount");
-        result.maxTransAmount = BigDecimalUtil.optBigDecimal(rootObject, "maxTransAmount");
+        JSONObject dataObject = rootObject.optJSONObject("data");
+        if (dataObject != null) {
+            result.paymentMethod = dataObject.optString("paymentMethod");
+            result.cryptoCurrency = dataObject.optString("cryptoCurrency");
+            result.minTransAmount = BigDecimalUtil.optBigDecimal(dataObject, "minTransAmount");
+            result.maxTransAmount = BigDecimalUtil.optBigDecimal(dataObject, "maxTransAmount");
 
-        JSONArray bankCodeArray = rootObject.optJSONArray("bankCode");
-        if (bankCodeArray != null) {
-            for (int i = 0; i < bankCodeArray.length(); i++) {
-                result.bankCodeList.add(bankCodeArray.optString(i));
+            JSONArray bankCodeArray = dataObject.optJSONArray("bankCode");
+            if (bankCodeArray != null) {
+                for (int i = 0; i < bankCodeArray.length(); i++) {
+                    result.bankCodeList.add(bankCodeArray.optString(i));
+                }
             }
-        }
-        JSONArray suggestedAmountArray = rootObject.optJSONArray("suggestedAmount");
-        if (suggestedAmountArray != null) {
-            for (int i = 0; i < suggestedAmountArray.length(); i++) {
-                result.suggestedAmountList.add(suggestedAmountArray.optString(i));
+            JSONArray suggestedAmountArray = dataObject.optJSONArray("suggestedAmount");
+            if (suggestedAmountArray != null) {
+                for (int i = 0; i < suggestedAmountArray.length(); i++) {
+                    result.suggestedAmountList.add(suggestedAmountArray.optString(i));
+                }
             }
         }
 

@@ -69,7 +69,6 @@ final class Action {
     static final String submitAtmOldBankDeposit = "x1sjnvu";
 
 
-
     static final String requestUsernameByEmailSendCode = "qVfZXDA";
     static final String requestUsernameByPhoneSendCode = "XXLy0yX";
     static final String requestUsernameByEmail = "0hjfn4H";

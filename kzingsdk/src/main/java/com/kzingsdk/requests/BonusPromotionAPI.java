@@ -18,6 +18,7 @@ public class BonusPromotionAPI extends CoreRequest {
     private String gpid = "";
     private String startDate = "";
     private String endDate = "";
+
     BonusPromotionAPI() {
         super();
     }

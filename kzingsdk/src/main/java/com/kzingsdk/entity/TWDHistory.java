@@ -87,7 +87,7 @@ public class TWDHistory {
         twdHistory.outImageAn = rootObject.optString("out_image_an");
         twdHistory.outImageH5 = rootObject.optString("out_image_h5");
         twdHistory.outImageIos = rootObject.optString("out_image_ios");
-        twdHistory.outGpid= rootObject.optString("outgpid");
+        twdHistory.outGpid = rootObject.optString("outgpid");
         twdHistory.outGpName = rootObject.optString("outgpname");
         twdHistory.isUploaded = rootObject.optBoolean("isUploaded");
         twdHistory.manualAdjusted = rootObject.optBoolean("manualAdjusted");

@@ -14,6 +14,7 @@ public class ChangeWithdrawPasswordAPI extends CoreRequest {
     private String accPassword = "";
     private String oldPassword = "";
     private String newPassword = "";
+
     ChangeWithdrawPasswordAPI() {
         super();
     }

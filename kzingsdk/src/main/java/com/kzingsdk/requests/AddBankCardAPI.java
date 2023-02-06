@@ -24,6 +24,7 @@ public class AddBankCardAPI extends CoreRequest {
     private String addrA = "";
     private String addrB = "";
     private String smsPhoneNoCountry = "";
+
     AddBankCardAPI() {
         super();
     }

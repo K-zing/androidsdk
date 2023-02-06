@@ -22,6 +22,7 @@ public class SubmitWithdrawCryptoAPI extends CoreRequest implements RequireCurre
     private String smsPhoneNo;
     private String smsPhoneNoCountry;
     private String smscode;
+
     SubmitWithdrawCryptoAPI() {
         super();
     }

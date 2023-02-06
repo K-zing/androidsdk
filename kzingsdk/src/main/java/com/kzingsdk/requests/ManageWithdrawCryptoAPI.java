@@ -17,6 +17,7 @@ public class ManageWithdrawCryptoAPI extends CoreRequest {
     private String note;
     private String status;
     private String wdpassword;
+
     ManageWithdrawCryptoAPI() {
         super();
     }

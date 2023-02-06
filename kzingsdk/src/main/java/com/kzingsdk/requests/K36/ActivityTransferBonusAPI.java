@@ -17,6 +17,7 @@ public class ActivityTransferBonusAPI extends BaseK36API {
     private String gpid;
     private BigDecimal amount = BigDecimal.ZERO;
     private boolean transfer = false;
+
     ActivityTransferBonusAPI() {
         super();
     }
