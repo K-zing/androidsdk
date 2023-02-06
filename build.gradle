@@ -1,26 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-apply plugin: 'java'
-apply plugin: 'maven-publish'
-
-group = 'com.github.K-zing'
-version = '0.6.41'
-
-sourceCompatibility = 1.8 // java 8
-targetCompatibility = 1.8
 
 repositories {
+	google()
 	mavenCentral()
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-			from components.java
-        }
-    }
-}
-
-wrapper {
-    gradleVersion = "7.3.3"
-    distributionType = Wrapper.DistributionType.ALL
 }
