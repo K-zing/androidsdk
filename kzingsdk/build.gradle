@@ -1,19 +1,14 @@
 apply plugin: 'com.android.library'
-apply plugin: 'java'
-apply plugin: 'maven-publish'
-
-group = 'com.github.K-zing'
-version = '0.6.41'
-
-sourceCompatibility = 1.8 // java 8
-targetCompatibility = 1.8
+apply plugin: 'com.github.dcendents.android-maven'
 
 android {
+
     compileSdkVersion 29
     defaultConfig {
         minSdkVersion 24
         versionCode 1
         versionName "0.6.41"
+		
         buildConfigField("String","SDK_VERSION_NAME","\"${defaultConfig.versionName}\"")
     }
     buildTypes {
@@ -34,17 +29,4 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-			from components.java
-        }
-    }
-}
-
-wrapper {
-    gradleVersion = "7.3.3"
-    distributionType = Wrapper.DistributionType.ALL
 }
