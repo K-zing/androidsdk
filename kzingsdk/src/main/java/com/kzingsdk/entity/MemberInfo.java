@@ -51,6 +51,7 @@ public class MemberInfo implements Parcelable {
     private String agentCode = "";
     private String skype = "";
     private String tncStatus = "";
+    private String rankLevel = "";
     private boolean isDisplayGroupName = false;
     private boolean isMobileVerified = false;
     private boolean isEmailVerified = false;
@@ -106,6 +107,7 @@ public class MemberInfo implements Parcelable {
         agentCode = in.readString();
         skype = in.readString();
         tncStatus = in.readString();
+        rankLevel = in.readString();
         hasWithdrawPassword = in.readInt() == 1;
         displayGroupName = in.readString();
         isDisplayGroupName = in.readInt() == 1;
@@ -168,6 +170,7 @@ public class MemberInfo implements Parcelable {
         memberInfo.setAgentCode(rootObject.optString("agentcode"));
         memberInfo.setSkype(rootObject.optString("skype"));
         memberInfo.setTncStatus(rootObject.optString("tncStatus"));
+        memberInfo.setRankLevel(rootObject.optString("rankLevel"));
         memberInfo.setHasWithdrawPassword(rootObject.optString("haswithdrawpassword").equalsIgnoreCase("ON"));
         memberInfo.setDisplayGroupName(rootObject.optString("display_group_name"));
         memberInfo.setIsDisplayGroupName(rootObject.optString("is_display_group_name").equalsIgnoreCase("1"));
@@ -247,6 +250,7 @@ public class MemberInfo implements Parcelable {
         memberInfo.setAgentCode(rootObject.optString("agentCode"));
         memberInfo.setSkype(rootObject.optString("skype"));
         memberInfo.setTncStatus(rootObject.optString("tncStatus"));
+        memberInfo.setRankLevel(rootObject.optString("rankLevel"));
         memberInfo.setHasWithdrawPassword(rootObject.optBoolean("hasWithdrawPassword"));
         memberInfo.setDisplayGroupName(rootObject.optString("displayGroupName"));
         memberInfo.setIsDisplayGroupName(rootObject.optBoolean("isDisplayGroupName"));
@@ -628,6 +632,13 @@ public class MemberInfo implements Parcelable {
         this.tncStatus = tncStatus;
     }
 
+    public String getRankLevel() {
+        return rankLevel;
+    }
+
+    public void setRankLevel(String rankLevel) {
+        this.rankLevel = rankLevel;
+    }
     public boolean isEnablePhoneRecall() {
         return enablePhoneRecall;
     }
@@ -762,6 +773,7 @@ public class MemberInfo implements Parcelable {
         dest.writeString(agentCode);
         dest.writeString(skype);
         dest.writeString(tncStatus);
+        dest.writeString(rankLevel);
         dest.writeInt(hasWithdrawPassword ? 1 : 0);
         dest.writeString(displayGroupName);
         dest.writeInt(isDisplayGroupName ? 1 : 0);
