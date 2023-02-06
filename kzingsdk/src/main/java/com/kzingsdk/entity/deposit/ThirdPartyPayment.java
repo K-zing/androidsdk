@@ -138,7 +138,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         item.setFormType(rootObject.optString("formtype"));
         item.setOptionId(optionId);
         item.setUseRotate(rootObject.optBoolean("useRotate", false));
-        item.setRootMaxAmount(rootObject.optDouble("min", 0d));
+        item.setRootMinAmount(rootObject.optDouble("min", 0d));
         item.setRootMaxAmount(rootObject.optDouble("max", 0d));
         item.importSettingFromJson(rootObject);
         item.setName(rootRootObject.optString("name"));
