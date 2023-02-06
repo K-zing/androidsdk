@@ -31,6 +31,9 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
     private ArrayList<ThirdPartyPaymentBank> paymentBankList = new ArrayList<>();
     private ArrayList<BigDecimal> fixAmtArray = new ArrayList<>();
     private String name = "";
+
+    private Double rootMinAmount = 0d;
+    private Double rootMaxAmount = 0d;
     private BigDecimal randMax = BigDecimal.ZERO;
     private BigDecimal randMin = BigDecimal.ZERO;
     private Integer randType = -1;
@@ -47,6 +50,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
     private String cryptoCurrency = "";
     private ArrayList<String> cryptoCurrencyList = new ArrayList<>();
     private BigDecimal pRate = BigDecimal.ZERO;
+    private BigDecimal rebateRate = BigDecimal.ZERO;
     private Integer random = -1;
     private boolean displayDepositName = false;
     private boolean isQrScanMethod = false;
@@ -64,6 +68,8 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         displayOrder = in.readInt();
         random = in.readInt();
         name = in.readString();
+        rootMinAmount = in.readDouble();
+        rootMaxAmount = in.readDouble();
         minAmount = in.readDouble();
         maxAmount = in.readDouble();
         optionId = in.readString();
@@ -82,6 +88,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         pRate = new BigDecimal(in.readString());
         promoRate = new BigDecimal(in.readString());
         sDealsRate = new BigDecimal(in.readString());
+        rebateRate = new BigDecimal(in.readString());
         code = in.readString();
         formType = in.readString();
         quickAmountFlag = in.readInt() == 1;
@@ -131,6 +138,8 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         item.setFormType(rootObject.optString("formtype"));
         item.setOptionId(optionId);
         item.setUseRotate(rootObject.optBoolean("useRotate", false));
+        item.setRootMaxAmount(rootObject.optDouble("min", 0d));
+        item.setRootMaxAmount(rootObject.optDouble("max", 0d));
         item.importSettingFromJson(rootObject);
         item.setName(rootRootObject.optString("name"));
         item.setRandMax(BigDecimalUtil.optBigDecimal(rootRootObject, "randMax", BigDecimal.ZERO));
@@ -139,6 +148,15 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         item.setPromoRate(BigDecimalUtil.optBigDecimal(rootObject, "promorate", BigDecimal.ZERO));
         item.setSDealsRate(BigDecimalUtil.optBigDecimal(rootObject, "sdealsrate", BigDecimal.ZERO));
         item.setDisplayDepositName(rootObject.optInt("displaydepositname", 0) == 1);
+
+        item.paymentBankList = new ArrayList<>();
+        JSONArray channelArray = rootObject.optJSONArray("bank_json");
+        if (channelArray != null) {
+            for (int i = 0; i < channelArray.length(); i++) {
+                JSONObject channelJObject = channelArray.optJSONObject(i);
+                item.paymentBankList.add(ThirdPartyPaymentBank.newInstance(channelJObject, item));
+            }
+        }
 
         JSONObject displayAddressObject = rootObject.optJSONObject("displayAddress");
         if (displayAddressObject != null) {
@@ -183,6 +201,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         random = settingObject.optInt("random", 0);
         minAmount = settingObject.optDouble("min", 0d);
         maxAmount = settingObject.optDouble("max", 0d);
+        rebateRate = BigDecimalUtil.optBigDecimal(settingObject, "rebaterate", BigDecimal.ZERO);
 
         quickAmountFlag = settingObject.optInt("quickamountflag") == 1;
         String quickamountString = settingObject.optString("quickamount");
@@ -206,12 +225,6 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
             fixAmtArr = items;
         }
 
-        paymentBankList = new ArrayList<>();
-        JSONArray channelArray = rootObject.optJSONArray("bank_json");
-        for (int i = 0; i < channelArray.length(); i++) {
-            JSONObject channelJObject = channelArray.optJSONObject(i);
-            paymentBankList.add(ThirdPartyPaymentBank.newInstance(channelJObject, this));
-        }
     }
 
     public String getOptionId() {
@@ -440,6 +453,30 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         this.cryptoCurrencyList = cryptoCurrencyList;
     }
 
+    public BigDecimal getRebateRate() {
+        return rebateRate;
+    }
+
+    public void setRebateRate(BigDecimal rebateRate) {
+        this.rebateRate = rebateRate;
+    }
+
+    public Double getRootMinAmount() {
+        return rootMinAmount;
+    }
+
+    public void setRootMinAmount(Double rootMinAmount) {
+        this.rootMinAmount = rootMinAmount;
+    }
+
+    public Double getRootMaxAmount() {
+        return rootMaxAmount;
+    }
+
+    public void setRootMaxAmount(Double rootMaxAmount) {
+        this.rootMaxAmount = rootMaxAmount;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -454,6 +491,8 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         dest.writeInt(displayOrder);
         dest.writeInt(random);
         dest.writeString(name);
+        dest.writeDouble(rootMinAmount);
+        dest.writeDouble(rootMaxAmount);
         dest.writeDouble(minAmount);
         dest.writeDouble(maxAmount);
         dest.writeString(optionId);
@@ -472,6 +511,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         dest.writeString(pRate.toString());
         dest.writeString(promoRate.toString());
         dest.writeString(sDealsRate.toString());
+        dest.writeString(rebateRate.toString());
         dest.writeString(code);
         dest.writeString(formType);
         dest.writeInt(quickAmountFlag ? 1 : 0);
