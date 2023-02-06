@@ -231,7 +231,7 @@ public abstract class CoreRequest {
                     .writeTimeout(requestTimeoutMs, TimeUnit.MILLISECONDS)
                     .addInterceptor(chain -> {
                         Request request = chain.request().newBuilder()
-                                .addHeader("User-Agent", "KzingAndroidSDK:" + BuildConfig.VERSION_NAME)
+                                .addHeader("User-Agent", "KzingAndroidSDK:" + BuildConfig.SDK_VERSION_NAME)
                                 .build();
                         showLogDebug(request);
                         return chain.proceed(request);
@@ -437,7 +437,7 @@ public abstract class CoreRequest {
             }
             jsonData.put("device", "android");
             jsonData.put("platform", "an");
-            jsonData.put("sdkversion", BuildConfig.VERSION_NAME);
+            jsonData.put("sdkversion", BuildConfig.SDK_VERSION_NAME);
             jsonData.put(DOMAIN_NAME, lastUsedIP);
             if (this instanceof RequireCurrency) {
                 String currency = ((RequireCurrency) this).getCurrency();
