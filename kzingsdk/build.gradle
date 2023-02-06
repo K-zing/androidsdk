@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'maven-publish'
 
 android {
 
@@ -7,7 +7,7 @@ android {
     defaultConfig {
         minSdkVersion 24
         versionCode 1
-        versionName "0.6.40"
+        versionName "0.6.41"
     }
     buildTypes {
         release {
@@ -27,4 +27,18 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.K-zing'
+                artifactId = 'androidsdk'
+                version = '0.6.41'
+            }
+        }
+    }
 }
