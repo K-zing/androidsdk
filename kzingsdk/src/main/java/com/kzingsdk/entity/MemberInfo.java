@@ -46,6 +46,8 @@ public class MemberInfo implements Parcelable {
     private String groupId = "";
     private String groupName = "";
     private String displayGroupName = "";
+    private String memberVipLevelNameCn = "";
+    private String memberVipLevelNameEn = "";
     private String zalo = "";
     private String facebook = "";
     private String pan = "";
@@ -112,6 +114,8 @@ public class MemberInfo implements Parcelable {
         hasWithdrawPassword = in.readInt() == 1;
         groupName = in.readString();
         displayGroupName = in.readString();
+        memberVipLevelNameCn = in.readString();
+        memberVipLevelNameEn = in.readString();
         isDisplayGroupName = in.readInt() == 1;
         isMobileVerified = in.readInt() == 1;
         isEmailVerified = in.readInt() == 1;
@@ -176,6 +180,8 @@ public class MemberInfo implements Parcelable {
         memberInfo.setHasWithdrawPassword(rootObject.optString("haswithdrawpassword").equalsIgnoreCase("ON"));
         memberInfo.setGroupName(rootObject.optString("group_name"));
         memberInfo.setDisplayGroupName(rootObject.optString("display_group_name"));
+        memberInfo.setMemberVipLevelNameCn(rootObject.optString("memberVipLevelNameCn"));
+        memberInfo.setMemberVipLevelNameEn(rootObject.optString("memberVipLevelNameEn"));
         memberInfo.setIsDisplayGroupName(rootObject.optString("is_display_group_name").equalsIgnoreCase("1"));
         memberInfo.setMobileVerified(rootObject.optString("mobileverification").equalsIgnoreCase("1"));
         memberInfo.setEmailVerified(rootObject.optString("emailverification").equalsIgnoreCase("1"));
@@ -257,6 +263,8 @@ public class MemberInfo implements Parcelable {
         memberInfo.setHasWithdrawPassword(rootObject.optBoolean("hasWithdrawPassword"));
         memberInfo.setGroupName(rootObject.optString("group_name"));
         memberInfo.setDisplayGroupName(rootObject.optString("displayGroupName"));
+        memberInfo.setMemberVipLevelNameCn(rootObject.optString("memberVipLevelNameCn"));
+        memberInfo.setMemberVipLevelNameEn(rootObject.optString("memberVipLevelNameEn"));
         memberInfo.setIsDisplayGroupName(rootObject.optBoolean("isDisplayGroupName"));
         memberInfo.setMobileVerified(rootObject.optString("phoneVerification").equalsIgnoreCase("1"));
         memberInfo.setEmailVerified(rootObject.optString("emailVerification").equalsIgnoreCase("1"));
@@ -482,6 +490,22 @@ public class MemberInfo implements Parcelable {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+
+    public String getMemberVipLevelNameCn() {
+        return memberVipLevelNameCn;
+    }
+
+    public void setMemberVipLevelNameCn(String memberVipLevelNameCn) {
+        this.memberVipLevelNameCn = memberVipLevelNameCn;
+    }
+
+    public String getMemberVipLevelNameEn() {
+        return memberVipLevelNameEn;
+    }
+
+    public void setMemberVipLevelNameEn(String memberVipLevelNameEn) {
+        this.memberVipLevelNameEn = memberVipLevelNameEn;
     }
 
     public String getDisplayGroupName() {
@@ -789,6 +813,8 @@ public class MemberInfo implements Parcelable {
         dest.writeInt(hasWithdrawPassword ? 1 : 0);
         dest.writeString(groupName);
         dest.writeString(displayGroupName);
+        dest.writeString(memberVipLevelNameCn);
+        dest.writeString(memberVipLevelNameEn);
         dest.writeInt(isDisplayGroupName ? 1 : 0);
         dest.writeInt(isMobileVerified ? 1 : 0);
         dest.writeInt(isEmailVerified ? 1 : 0);
