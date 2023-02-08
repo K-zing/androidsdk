@@ -21,15 +21,14 @@ public class GetFixAmountRangeResult {
 
     public static GetFixAmountRangeResult newInstance(JSONObject rootObject) {
         GetFixAmountRangeResult result = new GetFixAmountRangeResult();
-        JSONArray listArray = rootObject.optJSONArray("data");
-        if (listArray != null) {
-            for (int i = 0; i < listArray.length(); i++) {
-                result.fixAmountList.add(FixAmount.newInstance(listArray.optJSONObject(i)));
-            }
-        }
-
         JSONObject dataObject = rootObject.optJSONObject("data");
         if (dataObject != null) {
+            JSONArray listArray = dataObject.optJSONArray("list");
+            if (listArray != null) {
+                for (int i = 0; i < listArray.length(); i++) {
+                    result.fixAmountList.add(FixAmount.newInstance(listArray.optJSONObject(i)));
+                }
+            }
             result.paymentMethod = dataObject.optString("paymentMethod");
             result.cryptoCurrency = dataObject.optString("cryptoCurrency");
             result.minTransAmount = BigDecimalUtil.optBigDecimal(dataObject, "minTransAmount");
