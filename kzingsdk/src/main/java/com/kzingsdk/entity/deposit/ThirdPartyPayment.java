@@ -48,6 +48,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
     private BigDecimal minDpt = BigDecimal.ZERO;
     private String pNum = "";
     private String cryptoCurrency = "";
+    private String rebateMethod = "";
     private ArrayList<String> cryptoCurrencyList = new ArrayList<>();
     private BigDecimal pRate = BigDecimal.ZERO;
     private BigDecimal rebateRate = BigDecimal.ZERO;
@@ -89,6 +90,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         promoRate = new BigDecimal(in.readString());
         sDealsRate = new BigDecimal(in.readString());
         rebateRate = new BigDecimal(in.readString());
+        rebateMethod = in.readString();
         code = in.readString();
         formType = in.readString();
         quickAmountFlag = in.readInt() == 1;
@@ -201,6 +203,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         random = settingObject.optInt("random", 0);
         minAmount = settingObject.optDouble("min", 0d);
         maxAmount = settingObject.optDouble("max", 0d);
+        rebateMethod = settingObject.optString("rebatemethod");
         rebateRate = BigDecimalUtil.optBigDecimal(settingObject, "rebaterate", BigDecimal.ZERO);
 
         quickAmountFlag = settingObject.optInt("quickamountflag") == 1;
@@ -461,6 +464,14 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         this.rebateRate = rebateRate;
     }
 
+    public String getRebateMethod() {
+        return rebateMethod;
+    }
+
+    public void setRebateMethod(String rebateMethod) {
+        this.rebateMethod = rebateMethod;
+    }
+
     public Double getRootMinAmount() {
         return rootMinAmount;
     }
@@ -512,6 +523,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         dest.writeString(promoRate.toString());
         dest.writeString(sDealsRate.toString());
         dest.writeString(rebateRate.toString());
+        dest.writeString(rebateMethod);
         dest.writeString(code);
         dest.writeString(formType);
         dest.writeInt(quickAmountFlag ? 1 : 0);

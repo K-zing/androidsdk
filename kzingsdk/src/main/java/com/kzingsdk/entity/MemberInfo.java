@@ -44,6 +44,7 @@ public class MemberInfo implements Parcelable {
     private String userPreferLanguage = "";
     private boolean hasWithdrawPassword = false;
     private String groupId = "";
+    private String groupName = "";
     private String displayGroupName = "";
     private String zalo = "";
     private String facebook = "";
@@ -109,6 +110,7 @@ public class MemberInfo implements Parcelable {
         tncStatus = in.readString();
         rankLevel = in.readString();
         hasWithdrawPassword = in.readInt() == 1;
+        groupName = in.readString();
         displayGroupName = in.readString();
         isDisplayGroupName = in.readInt() == 1;
         isMobileVerified = in.readInt() == 1;
@@ -172,6 +174,7 @@ public class MemberInfo implements Parcelable {
         memberInfo.setTncStatus(rootObject.optString("tncStatus"));
         memberInfo.setRankLevel(rootObject.optString("rankLevel"));
         memberInfo.setHasWithdrawPassword(rootObject.optString("haswithdrawpassword").equalsIgnoreCase("ON"));
+        memberInfo.setGroupName(rootObject.optString("group_name"));
         memberInfo.setDisplayGroupName(rootObject.optString("display_group_name"));
         memberInfo.setIsDisplayGroupName(rootObject.optString("is_display_group_name").equalsIgnoreCase("1"));
         memberInfo.setMobileVerified(rootObject.optString("mobileverification").equalsIgnoreCase("1"));
@@ -252,6 +255,7 @@ public class MemberInfo implements Parcelable {
         memberInfo.setTncStatus(rootObject.optString("tncStatus"));
         memberInfo.setRankLevel(rootObject.optString("rankLevel"));
         memberInfo.setHasWithdrawPassword(rootObject.optBoolean("hasWithdrawPassword"));
+        memberInfo.setGroupName(rootObject.optString("group_name"));
         memberInfo.setDisplayGroupName(rootObject.optString("displayGroupName"));
         memberInfo.setIsDisplayGroupName(rootObject.optBoolean("isDisplayGroupName"));
         memberInfo.setMobileVerified(rootObject.optString("phoneVerification").equalsIgnoreCase("1"));
@@ -470,6 +474,14 @@ public class MemberInfo implements Parcelable {
 
     public void setHasWithdrawPassword(boolean hasWithdrawPassword) {
         this.hasWithdrawPassword = hasWithdrawPassword;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
     public String getDisplayGroupName() {
@@ -775,6 +787,7 @@ public class MemberInfo implements Parcelable {
         dest.writeString(tncStatus);
         dest.writeString(rankLevel);
         dest.writeInt(hasWithdrawPassword ? 1 : 0);
+        dest.writeString(groupName);
         dest.writeString(displayGroupName);
         dest.writeInt(isDisplayGroupName ? 1 : 0);
         dest.writeInt(isMobileVerified ? 1 : 0);
