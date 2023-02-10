@@ -355,6 +355,16 @@ public final class KzingAPI {
         return new UpdateProfileImagesAPI();
     }
 
+
+    public static GetWithdrawAmountRangeAPI getWithdrawAmountRange() {
+        return new GetWithdrawAmountRangeAPI();
+    }
+
+
+    public static GetRewardTransHistoryAPI getRewardTransHistory() {
+        return new GetRewardTransHistoryAPI();
+    }
+
     public static GetFeMaintenanceStatusAPI getFeMaintenanceStatus() {
         return new GetFeMaintenanceStatusAPI();
     }

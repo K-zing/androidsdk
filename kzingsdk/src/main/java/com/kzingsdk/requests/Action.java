@@ -67,6 +67,8 @@ final class Action {
     static final String getRewardMemberDetails = "ftux1sf";
     static final String atmOldBankGetBankCard = "61tffoq";
     static final String submitAtmOldBankDeposit = "x1sjnvu";
+    static final String getWithdrawAmountRange = "tgjva7v";
+    static final String getRewardTransHistory = "ut6uila";
 
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";
