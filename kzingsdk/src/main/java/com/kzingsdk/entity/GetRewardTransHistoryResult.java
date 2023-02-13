@@ -18,13 +18,16 @@ public class GetRewardTransHistoryResult extends SimpleApiResult {
         GetRewardTransHistoryResult result = new GetRewardTransHistoryResult();
         result.status = simpleApiResult.status;
         result.message = simpleApiResult.message;
-        JSONArray dataArray = rootObject.optJSONArray("transList");
-        if (dataArray != null) {
-            for (int i = 0; i < dataArray.length(); i++) {
-                result.rewardTransHistoryList.add(RewardTransHistory.newInstance(dataArray.optJSONObject(i)));
+        JSONObject dataJSON = rootObject.optJSONObject("data");
+        if (dataJSON != null) {
+            JSONArray dataArray = dataJSON.optJSONArray("transList");
+            if (dataArray != null) {
+                for (int i = 0; i < dataArray.length(); i++) {
+                    result.rewardTransHistoryList.add(RewardTransHistory.newInstance(dataArray.optJSONObject(i)));
+                }
             }
+            result.pointBalance = BigDecimalUtil.optBigDecimal(dataJSON, "pointBalance");
         }
-        result.pointBalance = BigDecimalUtil.optBigDecimal(rootObject, "pointBalance");
         return result;
     }
 
