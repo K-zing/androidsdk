@@ -6,6 +6,7 @@ import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.GetRewardTransHistoryResult;
 import com.kzingsdk.entity.RewardTransHistory;
 import com.kzingsdk.entity.SimpleApiResult;
+import com.kzingsdk.util.Constant;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,8 +43,8 @@ public class GetRewardTransHistoryAPI extends CoreRequest {
         try {
             jsonData.put("pagecount", pageCount);
             jsonData.put("offset", offset);
-            jsonData.put("start", startDateCalendar.getTime().getTime() / 1000);
-            jsonData.put("end", endDateCalendar.getTime().getTime() / 1000);
+            jsonData.put("start", Constant.FULL_DATE_FORMAT.format(startDateCalendar.getTime()));
+            jsonData.put("end", Constant.FULL_DATE_FORMAT.format(endDateCalendar.getTime()));
             return jsonData;
         } catch (JSONException ignored) {
         }

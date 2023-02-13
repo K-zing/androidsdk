@@ -18,7 +18,7 @@ public class GetRewardTransHistoryResult extends SimpleApiResult {
         GetRewardTransHistoryResult result = new GetRewardTransHistoryResult();
         result.status = simpleApiResult.status;
         result.message = simpleApiResult.message;
-        JSONArray dataArray = rootObject.optJSONArray("data");
+        JSONArray dataArray = rootObject.optJSONArray("transList");
         if (dataArray != null) {
             for (int i = 0; i < dataArray.length(); i++) {
                 result.rewardTransHistoryList.add(RewardTransHistory.newInstance(dataArray.optJSONObject(i)));
