@@ -82,6 +82,7 @@ public class PostpaidBonus {
     private String mobileContent;
     private Integer hotLvl;
     private Long updated;
+    private String getStatus;
 
     public static PostpaidBonus newInstance(JSONObject rootObject) {
         PostpaidBonus bankCard = new PostpaidBonus();
@@ -159,6 +160,7 @@ public class PostpaidBonus {
         bankCard.setMobileContent(rootObject.optString("mobilecontent"));
         bankCard.setHotLvl(rootObject.optInt("hotlvl"));
         bankCard.setUpdated(rootObject.optLong("updated"));
+        bankCard.setGetStatus(rootObject.optString("getstatus"));
 
         return bankCard;
     }
@@ -746,6 +748,14 @@ public class PostpaidBonus {
 
     public void setUpdated(Long updated) {
         this.updated = updated;
+    }
+
+    public String getGetStatus() {
+        return getStatus;
+    }
+
+    public void setGetStatus(String getStatus) {
+        this.getStatus = getStatus;
     }
 
     public Long getExpiredOn() {
