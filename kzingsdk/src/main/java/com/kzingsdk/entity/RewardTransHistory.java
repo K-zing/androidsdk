@@ -24,6 +24,7 @@ public class RewardTransHistory {
         history.setPointType(rootObject.optString("pointType"));
         history.setPoint(rootObject.optString("point"));
         history.setDetail(rootObject.optString("detail"));
+
         return history;
     }
 

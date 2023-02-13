@@ -3,6 +3,7 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
+import com.kzingsdk.entity.GetRewardTransHistoryResult;
 import com.kzingsdk.entity.RewardTransHistory;
 import com.kzingsdk.entity.SimpleApiResult;
 
@@ -50,24 +51,16 @@ public class GetRewardTransHistoryAPI extends CoreRequest {
     }
 
     @Override
-    public Observable<ArrayList<RewardTransHistory>> requestRx(final Context context) {
-        return super.baseExecute(context).map(jsonResponse -> {
-            ArrayList<RewardTransHistory> lists = new ArrayList<>();
-            JSONArray response = jsonResponse.optJSONArray("data");
-            if (response != null)
-                for (int i = 0; i < response.length(); i++) {
-                    lists.add(RewardTransHistory.newInstance(response.optJSONObject(i)));
-                }
-            return lists;
-        });
+    public Observable<GetRewardTransHistoryResult> requestRx(final Context context) {
+        return super.baseExecute(context).map(GetRewardTransHistoryResult::newInstance);
     }
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(rewardTransHistoryList -> {
+        requestRx(context).subscribe(getRewardTransHistoryResult -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((GetRewardTransHistoryCallBack) kzingCallBack).onSuccess(rewardTransHistoryList);
+                    ((GetRewardTransHistoryCallBack) kzingCallBack).onSuccess(getRewardTransHistoryResult);
                 }
             }
         }, defaultOnErrorConsumer);
@@ -79,7 +72,7 @@ public class GetRewardTransHistoryAPI extends CoreRequest {
     }
 
     public interface GetRewardTransHistoryCallBack extends KzingCallBack {
-        void onSuccess(ArrayList<RewardTransHistory> rewardTransHistoryList);
+        void onSuccess(GetRewardTransHistoryResult getRewardTransHistoryResult);
     }
 
     public GetRewardTransHistoryAPI setPageCount(Integer pageCount) {
