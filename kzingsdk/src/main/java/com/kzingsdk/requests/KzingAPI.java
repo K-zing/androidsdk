@@ -381,6 +381,10 @@ public final class KzingAPI {
         return new GetReferralDataAPI();
     }
 
+    public static GetRefereeStatusAPI getRefereeStatus() {
+        return new GetRefereeStatusAPI();
+    }
+
     public static RegParamAPI getRegParam() {
         return new RegParamAPI();
     }

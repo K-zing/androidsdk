@@ -86,6 +86,7 @@ public class ClientInstantInfo implements Parcelable {
     private ArrayList<String> memberPanUsername = new ArrayList<>();
     private ArrayList<String> bannerCountdown = new ArrayList<>();
     private ArrayList<String> bannerFirstLaunch = new ArrayList<>();
+    private ArrayList<String> depositAnnouncementList = new ArrayList<>();
     private ArrayList<MarqueeAnnouncement> marqueeAnnouncementList = new ArrayList<>();
     private ArrayList<MarqueeActivity> marqueeActivityList = new ArrayList<>();
     private ArrayList<ThemeInfo> themeList = new ArrayList<>();
@@ -164,6 +165,7 @@ public class ClientInstantInfo implements Parcelable {
         memberPanUsername = (ArrayList<String>) objectArray[i++];
         bannerCountdown = (ArrayList<String>) objectArray[i++];
         bannerFirstLaunch = (ArrayList<String>) objectArray[i++];
+        depositAnnouncementList = (ArrayList<String>) objectArray[i++];
         marqueeAnnouncementList = (ArrayList<MarqueeAnnouncement>) objectArray[i++];
         marqueeActivityList = (ArrayList<MarqueeActivity>) objectArray[i++];
         themeList = (ArrayList<ThemeInfo>) objectArray[i++];
@@ -283,6 +285,16 @@ public class ClientInstantInfo implements Parcelable {
             }
         }
         clientInfo.setBannerCountdown(bannerCountdownList);
+
+        JSONArray depositAnnouncementJSONArray = rootObject.optJSONArray("depositAnnouncementArr");
+        ArrayList<String> depositAnnouncementList = new ArrayList<>();
+        if (depositAnnouncementJSONArray != null) {
+            for (int i = 0; i < depositAnnouncementJSONArray.length(); i++) {
+                depositAnnouncementList.add(depositAnnouncementJSONArray.optJSONObject(i).optString("ticker"));
+            }
+        }
+        clientInfo.setDepositAnnouncementList(depositAnnouncementList);
+
         JSONArray bannerFirstLaunchJSONArray = rootObject.optJSONArray("bannerFirstLaunch");
         ArrayList<String> bannerFirstLaunchList = new ArrayList<>();
         if (bannerFirstLaunchJSONArray != null) {
@@ -425,6 +437,7 @@ public class ClientInstantInfo implements Parcelable {
                 memberPanUsername,
                 bannerCountdown,
                 bannerFirstLaunch,
+                depositAnnouncementList,
                 marqueeAnnouncementList,
                 marqueeActivityList,
                 themeList,
@@ -927,6 +940,14 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setBannerFirstLaunch(ArrayList<String> bannerFirstLaunch) {
         this.bannerFirstLaunch = bannerFirstLaunch;
+    }
+
+    public ArrayList<String> getDepositAnnouncementList() {
+        return depositAnnouncementList;
+    }
+
+    public void setDepositAnnouncementList(ArrayList<String> depositAnnouncementList) {
+        this.depositAnnouncementList = depositAnnouncementList;
     }
 
     public ContactInfo getFeedbackContactInfo() {
