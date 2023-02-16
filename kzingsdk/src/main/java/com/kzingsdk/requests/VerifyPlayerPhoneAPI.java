@@ -3,6 +3,8 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
+import com.kzingsdk.entity.SimpleApiResult;
+import com.kzingsdk.entity.VerifyPlayerPhoneResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,6 +17,7 @@ public class VerifyPlayerPhoneAPI extends CoreRequest {
     private String phoneCountry = null;
     private String validateCode = null;
     private String type = null;
+
 
     VerifyPlayerPhoneAPI() {
         super();
@@ -53,16 +56,16 @@ public class VerifyPlayerPhoneAPI extends CoreRequest {
     }
 
     @Override
-    public Observable<Boolean> requestRx(final Context context) {
-        return super.baseExecute(context).map(jsonResponse -> true);
+    public Observable<VerifyPlayerPhoneResult> requestRx(final Context context) {
+        return super.baseExecute(context).map(VerifyPlayerPhoneResult::newInstance);
     }
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(success -> {
+        requestRx(context).subscribe(verifyPlayerPhoneResult -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((VerifyPlayerPhoneCallBack) kzingCallBack).onSuccess(success);
+                    ((VerifyPlayerPhoneCallBack) kzingCallBack).onSuccess(verifyPlayerPhoneResult);
                 }
             }
         }, defaultOnErrorConsumer);
@@ -98,6 +101,6 @@ public class VerifyPlayerPhoneAPI extends CoreRequest {
     }
 
     public interface VerifyPlayerPhoneCallBack extends KzingCallBack {
-        void onSuccess(Boolean success);
+        void onSuccess(VerifyPlayerPhoneResult verifyPlayerPhoneResult);
     }
 }

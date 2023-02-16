@@ -188,9 +188,9 @@ public class MemberInfo implements Parcelable {
         memberInfo.setPreferContactType(rootObject.optString("prefercontact_type"));
         memberInfo.setHasWithdrawPassword(rootObject.optString("haswithdrawpassword").equalsIgnoreCase("ON"));
         memberInfo.setGroupName(rootObject.optString("group_name"));
-        memberInfo.setDisplayGroupName(rootObject.optString("display_group_name"));
         memberInfo.setMemberVipLevelNameCn(rootObject.optString("memberVipLevelNameCn"));
         memberInfo.setMemberVipLevelNameEn(rootObject.optString("memberVipLevelNameEn"));
+        memberInfo.setDisplayGroupName(rootObject.optString("display_group_name"));
         memberInfo.setIsDisplayGroupName(rootObject.optString("is_display_group_name").equalsIgnoreCase("1"));
         memberInfo.setMobileVerified(rootObject.optString("mobileverification").equalsIgnoreCase("1"));
         memberInfo.setEmailVerified(rootObject.optString("emailverification").equalsIgnoreCase("1"));
