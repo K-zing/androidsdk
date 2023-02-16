@@ -55,6 +55,7 @@ public class MemberInfo implements Parcelable {
     private String skype = "";
     private String tncStatus = "";
     private String rankLevel = "";
+    private String preferContactType = "";
     private boolean isDisplayGroupName = false;
     private boolean isMobileVerified = false;
     private boolean isEmailVerified = false;
@@ -69,6 +70,9 @@ public class MemberInfo implements Parcelable {
     private boolean memberPanUsername = false;
     private boolean displayAddress = false;
     private boolean withdrawBindAddress = false;
+    private boolean preferContactPhone = false;
+    private boolean preferContactSms = false;
+    private boolean preferContactEmail = false;
     private String playerCurrency = "";
     private String address = "";
     private String shortenLink = "";
@@ -111,6 +115,7 @@ public class MemberInfo implements Parcelable {
         skype = in.readString();
         tncStatus = in.readString();
         rankLevel = in.readString();
+        preferContactType = in.readString();
         hasWithdrawPassword = in.readInt() == 1;
         groupName = in.readString();
         displayGroupName = in.readString();
@@ -135,6 +140,9 @@ public class MemberInfo implements Parcelable {
         memberPanUsername = in.readInt() == 1;
         displayAddress = in.readInt() == 1;
         withdrawBindAddress = in.readInt() == 1;
+        preferContactPhone = in.readInt() == 1;
+        preferContactSms = in.readInt() == 1;
+        preferContactEmail = in.readInt() == 1;
         playerCurrency = in.readString();
         address = in.readString();
         shortenLink = in.readString();
@@ -177,6 +185,7 @@ public class MemberInfo implements Parcelable {
         memberInfo.setSkype(rootObject.optString("skype"));
         memberInfo.setTncStatus(rootObject.optString("tncStatus"));
         memberInfo.setRankLevel(rootObject.optString("rankLevel"));
+        memberInfo.setPreferContactType(rootObject.optString("prefercontact_type"));
         memberInfo.setHasWithdrawPassword(rootObject.optString("haswithdrawpassword").equalsIgnoreCase("ON"));
         memberInfo.setGroupName(rootObject.optString("group_name"));
         memberInfo.setDisplayGroupName(rootObject.optString("display_group_name"));
@@ -260,6 +269,7 @@ public class MemberInfo implements Parcelable {
         memberInfo.setSkype(rootObject.optString("skype"));
         memberInfo.setTncStatus(rootObject.optString("tncStatus"));
         memberInfo.setRankLevel(rootObject.optString("rankLevel"));
+        memberInfo.setPreferContactType(rootObject.optString("prefercontact_type"));
         memberInfo.setHasWithdrawPassword(rootObject.optBoolean("hasWithdrawPassword"));
         memberInfo.setGroupName(rootObject.optString("group_name"));
         memberInfo.setDisplayGroupName(rootObject.optString("displayGroupName"));
@@ -285,6 +295,12 @@ public class MemberInfo implements Parcelable {
         memberInfo.setAddress(rootObject.optString("address"));
         memberInfo.setShortenLink(rootObject.optString("shortenLink"));
 
+        JSONObject prefercontactJSON = rootObject.optJSONObject("prefercontact");
+        if (prefercontactJSON != null) {
+            memberInfo.setPreferContactPhone(prefercontactJSON.optBoolean("phone"));
+            memberInfo.setPreferContactSms(prefercontactJSON.optBoolean("sms"));
+            memberInfo.setPreferContactEmail(prefercontactJSON.optBoolean("email"));
+        }
 
         JSONObject verifyremaincountJSON = rootObject.optJSONObject("verifyremaincount");
         if (verifyremaincountJSON != null) {
@@ -675,6 +691,15 @@ public class MemberInfo implements Parcelable {
     public void setRankLevel(String rankLevel) {
         this.rankLevel = rankLevel;
     }
+
+    public String getPreferContactType() {
+        return preferContactType;
+    }
+
+    public void setPreferContactType(String preferContactType) {
+        this.preferContactType = preferContactType;
+    }
+
     public boolean isEnablePhoneRecall() {
         return enablePhoneRecall;
     }
@@ -723,6 +748,30 @@ public class MemberInfo implements Parcelable {
     public MemberInfo setWithdrawBindAddress(boolean withdrawBindAddress) {
         this.withdrawBindAddress = withdrawBindAddress;
         return this;
+    }
+
+    public boolean isPreferContactPhone() {
+        return preferContactPhone;
+    }
+
+    public void setPreferContactPhone(boolean preferContactPhone) {
+        this.preferContactPhone = preferContactPhone;
+    }
+
+    public boolean isPreferContactSms() {
+        return preferContactSms;
+    }
+
+    public void setPreferContactSms(boolean preferContactSms) {
+        this.preferContactSms = preferContactSms;
+    }
+
+    public boolean isPreferContactEmail() {
+        return preferContactEmail;
+    }
+
+    public void setPreferContactEmail(boolean preferContactEmail) {
+        this.preferContactEmail = preferContactEmail;
     }
 
     public String getPlayerCurrency() {
@@ -810,6 +859,7 @@ public class MemberInfo implements Parcelable {
         dest.writeString(skype);
         dest.writeString(tncStatus);
         dest.writeString(rankLevel);
+        dest.writeString(preferContactType);
         dest.writeInt(hasWithdrawPassword ? 1 : 0);
         dest.writeString(groupName);
         dest.writeString(displayGroupName);
@@ -834,6 +884,9 @@ public class MemberInfo implements Parcelable {
         dest.writeInt(memberPanUsername ? 1 : 0);
         dest.writeInt(displayAddress ? 1 : 0);
         dest.writeInt(withdrawBindAddress ? 1 : 0);
+        dest.writeInt(preferContactPhone ? 1 : 0);
+        dest.writeInt(preferContactSms ? 1 : 0);
+        dest.writeInt(preferContactEmail ? 1 : 0);
         dest.writeString(playerCurrency);
         dest.writeString(address);
         dest.writeString(shortenLink);
