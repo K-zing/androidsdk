@@ -3,6 +3,7 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
+import com.kzingsdk.entity.VerifyPlayerEmailResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,8 +52,8 @@ public class VerifyPlayerEmailAPI extends CoreRequest {
     }
 
     @Override
-    public Observable<Boolean> requestRx(final Context context) {
-        return super.baseExecute(context).map(jsonResponse -> true);
+    public Observable<VerifyPlayerEmailResult> requestRx(final Context context) {
+        return super.baseExecute(context).map(VerifyPlayerEmailResult::newInstance);
     }
 
     @Override
@@ -91,6 +92,6 @@ public class VerifyPlayerEmailAPI extends CoreRequest {
     }
 
     public interface VerifyPlayerEmailCallBack extends KzingCallBack {
-        void onSuccess(Boolean success);
+        void onSuccess(VerifyPlayerEmailResult verifyPlayerEmailResult);
     }
 }
