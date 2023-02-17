@@ -9,12 +9,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 public class VipSettingV2 {
 
-    private HashSet<String> promotionConditionSet = new HashSet<>();
-    private HashSet<String> relegationConditionSet = new HashSet<>();
-    private HashSet<String> vipExclusiveSet = new HashSet<>();
+    private List<String> promotionConditionList = new ArrayList<>();
+    private List<String> relegationConditionList = new ArrayList<>();
+    private List<String> vipExclusiveList = new ArrayList<>();
     private Boolean vipSettingSwitch;
     private HashMap<Integer, String> vipWaterMap = new HashMap<>();
     private String maxWater = null;
@@ -24,11 +25,11 @@ public class VipSettingV2 {
     public static VipSettingV2 newInstance(JSONObject rootObject) {
         VipSettingV2 vipSetting = new VipSettingV2();
         String promotionConditions = rootObject.optString("promotionconditions");
-        vipSetting.promotionConditionSet = new HashSet<>(Arrays.asList(promotionConditions.split(",")));
+        vipSetting.promotionConditionList = Arrays.asList(promotionConditions.split(","));
         String relegationConditions = rootObject.optString("relegationconditions");
-        vipSetting.relegationConditionSet = new HashSet<>(Arrays.asList(relegationConditions.split(",")));
+        vipSetting.relegationConditionList = Arrays.asList(relegationConditions.split(","));
         String vipExclusives = rootObject.optString("vipexclusives");
-        vipSetting.vipExclusiveSet = new HashSet<>(Arrays.asList(vipExclusives.split(",")));
+        vipSetting.vipExclusiveList = Arrays.asList(vipExclusives.split(","));
         vipSetting.vipSettingSwitch = rootObject.optString("vipSettingSwitch", "OFF").equalsIgnoreCase("on");
         vipSetting.vipWaterMap = new HashMap<>();
         JSONObject vipWaterJSONObject = rootObject.optJSONObject("vipwater");
@@ -50,28 +51,28 @@ public class VipSettingV2 {
         return vipSetting;
     }
 
-    public HashSet<String> getPromotionConditionSet() {
-        return promotionConditionSet;
+    public List<String> getPromotionConditionList() {
+        return promotionConditionList;
     }
 
-    public void setPromotionConditionSet(HashSet<String> promotionConditionSet) {
-        this.promotionConditionSet = promotionConditionSet;
+    public void setPromotionConditionList(List<String> promotionConditionList) {
+        this.promotionConditionList = promotionConditionList;
     }
 
-    public HashSet<String> getRelegationConditionSet() {
-        return relegationConditionSet;
+    public List<String> getRelegationConditionList() {
+        return relegationConditionList;
     }
 
-    public void setRelegationConditionSet(HashSet<String> relegationConditionSet) {
-        this.relegationConditionSet = relegationConditionSet;
+    public void setRelegationConditionList(List<String> relegationConditionList) {
+        this.relegationConditionList = relegationConditionList;
     }
 
-    public HashSet<String> getVipExclusiveSet() {
-        return vipExclusiveSet;
+    public List<String> getVipExclusiveList() {
+        return vipExclusiveList;
     }
 
-    public void setVipExclusiveSet(HashSet<String> vipExclusiveSet) {
-        this.vipExclusiveSet = vipExclusiveSet;
+    public void setVipExclusiveList(List<String> vipExclusiveList) {
+        this.vipExclusiveList = vipExclusiveList;
     }
 
     public Boolean getVipSettingSwitch() {
