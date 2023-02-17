@@ -35,7 +35,12 @@ public class VipSetting implements Parcelable {
     private BigDecimal autoLevelReward = BigDecimal.ZERO;
     private BigDecimal autoUpTargetDeposit = BigDecimal.ZERO;
     private BigDecimal autoUpTargetBet = BigDecimal.ZERO;
+    private BigDecimal autoUpTargetWinloss = BigDecimal.ZERO;
+    private BigDecimal autoUpTargetReg = BigDecimal.ZERO;
+    private BigDecimal autoRemainTargetDeposit = BigDecimal.ZERO;
     private BigDecimal autoRemainTargetBet = BigDecimal.ZERO;
+    private BigDecimal autoRemainTargetWinloss = BigDecimal.ZERO;
+    private BigDecimal autoRemainTargetReg = BigDecimal.ZERO;
 
     public VipSetting() {
     }
@@ -54,7 +59,12 @@ public class VipSetting implements Parcelable {
         autoLevelReward = new BigDecimal(in.readString());
         autoUpTargetDeposit = new BigDecimal(in.readString());
         autoUpTargetBet = new BigDecimal(in.readString());
+        autoUpTargetWinloss = new BigDecimal(in.readString());
+        autoUpTargetReg = new BigDecimal(in.readString());
+        autoRemainTargetDeposit = new BigDecimal(in.readString());
         autoRemainTargetBet = new BigDecimal(in.readString());
+        autoRemainTargetWinloss = new BigDecimal(in.readString());
+        autoRemainTargetReg = new BigDecimal(in.readString());
     }
 
     public static VipSetting newInstance(JSONObject rootObject) {
@@ -72,7 +82,12 @@ public class VipSetting implements Parcelable {
         vipSetting.autoLevelReward = BigDecimalUtil.optBigDecimal(rootObject, "autoLevelReward", BigDecimal.ZERO);
         vipSetting.autoUpTargetDeposit = BigDecimalUtil.optBigDecimal(rootObject, "autoUpTargetDeposit", BigDecimal.ZERO);
         vipSetting.autoUpTargetBet = BigDecimalUtil.optBigDecimal(rootObject, "autoUpTargetBet", BigDecimal.ZERO);
+        vipSetting.autoUpTargetWinloss = BigDecimalUtil.optBigDecimal(rootObject, "autoUpTargetWinloss", BigDecimal.ZERO);
+        vipSetting.autoUpTargetReg = BigDecimalUtil.optBigDecimal(rootObject, "autoUpTargetReg", BigDecimal.ZERO);
+        vipSetting.autoRemainTargetDeposit = BigDecimalUtil.optBigDecimal(rootObject, "autoRemainTargetDeposit", BigDecimal.ZERO);
         vipSetting.autoRemainTargetBet = BigDecimalUtil.optBigDecimal(rootObject, "autoRemainTargetBet", BigDecimal.ZERO);
+        vipSetting.autoRemainTargetWinloss = BigDecimalUtil.optBigDecimal(rootObject, "autoRemainTargetWinloss", BigDecimal.ZERO);
+        vipSetting.autoRemainTargetReg = BigDecimalUtil.optBigDecimal(rootObject, "autoRemainTargetReg", BigDecimal.ZERO);
         return vipSetting;
     }
 
@@ -164,6 +179,46 @@ public class VipSetting implements Parcelable {
         this.autoUpTargetDeposit = autoUpTargetDeposit;
     }
 
+    public BigDecimal getAutoUpTargetWinloss() {
+        return autoUpTargetWinloss;
+    }
+
+    public void setAutoUpTargetWinloss(BigDecimal autoUpTargetWinloss) {
+        this.autoUpTargetWinloss = autoUpTargetWinloss;
+    }
+
+    public BigDecimal getAutoUpTargetReg() {
+        return autoUpTargetReg;
+    }
+
+    public void setAutoUpTargetReg(BigDecimal autoUpTargetReg) {
+        this.autoUpTargetReg = autoUpTargetReg;
+    }
+
+    public BigDecimal getAutoRemainTargetDeposit() {
+        return autoRemainTargetDeposit;
+    }
+
+    public void setAutoRemainTargetDeposit(BigDecimal autoRemainTargetDeposit) {
+        this.autoRemainTargetDeposit = autoRemainTargetDeposit;
+    }
+
+    public BigDecimal getAutoRemainTargetWinloss() {
+        return autoRemainTargetWinloss;
+    }
+
+    public void setAutoRemainTargetWinloss(BigDecimal autoRemainTargetWinloss) {
+        this.autoRemainTargetWinloss = autoRemainTargetWinloss;
+    }
+
+    public BigDecimal getAutoRemainTargetReg() {
+        return autoRemainTargetReg;
+    }
+
+    public void setAutoRemainTargetReg(BigDecimal autoRemainTargetReg) {
+        this.autoRemainTargetReg = autoRemainTargetReg;
+    }
+
     public BigDecimal getAutoUpTargetBet() {
         return autoUpTargetBet;
     }
@@ -203,7 +258,12 @@ public class VipSetting implements Parcelable {
         dest.writeString(autoLevelReward.toString());
         dest.writeString(autoUpTargetDeposit.toString());
         dest.writeString(autoUpTargetBet.toString());
+        dest.writeString(autoUpTargetWinloss.toString());
+        dest.writeString(autoUpTargetReg.toString());
+        dest.writeString(autoRemainTargetDeposit.toString());
         dest.writeString(autoRemainTargetBet.toString());
+        dest.writeString(autoRemainTargetWinloss.toString());
+        dest.writeString(autoRemainTargetReg.toString());
     }
 
     @Override
