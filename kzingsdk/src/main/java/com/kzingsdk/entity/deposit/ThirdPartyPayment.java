@@ -57,6 +57,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
     private boolean isQrScanMethod = false;
     private boolean quickAmountFlag = false;
     private ArrayList<BigDecimal> quickAmountList = new ArrayList<>();
+    private Integer waiveCountBal = 0;
 
     public ThirdPartyPayment() {
     }
@@ -68,6 +69,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         bankCode = in.readString();
         displayOrder = in.readInt();
         random = in.readInt();
+        waiveCountBal = in.readInt();
         name = in.readString();
         rootMinAmount = in.readDouble();
         rootMaxAmount = in.readDouble();
@@ -200,6 +202,8 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
                 cOptionList.add(COption.newInstance(cOptionArray.optJSONObject(i)));
             }
         }
+
+        waiveCountBal = settingObject.optInt("waiveCountBal", 0);
         random = settingObject.optInt("random", 0);
         minAmount = settingObject.optDouble("min", 0d);
         maxAmount = settingObject.optDouble("max", 0d);
@@ -406,6 +410,14 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         this.random = random;
     }
 
+    public Integer getWaiveCountBal() {
+        return waiveCountBal;
+    }
+
+    public void setWaiveCountBal(Integer waiveCountBal) {
+        this.waiveCountBal = waiveCountBal;
+    }
+
     public ArrayList<COption> getcOptionList() {
         return cOptionList;
     }
@@ -501,6 +513,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
         dest.writeString(bankCode);
         dest.writeInt(displayOrder);
         dest.writeInt(random);
+        dest.writeInt(waiveCountBal);
         dest.writeString(name);
         dest.writeDouble(rootMinAmount);
         dest.writeDouble(rootMaxAmount);
