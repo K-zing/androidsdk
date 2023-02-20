@@ -56,6 +56,7 @@ public class ClientInstantInfo implements Parcelable {
     private Boolean selfServiceActivate = false;
     private Boolean allowBindCryptoAddress = false;
     private Boolean allowPlayerReferralReport = false;
+    private Boolean showVIP = false;
     private String siteId;
     private String cryptoFixedExchangeRate;
     private String announcement;
@@ -136,6 +137,7 @@ public class ClientInstantInfo implements Parcelable {
         selfServiceActivate = in.readInt() == 1;
         allowBindCryptoAddress = in.readInt() == 1;
         allowPlayerReferralReport = in.readInt() == 1;
+        showVIP = in.readInt() == 1;
         siteId = in.readString();
         cryptoFixedExchangeRate = in.readString();
         announcement = in.readString();
@@ -213,6 +215,7 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setSelfServiceActivate(rootObject.optBoolean("selfserviceActivate", false));
         clientInfo.setAllowBindCryptoAddress(rootObject.optBoolean("allowBindCryptoAddress", false));
         clientInfo.setAllowPlayerReferralReport(rootObject.optBoolean("allowPlayerReferralReport", false));
+        clientInfo.setShowVIP(rootObject.optBoolean("showVIP", false));
         clientInfo.setCaptchaMode(rootObject.optString("captchaMode"));
         clientInfo.setSiteId(rootObject.optString("siteId"));
         clientInfo.setCryptoFixedExchangeRate(rootObject.optString("cryptoFixedExchangeRate"));
@@ -408,6 +411,7 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeInt(selfServiceActivate ? 1 : 0);
         dest.writeInt(allowBindCryptoAddress ? 1 : 0);
         dest.writeInt(allowPlayerReferralReport ? 1 : 0);
+        dest.writeInt(showVIP ? 1 : 0);
         dest.writeString(siteId);
         dest.writeString(cryptoFixedExchangeRate);
         dest.writeString(announcement);
@@ -731,6 +735,14 @@ public class ClientInstantInfo implements Parcelable {
     public ClientInstantInfo setAllowPlayerReferralReport(Boolean allowPlayerReferralReport) {
         this.allowPlayerReferralReport = allowPlayerReferralReport;
         return this;
+    }
+
+    public Boolean getShowVIP() {
+        return showVIP;
+    }
+
+    public void setShowVIP(Boolean showVIP) {
+        this.showVIP = showVIP;
     }
 
     public String getSiteId() {
