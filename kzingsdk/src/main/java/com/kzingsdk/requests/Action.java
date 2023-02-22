@@ -70,6 +70,7 @@ final class Action {
     static final String getWithdrawAmountRange = "tgjva7v";
     static final String getRewardTransHistory = "ut6uila";
     static final String getRefereeStatus = "uase9cr";
+    static final String getDefaultTierRate = "7zbjnve";
 
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";

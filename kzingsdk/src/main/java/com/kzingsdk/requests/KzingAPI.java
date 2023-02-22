@@ -355,11 +355,13 @@ public final class KzingAPI {
         return new UpdateProfileImagesAPI();
     }
 
+    public static GetDefaultTierRateAPI getDefaultTierRate() {
+        return new GetDefaultTierRateAPI();
+    }
 
     public static GetWithdrawAmountRangeAPI getWithdrawAmountRange() {
         return new GetWithdrawAmountRangeAPI();
     }
-
 
     public static GetRewardTransHistoryAPI getRewardTransHistory() {
         return new GetRewardTransHistoryAPI();
