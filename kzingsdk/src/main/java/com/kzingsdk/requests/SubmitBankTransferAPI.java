@@ -13,6 +13,7 @@ import io.reactivex.Observable;
 public class SubmitBankTransferAPI extends CoreRequest {
 
     private String ppid;
+    private String bcid;
     private String optionId;
     private String depositUser;
     private String amount;
@@ -42,6 +43,7 @@ public class SubmitBankTransferAPI extends CoreRequest {
         JSONObject jsonData = super.generateParamsJson();
         try {
             jsonData.put("ppid", ppid);
+            jsonData.put("bcid", bcid);
             jsonData.put("optionid", optionId);
             jsonData.put("deposituser", depositUser);
             jsonData.put("amount", amount);
@@ -80,6 +82,11 @@ public class SubmitBankTransferAPI extends CoreRequest {
 
     public SubmitBankTransferAPI setPpid(String ppid) {
         this.ppid = ppid;
+        return this;
+    }
+
+    public SubmitBankTransferAPI setBcid(String bcid) {
+        this.bcid = bcid;
         return this;
     }
 
