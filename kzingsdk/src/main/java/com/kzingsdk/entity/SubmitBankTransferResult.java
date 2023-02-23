@@ -25,30 +25,34 @@ public class SubmitBankTransferResult {
     protected String created;
 
     public static SubmitBankTransferResult newInstance(JSONObject rootObject) {
-        SubmitBankTransferResult simpleApiResult = new SubmitBankTransferResult();
-        simpleApiResult.setType(rootObject.optInt("type"));
-        simpleApiResult.setMsg(rootObject.optString("msg"));
-        simpleApiResult.setUrl(rootObject.optString("url"));
-        simpleApiResult.setQrcode(rootObject.optString("qrcode"));
-        simpleApiResult.setHtml(rootObject.optString("html"));
-        simpleApiResult.setDno(rootObject.optString("dno"));
-        JSONObject tlcObject = rootObject.optJSONObject("TLC_RESPONSE");
-        if (tlcObject != null) {
-            simpleApiResult.setStatus(tlcObject.optString("status"));
-            simpleApiResult.setBankAccount(tlcObject.optString("bankAccount"));
-            simpleApiResult.setBankName(tlcObject.optString("bankName"));
-            simpleApiResult.setAccountName(tlcObject.optString("accountName"));
-            simpleApiResult.setPpid(tlcObject.optString("ppid"));
-            simpleApiResult.setCanRedirect(tlcObject.optString("canRedirect"));
-            simpleApiResult.setAtmName(tlcObject.optString("atmname"));
-            simpleApiResult.setAtmNo(tlcObject.optString("atm_no"));
-            simpleApiResult.setBankcode(tlcObject.optString("bankcode"));
-            simpleApiResult.setAtmAddr(tlcObject.optString("atm_addr"));
-            simpleApiResult.setAtmBankName(tlcObject.optString("atm_bankname"));
-            simpleApiResult.setAmount(tlcObject.optString("amount"));
-            simpleApiResult.setCreated(tlcObject.optString("created"));
+        SubmitBankTransferResult result = new SubmitBankTransferResult();
+        result.setType(rootObject.optInt("type"));
+        result.setMsg(rootObject.optString("msg"));
+        result.setUrl(rootObject.optString("url"));
+        result.setQrcode(rootObject.optString("qrcode"));
+        result.setHtml(rootObject.optString("html"));
+        result.setDno(rootObject.optString("dno"));
+        JSONObject resultObject = rootObject.optJSONObject("result");
+        if (resultObject != null) {
+            result.setDno(resultObject.optString("dno"));
+            JSONObject tlcObject = resultObject.optJSONObject("TLC_RESPONSE");
+            if (tlcObject != null) {
+                result.setStatus(tlcObject.optString("status"));
+                result.setBankAccount(tlcObject.optString("bankAccount"));
+                result.setBankName(tlcObject.optString("bankName"));
+                result.setAccountName(tlcObject.optString("accountName"));
+                result.setPpid(tlcObject.optString("ppid"));
+                result.setCanRedirect(tlcObject.optString("canRedirect"));
+                result.setAtmName(tlcObject.optString("atmname"));
+                result.setAtmNo(tlcObject.optString("atm_no"));
+                result.setBankcode(tlcObject.optString("bankcode"));
+                result.setAtmAddr(tlcObject.optString("atm_addr"));
+                result.setAtmBankName(tlcObject.optString("atm_bankname"));
+                result.setAmount(tlcObject.optString("amount"));
+                result.setCreated(tlcObject.optString("created"));
+            }
         }
-        return simpleApiResult;
+        return result;
     }
 
     public Integer getType() {
