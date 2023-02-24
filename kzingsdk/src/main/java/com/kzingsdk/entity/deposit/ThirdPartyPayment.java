@@ -111,7 +111,7 @@ public class ThirdPartyPayment extends BasePaymentMethod implements Parcelable, 
 
     public static ThirdPartyPayment newInstance(JSONObject rootObject, JSONObject rootRootObject, String optionId) {
         ThirdPartyPayment item = new ThirdPartyPayment();
-        item.bcid = rootRootObject.optInt("bcid", -1);
+        item.bcid = rootObject.optInt("bcid", -1);
         JSONObject extraJSONObject = rootObject.optJSONObject("extra");
         if (extraJSONObject != null) {
             if (extraJSONObject.has("bcid"))
