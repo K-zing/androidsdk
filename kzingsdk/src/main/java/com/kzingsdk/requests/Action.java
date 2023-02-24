@@ -71,6 +71,8 @@ final class Action {
     static final String getRewardTransHistory = "ut6uila";
     static final String getRefereeStatus = "uase9cr";
     static final String getDefaultTierRate = "7zbjnve";
+    static final String getAllTierRate = "jfzbo8x";
+    static final String withdrawTierRate = "5jn7v6e";
 
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";

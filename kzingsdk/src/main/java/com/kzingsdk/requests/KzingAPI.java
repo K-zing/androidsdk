@@ -359,6 +359,14 @@ public final class KzingAPI {
         return new GetDefaultTierRateAPI();
     }
 
+    public static GetAllTierRateAPI getAllTierRate() {
+        return new GetAllTierRateAPI();
+    }
+
+    public static WithdrawTierRateAPI withdrawTierRate() {
+        return new WithdrawTierRateAPI();
+    }
+
     public static GetWithdrawAmountRangeAPI getWithdrawAmountRange() {
         return new GetWithdrawAmountRangeAPI();
     }
