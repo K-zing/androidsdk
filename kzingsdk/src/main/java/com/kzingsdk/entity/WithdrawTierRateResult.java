@@ -23,15 +23,15 @@ public class WithdrawTierRateResult extends SimpleApiResult {
         if (dataObject != null) {
             JSONObject defaultRateObject = dataObject.optJSONObject("default_rate");
             if (defaultRateObject != null) {
-                result.setExcludedMember(defaultRateObject.optBoolean("'isExcludedMember'"));
-                result.setRequestAmount(defaultRateObject.optString("'requestamount'"));
-                result.setQuotaBal(defaultRateObject.optString("'quotabal'"));
-                result.setQuotaUpdate(defaultRateObject.optString("'quotaupdate'"));
-                result.setTier1Amt(defaultRateObject.optString("'tier1_amt'"));
-                result.setTier1ConvertAmt(defaultRateObject.optString("'tier1_convertamt'"));
-                result.setTier2Amt(defaultRateObject.optString("'tier2_amt'"));
-                result.setTier2ConvertAmt(defaultRateObject.optString("'tier2_convertamt'"));
-                result.setTotalConvertAmt(defaultRateObject.optString("'totalconvertamt'"));
+                result.setExcludedMember(defaultRateObject.optBoolean("isExcludedMember"));
+                result.setRequestAmount(defaultRateObject.optString("requestamount"));
+                result.setQuotaBal(defaultRateObject.optString("quotabal"));
+                result.setQuotaUpdate(defaultRateObject.optString("quotaupdate"));
+                result.setTier1Amt(defaultRateObject.optString("tier1_amt"));
+                result.setTier1ConvertAmt(defaultRateObject.optString("tier1_convertamt"));
+                result.setTier2Amt(defaultRateObject.optString("tier2_amt"));
+                result.setTier2ConvertAmt(defaultRateObject.optString("tier2_convertamt"));
+                result.setTotalConvertAmt(defaultRateObject.optString("totalconvertamt"));
             }
         }
         return result;
