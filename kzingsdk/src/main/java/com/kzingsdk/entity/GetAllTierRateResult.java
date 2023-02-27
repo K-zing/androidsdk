@@ -20,7 +20,7 @@ public class GetAllTierRateResult extends SimpleApiResult {
         result.setStatus(simpleApiResult.getStatus());
         JSONObject dataObject = rootObject.optJSONObject("data");
         if (dataObject != null) {
-            JSONObject defaultRateObject = rootObject.optJSONObject("default_rate");
+            JSONObject defaultRateObject = dataObject.optJSONObject("default_rate");
             if (defaultRateObject != null) {
                 result.setExcludedMember(defaultRateObject.optBoolean("'isExcludedMember'"));
                 result.setDepositRate(BigDecimalUtil.optBigDecimal(defaultRateObject, "deposit_rate"));

@@ -21,7 +21,7 @@ public class WithdrawTierRateResult extends SimpleApiResult {
         result.setStatus(simpleApiResult.getStatus());
         JSONObject dataObject = rootObject.optJSONObject("data");
         if (dataObject != null) {
-            JSONObject defaultRateObject = rootObject.optJSONObject("default_rate");
+            JSONObject defaultRateObject = dataObject.optJSONObject("default_rate");
             if (defaultRateObject != null) {
                 result.setExcludedMember(defaultRateObject.optBoolean("'isExcludedMember'"));
                 result.setRequestAmount(defaultRateObject.optString("'requestamount'"));
