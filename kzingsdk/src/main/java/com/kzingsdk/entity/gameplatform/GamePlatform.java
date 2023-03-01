@@ -114,7 +114,6 @@ public class GamePlatform extends SimpleGamePlatform implements Playable {
             }
         }
         item.setCategoryArrayList(categoryList);
-
         JSONArray childGroupsArray = rootObject.optJSONArray("childgroups");
         if (childGroupsArray != null) {
             for (int i = 0; i < childGroupsArray.length(); i++) {

@@ -50,7 +50,7 @@ public class SocialRegisterAPI extends RegAccountAPI {
                 jsonData.put("provider", provider);
             }
             if (providerId != null) {
-                jsonData.put("providerid", providerId);
+                jsonData.put("providerId", providerId);
             }
             return jsonData;
         } catch (JSONException ignored) {
@@ -115,5 +115,6 @@ public class SocialRegisterAPI extends RegAccountAPI {
     public interface SocialRegisterCallBack extends KzingCallBack {
         void onSuccess();
     }
+
 }
 

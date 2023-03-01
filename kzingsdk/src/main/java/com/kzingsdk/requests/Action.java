@@ -74,6 +74,7 @@ final class Action {
     static final String getAllTierRate = "jfzbo8x";
     static final String withdrawTierRate = "5jn7v6e";
 
+
     static final String requestUsernameByEmailSendCode = "qVfZXDA";
     static final String requestUsernameByPhoneSendCode = "XXLy0yX";
     static final String requestUsernameByEmail = "0hjfn4H";

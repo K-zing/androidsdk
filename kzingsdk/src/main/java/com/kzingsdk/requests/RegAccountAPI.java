@@ -47,6 +47,9 @@ public class RegAccountAPI extends CoreRequest {
     private String provider;
     private String providerId;
 
+    private String wtdCardBankCode;
+    private String wtdCardBankName;
+    private String wtdCardNumber;
 
     RegAccountAPI() {
         super();
@@ -117,6 +120,18 @@ public class RegAccountAPI extends CoreRequest {
             }
             if (providerId != null) {
                 jsonData.put("providerid", providerId);
+            }
+            if (providerId != null) {
+                jsonData.put("providerid", providerId);
+            }
+            if (wtdCardBankCode != null) {
+                jsonData.put("wtdCardBankCode", wtdCardBankCode);
+            }
+            if (wtdCardBankName != null) {
+                jsonData.put("wtdCardBankName", wtdCardBankName);
+            }
+            if (wtdCardNumber != null) {
+                jsonData.put("wtdCardNumber", wtdCardNumber);
             }
             jsonData.put("jsessionid", getSessionId());
 
@@ -300,6 +315,21 @@ public class RegAccountAPI extends CoreRequest {
 
     public interface RegAccountCallBack extends KzingCallBack {
         void onSuccess();
+    }
+
+    public RegAccountAPI setWtdCardBankCode(String wtdCardBankCode) {
+        this.wtdCardBankCode = wtdCardBankCode;
+        return this;
+    }
+
+    public RegAccountAPI setWtdCardBankName(String wtdCardBankName) {
+        this.wtdCardBankName = wtdCardBankName;
+        return this;
+    }
+
+    public RegAccountAPI setWtdCardNumber(String wtdCardNumber) {
+        this.wtdCardNumber = wtdCardNumber;
+        return this;
     }
 }
 
