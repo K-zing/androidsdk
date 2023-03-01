@@ -363,8 +363,17 @@ public final class KzingAPI {
         return new GetAllTierRateAPI();
     }
 
+
     public static WithdrawTierRateAPI withdrawTierRate() {
         return new WithdrawTierRateAPI();
+    }
+
+    public static UploadBankPassBookAPI uploadBankPassBook() {
+        return new UploadBankPassBookAPI();
+    }
+
+    public static DeleteBankPassBookAPI deleteBankPassBook() {
+        return new DeleteBankPassBookAPI();
     }
 
     public static GetWithdrawAmountRangeAPI getWithdrawAmountRange() {

@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import io.reactivex.Observable;
 
 public class WithdrawTierRateAPI extends CoreRequest {
+
     private String cryptoCurrency;
     private String requestAmount;
 

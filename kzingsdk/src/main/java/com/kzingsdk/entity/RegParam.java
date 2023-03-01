@@ -36,6 +36,7 @@ public class RegParam {
     private Boolean regFriendReferCodeDisplay;
     private Boolean isReferrerSameAgent;
     private Boolean regCaptcha;
+    private Boolean regWithdrawBankCard;
     private Integer regWithdrawPwdFormat;
     private Integer regNameMin;
     private Integer regNameMax;
@@ -84,6 +85,7 @@ public class RegParam {
         regParam.setRegFriendReferCodeDisplay(paramObject.optBoolean("regFriendReferCodeDisplay", false));
         regParam.setReferrerSameAgent(paramObject.optBoolean("isReferrerSameAgent", false));
         regParam.setRegCaptcha(paramObject.optBoolean("regCaptcha", false));
+        regParam.setRegWithdrawBankCard(paramObject.optBoolean("regWithdrawBankCard", false));
 
         String image = rootObject.optString("image");
         byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
@@ -313,6 +315,14 @@ public class RegParam {
 
     public void setRegCaptcha(Boolean regCaptcha) {
         this.regCaptcha = regCaptcha;
+    }
+
+    public Boolean getRegWithdrawBankCard() {
+        return regWithdrawBankCard;
+    }
+
+    public void setRegWithdrawBankCard(Boolean regWithdrawBankCard) {
+        this.regWithdrawBankCard = regWithdrawBankCard;
     }
 
     public Integer getRegWithdrawPwdFormat() {

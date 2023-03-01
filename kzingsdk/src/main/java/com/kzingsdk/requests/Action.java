@@ -73,6 +73,8 @@ final class Action {
     static final String getDefaultTierRate = "7zbjnve";
     static final String getAllTierRate = "jfzbo8x";
     static final String withdrawTierRate = "5jn7v6e";
+    static final String uploadBankPassBook = "qbijslu";
+    static final String deleteBankPassBook = "jn65vde";
 
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";
