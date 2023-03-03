@@ -40,6 +40,7 @@ public class WithdrawInfo {
     private boolean allowIFSCCode;
     private boolean cfQuickPay;
     private boolean addCryptoAddressEnterOtp;
+    private boolean allowUploadBankPassbookPhoto;
 
 
     private BigDecimal withdrawRate = BigDecimal.ONE;
@@ -80,6 +81,7 @@ public class WithdrawInfo {
         withdrawInfo.setAllowIFSCCode(rootObject.optBoolean("allowIFSCCode", false));
         withdrawInfo.setCfQuickPay(rootObject.optString("cfquickpay", "OFF").equalsIgnoreCase("ON"));
         withdrawInfo.setAddCryptoAddressEnterOtp(rootObject.optBoolean("addCryptoAddressEnterOtp"));
+        withdrawInfo.setAllowUploadBankPassbookPhoto(rootObject.optBoolean("allowUploadBankPassbookPhoto"));
 
         JSONArray cryptoArray = rootObject.optJSONArray("crypto");
         for (int i = 0; i < cryptoArray.length(); i++) {
@@ -376,6 +378,14 @@ public class WithdrawInfo {
 
     public void setAddCryptoAddressEnterOtp(boolean addCryptoAddressEnterOtp) {
         this.addCryptoAddressEnterOtp = addCryptoAddressEnterOtp;
+    }
+
+    public boolean isAllowUploadBankPassbookPhoto() {
+        return allowUploadBankPassbookPhoto;
+    }
+
+    public void setAllowUploadBankPassbookPhoto(boolean allowUploadBankPassbookPhoto) {
+        this.allowUploadBankPassbookPhoto = allowUploadBankPassbookPhoto;
     }
 
     public ArrayList<QpWallet> getQpWalletList() {
