@@ -372,6 +372,10 @@ public final class KzingAPI {
         return new UploadBankPassBookAPI();
     }
 
+    public static SelfServiceFeedbackAPI selfServiceFeedback() {
+        return new SelfServiceFeedbackAPI();
+    }
+
     public static DeleteBankPassBookAPI deleteBankPassBook() {
         return new DeleteBankPassBookAPI();
     }

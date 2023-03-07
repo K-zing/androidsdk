@@ -10,18 +10,19 @@ import org.json.JSONObject;
 
 import io.reactivex.Observable;
 
-public class UploadBankPassBookAPI extends CoreRequest {
+public class SelfServiceFeedbackAPI extends CoreRequest {
 
-    private String wdBankId;
-    private String bankPassbook;
+    private String username;
+    private String feedback;
 
-    UploadBankPassBookAPI() {
+
+    SelfServiceFeedbackAPI() {
         super();
     }
 
     @Override
     protected String getAction() {
-        return Action.uploadBankPassBook;
+        return Action.selfServiceFeedback;
     }
 
     @Override
@@ -33,8 +34,8 @@ public class UploadBankPassBookAPI extends CoreRequest {
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            jsonData.put("wdbankid", wdBankId);
-            jsonData.put("bankpassbook", bankPassbook);
+            jsonData.put("username", username);
+            jsonData.put("feedback", feedback);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -51,28 +52,28 @@ public class UploadBankPassBookAPI extends CoreRequest {
         requestRx(context).subscribe(simpleApiResult -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((UploadBankPassBookCallBack) kzingCallBack).onSuccess(simpleApiResult);
+                    ((SelfServiceFeedbackCallBack) kzingCallBack).onSuccess(simpleApiResult);
                 }
             }
         }, defaultOnErrorConsumer);
     }
 
-    public UploadBankPassBookAPI addUploadBankPassBookCallBack(UploadBankPassBookCallBack uploadBankPassBookCallBack) {
-        kzingCallBackList.add(uploadBankPassBookCallBack);
+    public SelfServiceFeedbackAPI addSelfServiceFeedbackCallBack(SelfServiceFeedbackCallBack selfServiceFeedbackCallBack) {
+        kzingCallBackList.add(selfServiceFeedbackCallBack);
         return this;
     }
 
-    public interface UploadBankPassBookCallBack extends KzingCallBack {
+    public interface SelfServiceFeedbackCallBack extends KzingCallBack {
         void onSuccess(SimpleApiResult simpleApiResult);
     }
 
-    public UploadBankPassBookAPI setWdBankId(String wdBankId) {
-        this.wdBankId = wdBankId;
+    public SelfServiceFeedbackAPI setUsername(String username) {
+        this.username = username;
         return this;
     }
 
-    public UploadBankPassBookAPI setBankPassbook(String bankPassbook) {
-        this.bankPassbook = bankPassbook;
+    public SelfServiceFeedbackAPI setFeedback(String feedback) {
+        this.feedback = feedback;
         return this;
     }
 }
