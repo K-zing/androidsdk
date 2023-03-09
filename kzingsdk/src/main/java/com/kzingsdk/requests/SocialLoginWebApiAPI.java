@@ -12,23 +12,21 @@ import org.json.JSONObject;
 
 import io.reactivex.Observable;
 
-public class LoginWebApiAPI extends CoreRequest {
+public class SocialLoginWebApiAPI extends CoreRequest {
 
-    private String loginName;
-    private String password;
-    private String captchaValidate = "";
-    private String verifyCode = "";
-    private String uuid = "";
+    private String socialId;
+    private String token;
+    private String platform = "";
     private String provider = "";
     private String providerId = "";
 
-    LoginWebApiAPI() {
+    SocialLoginWebApiAPI() {
         super();
     }
 
     @Override
     protected String getAction() {
-        return Action.loginWebApi;
+        return Action.socialLoginWebApi;
     }
 
     @Override
@@ -40,14 +38,9 @@ public class LoginWebApiAPI extends CoreRequest {
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            jsonData.put("playername", loginName);
-            jsonData.put("password", password);
-            jsonData.put("captchavalidate", captchaValidate);
-            jsonData.put("verifycode", verifyCode);
-            jsonData.put("jsessionid", getSessionId());
-            if (uuid != null) {
-                jsonData.put("uuid", uuid);
-            }
+            jsonData.put("socialid", socialId);
+            jsonData.put("splatform", platform);
+            jsonData.put("token", token);
             if (provider != null) {
                 jsonData.put("provider", provider);
             }
@@ -86,54 +79,43 @@ public class LoginWebApiAPI extends CoreRequest {
         requestRx(context).subscribe(memberInfo -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((LoginCallBack) kzingCallBack).onSuccess(memberInfo);
+                    ((SocialLoginWebCallBack) kzingCallBack).onSuccess(memberInfo);
                 }
             }
         }, defaultOnErrorConsumer);
     }
 
-    public interface LoginCallBack extends KzingCallBack {
+    public interface SocialLoginWebCallBack extends KzingCallBack {
         void onSuccess(MemberInfo memberInfo);
     }
 
-    public LoginWebApiAPI addLoginWebApiCallBack(LoginCallBack loginWebApiCallBack) {
-        kzingCallBackList.add(loginWebApiCallBack);
+    public SocialLoginWebApiAPI addLoginWebApiCallBack(SocialLoginWebCallBack socialLoginWebApiCallBack) {
+        kzingCallBackList.add(socialLoginWebApiCallBack);
         return this;
     }
 
-    public LoginWebApiAPI setParamLoginName(String loginName) {
-        this.loginName = loginName;
+    public SocialLoginWebApiAPI setSocialId(String socialId) {
+        this.socialId = socialId;
         return this;
     }
 
-    public LoginWebApiAPI setParamPassword(String password) {
-        this.password = password;
+    public SocialLoginWebApiAPI setToken(String token) {
+        this.token = token;
         return this;
     }
 
-    public LoginWebApiAPI setCaptchaValidate(String captchaValidate) {
-        this.captchaValidate = captchaValidate;
+    public SocialLoginWebApiAPI setPlatform(String platform) {
+        this.platform = platform;
         return this;
     }
 
-    public LoginWebApiAPI setVerifyCode(String verifyCode) {
-        this.verifyCode = verifyCode;
-        return this;
-    }
-
-    public LoginWebApiAPI setUuid(String uuid) {
-        this.uuid = uuid;
-        return this;
-    }
-
-    public LoginWebApiAPI setProvider(String provider) {
+    public SocialLoginWebApiAPI setProvider(String provider) {
         this.provider = provider;
         return this;
     }
 
-    public LoginWebApiAPI setProviderId(String providerId) {
+    public SocialLoginWebApiAPI setProviderId(String providerId) {
         this.providerId = providerId;
         return this;
     }
-
 }

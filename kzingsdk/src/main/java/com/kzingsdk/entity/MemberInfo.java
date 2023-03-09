@@ -56,6 +56,7 @@ public class MemberInfo implements Parcelable {
     private String tncStatus = "";
     private String rankLevel = "";
     private String preferContactType = "";
+    private String redirectLink = "";
     private boolean isDisplayGroupName = false;
     private boolean isMobileVerified = false;
     private boolean isEmailVerified = false;
@@ -116,6 +117,7 @@ public class MemberInfo implements Parcelable {
         tncStatus = in.readString();
         rankLevel = in.readString();
         preferContactType = in.readString();
+        redirectLink = in.readString();
         hasWithdrawPassword = in.readInt() == 1;
         groupName = in.readString();
         displayGroupName = in.readString();
@@ -186,6 +188,7 @@ public class MemberInfo implements Parcelable {
         memberInfo.setTncStatus(rootObject.optString("tncStatus"));
         memberInfo.setRankLevel(rootObject.optString("rankLevel"));
         memberInfo.setPreferContactType(rootObject.optString("prefercontact_type"));
+        memberInfo.setRedirectLink(rootObject.optString("redirectlink"));
         memberInfo.setHasWithdrawPassword(rootObject.optString("haswithdrawpassword").equalsIgnoreCase("ON"));
         memberInfo.setGroupName(rootObject.optString("group_name"));
         memberInfo.setMemberVipLevelNameCn(rootObject.optString("memberVipLevelNameCn"));
@@ -270,6 +273,7 @@ public class MemberInfo implements Parcelable {
         memberInfo.setTncStatus(rootObject.optString("tncStatus"));
         memberInfo.setRankLevel(rootObject.optString("rankLevel"));
         memberInfo.setPreferContactType(rootObject.optString("prefercontact_type"));
+        memberInfo.setRedirectLink(rootObject.optString("redirectlink"));
         memberInfo.setHasWithdrawPassword(rootObject.optBoolean("hasWithdrawPassword"));
         memberInfo.setGroupName(rootObject.optString("group_name"));
         memberInfo.setDisplayGroupName(rootObject.optString("displayGroupName"));
@@ -700,6 +704,14 @@ public class MemberInfo implements Parcelable {
         this.preferContactType = preferContactType;
     }
 
+    public String getRedirectLink() {
+        return redirectLink;
+    }
+
+    public void setRedirectLink(String redirectLink) {
+        this.redirectLink = redirectLink;
+    }
+
     public boolean isEnablePhoneRecall() {
         return enablePhoneRecall;
     }
@@ -860,6 +872,7 @@ public class MemberInfo implements Parcelable {
         dest.writeString(tncStatus);
         dest.writeString(rankLevel);
         dest.writeString(preferContactType);
+        dest.writeString(redirectLink);
         dest.writeInt(hasWithdrawPassword ? 1 : 0);
         dest.writeString(groupName);
         dest.writeString(displayGroupName);
