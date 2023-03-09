@@ -12,6 +12,7 @@ public class PlayerBankCard extends BankCard {
     private String bankNode = "";
     private String province = "";
     private String city = "";
+    private String bankPassbook = "";
     private Integer defaultCard = 0;
 
     public static PlayerBankCard newInstance(JSONObject rootObject) {
@@ -27,6 +28,7 @@ public class PlayerBankCard extends BankCard {
         playerBankCard.setBankNode(rootObject.optString("banknode"));
         playerBankCard.setProvince(rootObject.optString("province"));
         playerBankCard.setCity(rootObject.optString("city"));
+        playerBankCard.setBankPassbook(rootObject.optString("bankpassbook"));
         playerBankCard.setDefaultCard(rootObject.optInt("defaultcard"));
 
         return playerBankCard;
@@ -94,6 +96,14 @@ public class PlayerBankCard extends BankCard {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getBankPassbook() {
+        return bankPassbook;
+    }
+
+    public void setBankPassbook(String bankPassbook) {
+        this.bankPassbook = bankPassbook;
     }
 
     public Integer getDefaultCard() {
