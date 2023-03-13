@@ -358,6 +358,10 @@ public final class KzingAPI {
         return new UpdateProfileImagesAPI();
     }
 
+    public static SubmitMemberKycAPI submitMemberKyc() {
+        return new SubmitMemberKycAPI();
+    }
+
     public static GetDefaultTierRateAPI getDefaultTierRate() {
         return new GetDefaultTierRateAPI();
     }
