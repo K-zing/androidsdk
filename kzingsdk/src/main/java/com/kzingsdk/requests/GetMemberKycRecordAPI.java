@@ -28,7 +28,7 @@ public class GetMemberKycRecordAPI extends CoreRequest {
 
     @Override
     protected JSONObject generateParamsJson() {
-        JSONObject jsonData = super.generateParamsJson();
+        return super.generateParamsJson();
     }
 
     @Override
