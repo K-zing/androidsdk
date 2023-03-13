@@ -22,7 +22,7 @@ public class DptTransInfo extends SimpleApiResult{
         DptTransInfo result = new DptTransInfo();
         result.status = simpleApiResult.status;
         result.message = simpleApiResult.message;
-        JSONObject dataObject = rootObject.optJSONObject("data");
+        JSONObject dataObject = rootObject.optJSONObject("response");
         if (dataObject!=null){
             result.setDstatus(dataObject.optInt("dstatus"));
             result.setAmount(BigDecimalUtil.optBigDecimal(dataObject, "amount"));
