@@ -4,7 +4,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 
 public class RegParam {
@@ -45,6 +48,7 @@ public class RegParam {
     private Integer regPwdMax;
     private Integer dcode;
     private Bitmap verifyCode;
+    private ArrayList<BankCard> bankDictList = new ArrayList<>();
 
     public static RegParam newInstance(JSONObject rootObject) {
         RegParam regParam = new RegParam();
@@ -90,6 +94,14 @@ public class RegParam {
         String image = rootObject.optString("image");
         byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
         regParam.verifyCode = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        JSONArray dictArray = paramObject.optJSONArray("bankDict");
+        if (dictArray!=null){
+            for (int i = 0; i < dictArray.length(); i++) {
+                regParam.bankDictList.add(BankCard.newInstance(dictArray.optJSONObject(i)));
+            }
+        }
+
         return regParam;
     }
 
@@ -387,5 +399,13 @@ public class RegParam {
 
     public void setVerifyCode(Bitmap verifyCode) {
         this.verifyCode = verifyCode;
+    }
+
+    public ArrayList<BankCard> getBankDictList() {
+        return bankDictList;
+    }
+
+    public void setBankDictList(ArrayList<BankCard> bankDictList) {
+        this.bankDictList = bankDictList;
     }
 }
