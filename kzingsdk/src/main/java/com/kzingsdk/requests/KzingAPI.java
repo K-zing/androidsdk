@@ -375,6 +375,10 @@ public final class KzingAPI {
         return new WithdrawTierRateAPI();
     }
 
+    public static GetMemberKycRecordAPI getMemberKycRecord() {
+        return new GetMemberKycRecordAPI();
+    }
+
     public static UploadBankPassBookAPI uploadBankPassBook() {
         return new UploadBankPassBookAPI();
     }
