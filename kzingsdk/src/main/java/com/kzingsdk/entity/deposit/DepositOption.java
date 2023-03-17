@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 import static com.kzingsdk.entity.deposit.PaymentType.EWALLET;
@@ -21,15 +21,6 @@ import static com.kzingsdk.entity.deposit.PaymentType.THIRD_PARTY;
 
 public class DepositOption implements Parcelable {
 
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public DepositOption createFromParcel(Parcel in) {
-            return new DepositOption(in);
-        }
-
-        public DepositOption[] newArray(int size) {
-            return new DepositOption[size];
-        }
-    };
     private boolean isProcessing;
     private boolean isAllowDeposit;
     private boolean isAllowDecimal;
@@ -89,7 +80,7 @@ public class DepositOption implements Parcelable {
         depositFooterDesc = in.readString();
         bank2DepositDesc = in.readString();
         int i = 0;
-        Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
+        Object[] customObjects = in.readArray(DepositOption.class.getClassLoader());
         paymentGroupList = (ArrayList<PaymentGroup>) customObjects[i++];
         activityMap = (HashMap<String, String>) customObjects[i++];
         quickLinkDepositList = (ArrayList<QuickLinkDeposit>) customObjects[i++];
@@ -197,54 +188,63 @@ public class DepositOption implements Parcelable {
             }
         }
 
-
-        for (int i = 0; i < sortArrJArray.length(); i++) {
-            JSONObject cateSortingObject = sortArrJArray.optJSONObject(i);
-            String option = cateSortingObject.optString("option");
-            int j;
-            switch (option) {
-                case "1":
-                    for (j = 0; j < paymentGroupJArray.length(); j++) {
-                        PaymentGroup paymentGroup = PaymentGroup.newInstance(paymentGroupJArray.optJSONObject(j));
-                        if (paymentGroup.getPaymentType() == THIRD_PARTY) {
-                            item.paymentGroupList.add(paymentGroup);
+        if (sortArrJArray != null && paymentGroupJArray != null) {
+            for (int i = 0; i < sortArrJArray.length(); i++) {
+                JSONObject cateSortingObject = sortArrJArray.optJSONObject(i);
+                String option = cateSortingObject.optString("option");
+                int j;
+                switch (option) {
+                    case "1":
+                        for (j = 0; j < paymentGroupJArray.length(); j++) {
+                            PaymentGroup paymentGroup = PaymentGroup.newInstance(paymentGroupJArray.optJSONObject(j));
+                            if (paymentGroup.getPaymentType() == THIRD_PARTY) {
+                                item.paymentGroupList.add(paymentGroup);
+                            }
                         }
-                    }
-                    break;
-                case "99": // prepaid card
-                    if (!item.isPrepaidCard) break;
-                    String displayName = cateSortingObject.optString("displayName");
-                    String bankcss = cateSortingObject.optString("bankcss");
-                    PaymentGroup paymentGroupPrepaid = new PaymentGroup();
-                    paymentGroupPrepaid.setName(displayName);
-                    paymentGroupPrepaid.setImage(bankcss);
-                    paymentGroupPrepaid.setPaymentType(PREPAIDCARD);
-                    paymentGroupPrepaid.setIcon(prepaidCardIcon);
-                    item.paymentGroupList.add(paymentGroupPrepaid);
-                    break;
-                case "3":
-                    //ignored
-                    break;
-                case "2":
-                case "4":
-                case "69":
-                case "73":
-                case "101"://micro
-                    for (j = 0; j < paymentGroupJArray.length(); j++) {
-                        PaymentGroup paymentGroup = PaymentGroup.newInstance(paymentGroupJArray.optJSONObject(j));
-                        if (paymentGroup.getPaymentType() == PaymentType.valueOfTypeId(option)) {
-                            item.paymentGroupList.add(paymentGroup);
+                        break;
+                    case "99": // prepaid card
+                        if (!item.isPrepaidCard) break;
+                        String displayName = cateSortingObject.optString("displayName");
+                        String bankcss = cateSortingObject.optString("bankcss");
+                        PaymentGroup paymentGroupPrepaid = new PaymentGroup();
+                        paymentGroupPrepaid.setName(displayName);
+                        paymentGroupPrepaid.setImage(bankcss);
+                        paymentGroupPrepaid.setPaymentType(PREPAIDCARD);
+                        paymentGroupPrepaid.setIcon(prepaidCardIcon);
+                        item.paymentGroupList.add(paymentGroupPrepaid);
+                        break;
+                    case "3":
+                        //ignored
+                        break;
+                    case "4":
+                        for (j = 0; j < paymentGroupJArray.length(); j++) {
+                            PaymentGroup paymentGroup = PaymentGroup.newInstance(paymentGroupJArray.optJSONObject(j));
+                            if (paymentGroup.getPaymentType() == PaymentType.valueOfTypeId("atm") &&
+                                    paymentGroup.getId().equalsIgnoreCase("0")) {
+                                item.paymentGroupList.add(paymentGroup);
+                            }
                         }
-                    }
-                    break;
-                case "5"://crypto
-                    for (j = 0; j < paymentGroupJArray.length(); j++) {
-                        PaymentGroup paymentGroup = PaymentGroup.newInstance(paymentGroupJArray.optJSONObject(j));
-                        if (paymentGroup.getPaymentType() == PaymentType.valueOfTypeId("crypto")) {
-                            item.paymentGroupList.add(paymentGroup);
+                        break;
+                    case "2":
+                    case "69":
+                    case "73":
+                    case "101"://micro
+                        for (j = 0; j < paymentGroupJArray.length(); j++) {
+                            PaymentGroup paymentGroup = PaymentGroup.newInstance(paymentGroupJArray.optJSONObject(j));
+                            if (paymentGroup.getPaymentType() == PaymentType.valueOfTypeId(option) &&
+                                    !paymentGroup.getId().equalsIgnoreCase("0")) {
+                                item.paymentGroupList.add(paymentGroup);
+                            }
                         }
-                    }
-                    break;
+                        break;
+                    case "5"://crypto
+                        for (j = 0; j < paymentGroupJArray.length(); j++) {
+                            PaymentGroup paymentGroup = PaymentGroup.newInstance(paymentGroupJArray.optJSONObject(j));
+                            if (paymentGroup.getPaymentType() == PaymentType.valueOfTypeId("crypto")) {
+                                item.paymentGroupList.add(paymentGroup);
+                            }
+                        }
+                        break;
 //                default: // other
 //                    for (j = 0; j < paymentGroupJArray.length(); j++) {
 //                        PaymentGroup paymentGroup = PaymentGroup.newInstance(paymentGroupJArray.optJSONObject(j));
@@ -254,6 +254,7 @@ public class DepositOption implements Parcelable {
 //                        }
 //                    }
 //                    break;
+                }
             }
         }
 
@@ -273,7 +274,7 @@ public class DepositOption implements Parcelable {
                     break;
                 case THIRD_PARTY:
                     if (thirdPartyPaymentMap.containsKey(key)) {
-                        paymentGroup.getPaymentList().addAll(thirdPartyPaymentMap.get(key));
+                        paymentGroup.getPaymentList().addAll(thirdPartyPaymentMap.getOrDefault(key, new ArrayList<>()));
                     }
                     break;
                 case CRYPTO:
@@ -304,9 +305,7 @@ public class DepositOption implements Parcelable {
                 CryptoAtmPayment cryptoAtmPayment = CryptoAtmPayment.newInstance(cryptoAtmJObject);
                 cryptoAtmPaymentList.add(cryptoAtmPayment);
             }
-            Collections.sort(cryptoAtmPaymentList,
-                    (o1, o2) -> o1.getDisplayOrder() - o2.getDisplayOrder()
-            );
+            cryptoAtmPaymentList.sort(Comparator.comparingInt(BasePaymentMethod::getDisplayOrder));
         }
         return cryptoAtmPaymentList;
     }
@@ -319,15 +318,16 @@ public class DepositOption implements Parcelable {
                 MicroAtmPayment cryptoAtmPayment = MicroAtmPayment.newInstance(microAtmPaymentJObject);
                 microAtmPaymentList.add(cryptoAtmPayment);
             }
-            Collections.sort(microAtmPaymentList,
-                    (o1, o2) -> o1.getDisplayOrder() - o2.getDisplayOrder()
-            );
+            microAtmPaymentList.sort(Comparator.comparingInt(BasePaymentMethod::getDisplayOrder));
         }
         return microAtmPaymentList;
     }
 
     private static ArrayList<AtmPayment> createAtmPaymentList(JSONArray jArray, JSONArray sortingArray, boolean isQrcode) {
         ArrayList<AtmPayment> atmPaymentList = new ArrayList<>();
+        if (sortingArray == null) {
+            return atmPaymentList;
+        }
         JSONArray sortingItemsArray = null;
         for (int i = 0; i < sortingArray.length(); i++) {
             JSONObject itemsJObject = sortingArray.optJSONObject(i);
@@ -361,9 +361,7 @@ public class DepositOption implements Parcelable {
                 atmPaymentList.add(atmPayment);
             }
         }
-        Collections.sort(atmPaymentList,
-                (o1, o2) -> o1.getDisplayOrder() - o2.getDisplayOrder()
-        );
+        atmPaymentList.sort(Comparator.comparingInt(BasePaymentMethod::getDisplayOrder));
         return atmPaymentList;
     }
 
@@ -378,8 +376,7 @@ public class DepositOption implements Parcelable {
                 }
                 String key = atmJObject.optString("key");
                 ArrayList<ThirdPartyPayment> thirdPartyPaymentList =
-                        thirdPartyPaymentMap.containsKey(key) ?
-                                thirdPartyPaymentMap.get(key) : new ArrayList<>();
+                        thirdPartyPaymentMap.getOrDefault(key, new ArrayList<>());
                 for (int j = 0; j < thirdPartyPaymentArray.length(); j++) {
                     if (EWALLET.getId().equalsIgnoreCase(key)) {
                         thirdPartyPaymentList.add(EWalletPayment.newInstance(thirdPartyPaymentArray.optJSONObject(j), atmJObject, key));
@@ -393,9 +390,7 @@ public class DepositOption implements Parcelable {
             }
         }
         for (ArrayList<ThirdPartyPayment> thirdPartyPaymentList : thirdPartyPaymentMap.values()) {
-            Collections.sort(thirdPartyPaymentList,
-                    (o1, o2) -> o1.getDisplayOrder() - o2.getDisplayOrder()
-            );
+            thirdPartyPaymentList.sort(Comparator.comparingInt(BasePaymentMethod::getDisplayOrder));
         }
         return thirdPartyPaymentMap;
     }
@@ -678,12 +673,18 @@ public class DepositOption implements Parcelable {
                 availablePaymentGroupList,
                 excludeTLCBankTransferList,
         });
-
-
-        ArrayList<PayOptionSortData> payOptionSortDataList = new ArrayList<>();
-        ArrayList<AvailablePaymentGroup> availablePaymentGroupList = new ArrayList<>();
-        ArrayList<ExcludeTLCBankTransfer> excludeTLCBankTransferList = new ArrayList<>();
     }
+
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public DepositOption createFromParcel(Parcel in) {
+            return new DepositOption(in);
+        }
+
+        public DepositOption[] newArray(int size) {
+            return new DepositOption[size];
+        }
+    };
 
     @Override
     public String toString() {
