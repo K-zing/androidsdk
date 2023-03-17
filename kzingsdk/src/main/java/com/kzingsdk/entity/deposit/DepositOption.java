@@ -219,7 +219,7 @@ public class DepositOption implements Parcelable {
                     case "4":
                         for (j = 0; j < paymentGroupJArray.length(); j++) {
                             PaymentGroup paymentGroup = PaymentGroup.newInstance(paymentGroupJArray.optJSONObject(j));
-                            if (paymentGroup.getPaymentType() == PaymentType.valueOfTypeId("atm") &&
+                            if (paymentGroup.getPaymentType() == PaymentType.ATM &&
                                     paymentGroup.getId().equalsIgnoreCase("0")) {
                                 item.paymentGroupList.add(paymentGroup);
                             }
