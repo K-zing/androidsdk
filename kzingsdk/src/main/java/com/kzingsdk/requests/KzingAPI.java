@@ -379,6 +379,10 @@ public final class KzingAPI {
         return new GetMemberKycRecordAPI();
     }
 
+    public static IsShowPlayerUploadKycAPI isShowPlayerUploadKyc() {
+        return new IsShowPlayerUploadKycAPI();
+    }
+
     public static UploadBankPassBookAPI uploadBankPassBook() {
         return new UploadBankPassBookAPI();
     }

@@ -79,6 +79,7 @@ final class Action {
     static final String selfServiceFeedback = "fe1vdeq";
     static final String submitMemberKyc = "qvtu0o1";
     static final String getMemberKycRecord = "qvtu0o2";
+    static final String isShowPlayerUploadKyc = "tuv0qvf";
 
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";
