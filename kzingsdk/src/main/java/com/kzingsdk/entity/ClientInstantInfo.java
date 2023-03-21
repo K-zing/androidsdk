@@ -79,6 +79,8 @@ public class ClientInstantInfo implements Parcelable {
     private String enterDepositPopup;
     private String dptCryptoFixedExchangeRate;
     private String enterwithdrawalpopup;
+    private String playerKycDesc;
+
 
     private Integer marqueeAnnouncementUnreadCount = 0;
     private Integer marqueeActivityUnreadCount = 0;
@@ -161,6 +163,7 @@ public class ClientInstantInfo implements Parcelable {
         enterDepositPopup = in.readString();
         dptCryptoFixedExchangeRate = in.readString();
         enterwithdrawalpopup = in.readString();
+        playerKycDesc = in.readString();
         Object[] objectArray = in.readArray(ClientInstantInfo.class.getClassLoader());
         int i = 0;
         captchaApiId = (CaptchaApiId) objectArray[i++];
@@ -241,6 +244,7 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setEnterDepositPopup(rootObject.optString("enterdepositpopup"));
         clientInfo.setDptCryptoFixedExchangeRate(rootObject.optString("dptCryptoFixedExchangeRate"));
         clientInfo.setEnterwithdrawalpopup(rootObject.optString("enterwithdrawalpopup"));
+        clientInfo.setPlayerKycDesc(rootObject.optString("playerKycDesc"));
 
         JSONObject captchaApiIdJSONObject = rootObject.optJSONObject("captchaApiId");
         if (captchaApiIdJSONObject != null)
@@ -438,6 +442,7 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeString(enterDepositPopup);
         dest.writeString(dptCryptoFixedExchangeRate);
         dest.writeString(enterwithdrawalpopup);
+        dest.writeString(playerKycDesc);
 
         dest.writeArray(new Object[]{
                 captchaApiId,
@@ -925,6 +930,14 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setEnterwithdrawalpopup(String enterwithdrawalpopup) {
         this.enterwithdrawalpopup = enterwithdrawalpopup;
+    }
+
+    public String getPlayerKycDesc() {
+        return playerKycDesc;
+    }
+
+    public void setPlayerKycDesc(String playerKycDesc) {
+        this.playerKycDesc = playerKycDesc;
     }
 
     public ArrayList<String> getMemberPanAgentCode() {
