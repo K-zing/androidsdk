@@ -7,6 +7,7 @@ public class MemberKycRecord {
     private String id;
     private String filename;
     private String status;
+    private String statusCode;
     private String updated;
 
     public static MemberKycRecord newInstance(JSONObject rootObject) {
@@ -14,6 +15,7 @@ public class MemberKycRecord {
         result.setId(rootObject.optString("id"));
         result.setFilename(rootObject.optString("filename"));
         result.setStatus(rootObject.optString("status"));
+        result.setStatusCode(rootObject.optString("statusCode"));
         result.setUpdated(rootObject.optString("updated"));
         return result;
     }
@@ -40,6 +42,14 @@ public class MemberKycRecord {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
     }
 
     public String getUpdated() {
