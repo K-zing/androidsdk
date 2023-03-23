@@ -3,7 +3,7 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.SimpleApiResult;
+import com.kzingsdk.entity.IsShowPlayerUploadKycResult;
 
 import org.json.JSONObject;
 
@@ -31,8 +31,8 @@ public class IsShowPlayerUploadKycAPI extends CoreRequest {
     }
 
     @Override
-    public Observable<SimpleApiResult> requestRx(final Context context) {
-        return super.baseExecute(context).map(SimpleApiResult::newInstance);
+    public Observable<IsShowPlayerUploadKycResult> requestRx(final Context context) {
+        return super.baseExecute(context).map(IsShowPlayerUploadKycResult::newInstance);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class IsShowPlayerUploadKycAPI extends CoreRequest {
     }
 
     public interface IsShowPlayerUploadKycCallBack extends KzingCallBack {
-        void onSuccess(SimpleApiResult simpleApiResult);
+        void onSuccess(IsShowPlayerUploadKycResult simpleApiResult);
     }
 }
 
