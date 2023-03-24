@@ -20,6 +20,9 @@ public class PayOptionSortData implements Parcelable {
     private String categoryId;
     private String opCode;
     private String opName;
+    private String topRemark;
+    private String middleRemark;
+    private String bottomRemark;
     private String displayOrder;
     private String status;
     private String created;
@@ -36,6 +39,9 @@ public class PayOptionSortData implements Parcelable {
         categoryId = in.readString();
         opCode = in.readString();
         opName = in.readString();
+        topRemark = in.readString();
+        middleRemark = in.readString();
+        bottomRemark = in.readString();
         displayOrder = in.readString();
         status = in.readString();
         created = in.readString();
@@ -50,6 +56,9 @@ public class PayOptionSortData implements Parcelable {
         item.categoryId = rootObject.optString("categoryid");
         item.opCode = rootObject.optString("opcode");
         item.opName = rootObject.optString("opname");
+        item.topRemark = rootObject.optString("topremark");
+        item.middleRemark = rootObject.optString("middleremark");
+        item.bottomRemark = rootObject.optString("bottomremark");
         item.displayOrder = rootObject.optString("displayorder");
         item.status = rootObject.optString("status");
         item.created = rootObject.optString("created");
@@ -70,6 +79,9 @@ public class PayOptionSortData implements Parcelable {
         dest.writeString(categoryId);
         dest.writeString(opCode);
         dest.writeString(opName);
+        dest.writeString(topRemark);
+        dest.writeString(middleRemark);
+        dest.writeString(bottomRemark);
         dest.writeString(displayOrder);
         dest.writeString(status);
         dest.writeString(created);
@@ -108,6 +120,30 @@ public class PayOptionSortData implements Parcelable {
 
     public void setOpName(String opName) {
         this.opName = opName;
+    }
+
+    public String getTopRemark() {
+        return topRemark;
+    }
+
+    public void setTopRemark(String topRemark) {
+        this.topRemark = topRemark;
+    }
+
+    public String getMiddleRemark() {
+        return middleRemark;
+    }
+
+    public void setMiddleRemark(String middleRemark) {
+        this.middleRemark = middleRemark;
+    }
+
+    public String getBottomRemark() {
+        return bottomRemark;
+    }
+
+    public void setBottomRemark(String bottomRemark) {
+        this.bottomRemark = bottomRemark;
     }
 
     public String getDisplayOrder() {
