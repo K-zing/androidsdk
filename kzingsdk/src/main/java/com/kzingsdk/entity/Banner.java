@@ -9,6 +9,7 @@ public class Banner {
     private String coveralt;
     private String redirect;
     private String actid;
+    private String actgpid;
 
     public Banner() {
 
@@ -20,6 +21,7 @@ public class Banner {
         activityBonus.setCoveralt(rootObject.optString("coveralt"));
         activityBonus.setRedirect(rootObject.optString("redirect"));
         activityBonus.setActid(rootObject.optString("actid"));
+        activityBonus.setActid(rootObject.optString("actgpid"));
         return activityBonus;
     }
 
@@ -53,6 +55,14 @@ public class Banner {
 
     public void setActid(String actid) {
         this.actid = actid;
+    }
+
+    public String getActgpid() {
+        return actgpid;
+    }
+
+    public void setActgpid(String actgpid) {
+        this.actgpid = actgpid;
     }
 }
 
