@@ -12,12 +12,15 @@ public class BetHistorySummary {
 
     private BigDecimal totalWin = BigDecimal.ZERO;
     private BigDecimal totalBetAmt = BigDecimal.ZERO;
+    private BigDecimal totalValidBetAmt = BigDecimal.ZERO;
+
     private ArrayList<BetHistory> betHistoryList = new ArrayList<>();
 
     public static BetHistorySummary newInstance(JSONObject rootObject) {
         BetHistorySummary rebateSummary = new BetHistorySummary();
         rebateSummary.setTotalWin(BigDecimalUtil.optBigDecimal(rootObject, "totalwin", BigDecimal.ZERO));
         rebateSummary.setTotalBetAmt(BigDecimalUtil.optBigDecimal(rootObject, "totalbetamt", BigDecimal.ZERO));
+        rebateSummary.setTotalValidBetAmt(BigDecimalUtil.optBigDecimal(rootObject, "totalvalidbetamt", BigDecimal.ZERO));
         JSONArray dataArray = rootObject.optJSONArray("data");
         if (dataArray != null) {
             for (int i = 0; i < dataArray.length(); i++) {
@@ -42,6 +45,14 @@ public class BetHistorySummary {
 
     public void setTotalBetAmt(BigDecimal totalBetAmt) {
         this.totalBetAmt = totalBetAmt;
+    }
+
+    public BigDecimal getTotalValidBetAmt() {
+        return totalValidBetAmt;
+    }
+
+    public void setTotalValidBetAmt(BigDecimal totalValidBetAmt) {
+        this.totalValidBetAmt = totalValidBetAmt;
     }
 
     public ArrayList<BetHistory> getBetHistoryList() {
