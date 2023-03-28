@@ -10,16 +10,6 @@ import java.util.ArrayList;
 
 public class AvailablePaymentGroup implements Parcelable {
 
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public AvailablePaymentGroup createFromParcel(Parcel in) {
-            return new AvailablePaymentGroup(in);
-        }
-
-        public AvailablePaymentGroup[] newArray(int size) {
-            return new AvailablePaymentGroup[size];
-        }
-    };
     private String categoryId;
     private String opName;
     private String displayOrder;
@@ -31,27 +21,13 @@ public class AvailablePaymentGroup implements Parcelable {
     private String updated;
     private String currency;
     private String brandId;
+    private String topRemark;
+    private String middleRemark;
+    private String bottomRemark;
     private ArrayList<String> availableChannel = new ArrayList<>();
 
     public AvailablePaymentGroup() {
 
-    }
-
-    public AvailablePaymentGroup(Parcel in) {
-        categoryId = in.readString();
-        opName = in.readString();
-        displayOrder = in.readString();
-        depositAmountFormat = in.readString();
-        status = in.readString();
-        isMain = in.readString();
-        ptCss = in.readString();
-        created = in.readString();
-        updated = in.readString();
-        currency = in.readString();
-        brandId = in.readString();
-        int i = 0;
-        Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
-        availableChannel = (ArrayList<String>) customObjects[i++];
     }
 
     public static AvailablePaymentGroup newInstance(JSONObject rootObject) {
@@ -67,6 +43,9 @@ public class AvailablePaymentGroup implements Parcelable {
         item.updated = rootObject.optString("updated");
         item.currency = rootObject.optString("currency");
         item.brandId = rootObject.optString("brandid");
+        item.topRemark = rootObject.optString("topremark");
+        item.middleRemark = rootObject.optString("middleremark");
+        item.bottomRemark = rootObject.optString("bottomremark");
         JSONArray availableChannelA = rootObject.optJSONArray("availableChannel");
         if (availableChannelA != null) {
             for (int i = 0; i < availableChannelA.length(); i++) {
@@ -172,9 +151,54 @@ public class AvailablePaymentGroup implements Parcelable {
         this.availableChannel = availableChannel;
     }
 
+
+    public String getTopRemark() {
+        return topRemark;
+    }
+
+    public void setTopRemark(String topRemark) {
+        this.topRemark = topRemark;
+    }
+
+    public String getMiddleRemark() {
+        return middleRemark;
+    }
+
+    public void setMiddleRemark(String middleRemark) {
+        this.middleRemark = middleRemark;
+    }
+
+    public String getBottomRemark() {
+        return bottomRemark;
+    }
+
+    public void setBottomRemark(String bottomRemark) {
+        this.bottomRemark = bottomRemark;
+    }
+
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    public AvailablePaymentGroup(Parcel in) {
+        categoryId = in.readString();
+        opName = in.readString();
+        displayOrder = in.readString();
+        depositAmountFormat = in.readString();
+        status = in.readString();
+        isMain = in.readString();
+        ptCss = in.readString();
+        created = in.readString();
+        updated = in.readString();
+        currency = in.readString();
+        brandId = in.readString();
+        topRemark = in.readString();
+        middleRemark = in.readString();
+        bottomRemark = in.readString();
+        int i = 0;
+        Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
+        availableChannel = (ArrayList<String>) customObjects[i++];
     }
 
     @Override
@@ -190,10 +214,21 @@ public class AvailablePaymentGroup implements Parcelable {
         dest.writeString(updated);
         dest.writeString(currency);
         dest.writeString(brandId);
-        dest.writeArray(new Object[]{
-                availableChannel
-        });
+        dest.writeString(topRemark);
+        dest.writeString(middleRemark);
+        dest.writeString(bottomRemark);
+        dest.writeArray(new Object[]{availableChannel});
     }
 
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public AvailablePaymentGroup createFromParcel(Parcel in) {
+            return new AvailablePaymentGroup(in);
+        }
+
+        public AvailablePaymentGroup[] newArray(int size) {
+            return new AvailablePaymentGroup[size];
+        }
+    };
 
 }
