@@ -74,6 +74,7 @@ public class MemberInfo implements Parcelable {
     private boolean preferContactPhone = false;
     private boolean preferContactSms = false;
     private boolean preferContactEmail = false;
+    private boolean hasDeposit = false;
     private String playerCurrency = "";
     private String address = "";
     private String shortenLink = "";
@@ -145,6 +146,7 @@ public class MemberInfo implements Parcelable {
         preferContactPhone = in.readInt() == 1;
         preferContactSms = in.readInt() == 1;
         preferContactEmail = in.readInt() == 1;
+        hasDeposit = in.readInt() == 1;
         playerCurrency = in.readString();
         address = in.readString();
         shortenLink = in.readString();
@@ -210,6 +212,7 @@ public class MemberInfo implements Parcelable {
         memberInfo.setMemberPanUsername(rootObject.optBoolean("memberPanUsername", false));
         memberInfo.setDisplayAddress(rootObject.optBoolean("displayAddress", false));
         memberInfo.setWithdrawBindAddress(rootObject.optBoolean("withdrawBindAddress", false));
+        memberInfo.setHasDeposit(rootObject.optBoolean("hasDeposit", false));
         memberInfo.setPlayerCurrency(rootObject.optString("playerCurrency"));
         memberInfo.setAddress(rootObject.optString("address"));
         memberInfo.setShortenLink(rootObject.optString("shortenlink"));
@@ -295,6 +298,7 @@ public class MemberInfo implements Parcelable {
         memberInfo.setMemberPanUsername(rootObject.optBoolean("memberPanUsername", false));
         memberInfo.setDisplayAddress(rootObject.optBoolean("displayAddress", false));
         memberInfo.setWithdrawBindAddress(rootObject.optBoolean("withdrawBindAddress", false));
+        memberInfo.setHasDeposit(rootObject.optBoolean("hasDeposit", false));
         memberInfo.setPlayerCurrency(rootObject.optString("playerCurrency"));
         memberInfo.setAddress(rootObject.optString("address"));
         memberInfo.setShortenLink(rootObject.optString("shortenLink"));
@@ -786,6 +790,14 @@ public class MemberInfo implements Parcelable {
         this.preferContactEmail = preferContactEmail;
     }
 
+    public boolean isHasDeposit() {
+        return hasDeposit;
+    }
+
+    public void setHasDeposit(boolean hasDeposit) {
+        this.hasDeposit = hasDeposit;
+    }
+
     public String getPlayerCurrency() {
         return playerCurrency;
     }
@@ -900,6 +912,7 @@ public class MemberInfo implements Parcelable {
         dest.writeInt(preferContactPhone ? 1 : 0);
         dest.writeInt(preferContactSms ? 1 : 0);
         dest.writeInt(preferContactEmail ? 1 : 0);
+        dest.writeInt(hasDeposit ? 1 : 0);
         dest.writeString(playerCurrency);
         dest.writeString(address);
         dest.writeString(shortenLink);
