@@ -21,7 +21,7 @@ public class Banner {
         activityBonus.setCoveralt(rootObject.optString("coveralt"));
         activityBonus.setRedirect(rootObject.optString("redirect"));
         activityBonus.setActid(rootObject.optString("actid"));
-        activityBonus.setActid(rootObject.optString("actgpid"));
+        activityBonus.setActgpid(rootObject.optString("actgpid"));
         return activityBonus;
     }
 
