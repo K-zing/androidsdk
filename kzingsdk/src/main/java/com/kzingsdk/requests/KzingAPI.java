@@ -354,6 +354,14 @@ public final class KzingAPI {
         return new UploadProfileImagesAPI();
     }
 
+    public static VerifyLoginGetCodeAPI verifyLoginGetCode() {
+        return new VerifyLoginGetCodeAPI();
+    }
+
+    public static GetPhoneByNameAPI getPhoneByName() {
+        return new GetPhoneByNameAPI();
+    }
+
     public static UpdateProfileImagesAPI updateProfileImages() {
         return new UpdateProfileImagesAPI();
     }

@@ -3,23 +3,23 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.SimpleApiResult;
+import com.kzingsdk.entity.GetPhoneByNameResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import io.reactivex.Observable;
 
-public class UploadProfileImagesAPI extends CoreRequest {
-    private String cover;
+public class GetPhoneByNameAPI extends CoreRequest {
+    private String loginName;
 
-    UploadProfileImagesAPI() {
+    GetPhoneByNameAPI() {
         super();
     }
 
     @Override
     protected String getAction() {
-        return Action.uploadProfileImages;
+        return Action.getPhoneByName;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class UploadProfileImagesAPI extends CoreRequest {
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            jsonData.put("cover", cover);
+            jsonData.put("loginame", loginName);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -39,32 +39,32 @@ public class UploadProfileImagesAPI extends CoreRequest {
     }
 
     @Override
-    public Observable<SimpleApiResult> requestRx(final Context context) {
-        return super.baseExecute(context).map(SimpleApiResult::newInstance);
+    public Observable<GetPhoneByNameResult> requestRx(final Context context) {
+        return super.baseExecute(context).map(GetPhoneByNameResult::newInstance);
     }
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(result -> {
+        requestRx(context).subscribe(simpleApiResult -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((UploadProfileImagesCallBack) kzingCallBack).onSuccess(result);
+                    ((GetPhoneByNameCallBack) kzingCallBack).onSuccess(simpleApiResult);
                 }
             }
         }, defaultOnErrorConsumer);
     }
 
-    public UploadProfileImagesAPI addUploadProfileImagesCallBack(UploadProfileImagesCallBack uploadProfileImagesCallBack) {
-        kzingCallBackList.add(uploadProfileImagesCallBack);
+    public GetPhoneByNameAPI addGetPhoneByNameCallBack(GetPhoneByNameCallBack getPhoneByNameCallBack) {
+        kzingCallBackList.add(getPhoneByNameCallBack);
         return this;
     }
 
-    public interface UploadProfileImagesCallBack extends KzingCallBack {
-        void onSuccess(SimpleApiResult result);
+    public interface GetPhoneByNameCallBack extends KzingCallBack {
+        void onSuccess(GetPhoneByNameResult simpleApiResult);
     }
 
-    public UploadProfileImagesAPI setCover(String cover) {
-        this.cover = cover;
+    public GetPhoneByNameAPI setLoginName(String loginName) {
+        this.loginName = loginName;
         return this;
     }
 }

@@ -10,16 +10,16 @@ import org.json.JSONObject;
 
 import io.reactivex.Observable;
 
-public class UploadProfileImagesAPI extends CoreRequest {
-    private String cover;
+public class VerifyLoginGetCodeAPI extends CoreRequest {
+    private String playerName;
 
-    UploadProfileImagesAPI() {
+    VerifyLoginGetCodeAPI() {
         super();
     }
 
     @Override
     protected String getAction() {
-        return Action.uploadProfileImages;
+        return Action.verifyLoginGetCode;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class UploadProfileImagesAPI extends CoreRequest {
     protected JSONObject generateParamsJson() {
         JSONObject jsonData = super.generateParamsJson();
         try {
-            jsonData.put("cover", cover);
+            jsonData.put("playername", playerName);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -45,26 +45,26 @@ public class UploadProfileImagesAPI extends CoreRequest {
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(result -> {
+        requestRx(context).subscribe(simpleApiResult -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((UploadProfileImagesCallBack) kzingCallBack).onSuccess(result);
+                    ((VerifyLoginGetCodeCallBack) kzingCallBack).onSuccess(simpleApiResult);
                 }
             }
         }, defaultOnErrorConsumer);
     }
 
-    public UploadProfileImagesAPI addUploadProfileImagesCallBack(UploadProfileImagesCallBack uploadProfileImagesCallBack) {
-        kzingCallBackList.add(uploadProfileImagesCallBack);
+    public VerifyLoginGetCodeAPI addVerifyLoginGetCodeCallBack(VerifyLoginGetCodeCallBack verifyLoginGetCodeCallBack) {
+        kzingCallBackList.add(verifyLoginGetCodeCallBack);
         return this;
     }
 
-    public interface UploadProfileImagesCallBack extends KzingCallBack {
-        void onSuccess(SimpleApiResult result);
+    public interface VerifyLoginGetCodeCallBack extends KzingCallBack {
+        void onSuccess(SimpleApiResult simpleApiResult);
     }
 
-    public UploadProfileImagesAPI setCover(String cover) {
-        this.cover = cover;
+    public VerifyLoginGetCodeAPI setPlayerName(String playerName) {
+        this.playerName = playerName;
         return this;
     }
 }

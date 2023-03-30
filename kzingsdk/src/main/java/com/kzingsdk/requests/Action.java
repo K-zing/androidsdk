@@ -80,6 +80,10 @@ final class Action {
     static final String submitMemberKyc = "qvtu0o1";
     static final String getMemberKycRecord = "qvtu0o2";
     static final String isShowPlayerUploadKyc = "tuv0qvf";
+    static final String verifyLoginGetCode = "uxqvf1s";
+    static final String getPhoneByName = "656nqpa";
+
+
 
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";
