@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import io.reactivex.Observable;
 
+@Deprecated
 public class LoginAllInOneAPI extends CoreRequest {
 
     //normal login
@@ -32,6 +33,7 @@ public class LoginAllInOneAPI extends CoreRequest {
     private Boolean showChild = false;
     private String provider = "";
     private String providerId = "";
+    private String forceResetPwdSmsCode = "";
 
     LoginAllInOneAPI() {
         super();
@@ -95,6 +97,9 @@ public class LoginAllInOneAPI extends CoreRequest {
             if (providerId != null) {
                 jsonData.put("providerid", providerId);
             }
+            if (forceResetPwdSmsCode != null) {
+                jsonData.put("forceresetpwdsmscode", forceResetPwdSmsCode);
+            }
             jsonData.put("useWebApi", true);
             return jsonData;
         } catch (JSONException ignored) {
@@ -132,6 +137,10 @@ public class LoginAllInOneAPI extends CoreRequest {
                 }
             }
         }, defaultOnErrorConsumer);
+    }
+
+    public interface LoginAllInOneCallBack extends KzingCallBack {
+        void onSuccess(AllInOneResult allInOneResult);
     }
 
     public LoginAllInOneAPI addLoginAllInOneCallBack(LoginAllInOneCallBack loginAllInOneCallBack) {
@@ -217,8 +226,9 @@ public class LoginAllInOneAPI extends CoreRequest {
         return this;
     }
 
-    public interface LoginAllInOneCallBack extends KzingCallBack {
-        void onSuccess(AllInOneResult allInOneResult);
+    public LoginAllInOneAPI setForceResetPwdSmsCode(String forceResetPwdSmsCode) {
+        this.forceResetPwdSmsCode = forceResetPwdSmsCode;
+        return this;
     }
 }
 

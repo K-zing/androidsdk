@@ -3,7 +3,9 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
+import com.kzingsdk.entity.LoginWebApiResult;
 import com.kzingsdk.entity.MemberInfo;
+import com.kzingsdk.entity.SimpleApiResult;
 import com.kzingsdk.util.Constant;
 import com.kzingsdk.util.SharePrefUtil;
 
@@ -21,6 +23,8 @@ public class LoginWebApiAPI extends CoreRequest {
     private String uuid = "";
     private String provider = "";
     private String providerId = "";
+    private String forceResetPwdSmsCode = "";
+
 
     LoginWebApiAPI() {
         super();
@@ -51,6 +55,9 @@ public class LoginWebApiAPI extends CoreRequest {
             if (provider != null) {
                 jsonData.put("provider", provider);
             }
+            if (forceResetPwdSmsCode != null) {
+                jsonData.put("forceresetpwdsmscode", forceResetPwdSmsCode);
+            }
             if (providerId != null) {
                 jsonData.put("providerid", providerId);
             }
@@ -61,14 +68,20 @@ public class LoginWebApiAPI extends CoreRequest {
     }
 
     @Override
-    public Observable<MemberInfo> requestRx(Context context) {
+    public Observable<LoginWebApiResult> requestRx(Context context) {
         return super.baseExecute(context).map(jsonResponse -> {
-                    String vcToken = jsonResponse.optString("vc", "");
-                    String ccToken = jsonResponse.optString("cc", "");
-                    SharePrefUtil.putString(context, Constant.Pref.VCTOKEN, vcToken);
-                    SharePrefUtil.putString(context, Constant.Pref.CCTOKEN, ccToken);
-                    setLoginTokens(vcToken, ccToken);
-                    return MemberInfo.newInstanceFromWebapi(jsonResponse);
+                    LoginWebApiResult result = LoginWebApiResult.newInstance(jsonResponse);
+                    if (result.getStatus() != 0) {
+                        JSONObject dataObject = jsonResponse.optJSONObject("data");
+                        if (dataObject != null) {
+                            String vcToken = dataObject.optString("vc", "");
+                            String ccToken = dataObject.optString("cc", "");
+                            SharePrefUtil.putString(context, Constant.Pref.VCTOKEN, vcToken);
+                            SharePrefUtil.putString(context, Constant.Pref.CCTOKEN, ccToken);
+                            setLoginTokens(vcToken, ccToken);
+                        }
+                    }
+                    return result;
                 })
                 .doOnNext(response -> {
                     new GetSiteDomainAPI()
@@ -83,17 +96,17 @@ public class LoginWebApiAPI extends CoreRequest {
 
     @Override
     public void request(Context context) {
-        requestRx(context).subscribe(memberInfo -> {
+        requestRx(context).subscribe(result -> {
             if (kzingCallBackList.size() > 0) {
                 for (KzingCallBack kzingCallBack : kzingCallBackList) {
-                    ((LoginCallBack) kzingCallBack).onSuccess(memberInfo);
+                    ((LoginCallBack) kzingCallBack).onSuccess(result);
                 }
             }
         }, defaultOnErrorConsumer);
     }
 
     public interface LoginCallBack extends KzingCallBack {
-        void onSuccess(MemberInfo memberInfo);
+        void onSuccess(LoginWebApiResult result);
     }
 
     public LoginWebApiAPI addLoginWebApiCallBack(LoginCallBack loginWebApiCallBack) {
@@ -136,4 +149,8 @@ public class LoginWebApiAPI extends CoreRequest {
         return this;
     }
 
+    public LoginWebApiAPI setForceResetPwdSmsCode(String forceResetPwdSmsCode) {
+        this.forceResetPwdSmsCode = forceResetPwdSmsCode;
+        return this;
+    }
 }

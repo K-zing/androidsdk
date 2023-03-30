@@ -19,6 +19,7 @@ public class MemberInfo implements Parcelable {
             return new MemberInfo[size];
         }
     };
+    private String d;
     private String regDate;
     private String joinDays;
     private String playerName;
@@ -89,7 +90,7 @@ public class MemberInfo implements Parcelable {
     }
 
     public MemberInfo(Parcel in) {
-
+        d = in.readString();
         regDate = in.readString();
         joinDays = in.readString();
         playerName = in.readString();
@@ -245,6 +246,7 @@ public class MemberInfo implements Parcelable {
 
     public static MemberInfo newInstanceFromWebapi(JSONObject rootObject) {
         MemberInfo memberInfo = new MemberInfo();
+        memberInfo.setD(rootObject.optString("d"));
         memberInfo.setRegDate(rootObject.optString("regDate"));
         memberInfo.setJoinDays(rootObject.optString("joinDays"));
         memberInfo.setPlayerName(rootObject.optString("playerName"));
@@ -382,6 +384,14 @@ public class MemberInfo implements Parcelable {
 
     public void setRealName(String realName) {
         this.realName = realName;
+    }
+
+    public String getD() {
+        return d;
+    }
+
+    public void setD(String d) {
+        this.d = d;
     }
 
     public String getRegDate() {
@@ -856,6 +866,7 @@ public class MemberInfo implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(d);
         dest.writeString(regDate);
         dest.writeString(joinDays);
         dest.writeString(playerName);

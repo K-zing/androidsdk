@@ -130,6 +130,7 @@ public final class KzingAPI {
         return new SocialLoginWebApiAPI();
     }
 
+    @Deprecated
     public static LoginAllInOneAPI loginAllInOne() {
         return new LoginAllInOneAPI();
     }

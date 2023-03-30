@@ -168,8 +168,9 @@ public abstract class CoreRequest {
                 kzingCode = responseJson.optInt("status", 0);
                 String errorMsg = responseJson.optString("msg", "");
                 String apiPath = responseJson.optString("apiPath", "");
+                JSONObject dataObject = responseJson.optJSONObject("data");
                 if (kzingCode != 0 && !errorMsg.isEmpty()) {
-                    throw new KzingRequestException(statusCode, kzingCode, errorMsg, choseDomain, apiPath);
+                    throw new KzingRequestException(statusCode, kzingCode, errorMsg, choseDomain, apiPath, dataObject);
                 }
             } catch (JSONException e) {
                 throw new KzingRequestException(statusCode, kzingCode, "Unknown response error : " + response.body(), choseDomain, "");
