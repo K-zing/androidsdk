@@ -82,6 +82,7 @@ final class Action {
     static final String isShowPlayerUploadKyc = "tuv0qvf";
     static final String verifyLoginGetCode = "uxqvf1s";
     static final String getPhoneByName = "656nqpa";
+    static final String validatePhone = "lnpvqon";
 
 
 
