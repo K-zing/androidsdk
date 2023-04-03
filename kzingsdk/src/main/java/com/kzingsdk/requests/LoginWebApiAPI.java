@@ -140,4 +140,8 @@ public class LoginWebApiAPI extends CoreRequest {
         return this;
     }
 
+    public LoginWebApiAPI setForceResetPwdSmsCode(String forceResetPwdSmsCode) {
+        this.forceResetPwdSmsCode = forceResetPwdSmsCode;
+        return this;
+    }
 }
