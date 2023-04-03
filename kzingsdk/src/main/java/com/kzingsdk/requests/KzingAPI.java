@@ -354,7 +354,7 @@ public final class KzingAPI {
     public static UploadProfileImagesAPI uploadProfileImages() {
         return new UploadProfileImagesAPI();
     }
-    
+
     public static ValidatePhoneAPI validatePhone() {
         return new ValidatePhoneAPI();
     }
