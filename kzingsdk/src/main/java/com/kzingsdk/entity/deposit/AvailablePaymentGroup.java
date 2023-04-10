@@ -24,6 +24,7 @@ public class AvailablePaymentGroup implements Parcelable {
     private String topRemark;
     private String middleRemark;
     private String bottomRemark;
+    private String customAmount;
     private ArrayList<String> availableChannel = new ArrayList<>();
 
     public AvailablePaymentGroup() {
@@ -46,6 +47,7 @@ public class AvailablePaymentGroup implements Parcelable {
         item.topRemark = rootObject.optString("topremark");
         item.middleRemark = rootObject.optString("middleremark");
         item.bottomRemark = rootObject.optString("bottomremark");
+        item.customAmount = rootObject.optString("customamount");
         JSONArray availableChannelA = rootObject.optJSONArray("availableChannel");
         if (availableChannelA != null) {
             for (int i = 0; i < availableChannelA.length(); i++) {
@@ -151,6 +153,13 @@ public class AvailablePaymentGroup implements Parcelable {
         this.availableChannel = availableChannel;
     }
 
+    public String getCustomAmount() {
+        return customAmount;
+    }
+
+    public void setCustomAmount(String customAmount) {
+        this.customAmount = customAmount;
+    }
 
     public String getTopRemark() {
         return topRemark;
@@ -196,6 +205,7 @@ public class AvailablePaymentGroup implements Parcelable {
         topRemark = in.readString();
         middleRemark = in.readString();
         bottomRemark = in.readString();
+        customAmount = in.readString();
         int i = 0;
         Object[] customObjects = in.readArray(ThirdPartyPayment.class.getClassLoader());
         availableChannel = (ArrayList<String>) customObjects[i++];
@@ -217,6 +227,7 @@ public class AvailablePaymentGroup implements Parcelable {
         dest.writeString(topRemark);
         dest.writeString(middleRemark);
         dest.writeString(bottomRemark);
+        dest.writeString(customAmount);
         dest.writeArray(new Object[]{availableChannel});
     }
 
