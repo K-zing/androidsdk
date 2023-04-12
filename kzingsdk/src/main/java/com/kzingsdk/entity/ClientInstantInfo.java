@@ -247,7 +247,7 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setDptCryptoFixedExchangeRate(rootObject.optString("dptCryptoFixedExchangeRate"));
         clientInfo.setEnterwithdrawalpopup(rootObject.optString("enterwithdrawalpopup"));
         clientInfo.setPlayerKycDesc(rootObject.optString("playerKycDesc"));
-        clientInfo.setWithdrawalDescription(rootObject.optString("withdrawaldescription"));
+        clientInfo.setWithdrawalDescription(rootObject.optString("withdrawalDescription"));
 
         JSONObject captchaApiIdJSONObject = rootObject.optJSONObject("captchaApiId");
         if (captchaApiIdJSONObject != null)
