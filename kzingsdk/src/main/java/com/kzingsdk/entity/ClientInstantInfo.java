@@ -80,6 +80,7 @@ public class ClientInstantInfo implements Parcelable {
     private String dptCryptoFixedExchangeRate;
     private String enterwithdrawalpopup;
     private String playerKycDesc;
+    private String withdrawalDescription;
 
 
     private Integer marqueeAnnouncementUnreadCount = 0;
@@ -164,6 +165,7 @@ public class ClientInstantInfo implements Parcelable {
         dptCryptoFixedExchangeRate = in.readString();
         enterwithdrawalpopup = in.readString();
         playerKycDesc = in.readString();
+        withdrawalDescription = in.readString();
         Object[] objectArray = in.readArray(ClientInstantInfo.class.getClassLoader());
         int i = 0;
         captchaApiId = (CaptchaApiId) objectArray[i++];
@@ -245,6 +247,7 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setDptCryptoFixedExchangeRate(rootObject.optString("dptCryptoFixedExchangeRate"));
         clientInfo.setEnterwithdrawalpopup(rootObject.optString("enterwithdrawalpopup"));
         clientInfo.setPlayerKycDesc(rootObject.optString("playerKycDesc"));
+        clientInfo.setWithdrawalDescription(rootObject.optString("withdrawaldescription"));
 
         JSONObject captchaApiIdJSONObject = rootObject.optJSONObject("captchaApiId");
         if (captchaApiIdJSONObject != null)
@@ -443,6 +446,7 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeString(dptCryptoFixedExchangeRate);
         dest.writeString(enterwithdrawalpopup);
         dest.writeString(playerKycDesc);
+        dest.writeString(withdrawalDescription);
 
         dest.writeArray(new Object[]{
                 captchaApiId,
@@ -938,6 +942,15 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setPlayerKycDesc(String playerKycDesc) {
         this.playerKycDesc = playerKycDesc;
+    }
+
+    public String getWithdrawalDescription() {
+        return withdrawalDescription;
+    }
+
+    public ClientInstantInfo setWithdrawalDescription(String withdrawalDescription) {
+        this.withdrawalDescription = withdrawalDescription;
+        return this;
     }
 
     public ArrayList<String> getMemberPanAgentCode() {
