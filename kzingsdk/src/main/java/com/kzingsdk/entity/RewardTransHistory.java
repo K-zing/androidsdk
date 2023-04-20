@@ -1,10 +1,6 @@
 package com.kzingsdk.entity;
 
-import com.kzingsdk.util.BigDecimalUtil;
-
 import org.json.JSONObject;
-
-import java.math.BigDecimal;
 
 
 public class RewardTransHistory {
@@ -13,6 +9,7 @@ public class RewardTransHistory {
     private String pointType;
     private String point;
     private String detail;
+    private String itemName;
 
     public RewardTransHistory() {
 
@@ -24,7 +21,7 @@ public class RewardTransHistory {
         history.setPointType(rootObject.optString("pointType"));
         history.setPoint(rootObject.optString("point"));
         history.setDetail(rootObject.optString("detail"));
-
+        history.setItemName(rootObject.optString("itemName"));
         return history;
     }
 
@@ -58,6 +55,14 @@ public class RewardTransHistory {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 }
 
