@@ -18,6 +18,7 @@ public class GamePlatformChild implements Playable {
     private String rtpPercentage = "";
     private int displayorder = 0;
     private boolean isEnabled = false;
+    private boolean canTry = false;
     private HashSet<Integer> categorysSet = new HashSet<>();
 
     public GamePlatformChild() {
@@ -42,7 +43,7 @@ public class GamePlatformChild implements Playable {
 
         item.setChildGroupId(childGroupId);
         item.setChildGroupName(childGroupName);
-
+        item.setCanTry(rootObject.optString("can_try").equals("1"));
         item.setChildEnName(rootObject.optString("childnameen"));
         item.setImage(rootObject.optString("image"));
         item.setEnabled(rootObject.optString("enable_an").equals("1"));
@@ -64,6 +65,7 @@ public class GamePlatformChild implements Playable {
         gpChild.childName = childName;
         gpChild.childEnName = childEnName;
         gpChild.urlSuffix = urlSuffix;
+        gpChild.canTry = canTry;
         gpChild.image = image;
         gpChild.rtpPercentage = rtpPercentage;
         gpChild.displayorder = displayorder;
@@ -93,6 +95,15 @@ public class GamePlatformChild implements Playable {
 
     public void setUrlSuffix(String urlSuffix) {
         this.urlSuffix = urlSuffix;
+    }
+
+    public boolean isCanTry() {
+        return canTry;
+    }
+
+    public GamePlatformChild setCanTry(boolean canTry) {
+        this.canTry = canTry;
+        return this;
     }
 
     public GamePlatform getGamePlatform() {
