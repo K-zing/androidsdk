@@ -90,6 +90,23 @@ public final class KzingAPI {
         return new CheckAgentNameExistAPI();
     }
 
+    public static SendOTPWithPhoneAPI sendOTPWithPhone() {
+        return new SendOTPWithPhoneAPI();
+    }
+
+    public static ValidatePhoneSmsAPI validatePhoneSms() {
+        return new ValidatePhoneSmsAPI();
+    }
+
+    public static CheckTransDetailsPartialAPI checkTransDetailsPartial() {
+        return new CheckTransDetailsPartialAPI();
+    }
+
+    public static CheckTransDetailsAPI checkTransDetails() {
+        return new CheckTransDetailsAPI();
+    }
+
+
     public static GetPhoneSupportedCountriesAPI getPhoneSupportedCountries() {
         return new GetPhoneSupportedCountriesAPI();
     }
@@ -126,6 +143,7 @@ public final class KzingAPI {
     public static LoginWebApiAPI loginWebApi() {
         return new LoginWebApiAPI();
     }
+
     public static SocialLoginWebApiAPI socialLoginWebApi() {
         return new SocialLoginWebApiAPI();
     }

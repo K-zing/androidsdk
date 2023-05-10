@@ -84,6 +84,10 @@ final class Action {
     static final String getPhoneByName = "656nqpa";
     static final String validatePhone = "lnpvqon";
 
+    static final String sendOTPWithPhone = "509f7h0";
+    static final String validatePhoneSms = "4ut2nbe";
+    static final String checkTransDetailsPartial = "ujhv5mn";
+    static final String checkTransDetails = "i6e826r";
 
 
 
