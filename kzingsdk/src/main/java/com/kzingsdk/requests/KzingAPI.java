@@ -388,6 +388,9 @@ public final class KzingAPI {
     public static UpdateProfileImagesAPI updateProfileImages() {
         return new UpdateProfileImagesAPI();
     }
+    public static IsMaintenaceAPI isMaintenace() {
+        return new IsMaintenaceAPI();
+    }
 
     public static SubmitMemberKycAPI submitMemberKyc() {
         return new SubmitMemberKycAPI();
