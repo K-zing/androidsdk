@@ -2,7 +2,9 @@ package com.kzingsdk.requests;
 
 final class Action {
 
+
     static final String isMaintenace = "i6e827r";
+    static final String enableMobile = "i6e828r";
     static final String getBasicEncryptKey = "4cbe75e";
     static final String getEncryptKey = "c6ace99";
     static final String login = "988217c";
