@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.ProfileImage;
-import com.kzingsdk.entity.SimpleApiResult;
+import com.kzingsdk.entity.EnableMobileResult;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,8 +44,8 @@ public class EnableMobileAPI extends CoreRequest {
     }
 
     @Override
-    public Observable<SimpleApiResult> requestRx(Context context) {
-        return super.baseExecute(context).map(SimpleApiResult::newInstance);
+    public Observable<EnableMobileResult> requestRx(Context context) {
+        return super.baseExecute(context).map(EnableMobileResult::newInstance);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class EnableMobileAPI extends CoreRequest {
     }
 
     public interface EnableMobileCallBack extends KzingCallBack {
-        void onSuccess(SimpleApiResult result);
+        void onSuccess(EnableMobileResult result);
     }
 
     public EnableMobileAPI setUphone(String uphone) {
