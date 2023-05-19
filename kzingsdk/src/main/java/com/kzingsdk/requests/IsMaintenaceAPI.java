@@ -3,7 +3,7 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.SimpleApiResult;
+import com.kzingsdk.entity.IsMaintenaceResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,8 +32,8 @@ public class IsMaintenaceAPI extends CoreRequest {
     }
 
     @Override
-    public Observable<SimpleApiResult> requestRx(final Context context) {
-        return super.baseExecute(context).map(SimpleApiResult::newInstance);
+    public Observable<IsMaintenaceResult> requestRx(final Context context) {
+        return super.baseExecute(context).map(IsMaintenaceResult::newInstance);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class IsMaintenaceAPI extends CoreRequest {
     }
 
     public interface IsMaintenaceCallBack extends KzingCallBack {
-        void onSuccess(SimpleApiResult simpleApiResult);
+        void onSuccess(IsMaintenaceResult simpleApiResult);
     }
 
 }
