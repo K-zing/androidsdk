@@ -47,9 +47,9 @@ public class CurrencyBalance implements Parcelable {
         currencyBalance.setAmount(BigDecimalUtil.optBigDecimal(rootObject, "amount"));
         currencyBalance.setDecimalPlaces(rootObject.optInt("decimalPlaces"));
         if (rootObject.has("isCrypto")) {
-            currencyBalance.setIsCrypto(rootObject.optInt("isCrypto") == 1);
+            currencyBalance.setIsCrypto(rootObject.optBoolean("isCrypto"));
         } else {
-            currencyBalance.setIsCrypto(rootObject.optInt("iscrypto") == 1);
+            currencyBalance.setIsCrypto(rootObject.optBoolean("iscrypto"));
         }
         return currencyBalance;
     }
