@@ -1,7 +1,7 @@
 package com.kzingsdk.entity;
 
 public enum SocialRegisterPlatform {
-    facebook, google, telegram;
+    facebook, google, telegram, zalo;
 
     public static SocialRegisterPlatform valueOfName(String name) {
         for (SocialRegisterPlatform type : SocialRegisterPlatform.values()) {
