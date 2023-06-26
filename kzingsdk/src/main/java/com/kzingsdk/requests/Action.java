@@ -92,6 +92,9 @@ final class Action {
     static final String checkTransDetailsPartial = "ujhv5mn";
     static final String checkTransDetails = "i6e826r";
 
+    static final String getNewsCategory = "j6e827r";
+    static final String getCategoryNews = "j6e828r";
+
 
 
     static final String requestUsernameByEmailSendCode = "qVfZXDA";

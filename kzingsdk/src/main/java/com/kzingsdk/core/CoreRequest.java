@@ -107,7 +107,7 @@ public abstract class CoreRequest {
         add("");
     }};
     private final HashSet<String> API_URL_SET = new HashSet<String>() {{
-//        add("https://miracle-apis-dev.qijixitong.com");
+//        add("http://testing.weijinlai.com/");
         String defaultIP = "https://miracle-apis-dev.qijixitong.com";
         add(defaultIP);
         add("https://tvwkkq8k9e7grjbw49pk.jumzxxtu3j.com");

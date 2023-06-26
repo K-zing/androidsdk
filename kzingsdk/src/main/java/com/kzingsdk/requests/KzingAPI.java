@@ -38,6 +38,14 @@ public final class KzingAPI {
         return new GetBannersAPI();
     }
 
+    public static GetNewsCategoryAPI getNewsCategoryAPI() {
+        return new GetNewsCategoryAPI();
+    }
+
+    public static GetCategoryNewsAPI getCategoryNewsAPI() {
+        return new GetCategoryNewsAPI();
+    }
+
     public static ActivityCanSignInAPI activityCanSignIn() {
         return new ActivityCanSignInAPI();
     }
@@ -372,6 +380,7 @@ public final class KzingAPI {
     public static UploadProfileImagesAPI uploadProfileImages() {
         return new UploadProfileImagesAPI();
     }
+
     public static EnableMobileAPI enableMobile() {
         return new EnableMobileAPI();
     }
@@ -391,6 +400,7 @@ public final class KzingAPI {
     public static UpdateProfileImagesAPI updateProfileImages() {
         return new UpdateProfileImagesAPI();
     }
+
     public static IsMaintenaceAPI isMaintenace() {
         return new IsMaintenaceAPI();
     }
