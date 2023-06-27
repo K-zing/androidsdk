@@ -5,17 +5,20 @@ import org.json.JSONObject;
 public class CategoryNews {
 
     private int id = 0;
-    private int order = 0;
-    private String name = "";
+    private String datetime = "";
+    private String title = "";
+    private String content = "";
+    private String lang = "";
+    private String mobileFName = "";
 
-"id": "24",
-"datetime": "1686499200",
-"web_fname": "i20230663e0ce3c5a9a43a884aaa95c6cc342c9.png",
     public static CategoryNews newInstance(JSONObject rootObject) {
         CategoryNews result = new CategoryNews();
         result.setId(rootObject.optInt("id"));
-        result.setOrder(rootObject.optInt("order"));
-        result.setName(rootObject.optString("name"));
+        result.setDatetime(rootObject.optString("datetime"));
+        result.setTitle(rootObject.optString("title"));
+        result.setContent(rootObject.optString("content"));
+        result.setLang(rootObject.optString("lang"));
+        result.setMobileFName(rootObject.optString("mobile_fname"));
         return result;
     }
 
@@ -27,19 +30,43 @@ public class CategoryNews {
         this.id = id;
     }
 
-    public int getOrder() {
-        return order;
+    public String getDatetime() {
+        return datetime;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
+
+    public String getMobileFName() {
+        return mobileFName;
+    }
+
+    public void setMobileFName(String mobileFName) {
+        this.mobileFName = mobileFName;
     }
 }
