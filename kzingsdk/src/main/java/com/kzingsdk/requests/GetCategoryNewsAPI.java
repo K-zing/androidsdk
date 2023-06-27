@@ -12,6 +12,7 @@ import io.reactivex.Observable;
 
 public class GetCategoryNewsAPI extends CoreRequest {
     private String lang;
+    private String catid;
 
     GetCategoryNewsAPI() {
         super();
@@ -32,6 +33,7 @@ public class GetCategoryNewsAPI extends CoreRequest {
         JSONObject jsonData = super.generateParamsJson();
         try {
             jsonData.put("lang", lang);
+            jsonData.put("catid", catid);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -65,6 +67,11 @@ public class GetCategoryNewsAPI extends CoreRequest {
 
     public GetCategoryNewsAPI setLang(String lang) {
         this.lang = lang;
+        return this;
+    }
+
+    public GetCategoryNewsAPI setCatid(String catid) {
+        this.catid = catid;
         return this;
     }
 }
