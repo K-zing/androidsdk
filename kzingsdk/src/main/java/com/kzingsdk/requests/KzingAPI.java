@@ -25,6 +25,9 @@ public final class KzingAPI {
     public static CheckGiftRedeemableAPI checkGiftRedeemable() {
         return new CheckGiftRedeemableAPI();
     }
+    public static CheckGiftRedeemableWebapiAPI checkGiftRedeemableWebapi() {
+        return new CheckGiftRedeemableWebapiAPI();
+    }
 
     public static CheckActivityRedeemableAPI checkActivityRedeemable() {
         return new CheckActivityRedeemableAPI();
