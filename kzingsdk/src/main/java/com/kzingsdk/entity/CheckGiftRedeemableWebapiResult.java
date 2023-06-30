@@ -1,14 +1,10 @@
 package com.kzingsdk.entity;
 
-import com.kzingsdk.util.BigDecimalUtil;
-
 import org.json.JSONObject;
-
-import java.math.BigDecimal;
 
 public class CheckGiftRedeemableWebapiResult extends SimpleApiResult{
 
-    CheckGiftRedeemableResult checkGiftRedeemableResult;
+    CheckGiftRedeemableWebapi checkGiftRedeemableWebapi;
 
     public CheckGiftRedeemableWebapiResult() {
 
@@ -21,16 +17,16 @@ public class CheckGiftRedeemableWebapiResult extends SimpleApiResult{
         result.setStatus(simpleApiResult.getStatus());
         JSONObject dataObject = rootObject.optJSONObject("response");
         if (dataObject != null) {
-            result.checkGiftRedeemableResult = CheckGiftRedeemableResult.newInstance(dataObject);
+            result.checkGiftRedeemableWebapi = CheckGiftRedeemableWebapi.newInstance(dataObject);
         }
         return result;
     }
 
-    public CheckGiftRedeemableResult getCheckGiftRedeemableResult() {
-        return checkGiftRedeemableResult;
+    public CheckGiftRedeemableWebapi getCheckGiftRedeemableWebapi() {
+        return checkGiftRedeemableWebapi;
     }
 
-    public void setCheckGiftRedeemableResult(CheckGiftRedeemableResult checkGiftRedeemableResult) {
-        this.checkGiftRedeemableResult = checkGiftRedeemableResult;
+    public void setCheckGiftRedeemableWebapi(CheckGiftRedeemableWebapi checkGiftRedeemableWebapi) {
+        this.checkGiftRedeemableWebapi = checkGiftRedeemableWebapi;
     }
 }
