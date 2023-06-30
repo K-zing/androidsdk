@@ -47,7 +47,7 @@ public class CheckGiftRedeemableWebapiAPI extends CoreRequest {
 
     @Override
     public Observable<CheckGiftRedeemableWebapiResult> requestRx(Context context) {
-        return super.baseExecute(context).map(jsonResponse -> CheckGiftRedeemableWebapiResult.newInstance(jsonResponse.optJSONObject("response")));
+        return super.baseExecute(context).map(CheckGiftRedeemableWebapiResult::newInstance);
     }
 
     @Override

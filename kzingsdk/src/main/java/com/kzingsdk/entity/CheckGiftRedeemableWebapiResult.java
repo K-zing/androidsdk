@@ -19,7 +19,7 @@ public class CheckGiftRedeemableWebapiResult extends SimpleApiResult{
         CheckGiftRedeemableWebapiResult result = new CheckGiftRedeemableWebapiResult();
         result.setMessage(simpleApiResult.getMessage());
         result.setStatus(simpleApiResult.getStatus());
-        JSONObject dataObject = rootObject.optJSONObject("data");
+        JSONObject dataObject = rootObject.optJSONObject("response");
         if (dataObject != null) {
             result.checkGiftRedeemableResult = CheckGiftRedeemableResult.newInstance(dataObject);
         }
