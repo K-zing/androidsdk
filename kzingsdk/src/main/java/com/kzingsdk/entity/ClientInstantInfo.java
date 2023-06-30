@@ -34,6 +34,7 @@ public class ClientInstantInfo implements Parcelable {
     private Boolean checkMobileVerified;
     private Boolean isWdPasswordOn;
     private Boolean allowGameTransferPopup;
+    private Boolean allowGameTransferPopupV2;
     private Boolean initWdPwdNeedLoginPwd;
     private Boolean memberPanDupIP;
     private Boolean memberPanDupUUID;
@@ -120,6 +121,7 @@ public class ClientInstantInfo implements Parcelable {
         checkMobileVerified = in.readInt() == 1;
         isWdPasswordOn = in.readInt() == 1;
         allowGameTransferPopup = in.readInt() == 1;
+        allowGameTransferPopupV2 = in.readInt() == 1;
         initWdPwdNeedLoginPwd = in.readInt() == 1;
         memberPanDupIP = in.readInt() == 1;
         memberPanDupUUID = in.readInt() == 1;
@@ -201,6 +203,7 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setCheckMobileVerified(rootObject.optBoolean("checkMobileVerified", false));
         clientInfo.setWdPasswordOn(rootObject.optBoolean("isWdPasswordOn", false));
         clientInfo.setAllowGameTransferPopup(rootObject.optBoolean("allowGameTransferPopup", false));
+        clientInfo.setAllowGameTransferPopupV2(rootObject.optString("allowGameTransferPopupV2", "OFF").equalsIgnoreCase("ON"));
         clientInfo.setInitWdPwdNeedLoginPwd(rootObject.optBoolean("initWdPwdNeedLoginPwd", false));
         clientInfo.setMemberPanDupIP(rootObject.optBoolean("memberPanDupIP", false));
         clientInfo.setMemberPanDupUUID(rootObject.optBoolean("memberPanDupUUID", false));
@@ -400,6 +403,7 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeInt(checkMobileVerified ? 1 : 0);
         dest.writeInt(isWdPasswordOn ? 1 : 0);
         dest.writeInt(allowGameTransferPopup ? 1 : 0);
+        dest.writeInt(allowGameTransferPopupV2 ? 1 : 0);
         dest.writeInt(initWdPwdNeedLoginPwd ? 1 : 0);
         dest.writeInt(memberPanDupIP ? 1 : 0);
         dest.writeInt(memberPanDupUUID ? 1 : 0);
@@ -578,6 +582,14 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setAllowGameTransferPopup(Boolean allowGameTransferPopup) {
         this.allowGameTransferPopup = allowGameTransferPopup;
+    }
+
+    public Boolean getAllowGameTransferPopupV2() {
+        return allowGameTransferPopupV2;
+    }
+
+    public void setAllowGameTransferPopupV2(Boolean allowGameTransferPopupV2) {
+        this.allowGameTransferPopupV2 = allowGameTransferPopupV2;
     }
 
     public Boolean getInitWdPwdNeedLoginPwd() {
