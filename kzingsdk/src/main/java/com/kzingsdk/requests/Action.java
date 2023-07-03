@@ -124,8 +124,8 @@ final class Action {
     static final String getActivityList = "93bf052";
     static final String getActivityContent = "cc13e23";
     static final String checkGiftRedeemable = "qfn2hma";
-    static final String checkGiftRedeemableWebapi = "qfn2hmb";
-    static final String checkActivityRedeemable = "qfn2hmc";
+    static final String checkGiftRedeemableWebapi = "qfn2hmc";
+    static final String checkActivityRedeemable = "qfn2hmb";
     static final String applyActivity = "c43e69f";
     static final String activityCanSignIn = "c948aca";
     static final String activitySignIn = "8acac94";
