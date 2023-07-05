@@ -33,6 +33,10 @@ public final class KzingAPI {
         return new CheckActivityRedeemableAPI();
     }
 
+    public static TransferGameToMainBalanceAPI transferGameToMainBalance() {
+        return new TransferGameToMainBalanceAPI();
+    }
+
     public static ApplyActivityAPI applyActivity() {
         return new ApplyActivityAPI();
     }
