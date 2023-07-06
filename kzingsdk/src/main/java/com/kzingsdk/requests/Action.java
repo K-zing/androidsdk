@@ -144,6 +144,7 @@ final class Action {
     static final String redeemSpecRedPacket = "30GDPFC";
     static final String getBonusWallet = "11dlIbr";
     static final String transferGameToMainBalance = "j6e828a";
+    static final String transferMainBalanceToGame = "j6e828b";
 
     static final String updatePreferContactMethod = "7n8rf5o";
     static final String getMemberJoinableActivityList = "28dnhha";

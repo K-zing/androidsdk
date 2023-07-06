@@ -37,6 +37,10 @@ public final class KzingAPI {
         return new TransferGameToMainBalanceAPI();
     }
 
+    public static TransferMainBalanceToGameAPI transferMainBalanceToGame() {
+        return new TransferMainBalanceToGameAPI();
+    }
+
     public static ApplyActivityAPI applyActivity() {
         return new ApplyActivityAPI();
     }
