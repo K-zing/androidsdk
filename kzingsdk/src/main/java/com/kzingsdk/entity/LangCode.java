@@ -1,7 +1,7 @@
 package com.kzingsdk.entity;
 
 public enum LangCode {
-    CHS, ENG, THA, IND, VIT, BEN, JPN, KOR, TEL, HIN;
+    CHS, ENG, THA, IND, VIT, BEN, JPN, KOR, TEL, HIN, POR;
 
     public static LangCode valueOfName(String name) {
         for (LangCode type : LangCode.values()) {
