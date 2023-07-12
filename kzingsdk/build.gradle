@@ -7,7 +7,7 @@ android {
     defaultConfig {
         minSdkVersion 24
         versionCode 1
-        versionName "0.7.22"
+        versionName "0.7.23"
 		
         buildConfigField("String","SDK_VERSION_NAME","\"${defaultConfig.versionName}\"")
     }
@@ -30,3 +30,4 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 }
+

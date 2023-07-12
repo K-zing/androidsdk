@@ -32,6 +32,7 @@ public class RegAgentParam implements Parcelable {
             reqFacebook,
             highLevelPassAgent,
             agentWithdrawPassword;
+    private boolean reqDisplayReferCode ;
     private Bitmap verifyCode;
     private String agentWithdrawPasswordFormat;
 
@@ -50,6 +51,7 @@ public class RegAgentParam implements Parcelable {
         reqFacebook = in.readInt() == 1;
         highLevelPassAgent = in.readInt() == 1;
         agentWithdrawPassword = in.readInt() == 1;
+        reqDisplayReferCode = in.readInt() == 1;
         agentWithdrawPasswordFormat = in.readString();
         Object[] objectArray = in.readArray(RegAgentParam.class.getClassLoader());
         verifyCode = (Bitmap) objectArray[0];
@@ -74,6 +76,7 @@ public class RegAgentParam implements Parcelable {
         regParam.setHighLevelPassAgent(rootObject.optString("highLevelPassAgent").equals("ON"));
         regParam.setAgentWithdrawPassword(rootObject.optString("agentwithdrawpassword").equals("ON"));
         regParam.setReqFacebook(rootObject.optString("agentreqfacebook").equals("ON"));
+        regParam.setReqDisplayReferCode(rootObject.optString("agentreqdisplayrefercode").equals("ON"));
 
         regParam.setAgentWithdrawPasswordFormat(rootObject.optString("agentwithdrawpasswordformat"));
         String image = rootObject.optString("image");
@@ -175,6 +178,14 @@ public class RegAgentParam implements Parcelable {
         return highLevelPassAgent;
     }
 
+    public boolean isReqDisplayReferCode() {
+        return reqDisplayReferCode;
+    }
+
+    public void setReqDisplayReferCode(boolean reqDisplayReferCode) {
+        this.reqDisplayReferCode = reqDisplayReferCode;
+    }
+
     public void setHighLevelPassAgent(boolean highLevelPassAgent) {
         this.highLevelPassAgent = highLevelPassAgent;
     }
@@ -218,6 +229,7 @@ public class RegAgentParam implements Parcelable {
         dest.writeInt(reqFacebook ? 1 : 0);
         dest.writeInt(highLevelPassAgent ? 1 : 0);
         dest.writeInt(agentWithdrawPassword ? 1 : 0);
+        dest.writeInt(reqDisplayReferCode ? 1 : 0);
         dest.writeString(agentWithdrawPasswordFormat);
         dest.writeArray(new Object[]{
                 verifyCode
