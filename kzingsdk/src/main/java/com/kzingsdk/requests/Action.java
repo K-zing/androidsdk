@@ -86,6 +86,8 @@ final class Action {
     static final String verifyLoginGetCode = "uxqvf1s";
     static final String getPhoneByName = "656nqpa";
     static final String validatePhone = "lnpvqon";
+    static final String platformMaintenance = "j6e828c";
+
 
     static final String sendOTPWithPhone = "509f7h0";
     static final String validatePhoneSms = "4ut2nbe";

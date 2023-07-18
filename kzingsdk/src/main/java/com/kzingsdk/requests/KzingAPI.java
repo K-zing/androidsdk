@@ -25,6 +25,7 @@ public final class KzingAPI {
     public static CheckGiftRedeemableAPI checkGiftRedeemable() {
         return new CheckGiftRedeemableAPI();
     }
+
     public static CheckGiftRedeemableWebapiAPI checkGiftRedeemableWebapi() {
         return new CheckGiftRedeemableWebapiAPI();
     }
@@ -161,6 +162,10 @@ public final class KzingAPI {
 
     public static LoginWebApiAPI loginWebApi() {
         return new LoginWebApiAPI();
+    }
+
+    public static PlatformMaintenanceAPI platformMaintenance() {
+        return new PlatformMaintenanceAPI();
     }
 
     public static SocialLoginWebApiAPI socialLoginWebApi() {

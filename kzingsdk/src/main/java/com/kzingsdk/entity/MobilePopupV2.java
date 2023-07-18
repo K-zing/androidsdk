@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 
 public class MobilePopupV2 {
+
     private int id;
     private int order;
     private int displayCondition;
@@ -15,6 +16,8 @@ public class MobilePopupV2 {
     private String title;
     private String content;
     private String frame;
+    private JSONObject displayTarget;
+    private JSONObject selectedDisplay;
 
     public MobilePopupV2() {
     }
@@ -32,6 +35,8 @@ public class MobilePopupV2 {
         item.setTitle(rootObject.optString("title"));
         item.setContent(rootObject.optString("content"));
         item.setFrame(rootObject.optString("frame"));
+        item.setDisplayTarget(rootObject.optJSONObject("displaytarget"));
+        item.setSelectedDisplay(rootObject.optJSONObject("selecteddisplay"));
         return item;
     }
 
@@ -121,5 +126,21 @@ public class MobilePopupV2 {
 
     public void setFrame(String frame) {
         this.frame = frame;
+    }
+
+    public JSONObject getDisplayTarget() {
+        return displayTarget;
+    }
+
+    public void setDisplayTarget(JSONObject displayTarget) {
+        this.displayTarget = displayTarget;
+    }
+
+    public JSONObject getSelectedDisplay() {
+        return selectedDisplay;
+    }
+
+    public void setSelectedDisplay(JSONObject selectedDisplay) {
+        this.selectedDisplay = selectedDisplay;
     }
 }
