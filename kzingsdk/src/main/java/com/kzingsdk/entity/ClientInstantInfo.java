@@ -82,6 +82,7 @@ public class ClientInstantInfo implements Parcelable {
     private String playerKycDesc;
     private String withdrawalDescription;
     private String allowGameTransferPopupV2;
+    private String playerMaintenanceNoticeMobile;
 
 
     private Integer marqueeAnnouncementUnreadCount = 0;
@@ -122,6 +123,7 @@ public class ClientInstantInfo implements Parcelable {
         isWdPasswordOn = in.readInt() == 1;
         allowGameTransferPopup = in.readInt() == 1;
         allowGameTransferPopupV2 = in.readString();
+        playerMaintenanceNoticeMobile = in.readString();
         initWdPwdNeedLoginPwd = in.readInt() == 1;
         memberPanDupIP = in.readInt() == 1;
         memberPanDupUUID = in.readInt() == 1;
@@ -251,6 +253,7 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setPlayerKycDesc(rootObject.optString("playerKycDesc"));
         clientInfo.setWithdrawalDescription(rootObject.optString("withdrawalDescription"));
         clientInfo.setAllowGameTransferPopupV2(rootObject.optString("allowGameTransferPopupV2", ""));
+        clientInfo.setPlayerMaintenanceNoticeMobile(rootObject.optString("playerMaintenanceNoticeMobile", ""));
 
         JSONObject captchaApiIdJSONObject = rootObject.optJSONObject("captchaApiId");
         if (captchaApiIdJSONObject != null)
@@ -404,6 +407,7 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeInt(isWdPasswordOn ? 1 : 0);
         dest.writeInt(allowGameTransferPopup ? 1 : 0);
         dest.writeString(allowGameTransferPopupV2);
+        dest.writeString(playerMaintenanceNoticeMobile);
         dest.writeInt(initWdPwdNeedLoginPwd ? 1 : 0);
         dest.writeInt(memberPanDupIP ? 1 : 0);
         dest.writeInt(memberPanDupUUID ? 1 : 0);
@@ -590,6 +594,14 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setAllowGameTransferPopupV2(String allowGameTransferPopupV2) {
         this.allowGameTransferPopupV2 = allowGameTransferPopupV2;
+    }
+
+    public String getPlayerMaintenanceNoticeMobile() {
+        return playerMaintenanceNoticeMobile;
+    }
+
+    public void setPlayerMaintenanceNoticeMobile(String playerMaintenanceNoticeMobile) {
+        this.playerMaintenanceNoticeMobile = playerMaintenanceNoticeMobile;
     }
 
     public Boolean getInitWdPwdNeedLoginPwd() {
