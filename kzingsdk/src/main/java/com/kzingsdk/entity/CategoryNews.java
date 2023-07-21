@@ -10,6 +10,8 @@ public class CategoryNews {
     private String content = "";
     private String lang = "";
     private String mobileFName = "";
+    private String mobileType = "";
+    private String redirectUrl = "";
 
     public static CategoryNews newInstance(JSONObject rootObject) {
         CategoryNews result = new CategoryNews();
@@ -19,6 +21,8 @@ public class CategoryNews {
         result.setContent(rootObject.optString("content"));
         result.setLang(rootObject.optString("lang"));
         result.setMobileFName(rootObject.optString("mobile_fname"));
+        result.setMobileType(rootObject.optString("mobile_type"));
+        result.setRedirectUrl(rootObject.optString("redirect_url"));
         return result;
     }
 
@@ -68,5 +72,21 @@ public class CategoryNews {
 
     public void setMobileFName(String mobileFName) {
         this.mobileFName = mobileFName;
+    }
+
+    public String getMobileType() {
+        return mobileType;
+    }
+
+    public void setMobileType(String mobileType) {
+        this.mobileType = mobileType;
+    }
+
+    public String getRedirectUrl() {
+        return redirectUrl;
+    }
+
+    public void setRedirectUrl(String redirectUrl) {
+        this.redirectUrl = redirectUrl;
     }
 }
