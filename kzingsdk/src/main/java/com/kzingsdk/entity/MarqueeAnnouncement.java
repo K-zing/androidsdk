@@ -14,6 +14,8 @@ public class MarqueeAnnouncement {
     private String unread;
     private String status;
     private String created;
+    private String tickerEffect;
+    private String tickerLink;
 
     public MarqueeAnnouncement() {
 
@@ -29,6 +31,8 @@ public class MarqueeAnnouncement {
         marqueeAnnouncement.setUnread(rootObject.optString("unread"));
         marqueeAnnouncement.setStatus(rootObject.optString("status"));
         marqueeAnnouncement.setCreated(rootObject.optString("created"));
+        marqueeAnnouncement.setTickerEffect(rootObject.optString("ticker_effect"));
+        marqueeAnnouncement.setTickerLink(rootObject.optString("ticker_link"));
         return marqueeAnnouncement;
     }
 
@@ -95,6 +99,22 @@ public class MarqueeAnnouncement {
 
     public void setCreated(String created) {
         this.created = created;
+    }
+
+    public String getTickerEffect() {
+        return tickerEffect;
+    }
+
+    public void setTickerEffect(String tickerEffect) {
+        this.tickerEffect = tickerEffect;
+    }
+
+    public String getTickerLink() {
+        return tickerLink;
+    }
+
+    public void setTickerLink(String tickerLink) {
+        this.tickerLink = tickerLink;
     }
 }
 
