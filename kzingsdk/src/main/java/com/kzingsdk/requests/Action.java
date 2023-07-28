@@ -87,6 +87,7 @@ final class Action {
     static final String getPhoneByName = "656nqpa";
     static final String validatePhone = "lnpvqon";
     static final String platformMaintenance = "j6e828c";
+    static final String deleteMemberKyc = "j6e828d";
 
 
     static final String sendOTPWithPhone = "509f7h0";
