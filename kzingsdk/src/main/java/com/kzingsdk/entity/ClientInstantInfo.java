@@ -85,6 +85,7 @@ public class ClientInstantInfo implements Parcelable {
     private String playerMaintenanceNoticeMobile;
 
 
+    private Integer kycVerificationUploadLimit = 0;
     private Integer marqueeAnnouncementUnreadCount = 0;
     private Integer marqueeActivityUnreadCount = 0;
     private CaptchaApiId captchaApiId = new CaptchaApiId();
@@ -254,6 +255,7 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setWithdrawalDescription(rootObject.optString("withdrawalDescription"));
         clientInfo.setAllowGameTransferPopupV2(rootObject.optString("allowGameTransferPopupV2", ""));
         clientInfo.setPlayerMaintenanceNoticeMobile(rootObject.optString("playerMaintenanceNoticeMobile", ""));
+        clientInfo.setKycVerificationUploadLimit(rootObject.optInt("kycverificationuploadlimit", 0));
 
         JSONObject captchaApiIdJSONObject = rootObject.optJSONObject("captchaApiId");
         if (captchaApiIdJSONObject != null)
@@ -408,6 +410,7 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeInt(allowGameTransferPopup ? 1 : 0);
         dest.writeString(allowGameTransferPopupV2);
         dest.writeString(playerMaintenanceNoticeMobile);
+        dest.writeInt(kycVerificationUploadLimit);
         dest.writeInt(initWdPwdNeedLoginPwd ? 1 : 0);
         dest.writeInt(memberPanDupIP ? 1 : 0);
         dest.writeInt(memberPanDupUUID ? 1 : 0);
@@ -602,6 +605,14 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setPlayerMaintenanceNoticeMobile(String playerMaintenanceNoticeMobile) {
         this.playerMaintenanceNoticeMobile = playerMaintenanceNoticeMobile;
+    }
+
+    public Integer getKycVerificationUploadLimit() {
+        return kycVerificationUploadLimit;
+    }
+
+    public void setKycVerificationUploadLimit(Integer kycVerificationUploadLimit) {
+        this.kycVerificationUploadLimit = kycVerificationUploadLimit;
     }
 
     public Boolean getInitWdPwdNeedLoginPwd() {
