@@ -58,6 +58,8 @@ public class ClientInstantInfo implements Parcelable {
     private Boolean allowPlayerReferralReport = false;
     private Boolean showVIP = false;
     private Boolean kycVerification = false;
+    private Boolean playerWithdrawBindBirthday = false;
+    private Boolean playerWithdrawBindPhone = false;
     private String siteId;
     private String cryptoFixedExchangeRate;
     private String announcement;
@@ -125,6 +127,7 @@ public class ClientInstantInfo implements Parcelable {
         allowGameTransferPopup = in.readInt() == 1;
         allowGameTransferPopupV2 = in.readString();
         playerMaintenanceNoticeMobile = in.readString();
+        kycVerificationUploadLimit = in.readInt();
         initWdPwdNeedLoginPwd = in.readInt() == 1;
         memberPanDupIP = in.readInt() == 1;
         memberPanDupUUID = in.readInt() == 1;
@@ -148,6 +151,8 @@ public class ClientInstantInfo implements Parcelable {
         allowPlayerReferralReport = in.readInt() == 1;
         showVIP = in.readInt() == 1;
         kycVerification = in.readInt() == 1;
+        playerWithdrawBindBirthday = in.readInt() == 1;
+        playerWithdrawBindPhone = in.readInt() == 1;
         siteId = in.readString();
         cryptoFixedExchangeRate = in.readString();
         announcement = in.readString();
@@ -229,6 +234,8 @@ public class ClientInstantInfo implements Parcelable {
         clientInfo.setAllowPlayerReferralReport(rootObject.optBoolean("allowPlayerReferralReport", false));
         clientInfo.setShowVIP(rootObject.optBoolean("showVIP", false));
         clientInfo.setKycVerification(rootObject.optBoolean("kycverification", false));
+        clientInfo.setPlayerWithdrawBindBirthday(rootObject.optBoolean("playerWithdrawBindBirthday", false));
+        clientInfo.setPlayerWithdrawBindPhone(rootObject.optBoolean("playerWithdrawBindPhone", false));
         clientInfo.setCaptchaMode(rootObject.optString("captchaMode"));
         clientInfo.setSiteId(rootObject.optString("siteId"));
         clientInfo.setCryptoFixedExchangeRate(rootObject.optString("cryptoFixedExchangeRate"));
@@ -434,6 +441,9 @@ public class ClientInstantInfo implements Parcelable {
         dest.writeInt(allowPlayerReferralReport ? 1 : 0);
         dest.writeInt(showVIP ? 1 : 0);
         dest.writeInt(kycVerification ? 1 : 0);
+        dest.writeInt(playerWithdrawBindBirthday ? 1 : 0);
+        dest.writeInt(playerWithdrawBindPhone ? 1 : 0);
+
 
         dest.writeString(siteId);
         dest.writeString(cryptoFixedExchangeRate);
@@ -613,6 +623,22 @@ public class ClientInstantInfo implements Parcelable {
 
     public void setKycVerificationUploadLimit(Integer kycVerificationUploadLimit) {
         this.kycVerificationUploadLimit = kycVerificationUploadLimit;
+    }
+
+    public Boolean getPlayerWithdrawBindBirthday() {
+        return playerWithdrawBindBirthday;
+    }
+
+    public void setPlayerWithdrawBindBirthday(Boolean playerWithdrawBindBirthday) {
+        this.playerWithdrawBindBirthday = playerWithdrawBindBirthday;
+    }
+
+    public Boolean getPlayerWithdrawBindPhone() {
+        return playerWithdrawBindPhone;
+    }
+
+    public void setPlayerWithdrawBindPhone(Boolean playerWithdrawBindPhone) {
+        this.playerWithdrawBindPhone = playerWithdrawBindPhone;
     }
 
     public Boolean getInitWdPwdNeedLoginPwd() {
