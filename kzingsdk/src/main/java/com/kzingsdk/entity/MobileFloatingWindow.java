@@ -33,7 +33,7 @@ public class MobileFloatingWindow {
         mobileFloatingWindow.setId(rootObject.optString("id"));
         mobileFloatingWindow.setLang(rootObject.optString("lang"));
         mobileFloatingWindow.setLang(rootObject.optString("lang"));
-        mobileFloatingWindow.setFloatingRedirectGpid(rootObject.optInt("floatingRedirectGpid"));
+        mobileFloatingWindow.setFloatingRedirectGpid(rootObject.optString("floatingRedirectGpid"));
         mobileFloatingWindow.setStatus(rootObject.optInt("status"));
         JSONObject floatingImageObject = rootObject.optJSONObject("floatingImage");
         if (floatingImageObject != null) {
