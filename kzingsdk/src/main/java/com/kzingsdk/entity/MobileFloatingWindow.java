@@ -18,6 +18,7 @@ public class MobileFloatingWindow {
     private Integer status = 0;
     private String floatingImageId;
     private String floatingImagePath;
+    private String floatingRedirectGpid;
 
 
     public static MobileFloatingWindow newInstance(JSONObject rootObject) {
@@ -31,7 +32,8 @@ public class MobileFloatingWindow {
         mobileFloatingWindow.setFloatingStyleValue(rootObject.optString("floatingStyleValue"));
         mobileFloatingWindow.setId(rootObject.optString("id"));
         mobileFloatingWindow.setLang(rootObject.optString("lang"));
-        mobileFloatingWindow.setOrder(rootObject.optInt("order"));
+        mobileFloatingWindow.setLang(rootObject.optString("lang"));
+        mobileFloatingWindow.setFloatingRedirectGpid(rootObject.optInt("floatingRedirectGpid"));
         mobileFloatingWindow.setStatus(rootObject.optInt("status"));
         JSONObject floatingImageObject = rootObject.optJSONObject("floatingImage");
         if (floatingImageObject != null) {
@@ -143,6 +145,14 @@ public class MobileFloatingWindow {
 
     public void setOrder(Integer order) {
         this.order = order;
+    }
+
+    public String getFloatingRedirectGpid() {
+        return floatingRedirectGpid;
+    }
+
+    public void setFloatingRedirectGpid(String floatingRedirectGpid) {
+        this.floatingRedirectGpid = floatingRedirectGpid;
     }
 }
 
