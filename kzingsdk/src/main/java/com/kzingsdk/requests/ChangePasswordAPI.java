@@ -13,6 +13,7 @@ public class ChangePasswordAPI extends CoreRequest {
 
     private String oldPassword = "";
     private String newPassword = "";
+    private String verifycode = "";
 
     ChangePasswordAPI() {
         super();
@@ -40,6 +41,7 @@ public class ChangePasswordAPI extends CoreRequest {
         try {
             jsonData.put("password", oldPassword);
             jsonData.put("newpassword", newPassword);
+            jsonData.put("verifycode", verifycode);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -75,6 +77,14 @@ public class ChangePasswordAPI extends CoreRequest {
     public ChangePasswordAPI setOldParamPassword(String oldPassword) {
         this.oldPassword = oldPassword;
         return this;
+    }
+
+    public String getVerifycode() {
+        return verifycode;
+    }
+
+    public void setVerifycode(String verifycode) {
+        this.verifycode = verifycode;
     }
 
     public interface ChangePasswordCallBack extends KzingCallBack {
