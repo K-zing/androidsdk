@@ -43,7 +43,7 @@ public class ChangePasswordAPI extends CoreRequest {
             jsonData.put("password", oldPassword);
             jsonData.put("newpassword", newPassword);
             jsonData.put("verifycode", verifycode);
-            jsonData.put("jsessionid", jsessionid);
+            jsonData.put("jsessionid", getSessionId());
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -85,12 +85,7 @@ public class ChangePasswordAPI extends CoreRequest {
         this.verifycode = verifycode;
         return this;
     }
-
-    public ChangePasswordAPI setJsessionid(String jsessionid) {
-        this.jsessionid = jsessionid;
-        return this;
-    }
-
+    
     public interface ChangePasswordCallBack extends KzingCallBack {
         void onSuccess();
     }
