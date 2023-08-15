@@ -232,9 +232,13 @@ public abstract class CoreRequest {
                     .writeTimeout(requestTimeoutMs, TimeUnit.MILLISECONDS)
                     .addInterceptor(chain -> {
                         String aid = KzingSDK.getInstance().getAid() == null ? "" : KzingSDK.getInstance().getAid();
+                        Random random = new Random();
+                        random.setSeed(System.currentTimeMillis());
+                        long randomLong = random.nextInt(99999) + 4324344713731553L + random.nextInt(99999);
                         Request request = chain.request().newBuilder()
                                 .addHeader("User-Agent", "KzingAndroidSDK:" + BuildConfig.SDK_VERSION_NAME)
                                 .addHeader("X-CLIENTCODE", aid)
+                                .addHeader("X-TOKEN", randomLong + "")
                                 .build();
                         showLogDebug(request);
                         return chain.proceed(request);
