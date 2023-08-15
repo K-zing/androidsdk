@@ -231,8 +231,10 @@ public abstract class CoreRequest {
                     .readTimeout(requestTimeoutMs, TimeUnit.MILLISECONDS)
                     .writeTimeout(requestTimeoutMs, TimeUnit.MILLISECONDS)
                     .addInterceptor(chain -> {
+                        String aid = KzingSDK.getInstance().getAid() == null ? "" : KzingSDK.getInstance().getAid();
                         Request request = chain.request().newBuilder()
                                 .addHeader("User-Agent", "KzingAndroidSDK:" + BuildConfig.SDK_VERSION_NAME)
+                                .addHeader("X-CLIENTCODE", aid)
                                 .build();
                         showLogDebug(request);
                         return chain.proceed(request);

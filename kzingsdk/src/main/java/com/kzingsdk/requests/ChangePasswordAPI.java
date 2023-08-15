@@ -85,7 +85,7 @@ public class ChangePasswordAPI extends CoreRequest {
         this.verifycode = verifycode;
         return this;
     }
-    
+
     public interface ChangePasswordCallBack extends KzingCallBack {
         void onSuccess();
     }
