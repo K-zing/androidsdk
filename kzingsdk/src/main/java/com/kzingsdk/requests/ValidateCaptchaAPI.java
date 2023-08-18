@@ -14,6 +14,7 @@ public class ValidateCaptchaAPI extends CoreRequest {
 
     private String verifyCode;
     private String captchaValidate;
+    private String jsessionid;
 
     ValidateCaptchaAPI() {
         super();
@@ -35,7 +36,7 @@ public class ValidateCaptchaAPI extends CoreRequest {
         try {
             jsonData.put("verifycode", verifyCode);
             jsonData.put("captchavalidate", captchaValidate);
-            jsonData.put("jsessionid", getSessionId());
+            jsonData.put("jsessionid", jsessionid);
             return jsonData;
         } catch (JSONException ignored) {
         }
@@ -74,6 +75,12 @@ public class ValidateCaptchaAPI extends CoreRequest {
 
     public ValidateCaptchaAPI setCaptchaValidate(String captchaValidate) {
         this.captchaValidate = captchaValidate;
+        return this;
+    }
+
+
+    public ValidateCaptchaAPI setJsessionid(String jsessionid) {
+        this.jsessionid = jsessionid;
         return this;
     }
 }

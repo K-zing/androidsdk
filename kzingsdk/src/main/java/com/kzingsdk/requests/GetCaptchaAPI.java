@@ -43,7 +43,7 @@ public class GetCaptchaAPI extends CoreRequest {
     public Observable<SimpleApiResult> requestRx(final Context context) {
         return super.baseExecute(context).map(jsonResponse -> {
             GetCaptchaResult result = GetCaptchaResult.newInstance(jsonResponse);
-            setSessionId(result.getSessionId());
+//            setSessionId(result.getSessionId());
             return result;
         });
     }
