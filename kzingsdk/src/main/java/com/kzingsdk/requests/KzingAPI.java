@@ -400,6 +400,14 @@ public final class KzingAPI {
         return new DeleteMemberKycAPI();
     }
 
+    public static GetCaptchaAPI getCaptcha() {
+        return new GetCaptchaAPI();
+    }
+
+    public static ValidateCaptchaAPI validateCaptcha() {
+        return new ValidateCaptchaAPI();
+    }
+
     public static EnableMobileAPI enableMobile() {
         return new EnableMobileAPI();
     }
