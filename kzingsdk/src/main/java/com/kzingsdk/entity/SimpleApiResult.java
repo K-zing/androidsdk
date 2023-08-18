@@ -9,10 +9,19 @@ public class SimpleApiResult {
 
     public static SimpleApiResult newInstance(JSONObject rootObject) {
         SimpleApiResult simpleApiResult = new SimpleApiResult();
-        simpleApiResult.setStatus(rootObject.optInt("status"));
+        if (rootObject.has("status")) {
+            simpleApiResult.setStatus(rootObject.optInt("status"));
+        } else if (rootObject.has("c")) {
+            simpleApiResult.setStatus(rootObject.optInt("c"));
+        } else {
+            simpleApiResult.setStatus(0);
+        }
         String msg = rootObject.optString("message", "null");
         if (msg.equals("null")) {
-            msg = rootObject.optString("msg");
+            msg = rootObject.optString("msg", "null");
+        }
+        if (msg.equals("null")) {
+            msg = rootObject.optString("m");
         }
         simpleApiResult.setMessage(msg);
         return simpleApiResult;

@@ -14,12 +14,15 @@ public class GetCaptchaResult extends SimpleApiResult {
         GetCaptchaResult result = new GetCaptchaResult();
         result.status = simpleApiResult.status;
         result.message = simpleApiResult.message;
-        result.setCaptchaMode(rootObject.optString("captchaMode"));
-        result.setPuzzleCaptcha(rootObject.optString("puzzleCaptcha"));
-        JSONObject dataObject = rootObject.optJSONObject("imageCaptcha");
+        JSONObject dataObject = rootObject.optJSONObject("data");
         if (dataObject != null) {
-            result.setImage(dataObject.optString("image"));
-            result.setSessionId(dataObject.optString("sessionId"));
+            result.setCaptchaMode(dataObject.optString("captchaMode"));
+            result.setPuzzleCaptcha(dataObject.optString("puzzleCaptcha"));
+            JSONObject imageCaptchaObject = rootObject.optJSONObject("imageCaptcha");
+            if (imageCaptchaObject != null) {
+                result.setImage(imageCaptchaObject.optString("image"));
+                result.setSessionId(imageCaptchaObject.optString("sessionId"));
+            }
         }
         return result;
     }
