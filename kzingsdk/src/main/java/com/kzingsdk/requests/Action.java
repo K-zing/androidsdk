@@ -88,7 +88,8 @@ final class Action {
     static final String validatePhone = "lnpvqon";
     static final String platformMaintenance = "j6e828c";
     static final String deleteMemberKyc = "j6e828d";
-
+    static final String getCaptcha = "j6e828e";
+    static final String validateCaptcha = "j6e828f";
 
     static final String sendOTPWithPhone = "509f7h0";
     static final String validatePhoneSms = "4ut2nbe";
