@@ -5,7 +5,7 @@ import android.content.Context;
 import com.kzingsdk.core.CoreRequest;
 import com.kzingsdk.entity.GetCaptchaResult;
 import com.kzingsdk.entity.RegParam;
-import com.kzingsdk.entity.SimpleApiResult;
+import com.kzingsdk.entity.GetCaptchaResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,7 +40,7 @@ public class GetCaptchaAPI extends CoreRequest {
     }
 
     @Override
-    public Observable<SimpleApiResult> requestRx(final Context context) {
+    public Observable<GetCaptchaResult> requestRx(final Context context) {
         return super.baseExecute(context).map(jsonResponse -> {
             GetCaptchaResult result = GetCaptchaResult.newInstance(jsonResponse);
 //            setSessionId(result.getSessionId());
@@ -65,7 +65,7 @@ public class GetCaptchaAPI extends CoreRequest {
     }
 
     public interface GetCaptchaCallBack extends KzingCallBack {
-        void onSuccess(SimpleApiResult result);
+        void onSuccess(GetCaptchaResult result);
     }
 
     
