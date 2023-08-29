@@ -3,7 +3,7 @@ package com.kzingsdk.requests;
 import android.content.Context;
 
 import com.kzingsdk.core.CoreRequest;
-import com.kzingsdk.entity.SimpleApiResult;
+import com.kzingsdk.entity.SendOTPWithPhoneResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,8 +43,8 @@ public class SendOTPWithPhoneAPI extends CoreRequest {
     }
 
     @Override
-    public Observable<SimpleApiResult> requestRx(final Context context) {
-        return super.baseExecute(context).map(SimpleApiResult::newInstance);
+    public Observable<SendOTPWithPhoneResult> requestRx(final Context context) {
+        return super.baseExecute(context).map(SendOTPWithPhoneResult::newInstance);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class SendOTPWithPhoneAPI extends CoreRequest {
     }
 
     public interface SendOTPWithPhoneCallBack extends KzingCallBack {
-        void onSuccess(SimpleApiResult result);
+        void onSuccess(SendOTPWithPhoneResult result);
     }
 
     public String getUphone() {
